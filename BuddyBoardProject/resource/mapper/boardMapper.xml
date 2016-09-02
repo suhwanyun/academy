@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="workshop.dao.BoardMapper">
+	<select id="selectAllBoard" resultType="board">
+		select * from board
+	</select>
+	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="board">
+		select * from board where board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteBoardByBoardNo" parameterType="int">
+		delete from board where board_no = #{boardNo}
+	</delete>
+	
+	<update id="updateBoard" parameterType="board">
+		update board set content = #{content} where board_no = #{boardNo}
+	</update>
+	
+	<insert id="insertBoard" parameterType="board">
+		insert into board (board_no, content, customer_cust_id)
+		values(SEQ_board_comment_no.nextval, #{content}, #{customerCustId})
+	</insert>
+	
+	<select id="selectBoardByPage" parameterType="page" resultType="board">
+		select * from (select rownum as rnum, sub.*
+						from (select * from board order by board_no desc) sub)
+		where rnum &gt; #{startNo} and rnum &lt;= #{endNo}
+	</select>
+	
+</mapper>

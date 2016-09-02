@@ -1,0 +1,14 @@
+menu_main=J: 가입, L: 로그인,  X: 종료
+title_main=메뉴를 고르세요.
+menu_join=J: 가입, R : 다시하기, B : 이전 메뉴
+title_join=회원 가입을 위해 안내에 따라 정보를 입력하세요.
+menu_login=L: 로그인, R: 다시하기, B: 이전 메뉴
+title_login=로그인은 위해 안내에 따라 아이디와 패스워드를 입력하세요.
+menu_board=N : 다음 페이지, P : 이전 페이지, W: 새글 쓰기, 숫자 : 게시물 번호, X: 종료
+title_board=건전한 게시판 문화 부탁해요
+menu_write_board=S : 저장, C : 취소
+title_write_board=게시물을 작성합니다. 그만하려면 새 줄에서 Q를 입력하세요.
+menu_view_board=R : 댓글달기, L : 목록보기, D : 삭제하기, 숫자 : 숫자 댓글 삭제
+title_view_board=좋은 글 감상하세요.
+menu_write_reply=S : 저장, C : 취소
+title_write_reply=댓글을 작성합니다. 그만하려면 새 줄에서 Q를 입력하세요.
