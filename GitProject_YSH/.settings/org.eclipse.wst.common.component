@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="GitProject">
+    <wb-module deploy-name="GitProject_YSH">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
-        <property name="context-root" value="GitProject"/>
-        <property name="java-output-path" value="/GitProject/build/classes"/>
+        <property name="context-root" value="GitProject_YSH"/>
+        <property name="java-output-path" value="/GitProject_YSH/build/classes"/>
     </wb-module>
 </project-modules>
