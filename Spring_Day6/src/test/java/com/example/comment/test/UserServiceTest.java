@@ -20,25 +20,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.example.comment.config.CommentConfig;
 import com.example.comment.dto.Comment;
 import com.example.comment.dto.User;
-import com.example.comment.repo.CommentRepo;
-import com.example.comment.repo.UserRepo;
+import com.example.comment.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={CommentConfig.class})
 @Sql({"/dbschema/comment_schema.sql", "/dbschema/comment_data.sql"})
-public class RepoTest {
+public class UserServiceTest {
 
 	@Autowired
-	UserRepo userRepo;
-	
-	@Autowired
-	CommentRepo commRepo;
-	
-	@Autowired
-	DataSource ds;
-	
-	@Autowired
-	SqlSessionTemplate template;
+	UserService service;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -46,24 +36,9 @@ public class RepoTest {
 
 	@Test
 	public void test() throws SQLException {
-		assertThat(userRepo, is(notNullValue()));
-		assertThat(commRepo, is(notNullValue()));
-		
-		assertThat(ds, is(notNullValue()));
-		Connection con = ds.getConnection();
-		assertThat(con, is(notNullValue()));
-		assertThat(template, is(notNullValue()));
-	}
-	
-	@Test
-	public void insertTest(){
-		Comment comment = new Comment(0, "hong", "test");
-		int result = commRepo.insert(comment);
-		assertThat(result, is(1));
-		
-		User user = new User("hong2", "test");
-		int result2 = userRepo.insert(user);
-		assertThat(result2, is(1));
+		assertThat(service, is(notNullValue()));
+		User user = new User("hong2", "4321");
+		assertThat(service.join(user), is(1));
 	}
 
 }

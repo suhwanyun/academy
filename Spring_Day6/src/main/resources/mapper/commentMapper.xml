@@ -8,7 +8,7 @@
 		<selectKey keyProperty="commentNo" resultType="int" order="AFTER">
 			select SEQ_COMMENT.currval as commentNo from dual
 		</selectKey>
-		insert into tcomment (user_id, content) values (#{userId}, #{content}) 
+		insert into tcomment (user_id, content) values ( #{userId}, #{content}) 
 	</insert>
 	
 	<select id="selectAllComment" resultType="comment">
