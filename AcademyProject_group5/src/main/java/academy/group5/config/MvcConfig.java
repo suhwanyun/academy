@@ -1,4 +1,4 @@
-package com.academy.config;
+package academy.group5.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,8 +10,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 // Spring@MVC에 대한 빈들을 설정
 @Configuration
-@ComponentScan(basePackages={"com.example.controller"})
-@EnableWebMvc//<mvc:annotation-driven />
+@ComponentScan(basePackages={"academy.group5.controller"})
+@EnableWebMvc
 public class MvcConfig extends WebMvcConfigurerAdapter{
 
 	@Bean

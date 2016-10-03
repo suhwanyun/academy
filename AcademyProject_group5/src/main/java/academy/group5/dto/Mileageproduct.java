@@ -1,4 +1,4 @@
-package com.academy.dto;
+package academy.group5.dto;
 
 import java.util.Set;
 
