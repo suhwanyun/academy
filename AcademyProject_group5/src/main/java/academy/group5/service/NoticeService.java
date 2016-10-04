@@ -20,10 +20,16 @@ public interface NoticeService {
 	 */
 	List<Lecturenotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page);
 	/**
-	 * 강의의 상세 정보
+	 * 강의공지의 상세 정보
 	 * @param lectureId
 	 * @return
 	 */
 	Lecturenotice lectureInfo(Integer lectureId);
+	/**
+	 * 강의 공지 작성
+	 * @param lecturenotice
+	 * @return
+	 */
+	boolean postNotice(Lecturenotice lecturenotice);
 	
 }

@@ -40,7 +40,14 @@ public interface LectureService {
 	 * @return
 	 */
 	List<Lecturetime> timetable(Integer lectureId, Integer lectureClass, String userId);
+	/**
+	 * 해당 강의의 반장여부를 반환
+	 * @param lectureId
+	 * @param userId
+	 * @param lectureClass
+	 * @return
+	 */
 	char getIsPresident(Integer lectureId, String userId, Integer lectureClass);
-	//boolean postNotice()
+	
 
 }
