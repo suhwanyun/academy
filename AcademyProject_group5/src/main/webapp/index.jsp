@@ -16,7 +16,7 @@
 	<body>
 
 		<!-- Header -->
-	 		<header id="header">
+	 		<!-- <header id="header">
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
@@ -29,8 +29,8 @@
 					<a href="#" class="button hidden"><span>Let's Go</span></a>
 				</div>
 			</header>
+			 -->
 			
-			<!-- 
 			<header id="header2">
 				<div class="inner">
 					<div class="content">
@@ -43,7 +43,7 @@
 					</div>
 					<a href="#" class="button hidden"><span>Let's Go</span></a>
 				</div>
-			</header> -->
+			</header>
   
 		 <!-- Main -->
 	 		<div id="main">
