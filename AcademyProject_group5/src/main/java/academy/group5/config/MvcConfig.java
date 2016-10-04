@@ -24,16 +24,31 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 		return resolver;
 	}
 	
-	@Bean
+/*	@Bean
 	public CommonsMultipartResolver multipartResolver(){
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setDefaultEncoding("utf-8");
 		return resolver;
-	}
+	}*/
 	
 	@Override
 	   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	      registry.addResourceHandler("/upload/**")
 	      .addResourceLocations("WEB-INF/upload/");
+	      
+	      registry.addResourceHandler("/css/**")
+	      .addResourceLocations("WEB-INF/assets/css/");
+	      
+	      registry.addResourceHandler("/images/**")
+	      .addResourceLocations("WEB-INF/assets/images/");
+	      
+	      registry.addResourceHandler("/fonts/**")
+	      .addResourceLocations("WEB-INF/assets/fonts/");
+	      
+	      registry.addResourceHandler("/fonts/**")
+	      .addResourceLocations("WEB-INF/assets/fonts/");
+	      
+	      registry.addResourceHandler("/js/**")
+	      .addResourceLocations("WEB-INF/assets/js/");
 	   }
 }
