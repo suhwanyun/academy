@@ -49,15 +49,15 @@
 	</select>
 	
 	<select id="selectPassQuestion" parameterType="String" resultType="String">
-		select pass_answer
+		select pass_question
 		from UserData
 		where user_id = #{userId}
 	</select>
 	
 	<select id="selectPass" parameterType="userpass" resultType="String">
-		select REPLACE(userPass, SUBSTR(userPass, -2, 2), '**')
+		select RPAD(SUBSTR(user_pass, -2), LENGTH(user_pass), '*')
 		from UserData
-		where user_id = #{userId} and 
+		where user_name = #{userName} and 
 			  pass_answer = #{passAnswer}
 	</select>
 	

@@ -2,6 +2,7 @@ package academy.group5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserId;
@@ -9,6 +10,7 @@ import academy.group5.dto.etc.UserPass;
 import academy.group5.repo.LoginRepo;
 
 @Service
+@Transactional
 public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
@@ -27,9 +29,10 @@ public class LoginServiceImpl implements LoginService {
 	// 회원가입
 	@Override
 	public boolean join(UserData userdata) {
-		int result = loginRepo.setUser(userdata);
-		
-		if(result != 1){
+		try{
+			loginRepo.setUser(userdata);
+		// 아이디 중복
+		}catch(org.springframework.dao.DuplicateKeyException e){
 			return false;
 		}
 		
