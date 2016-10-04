@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:/config/dbconfigTesting.properties")
 public class JDBCDataSource {
 	
+	private static final Logger logger = LoggerFactory.getLogger(JDBCDataSource.class);
+	
 	@Bean
 	public DataSource dataSource(
 			@Value("${db.driverClassName}") String driver,

@@ -1,14 +1,27 @@
 package academy.group5.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 // Spring Core에 대한 설정
 @Configuration
 @ComponentScans({
 	@ComponentScan("academy.group5.beans"),
+	@ComponentScan("academy.group5.repo"),
 	@ComponentScan("academy.group5.controller")
 })
+/*@EnableTransactionManagement*/
 public class ApplicationConfig {
+	
+	/*@Bean
+	PlatformTransactionManager transactionManager(DataSource ds){
+		return new DataSourceTransactionManager(ds);
+	}*/
 }
