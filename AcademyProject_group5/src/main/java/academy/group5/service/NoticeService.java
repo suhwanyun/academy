@@ -11,19 +11,19 @@ public interface NoticeService {
 	 * @param page
 	 * @return
 	 */
-	List<Lecturenotice> AllLecturenoticeList(String userId, int page);
+	List<Lecturenotice> allLecturenoticeList(String userId, int page);
 	/**
 	 * 특정 강의의 전체 공지 가져오기 page=5
 	 * @param lectureId
 	 * @param lectureClass
 	 * @return
 	 */
-	List<Lecturenotice> LecturenoticeList(Integer lectureId, Integer lectureClass, int page);
+	List<Lecturenotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page);
 	/**
 	 * 강의의 상세 정보
 	 * @param lectureId
 	 * @return
 	 */
-	Lecturenotice LectureInfo(Integer lectureId);
+	Lecturenotice lectureInfo(Integer lectureId);
 	
 }
