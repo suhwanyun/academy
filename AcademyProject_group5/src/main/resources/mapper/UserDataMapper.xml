@@ -4,10 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.UserDataMapper">
 	
-	<select id="selectAllLecture" resultType="lecture">
-		select *
-		from Lecture
-		order by lectureId
+	<select id="selectUser" parameterType="String" resultType="userdata">
+		select user_id, user_pass, user_name, user_mileage, phone_id, phone_num, pass_question, pass_answer
+		from UserData
+		where user_id = #{userId}
+		order by user_id
 	</select>
+	
+	<insert id="insertUser" parameterType="userdata">
+		insert into UserData
+		(user_id, user_pass, user_name, user_mileage, phone_id, phone_num, pass_question, pass_answer)
+		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
+	</insert>
+	
+	
 	
 </mapper>

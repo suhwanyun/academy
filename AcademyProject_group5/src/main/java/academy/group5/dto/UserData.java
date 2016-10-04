@@ -55,4 +55,21 @@ public class UserData {
 
 	/** 보유 마일리지 상품 목록. */
 	private Set<Usermileage> usermileageSet;
+
+	public UserData(String userId, String userPass, String userName, Integer userMileage, String phoneId,
+			Integer phoneNum, String passQuestion, String passAnswer) {
+		super();
+		this.userId = userId;
+		this.userPass = userPass;
+		this.userName = userName;
+		this.userMileage = userMileage;
+		this.phoneId = phoneId;
+		this.phoneNum = phoneNum;
+		this.passQuestion = passQuestion;
+		this.passAnswer = passAnswer;
+	}
+	
+	
+	
+	
 }
