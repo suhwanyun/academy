@@ -7,10 +7,10 @@ import academy.group5.dto.Lecturetime;
 
 public interface LectureService {
 	/**
-	 * 전체 강의목록 가져오기
+	 * 전체 강의목록 가져오기 page=10
 	 * @return
 	 */
-	List<Lecture> allLectureList();
+	List<Lecture> allLectureList(int page);
 	/**
 	 * 강의 신청
 	 * @param lectureId
