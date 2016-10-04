@@ -2,7 +2,7 @@ package academy.group5.service;
 
 import academy.group5.dto.Manager;
 
-public interface ManagerLoginService {
+public interface ManagerService {
 	/**
 	 * 로그인
 	 * @param managerId
