@@ -4,32 +4,44 @@ import academy.group5.dto.UserData;
 
 public interface LoginService {
 	/**
-	 * 회원 ID와Pass를 받아서 회원의 정보를 리턴
+	 * 로그인
 	 * @param userId
 	 * @param userPass
 	 * @return
 	 */
-	UserData getUserData(String userId, String userPass);
-	
+	UserData login(String userId, String userPass);
 	/**
-	 * 회원의 이름과 핸드폰을 받아서 회원 ID를 리턴
+	 * 회원가입 서비스
+	 * @param userdata
+	 * @return
+	 */
+	boolean join(UserData userdata);
+	/**
+	 * 회원 탈퇴
+	 * @param UserId
+	 * @return
+	 */
+	boolean dropOut(String UserId);
+	/**
+	 * 아이디 찾기
 	 * @param userName
 	 * @param phoneNum
 	 * @return
 	 */
-	String getUserId(String userName, String phoneNum);
+	String findId(String userName, String phoneNum);
 	/**
-	 * 회원Id를 받아서 비밀번호 질문을 리턴
+	 * 비밀번호 질문받아오기
 	 * @param userId
 	 * @return
 	 */
 	String getPassQuestion(String userId);
 	/**
-	 * 회원Id와 비밀번호 답을 받아서 비밀번호를 리턴
+	 * 비밀번호 찾기
 	 * @param userId
 	 * @param passAnswer
 	 * @return
 	 */
-	String getUserPass(String userId, String passAnswer);
+	String findPass(String userId, String passAnswer);
+	
 	
 }
