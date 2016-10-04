@@ -17,6 +17,12 @@ public interface LoginService {
 	 */
 	boolean join(UserData userdata);
 	/**
+	 * 회원정보 수정
+	 * @param userdata
+	 * @return
+	 */
+	boolean update(UserData userdata);
+	/**
 	 * 회원 탈퇴
 	 * @param UserId
 	 * @return
