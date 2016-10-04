@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 	@ComponentScan("academy.group5.repo"),
 	@ComponentScan("academy.group5.controller")
 })
-/*@EnableTransactionManagement*/
+@EnableTransactionManagement
 public class ApplicationConfig {
 	
-	/*@Bean
+	@Bean
 	PlatformTransactionManager transactionManager(DataSource ds){
 		return new DataSourceTransactionManager(ds);
-	}*/
+	}
 }

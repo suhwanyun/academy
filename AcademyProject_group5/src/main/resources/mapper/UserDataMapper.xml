@@ -17,4 +17,6 @@
 		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
 	</insert>
 	
+	
+	
 </mapper>
