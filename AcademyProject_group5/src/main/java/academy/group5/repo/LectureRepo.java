@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
+import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.Paging;
 
 @Repository
@@ -36,6 +37,11 @@ public class LectureRepo {
 	
 	public List<LectureApply> getUserLecture(String id) {
 		String stmt = LECTURE_NS + "selectLectureByUser";
+		return session.selectList(stmt, id);
+	}
+	
+	public List<LectureTime> getUserTimetable(String id){
+		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);
 	}
 }

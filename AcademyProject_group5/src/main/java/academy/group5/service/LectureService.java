@@ -35,11 +35,9 @@ public interface LectureService {
 	List<Lecture> userLectureList(String userId);
 	/**
 	 * 시간표
-	 * @param lectureId
-	 * @param lectureClass
 	 * @return
 	 */
-	List<LectureTime> timetable(Integer lectureId, Integer lectureClass, String userId);
+	List<LectureTime> timetable(String userId);
 	/**
 	 * 해당 강의의 반장여부를 반환
 	 * @param lectureId

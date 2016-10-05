@@ -38,6 +38,11 @@
 		where user_id = #{userId}
 	</select>
 	
-	<!-- <select id="selectLectureTimeByUser" parameterType="String">
-	</select> -->
+	<select id="selectLectureTimeByUser" parameterType="String">
+		select lectureId, lectureClass, lectureStart, lectureEnd, lecturePlace, lectureWeek, isTempDate
+		from LectureTime join LectureApply using (lecture_id)
+		where user_id = #{user_id} 
+	</select>
+	
+	<select id="selectIsPresident" parameterType=""
 </mapper>
