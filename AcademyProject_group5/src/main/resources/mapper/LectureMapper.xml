@@ -22,27 +22,34 @@
 	
 	<insert id="insertLectureAllpy" parameterType="lecture_apply">
 		insert into LectureApply
-		(lecture_id, user_id, lecture_class, is_president, isPresident)
+		(lecture_id, user_id, lecture_class, is_president)
 		values (#{lectureId}, #{userId}, #{lectureClass}, #{isPresident})
 	</insert>
 	
 	<delete id="deleteLectureApply" parameterType="lecture_apply">
 		delete from LectureApply
 		where user_id = #{userId}
-		  and lecture_id = #{lectureId}
+			and lecture_id = #{lectureId}
 	</delete>
 	
-	<select id="selectLectureByUser" parameterType="String">
+	<select id="selectLectureByUser" parameterType="String" resultType="lecture_apply">
 		select *
 		from LectureApply
 		where user_id = #{userId}
 	</select>
 	
-	<select id="selectLectureTimeByUser" parameterType="String">
+	<select id="selectLectureTimeByUser" parameterType="String" resultType="lecture_time">
 		select lectureId, lectureClass, lectureStart, lectureEnd, lecturePlace, lectureWeek, isTempDate
 		from LectureTime join LectureApply using (lecture_id)
 		where user_id = #{user_id} 
 	</select>
 	
+	<select id="selectIsPresident" parameterType="lecture_apply" resultType="String">
+		select is_president
+		from LectureApply
+		where lecture_id = #{lectureId} 
+			and lecture_class = #{lectureClass}
+			and user_id = #{userId}
+	</select>
 	
 </mapper>
