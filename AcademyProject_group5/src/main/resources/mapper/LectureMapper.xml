@@ -13,28 +13,18 @@
 	
 	<select id="selectLecture" parameterType="paging" resultType="lecture">
 		select *
-		from Lecture
-		where rownum &gt;= #{startIdx} and rownum &lt;= #{endIdx}
-		order by lecture_id
+		from select rownum as rnum, sub.*
+			 from (select *
+				  from Lecture 
+				  order by lecture_id) sub
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+		
 	</select>
 	
 	<insert id="insertLecture" parameterType="recture">
 		insert into Lecture
-		(lectureId, lectureClass, lectureName, professorName)
-		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
+		(lecture_id, lecture_class, lecture_name, professor_name)
+		values (#{lectureId}, #{lectureClass}, #{lectureName}, #{professorName} )
 	</insert>
-	
-	<update id="updateUser" parameterType="userdata">
-		update UserData set 
-			user_pass = #{userPass},
-			pass_question = #{passQuestion},
-			pass_answer = #{passAnswer}
-		where user_id = #{userId}
-	</update>
-	
-	<delete id="deleteUser" parameterType="String">
-		delete from UserData
-		where user_id = #{userId}
-	</delete>
 	
 </mapper>

@@ -23,6 +23,10 @@ public class LectureRepo {
 		return session.selectList(stmt, new Paging(page, LECTURE_MAX_PAGE));
 	}
 	
+	public int setLecture(Lecture data){
+		String stmt = LECTURE_NS + "insertLecture";
+		return session.insert(stmt, data);
+	}
 	
 	
 }
