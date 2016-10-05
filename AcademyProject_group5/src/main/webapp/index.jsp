@@ -16,19 +16,6 @@
 	</head>
 	<body>
 			
-			<!-- <header id="header2">
-				<div class="inner">
-					<div class="content">
-						<h1>MCM</h1>
-						<h2>000회원님 환영합니다.</h2>
-						<h3>마일리지 : </h3>
-						<h3>내 정보 확인 : </h3>
-						<h3>로그아웃 : </h3>
-						<a href="#" class="button big alt"><span>접어두기</span></a>
-					</div>
-					<a href="#" class="button hidden"><span>Let's Go</span></a>
-				</div>
-			</header> -->
   
 		 <!-- Main -->
 	 		<div id="main">

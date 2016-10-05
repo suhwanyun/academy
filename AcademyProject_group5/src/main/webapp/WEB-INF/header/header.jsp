@@ -11,8 +11,10 @@
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/css/font-awesome.css" />
 </head>
 	<body>
-	<a href="<%=request.getContextPath() %>/login" class="button big alt"><span>Login</span></a>
+		
+		
 	 		<header id="header">
+	 		<%if(session.getAttribute("userdata")==null){ %>
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
@@ -24,6 +26,17 @@
 					</div>
 					<a href="#" class="button hidden"><span>Home</span></a>
 				</div>
+			
+			<%}else if(session.getAttribute("userdata")!=null){ %>
+			
+				<div class="inner">
+					<div class="content">
+						<h1>MCM</h1>
+						<h2>로그인후</h2>
+						<a href="#" class="button big alt"><span>이용하기</span></a>
+					</div>
+					<a href="#" class="button hidden"><span>home</span></a>
+				</div><%} %>
 			</header>
 </body>
 </html>
