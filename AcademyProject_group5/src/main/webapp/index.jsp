@@ -52,7 +52,7 @@
 
 						
 							<div class="image fit">
-								<a href="detail1.html"><img src="<%=request.getContextPath() %>/images/pic01.jpg" alt="" /></a>
+								<a href="<%=request.getContextPath() %>/html/detail1.html"><img src="<%=request.getContextPath() %>/images/pic01.jpg" alt="" /></a>
 							</div>
 							<div class="image fit">
 								<a href="detail1.html"><img src="<%=request.getContextPath() %>/images/pic02.jpg" alt="" /></a>
