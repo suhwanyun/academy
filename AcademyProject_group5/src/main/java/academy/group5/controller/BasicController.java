@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BasicController {
 	
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
-	public String sayHello(Model model){
-		// View에 전달할 데이터를 model을 통해 설정
-		model.addAttribute("message", "Good Morning");
-		// 사용할 view의 이름 리턴 --> View Resolver
-		return "showMessage";
+	// 로그인 화면
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String toLogin(Model model){
+		
+		//model.addAttribute("message", "Good Morning");
+		return "/login/login";
 	}
 }
