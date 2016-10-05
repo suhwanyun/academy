@@ -3,9 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.UserDataMapper">
+
+	<resultMap type="userdata" id="userdataMapping">
+		<id column="user_id" property="userId"/>
+		<result column="user_pass" property="userPass"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_mileage" property="userMileage"/>
+		<result column="phone_id" property="phoneId"/>
+		<result column="phone_num" property="phoneNum"/>
+		<result column="pass_question" property="passQuestion"/>
+		<result column="pass_answer" property="passAnswer"/>
+	</resultMap>
 	
-	<select id="selectUser" parameterType="String" resultType="userdata">
-		select user_id, user_pass, user_name, user_mileage, phone_id, phone_num, pass_question, pass_answer
+	<select id="selectUser" parameterType="String" resultMap="userdataMapping">
+		select *
 		from UserData
 		where user_id = #{userId}
 		order by user_id
@@ -17,6 +28,37 @@
 		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
 	</insert>
 	
+	<update id="updateUser" parameterType="userdata">
+		update UserData set 
+			user_pass = #{userPass},
+			pass_question = #{passQuestion},
+			pass_answer = #{passAnswer}
+		where user_id = #{userId}
+	</update>
 	
+	<delete id="deleteUser" parameterType="String">
+		delete from UserData
+		where user_id = #{userId}
+	</delete>
+	
+	<select id="selectUserId" parameterType="userid" resultType="String">
+		select user_id
+		from UserData
+		where user_name = #{userName} and 
+			  phone_num = #{phoneNum}
+	</select>
+	
+	<select id="selectPassQuestion" parameterType="String" resultType="String">
+		select pass_question
+		from UserData
+		where user_id = #{userId}
+	</select>
+	
+	<select id="selectPass" parameterType="userpass" resultType="String">
+		select RPAD(SUBSTR(user_pass, -2), LENGTH(user_pass), '*')
+		from UserData
+		where user_name = #{userName} and 
+			  pass_answer = #{passAnswer}
+	</select>
 	
 </mapper>

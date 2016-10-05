@@ -25,6 +25,9 @@
 		<typeAlias type="academy.group5.dto.Term" alias="term"/>
 		<typeAlias type="academy.group5.dto.UserData" alias="userdata"/>
 		<typeAlias type="academy.group5.dto.Usermileage" alias="usermileage"/>
+		
+		<typeAlias type="academy.group5.dto.etc.UserId" alias="userid"/>
+		<typeAlias type="academy.group5.dto.etc.UserPass" alias="userpass"/>
 	</typeAliases>
 	
 	<mappers>

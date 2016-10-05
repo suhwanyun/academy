@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScans({
 	@ComponentScan("academy.group5.beans"),
 	@ComponentScan("academy.group5.repo"),
+	@ComponentScan("academy.group5.service"),
 	@ComponentScan("academy.group5.controller")
 })
 @EnableTransactionManagement

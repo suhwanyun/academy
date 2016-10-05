@@ -34,7 +34,7 @@ public interface LoginService {
 	 * @param phoneNum
 	 * @return
 	 */
-	String findId(String userName, String phoneNum);
+	String findId(String userName, Integer phoneNum);
 	/**
 	 * 비밀번호 질문받아오기
 	 * @param userId

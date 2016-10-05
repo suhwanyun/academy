@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-		<!-- Header -->
+		Header
 	 		<header id="header">
 				<div class="inner">
 					<div class="content">
@@ -30,8 +30,8 @@
 				</div>
 			</header>
 			
-			<!-- 
-			<header id="header2">
+			
+			<!-- <header id="header2">
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
