@@ -44,5 +44,5 @@
 		where user_id = #{user_id} 
 	</select>
 	
-	<select id="selectIsPresident" parameterType=""
+	
 </mapper>
