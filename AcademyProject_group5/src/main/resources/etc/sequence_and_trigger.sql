@@ -50,6 +50,7 @@ BEGIN
     into :new.posting_id
     from dual; 
 END;
+/
 
 CREATE OR REPLACE TRIGGER TRI_posting_attraction_no BEFORE INSERT ON Posting
 for each row
