@@ -36,7 +36,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public List<Lecture> myLectureList(String userId) {
+	public List<Lecture> userLectureList(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
