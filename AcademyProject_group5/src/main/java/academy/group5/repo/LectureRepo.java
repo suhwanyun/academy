@@ -23,4 +23,6 @@ public class LectureRepo {
 		return session.selectList(stmt, new Paging(page, LECTURE_MAX_PAGE));
 	}
 	
+	
+	
 }

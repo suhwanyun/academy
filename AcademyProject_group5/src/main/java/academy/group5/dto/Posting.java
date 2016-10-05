@@ -42,10 +42,10 @@ public class Posting {
 	/** 이미지 파일명들. */
 	private String postingPhoto;
 
-	/** 댓글 목록. */
+	/** 댓글 목록. *//*
 	private Set<PostingComment> commentSet;
 
-	/** 추천 목록. */
-	private Set<Recommend> recommendSet;
+	*//** 추천 목록. *//*
+	private Set<Recommend> recommendSet;*/
 
 }

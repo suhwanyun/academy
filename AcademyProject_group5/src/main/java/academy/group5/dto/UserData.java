@@ -1,7 +1,5 @@
 package academy.group5.dto;
 
-import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,38 +36,21 @@ public class UserData {
 	/** 비밀번호 질문 답. */
 	private String passAnswer;
 
-	/** 댓글 목록. */
+	/** 댓글 목록. *//*
 	private Set<PostingComment> commentSet;
 
-	/** 강의 신청 목록. */
+	*//** 강의 신청 목록. *//*
 	private Set<Lectureapply> lectureapplySet;
 
-	/** 알림설정 목록. */
+	*//** 알림설정 목록. *//*
 	private Set<Notificationsetting> notificationsettingSet;
 
-	/** 게시글 목록. */
+	*//** 게시글 목록. *//*
 	private Set<Posting> postingSet;
 
-	/** 추천 목록. */
+	*//** 추천 목록. *//*
 	private Set<Recommend> recommendSet;
 
-	/** 보유 마일리지 상품 목록. */
-	private Set<Usermileage> usermileageSet;
-
-	public UserData(String userId, String userPass, String userName, Integer userMileage, String phoneId,
-			Integer phoneNum, String passQuestion, String passAnswer) {
-		super();
-		this.userId = userId;
-		this.userPass = userPass;
-		this.userName = userName;
-		this.userMileage = userMileage;
-		this.phoneId = phoneId;
-		this.phoneNum = phoneNum;
-		this.passQuestion = passQuestion;
-		this.passAnswer = passAnswer;
-	}
-	
-	
-	
-	
+	*//** 보유 마일리지 상품 목록. *//*
+	private Set<Usermileage> usermileageSet;*/	
 }

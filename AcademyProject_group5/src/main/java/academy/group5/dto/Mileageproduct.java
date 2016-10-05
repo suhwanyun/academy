@@ -32,7 +32,7 @@ public class Mileageproduct {
 	/** 이미지 파일명. */
 	private String productImgfile;
 
-	/** 보유 마일리지 상품 목록. */
-	private Set<Usermileage> usermileageSet;
+	/** 보유 마일리지 상품 목록. *//*
+	private Set<Usermileage> usermileageSet;*/
 
 }

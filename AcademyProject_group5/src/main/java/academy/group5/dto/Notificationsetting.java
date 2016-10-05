@@ -30,7 +30,7 @@ public class Notificationsetting {
 	/** 알림 간격. */
 	private Integer notiTimeInterval;
 
-	/** 알림 목록. */
-	private Set<Notifications> notificationsSet;
+	/** 알림 목록. *//*
+	private Set<Notifications> notificationsSet;*/
 
 }

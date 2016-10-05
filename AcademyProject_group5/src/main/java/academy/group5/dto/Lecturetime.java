@@ -36,7 +36,7 @@ public class Lecturetime {
 	/** 임시 등록 날짜. */
 	private Date isTempDate;
 
-	/** 휴강 목록. */
-	private Set<CancelLecture> cancelSet;
+	/** 휴강 목록. *//*
+	private Set<CancelLecture> cancelSet;*/
 
 }

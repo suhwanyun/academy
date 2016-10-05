@@ -26,14 +26,14 @@ public class Lecture {
 	/** 교수 이름. */
 	private String professorName;
 
-	/** 강의 신청 목록. */
+/*	*//** 강의 신청 목록. *//*
 	private Set<Lectureapply> lectureapplySet;
 
-	/** 강의 공지 목록. */
+	*//** 강의 공지 목록. *//*
 	private Set<Lecturenotice> lecturenoticeSet;
 
-	/** 강의시간 목록. */
-	private Set<Lecturetime> lecturetimeSet;
+	*//** 강의시간 목록. *//*
+	private Set<Lecturetime> lecturetimeSet;*/
 
 	public Lecture(Integer lectureClass, String lectureName, String professorName) {
 		super();

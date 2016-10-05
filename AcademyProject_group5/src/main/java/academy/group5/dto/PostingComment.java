@@ -36,7 +36,7 @@ public class PostingComment {
 	/** 댓글 내용. */
 	private String commentContent;
 
-	/** 자식 댓글 목록. */
-	private Set<PostingComment> commentSet;
+	/** 자식 댓글 목록. *//*
+	private Set<PostingComment> commentSet;*/
 
 }
