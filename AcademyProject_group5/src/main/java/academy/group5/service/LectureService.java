@@ -32,7 +32,7 @@ public interface LectureService {
 	 * @param userId
 	 * @return
 	 */
-	List<Lecture> myLectureList(String userId);
+	List<Lecture> userLectureList(String userId);
 	/**
 	 * 시간표
 	 * @param lectureId
