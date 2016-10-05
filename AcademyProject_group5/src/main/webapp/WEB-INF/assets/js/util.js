@@ -152,7 +152,7 @@
 							var $a = $(this),
 								href = $a.attr('href'),
 								target = $a.attr('target');
-
+							
 							if (!href || href == '#' || href == '' || href == '#' + id)
 								return;
 

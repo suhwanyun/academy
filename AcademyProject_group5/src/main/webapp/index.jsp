@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
+	<jsp:include page="WEB-INF/header/header.jsp" />
 	<head>
 		<title>Radius by TEMPLATED</title>
 		<meta charset="utf-8" />
@@ -14,22 +15,6 @@
 		<link rel="stylesheet" href="<%=request.getContextPath() %>/css/font-awesome.css" />
 	</head>
 	<body>
-
-		Header
-	 		<header id="header">
-				<div class="inner">
-					<div class="content">
-						<h1>MCM</h1>
-						<h2>여러 게시판이 사용가능합니다.<br />
-						사용하시겠습니까?</h2>
-						<a href="#" class="button big alt"><span>가입없이 이용하기</span></a><br><br>
-						<a href="#" class="button big alt"><span>Login</span></a>
-						<a href="#" class="button big alt"><span>회원가입</span></a>
-					</div>
-					<a href="#" class="button hidden"><span>Let's Go</span></a>
-				</div>
-			</header>
-			
 			
 			<!-- <header id="header2">
 				<div class="inner">

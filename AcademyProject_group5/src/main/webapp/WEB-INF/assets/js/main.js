@@ -54,7 +54,7 @@
 					if ( t.hasClass('preview') ) {
 						return true;
 					} else {
-						e.preventDefault();
+						//e.preventDefault();
 					}
 
 				});

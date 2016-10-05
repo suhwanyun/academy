@@ -32,7 +32,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 	
 	@Override
 	   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-	      registry.addResourceHandler("/upload/**")
+	
+		registry.addResourceHandler("/upload/**")
 	      .addResourceLocations("WEB-INF/upload/");
 	      
 	      registry.addResourceHandler("/html/**")
