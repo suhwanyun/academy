@@ -28,6 +28,7 @@
 		
 		<typeAlias type="academy.group5.dto.etc.UserId" alias="userid"/>
 		<typeAlias type="academy.group5.dto.etc.UserPass" alias="userpass"/>
+		<typeAlias type="academy.group5.dto.etc.Paging" alias="paging"/>
 	</typeAliases>
 	
 	<mappers>

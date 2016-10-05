@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.LectureMapper">
+
+	<resultMap type="lecture" id="lectureMapping">
+		<id column="lecture_id" property="lectureId"/>
+		<id column="lecture_class" property="lectureClass"/>
+		<result column="lecture_name" property="lectureName"/>
+		<result column="professor_name" property="professorName"/>
+	</resultMap>
+	
+	<select id="selectLecture" parameterType="paging" resultMap="lectureMapping">
+		select *
+		from Lecture
+		where rownum &gt;= #{startIdx} and rownum &lt;= #{endIdx}
+		order by lecture_id
+	</select>
+	
+	<insert id="insertUser" parameterType="userdata">
+		insert into UserData
+		(user_id, user_pass, user_name, user_mileage, phone_id, phone_num, pass_question, pass_answer)
+		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
+	</insert>
+	
+	<update id="updateUser" parameterType="userdata">
+		update UserData set 
+			user_pass = #{userPass},
+			pass_question = #{passQuestion},
+			pass_answer = #{passAnswer}
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		delete from UserData
+		where user_id = #{userId}
+	</delete>
+	
+</mapper>
