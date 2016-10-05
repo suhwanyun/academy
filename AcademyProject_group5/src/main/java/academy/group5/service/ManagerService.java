@@ -4,6 +4,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.Lecturetime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.Mileageproduct;
+import academy.group5.dto.Term;
 
 public interface ManagerService {
 	/**
@@ -13,6 +14,12 @@ public interface ManagerService {
 	 * @return
 	 */
 	Manager managerLogin(String managerId, String managerPass);
+	/**
+	 * 학기등록
+	 * @param term
+	 * @return
+	 */
+	boolean registerTerm(Term term);
 	/**
 	 * 강의등록
 	 * @param lecture
