@@ -48,9 +48,9 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public char getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
+	public boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
 	}
 
 }

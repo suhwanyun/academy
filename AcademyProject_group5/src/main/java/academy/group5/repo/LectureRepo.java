@@ -25,7 +25,7 @@ public class LectureRepo {
 		return session.selectList(stmt, new Paging(page, LECTURE_MAX_PAGE));
 	}
 	
-	public int setLecture(Lecture data){
+	public int setLecture(LectureApply data){
 		String stmt = LECTURE_NS + "insertLectureAllpy";
 		return session.insert(stmt, data);
 	}
@@ -35,7 +35,7 @@ public class LectureRepo {
 		return session.delete(stmt, data);
 	}
 	
-/*	public List<LectureApply> getUserLecture(String id) {
+	public List<LectureApply> getUserLecture(String id) {
 		String stmt = LECTURE_NS + "selectLectureByUser";
 		return session.selectList(stmt, id);
 	}
@@ -43,5 +43,10 @@ public class LectureRepo {
 	public List<LectureTime> getUserTimetable(String id){
 		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);
-	}*/
+	}
+	
+	public String getIsPresident(LectureApply data){
+		String stmt = LECTURE_NS + "selectIsPresident";
+		return session.selectOne(stmt, data);
+	}
 }
