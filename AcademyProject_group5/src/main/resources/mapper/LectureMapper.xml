@@ -39,8 +39,8 @@
 	</select>
 	
 	<select id="selectLectureTimeByUser" parameterType="String" resultType="lecture_time">
-		select lectureId, lectureClass, lectureStart, lectureEnd, lecturePlace, lectureWeek, isTempDate
-		from LectureTime join LectureApply using (lecture_id)
+		select lecture_id, lecture_class, lecture_start, lecture_end, lecture_place, lecture_week, is_temp_date
+		from LectureTime join LectureApply using (lecture_id, lecture_class)
 		where user_id = #{user_id} 
 	</select>
 	

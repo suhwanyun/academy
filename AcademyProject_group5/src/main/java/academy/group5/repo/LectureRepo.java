@@ -30,7 +30,7 @@ public class LectureRepo {
 		return session.insert(stmt, data);
 	}
 	
-	public int deleteLecture(Lecture data){
+	public int deleteLecture(LectureApply data){
 		String stmt = LECTURE_NS + "deleteLectureApply";
 		return session.delete(stmt, data);
 	}
