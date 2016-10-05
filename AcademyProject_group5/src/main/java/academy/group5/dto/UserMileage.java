@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usermileage {
+public class UserMileage {
 
 	/** 회원 ID. */
 	private String userId;

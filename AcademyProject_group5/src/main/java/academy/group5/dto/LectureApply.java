@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lectureapply {
+public class LectureApply {
 
 	/** 강의 ID. */
 	private Integer lectureId;

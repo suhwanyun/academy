@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Notificationsetting {
+public class NotificationSetting {
 
 	/** 알림 종류. */
 	private String notiType;

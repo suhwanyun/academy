@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Mileageproduct {
+public class MileageProduct {
 
 	/** 상품 ID. */
 	private Integer productId;

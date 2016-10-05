@@ -38,23 +38,20 @@ margin-left: 300px;
    if(loginId == null){      // 세션에 유저정보(loginId)가 없을 경우에만 로그인창 출력
 %>
 
-<form name="f1" action="JSP_06login2.jsp" >   <!--  로그인하기전 화면 -->
+<form name="f1" >   <!--  로그인하기전 화면 -->
    <div id="tableContainer">
-   <table width="604" height="220" cellspacing="4" 
-         style="border: 2px dotted rgb(199,185,194); FILTER: alpha(opacity=100);">
+   <table width="604" height="220" cellspacing="4">
          
       <tr>
-         <td style="background: url('http://cfile264.uf.daum.net/image/1267D6254A39EAB24FEE1E') no-repeat 0% 50%;
-         border: 1px solid rgb(199,185,194); text-align:center; ">아이디</td><td><input type="text" name="id" size="8"></td>
+         <td style="border: 1px solid rgb(199,185,194); text-align:center; ">아이디</td><td><input type="text" name="id" size="8"></td>
       </tr>
       
       <tr>
-         <td style="background: url('http://cfile264.uf.daum.net/image/1267D6254A39EAB24FEE1E') no-repeat 0% 50%; 
-         border: 1px solid rgb(199,185,194);text-align:center;">
+         <td style="border: 1px solid rgb(199,185,194);text-align:center;">
          암호</td><td><input type="password" name="pass" size="8"></td>
       </tr>
       
-      <tr align="center"><td colspan="2"><input type="submit" value="로그인"></td></tr>
+      <tr align="center"><td colspan="2"><input type="button" formaction="<%=request.getContextPath() %>/logincheck?session=food" value="로그인"></td></tr>
       
       <tr><td><input type="button" value="회원가입"></td>
       

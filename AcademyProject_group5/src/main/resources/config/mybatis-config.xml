@@ -9,29 +9,31 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="academy.group5.dto.CancelLecture" alias="cancellecture"/>
+		<typeAlias type="academy.group5.dto.CancelLecture" alias="cancel_lecture"/>
 		<typeAlias type="academy.group5.dto.Lecture" alias="lecture"/>
-		<typeAlias type="academy.group5.dto.Lectureapply" alias="lectureapply"/>
-		<typeAlias type="academy.group5.dto.Lecturenotice" alias="lecturenotice"/>
-		<typeAlias type="academy.group5.dto.Lecturetime" alias="lecturetime"/>
+		<typeAlias type="academy.group5.dto.LectureApply" alias="lecture_apply"/>
+		<typeAlias type="academy.group5.dto.LectureNotice" alias="lecture_notice"/>
+		<typeAlias type="academy.group5.dto.LectureTime" alias="lecture_time"/>
 		<typeAlias type="academy.group5.dto.Manager" alias="manager"/>
 		<typeAlias type="academy.group5.dto.Mileage" alias="mileage"/>
-		<typeAlias type="academy.group5.dto.Mileageproduct" alias="mileageproduct"/>
+		<typeAlias type="academy.group5.dto.MileageProduct" alias="mileage_product"/>
 		<typeAlias type="academy.group5.dto.Notifications" alias="notifications"/>
-		<typeAlias type="academy.group5.dto.Notificationsetting" alias="notificationsetting"/>
+		<typeAlias type="academy.group5.dto.NotificationSetting" alias="notification_setting"/>
 		<typeAlias type="academy.group5.dto.Posting" alias="posting"/>
-		<typeAlias type="academy.group5.dto.PostingComment" alias="postingcomment"/>
+		<typeAlias type="academy.group5.dto.PostingComment" alias="posting_comment"/>
 		<typeAlias type="academy.group5.dto.Recommend" alias="recommend"/>
 		<typeAlias type="academy.group5.dto.Term" alias="term"/>
-		<typeAlias type="academy.group5.dto.UserData" alias="userdata"/>
-		<typeAlias type="academy.group5.dto.Usermileage" alias="usermileage"/>
+		<typeAlias type="academy.group5.dto.UserData" alias="user_data"/>
+		<typeAlias type="academy.group5.dto.UserMileage" alias="user_mileage"/>
 		
-		<typeAlias type="academy.group5.dto.etc.UserId" alias="userid"/>
-		<typeAlias type="academy.group5.dto.etc.UserPass" alias="userpass"/>
+		<typeAlias type="academy.group5.dto.etc.UserId" alias="user_id"/>
+		<typeAlias type="academy.group5.dto.etc.UserPass" alias="user_pass"/>
+		<typeAlias type="academy.group5.dto.etc.UserLecture" alias="user_lecture"/>
 		<typeAlias type="academy.group5.dto.etc.Paging" alias="paging"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/UserDataMapper.xml"/>
+		<mapper resource="mapper/LectureMapper.xml"/>
 	</mappers>
 </configuration>

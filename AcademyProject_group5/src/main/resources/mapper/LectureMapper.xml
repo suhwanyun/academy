@@ -11,20 +11,33 @@
 		<result column="professor_name" property="professorName"/>
 	</resultMap> -->
 	
-	<select id="selectLecture" parameterType="paging" resultType="lecture">
+	<select id="selectLectureByPage" parameterType="paging" resultType="lecture">
 		select *
-		from select rownum as rnum, sub.*
+		from (select rownum as rnum, sub.*
 			 from (select *
 				  from Lecture 
-				  order by lecture_id) sub
+				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
-		
 	</select>
 	
-	<insert id="insertLecture" parameterType="recture">
-		insert into Lecture
-		(lecture_id, lecture_class, lecture_name, professor_name)
-		values (#{lectureId}, #{lectureClass}, #{lectureName}, #{professorName} )
+	<insert id="insertLectureAllpy" parameterType="lecture_apply">
+		insert into LectureApply
+		(lecture_id, user_id, lecture_class, is_president, isPresident)
+		values (#{lectureId}, #{userId}, #{lectureClass}, #{isPresident})
 	</insert>
 	
+	<delete id="deleteLectureApply" parameterType="lecture_apply">
+		delete from LectureApply
+		where user_id = #{userId}
+		  and lecture_id = #{lectureId}
+	</delete>
+	
+	<select id="selectLectureByUser" parameterType="String">
+		select *
+		from LectureApply
+		where user_id = #{userId}
+	</select>
+	
+	<!-- <select id="selectLectureTimeByUser" parameterType="String">
+	</select> -->
 </mapper>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.Lecture;
-import academy.group5.dto.Lecturetime;
+import academy.group5.dto.LectureTime;
 import academy.group5.repo.LectureRepo;
 
 @Service
@@ -42,7 +42,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public List<Lecturetime> timetable(Integer lectureId, Integer lectureClass, String userId) {
+	public List<LectureTime> timetable(Integer lectureId, Integer lectureClass, String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -34,7 +34,6 @@
 	 		<div id="main">
 				<div class="inner">
 					<div class="columns">
-
 						
 							<div class="image fit">
 								<a href="<%=request.getContextPath() %>/html/detail1.html"><img src="<%=request.getContextPath() %>/images/pic01.jpg" alt="" /></a>

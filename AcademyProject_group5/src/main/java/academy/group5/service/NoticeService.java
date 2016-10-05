@@ -2,7 +2,7 @@ package academy.group5.service;
 
 import java.util.List;
 
-import academy.group5.dto.Lecturenotice;
+import academy.group5.dto.LectureNotice;
 
 public interface NoticeService {
 	/**
@@ -11,25 +11,25 @@ public interface NoticeService {
 	 * @param page
 	 * @return
 	 */
-	List<Lecturenotice> allLecturenoticeList(String userId, int page);
+	List<LectureNotice> allLecturenoticeList(String userId, int page);
 	/**
 	 * 특정 강의의 전체 공지 가져오기 page=5
 	 * @param lectureId
 	 * @param lectureClass
 	 * @return
 	 */
-	List<Lecturenotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page);
+	List<LectureNotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page);
 	/**
 	 * 강의공지의 상세 정보
 	 * @param lectureId
 	 * @return
 	 */
-	Lecturenotice lectureInfo(Integer lectureId);
+	LectureNotice lectureInfo(Integer lectureId);
 	/**
 	 * 강의 공지 작성
 	 * @param lecturenotice
 	 * @return
 	 */
-	boolean postNotice(Lecturenotice lecturenotice);
+	boolean postNotice(LectureNotice lecturenotice);
 	
 }

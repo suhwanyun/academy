@@ -2,26 +2,26 @@ package academy.group5.service;
 
 import java.util.List;
 
-import academy.group5.dto.Mileageproduct;
+import academy.group5.dto.MileageProduct;
 
 public interface MileageService {
 	/**
 	 * 상품의 전체리스트
 	 * @return
 	 */
-	List<Mileageproduct> productList();
+	List<MileageProduct> productList();
 	/**
 	 * 하나의 상품 내용
 	 * @param productId
 	 * @return
 	 */
-	Mileageproduct productOne(Integer productId);
+	MileageProduct productOne(Integer productId);
 	/**
 	 * 회원의 구매목록
 	 * @param userId
 	 * @return
 	 */
-	List<Mileageproduct> shoppingList(String userId);
+	List<MileageProduct> shoppingList(String userId);
 	/**
 	 * 구매하기
 	 * @param userId

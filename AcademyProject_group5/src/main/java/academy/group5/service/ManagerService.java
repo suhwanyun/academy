@@ -1,9 +1,9 @@
 package academy.group5.service;
 
 import academy.group5.dto.Lecture;
-import academy.group5.dto.Lecturetime;
+import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
-import academy.group5.dto.Mileageproduct;
+import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 
 public interface ManagerService {
@@ -31,7 +31,7 @@ public interface ManagerService {
 	 * @param lecturetime
 	 * @return
 	 */
-	boolean registerLecturetime(Lecturetime lecturetime);
+	boolean registerLecturetime(LectureTime lecturetime);
 	/**
 	 * 강의 내용 수정
 	 * @param lecture
@@ -43,7 +43,7 @@ public interface ManagerService {
 	 * @param lecturetime
 	 * @return
 	 */
-	boolean updateLecturetime(Lecturetime lecturetime);
+	boolean updateLecturetime(LectureTime lecturetime);
 	/**
 	 * 강의삭제(강의에 시간까지 같이 삭제)
 	 * @param lectureId
@@ -62,13 +62,13 @@ public interface ManagerService {
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean registerProduct(Mileageproduct mileageProduct);
+	boolean registerProduct(MileageProduct mileageProduct);
 	/**
 	 * 상품 수정
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean updateProduct(Mileageproduct mileageProduct);
+	boolean updateProduct(MileageProduct mileageProduct);
 	/**
 	 * 상품 삭제
 	 * @param productId

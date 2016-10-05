@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lecturenotice {
+public class LectureNotice {
 
 	/** 공지 시간. */
 	private Date noticeTime;

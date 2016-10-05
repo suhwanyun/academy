@@ -3,7 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.Lecture;
-import academy.group5.dto.Lecturetime;
+import academy.group5.dto.LectureTime;
 
 public interface LectureService {
 	/**
@@ -39,7 +39,7 @@ public interface LectureService {
 	 * @param lectureClass
 	 * @return
 	 */
-	List<Lecturetime> timetable(Integer lectureId, Integer lectureClass, String userId);
+	List<LectureTime> timetable(Integer lectureId, Integer lectureClass, String userId);
 	/**
 	 * 해당 강의의 반장여부를 반환
 	 * @param lectureId
