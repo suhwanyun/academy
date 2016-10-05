@@ -35,7 +35,7 @@ public class LectureRepo {
 		return session.delete(stmt, data);
 	}
 	
-	public List<LectureApply> getUserLecture(String id) {
+/*	public List<LectureApply> getUserLecture(String id) {
 		String stmt = LECTURE_NS + "selectLectureByUser";
 		return session.selectList(stmt, id);
 	}
@@ -43,5 +43,5 @@ public class LectureRepo {
 	public List<LectureTime> getUserTimetable(String id){
 		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);
-	}
+	}*/
 }

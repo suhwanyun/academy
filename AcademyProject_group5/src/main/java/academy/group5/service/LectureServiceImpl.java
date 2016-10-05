@@ -42,7 +42,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public List<LectureTime> timetable(Integer lectureId, Integer lectureClass, String userId) {
+	public List<LectureTime> timetable(String userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

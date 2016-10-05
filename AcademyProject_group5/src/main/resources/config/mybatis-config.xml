@@ -28,7 +28,6 @@
 		
 		<typeAlias type="academy.group5.dto.etc.UserId" alias="user_id"/>
 		<typeAlias type="academy.group5.dto.etc.UserPass" alias="user_pass"/>
-		<typeAlias type="academy.group5.dto.etc.UserLecture" alias="user_lecture"/>
 		<typeAlias type="academy.group5.dto.etc.Paging" alias="paging"/>
 	</typeAliases>
 	
