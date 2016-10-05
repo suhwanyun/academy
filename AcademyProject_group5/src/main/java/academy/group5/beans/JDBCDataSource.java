@@ -5,8 +5,6 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource("classpath:/config/dbconfigTesting.properties")
 public class JDBCDataSource {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JDBCDataSource.class);
 	
 	@Bean
 	public DataSource dataSource(
