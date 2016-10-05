@@ -45,7 +45,7 @@ public interface LectureService {
 	 * @param lectureClass
 	 * @return
 	 */
-	char getIsPresident(Integer lectureId, String userId, Integer lectureClass);
+	boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass);
 	
 
 }
