@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.UserData;
 
@@ -13,21 +14,20 @@ public class BasicController {
 	// 로그인 화면
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
 	public String loginPage(Model model){
-		
-		//model.addAttribute("message", "Good Morning");
+
 		return "/login/login";
 	}
 
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String JoinPage(Model model){
-		
-		//model.addAttribute("message", "Good Morning");
+		UserData data = new UserData();
+		model.addAttribute("UserData", data);
 		return "/join/join";
 	}
-	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String Join(Model model){
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String Join(Model model, UserData data){
 		
-		//model.addAttribute("message", "Good Morning");
-		return "/join/join";
+		model.addAttribute("msg", "회원가입 되었습니다.");
+		return "index";
 	}
 }

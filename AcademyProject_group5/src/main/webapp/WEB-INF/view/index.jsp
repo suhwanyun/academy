@@ -17,40 +17,41 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 </head>
+
 <body>
-	<jsp:include page="WEB-INF/header/header.jsp" />
+	<c:if test="${!empty msg}">
+		<script>alert('${msg}');</script>
+		<c:remove var="msg"/> 
+	</c:if>
+	
+	<jsp:include page="../header/header.jsp" />
 
 	<!-- Main -->
 	<div id="main">
 		<div class="inner">
-			
-				<div class="columns">
+			<div class="columns">
 					<a href="<%=request.getContextPath() %>/html/detail1.html"><img 
 						class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic01.png" alt="" /></a>
-					
+				
 					<a href="detail1.html"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></a>
-						
-				</div>
-		
-				<div class="columns">
+				
 					<a href="detail1.html"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic03.png" alt="" /></a>
 			
 					<a href="detail1.html"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic04.png" alt="" /></a>
-				</div>
-				<div class="columns">
+				
 					<a href="detail1.html"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic05.png" alt="" /></a>
-				</div>
+
 				
 			</div>
 		</div>
 
-	
-		<jsp:include page="WEB-INF/footer/footer.jsp" />
+</div>		
+		<jsp:include page="../footer/footer.jsp" />
 
 </body>
 <!-- Scripts -->

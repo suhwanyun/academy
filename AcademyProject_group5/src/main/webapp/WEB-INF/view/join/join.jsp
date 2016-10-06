@@ -8,10 +8,11 @@
 <title>회원가입</title>
 </head>
 <body>
-	<sform:form method="post" action="join" modelAttribute="userData">
+	<sform:form method="post" action="join" modelAttribute="UserData">
 		<fieldset>
-			<sform:label path="id">아이디</sform:label>
-			<sform:input path="id"/>
+			<sform:label path="userId">아이디</sform:label>
+			<sform:input path="userId"/>
+			<sform:button>확인</sform:button>
 		</fieldset>
 	</sform:form>
 </body>
