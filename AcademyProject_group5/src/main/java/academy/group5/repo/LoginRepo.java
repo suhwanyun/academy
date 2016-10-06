@@ -50,4 +50,9 @@ public class LoginRepo {
 		String stmt = LOGIN_NS + "selectPass";
 		return session.selectOne(stmt, data);
 	}
+	
+	public Integer findId(String id){
+		String stmt = LOGIN_NS + "selectId";
+		return session.selectOne(stmt, id);
+	}
 }

@@ -96,4 +96,16 @@ public class LoginServiceImpl implements LoginService {
 		return data;
 	}
 
+	// 존재하는 아이디인지 확인
+	@Override
+	public boolean findUser(String id) {
+		int finded = loginRepo.findId(id);
+		
+		if(finded == 0){
+			return true;
+		} else{
+			return false;
+		}
+	}
+
 }
