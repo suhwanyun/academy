@@ -309,7 +309,7 @@
 	}
 
 /* Button */
- /*버튼 크기 - 없애면 줄어듬*/ 
+ /*踰꾪듉 �겕湲� - �뾾�븷硫� 以꾩뼱�벉*/ 
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
@@ -911,7 +911,7 @@
 	}
 
 /* Columns */
-/*사진 열배치*/
+/*�궗吏� �뿴諛곗튂*/
 
 
 
@@ -1196,7 +1196,7 @@
 	}
 
 /* Header */
- /*원, 버튼도형만들기*/
+ /*�썝, 踰꾪듉�룄�삎留뚮뱾湲�*/
 	#header, #header2 {
 		-moz-transition: background 1s ease-in-out, height 0.2s ease-in-out;
 		-webkit-transition: background 1s ease-in-out, height 0.2s ease-in-out;
@@ -1224,7 +1224,7 @@
 		height: 100vh;
 		z-index: 10001;
 	}
-/*단순배치*/
+/*�떒�닚諛곗튂*/
 		#header .inner,#header2 .inner{
 			-moz-transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
 			-webkit-transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
@@ -1258,7 +1258,7 @@
 			box-shadow: 0 0 0 1em #FFF;
 			cursor: default;
 		}
-/* 내부 글씨 스타일 변경*/
+/* �궡遺� 湲��뵪 �뒪���씪 蹂�寃�*/
 			#header .inner .content,#header2 .inner .content{
 				-moz-transition: opacity 1s ease-in-out;
 				-webkit-transition: opacity 1s ease-in-out;
@@ -1288,6 +1288,9 @@
 				margin: 0;
 				border-radius: 30px;
 			}
+			#header .inner .content a{
+				margin: 10px;
+			}
 
 				#header .inner .button.hidden, #header2 .inner .button.hidden {
 					display: none;
@@ -1297,7 +1300,7 @@
 			#header .inner.hidden, #header2 .inner.hidden {
 				display: none;
 			}
-/* 버튼누른후 숨었을때*/
+/* 踰꾪듉�늻瑜명썑 �닲�뿀�쓣�븣*/
 		#header.hide, #header.preview, #header2.hide, #header2.preview {
 			-moz-transition: background 0.2s ease-in-out, height 1s ease-in-out;
 			-webkit-transition: background 0.2s ease-in-out, height 1s ease-in-out;
@@ -1306,13 +1309,13 @@
 			background: none;
 			height: 0;
 		}
-/*숨었을때 모양*/
+/*�닲�뿀�쓣�븣 紐⑥뼇*/
 			#header.hide .inner, #header.preview .inner, #header2.hide .inner, #header2.preview .inner {
 				height: 6em;
 				width: 6em;
 				padding: 2em;
 			}
-/*숨었을때 텍스트 사라지기*/
+/*�닲�뿀�쓣�븣 �뀓�뒪�듃 �궗�씪吏�湲�*/
 				#header.hide .inner .content, #header.preview .inner .content, 
 				#header2.hide .inner .content, #header2.preview .inner .content{
 					opacity: 0;
@@ -1352,7 +1355,7 @@
 					font-weight: normal;
 					text-transform: none !important;
 				}
-/*홈버튼*/
+/*�솃踰꾪듉*/
 				#header.hide .button.hidden:before, #header.preview .button.hidden:before {
 					content: '\f015';
 					color: #FFF;
@@ -1362,7 +1365,7 @@
 				#header.hide .button.hidden span, #header.preview .button.hidden span {
 					display: none;
 				}
-/*스크린 사이즈 맞추기*/
+/*�뒪�겕由� �궗�씠利� 留욎텛湲�*/
 		@media screen and (max-width: 736px) {
 
 			#header .inner {
@@ -1497,7 +1500,7 @@ Footer
 			}
 
 		@media screen and (max-width: 980px) {
-/*그룹 나눠서 아래에 표시*/
+/*洹몃９ �굹�닠�꽌 �븘�옒�뿉 �몴�떆*/
 			#footer {
 				position: relative;
 				bottom: 0;
@@ -1507,14 +1510,14 @@ Footer
 					height: auto;
 					display: block;
 				}
-/*가운데정렬*/
+/*媛��슫�뜲�젙�젹*/
 					#footer .inner .content,
 					#footer .inner .copyright {
 						display: block;
 						width: 100%;
 						text-align: center;
 					}
-/*위에 i정보*/
+/*�쐞�뿉 i�젙蹂�*/
 				#footer .info {
 					display: none;
 				}
