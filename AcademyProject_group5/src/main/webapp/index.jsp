@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 
 <html>
 
@@ -53,7 +53,8 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="WEB-INF/footer/footer.jsp" />
+	</div>
+	<jsp:include page="WEB-INF/footer/footer.jsp" />
 </body>
 <!-- Scripts -->
 <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
