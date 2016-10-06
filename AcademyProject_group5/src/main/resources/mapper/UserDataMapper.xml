@@ -24,8 +24,8 @@
 	
 	<insert id="insertUser" parameterType="user_data">
 		insert into UserData
-		(user_id, user_pass, user_name, user_mileage, phone_id, phone_num, pass_question, pass_answer)
-		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneId}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
+		(user_id, user_pass, user_name, user_mileage, phone_num, pass_question, pass_answer)
+		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
 	</insert>
 	
 	<update id="updateUser" parameterType="user_data">

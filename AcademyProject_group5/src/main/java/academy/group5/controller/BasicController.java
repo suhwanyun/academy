@@ -26,10 +26,4 @@ public class BasicController {
 		model.addAttribute("UserData", data);
 		return "/join/join";
 	}
-	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(Model model, UserData data){
-		
-		model.addAttribute("msg", "회원가입 되었습니다.");
-		return "index";
-	}
 }

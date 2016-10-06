@@ -35,10 +35,16 @@ public class LoginServiceImpl implements LoginService {
 	// 회원가입
 	@Override
 	public boolean join(UserData userdata) {
+		String id = userdata.getUserId();
+		// 아이디 중복 방지
+		if(id == null || id.equals("") || !findUser(userdata.getUserId())){
+			return false;
+		}
+		
 		UserData encdata = toHash(userdata);
+		logger.trace("data: {}", encdata);
 		try{
 			loginRepo.setUser(encdata);
-		// 아이디 중복
 		}catch(org.springframework.dao.DuplicateKeyException e){
 			return false;
 		}
