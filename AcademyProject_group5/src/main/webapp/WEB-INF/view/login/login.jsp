@@ -3,44 +3,41 @@
 <html>
 <head>
 <title>login form </title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 
-<style>
-
-
-body { margin: 0px; height: 100%; }
-
-#tableContainer{
-position: absolute;
-top: 50%;
-margin-top: -110px;
-width: 100%;
-text-align: center;
-margin-left: 300px;
-}
-
-</style>
 </head>
-<body topmargin="0" leftmargin="0">
 
-<form name="f1" >   <!--  로그인하기전 화면 -->
-   <div id="tableContainer">
-   <table width="604" height="220" cellspacing="4">
-         
-      <tr>
-         <td style="border: 1px solid rgb(199,185,194); text-align:center; ">아이디</td><td><input type="text" id="id" name="id" size="8"></td>
-      </tr>
-      
-      <tr>
-         <td style="border: 1px solid rgb(199,185,194);text-align:center;">
-         암호</td><td><input type="password" name="pass" size="8"></td>
-      </tr>
-      
-      <tr align="center"><td colspan="2"><input type="button" id="loginBtn"value="로그인"></td></tr>
-
-   </table>
+<form >   <!--  로그인하기전 화면 -->
+<a href="<%=request.getContextPath() %>"><img 
+						class="circular--logo"
+						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+ 
+  <div id="wrap">
+   <h1 class="member">member login</h1>
+   <div class="form">
+    <div class="form2">
+     <div class="form3 pad">
+      <label for="user">아이디</label><input type="text" id="user">
+      <label for="user">비밀번호</label><input type="password" id="user">
+     </div>
+     <div class="pad">
+     <input type="submit" value="로그인하기"  id="loginBtn">
+     </div>
+     <div class="pad">
+      <input type="button" value="회원가입">
+      <input type="button" value="ID/Pass 찾기">
+    </div>
    </div>
-</form>
+  </div>
+  </div>
+ </form>
 </body>
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	<%session.setAttribute("userdata", "value");%>
