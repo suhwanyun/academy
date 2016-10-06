@@ -210,105 +210,105 @@ CREATE TABLE UserMileage
 ALTER TABLE LectureApply
 	ADD CONSTRAINT "LectureApply FK ref Lecture"
 	FOREIGN KEY (lecture_id, lecture_class)
-	REFERENCES Lecture (lecture_id, lecture_class) NO DELETE NO ACTION
+	REFERENCES Lecture (lecture_id, lecture_class)
 ;
 
 
 ALTER TABLE LectureNotice
 	ADD CONSTRAINT "LectureNotice FK ref Lecture"
 	FOREIGN KEY (lecture_id, lecture_class)
-	REFERENCES Lecture (lecture_id, lecture_class) NO DELETE NO ACTION
+	REFERENCES Lecture (lecture_id, lecture_class)
 ;
 
 
 ALTER TABLE LectureTime
 	ADD CONSTRAINT "LectureTime FK ref Lecture"
 	FOREIGN KEY (lecture_id, lecture_class)
-	REFERENCES Lecture (lecture_id, lecture_class) NO DELETE NO ACTION
+	REFERENCES Lecture (lecture_id, lecture_class)
 ;
 
 
 ALTER TABLE CancelLecture
 	ADD CONSTRAINT "CancelLecture FK ref Lecture"
 	FOREIGN KEY (lecture_id, lecture_class, lecture_start)
-	REFERENCES LectureTime (lecture_id, lecture_class, lecture_start) NO DELETE NO ACTION
+	REFERENCES LectureTime (lecture_id, lecture_class, lecture_start)
 ;
 
 
 ALTER TABLE UserMileage
 	ADD CONSTRAINT "UserMileage FK ref MileageProd"
 	FOREIGN KEY (product_id)
-	REFERENCES MileageProduct (product_id) NO DELETE NO ACTION
+	REFERENCES MileageProduct (product_id)
 ;
 
 
 ALTER TABLE Notifications
 	ADD CONSTRAINT "Noti FK ref NotiSetting"
 	FOREIGN KEY (user_id, noti_type)
-	REFERENCES NotificationSetting (user_id, noti_type) NO DELETE NO ACTION
+	REFERENCES NotificationSetting (user_id, noti_type)
 ;
 
 
 ALTER TABLE PostingComment
 	ADD CONSTRAINT "PostingComm FK ref Posting"
 	FOREIGN KEY (posting_id, posting_type)
-	REFERENCES Posting (posting_id, posting_type) NO DELETE NO ACTION
+	REFERENCES Posting (posting_id, posting_type)
 ;
 
 
 ALTER TABLE Recommend
 	ADD CONSTRAINT "Recommend FK ref Posting"
 	FOREIGN KEY (posting_id, posting_type)
-	REFERENCES Posting (posting_id, posting_type) NO DELETE NO ACTION
+	REFERENCES Posting (posting_id, posting_type)
 ;
 
 
 ALTER TABLE PostingComment
 	ADD CONSTRAINT "PostingComm FK ref PostingComm"
 	FOREIGN KEY (comment_parent_id)
-	REFERENCES PostingComment (comment_id) NO DELETE NO ACTION
+	REFERENCES PostingComment (comment_id)
 ;
 
 
 ALTER TABLE LectureApply
 	ADD CONSTRAINT "LectureApply FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
 ALTER TABLE NotificationSetting
 	ADD CONSTRAINT "NotiSetting FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
 ALTER TABLE Posting
 	ADD CONSTRAINT "Posting FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
 ALTER TABLE PostingComment
 	ADD CONSTRAINT "PostingComm FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
 ALTER TABLE Recommend
 	ADD CONSTRAINT "Recommend FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
 ALTER TABLE UserMileage
 	ADD CONSTRAINT "UserMileage FK ref UserData"
 	FOREIGN KEY (user_id)
-	REFERENCES UserData (user_id) NO DELETE NO ACTION
+	REFERENCES UserData (user_id)
 ;
 
 
