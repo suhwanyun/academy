@@ -13,43 +13,25 @@
 </head>
 
 <form >   <!--  로그인하기전 화면 -->
+ID찾기
 <a href="<%=request.getContextPath() %>"><img 
 						class="circular--logo"
 						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
- 
-  <div id="wrap">
-   <h1 class="member">member login</h1>
-   <div class="form">
-    <div class="form2">
-     <div class="form3 pad">
-      <label for="user">아이디</label><input type="text" id="user">
-      <label for="user">비밀번호</label><input type="password" id="user">
-     </div>
-     <div class="pad">
-     <input type="submit" value="로그인하기"  id="loginBtn">
-     </div>
-     <div class="pad">
-      <input type="button" value="회원가입" >
-      <input type="button" value="ID/Pass 찾기" id="searchBtn">
-    </div>
-   </div>
-  </div>
-  </div>
+ <label for="user">아이디</label><input type="text" id="user">
+ <label for="user">전화번호</label><input type="text" id="phone">
+ <input type="button" value="확인" id="idCheck">
+
  </form>
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	<%session.setAttribute("userdata", "value");%>
-	$("#loginBtn").click(function(){
+	$("#idCheck").click(function(){
 		alert("성공");
-		$(location).attr('href',"view/index.jsp");	
+		$(location).attr('href',"index.jsp");	
 	});
 	
-	<%session.setAttribute("userdata", "value");%>
-	$("#searchBtn").click(function(){
-		$(location).attr('href',"search_idpw.jsp");	
-	});
 	
 </script>
 </html>
