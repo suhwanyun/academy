@@ -6,7 +6,7 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
-
+ 
 /* Reset */
 
  	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -727,7 +727,11 @@
 		 	border-bottom-left-radius: 50% 50%;
 		 	border-bottom-left-radius: 50% 50%;
 		 }
-
+		.circular--logo{
+			width: 100px;
+		 	height:100px;
+		 	margin-left: 43%;
+			}
 			.image.fit img {
 				width: 100%;
 			}
@@ -1542,3 +1546,59 @@ Footer
 				}
 
  	}
+ 
+ /*login.jsp*/
+.member {
+ font-size: 50px;
+ text-shadow: 0 0 10px #666;
+ color: #fff;
+ margin: 0 auto;
+ text-align: center;
+ text-transform: capitalize;
+ font-family: "맑은 고딕";
+ font-style: italic;
+}
+
+
+.form {
+ width: 70%;
+ height: 70%;
+ border-radius: 25px;
+ border: 5px double #999;
+ margin: 30px auto;
+}
+
+.form2 {
+ width: 380px;
+ min-width: 320px;
+ height: 200px;
+ margin: 60px auto;
+ margin-left:50px;
+}
+
+.form3 {
+ float:left;
+ 
+}
+
+.form3 label {
+ width: 100px;
+ height: 20px;
+ /*  display: block; */
+ float: left;
+ text-align: justify;
+}
+
+.form4 {
+ padding: 0px 0px 0px 70px;
+}
+
+#wrap {
+ width: 600px;
+ height: 500px;
+ margin: 0 auto;
+}
+.pad{
+	padding:10px;
+}
+
