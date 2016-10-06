@@ -24,35 +24,26 @@
 	<div id="main">
 		<div class="inner">
 			<div class="columns">
+					<a href="<%=request.getContextPath() %>/html/detail1.html"><img 
+						class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic01.png" alt="" /></a>
+				
+					<a href="detail1.html"><img class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></a>
+				
+					<a href="detail1.html"><img class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic03.png" alt="" /></a>
+			
+					<a href="detail1.html"><img class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic04.png" alt="" /></a>
+				
+					<a href="detail1.html"><img class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic05.png" alt="" /></a>
 
-				<div class="image fit">
-					<a href="<%=request.getContextPath() %>/html/detail1.html"><img
-						src="<%=request.getContextPath() %>/images/pic01.jpg" alt="" /></a>
-				</div>
-				<div class="image fit">
-					<a href="detail1.html"><img
-						src="<%=request.getContextPath() %>/images/pic02.jpg" alt="" /></a>
-				</div>
-				<div class="image fit">
-					<a href="detail1.html"><img
-						src="<%=request.getContextPath() %>/images/pic03.jpg" alt="" /></a>
-				</div>
-
-
-
-
-				<div class="image fit">
-					<a href="detail1.html"><img
-						src="<%=request.getContextPath() %>/images/pic04.jpg" alt="" /></a>
-				</div>
-
-				<div class="image fit">
-					<a href="detail1.html"><img
-						src="<%=request.getContextPath() %>/images/pic05.jpg" alt="" /></a>
-
-				</div>
+				
 			</div>
 		</div>
+</div>		
 		<jsp:include page="WEB-INF/footer/footer.jsp" />
 </body>
 <!-- Scripts -->
