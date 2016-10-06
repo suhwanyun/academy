@@ -15,7 +15,7 @@ public class BasicController {
 		//model.addAttribute("message", "Good Morning");
 		return "/login/login";
 	}
-	@RequestMapping(value="/join", method=RequestMethod.POST)
+	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String toJoin(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
