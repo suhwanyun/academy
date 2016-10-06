@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import academy.group5.dto.UserData;
 
 @Controller
-public class BasicController {
+public class IndexController {
 	
 	// 로그인 화면
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
@@ -20,6 +20,7 @@ public class BasicController {
 		return "/login/login";
 	}
 
+	// 회원가입 화면
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String joinPage(Model model){
 		UserData data = new UserData();
@@ -27,6 +28,7 @@ public class BasicController {
 		return "/join/join";
 	}
 
+	// 아이디 찾기, 패스워드 재설정 화면
 	@RequestMapping(value="/searchidpw", method=RequestMethod.GET)
 	public String search(Model model){
 	
