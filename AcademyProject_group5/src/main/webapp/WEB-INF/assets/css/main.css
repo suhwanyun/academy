@@ -1206,7 +1206,7 @@
 	}
 
 /* Header */
- /*�썝, 踰꾪듉�룄�삎留뚮뱾湲�*/
+
 	#header {
 		-moz-transition: background 1s ease-in-out, height 0.2s ease-in-out;
 		-webkit-transition: background 1s ease-in-out, height 0.2s ease-in-out;
@@ -1234,8 +1234,8 @@
 		height: 100vh;
 		z-index: 10004;
 	}
-/*�떒�닚諛곗튂*/
-		#header .inner{
+
+		#header .inner {
 			-moz-transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
 			-webkit-transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
 			-ms-transition: height 0.2s ease-in-out, width 0.2s ease-in-out;
@@ -1252,7 +1252,6 @@
 			-webkit-justify-content: center;
 			-ms-justify-content: center;
 			justify-content: center;
-			
 			-moz-align-items: center;
 			-webkit-align-items: center;
 			-ms-align-items: center;
@@ -1269,8 +1268,8 @@
 			box-shadow: 0 0 0 1em #FFF;
 			cursor: default;
 		}
-/* �궡遺� 湲��뵪 �뒪���씪 蹂�寃�*/
-			#header .inner .content{
+
+			#header .inner .content {
 				-moz-transition: opacity 1s ease-in-out;
 				-webkit-transition: opacity 1s ease-in-out;
 				-ms-transition: opacity 1s ease-in-out;
@@ -1289,9 +1288,13 @@
 					font-size: 1.5em;
 					color: #fff;
 					margin: 0 0 1em 0;
+				}	
+				#header .inner .content a {
+				
+					margin: 0 0 1em 0;
 				}
 
-			#header .inner .content h2 {
+			#header .inner .button {
 				-moz-transition: background 1s ease-in-out;
 				-webkit-transition: background 1s ease-in-out;
 				-ms-transition: background 1s ease-in-out;
@@ -1299,11 +1302,8 @@
 				margin: 0;
 				border-radius: 30px;
 			}
-			#header .inner .content a{
-				margin: 10px;
-			}
 
-				#header .inner .button.hidden{
+				#header .inner .button.hidden {
 					display: none;
 					cursor: pointer;
 				}
@@ -1311,7 +1311,7 @@
 			#header .inner.hidden {
 				display: none;
 			}
-/* 踰꾪듉�늻瑜명썑 �닲�뿀�쓣�븣*/
+
 		#header.hide, #header.preview {
 			-moz-transition: background 0.2s ease-in-out, height 1s ease-in-out;
 			-webkit-transition: background 0.2s ease-in-out, height 1s ease-in-out;
@@ -1320,35 +1320,30 @@
 			background: none;
 			height: 0;
 		}
-/*�닲�뿀�쓣�븣 紐⑥뼇*/
+
 			#header.hide .inner, #header.preview .inner {
 				height: 6em;
 				width: 6em;
 				padding: 2em;
 			}
-/*�닲�뿀�쓣�븣 �뀓�뒪�듃 �궗�씪吏�湲�*/
-				#header.hide .inner .content, #header.preview .inner .content, 
-				{
+
+				#header.hide .inner .content, #header.preview .inner .content {
 					opacity: 0;
 				}
 
-					#header.hide .inner .content h1, #header.preview .inner .content h1, 
-					{
+					#header.hide .inner .content h1, #header.preview .inner .content h1 {
 						display: none;
 					}
 
-					#header.hide .inner .content h2, #header.preview .inner .content h2, 
-					{
+					#header.hide .inner .content h2, #header.preview .inner .content h2 {
 						display: none;
 					}
 
-			#header.hide .button.big, #header.preview .button.big, 
-			{
+			#header.hide .button.big, #header.preview .button.big {
 				display: none;
 			}
-
-			#header.hide .button.hidden, #header.preview .button.hidden,
-			 {
+ 
+			#header.hide .button.hidden, #header.preview .button.hidden {
 				text-decoration: none;
 				padding-top: 1.5em;
 				padding-left: 0;
@@ -1357,8 +1352,7 @@
 				display: inline-block;
 			}
 
-				#header.hide .button.hidden:before, #header.preview .button.hidden:before,
-				 {
+				#header.hide .button.hidden:before, #header.preview .button.hidden:before {
 					-moz-osx-font-smoothing: grayscale;
 					-webkit-font-smoothing: antialiased;
 					font-family: FontAwesome;
@@ -1366,7 +1360,7 @@
 					font-weight: normal;
 					text-transform: none !important;
 				}
-/*�솃踰꾪듉*/
+
 				#header.hide .button.hidden:before, #header.preview .button.hidden:before {
 					content: '\f015';
 					color: #FFF;
@@ -1376,7 +1370,7 @@
 				#header.hide .button.hidden span, #header.preview .button.hidden span {
 					display: none;
 				}
-/*�뒪�겕由� �궗�씠利� 留욎텛湲�*/
+
 		@media screen and (max-width: 736px) {
 
 			#header .inner {
