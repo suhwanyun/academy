@@ -42,8 +42,15 @@
 			},
 			success : function(res){
 				
+				if(res=="true"){
+					alert("사용가능한 ID 입니다.");
+					result = res;
+				}else{
+					alert("이미 있는 ID 입니다.");
+					result = res;
+				}
 				
-				alert("성공"+res);
+				
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
