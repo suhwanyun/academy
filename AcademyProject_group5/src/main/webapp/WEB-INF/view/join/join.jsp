@@ -31,27 +31,22 @@
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	var result = false;
+	var result = "false";
 	$("#duplicationCheckBtn").click(function(event){
 		event.preventDefault();
 		$.ajax({
 			type :"get",
 			url : "findUser",
 			data : {
-				userId: $("#userId").val(),
+				userId: $("#userId").val()
 			},
 			success : function(res){
-				if(res){
-					alert("존재하지 않는 id");
-				} else{
-					alert("존재하는 id");
-				}
-				/* result = $(res).val();
-				alert("성공"+result); */
+				
+				
+				alert("성공"+res);
 			},
-			error : function(xhr, status, error){
-				alert(error);
-			}
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 		});
 		
 	});
