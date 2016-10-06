@@ -13,6 +13,9 @@
 			<sform:label path="userId">아이디</sform:label>
 			<sform:input type="text" path="userId"/>
 			<sform:button id="duplicationCheckBtn">중복 확인</sform:button><br>
+			<img 
+						class="circular--square"
+						src="<%=request.getContextPath() %>/images/btn1.png" alt="" />
 			<sform:label  path="userPass">비밀번호</sform:label>
 			<sform:input type="text" path="userPass"/><br>
 			<label for="passCheck">비밀번호 확인</label>
