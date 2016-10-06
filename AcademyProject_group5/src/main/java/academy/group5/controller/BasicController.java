@@ -19,7 +19,7 @@ public class BasicController {
 	}
 
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
-	public String toJoin(Model model, UserData data){
+	public String toJoin(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/join/join";

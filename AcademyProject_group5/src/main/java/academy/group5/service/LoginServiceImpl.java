@@ -78,12 +78,6 @@ public class LoginServiceImpl implements LoginService {
 	public String getPassQuestion(String userId) {
 		return loginRepo.getQuestion(userId);
 	}
-
-	// 비밀번호 찾기
-	@Override
-	public String findPass(String userId, String passAnswer) {
-		return loginRepo.getPass(new UserPass(userId, passAnswer));
-	}
 	
 	// 암호화
 	private UserData toHash(UserData data){

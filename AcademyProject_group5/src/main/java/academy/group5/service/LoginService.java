@@ -41,13 +41,6 @@ public interface LoginService {
 	 * @return
 	 */
 	String getPassQuestion(String userId);
-	/**
-	 * 비밀번호 찾기
-	 * @param userId
-	 * @param passAnswer
-	 * @return
-	 */
-	String findPass(String userId, String passAnswer);
 	
 	
 }
