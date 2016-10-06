@@ -17,8 +17,12 @@ public class LoginController {
 	LoginService service;
 	
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
-	public @ResponseBody boolean findUser(Model model, @RequestParam String userId){
+	public @ResponseBody String findUser(Model model, @RequestParam String userId){
 		
-		return service.findUser(userId);
+		if(service.findUser(userId)){
+			return "true";
+		}else{
+			return "false";
+		}
 	}
 }
