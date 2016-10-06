@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.UserData;
-import academy.group5.dto.etc.MyHash;
 import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 
@@ -50,9 +49,5 @@ public class LoginRepo {
 	public String getPass(UserPass data) {
 		String stmt = LOGIN_NS + "selectPass";
 		return session.selectOne(stmt, data);
-	}
-	
-	public String toHash(String data){
-		return MyHash.MD5(data);
 	}
 }

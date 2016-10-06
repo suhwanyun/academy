@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.MyHash;
 import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 import academy.group5.repo.LoginRepo;
@@ -20,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public UserData login(String userId, String userPass) {
 		UserData data = loginRepo.getUser(userId);
-		if(data == null || !data.getUserPass().equals(userPass)){
+		if(data == null || !data.getUserPass().equals(MyHash.MD5(userPass))){
 			return null;
 		}
 		return data;
@@ -29,8 +30,9 @@ public class LoginServiceImpl implements LoginService {
 	// 회원가입
 	@Override
 	public boolean join(UserData userdata) {
+		UserData encdata = toHash(userdata);
 		try{
-			loginRepo.setUser(userdata);
+			loginRepo.setUser(encdata);
 		// 아이디 중복
 		}catch(org.springframework.dao.DuplicateKeyException e){
 			return false;
@@ -42,7 +44,9 @@ public class LoginServiceImpl implements LoginService {
 	// 정보 수정
 	@Override
 	public boolean update(UserData userdata) {
-		int result = loginRepo.updateUser(userdata);
+		UserData encdata = toHash(userdata);
+		
+		int result = loginRepo.updateUser(encdata);
 		
 		if(result != 1){
 			return false;
@@ -79,6 +83,17 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String findPass(String userId, String passAnswer) {
 		return loginRepo.getPass(new UserPass(userId, passAnswer));
+	}
+	
+	// 암호화
+	private UserData toHash(UserData data){
+		String oriPass = data.getUserPass();
+		if(oriPass != null && !oriPass.equals("")){
+			String newPass = MyHash.MD5(oriPass);
+			data.setUserPass(newPass);
+		}
+		
+		return data;
 	}
 
 }

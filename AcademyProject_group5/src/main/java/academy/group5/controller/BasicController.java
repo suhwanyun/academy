@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import academy.group5.dto.UserData;
+
 @Controller
 public class BasicController {
 	
@@ -16,7 +18,7 @@ public class BasicController {
 		return "/login/login";
 	}
 	@RequestMapping(value="/join", method=RequestMethod.GET)
-	public String toJoin(Model model){
+	public String toJoin(Model model, UserData data){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/join/join";

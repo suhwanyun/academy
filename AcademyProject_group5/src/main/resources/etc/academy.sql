@@ -50,7 +50,7 @@ CREATE TABLE LectureApply
 	lecture_class number NOT NULL,
 	is_president char(1) NOT NULL,
 	right_end_time date,
-	CONSTRAINT LectureApply_PK PRIMARY KEY (lecture_id, user_id, lecture_class)
+	CONSTRAINT LectureApply_PK PRIMARY KEY (lecture_id, user_id)
 );
 
 
@@ -183,7 +183,7 @@ CREATE TABLE Term
 CREATE TABLE UserData
 (
 	user_id varchar2(10) NOT NULL,
-	user_pass varchar2(20) NOT NULL,
+	user_pass varchar2(64) NOT NULL,
 	user_name varchar2(10) NOT NULL,
 	user_mileage number NOT NULL,
 	phone_id varchar2(200),
