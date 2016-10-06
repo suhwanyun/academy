@@ -66,4 +66,10 @@
 			  pass_answer = #{passAnswer}
 	</select>
 	
+	<select id="selectId" parameterType="String" resultType="Integer">
+		select count(*)
+		from UserData
+		where user_id = #{userId}
+	</select>
+	
 </mapper>

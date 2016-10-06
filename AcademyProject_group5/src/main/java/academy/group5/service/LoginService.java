@@ -42,5 +42,10 @@ public interface LoginService {
 	 */
 	String getPassQuestion(String userId);
 	
-	
+	/**
+	 * 존재하는 id인지 확인
+	 * @param id
+	 * @return
+	 */
+	boolean findUser(String id);
 }
