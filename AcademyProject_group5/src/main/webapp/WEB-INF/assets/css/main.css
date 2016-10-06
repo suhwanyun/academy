@@ -1342,7 +1342,7 @@
 			#header.hide .button.big, #header.preview .button.big {
 				display: none;
 			}
-
+ 
 			#header.hide .button.hidden, #header.preview .button.hidden {
 				text-decoration: none;
 				padding-top: 1.5em;
