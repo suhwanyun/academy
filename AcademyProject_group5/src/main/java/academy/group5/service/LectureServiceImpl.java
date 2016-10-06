@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
 import academy.group5.repo.LectureRepo;
 
@@ -23,9 +24,10 @@ public class LectureServiceImpl implements LectureService{
 		return lecRepo.getAllLecture(page);
 	}
 
+	// 강의 신청
 	@Override
 	public boolean apply(Integer lectureId, Integer lectureClass, String userId) {
-		// TODO Auto-generated method stub
+		lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "0", null));
 		return false;
 	}
 

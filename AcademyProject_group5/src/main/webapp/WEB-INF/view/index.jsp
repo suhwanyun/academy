@@ -17,8 +17,14 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 </head>
+
 <body>
-	<jsp:include page="WEB-INF/header/header.jsp" />
+	<c:if test="${!empty msg}">
+		<script>alert('${msg}');</script>
+		<c:remove var="msg"/>
+	</c:if>
+	
+	<jsp:include page="../header/header.jsp" />
 
 	<!-- Main -->
 	<div id="main">
@@ -45,7 +51,7 @@
 		</div>
 
 </div>		
-		<jsp:include page="WEB-INF/footer/footer.jsp" />
+		<jsp:include page="../footer/footer.jsp" />
 
 </body>
 <!-- Scripts -->
