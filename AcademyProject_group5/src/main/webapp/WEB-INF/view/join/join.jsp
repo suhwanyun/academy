@@ -8,7 +8,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<sform:form method="post" action="updateUser" modelAttribute="userData">
+	<sform:form method="post" action="join" modelAttribute="userData">
 		<fieldset>
 			<sform:label path="id">아이디</sform:label>
 			<sform:input path="id"/>
