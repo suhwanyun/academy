@@ -1369,7 +1369,7 @@
 
 				#header.hide .button.hidden span, #header.preview .button.hidden span {
 					display: none;
-				}
+				} 
 
 		@media screen and (max-width: 736px) {
 

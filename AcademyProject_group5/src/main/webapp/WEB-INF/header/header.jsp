@@ -27,8 +27,8 @@
 						</h2>
 						<a href="#" class="button big alt"><span>가입없이 이용하기</span></a><br />
 						<a href="<%=request.getContextPath() %>/loginjsp"
-							class="button alt"><span>Login</span></a>
-							 <a href="<%=request.getContextPath() %>/joinjsp" class="button alt"><span>회원가입</span></a>
+							class="button big alt"><span>Login</span></a>
+							 <a href="<%=request.getContextPath() %>/joinjsp" class="button big alt"><span>회원가입</span></a>
 					</div>
 					<a href="#" class="button hidden"><span>Home</span></a>
 				</div>
