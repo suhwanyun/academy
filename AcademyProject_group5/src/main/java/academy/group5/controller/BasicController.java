@@ -11,13 +11,14 @@ import academy.group5.dto.UserData;
 public class BasicController {
 	
 	// 로그인 화면
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
 	public String toLogin(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/login/login";
 	}
-	@RequestMapping(value="/join", method=RequestMethod.GET)
+
+	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String toJoin(Model model, UserData data){
 		
 		//model.addAttribute("message", "Good Morning");
