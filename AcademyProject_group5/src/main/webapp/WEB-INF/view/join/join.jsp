@@ -14,9 +14,9 @@
 			<sform:input type="text" path="userId"/>
 			<sform:button id="duplicationCheckBtn">중복 확인</sform:button><br>
 			<sform:label  path="userPass">비밀번호</sform:label>
-			<sform:input type="text" path="userPass"/><br>
+			<sform:input type="password" path="userPass"/><br>
 			<label for="passCheck">비밀번호 확인</label>
-			<input type="text" id="passCheck"/><br>
+			<input type="password" id="passCheck"/><br>
 			<sform:label path="userName">이름</sform:label>
 			<sform:input type="text" path="userName"/><br>
 			<sform:label path="phoneNum">전화번호</sform:label>
