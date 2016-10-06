@@ -48,7 +48,6 @@ public class LoginServiceImpl implements LoginService {
 		}catch(org.springframework.dao.DuplicateKeyException e){
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -62,7 +61,6 @@ public class LoginServiceImpl implements LoginService {
 		if(result != 1){
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -74,7 +72,6 @@ public class LoginServiceImpl implements LoginService {
 		if(result != 1){
 			return false;
 		}
-		
 		return true;
 	}
 

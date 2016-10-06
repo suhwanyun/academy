@@ -29,8 +29,7 @@ public class BasicController {
 
 	@RequestMapping(value="/searchidpw", method=RequestMethod.GET)
 	public String search(Model model){
-		UserData data = new UserData();
-		model.addAttribute("UserData", data);
+	
 		return "/login/search_idpw";
 	}
 }

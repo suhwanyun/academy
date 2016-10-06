@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,26 +35,42 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public boolean delete(Integer lectureId, String userId) {
-		// TODO Auto-generated method stub
+		LectureApply data = new LectureApply();
+		data.setLectureId(lectureId);
+		data.setUserId(userId);
+		
+		lecRepo.deleteLecture(data);
 		return false;
 	}
 
 	@Override
 	public List<Lecture> userLectureList(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return lecRepo.getUserLecture(userId);
 	}
 
 	@Override
 	public List<LectureTime> timetable(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return lecRepo.getUserTimetable(userId);
 	}
 
 	@Override
 	public boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
-		// TODO Auto-generated method stub
-		return false;
+		LectureApply data = new LectureApply(lectureId, userId, lectureClass, null, null);
+		LectureApply result = lecRepo.getIsPresident(data);
+		
+		String president = result.getIsPresident();
+		Date time = result.getRightEndTime();
+		
+		// 처음부터 반장이 아님
+		if(president.equals("0")){
+			return false;
+		// (임시)반장
+		} else if(time.compareTo(new Date()) <= 0){
+			return true;
+		// (임시)반장이었으나 기간이 지남
+		} else{
+			return false;
+		}
 	}
 
 }
