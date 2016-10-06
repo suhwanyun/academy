@@ -41,8 +41,13 @@
 				userId: $("#userId").val(),
 			},
 			success : function(res){
-				result = $(res).val();
-				alert("성공"+result);
+				if(res){
+					alert("존재하지 않는 id");
+				} else{
+					alert("존재하는 id");
+				}
+				/* result = $(res).val();
+				alert("성공"+result); */
 			},
 			error : function(xhr, status, error){
 				alert(error);
