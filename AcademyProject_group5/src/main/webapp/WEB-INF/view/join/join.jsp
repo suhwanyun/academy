@@ -8,7 +8,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<sform:form>
+	<sform:form action="join" modelAttribute="userData">
 	<table>
 		<tr>
 			<td>ID:</td>

@@ -26,9 +26,9 @@
 							여러 게시판이 사용가능합니다.<br /> 사용하시겠습니까?
 						</h2>
 						<a href="#" class="button big alt"><span>가입없이 이용하기</span></a><br />
-						<a href="<%=request.getContextPath() %>/login"
+						<a href="<%=request.getContextPath() %>/loginjsp"
 							class="button big alt"><span>Login</span></a>
-							 <a href="<%=request.getContextPath() %>/join" class="button big alt"><span>회원가입</span></a>
+							 <a href="<%=request.getContextPath() %>/joinjsp" class="button big alt"><span>회원가입</span></a>
 					</div>
 					<a href="#" class="button hidden"><span>Home</span></a>
 				</div>

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BasicController {
 	
 	// 로그인 화면
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
 	public String toLogin(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/login/login";
 	}
-	@RequestMapping(value="/join", method=RequestMethod.GET)
+	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String toJoin(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
