@@ -42,8 +42,8 @@
 <script type="text/javascript">
 	<%session.setAttribute("userdata", "value");%>
 	$("#loginBtn").click(function(){
-		alert("성공");al
-		$(location).attr('href',"index.jsp");	
+		alert("성공");
+		$(location).attr('href',"view/index.jsp");	
 	});
 	
 	<%session.setAttribute("userdata", "value");%>

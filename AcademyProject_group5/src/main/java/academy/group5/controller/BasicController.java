@@ -32,4 +32,10 @@ public class BasicController {
 		model.addAttribute("msg", "회원가입 되었습니다.");
 		return "index";
 	}
+	@RequestMapping(value="/searchidpw", method=RequestMethod.GET)
+	public String search(Model model){
+		UserData data = new UserData();
+		model.addAttribute("UserData", data);
+		return "/login/search_idpw";
+	}
 }
