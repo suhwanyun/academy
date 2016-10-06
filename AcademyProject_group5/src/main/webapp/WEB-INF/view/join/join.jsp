@@ -8,7 +8,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<sform:form id="joinform" method="post" action="join"
+	<sform:form method="post" action="join"
 		modelAttribute="UserData">
 		<fieldset>
 			<sform:label path="userId">아이디</sform:label>
@@ -37,73 +37,11 @@
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/js/jquery.validate.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/additional-methods.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/messages_ko.min.js"></script>
 <script type="text/javascript">
 	var result = "false";
 	$("#join").click(function(event) {
 		event.preventDefault();
-		$("#joinform").validate({
-			//validation이 끝난 이후의 submit 직전 추가 작업할 부분
-			submitHandler : function() {
-				var f = confirm("회원가입을 완료하겠습니까?");
-				if (f) {
-					return true;
-				} else {
-					return false;
-				}
-			},
-			//규칙
-			rules : {
-				userId : {
-					required : true,
-				},
-				userPass : {
-					required : true,
-					minlength : 3
-				},
-				userName : {
-					required : true,
-					maxlength : 6
-				},
-				phoneNum : {
-					digits : true
-				},
-				passQuestion : {
-					required : true,
-					maxlength : 100
-				},
-				passAnswer : {
-					required : true,
-				}
-			},
-			//규칙체크 실패시 출력될 메시지
-			messages : {
-				userId : {
-					required : "필수 입력사항 입니다",
-					minlength : "최소 {0}글자이상이어야 합니다"
-				},
-				userPass : {
-					required : "필수로입력하세요",
-					minlength : "최소 {0}글자이상이어야 합니다"
-				},
-				userName : {
-					required : "필수로입력하세요",
-					maxlength : "최소 {0}글자 이하여야 합니다"
-				},
-				phoneNum : {
-					digits : "숫자만입력하세요"
-				},
-				passQuestion : {
-					required : "필수로입력하세요",
-					maxlength : "최대 {0}글자 이하여야 합니다"
-				},
-				passAnswer : {
-					required : "필수로입력하세요"
-				}
-			}
-		});
+		
 
 	});
 	$("#duplicationCheckBtn").click(
