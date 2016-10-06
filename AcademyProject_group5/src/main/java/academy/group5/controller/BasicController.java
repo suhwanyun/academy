@@ -12,14 +12,20 @@ public class BasicController {
 	
 	// 로그인 화면
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
-	public String toLogin(Model model){
+	public String loginPage(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/login/login";
 	}
 
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
-	public String toJoin(Model model){
+	public String JoinPage(Model model){
+		
+		//model.addAttribute("message", "Good Morning");
+		return "/join/join";
+	}
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String Join(Model model){
 		
 		//model.addAttribute("message", "Good Morning");
 		return "/join/join";
