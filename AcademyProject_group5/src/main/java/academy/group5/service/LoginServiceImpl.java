@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import academy.group5.repo.LoginRepo;
 @Transactional
 public class LoginServiceImpl implements LoginService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+	
 	@Autowired
 	LoginRepo loginRepo;
 
@@ -21,6 +25,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public UserData login(String userId, String userPass) {
 		UserData data = loginRepo.getUser(userId);
+
 		if(data == null || !data.getUserPass().equals(MyHash.MD5(userPass))){
 			return null;
 		}
@@ -82,6 +87,7 @@ public class LoginServiceImpl implements LoginService {
 	// 암호화
 	private UserData toHash(UserData data){
 		String oriPass = data.getUserPass();
+
 		if(oriPass != null && !oriPass.equals("")){
 			String newPass = MyHash.MD5(oriPass);
 			data.setUserPass(newPass);

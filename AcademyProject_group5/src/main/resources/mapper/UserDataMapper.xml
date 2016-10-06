@@ -30,14 +30,18 @@
 	
 	<update id="updateUser" parameterType="user_data">
 		update UserData set 
+		<if test="userPass != null and userPass != ''">
 			user_pass = #{userPass},
+		</if>
+		<if test="passQuestion != null and passQuestion != '' and passAnswer != null and passAnswer != ''">
 			pass_question = #{passQuestion},
 			pass_answer = #{passAnswer}
+		</if>
 		where user_id = #{userId}
 	</update>
 	
 	<delete id="deleteUser" parameterType="String">
-		delete from UserData
+		delete from UserData cascade
 		where user_id = #{userId}
 	</delete>
 	
@@ -55,7 +59,8 @@
 	</select>
 	
 	<select id="selectPass" parameterType="user_pass" resultType="String">
-		select RPAD(SUBSTR(user_pass, 1, LENGTH(user_pass)-2), LENGTH(user_pass), '*')
+		<!-- select RPAD(SUBSTR(user_pass, 1, LENGTH(user_pass)-2), LENGTH(user_pass), '*') -->
+		select user_pass
 		from UserData
 		where user_name = #{userName} and 
 			  pass_answer = #{passAnswer}
