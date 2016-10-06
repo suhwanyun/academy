@@ -39,9 +39,15 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	var result = "false";
+	var idcheck=passcheck=namecheck=phonecheck=questioncheck=ansercheck = true;
 	$("#join").click(function(event) {
-		event.preventDefault();
 		
+		if(idcheck&&passcheck&&namecheck&&phonecheck&&questioncheck&&ansercheck==true){
+			alert("cc");
+		}else{
+			alert(idcheck,passcheck,namecheck,phonecheck,questioncheck,ansercheck);
+			event.preventDefault();
+		}
 
 	});
 	$("#duplicationCheckBtn").click(
