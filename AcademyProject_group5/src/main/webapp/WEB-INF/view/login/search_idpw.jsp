@@ -21,6 +21,15 @@ ID찾기
  <label for="user">전화번호</label><input type="text" id="phone">
  <input type="button" value="확인" id="idCheck">
 
+Password 찾기
+<a href="<%=request.getContextPath() %>"><img 
+						class="circular--logo"
+						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+ <label for="user">아이디</label><input type="text" id="user">
+ <label for="user">이름</label><input type="text" id="name">
+  <label for="user">이름</label><input type="text" id="name">
+   <label for="user">이름</label><input type="text" id="name">
+ <input type="button" value="확인" id="idCheck">
  </form>
 </body>
 

@@ -12,12 +12,13 @@
 
 </head>
 
-<form >   <!--  로그인하기전 화면 -->
+<form>   <!--  로그인하기전 화면 -->
+<div id="wrap">
 <a href="<%=request.getContextPath() %>"><img 
 						class="circular--logo"
 						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
  
-  <div id="wrap">
+  
    <h1 class="member">member login</h1>
    <div class="form">
     <div class="form2">

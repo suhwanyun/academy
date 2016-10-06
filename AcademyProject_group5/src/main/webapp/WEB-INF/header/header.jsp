@@ -37,7 +37,7 @@
 						<h1>MCM</h1>
 						<h2>***님 어서오세요</h2>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
-						<a href="#" class="button big alt"><span>로그아웃</span></a>
+						<a href="#" class="button big alt" ><span>로그아웃</span></a>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
 					</div>

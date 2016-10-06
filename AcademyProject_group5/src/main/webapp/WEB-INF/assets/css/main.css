@@ -726,6 +726,7 @@
 		 	border-top-right-radius: 50% 50%;
 		 	border-bottom-left-radius: 50% 50%;
 		 	border-bottom-left-radius: 50% 50%;
+		 	margin: 1em 0em 1em 1.5em;
 		 }
 		.circular--logo{
 			width: 100px;
@@ -927,7 +928,16 @@
 /* Columns */
 /*�궗吏� �뿴諛곗튂*/
 
-
+	.columnsBtn {
+		position: relative;
+		-moz-column-count: 4;
+		-webkit-column-count: 4;
+		column-count: 4;
+		-moz-column-gap: 1em;
+		-webkit-column-gap: 1em;
+		column-gap: 1em;
+		
+	}
 
 	.columns {
 		position: relative;
@@ -1594,11 +1604,15 @@ Footer
 }
 
 #wrap {
- width: 600px;
- height: 500px;
+ width: 630px;
+ height: 600px;
  margin: 0 auto;
 }
+
 .pad{
 	padding:10px;
+}
+.setleft{
+	left: 1;
 }
 
