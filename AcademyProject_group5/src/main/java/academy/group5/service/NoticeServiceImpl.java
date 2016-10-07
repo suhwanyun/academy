@@ -21,26 +21,28 @@ public class NoticeServiceImpl implements NoticeService{
 	NoticeRepo notiRepo;
 	
 	@Override
-	public List<LectureNotice> allLecturenoticeList(String userId, int page) {
+	public List<LectureNotice> allLectureNoticeList(String userId, int page) {
 		return notiRepo.getAllLectureNoticeList(new Paging(page, NOTICE_MAX_PAGE, userId));
 	}
 
 	@Override
-	public List<LectureNotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LectureNotice> lectureNoticeList(Integer lectureId, Integer lectureClass, int page) {
+		return notiRepo.getLectureNoticeList(new Paging(page, NOTICE_MAX_PAGE, lectureId, lectureClass));
 	}
 
 	@Override
-	public LectureNotice lectureInfo(Integer lectureId) {
-		// TODO Auto-generated method stub
-		return null;
+	public LectureNotice lectureNoticeInfo(LectureNotice lecturenotice) {
+		return notiRepo.getLectureNoticeInfo(lecturenotice);
 	}
 
 	@Override
 	public boolean postNotice(LectureNotice lecturenotice) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = notiRepo.setLectureNotice(lecturenotice);
+		if(result == 1){
+			return true;
+		} else{
+			return false;
+		}
 	}
 
 }

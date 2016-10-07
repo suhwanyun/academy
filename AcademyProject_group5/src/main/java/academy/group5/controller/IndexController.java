@@ -46,7 +46,7 @@ public class IndexController {
 	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
 	public String campusMainPage(){
 		
-		return "campus/main";
+		return "/campus/main";
 	}
 	
 	/** 먹거리(식사) 추천 게시판 페이지 */

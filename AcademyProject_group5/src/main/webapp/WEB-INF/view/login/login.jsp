@@ -21,12 +21,10 @@
  
   
    <h1 class="member">member login</h1>
-   <div class="form">
-    <div class="form2">
-     <div class="form3 pad">
+
+     <div class="form10 pad">
       <label for="user">아이디</label><input type="text" id="userId">
       <label for="user">비밀번호</label><input type="password" id="userPass">
-     </div>
      <div class="pad">
      <input type="button" value="로그인하기"  id="loginBtn">
      </div>
@@ -35,8 +33,7 @@
       <input type="button" value="ID/Pass 찾기" id="searchBtn">
     </div>
    </div>
-  </div>
-  </div>
+ </div>
  </form>
 </body>
 
