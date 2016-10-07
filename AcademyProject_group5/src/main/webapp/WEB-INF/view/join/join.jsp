@@ -23,10 +23,17 @@
             <div class="form6">
                <div class="form3 pad">
                   <sform:label path="userId">아이디</sform:label>
-                     <sform:input type="text" path="userId" />
-                     <img class="circular--square"
-                     src="<%=request.getContextPath()%>/images/btn1.png" alt="" />
-                     <sform:button id="duplicationCheckBtn">중복 확인</sform:button>
+                  <table>
+                  <tr>
+                     <td><sform:input type="text" path="userId" /></td>
+                     <td><a id="trueorfalse" href="main" class="button alt trueButton"><span></span></a>
+                     </td></tr>
+                     <tr>
+                     <td></td>
+                     <td><sform:button id="duplicationCheckBtn">중복 확인</sform:button></td>
+                     </tr>
+                     </table>
+                     
                      <sform:label path="userPass">비밀번호</sform:label>
                      <sform:input type="password" path="userPass" /><br>
                      <label for="passCheck">비밀번호 확인</label> 
