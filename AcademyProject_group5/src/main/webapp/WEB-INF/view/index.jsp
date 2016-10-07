@@ -41,14 +41,14 @@
 				</div>
 		
 				<div class="columns">
-					<a href="detail1.html"><img class="circular--square"
+					<a href="<%=request.getContextPath() %>/playMain"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic03.png" alt="" /></a>
 			
 					<a href="detail1.html"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic04.png" alt="" /></a>
 				</div>
 				<div class="columns">
-					<a href="detail1.html"><img class="circular--square"
+					<a href="<%=request.getContextPath() %>/mileageMain"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic05.png" alt="" /></a>
 				</div>
 		</div>

@@ -25,7 +25,7 @@
                   <table>
                   <tr>
                      <td><sform:input type="text" path="userId" /></td>
-                     <td><a id="trueorfalse" href="main" class="button alt trueButton"><span></span></a>
+                     <td><a id="trueorfalse" href="#" class="button alt trueButton"><span></span></a>
                      </td></tr>
                      <tr>
                      <td></td>

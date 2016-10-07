@@ -10,15 +10,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class SessionCheckInterceptor extends HandlerInterceptorAdapter{
 	
-	private static final Logger logger = LoggerFactory.getLogger(SessionCheckInterceptor.class);
-	
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		logger.trace("pathinfo: {}, requestURI: {}", request.getPathInfo(), request.getRequestURI());
+		
 		if(session.getAttribute("user") == null){
+			session.setAttribute("msg", "로그인이 필요한 서비스입니다."); 
 			response.sendRedirect(request.getContextPath() + "/main");
 		}
 		return super.preHandle(request, response, handler);
