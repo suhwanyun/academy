@@ -37,7 +37,7 @@
 						<h1>MCM</h1>
 						<h2>***님 어서오세요</h2>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
-						<a href="#" class="button big alt" ><span>로그아웃</span></a>
+						<a id="logout" href="#" class="button big alt" ><span>로그아웃</span></a>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
 						<a href="#" class="button big alt"><span>이용하기</span></a>
 					</div>
@@ -47,4 +47,11 @@
 		</c:choose>
 	</header>
 </body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	$("#logout").click(function(){
+		session.setMaxInactiveInterval(0); 
+		$(location).attr('href',"main");
+	})
+</script>
 </html>
