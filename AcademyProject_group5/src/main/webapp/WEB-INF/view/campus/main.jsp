@@ -12,11 +12,15 @@
 <jsp:include page="../campus/lnoti_list.jsp" />
 <jsp:include page="/lecture_list.jsp" />
 <jsp:include page="../campus/schedule.jsp" /> --%>
+<img src="/images/logo.png"/>
 <div class="columnsBtn">
-	<input type="button" id="list"  value="내 강의 목록">
-	<input type="button" id="noti_list"  value="공지 내역">
-	<input type="button" id="list2"  value="강의 선택">
-	<input type="button" id="schedule"  value="시간표">
+
+<a href="<%=request.getContextPath() %>/notiList" class="button big alt"><span>내 강의 목록</span></a>
+<a href="<%=request.getContextPath() %>/notiInfo" class="button big alt"><span>공지 내역</span></a>
+<a href="<%=request.getContextPath() %>/lectureList" class="button big alt"><span>강의 선택</span></a>
+<a href="<%=request.getContextPath() %>/schedule" class="button big alt"><span>시간표</span></a>
+
+	
 </div>
 </body>
 </html>

@@ -31,7 +31,7 @@
 		<div class="inner">
 			
 				<div class="columns">
-					<a href="<%=request.getContextPath() %>/campus/main.jsp"><img 
+					<a href="<%=request.getContextPath() %>/campusMain"><img 
 						class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic01.png" alt="" /></a>
 					
