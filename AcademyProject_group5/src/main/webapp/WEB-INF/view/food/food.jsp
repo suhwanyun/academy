@@ -12,28 +12,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/foodMain">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+	
 	 
 <!-- 테이블 시작 -->
-<div class="form5">
+<div id="wrap">
+<a href="<%=request.getContextPath() %>">
+	<img class="circular--logo"
+	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+	<h1 class="member">식사 게시판</h1>
+<div class="form9 pad">
 <div class="boardcss_list_table">
 	<table class="list_table">
-		<caption>식사게시판입니다.</caption>
-		
-		<thead>
-			<tr>
-				<td><select >정렬 기준</select></td>
-				<td><select  >선택</select></td>
-				<td><input type="text" id="searchText"></td>
-				<td><button id="searchBtn"></button></td>
-			</tr>
 			<colgroup>
 			<col width="30%" />
-			<col width="50%" />
-			<col width="20%" />
+			<col width="40%" />
+			<col width="30%" />
 		</colgroup>
+		<thead>
+			<tr>
+				<td>
+				<select id="array" title="select array">
+				<option selected="selected">정렬 기준</option>
+				<option>red</option>
+        		<option>blue</option>
+				<option>yellow</option>
+       			<option>black</option>
+    			</select></td>
+				<td>
+				<select id="select" title="select select">
+				<option selected="selected">선택</option>
+				<option>red</option>
+        		<option>blue</option>
+				<option>yellow</option>
+       			<option>black</option>
+    			</select></td>
+    		
+				<td><input type="search" id="searchBtn"></td>
+			</tr>
+		
 			<tr id="gomchi2">
 				<th>사진</th>
 				<th>제목</th>
@@ -44,21 +60,21 @@
 		<tbody>
 				<tr>
 				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>강의 이름</span></a></th>
-				<th>교수 이름</th>
-				<th>강의 분반</th>
+				class="button big"><span>사진</span></a></th>
+				<th>제목</th>
+				<th>추천수</th>
 			</tr>
 				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>강의 이름</span></a></th>
-				<th>교수 이름</th>
-				<th>강의 분반</th>
+					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+				class="button big"><span>사진</span></a></th>
+				<th>제목</th>
+				<th>추천수</th>
 			</tr>
 				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>강의 이름</span></a></th>
-				<th>교수 이름</th>
-				<th>강의 분반</th>
+					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+				class="button big"><span>사진</span></a></th>
+				<th>제목</th>
+				<th>추천수</th>
 			</tr>
 				<tr>
 				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
@@ -75,8 +91,11 @@
 		
 		
 	</table>
+	
 </div>
 </div>
+</div>
+
 <!-- 테이블 종료 -->
 	
 </body>

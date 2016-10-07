@@ -19,9 +19,8 @@
             class="circular--logo"
             src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
          <h1 class="member">회원가입</h1>
-         <div class="form5">
-            <div class="form6">
-               <div class="form3 pad">
+         
+               <div class="form9 pad">
                   <sform:label path="userId">아이디</sform:label>
                   <table>
                   <tr>
@@ -32,7 +31,7 @@
                      <td></td>
                      <td><sform:button id="duplicationCheckBtn">중복 확인</sform:button></td>
                      </tr>
-                     </table>
+                  </table>
                      
                      <sform:label path="userPass">비밀번호</sform:label>
                      <sform:input type="password" path="userPass" /><br>
@@ -53,8 +52,7 @@
                      <sform:button id="join" type="submit">가입 하기</sform:button>
                   </div>
                </div>
-            </div>
-		</div>
+    
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
