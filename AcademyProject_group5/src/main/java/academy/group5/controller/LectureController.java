@@ -52,16 +52,24 @@ public class LectureController {
 	}
 	
 	// 학생이 선택한 강의의 공지사항 중 선택한 공지의 정보
-	@RequestMapping(value="/lectureBoardInfo", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureNotiInfo", method=RequestMethod.GET)
 	public String lectureNotiInfo(Model model){
 		
-		return "campus/lecture/lecture_board_info";
+		return "campus/lecture/lecture_noti_info";
 	}
 	
-	// 학생이 선택한 강의의 게시판에 글 작성
-	@RequestMapping(value="/lectureBoardAdd", method=RequestMethod.GET)
+	// 학생이 선택한 강의의 알림 등록
+	@RequestMapping(value="/lectureNotiAdd", method=RequestMethod.GET)
 	public String lectureNotiAdd(Model model){
 		
-		return "campus/lecture/lecture_board_add";
+		return "campus/lecture/lecture_noti_add";
+	}
+	
+	
+	// 학생이 선택한 강의의 정보를 확인하거나 강의 취소
+	@RequestMapping(value="/lectureInfo", method=RequestMethod.GET)
+	public String lectureInfo(Model model){
+		
+		return "campus/lecture/lecture_info";
 	}
 }
