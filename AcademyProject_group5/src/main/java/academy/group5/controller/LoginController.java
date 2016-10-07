@@ -19,7 +19,7 @@ public class LoginController {
 	@Autowired
 	LoginService service;	
 	
-	// 회원가입시 아이디 중복확인
+	/** 회원가입시 아이디 중복확인 */
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
 	public @ResponseBody String findUser(@RequestParam String userId){
 		
@@ -30,7 +30,7 @@ public class LoginController {
 		}	
 	}
 	
-	// 회원가입 완료
+	/**회원가입 완료 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(Model model, UserData data){
 		
@@ -45,7 +45,7 @@ public class LoginController {
 		}
 	}
 	
-	// 로그인
+	/** 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public @ResponseBody String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
@@ -58,5 +58,12 @@ public class LoginController {
 		} else{
 			return "false";
 		}
+	}
+	
+	/** 로그 아웃 */
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "index";
 	}
 }
