@@ -5,10 +5,10 @@
 <mapper namespace="academy.repo.NoticeMapper">
 	
 	<select id="selectAllLectureNoticeByUser" parameterType="paging" resultType="lecture_notice">
-		select *
+		select notice_time, lecture_id, notice_type, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
-			 	 	from LectureNotice join Lecture using (lecture_id)
+			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)
 			 	 					   join LectureApply using (lecture_id)
 			 	 	where user_id = #{data}
 					order by notice_time) sub)
@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="selectLectureNotice" parameterType="paging" resultType="lecture_notice">
-		select *
+		select notice_time, notice_type, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice 
@@ -25,6 +25,19 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
+	<select id="selectLectureNoticeInfo" parameterType="lecture_notice" resultType="lecture_notice">
+		select *
+		from LectureNotice
+		where notice_time = #{noticeTime}
+			and lecture_id = #{lectureId}
+			and lecture_class = #{lectureClass}
+	</select>
 	
+	<insert id="insertLectureNotice" parameterType="lecture_notice">
+		insert into
+		LectureNotice
+		values (sysdate, #{lectureId}, #{lectureClass},
+			#{noticeType}, #{noticeTitle}, #{noticeContent})
+	</insert>
 	
 </mapper>

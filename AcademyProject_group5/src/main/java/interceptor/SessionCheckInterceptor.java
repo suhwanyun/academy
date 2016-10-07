@@ -16,6 +16,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("user") == null){
+			session.setAttribute("msg", "로그인이 필요한 서비스입니다."); 
 			response.sendRedirect(request.getContextPath() + "/main");
 		}
 		return super.preHandle(request, response, handler);
