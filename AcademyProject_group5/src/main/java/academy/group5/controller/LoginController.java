@@ -18,7 +18,7 @@ public class LoginController {
 	
 	@Autowired
 	LoginService service;	
-	
+	 
 	/** 회원가입시 아이디 중복확인 */
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
 	public @ResponseBody String findUser(@RequestParam String userId){
