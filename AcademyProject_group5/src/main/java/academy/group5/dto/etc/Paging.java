@@ -17,8 +17,16 @@ public class Paging {
 	/** 종료 인덱스 */
 	private Integer endIdx;
 	
+	/** 부가 데이터 */
+	private String data;
+	
 	public Paging(int page, int size){
+		this(page, size, null);
+	}
+	
+	public Paging(int page, int size, String data){
 		this.startIdx = (page - 1) * size + 1;
 		this.endIdx = page * size;
+		this.data = data;
 	}
 }
