@@ -8,13 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CampusController {
 	
-	// 학업 메뉴 메인 페이지
-	@RequestMapping(value="/campusMain", method=RequestMethod.GET)
-	public String campusMainPage(Model model){
-		
-		return "campus/main";
-	}
-	
 	// 기존 알림 목록 표시
 	@RequestMapping(value="/notiList", method=RequestMethod.GET)
 	public String userNotiList(Model model){

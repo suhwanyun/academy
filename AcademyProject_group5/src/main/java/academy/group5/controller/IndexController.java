@@ -34,4 +34,39 @@ public class IndexController {
 	
 		return "/login/search_idpw";
 	}
+	
+	// 학업 메뉴 메인 페이지
+	@RequestMapping(value="/campusMain", method=RequestMethod.GET)
+	public String campusMainPage(Model model){
+		
+		return "campus/main";
+	}
+	
+	// 먹거리(식사) 추천 게시판 페이지
+	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
+	public String foodMainPage(Model model){
+	
+		return "/food/food";
+	}
+	
+	// 오락 추천 게시판 페이지
+	@RequestMapping(value="/playMain", method=RequestMethod.GET)
+	public String playMainPage(Model model){
+	
+		return "/play/play";
+	}
+	
+	// 명소 추천 게시판 페이지
+	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
+	public String placeMainPage(Model model){
+	
+		return "/place/place";
+	}
+	
+	// 마일리지 페이지
+	@RequestMapping(value="/mileageMain", method=RequestMethod.GET)
+	public String mileageMainPage(Model model){
+	
+		return "/mileage/mileage";
+	}
 }
