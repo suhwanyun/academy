@@ -23,11 +23,11 @@
 				<div class="form6">
 					<div class="form3 pad">
 						<sform:label path="userId">아이디</sform:label>
-						<div class="columns">
+						
 								<sform:input type="text" path="userId" />
 								<img class="circular--square"
 									src="<%=request.getContextPath()%>/images/btn1.png" alt="" />
-						</div>
+						
 							<sform:button id="duplicationCheckBtn">중복 확인</sform:button>
 						
 						
