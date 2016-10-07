@@ -31,7 +31,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 		registry.addInterceptor(new SessionCheckInterceptor())
 			.addPathPatterns("/campus/**")
 			.addPathPatterns("/lecture/**")
-			.addPathPatterns("/add/**")
+			.addPathPatterns("/write/**")
 			.addPathPatterns("/manage/**");
 		
 		super.addInterceptors(registry);

@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardController {
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
-	@RequestMapping(value="/add/food", method=RequestMethod.GET)
+	@RequestMapping(value="/write/food", method=RequestMethod.GET)
 	public String addFood(){
 		
 		return "food/food_add";
 	}
 	
 	/** 오락추천 게시판에 글 작성 */
-	@RequestMapping(value="/add/play", method=RequestMethod.GET)
+	@RequestMapping(value="/write/play", method=RequestMethod.GET)
 	public String addPlay(){
 		
 		return "play/play_add";
 	}
 	
 	/** 명소추천 게시판에 글 작성 */
-	@RequestMapping(value="/add/place", method=RequestMethod.GET)
+	@RequestMapping(value="/write/place", method=RequestMethod.GET)
 	public String addPlace(){
 		
 		return "place/place_add";
