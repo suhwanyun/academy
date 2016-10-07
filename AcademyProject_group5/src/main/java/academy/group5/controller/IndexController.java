@@ -30,8 +30,7 @@ public class IndexController {
 	// 회원가입 화면
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String joinPage(Model model){
-		UserData data = new UserData();
-		model.addAttribute("UserData", data);
+
 		return "/join/join";
 	}
 
