@@ -57,9 +57,6 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	var result = "false";
-	var idcheck = passcheck = namecheck = phonecheck = questioncheck = ansercheck = false;
-	$("#join").click(
-			function(event) {
 
 				if (idcheck && passcheck && namecheck && phonecheck
 						&& questioncheck && ansercheck == true) {
