@@ -15,7 +15,7 @@
 	<a href="<%=request.getContextPath() %>/main">
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
-	
+	 
 <!-- 테이블 시작 -->
 <div class="boardcss_list_table">
 	<table class="list_table">
