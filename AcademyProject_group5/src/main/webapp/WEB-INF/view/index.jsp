@@ -35,7 +35,7 @@
 						class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic01.png" alt="" /></a>
 					
-					<a href="detail1.html"><img class="circular--square"
+					<a href="<%=request.getContextPath() %>/foodMain"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></a>
 						
 				</div>
