@@ -374,8 +374,18 @@
 		input[type="button"].trueButton,
 		button.trueButton,
 		.button.trueButton{
-		background: #e74c3c;
-			color: #FFF;
+		background: green;
+		color: #FFF;
+		height: 2em;
+		margin-top: 1em;
+		border-radius: 10em;
+		padding: 0 2.5em;
+		}
+		input[type="button"].falseButton,
+		button.falseButton,
+		.button.falseButton{
+		background: red;
+		color: #FFF;
 		height: 2em;
 		margin-top: 1em;
 		border-radius: 10em;
@@ -1684,6 +1694,8 @@ Footer
 
 /* 화면에 보여지는 글 목록 테이블 */
 .list_table { width: 100%;}
+
+.
 
 /* 화면에 보여지는 caption */
 /* .list_table caption { display: none; } */

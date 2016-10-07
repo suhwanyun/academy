@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/main">
+	<a href="<%=request.getContextPath() %>/foodMain">
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	 
@@ -20,17 +20,24 @@
 <div class="form5">
 <div class="boardcss_list_table">
 	<table class="list_table">
-		<caption>전체 강의 목록입니다. 원하는 강의를 선택하세요.</caption>
-		<colgroup>
-			<col width="40%" />
-			<col width="30%" />
-			<col width="30%" />
-		</colgroup>
+		<caption>식사게시판입니다.</caption>
+		
 		<thead>
+			<tr>
+				<td><select >정렬 기준</select></td>
+				<td><select  >선택</select></td>
+				<td><input type="text" id="searchText"></td>
+				<td><button id="searchBtn"></button></td>
+			</tr>
+			<colgroup>
+			<col width="30%" />
+			<col width="50%" />
+			<col width="20%" />
+		</colgroup>
 			<tr id="gomchi2">
-				<th>강의 이름</th>
-				<th>교수 이름</th>
-				<th>강의 분반</th>
+				<th>사진</th>
+				<th>제목</th>
+				<th>추천수</th>
 			</tr>
 		</thead>
 		<!--  데이터 넣기 -->
