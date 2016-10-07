@@ -24,9 +24,9 @@
 
 <div class="content">
 	
-	<a href="<%=request.getContextPath() %>/selectedLectureList" 
+	<a href="<%=request.getContextPath() %>/lecture/selectedLectureList" 
 	class="button big altButton"><span>내 강의 목록</span></a>
-	<a href="<%=request.getContextPath() %>/notiList" 
+	<a href="<%=request.getContextPath() %>/lecture/lectureNotiList" 
 	class="button big altButton"><span>공지 내역</span></a>
 	<a href="<%=request.getContextPath() %>/lectureList" 
 	class="button big altButton"><span>강의 선택</span></a>
