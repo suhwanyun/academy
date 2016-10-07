@@ -15,4 +15,16 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
+	<select id="selectLectureNotice" parameterType="paging" resultType="lecture_notice">
+		select *
+		from (select rownum as rnum, sub.*
+			  from (select *
+			 	 	from LectureNotice 
+			 	 	where lecture_id = #{data} and lecture_class = #{data2}
+					order by notice_time) sub)
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	
+	
 </mapper>

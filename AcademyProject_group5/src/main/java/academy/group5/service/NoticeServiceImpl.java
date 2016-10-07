@@ -27,8 +27,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public List<LectureNotice> lecturenoticeList(Integer lectureId, Integer lectureClass, int page) {
-		// TODO Auto-generated method stub
-		return null;
+		return notiRepo.getLectureNoticeList(new Paging(page, NOTICE_MAX_PAGE, lectureId, lectureClass));
 	}
 
 	@Override

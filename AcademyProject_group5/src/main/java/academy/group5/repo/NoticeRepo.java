@@ -22,4 +22,9 @@ public class NoticeRepo {
 		return session.selectList(stmt, data);
 	}
 	
+	public List<LectureNotice> getLectureNoticeList(Paging data) {
+		String stmt = LOGIN_NS + "selectLectureNotice";
+		return session.selectList(stmt, data);
+	}
+	
 }
