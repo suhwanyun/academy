@@ -54,7 +54,7 @@
                   </div>
                </div>
             </div>
-         </div>
+		</div>
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>

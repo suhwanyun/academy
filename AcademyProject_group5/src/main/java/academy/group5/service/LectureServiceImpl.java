@@ -10,11 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.Paging;
 import academy.group5.repo.LectureRepo;
 
 @Service
 @Transactional
 public class LectureServiceImpl implements LectureService{
+	
+	/** 한 페이지에 표시되는 강의의 수 */
+	private final int LECTURE_MAX_PAGE = 10;
 
 	@Autowired
 	LectureRepo lecRepo;
@@ -22,7 +26,7 @@ public class LectureServiceImpl implements LectureService{
 	// 전체 강의 목록
 	@Override
 	public List<Lecture> allLectureList(int page) {
-		return lecRepo.getAllLecture(page);
+		return lecRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
 	}
 
 	// 강의 신청
