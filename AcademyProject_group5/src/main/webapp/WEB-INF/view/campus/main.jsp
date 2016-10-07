@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -12,11 +17,24 @@
 <jsp:include page="../campus/lnoti_list.jsp" />
 <jsp:include page="/lecture_list.jsp" />
 <jsp:include page="../campus/schedule.jsp" /> --%>
-<div class="columnsBtn">
-	<input type="button" id="list"  value="내 강의 목록">
-	<input type="button" id="noti_list"  value="공지 내역">
-	<input type="button" id="list2"  value="강의 선택">
-	<input type="button" id="schedule"  value="시간표">
+
+	<a href="<%=request.getContextPath() %>">
+	<img class="circular--logo"
+	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+
+<div class="content">
+	
+	<a href="<%=request.getContextPath() %>/notiList" 
+	class="button big altButton"><span>내 강의 목록</span></a>
+	<a href="<%=request.getContextPath() %>/notiInfo" 
+	class="button big altButton"><span>공지 내역</span></a>
+	<a href="<%=request.getContextPath() %>/lectureList" 
+	class="button big altButton"><span>강의 선택</span></a>
+	<a href="<%=request.getContextPath() %>/schedule"
+	class="button big altButton"><span>시간표</span></a>
 </div>
+
+	
+
 </body>
 </html>

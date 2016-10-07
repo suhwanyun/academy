@@ -23,14 +23,14 @@
    <div class="form">
     <div class="form2">
      <div class="form3 pad">
-      <label for="user">아이디</label><input type="text" id="user">
-      <label for="user">비밀번호</label><input type="password" id="user">
+      <label for="user">아이디</label><input type="text" id="userId">
+      <label for="user">비밀번호</label><input type="password" id="userPass">
      </div>
      <div class="pad">
-     <input type="submit" value="로그인하기"  id="loginBtn">
+     <input type="button" value="로그인하기"  id="loginBtn">
      </div>
      <div class="pad">
-      <input type="button" value="회원가입" >
+      <input type="button" value="회원가입" id="joinBtn">
       <input type="button" value="ID/Pass 찾기" id="searchBtn">
     </div>
    </div>
@@ -41,15 +41,35 @@
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	<%session.setAttribute("userdata", "value");%>
+	
 	$("#loginBtn").click(function(){
-		alert("성공");
-		$(location).attr('href',"view/index.jsp");	
+		$.ajax({
+			type: "post",
+			url : "login",
+			data : {
+				userId : $("#userId").val(),
+				userPass : $("#userPass").val()
+			},
+			success : function(res) {
+				if (res == "true") {
+					$(location).attr('href',"main");
+				} else {
+					alert("아이디, 비밀번호를 확인하세요");
+				}
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
 	});
 	
-	<%session.setAttribute("userdata", "value");%>
 	$("#searchBtn").click(function(){
-		$(location).attr('href',"search_idpw.jsp");	
+		$(location).attr('href',"searchidpw");
+	});
+	$("#joinBtn").click(function(){
+		$(location).attr('href',"joinBtn");
 	});
 	
 </script>
