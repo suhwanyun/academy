@@ -15,14 +15,13 @@ import academy.group5.dto.etc.Paging;
 public class LectureRepo {
 	
 	private final String LECTURE_NS = "academy.repo.LectureMapper.";
-	private final int LECTURE_MAX_PAGE = 10;
 	
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public List<Lecture> getAllLecture(int page) {
+	public List<Lecture> getAllLecture(Paging data) {
 		String stmt = LECTURE_NS + "selectLectureByPage";
-		return session.selectList(stmt, new Paging(page, LECTURE_MAX_PAGE));
+		return session.selectList(stmt, data);
 	}
 	
 	public int setLecture(LectureApply data){

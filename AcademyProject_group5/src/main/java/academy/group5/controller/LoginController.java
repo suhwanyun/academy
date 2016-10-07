@@ -47,13 +47,13 @@ public class LoginController {
 	
 	// 로그인
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public @ResponseBody String login(HttpSession session,
+	public @ResponseBody String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
 		UserData data = service.login(userId, userPass);
 				
 		if(data != null){	
-			session.setAttribute("user", data);
+			session.setAttribute("logined", data);
 			return "true";
 		} else{
 			return "false";
