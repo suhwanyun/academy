@@ -35,7 +35,6 @@
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
-
 						<a href="#" class="button big alt"><span>비회원으로 사용</span></a> <a
 							href="<%=request.getContextPath()%>/loginjsp"
 							class="button big alt"><span>로그인</span></a> <a
