@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,7 @@ public class LoginController {
 	
 	// 회원가입시 아이디 중복확인
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
-	public @ResponseBody String findUser(Model model, @RequestParam String userId){
+	public @ResponseBody String findUser(@RequestParam String userId){
 		
 		if(service.findUser(userId)){
 			return "true";
@@ -40,6 +42,21 @@ public class LoginController {
 		} else {
 			model.addAttribute("msg", "오류가 발생하였습니다.\n 잠시 후 다시시도해주세요.");
 			return "index";
+		}
+	}
+	
+	// 로그인
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public @ResponseBody String login(HttpSession session,
+			@RequestParam String userId, @RequestParam String userPass){
+		
+		UserData data = service.login(userId, userPass);
+				
+		if(data != null){	
+			session.setAttribute("userData", data);
+			return "true";
+		} else{
+			return "false";
 		}
 	}
 }
