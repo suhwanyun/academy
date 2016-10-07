@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"   pageEncoding="EUC-KR"%>
 <%@ page import ="java.util.Map" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>login form </title>
@@ -41,11 +42,12 @@
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	
+	<c:url value="/login" var="login"/>
 	$("#loginBtn").click(function(){
+		console.log($("#userId").val()+", "+ $("#userPass").val());
 		$.ajax({
 			type: "post",
-			url : "login",
+			url : "${login}",
 			data : {
 				userId : $("#userId").val(),
 				userPass : $("#userPass").val()
@@ -66,6 +68,7 @@
 	});
 	
 	$("#searchBtn").click(function(){
+		
 		$(location).attr('href',"searchidpw");
 	});
 	$("#joinBtn").click(function(){
