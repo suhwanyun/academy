@@ -4,52 +4,73 @@
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 <title>회원가입</title>
 </head>
 <body>
-	<sform:form method="post" action="join"
-		modelAttribute="UserData">
-		<fieldset>
-			<sform:label path="userId">아이디</sform:label>
-			<sform:input type="text" path="userId" />
-			<sform:button id="duplicationCheckBtn">중복 확인</sform:button>
-			<img class="circular--square"
-				src="<%=request.getContextPath()%>/images/btn1.png" alt="" /><br>
-			<sform:label path="userPass">비밀번호</sform:label>
-			<sform:input type="password" path="userPass" />
-			<br> <label for="passCheck">비밀번호 확인</label> <input
-				type="password" id="passCheck" /><br>
-			<sform:label path="userName">이름</sform:label>
-			<sform:input type="text" path="userName" />
-			<br>
-			<sform:label path="phoneNum">전화번호</sform:label>
-			<sform:input type="number" path="phoneNum" />
-			<br>
-			<sform:label path="passQuestion">비밀번호 질문</sform:label>
-			<sform:textarea path="passQuestion" />
-			<br>
-			<sform:label path="passAnswer">질문 답</sform:label>
-			<sform:input type="text" path="passAnswer" />
-			<br>
-			<sform:button id="join" type="submit">가입 하기</sform:button>
-		</fieldset>
+	<sform:form method="post" action="join" modelAttribute="UserData">
+		<div id="wrap">
+			<a href="<%=request.getContextPath()%>"><img
+				class="circular--logo"
+				src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+			<h1 class="member">회원가입</h1>
+			<div class="form5">
+				<div class="form6">
+					<div class="form3 pad">
+						<sform:label path="userId">아이디</sform:label>
+						<div class="columns">
+								<sform:input type="text" path="userId" />
+								<img class="circular--square"
+									src="<%=request.getContextPath()%>/images/btn1.png" alt="" />
+						</div>
+							<sform:button id="duplicationCheckBtn">중복 확인</sform:button>
+						
+						
+						<sform:label path="userPass">비밀번호</sform:label>
+						<sform:input type="password" path="userPass" />
+						<br> <label for="passCheck">비밀번호 확인</label> <input
+							type="password" id="passCheck" /><br>
+						<sform:label path="userName">이름</sform:label>
+						<sform:input type="text" path="userName" />
+						<br>
+						<sform:label path="phoneNum">전화번호</sform:label>
+						<sform:input type="number" path="phoneNum" />
+						<br>
+						<sform:label path="passQuestion">비밀번호 질문</sform:label>
+						<sform:textarea path="passQuestion" />
+						<br>
+						<sform:label path="passAnswer">질문 답</sform:label>
+						<sform:input type="text" path="passAnswer" />
+						<br>
+						<sform:button id="join" type="submit">가입 하기</sform:button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	var result = "false";
-	var idcheck=passcheck=namecheck=phonecheck=questioncheck=ansercheck = false;
-	$("#join").click(function(event) {
-		
-		if(idcheck&&passcheck&&namecheck&&phonecheck&&questioncheck&&ansercheck==true){
-			alert("cc");
-		}else{
-			alert(idcheck,passcheck,namecheck,phonecheck,questioncheck,ansercheck);
-			event.preventDefault();
-		}
+	var idcheck = passcheck = namecheck = phonecheck = questioncheck = ansercheck = false;
+	$("#join").click(
+			function(event) {
 
-	});
+				if (idcheck && passcheck && namecheck && phonecheck
+						&& questioncheck && ansercheck == true) {
+					alert("cc");
+				} else {
+					alert(idcheck, passcheck, namecheck, phonecheck,
+							questioncheck, ansercheck);
+					event.preventDefault();
+				}
+
+			});
 	$("#duplicationCheckBtn").click(
 			function(event) {
 				event.preventDefault();

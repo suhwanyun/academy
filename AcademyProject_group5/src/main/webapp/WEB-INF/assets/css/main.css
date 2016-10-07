@@ -738,6 +738,16 @@
 		 	border-bottom-left-radius: 50% 50%;
 		 	margin: 1em 0em 1em 1.5em;
 		 }
+		 .circular--small{
+		 	width: 10%;
+		 	height:10%;
+		 	border-radius: 50%;
+		 	border-top-left-radius: 50% 50%;
+		 	border-top-right-radius: 50% 50%;
+		 	border-bottom-left-radius: 50% 50%;
+		 	border-bottom-left-radius: 50% 50%;
+		 	margin: 1em 0em 1em 1.5em;
+		 }
 		.circular--logo{
 			width: 100px;
 		 	height:100px;
@@ -948,6 +958,7 @@
 		-moz-column-gap: 1em;
 		-webkit-column-gap: 1em;
 		column-gap: 1em;
+		
 		
 	}
 
@@ -1589,11 +1600,13 @@ Footer
 
 .form3 {
  float:left;
+ width:100%;
+ 
  
 }
 
 .form3 label {
- width: 100px;
+ width: 100%;
  height: 20px;
  /*  display: block; */
  float: left;
@@ -1603,12 +1616,26 @@ Footer
 .form4 {
  padding: 0px 0px 0px 70px;
 }
-
+.form5{
+	 width: 70%;
+ height: 150%;
+ border-radius: 25px;
+ border: 5px double #999;
+ margin: 30px auto;
+}
+.form6{
+ width: 80%;
+ height: 200px;
+ margin: 0 0 0 2em;
+}
 #wrap {
+
  width: 630px;
  height: 600px;
- margin: 0 auto;
+ margin-left:0 auto;
 }
+
+
 
 .pad{
 	padding:10px;
