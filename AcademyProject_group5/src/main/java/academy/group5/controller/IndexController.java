@@ -13,6 +13,13 @@ import academy.group5.dto.UserData;
 @Controller
 public class IndexController {
 	
+	// 메인 화면
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public String mainPage(Model model){
+
+		return "index";
+	}
+		
 	// 로그인 화면
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
 	public String loginPage(Model model){
