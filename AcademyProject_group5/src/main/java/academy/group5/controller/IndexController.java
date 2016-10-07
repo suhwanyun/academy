@@ -43,7 +43,7 @@ public class IndexController {
 	}
 	
 	/** 학업 메뉴 메인 페이지 */
-	@RequestMapping(value="/campusMain", method=RequestMethod.GET)
+	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
 	public String campusMainPage(){
 		
 		return "campus/main";
