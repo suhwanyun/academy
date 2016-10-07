@@ -17,7 +17,7 @@ import academy.group5.service.LoginService;
 public class LoginController {
 	
 	@Autowired
-	LoginService service;
+	LoginService service;	
 	
 	// 회원가입시 아이디 중복확인
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
