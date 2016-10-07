@@ -14,8 +14,6 @@
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 </head>
 <body>
-
-
 	<header id="header">
 		<c:choose>
 			<c:when test="${!empty user }">
