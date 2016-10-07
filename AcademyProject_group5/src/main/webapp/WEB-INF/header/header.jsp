@@ -41,7 +41,6 @@
 							class="button big alt"><span>로그인</span></a> <a
 							href="<%=request.getContextPath()%>/joinjsp"
 							class="button big alt"><span>회원가입</span></a>
-
 					</div>
 					<a href="#" class="button hidden"><span>Home</span></a>
 				</div>
