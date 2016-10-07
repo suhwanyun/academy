@@ -20,7 +20,7 @@
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
-						<h2>${user}님어서오세요</h2>
+						<h2>${user.userName}님어서오세요</h2>
 						<a href="#" class="button big alt"><span>이용하기</span></a> 
 						<a href="logout" class="button big alt"><span>로그아웃</span></a>
 						<a href="lectureList" class="button big alt"><span>수강 신청</span></a>
