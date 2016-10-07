@@ -53,14 +53,14 @@ public class LectureController {
 	
 	// 학생이 선택한 강의의 공지사항 중 선택한 공지의 정보
 	@RequestMapping(value="/lectureBoardInfo", method=RequestMethod.GET)
-	public String lectureBoardInfo(Model model){
+	public String lectureNotiInfo(Model model){
 		
 		return "campus/lecture/lecture_board_info";
 	}
 	
 	// 학생이 선택한 강의의 게시판에 글 작성
 	@RequestMapping(value="/lectureBoardAdd", method=RequestMethod.GET)
-	public String lectureBoardAdd(Model model){
+	public String lectureNotiAdd(Model model){
 		
 		return "campus/lecture/lecture_board_add";
 	}
