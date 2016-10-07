@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		UserData encdata = toHash(userdata);
-		logger.trace("data: {}", encdata);
+		
 		try{
 			loginRepo.setUser(encdata);
 		}catch(org.springframework.dao.DuplicateKeyException e){
