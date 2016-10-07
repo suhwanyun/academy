@@ -53,7 +53,7 @@ public class LoginController {
 		UserData data = service.login(userId, userPass);
 				
 		if(data != null){	
-			session.setAttribute("logined", data);
+			session.setAttribute("user", data);
 			return "true";
 		} else{
 			return "false";
