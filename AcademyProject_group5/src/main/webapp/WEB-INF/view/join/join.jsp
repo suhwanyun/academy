@@ -12,6 +12,7 @@
 <title>회원가입</title>
 </head>
 <body>
+
 	<sform:form method="post" action="join" modelAttribute="userData">
 		<div id="wrap">
          <a href="<%=request.getContextPath()%>"><img
@@ -46,7 +47,7 @@
                   </div>
                </div>
             </div>
-         </div>
+		</div>
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
