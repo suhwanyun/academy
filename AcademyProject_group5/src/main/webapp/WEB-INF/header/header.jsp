@@ -18,11 +18,11 @@
 
 	<header id="header">
 		<c:choose>
-			<c:when test="${!empty userData }">
+			<c:when test="${!empty user }">
 				<div class="inner">
 					<div class="content">
 						<h1>MCM</h1>
-						<h2>${userData.userName}님어서오세요</h2>
+						<h2>${user.userName}님어서오세요</h2>
 						<a href="#" class="button big alt"><span>이용하기</span></a> <a
 							id="logout" href="main" class="button big alt"><span>로그아웃</span></a>
 						<a href="#" class="button big alt"><span>이용하기</span></a> <a
@@ -51,7 +51,7 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$("#logout").click(function(event) {
-		<c:remove var="userData"/>
+		<c:remove var="user"/>
 		$(location).attr('href', "main");
 	});
 </script>
