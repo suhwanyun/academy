@@ -9,7 +9,7 @@
  
 /* Reset */
 
- 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+ 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, t, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -359,6 +359,15 @@
 		.button.alt {
 			background: #FFF;
 			color: #e74c3c;
+		}
+		
+		/*버튼이 배경 빨강, 텍스트 흰색*/
+		input[type="button"].altButton,
+		button.altButton,
+		.button.altButton {
+			background: #e74c3c;
+			color: #FFF;
+			margin-left: 0.5em;
 		}
 
 		input[type="submit"].fit,
@@ -929,16 +938,7 @@
 /* Columns */
 /*�궗吏� �뿴諛곗튂*/
 
-	.columnsBtn {
-		position: relative;
-		-moz-column-count: 4;
-		-webkit-column-count: 4;
-		column-count: 4;
-		-moz-column-gap: 1em;
-		-webkit-column-gap: 1em;
-		column-gap: 1em;
-		
-	}
+
 
 	.columns {
 		position: relative;
