@@ -28,7 +28,7 @@ public class UserData {
 	private String phoneId;
 
 	/** 핸드폰 번호. */
-	private Integer phoneNum;
+	private String phoneNum;
 
 	/** 비밀번호 질문. */
 	private String passQuestion;
