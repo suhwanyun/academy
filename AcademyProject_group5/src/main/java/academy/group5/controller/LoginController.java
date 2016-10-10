@@ -48,6 +48,7 @@ public class LoginController {
 	/** 회원정보 수정 */
 	@RequestMapping(value="/info/update", method=RequestMethod.GET)
 	public @ResponseBody String infoUpdate(Model model){
+		
 		return "true";
 	}
 	

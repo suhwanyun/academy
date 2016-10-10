@@ -16,7 +16,7 @@
 	</resultMap> -->
 	
 	<select id="selectUser" parameterType="String" resultType="user_data">
-		select *
+		select user_id, user_name, user_mileage
 		from UserData
 		where user_id = #{userId}
 	</select>
