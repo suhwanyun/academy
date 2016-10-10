@@ -38,17 +38,17 @@
 		<td align="left" width="330">
 			<input type="text" size="10" maxlength="10" name="writer"></td>
 	</tr>
-	<tr>
-		<td width="70" align="center">파일 첨부</td>
-		<td align="left" width="330">
-			<input type="file" id="reportFile" name="reportFile"></td>
-	</tr>
+
 	<tr>
 		<td width="70" align="center">내 용</td>
 		<td align="left" width="330">
 			<textarea name="content" rows="13" cols="40"></textarea></td>
 	</tr>
-
+	<tr>
+		<td width="70" align="center">파일 첨부</td>
+		<td align="left" width="330">
+			<input type="file" id="reportFile" name="reportFile"></td>
+	</tr>
 	<tr>
 	<td colspan=2 align="center">
 		<input type="button" name="save" value="글쓰기" onclick="writeSave();">

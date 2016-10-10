@@ -38,24 +38,42 @@
 		<td align="left" width="330">
 			<input type="text" size="10" maxlength="10" name="writer"></td>
 	</tr>
-
+	<tr>
+		<td><img class="circular--square"
+						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></td>
+	</tr>
 	<tr>
 		<td width="70" align="center">내 용</td>
 		<td align="left" width="330">
 			<textarea name="content" rows="13" cols="40"></textarea></td>
 	</tr>
+
 	<tr>
-		<td width="70" align="center">파일 첨부</td>
-		<td align="left" width="330">
-			<input type="file" id="reportFile" name="reportFile"></td>
+	<td>
+		<a href="#" class="button big alt"><span>추천</span></a> 
+		</td>
 	</tr>
 	<tr>
-	<td colspan=2 align="center">
-		<input type="button" name="save" value="글쓰기" onclick="writeSave();">
-		<input type="reset" value="다시작성">
-		<input type="button" value="목록보기"
-			onclick="document.location.href='boardList.do?pageNum=${pageNum }'">
-		</td>
+		<td width="70%"><input type="text" value="댓글 내용"></td>
+		<td width="30%"><input type="button" value="등록"></td>
+	</tr>
+	<tr>
+		<td width="20%"><input type="date"></td>
+		<td width="40%"><input type="text" value="댓글 내용"></td>
+		<td width="20%"><input type="text" value="작성자"></td>
+		<td width="20%"><input type="button" value="댓글 달기"></td>
+	</tr>
+		<tr>
+		<td width="20%"><input type="date"></td>
+		<td width="40%"><input type="text" value="댓글 내용"></td>
+		<td width="20%"><input type="text" value="작성자"></td>
+		<td width="20%"><input type="button" value="댓글 달기"></td>
+	</tr>
+		<tr>
+		<td width="20%"><input type="date"></td>
+		<td width="40%"><input type="text" value="댓글 내용"></td>
+		<td width="20%"><input type="text" value="작성자"></td>
+		<td width="20%"><input type="button" value="댓글 달기"></td>
 	</tr>
 	</table>
 	
