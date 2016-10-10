@@ -188,7 +188,7 @@ CREATE TABLE UserData
 	user_mileage number NOT NULL,
 	phone_id varchar2(200),
 	-- 분실시 활용
-	phone_num number NOT NULL,
+	phone_num varchar2(20) NOT NULL,
 	pass_question varchar2(100) NOT NULL,
 	pass_answer varchar2(20) NOT NULL,
 	PRIMARY KEY (user_id)
