@@ -42,17 +42,15 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
 	@Override
-	public boolean settingSet(String userId) {
-		GregorianCalendar gc = new GregorianCalendar(2000 , 01 , 01, 24, 10);
-		
+	public boolean settingSet(String userId) {		
 
-		/*NotificationSetting[] settingList = {
-				new NotificationSetting("lecture", userId, 1, null, 7, null)
+		NotificationSetting[] settingList = {
+				new NotificationSetting("lecture", userId, 1, 0, 10, 7, null)
 				};
 		
 		for(NotificationSetting setting : settingList){
 			notiRepo.setNotificationSetting(setting);
-		}*/
+		}
 		return false;
 	}
 

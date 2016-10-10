@@ -45,6 +45,8 @@ public class IndexController {
 	/** 회원정보 수정화면 */
 	@RequestMapping(value="/info/myinfo", method=RequestMethod.GET)
 	public String infoUpdatePage(Model model){
+		UserData data = new UserData();
+		model.addAttribute("userData", data);
 		return "/info/myinfo";
 	}
 	
