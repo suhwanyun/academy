@@ -26,8 +26,8 @@
 				<div class="form3 pad">
 					
 					<h1 class="member">ID 찾기</h1>
-					<label for="user">아이디</label><input type="text" id="user">
-					<label for="user">전화번호</label><input type="text" id="phone"><br>
+					<label for="user">이름</label><input type="text" id="userName">
+					<label for="user">전화번호</label><input type="text" id="phoneNum"><br>
 					<input type="button" value="확인" id="idCheck" style="margin-left: 45%"><br>
 </div>
 </div>
@@ -52,10 +52,9 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	
-<%session.setAttribute("userdata", "value");%>
 	$("#idCheck").click(function() {
 		alert("성공");
-		$(location).attr('href', "index.jsp");
+	
 	});
 </script>
 </html>

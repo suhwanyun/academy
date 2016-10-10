@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<sform:form method="post" action="join" modelAttribute="userData">
+	<sform:form method="post" action="info/update" modelAttribute="user">
 		<sform:label path="userId">아이디</sform:label>
 		<sform:input readonly="true" type="text" path="userId"
 			value="${user.userId}" />
