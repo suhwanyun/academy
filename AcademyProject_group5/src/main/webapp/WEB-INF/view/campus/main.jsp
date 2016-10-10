@@ -21,20 +21,26 @@
 	<a href="<%=request.getContextPath() %>">
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+<table>
+<colgroup>
+			<col width="25%"/>
+			<col width="25%"/>
+			<col width="25%"/>			
+			<col width="25%"/>
+		</colgroup>
 
-<div class="content">
-	
-	<a href="<%=request.getContextPath() %>/lecture/selectedLectureList" 
-	class="button big altButton"><span>내 강의 목록</span></a>
-	<a href="<%=request.getContextPath() %>/lecture/lectureNotiList" 
-	class="button big altButton"><span>공지 내역</span></a>
-	<a href="<%=request.getContextPath() %>/lectureList" 
-	class="button big altButton"><span>강의 선택</span></a>
-	<a href="<%=request.getContextPath() %>/schedule"
-	class="button big altButton"><span>시간표</span></a>
-</div>
+	<tr>
+	<td><a href="<%=request.getContextPath() %>/lecture/selectedLectureList" 
+	class="button altButton"><span>내 강의 목록</span></a></td>
+	<td><a href="<%=request.getContextPath() %>/lecture/lectureNotiList" 
+	class="button altButton"><span>공지 내역</span></a></td>
+	<td><a href="<%=request.getContextPath() %>/lectureList" 
+	class="button altButton"><span>강의 선택</span></a></td>
+	<td><a href="<%=request.getContextPath() %>/schedule"
+	class="button altButton"><span>시간표</span></a></td>
+</tr>
 
-	
+	</table>
 
 </body>
 </html>
