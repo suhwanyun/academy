@@ -1,4 +1,4 @@
-package util;
+package academy.group5.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import interceptor.SessionCheckInterceptor;
+import academy.group5.interceptor.SessionCheckInterceptor;
 
 // Spring@MVC에 대한 빈들을 설정
 @Configuration

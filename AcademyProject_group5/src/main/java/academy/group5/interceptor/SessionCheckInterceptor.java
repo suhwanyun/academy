@@ -1,4 +1,4 @@
-package interceptor;
+package academy.group5.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

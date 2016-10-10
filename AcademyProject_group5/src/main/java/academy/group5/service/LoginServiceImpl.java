@@ -12,7 +12,7 @@ import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 import academy.group5.repo.LoginRepo;
-import util.MyHash;
+import academy.group5.util.MyHash;
 
 @Service
 @Transactional
