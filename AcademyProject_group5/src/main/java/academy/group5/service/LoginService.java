@@ -43,6 +43,14 @@ public interface LoginService {
 	String getPassQuestion(String userId);
 	
 	/**
+	 * 임시 비밀번호 받기
+	 * @param userId
+	 * @param answer
+	 * @return
+	 */
+	String getPass(String userId, String answer);
+	
+	/**
 	 * 존재하는 id인지 확인
 	 * @param id
 	 * @return

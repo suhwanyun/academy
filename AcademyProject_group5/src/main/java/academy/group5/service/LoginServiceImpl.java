@@ -1,11 +1,14 @@
 package academy.group5.service;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserId;
+import academy.group5.dto.etc.UserPass;
 import academy.group5.repo.LoginRepo;
 import util.MyHash;
 
@@ -16,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	LoginRepo loginRepo;
 
-	// 로그인
+	/** 로그인 */
 	@Override
 	public UserData login(String userId, String userPass) {
 		UserData data = loginRepo.getUser(userId);
@@ -27,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
 		return data;
 	}
 
-	// 회원가입
+	/** 회원가입 */
 	@Override
 	public boolean join(UserData userdata) {
 		String id = userdata.getUserId();
@@ -46,7 +49,7 @@ public class LoginServiceImpl implements LoginService {
 		return true;
 	}
 
-	// 정보 수정
+	/** 정보 수정 */
 	@Override
 	public boolean update(UserData userdata) {
 		UserData encdata = toHash(userdata);
@@ -59,7 +62,7 @@ public class LoginServiceImpl implements LoginService {
 		return true;
 	}
 
-	// 회원 탈퇴
+	/** 회원 탈퇴 */
 	@Override
 	public boolean dropOut(String UserId) {
 		int result = loginRepo.deleteUser(UserId);
@@ -70,19 +73,47 @@ public class LoginServiceImpl implements LoginService {
 		return true;
 	}
 
-	// 아이디 찾기
+	/** 아이디 찾기 */
 	@Override
 	public String findId(String userName, Integer phoneNum) {
 		return loginRepo.getUserId(new UserId(userName, phoneNum));
 	}
 
-	// 비밀번호 질문 찾기
+	/** 비밀번호 질문 찾기 */
 	@Override
 	public String getPassQuestion(String userId) {
 		return loginRepo.getQuestion(userId);
 	}
 	
-	// 암호화
+	/** 임시 비밀번호 받기 */
+	@Override
+	public String getPass(String userId, String answer) {
+		if(loginRepo.getPass(new UserPass(userId, answer)) != null){
+			String tmpPass = generatePass();
+			UserData encdata = toHash(new UserData(userId, tmpPass));
+			int result = loginRepo.updateUser(encdata);
+			
+			if(result == 1){
+				// 생성된 임시 비밀번호
+				return tmpPass;
+			}
+		}
+		return "";
+	}
+
+	/** 존재하는 아이디인지 확인 */
+	@Override
+	public boolean findUser(String id) {
+		int finded = loginRepo.findId(id);
+		
+		if(finded == 0){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	
+	/** 암호화 */
 	private UserData toHash(UserData data){
 		String oriPass = data.getUserPass();
 
@@ -93,17 +124,36 @@ public class LoginServiceImpl implements LoginService {
 		
 		return data;
 	}
-
-	// 존재하는 아이디인지 확인
-	@Override
-	public boolean findUser(String id) {
-		int finded = loginRepo.findId(id);
+	
+	/** 암호 생성 */
+	private String generatePass(){
 		
-		if(finded == 0){
-			return true;
-		} else{
-			return false;
+		Random rand = new Random();
+		String newPass = "";
+		
+		for(int index = 1; index <= 10; index++){
+			int select = rand.nextInt(3);
+			String randData;
+			
+			switch(select){
+			// 숫자(0~9)
+			case 0:
+				randData = Integer.toString(rand.nextInt(10));
+				break;
+			// 소문자(a~z)
+			case 1:
+				randData = String.valueOf((char)(rand.nextInt(26) + 97));
+				break;
+			// 대문자(A-Z)
+			default:
+				randData = String.valueOf((char)(rand.nextInt(26) + 65));
+				break;
+			}
+			
+			newPass += randData;
 		}
+		
+		return newPass;
 	}
 
 }

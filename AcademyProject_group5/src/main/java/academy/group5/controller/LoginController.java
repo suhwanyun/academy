@@ -72,4 +72,22 @@ public class LoginController {
 		session.removeAttribute("user");
 		return "index";
 	}
+	
+	/** ID 찾기 */
+	@RequestMapping(value="findId", method=RequestMethod.GET)
+	public @ResponseBody String findId(@RequestParam String userName, @RequestParam Integer phoneNum){
+		
+		String result = service.findId(userName, phoneNum);
+		
+		return result == null ? "" : result;
+
+	}
+	
+	/** PASSWORD 찾기 */
+	@RequestMapping(value="findPass", method=RequestMethod.GET)
+	public @ResponseBody String findPass(@RequestParam String userId, @RequestParam String passAnswer){
+		
+		return service.getPass(userId, passAnswer);
+
+	}
 }

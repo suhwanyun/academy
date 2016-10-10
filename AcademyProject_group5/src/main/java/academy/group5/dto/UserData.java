@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserData {
-
+	
 	/** 회원 ID. */
 	private String userId;
 
@@ -53,4 +53,15 @@ public class UserData {
 
 	*//** 보유 마일리지 상품 목록. *//*
 	private Set<Usermileage> usermileageSet;*/	
+
+	public UserData(String userId, String userPass){
+		this.userId = userId;
+		this.userPass = userPass;
+		this.userName = null;
+		this.userMileage = null;
+		this.phoneId = null;
+		this.phoneNum = null;
+		this.passQuestion = null;
+		this.passAnswer = null;
+	}
 }
