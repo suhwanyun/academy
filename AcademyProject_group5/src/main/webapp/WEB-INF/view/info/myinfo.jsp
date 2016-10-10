@@ -17,7 +17,7 @@
 				class="circular--logo"
 				src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
 			<h1 class="member">내 정보 수정</h1>
-	<sform:form method="post" action="info/update" modelAttribute="userData">
+	<sform:form method="post" action="update" modelAttribute="userData">
 		<sform:label path="userId">아이디</sform:label>
 		<sform:input readonly="true" type="text" path="userId"
 			value="${user.userId}" />

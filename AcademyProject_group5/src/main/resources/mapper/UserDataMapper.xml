@@ -19,6 +19,7 @@
 	<update id="updateUser" parameterType="user_data">
 		update UserData set 
 			user_pass = #{userPass},
+			phone_num = #{phoneNum},
 			pass_question = #{passQuestion},
 			pass_answer = #{passAnswer}
 		where user_id = #{userId}
