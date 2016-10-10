@@ -101,7 +101,7 @@
 	function anserCheck(x){
 		if(x.length>0&&x.length<=20){
 			return true;
-		}else
+		}else 
 			return false;
 	}
 		$("#joinBtn").click(function(event){
