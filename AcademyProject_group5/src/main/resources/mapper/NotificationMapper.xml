@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.NotificationMapper">
+	
+	<select id="selectNotificationSetting" parameterType="String" resultType="notification_setting">
+		select *
+		from NotificationSetting
+		where user_id = #{userId}
+	</select>
+	
+	<insert id="insertNotificationSetting" parameterType="notification_setting">
+		insert into NotificationSetting
+		values (#{notiType}, #{userId}, #{notiOn}, #{notiTime}, #{notiTimeInterval})
+	</insert>
+	
+	<update id="updateNotificationSetting" parameterType="notification_setting">
+		update NotificationSetting
+		set noti_on = #{notiOn}
+			, noti_time = #{notiTime}
+		<if test="notiTimeInterval != null">
+			, noti_time_interval #{notiTimeInterval}
+		</if>
+		where noti_type = #{notiType} and user_id = #{userId}
+	</update>
+	
+	<insert id="insertNotification" parameterType="notifications">
+		insert into Notifications
+		(noti_type, user_id, noti_title, noti_content)
+		values (#{notiType}, #{userId}, #{notiTitle}, #{notiContent})
+	</insert>
+	
+</mapper>

@@ -35,5 +35,6 @@
 		<mapper resource="mapper/UserDataMapper.xml"/>
 		<mapper resource="mapper/LectureMapper.xml"/>
 		<mapper resource="mapper/NoticeMapper.xml"/>
+		<mapper resource="mapper/NotificationMapper.xml"/>
 	</mappers>
 </configuration>

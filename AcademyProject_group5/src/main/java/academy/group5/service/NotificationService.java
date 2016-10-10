@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.Notifications;
 
 public interface NotificationService {
 	/**
@@ -12,10 +13,19 @@ public interface NotificationService {
 	 */
 	List<NotificationSetting> settingList(String userId);
 	/**
-	 * 알람 수정
+	 * 알람 설정 수정
 	 * @param notificationsetting
 	 * @return
 	 */
 	boolean settingModify(NotificationSetting notificationsetting);
+	
+	/**
+	 * 알림 송신
+	 * @param notiType
+	 * @param notiTitle
+	 * @param notiContent
+	 * @return
+	 */
+	boolean sendNotification(String notiType, String notiTitle, String notiContent);
 	
 }
