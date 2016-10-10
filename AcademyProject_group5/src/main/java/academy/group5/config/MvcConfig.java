@@ -44,12 +44,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 		super.addInterceptors(registry);
 	}
 	
-	@Override
-	public void addFormatters(FormatterRegistry registry) {
-		registry.addFormatter(new NotiSettingFormatter());
-		super.addFormatters(registry);
-	}
-	
 /*	@Bean
 	public CommonsMultipartResolver multipartResolver(){
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
