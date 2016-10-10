@@ -86,7 +86,7 @@
 				passAnswer : $("#passAnswer").val()
 			},
 			success : function(res) {
-
+				alert(res);
 				if (res.length>2) {
 					alert("임시 패스워드는 : ["+res+"]입니다.");
 					
@@ -110,7 +110,6 @@
 				userId : $("#userId").val()
 			},
 			success : function(res) {
-
 				if (res.length>1) {
 					$("#passQuestion").val(res)
 					
