@@ -47,7 +47,7 @@
 		<!-- select RPAD(SUBSTR(user_pass, 1, LENGTH(user_pass)-2), LENGTH(user_pass), '*') -->
 		select user_pass
 		from UserData
-		where user_name = #{userName} and 
+		where user_id = #{userId} and 
 			  pass_answer = #{passAnswer}
 	</select>
 	
