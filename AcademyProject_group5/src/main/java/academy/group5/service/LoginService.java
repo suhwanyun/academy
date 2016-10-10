@@ -35,12 +35,6 @@ public interface LoginService {
 	 * @return
 	 */
 	String findId(String userName, Integer phoneNum);
-	/**
-	 * 비밀번호 질문받아오기
-	 * @param userId
-	 * @return
-	 */
-	String getPassQuestion(String userId);
 	
 	/**
 	 * 임시 비밀번호 받기
@@ -56,4 +50,11 @@ public interface LoginService {
 	 * @return
 	 */
 	boolean findUser(String id);
+	
+	/**
+	 * 회원정보 확인
+	 * @param id
+	 * @return
+	 */
+	UserData info(String id);
 }

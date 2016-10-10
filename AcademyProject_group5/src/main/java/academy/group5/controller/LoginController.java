@@ -45,13 +45,6 @@ public class LoginController {
 		}
 	}
 	
-	/** 회원정보 수정 */
-	@RequestMapping(value="/info/update", method=RequestMethod.GET)
-	public @ResponseBody String infoUpdate(Model model){
-		
-		return "true";
-	}
-	
 	/** 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public @ResponseBody String login(Model model, HttpSession session,
@@ -72,6 +65,13 @@ public class LoginController {
 	public String logout(HttpSession session){
 		session.removeAttribute("user");
 		return "index";
+	}
+	
+	/** 회원정보 수정 */
+	@RequestMapping(value="/info/update", method=RequestMethod.GET)
+	public @ResponseBody String infoUpdate(Model model){
+		
+		return "true";
 	}
 	
 	/** ID 찾기 */

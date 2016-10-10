@@ -79,12 +79,6 @@ public class LoginServiceImpl implements LoginService {
 	public String findId(String userName, Integer phoneNum) {
 		return loginRepo.getUserId(new UserId(userName, phoneNum));
 	}
-
-	/** 비밀번호 질문 찾기 */
-	@Override
-	public String getPassQuestion(String userId) {
-		return loginRepo.getQuestion(userId);
-	}
 	
 	/** 임시 비밀번호 받기 */
 	@Override
@@ -92,7 +86,7 @@ public class LoginServiceImpl implements LoginService {
 		if(loginRepo.getEncPass(new UserPass(userId, answer)) != null){
 			String tmpPass = generatePass();
 			UserData encdata = toHash(new UserData(userId, tmpPass));
-			int result = loginRepo.updateUser(encdata);
+			int result = loginRepo.updatePass(encdata);
 			
 			if(result == 1){
 				// 생성된 임시 비밀번호
@@ -105,13 +99,19 @@ public class LoginServiceImpl implements LoginService {
 	/** 존재하는 아이디인지 확인 */
 	@Override
 	public boolean findUser(String id) {
-		int finded = loginRepo.findId(id);
+		int finded = loginRepo.findUser(id);
 		
 		if(finded == 0){
 			return true;
 		} else{
 			return false;
 		}
+	}
+	
+	/** 회원정보 확인 */
+	@Override
+	public UserData info(String id) {
+		return loginRepo.getInfo(id);
 	}
 	
 	/** 암호화 */

@@ -31,6 +31,11 @@ public class LoginRepo {
 		return session.update(stmt, data);
 	}
 	
+	public int updatePass(UserData data){
+		String stmt = LOGIN_NS + "updatePass";
+		return session.update(stmt, data);
+	}
+	
 	public int deleteUser(String data){
 		String stmt = LOGIN_NS + "deleteUser";
 		return session.delete(stmt, data);
@@ -39,11 +44,6 @@ public class LoginRepo {
 	public String getUserId(UserId data){
 		String stmt = LOGIN_NS + "selectUserId";
 		return session.selectOne(stmt, data);
-	}
-	
-	public String getQuestion(String id) {
-		String stmt = LOGIN_NS + "selectPassQuestion";
-		return session.selectOne(stmt, id);
 	}
 	
 	public String getEncPass(UserPass data) {
@@ -56,8 +56,13 @@ public class LoginRepo {
 		return session.selectOne(stmt, id);
 	}
 	
-	public Integer findId(String id){
-		String stmt = LOGIN_NS + "selectId";
+	public Integer findUser(String id){
+		String stmt = LOGIN_NS + "selectIdCount";
+		return session.selectOne(stmt, id);
+	}
+	
+	public UserData getInfo(String id){
+		String stmt = LOGIN_NS + "selectUserInfo";
 		return session.selectOne(stmt, id);
 	}
 }

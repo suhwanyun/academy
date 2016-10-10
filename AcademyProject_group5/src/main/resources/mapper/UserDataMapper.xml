@@ -3,17 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.UserDataMapper">
-
-<!-- 	<resultMap type="userdata" id="userdataMapping">
-		<id column="user_id" property="userId"/>
-		<result column="user_pass" property="userPass"/>
-		<result column="user_name" property="userName"/>
-		<result column="user_mileage" property="userMileage"/>
-		<result column="phone_id" property="phoneId"/>
-		<result column="phone_num" property="phoneNum"/>
-		<result column="pass_question" property="passQuestion"/>
-		<result column="pass_answer" property="passAnswer"/>
-	</resultMap> -->
 	
 	<select id="selectUser" parameterType="String" resultType="user_data">
 		select user_id, user_name, user_mileage
@@ -29,13 +18,16 @@
 	
 	<update id="updateUser" parameterType="user_data">
 		update UserData set 
-		<if test="userPass != null and userPass != ''">
 			user_pass = #{userPass},
-		</if>
-		<if test="passQuestion != null and passQuestion != '' and passAnswer != null and passAnswer != ''">
 			pass_question = #{passQuestion},
 			pass_answer = #{passAnswer}
-		</if>
+		where user_id = #{userId}
+	</update>
+	
+	
+	<update id="updatePass" parameterType="user_data">
+		update UserData set 
+			user_pass = #{userPass},
 		where user_id = #{userId}
 	</update>
 	
@@ -49,12 +41,6 @@
 		from UserData
 		where user_name = #{userName} and 
 			  phone_num = #{phoneNum}
-	</select>
-	
-	<select id="selectPassQuestion" parameterType="String" resultType="String">
-		select pass_question
-		from UserData
-		where user_id = #{userId}
 	</select>
 	
 	<select id="selectPass_needAnswer" parameterType="user_pass" resultType="String">
@@ -72,8 +58,14 @@
 		where user_id = #{userId}
 	</select>
 	
-	<select id="selectId" parameterType="String" resultType="Integer">
+	<select id="selectIdCount" parameterType="String" resultType="Integer">
 		select count(*)
+		from UserData
+		where user_id = #{userId}
+	</select>
+	
+	<select id="selectUserInfo" parameterType="String" resultType="user_data">
+		select user_id, user_name, phone_num, pass_question, pass_answer
 		from UserData
 		where user_id = #{userId}
 	</select>
