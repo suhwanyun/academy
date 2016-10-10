@@ -87,6 +87,7 @@
 			<tr>
 			<th></th>
 			<th><a href="#"  class="button big alt"><span>더보기</span></a></th>
+			<th><a href="<%=request.getContextPath() %>/write/food"  class="button big alt"><span>글쓰기 이동</span></a></th>
 			<th></th>
 			</tr>
 		</tbody>
