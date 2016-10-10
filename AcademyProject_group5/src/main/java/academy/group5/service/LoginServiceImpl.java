@@ -2,6 +2,8 @@ package academy.group5.service;
 
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,7 +87,9 @@ public class LoginServiceImpl implements LoginService {
 	public String getPass(String userId, String answer) {
 		if(loginRepo.getEncPass(new UserPass(userId, answer)) != null){
 			String tmpPass = generatePass();
+			
 			UserData encdata = toHash(new UserData(userId, tmpPass));
+		
 			int result = loginRepo.updatePass(encdata);
 			
 			if(result == 1){

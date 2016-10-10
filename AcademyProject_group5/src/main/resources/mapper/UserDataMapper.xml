@@ -27,7 +27,7 @@
 	
 	<update id="updatePass" parameterType="user_data">
 		update UserData set 
-			user_pass = #{userPass},
+			user_pass = #{userPass}
 		where user_id = #{userId}
 	</update>
 	
