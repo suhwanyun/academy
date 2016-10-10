@@ -123,10 +123,12 @@
 		$("#trueorfalse").attr('class', 'button alt falseButton');		
 	});
 	$("#userPass").change(function(){
+		isChanged = false;
 		if(passCheck($("#userPass").val())){
 			if($("#passCheck").val()==$("#userPass").val()){
 				alert("비밀번호 성공");
 				alert("비밀번호 확인창 초록색");
+				isChanged = true;
 				}else{
 					alert("비밀번호 확인 색빨간색");
 				}
@@ -137,8 +139,8 @@
 	$("#passCheck").change(function(){
 		if(passCheck($("#userPass").val())&&$("#passCheck").val()==$("#userPass").val()){
 			alert("비밀번호 확인창 초록색");
+			isChanged = true;
 		}else{
-			focus();
 			alert("비밀번호 확인창 빨간색");	
 		}
 			
