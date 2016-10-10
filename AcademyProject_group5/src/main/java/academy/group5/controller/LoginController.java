@@ -93,7 +93,7 @@ public class LoginController {
 	}
 	
 	/** PASSWORD 질문 찾기 */
-	@RequestMapping(value="findQuestion", method=RequestMethod.GET)
+	@RequestMapping(value="findQuestion", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public @ResponseBody String findQuestion(@RequestParam String userId){
 		
 		return service.getQuestion(userId);
