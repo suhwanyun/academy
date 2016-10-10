@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserPass {
-	/** 회원 이름. */
-	private String userName;
+	/** 회원 ID. */
+	private String userId;
 
 	/** 비밀번호 질문 답. */
 	private String passAnswer;
