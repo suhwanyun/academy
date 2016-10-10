@@ -39,4 +39,10 @@ public class NotificationServiceImpl implements NotificationService{
 		return false;
 	}
 
+	@Override
+	public boolean settingSet(NotificationSetting notificationsetting) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

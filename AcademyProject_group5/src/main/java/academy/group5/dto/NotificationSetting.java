@@ -1,6 +1,7 @@
 package academy.group5.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,19 @@ public class NotificationSetting {
 	/** 알림 목록. *//*
 	private Set<Notifications> notificationsSet;*/
 
+	/** 알림 설정 목록 */
+	private List<NotificationSetting> settingList;
+	
+	/** 알림 설정 목록 getter */
+	public List<NotificationSetting> getSettingList(){
+		return settingList;
+	}
+	
+	/** 알림 설정 목록 setter */
+	public void setSettingList(List<NotificationSetting> settingList){
+		this.settingList = settingList;
+	}
+	
+	
+	
 }
