@@ -1,4 +1,4 @@
-package academy.group5.dto.etc;
+package util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

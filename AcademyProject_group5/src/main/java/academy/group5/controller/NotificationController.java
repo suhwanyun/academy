@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.UserData;
@@ -20,6 +21,13 @@ public class NotificationController {
 	
 	@Autowired
 	NotificationService service;
+	
+	/*@ModelAttribute
+	private String getId(HttpSession session){
+		// 로그인된 id 확인
+		String id = ((UserData)session.getAttribute("user")).getUserId();
+		return id;
+	}*/
 	
 	/** 알림 설정 목록 표시 */
 	@RequestMapping(value="/noti/notiSettingList", method=RequestMethod.GET)
@@ -39,7 +47,7 @@ public class NotificationController {
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
-	public String notiSetting(Model model, @RequestParam List<NotificationSetting> settingList){
+	public @ResponseBody String notiSetting(Model model, @RequestParam List<NotificationSetting> settingList){
 		
 		int successCount = 0;
 		for(NotificationSetting setting : settingList){
@@ -49,11 +57,11 @@ public class NotificationController {
 		}
 		
 		if(successCount < settingList.size()){
-			
+			return "false";
 		}
 		
 		//service.getNotificationSettingList();
-		return "noti/noti";
+		return "true";
 	}
 	
 }

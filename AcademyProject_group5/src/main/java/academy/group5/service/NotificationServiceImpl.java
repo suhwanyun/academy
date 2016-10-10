@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +37,22 @@ public class NotificationServiceImpl implements NotificationService{
 
 	@Override
 	public boolean sendNotification(String notiType, String notiTitle, String notiContent) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
-	public boolean settingSet(NotificationSetting notificationsetting) {
-		// TODO Auto-generated method stub
+	public boolean settingSet(String userId) {
+		GregorianCalendar gc = new GregorianCalendar(2000 , 01 , 01, 24, 10);
+		
+
+		NotificationSetting[] settingList = {
+				new NotificationSetting("lecture", userId, 1, null, 7, null)
+				};
+		
+		for(NotificationSetting setting : settingList){
+			notiRepo.setNotificationSetting(setting);
+		}
 		return false;
 	}
 

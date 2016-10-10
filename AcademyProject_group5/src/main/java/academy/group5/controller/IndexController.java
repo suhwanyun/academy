@@ -42,6 +42,12 @@ public class IndexController {
 		return "/login/search_idpw";
 	}
 	
+	/** 회원정보 수정화면 */
+	@RequestMapping(value="/info/myinfo", method=RequestMethod.GET)
+	public String infoUpdatePage(Model model){
+		return "/info/myinfo";
+	}
+	
 	/** 학업 메뉴 메인 페이지 */
 	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
 	public String campusMainPage(){

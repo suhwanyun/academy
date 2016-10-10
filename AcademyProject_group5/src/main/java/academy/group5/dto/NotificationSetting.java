@@ -24,8 +24,11 @@ public class NotificationSetting {
 	/** 알림 여부. */
 	private Integer notiOn;
 
-	/** 알림 시간. */
-	private Date notiTime;
+	/** 알림 시간(시). */
+	private String notiTimeHour;
+	
+	/** 알림 시간(분). */
+	private String notiTimeMin;
 
 	/** 알림 간격. */
 	private Integer notiTimeInterval;
