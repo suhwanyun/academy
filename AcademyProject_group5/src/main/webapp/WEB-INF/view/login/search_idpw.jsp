@@ -82,8 +82,8 @@
 			type : "get",
 			url : "findPass",
 			data : {
-				userName : $("#userName").val(),
-				phoneNum : $("#phoneNum").val()
+				userId : $("#userId").val(),
+				passAnswer : $("#passAnswer").val()
 			},
 			success : function(res) {
 
@@ -111,7 +111,7 @@
 			},
 			success : function(res) {
 
-				if (res!=null) {
+				if (res.length>1) {
 					$("#passQuestion").val(res)
 					
 				} else {
