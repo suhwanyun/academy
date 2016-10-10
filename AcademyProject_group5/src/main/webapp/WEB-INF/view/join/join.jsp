@@ -19,7 +19,6 @@
 				class="circular--logo"
 				src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
 			<h1 class="member">회원가입</h1>
-
 			<div class="form9 pad">
 				<sform:label path="userId">아이디</sform:label>
 				<table>
@@ -51,7 +50,7 @@
 				<sform:label path="passAnswer">질문 답</sform:label>
 				<sform:input type="text" path="passAnswer"  id="passAnswer"/>
 				<br>
-				<sform:button id="join" type="submit">가입 하기</sform:button>
+				<sform:button id="joinBtn" type="submit">가입 하기</sform:button>
 			</div>
 		</div>
 
@@ -61,7 +60,7 @@
 <script type="text/javascript">
 
 	
-	
+	var isChanged = true;
 	function idCheck(x){
 		var ID_PATTERN = /^[a-z][a-z0-9_$@#]{3,11}$/i;
 		if(ID_PATTERN.test(x)){
@@ -105,26 +104,31 @@
 		}else
 			return false;
 	}
-		$("#joinBtn").click(function(){
-				if (idCheck($("#userId").val()) && passCheck($("#userPass").val()) 
+		$("#joinBtn").click(function(event){
+			
+			
+				if (isChanged&&idCheck($("#userId").val()) && passCheck($("#userPass").val()) 
 						&& nameCheck($("#userName").val()) && phoneCheck($("#phoneNum").val())
 						&& questionCheck($("#passQuestion").val()) && anserCheck($("#passAnswer").val()) == true) {
-					alert("가입완료, 어플설치시 알림기능 사용가능");
+					alert("가입 성공");
 				} else {
-					alert("가입 실패");
 					event.preventDefault();
+					alert("가입 실패");
 				}
 
 			});
 		
 	$("#userId").change(function(){
+		isChanged = false;
 		$("#trueorfalse").attr('class', 'button alt falseButton');		
 	});
 	$("#userPass").change(function(){
+		isChanged = false;
 		if(passCheck($("#userPass").val())){
 			if($("#passCheck").val()==$("#userPass").val()){
 				alert("비밀번호 성공");
 				alert("비밀번호 확인창 초록색");
+				isChanged = true;
 				}else{
 					alert("비밀번호 확인 색빨간색");
 				}
@@ -135,8 +139,8 @@
 	$("#passCheck").change(function(){
 		if(passCheck($("#userPass").val())&&$("#passCheck").val()==$("#userPass").val()){
 			alert("비밀번호 확인창 초록색");
+			isChanged = true;
 		}else{
-			focus();
 			alert("비밀번호 확인창 빨간색");	
 		}
 			
@@ -186,6 +190,7 @@
 
 							if (res == "true") {
 								alert("사용가능한 ID 입니다.");
+								isChanged = true;
 								$("#trueorfalse").attr('class', 'button alt trueButton');
 								
 							} else {
