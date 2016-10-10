@@ -46,10 +46,10 @@ public class NotificationServiceImpl implements NotificationService{
 
 		NotificationSetting[] settingList = {
 				new NotificationSetting("lecture", userId, 1, 0, 10, 7, null),
-				new NotificationSetting("noti", userId, 1, 0, 10, 7, null),
-				new NotificationSetting("place", userId, 1, 0, 10, 7, null),
-				new NotificationSetting("play", userId, 1, 0, 10, 1, null),
-				new NotificationSetting("food", userId, 1, 0, 10, 1, null)
+				new NotificationSetting("noti", userId, 1, 19, 0, 1, null),
+				new NotificationSetting("place", userId, 1, 9, 10, 7, null),
+				new NotificationSetting("play", userId, 1, 22, 10, 1, null),
+				new NotificationSetting("food", userId, 1, 11, 10, 1, null)
 				};
 		
 		for(NotificationSetting setting : settingList){
