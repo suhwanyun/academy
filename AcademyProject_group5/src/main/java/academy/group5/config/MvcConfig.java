@@ -32,6 +32,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 			.addPathPatterns("/campus/**")
 			.addPathPatterns("/lecture/**")
 			.addPathPatterns("/write/**")
+			.addPathPatterns("/mileage/**")
+			.addPathPatterns("/noti/**")
 			.addPathPatterns("/manage/**");
 		
 		super.addInterceptors(registry);

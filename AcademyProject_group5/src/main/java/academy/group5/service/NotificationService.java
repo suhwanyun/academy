@@ -20,6 +20,13 @@ public interface NotificationService {
 	boolean settingModify(NotificationSetting notificationsetting);
 	
 	/**
+	 * 알림 설정 생성(회원가입시)
+	 * @param notificationsetting
+	 * @return
+	 */
+	boolean settingSet(NotificationSetting notificationsetting);
+	
+	/**
 	 * 알림 송신
 	 * @param notiType
 	 * @param notiTitle
