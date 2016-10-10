@@ -46,13 +46,13 @@ public class NotificationServiceImpl implements NotificationService{
 		GregorianCalendar gc = new GregorianCalendar(2000 , 01 , 01, 24, 10);
 		
 
-		NotificationSetting[] settingList = {
+		/*NotificationSetting[] settingList = {
 				new NotificationSetting("lecture", userId, 1, null, 7, null)
 				};
 		
 		for(NotificationSetting setting : settingList){
 			notiRepo.setNotificationSetting(setting);
-		}
+		}*/
 		return false;
 	}
 
