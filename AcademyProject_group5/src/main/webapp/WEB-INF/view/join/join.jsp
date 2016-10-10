@@ -97,7 +97,7 @@
 			return true;
 		}else
 			return false;
-	}
+	} 
 	function anserCheck(x){
 		if(x.length>0&&x.length<=20){
 			return true;
