@@ -107,7 +107,7 @@
 			type : "get",
 			url : "findQuestion",
 			data : {
-				userName : $("#userId").val()
+				userId : $("#userId").val()
 			},
 			success : function(res) {
 
