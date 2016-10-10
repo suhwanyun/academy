@@ -30,7 +30,7 @@ public class LoginController {
 		}	
 	}
 	
-	/**회원가입 완료 */
+	/** 회원가입 완료 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(Model model, UserData data){
 		
@@ -43,6 +43,12 @@ public class LoginController {
 			model.addAttribute("msg", "오류가 발생하였습니다.\n 잠시 후 다시시도해주세요.");
 			return "index";
 		}
+	}
+	
+	/** 회원정보 수정 */
+	@RequestMapping(value="/info/update", method=RequestMethod.GET)
+	public @ResponseBody String infoUpdate(Model model){
+		return "true";
 	}
 	
 	/** 로그인 */

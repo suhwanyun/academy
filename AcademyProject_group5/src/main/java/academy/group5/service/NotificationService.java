@@ -21,10 +21,10 @@ public interface NotificationService {
 	
 	/**
 	 * 알림 설정 생성(회원가입시)
-	 * @param notificationsetting
+	 * @param userId
 	 * @return
 	 */
-	boolean settingSet(NotificationSetting notificationsetting);
+	boolean settingSet(String userId);
 	
 	/**
 	 * 알림 송신
