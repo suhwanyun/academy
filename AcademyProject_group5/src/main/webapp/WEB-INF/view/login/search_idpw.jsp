@@ -36,11 +36,10 @@
 			<div class="form6">
 				<div class="form3 pad">
 					<h1 class="member">Password찾기</h1>
-					<label for="user">아이디</label><input type="text" id="user">
-					<label for="user">이름</label><input type="text" id="name"> <label
-						for="user">이름</label><input type="text" id="name"> <label
-						for="user">이름</label><input type="text" id="name"> <br>
-						<input type="button" value="확인" id="idCheck"  style="margin-left: 45%">
+					<label for="user">아이디</label><input type="text" id="userId"><br>
+					<label for="user">비밀번호 질문</label><textarea id = passQuestion> </textarea> <br>
+					<label for="user">질문 답</label><input type="text" id="passAnswer"><br>
+						<input type="button" value="확인" id="passCheck"  style="margin-left: 45%">
 				</div>
 </div>
 		</div>
@@ -62,7 +61,7 @@
 			},
 			success : function(res) {
 
-				if (res.length>1) {
+				if (res.length>2) {
 					alert("귀하의 아이디는 : "+res);
 					
 				} else {
@@ -77,6 +76,55 @@
 			}
 		});
 	
+	});
+	$("#passCheck").click(function(){
+		$.ajax({
+			type : "get",
+			url : "findPass",
+			data : {
+				userName : $("#userName").val(),
+				phoneNum : $("#phoneNum").val()
+			},
+			success : function(res) {
+
+				if (res.length>2) {
+					alert("임시 패스워드는 : ["+res+"]입니다.");
+					
+				} else {
+					alert("아이디나 비밀번호 답을 확인하세요.");
+				}
+
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
+	});
+	$("#userId").change(function(){
+		$.ajax({
+			type : "get",
+			url : "findQuestion",
+			data : {
+				userName : $("#userId").val()
+			},
+			success : function(res) {
+
+				if (res!=null) {
+					$("#passQuestion").val(res)
+					
+				} else {
+					$("#passQuestion").val("조회된 질문이 없습니다. 관리자에게 문의 하세요");
+				}
+
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
 	});
 </script>
 </html>
