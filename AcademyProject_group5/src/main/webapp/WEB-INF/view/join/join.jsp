@@ -26,7 +26,7 @@
 						<td><sform:input placeholder="영문/숫자 4~10자" type="text"
 								path="userId" /></td>
 						<td><a id="trueorfalse" href="#"
-							class="button alt trueButton"><span></span></a></td>
+							class="button alt falseButton"><span></span></a></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -140,7 +140,6 @@
 	});
 	$("#userPass").change(function(){
 		isChanged = false;
-		
 		if(passCheck($("#userPass").val())){
 			if($("#passCheck").val()==$("#userPass").val()){
 				$("#userPass").attr('class', 'true');
@@ -153,6 +152,7 @@
 		}	
 	});
 	$("#passCheck").change(function(){
+		isChanged = false;
 		if(passCheck($("#userPass").val())&&$("#passCheck").val()==$("#userPass").val()){
 			$("#passCheck").attr('class', 'true');
 			isChanged = true;
@@ -162,31 +162,39 @@
 			
 	});
 	$("#userName").change(function(){
+		isChanged = false;
 		if(nameCheck($("#userName").val())){
 			$("#userName").attr('class', 'true');
+			isChanged = true;
 		}else{
 			$("#userName").attr('class', 'false');	
 		}
 			
 	});
 	$("#phoneNum").change(function(){
+		isChanged = false;
 		if(phoneCheck($("#phoneNum").val())){
 			$("#phoneNum").attr('class', 'true');
+			isChanged = true;
 		}else{
 			$("#phoneNum").attr('class', 'false');
 		}
 			
 	});
 	$("#passQuestion").change(function(){
+		isChanged = false;
 		if(questionCheck($("#passQuestion").val())){
 			$("#passQuestion").attr('class', 'true');
+			isChanged = true;
 		}else{
 			$("#passQuestion").attr('class', 'false');
 		}
 	});
 	$("#passAnswer").change(function(){
+		isChanged = false;
 		if(anserCheck($("#passAnswer").val())){
 			$("#passAnswer").attr('class', 'true');
+			isChanged = true;
 		}else{
 			$("#passAnswer").attr('class', 'false');
 		}
