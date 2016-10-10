@@ -33,23 +33,20 @@
 		<tr>
 				<td>
 				<select id="array" title="select array">
-				<option selected="selected">정렬 기준</option>
-				<option>red</option>
-        		<option>blue</option>
-				<option>yellow</option>
-       			<option>black</option>
+				<option selected="selected">기본 정렬</option>
+				<option>추천수 정렬</option>
+        		<option>날짜 정렬</option>
     			</select></td>
 				<td>
 				<select id="select" title="select select">
-				<option selected="selected">선택</option>
-				<option>red</option>
-        		<option>blue</option>
-				<option>yellow</option>
-       			<option>black</option>
+				<option selected="selected">작성자</option>
+				<option>제목</option>
+        		<option>내용</option>
+				<option>제목+내용</option>
     			</select></td>
     		
-				<td><input type="search" id="searchBtn"></td>
-				
+				<td><input type="search" id="search"><span> </span> <input type="button" value="찾기"></td>
+		
 			
 		</tr>
 			<tr id="gomchi2">
@@ -61,25 +58,25 @@
 		<!--  데이터 넣기 -->
 		<tbody>
 				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+				<th><a href="<%=request.getContextPath() %>/food_info" 
 				class="button big"><span>사진</span></a></th>
 				<th>제목</th>
 				<th>추천수</th>
 			</tr>
 				<tr>
-					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+					<th><a href="<%=request.getContextPath() %>/food_info" 
 				class="button big"><span>사진</span></a></th>
 				<th>제목</th>
 				<th>추천수</th>
 			</tr>
 				<tr>
-					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+					<th><a href="<%=request.getContextPath() %>/food_info" 
 				class="button big"><span>사진</span></a></th>
 				<th>제목</th>
 				<th>추천수</th>
 			</tr>
 				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
+				<th><a href="<%=request.getContextPath() %>/food_info" 
 				class="button big"><span>강의 이름</span></a></th>
 				<th>교수 이름</th>
 				<th>강의 분반</th>

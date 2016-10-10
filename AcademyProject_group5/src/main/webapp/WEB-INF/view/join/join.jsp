@@ -42,7 +42,7 @@
 				<sform:input placeholder="한글 2~5자 " type="text" path="userName"/>
 				<br>
 				<sform:label path="phoneNum">핸드폰 번호</sform:label>
-				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum"/>
+				<sform:input placeholder="-없이 입력 " type="text" path="phoneNum"/>
 				<br>
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
 				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"/>

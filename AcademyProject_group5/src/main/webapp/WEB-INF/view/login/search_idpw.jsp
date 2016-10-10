@@ -53,7 +53,29 @@
 <script type="text/javascript">
 	
 	$("#idCheck").click(function() {
-		alert("성공");
+		$.ajax({
+			type : "get",
+			url : "findId",
+			data : {
+				userName : $("#userName").val(),
+				phoneNum : $("#phoneNum").val()
+			},
+			success : function(res) {
+
+				if (res.length>1) {
+					alert("귀하의 아이디는 : "+res);
+					
+				} else {
+					alert("조회된 아이디가 없습니다.");
+				}
+
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
 	
 	});
 </script>
