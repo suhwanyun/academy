@@ -46,9 +46,14 @@ public class LoginRepo {
 		return session.selectOne(stmt, id);
 	}
 	
-	public String getPass(UserPass data) {
-		String stmt = LOGIN_NS + "selectPass";
+	public String getEncPass(UserPass data) {
+		String stmt = LOGIN_NS + "selectPass_needAnswer";
 		return session.selectOne(stmt, data);
+	}
+	
+	public String getEncPass(String id) {
+		String stmt = LOGIN_NS + "selectPass";
+		return session.selectOne(stmt, id);
 	}
 	
 	public Integer findId(String id){

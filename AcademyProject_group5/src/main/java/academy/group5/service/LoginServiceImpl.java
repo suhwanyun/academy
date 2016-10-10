@@ -23,8 +23,9 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public UserData login(String userId, String userPass) {
 		UserData data = loginRepo.getUser(userId);
+		String encPass = loginRepo.getEncPass(userId);
 		
-		if(data == null || !data.getUserPass().equals(MyHash.MD5(userPass))){
+		if(data == null || !encPass.equals(MyHash.MD5(userPass))){
 			return null;
 		}
 		return data;
@@ -88,7 +89,7 @@ public class LoginServiceImpl implements LoginService {
 	/** 임시 비밀번호 받기 */
 	@Override
 	public String getPass(String userId, String answer) {
-		if(loginRepo.getPass(new UserPass(userId, answer)) != null){
+		if(loginRepo.getEncPass(new UserPass(userId, answer)) != null){
 			String tmpPass = generatePass();
 			UserData encdata = toHash(new UserData(userId, tmpPass));
 			int result = loginRepo.updateUser(encdata);

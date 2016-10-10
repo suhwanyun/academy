@@ -57,12 +57,19 @@
 		where user_id = #{userId}
 	</select>
 	
-	<select id="selectPass" parameterType="user_pass" resultType="String">
+	<select id="selectPass_needAnswer" parameterType="user_pass" resultType="String">
 		<!-- select RPAD(SUBSTR(user_pass, 1, LENGTH(user_pass)-2), LENGTH(user_pass), '*') -->
 		select user_pass
 		from UserData
 		where user_name = #{userName} and 
 			  pass_answer = #{passAnswer}
+	</select>
+	
+	<select id="selectPass" parameterType="String" resultType="String">
+		<!-- select RPAD(SUBSTR(user_pass, 1, LENGTH(user_pass)-2), LENGTH(user_pass), '*') -->
+		select user_pass
+		from UserData
+		where user_id = #{userId}
 	</select>
 	
 	<select id="selectId" parameterType="String" resultType="Integer">
