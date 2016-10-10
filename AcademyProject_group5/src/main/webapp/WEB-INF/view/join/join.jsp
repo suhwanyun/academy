@@ -35,20 +35,20 @@
 				</table>
 
 				<sform:label path="userPass">비밀번호</sform:label>
-				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass"  id="passCheck" />
+				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass"/>
 				<br> <label for="passCheck">비밀번호 확인</label> <input
 					type="password"  id="passCheck" /><br>
 				<sform:label path="userName">이름</sform:label>
-				<sform:input placeholder="한글 2~5자 " type="text" path="userName" id="userName" />
+				<sform:input placeholder="한글 2~5자 " type="text" path="userName"/>
 				<br>
 				<sform:label path="phoneNum">핸드폰 번호</sform:label>
-				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum"  id="phoneNum"/>
+				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum"/>
 				<br>
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
-				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"  path="passQuestion"/>
+				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"/>
 				<br>
 				<sform:label path="passAnswer">질문 답</sform:label>
-				<sform:input type="text" path="passAnswer"  id="passAnswer"/>
+				<sform:input type="text" path="passAnswer"/>
 				<br>
 				<sform:button id="joinBtn" type="submit">가입 하기</sform:button>
 			</div>
@@ -64,9 +64,10 @@
 	function idCheck(x){
 		var ID_PATTERN = /^[a-z][a-z0-9_$@#]{3,11}$/i;
 		if(ID_PATTERN.test(x)){
+			$("#userId").attr('class', 'true');
 			return true;
 		}else{
-			$("#trueorfalse").attr('class', 'button alt falseButton');
+			$("#userId").attr('class', 'false');
 			return false;
 		}
 			
@@ -74,34 +75,44 @@
 	function passCheck(x){
 		var PASS_PATTERN = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
 		if(PASS_PATTERN.test(x)){
+			$("#userPass").attr('class', 'true');
 			return true;
 		}else
+			$("#userPass").attr('class', 'false');
 			return false;
 	}
 	function nameCheck(x){
 		var NAME_PATTERN = /^[가-힣]{2,5}$/;
 		if(NAME_PATTERN.test(x)){
+			$("#userName").attr('class', 'true');
 			return true;
 		}else
+			$("#userName").attr('class', 'false');
 			return false;
 	}
 	function phoneCheck(x){
 		var PHONE_PATTERN = /^[0-9]{10,11}$/;
 		if(PHONE_PATTERN.test(x)){
+			$("#phoneNum").attr('class', 'true');
 			return true;
 		}else
+			$("#phoneNum").attr('class', 'false');
 			return false;
 	}
 	function questionCheck(x){
 		if(x.length>0&&x.length<=100){
+			$("#passQuestion").attr('class', 'true');
 			return true;
 		}else
+			$("#passQuestion").attr('class', 'false');
 			return false;
 	} 
 	function anserCheck(x){
 		if(x.length>0&&x.length<=20){
+			$("#passAnswer").attr('class', 'true');
 			return true;
-		}else 
+		}else
+			$("#passAnswer").attr('class', 'false');
 			return false;
 	}
 		$("#joinBtn").click(function(event){
@@ -120,59 +131,64 @@
 		
 	$("#userId").change(function(){
 		isChanged = false;
-		$("#trueorfalse").attr('class', 'button alt falseButton');		
+		$("#trueorfalse").attr('class', 'button alt falseButton');
+		if(idCheck($("#userId").val())){
+			$("#userId").attr('class', 'true');
+		}else{
+			$("#userId").attr('class', 'false');
+		}
 	});
 	$("#userPass").change(function(){
 		isChanged = false;
+		
 		if(passCheck($("#userPass").val())){
 			if($("#passCheck").val()==$("#userPass").val()){
-				alert("비밀번호 성공");
-				alert("비밀번호 확인창 초록색");
+				$("#userPass").attr('class', 'true');
 				isChanged = true;
 				}else{
-					alert("비밀번호 확인 색빨간색");
+					$("#passCheck").attr('class', 'false');
 				}
 		}else{
-			alert("비밀번호 실패");
+			$("#userPass").attr('class', 'false');
 		}	
 	});
 	$("#passCheck").change(function(){
 		if(passCheck($("#userPass").val())&&$("#passCheck").val()==$("#userPass").val()){
-			alert("비밀번호 확인창 초록색");
+			$("#passCheck").attr('class', 'true');
 			isChanged = true;
 		}else{
-			alert("비밀번호 확인창 빨간색");	
+			$("#passCheck").attr('class', 'false');
 		}
 			
 	});
 	$("#userName").change(function(){
 		if(nameCheck($("#userName").val())){
-			alert("이름창 초록색");
+			$("#userName").attr('class', 'true');
 		}else{
-			alert("이름창 빨간색");	
+			$("#userName").attr('class', 'false');	
 		}
 			
 	});
 	$("#phoneNum").change(function(){
 		if(phoneCheck($("#phoneNum").val())){
-			alert("전화번호창 초록색");
+			$("#phoneNum").attr('class', 'true');
 		}else{
-			alert("전화번호창 빨간색");	
+			$("#phoneNum").attr('class', 'false');
 		}
 			
 	});
 	$("#passQuestion").change(function(){
 		if(questionCheck($("#passQuestion").val())){
-			alert("질문창 초록색");
+			$("#passQuestion").attr('class', 'true');
 		}else{
-			alert("질문창 빨간색");	
+			$("#passQuestion").attr('class', 'false');
 		}
 	});
 	$("#passAnswer").change(function(){
 		if(anserCheck($("#passAnswer").val())){
-			alert("답변창 초록색");
+			$("#passAnswer").attr('class', 'true');
 		}else{
-			alert("답변창 빨간색");	
+			$("#passAnswer").attr('class', 'false');
 		}
 	});
 	//아이디 중복확인
