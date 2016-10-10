@@ -22,7 +22,7 @@ public class NotificationController {
 	NotificationService service;
 	
 	/** 알림 설정 목록 표시 */
-	@RequestMapping(value="/noti/settingList", method=RequestMethod.GET)
+	@RequestMapping(value="/noti/notiSettingList", method=RequestMethod.GET)
 	public String notiSettingList(Model model, HttpSession session){
 		// 로그인된 id 확인
 		String id = ((UserData)session.getAttribute("user")).getUserId();
@@ -38,7 +38,7 @@ public class NotificationController {
 	}
 	
 	/** 알림 설정 */
-	@RequestMapping(value="/noti/settingList", method=RequestMethod.GET)
+	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
 	public String notiSetting(Model model, @RequestParam List<NotificationSetting> settingList){
 		
 		int successCount = 0;
