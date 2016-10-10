@@ -36,17 +36,17 @@
 				</table>
 
 				<sform:label path="userPass">비밀번호</sform:label>
-				<sform:input type="password" path="userPass" />
+				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass" />
 				<br> <label for="passCheck">비밀번호 확인</label> <input
 					type="password" id="passCheck" /><br>
 				<sform:label path="userName">이름</sform:label>
-				<sform:input type="text" path="userName" />
+				<sform:input placeholder="한글 2~5자 " type="text" path="userName" />
 				<br>
-				<sform:label path="phoneNum">전화번호</sform:label>
+				<sform:label path="phoneNum">핸드폰 번호</sform:label>
 				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum" />
 				<br>
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
-				<sform:textarea path="passQuestion" />
+				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion" />
 				<br>
 				<sform:label path="passAnswer">질문 답</sform:label>
 				<sform:input type="text" path="passAnswer" />
@@ -66,34 +66,116 @@
 		var ID_PATTERN = /^[a-z][a-z0-9_$@#]{3,11}$/i;
 		if(ID_PATTERN.test(x)){
 			return true;
+		}else{
+			$("#trueorfalse").attr('class', 'button alt falseButton');
+			return false;
+		}
+			
+	}
+	function passCheck(x){
+		var PASS_PATTERN = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
+		if(PASS_PATTERN.test(x)){
+			return true;
 		}else
 			return false;
 	}
-	
-	function passCheck(x){
-		var PASS_PATTERN = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
-		if()
+	function nameCheck(x){
+		var NAME_PATTERN = /^[가-힣]{2,5}$/;
+		if(NAME_PATTERN.test(x)){
+			return true;
+		}else
+			return false;
+	}
+	function phoneCheck(x){
+		var PHONE_PATTERN = /^[0-9]{10,11}$/;
+		if(PHONE_PATTERN.test(x)){
+			return true;
+		}else
+			return false;
+	}
+	function questionCheck(x){
+		if(x.length>0&&x.length<=100){
+			return true;
+		}else
+			return false;
+	}
+	function anserCheck(x){
+		if(x.length>0&&x.length<=20){
+			return true;
+		}else
+			return false;
 	}
 		$("#joinBtn").click(function(){
-				if (idcheck && passcheck($("#userPass").val()) && namecheck && phonecheck
-						&& questioncheck && ansercheck == true) {
-					alert("cc");
+				if (idCheck($("#userId").val()) && passCheck($("#userPass").val()) 
+						&& nameCheck($("#userName").val()) && phoneCheck($("#phoneNum").val())
+						&& questionCheck($("#passQuestion").val()) && anserCheck($("#passAnswer").val()) == true) {
+					alert("가입완료, 어플설치시 알림기능 사용가능");
 				} else {
-					alert(idcheck, passcheck, namecheck, phonecheck,
-							questioncheck, ansercheck);
+					alert("가입 실패");
 					event.preventDefault();
 				}
 
 			});
 		
 	$("#userId").change(function(){
-		idcheck=false;
 		$("#trueorfalse").attr('class', 'button alt falseButton');		
 	});
+	$("#userPass").change(function(){
+		if(passCheck($("#userPass").val())){
+			if($("#passCheck").val()==$("#userPass").val()){
+				alert("비밀번호 성공");
+				alert("비밀번호 확인창 초록색");
+				}else{
+					alert("비밀번호 확인 색빨간색");
+				}
+		}else{
+			alert("비밀번호 실패");
+		}	
+	});
+	$("#passCheck").change(function(){
+		if(passCheck($("#userPass").val())&&$("#passCheck").val()==$("#userPass").val()){
+			alert("비밀번호 확인창 초록색");
+		}else{
+			focus();
+			alert("비밀번호 확인창 빨간색");	
+		}
+			
+	});
+	$("#userName").change(function(){
+		if(nameCheck($("#userName").val())){
+			alert("이름창 초록색");
+		}else{
+			alert("이름창 빨간색");	
+		}
+			
+	});
+	$("#phoneNum").change(function(){
+		if(phoneCheck($("#phoneNum").val())){
+			alert("전화번호창 초록색");
+		}else{
+			alert("전화번호창 빨간색");	
+		}
+			
+	});
+	$("#passQuestion").change(function(){
+		if(questionCheck($("#passQuestion").val())){
+			alert("질문창 초록색");
+		}else{
+			alert("질문창 빨간색");	
+		}
+	});
+	$("#passAnswer").change(function(){
+		if(anserCheck($("#passAnswer").val())){
+			alert("답변창 초록색");
+		}else{
+			alert("답변창 빨간색");	
+		}
+	});
+	//아이디 중복확인
 	$("#duplicationCheckBtn").click(
 			function(event) {
 				event.preventDefault();
-				if(ID_PATTERN.test($("#userId").val())){
+				if(idCheck($("#userId").val())){
 					$.ajax({
 						type : "get",
 						url : "findUser",
@@ -105,12 +187,10 @@
 							if (res == "true") {
 								alert("사용가능한 ID 입니다.");
 								$("#trueorfalse").attr('class', 'button alt trueButton');
-								idcheck=true;
 								
 							} else {
 								alert("이미 있는 ID 입니다.");
 								$("#trueorfalse").attr('class', 'button alt falseButton');
-								idcheck=false;
 							}
 
 						},
