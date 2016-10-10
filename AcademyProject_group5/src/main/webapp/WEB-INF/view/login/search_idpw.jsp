@@ -26,8 +26,8 @@
 				<div class="form3 pad">
 					
 					<h1 class="member">ID 찾기</h1>
-					<label for="user">이름</label><input type="text" id="userName">
-					<label for="user">전화번호</label><input type="text" id="phoneNum"><br>
+					<label for="userName">이름</label><input type="text" id="userName">
+					<label for="phoneNum">전화번호</label><input type="text" id="phoneNum"><br>
 					<input type="button" value="확인" id="idCheck" style="margin-left: 45%"><br>
 </div>
 </div>
@@ -36,9 +36,9 @@
 			<div class="form6">
 				<div class="form3 pad">
 					<h1 class="member">Password찾기</h1>
-					<label for="user">아이디</label><input type="text" id="userId"><br>
-					<label for="user">비밀번호 질문</label><textarea id = passQuestion> </textarea> <br>
-					<label for="user">질문 답</label><input type="text" id="passAnswer"><br>
+					<label for="userId">아이디</label><input type="text" id="userId"><br>
+					<label for="passQuestion">비밀번호 질문</label><textarea id = passQuestion> </textarea> <br>
+					<label for="passAnswer">질문 답</label><input type="text" id="passAnswer"><br>
 						<input type="button" value="확인" id="passCheck"  style="margin-left: 45%">
 				</div>
 </div>
