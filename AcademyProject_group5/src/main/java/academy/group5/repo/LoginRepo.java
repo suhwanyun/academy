@@ -65,4 +65,9 @@ public class LoginRepo {
 		String stmt = LOGIN_NS + "selectUserInfo";
 		return session.selectOne(stmt, id);
 	}
+	
+	public String getQuestion(String id){
+		String stmt = LOGIN_NS + "selectPassQuestion";
+		return session.selectOne(stmt, id);
+	}
 }

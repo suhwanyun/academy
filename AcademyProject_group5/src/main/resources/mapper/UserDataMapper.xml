@@ -70,4 +70,10 @@
 		where user_id = #{userId}
 	</select>
 	
+	<select id="selectPassQuestion" parameterType="String" resultType="String">
+		select pass_question
+		from UserData
+		where user_id = #{userId}
+	</select>
+	
 </mapper>

@@ -56,5 +56,12 @@ public interface LoginService {
 	 * @param id
 	 * @return
 	 */
-	UserData info(String id);
+	UserData getInfo(String id);
+	
+	/**
+	 * PASSWORD 질문 확인
+	 * @param id
+	 * @return
+	 */
+	String getQuestion(String id);
 }

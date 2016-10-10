@@ -91,4 +91,12 @@ public class LoginController {
 		return service.getPass(userId, passAnswer);
 
 	}
+	
+	/** PASSWORD 질문 찾기 */
+	@RequestMapping(value="findQuestion", method=RequestMethod.GET)
+	public @ResponseBody String findQuestion(@RequestParam String userId){
+		
+		return service.getQuestion(userId);
+
+	}
 }

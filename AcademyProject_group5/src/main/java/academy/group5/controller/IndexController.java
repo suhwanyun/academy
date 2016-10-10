@@ -51,7 +51,7 @@ public class IndexController {
 	public String infoUpdatePage(Model model, HttpSession session){
 		String id = ((UserData)session.getAttribute("user")).getUserId();
 		
-		UserData info = loginService.info(id);
+		UserData info = loginService.getInfo(id);
 		if(info != null){
 			model.addAttribute("userData", info);
 			return "/info/myinfo";

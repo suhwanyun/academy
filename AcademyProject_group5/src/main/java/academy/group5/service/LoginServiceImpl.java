@@ -110,8 +110,13 @@ public class LoginServiceImpl implements LoginService {
 	
 	/** 회원정보 확인 */
 	@Override
-	public UserData info(String id) {
+	public UserData getInfo(String id) {
 		return loginRepo.getInfo(id);
+	}
+	
+	@Override
+	public String getQuestion(String id){
+		return loginRepo.getQuestion(id);
 	}
 	
 	/** 암호화 */
