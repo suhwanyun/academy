@@ -36,20 +36,20 @@
 				</table>
 
 				<sform:label path="userPass">비밀번호</sform:label>
-				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass" />
+				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass"  id="passCheck" />
 				<br> <label for="passCheck">비밀번호 확인</label> <input
-					type="password" id="passCheck" /><br>
+					type="password"  id="passCheck" /><br>
 				<sform:label path="userName">이름</sform:label>
-				<sform:input placeholder="한글 2~5자 " type="text" path="userName" />
+				<sform:input placeholder="한글 2~5자 " type="text" path="userName" id="userName" />
 				<br>
 				<sform:label path="phoneNum">핸드폰 번호</sform:label>
-				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum" />
+				<sform:input placeholder="-없이 입력 " type="number" path="phoneNum"  id="phoneNum"/>
 				<br>
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
-				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion" />
+				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"  path="passQuestion"/>
 				<br>
 				<sform:label path="passAnswer">질문 답</sform:label>
-				<sform:input type="text" path="passAnswer" />
+				<sform:input type="text" path="passAnswer"  id="passAnswer"/>
 				<br>
 				<sform:button id="join" type="submit">가입 하기</sform:button>
 			</div>
