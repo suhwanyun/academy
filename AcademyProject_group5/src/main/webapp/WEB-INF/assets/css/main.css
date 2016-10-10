@@ -1673,14 +1673,14 @@ Footer
 }
 .form7{
 	 width: 70%;
- height: 55%;
+ height: 23em;
  border-radius: 25px;
  border: 5px double #999;
  margin: 30px auto;
 }
 .form8{
 	 width: 70%;
- height: 85%;
+ height: 32em;
  border-radius: 25px;
  border: 5px double #999;
  margin: 30px auto;
@@ -1690,7 +1690,7 @@ Footer
  height: 130%;
  border-radius: 25px;
  border: 5px double #999;
-margin:1em auto;
+margin:1em auto; 
 }
 .form10{
 	 width: 100%;
