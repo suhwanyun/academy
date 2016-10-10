@@ -184,7 +184,7 @@ CREATE TABLE UserData
 (
 	user_id varchar2(10) NOT NULL,
 	user_pass varchar2(64) NOT NULL,
-	user_name varchar2(10) NOT NULL,
+	user_name varchar2(15) NOT NULL,
 	user_mileage number NOT NULL,
 	phone_id varchar2(200),
 	-- 분실시 활용
