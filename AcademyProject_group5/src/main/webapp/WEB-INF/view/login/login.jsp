@@ -69,7 +69,7 @@
 		$(location).attr('href',"searchidpw");
 	});
 	$("#joinBtn").click(function(){
-		$(location).attr('href',"joinBtn");
+		$(location).attr('href',"joinjsp");
 	});
 	
 </script>
