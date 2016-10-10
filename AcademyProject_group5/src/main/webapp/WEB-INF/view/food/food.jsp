@@ -9,7 +9,7 @@
 	href="<%=request.getContextPath() %>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/font-awesome.css" />
-<title>Insert title here</title>
+<title>식사게시판</title>
 </head>
 <body>
 	
@@ -28,8 +28,9 @@
 			<col width="40%" />
 			<col width="30%" />
 		</colgroup>
+		
 		<thead>
-			<tr>
+		<tr>
 				<td>
 				<select id="array" title="select array">
 				<option selected="selected">정렬 기준</option>
@@ -48,8 +49,9 @@
     			</select></td>
     		
 				<td><input type="search" id="searchBtn"></td>
-			</tr>
-		
+				
+			
+		</tr>
 			<tr id="gomchi2">
 				<th>사진</th>
 				<th>제목</th>
