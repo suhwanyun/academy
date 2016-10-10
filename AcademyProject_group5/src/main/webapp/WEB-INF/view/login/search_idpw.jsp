@@ -37,7 +37,7 @@
 				<div class="form3 pad">
 					<h1 class="member">Password찾기</h1>
 					<label for="userId">아이디</label><input type="text" id="userId"><br>
-					<label for="passQuestion">비밀번호 질문</label><textarea id = "passQuestion"> </textarea> <br>
+					<label for="passQuestion">비밀번호 질문</label><textarea id="passQuestion" readonly="readonly"> </textarea> <br>
 					<label for="passAnswer">질문 답</label><input type="text" id="passAnswer"><br>
 					<input type="button" value="확인" id="passCheck"  style="margin-left: 45%">
 				</div>
