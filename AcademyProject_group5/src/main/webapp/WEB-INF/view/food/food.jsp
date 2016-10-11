@@ -21,24 +21,31 @@
 		<h1 class="member">식사 게시판</h1>
 		<div class="form9 pad">
 			<table>
+				<colgroup>
+					<col width="30%">
+					<col width="20%">
+					<col width="25%">
+					<col width="25%">
+				</colgroup>
 				<tr>
-					<td colspan="2"><select id="array" title="select array"
-						style="height: 2em; margin-bottom: 0.1em;">
+					<td><select id="array" title="select array" >
 							<option selected="selected">정렬</option>
 							<option>추천수 정렬</option>
 							<option>날짜 정렬</option>
 					</select></td>
-					<td colspan="2"><select id="select" title="select select"
-						style="height: 2em; margin-bottom: 0.1em;">
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><select id="select" title="select select" >						
 							<option selected="selected">작성자</option>
 							<option>제목</option>
 							<option>내용</option>
 							<option>제목+내용</option>
 					</select></td>
-				</tr>
-				<tr>
-					<td colspan="3"><input type="search" id="search"></td>
-					<td><input type="button" value="찾기"></td>
+					<td colspan="2"><input type="search" id="search"></td>
+					<td><input type="button" class="boardBtn" value="찾기"></td>
 				</tr>
 
 			</table>
