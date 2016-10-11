@@ -19,7 +19,8 @@
 			class="circular--logo"
 			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
 		<h1 class="member">식사 게시판 글 내용</h1>
-		<table >
+	<div class="form10 pad">
+		<table style="text-align: center">
 			<tr>
 				<th colspan="4">제목</th>
 			</tr>
@@ -44,6 +45,7 @@
 				<td>댓글달기버튼</td>
 			</tr>
 		</table>
+		</div>
 	</div>
 </body>
 </html>
