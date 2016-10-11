@@ -57,5 +57,6 @@
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
+<script src="<%=request.getContextPath() %>/js/validationcheck.js"></script>
 <script src="<%=request.getContextPath() %>/js/join.js"></script>
 </html>

@@ -54,4 +54,5 @@
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="<%=request.getContextPath() %>/js/search_idpw.js"></script>
+<script src="<%=request.getContextPath() %>/js/validationcheck.js"></script>
 </html>
