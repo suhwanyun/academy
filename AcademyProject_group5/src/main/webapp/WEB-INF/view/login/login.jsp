@@ -27,8 +27,8 @@
   
 
      
-      <label for="user">아이디</label><input type="text" id="userId">
-      <label for="user">비밀번호</label><input type="password" id="userPass">
+      <label for="user">아이디</label><input type="text" maxlength="10" id="userId">
+      <label for="user">비밀번호</label><input type="password" maxlength="20" id="userPass">
      <div class="pad">
      <input type="button"  value="로그인 하기"  id="loginBtn" class="bigbig">
      </div>

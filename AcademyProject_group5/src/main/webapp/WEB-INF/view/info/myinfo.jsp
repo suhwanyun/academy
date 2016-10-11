@@ -22,22 +22,22 @@
 		<sform:input readonly="true" type="text" path="userId"
 			value="${user.userId}" />
 		<sform:label path="userPass">비밀번호 변경</sform:label>
-		<sform:input placeholder="변경할 경우에만 입력하시오" type="password" path="userPass" />
+		<sform:input placeholder="변경할 경우에만 입력하시오" maxlength="20" type="password" path="userPass" />
 		<br>
 		<label for="passCheck">비밀번호 변경 확인</label>
-		<input type="password" id="passCheck" />
+		<input type="password" maxlength="20" id="passCheck" />
 		<br>
 		<sform:label path="userName">이름</sform:label>
 		<sform:input readonly="true" type="text" path="userName" value="${user.userName}" />
 		<br>
 		<sform:label path="phoneNum">전화번호</sform:label>
-		<sform:input type="text" path="phoneNum" value="${user.phoneNum}" />
+		<sform:input type="text" path="phoneNum" maxlength="11" value="${user.phoneNum}" />
 		<br>
 		<sform:label path="passQuestion">비밀번호 질문</sform:label>
-		<sform:textarea path="passQuestion" value="${user.passQuestion}" />
+		<sform:textarea path="passQuestion" maxlength="100" value="${user.passQuestion}" />
 		<br>
 		<sform:label path="passAnswer">질문 답</sform:label>
-		<sform:input type="text" path="passAnswer" value="${user.passAnswer}" />
+		<sform:input type="text" path="passAnswer" maxlength="20" value="${user.passAnswer}" />
 		<br>
 		<sform:button id="infoUpdate" type="submit">수정 하기</sform:button>
 

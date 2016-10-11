@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,21 +21,10 @@
 	<h1 class="member">식사 글쓰기</h1>
 	<form name="writeForm" method="post" action="writePro.do">
 	<table>
-		<c:set var="num" value="${requestScope.num }"/>
-		<c:set var="ref" value="${requestScope.ref }"/>
-		<c:set var="re_step" value="${requestScope.re_step }"/>
-		<c:set var="re_level" value="${requestScope.re_level }"/>
-		
-		
-	<%-- <input type="hidden" name="num" value="${num }"/>
-	<input type="hidden" name="ref" value="${ref }"/>
-	<input type="hidden" name="re_step" value="${re_step }"/>
-	<input type="hidden"	name="re_level" value="${re_level }"/>
-	 --%>
-	<tr>
+ 	<tr>
 		<td width="70" align="center">제 목</td>
 		<td align="left" width="330">
-			<input type="text" size="10" maxlength="10" name="writer"></td>
+			<input type="text" maxlength="30"></td>
 	</tr>
 
 	<tr>
@@ -53,8 +41,6 @@
 	<td colspan=2 align="center">
 		<input type="button" name="save" value="글쓰기" onclick="writeSave();">
 		<input type="reset" value="다시작성">
-		<input type="button" value="목록보기"
-			onclick="document.location.href='boardList.do?pageNum=${pageNum }'">
 		</td>
 	</tr>
 	</table>

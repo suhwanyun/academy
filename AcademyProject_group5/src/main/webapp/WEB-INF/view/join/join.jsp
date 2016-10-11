@@ -24,7 +24,7 @@
 				<table>
 					<tr>
 						<td><sform:input placeholder="영문/숫자 4~10자" type="text"
-								path="userId" /></td>
+								maxlength="10" path="userId" /></td>
 						<td><a id="trueorfalse" href="#"
 							class="button alt falseButton"><span></span></a></td>
 					</tr>
@@ -35,20 +35,20 @@
 				</table>
 
 				<sform:label path="userPass">비밀번호</sform:label>
-				<sform:input placeholder="영문/숫자/특문 6~20자 "  type="password" path="userPass"/>
+				<sform:input placeholder="영문/숫자/특문 6~20자 " maxlength="20" type="password" path="userPass"/>
 				<br> <label for="passCheck">비밀번호 확인</label> <input
-					type="password"  id="passCheck" /><br>
+					type="password" maxlength="20"  id="passCheck" /><br>
 				<sform:label path="userName">이름</sform:label>
-				<sform:input placeholder="한글 2~5자 " type="text" path="userName"/>
+				<sform:input placeholder="한글 2~5자 " maxlength="5" type="text" path="userName"/>
 				<br>
 				<sform:label path="phoneNum">핸드폰 번호</sform:label>
-				<sform:input placeholder="-없이 입력 " type="text" path="phoneNum"/>
+				<sform:input placeholder="-없이 입력 " maxlength="11" type="text" path="phoneNum"/>
 				<br>
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
-				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"/>
+				<sform:textarea placeholder="1자 이상 100자 이하 " maxlength="100" path="passQuestion"/>
 				<br>
 				<sform:label path="passAnswer">질문 답</sform:label>
-				<sform:input placeholder="1자 이상 20자 이하 " type="text" path="passAnswer"/>
+				<sform:input placeholder="1자 이상 20자 이하 " maxlength="20" type="text" path="passAnswer"/>
 				<br>
 				<sform:button id="joinBtn" type="submit">가입 하기</sform:button>
 			</div>
