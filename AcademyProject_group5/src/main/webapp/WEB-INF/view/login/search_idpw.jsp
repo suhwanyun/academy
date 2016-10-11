@@ -1,129 +1,174 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <html>
 <head>
-<title>login form</title>
+<title>ID, Pass ì°¾ê¸°</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 
 </head>
 
 <form>
-	<!--  ·Î±×ÀÎÇÏ±âÀü È­¸é -->
+	<!--  ë¡œê·¸ì¸í•˜ê¸°ì „ í™”ë©´ -->
 
 	<div id="wrap">
 		<a href="<%=request.getContextPath()%>"><img
 			class="circular--logo"
 			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
-		
+
 		<div class="form7">
 			<div class="form6">
 				<div class="form3 pad">
-					
-					<h1 class="member">ID Ã£±â</h1>
-					<label for="userName">ÀÌ¸§</label><input type="text" id="userName">
-					<label for="phoneNum">ÀüÈ­¹øÈ£</label><input type="text" id="phoneNum"><br>
-					<input type="button" value="È®ÀÎ" id="idCheck" style="margin-left: 45%"><br>
-</div>
-</div>
+
+					<h1 class="member">ID ì°¾ê¸°</h1>
+					<label for="userName">ì´ë¦„</label><input placeholder="í•œê¸€ 2~5ì " type="text" id="userName">
+					<label for="phoneNum">ì „í™”ë²ˆí˜¸</label><input placeholder="-ì—†ì´ ì…ë ¥ "
+						type="text" id="phoneNum"><br> <input type="button"
+						value="í™•ì¸" id="idCheck" style="margin-left: 45%"><br>
+				</div>
+			</div>
 		</div>
 		<div class="form8">
 			<div class="form6">
 				<div class="form3 pad">
-					<h1 class="member">PasswordÃ£±â</h1>
-					<label for="userId">¾ÆÀÌµğ</label><input type="text" id="userId"><br>
-					<label for="passQuestion">ºñ¹Ğ¹øÈ£ Áú¹®</label><textarea id="passQuestion" readonly="readonly"> </textarea> <br>
-					<label for="passAnswer">Áú¹® ´ä</label><input type="text" id="passAnswer"><br>
-					<input type="button" value="È®ÀÎ" id="passCheck"  style="margin-left: 45%">
+					<h1 class="member">Passwordì°¾ê¸°</h1>
+					<label for="userId">ì•„ì´ë””</label><input placeholder="ì˜ë¬¸/ìˆ«ì 4~10ì" type="text" id="userId"><br>
+					<label for="passQuestion">ë¹„ë°€ë²ˆí˜¸ ì§ˆë¬¸</label>
+					<textarea id="passQuestion" readonly="readonly"> </textarea>
+					<br> <label for="passAnswer">ì§ˆë¬¸ ë‹µ</label><input placeholder="1ì ì´ìƒ 20 ì´í•˜ " type="text"
+						id="passAnswer"><br>
+						<input id ="res" readonly="readonly" type="text" value="ì„ì‹œë¹„ë°€ë²ˆí˜¸ :"
+						id="passAnswer"><br> <input type="button" value="í™•ì¸"
+						id="passCheck" style="margin-left: 45%">
 				</div>
-</div>
+			</div>
 		</div>
-			
+
 	</div>
 </form>
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+function phoneCheck(x){
+	var PHONE_PATTERN = /^[0-9]{10,11}$/;
+	if(PHONE_PATTERN.test(x)){
+		return true;
+	}else{
+		return false;
+	}
+}
+function nameCheck(x){
+	var NAME_PATTERN = /^[ê°€-í£]{2,5}$/;
+	if(NAME_PATTERN.test(x)){
+		return true;
+	}else{
+		return false;
+	}
+}
+function idCheck(x){
+	var ID_PATTERN = /^[a-z][a-z0-9_$@#]{3,11}$/i;
+	if(ID_PATTERN.test(x)){
+		return true;
+	}else{
+		return false;
+	}
+}
+function anserCheck(x){
+	if(x.length>0&&x.length<=20){
+		return true;
+	}else{
+		return false;
+	}
+}
 	
 	$("#idCheck").click(function() {
-		$.ajax({
-			type : "get",
-			url : "findId",
-			data : {
-				userName : $("#userName").val(),
-				phoneNum : $("#phoneNum").val()
-			},
-			success : function(res) {
+		if(phoneCheck($("#phoneNum").val())&&nameCheck($("#userName").val())){
+			$.ajax({
+				type : "get",
+				url : "findId",
+				data : {
+					userName : $("#userName").val(),
+					phoneNum : $("#phoneNum").val()
+				},
+				success : function(res) {
+					if (res.length>2) {
+						alert("ê·€í•˜ì˜ ì•„ì´ë””ëŠ” : "+res);
+						
+					} else {
+						alert("ì¡°íšŒëœ ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
+					}
 
-				if (res.length>2) {
-					alert("±ÍÇÏÀÇ ¾ÆÀÌµğ´Â : "+res);
-					
-				} else {
-					alert("Á¶È¸µÈ ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:"
+							+ error);
 				}
-
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:"
-						+ error);
-			}
-		});
-	
+			});
+		}else{
+			alert("ì´ë¦„, ì „í™”ë²ˆí˜¸ ì–‘ì‹ì´ í‹€ë ¸ìŠµë‹ˆë‹¤.");
+		}
+		
 	});
 	$("#passCheck").click(function(){
-		$.ajax({
-			type : "get",
-			url : "findPass",
-			data : {
-				userId : $("#userId").val(),
-				passAnswer : $("#passAnswer").val()
-			},
-			success : function(res) {
-				alert(res);
-				if (res.length>2) {
-					alert("ÀÓ½Ã ÆĞ½º¿öµå´Â : ["+res+"]ÀÔ´Ï´Ù.");
-					
-				} else {
-					alert("¾ÆÀÌµğ³ª ºñ¹Ğ¹øÈ£ ´äÀ» È®ÀÎÇÏ¼¼¿ä.");
-				}
+		if(anserCheck($("#passAnswer").val())){
+			$.ajax({
+				type : "get",
+				url : "findPass",
+				data : {
+					userId : $("#userId").val(),
+					passAnswer : $("#passAnswer").val()
+				},
+				success : function(res) {
+					if (res.length>2) {
+						$("#res").val("ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ : [ "+res+" ]");
+					} else {
+						alert("ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ ë‹µì„ í™•ì¸í•˜ì„¸ìš”.");
+					}
 
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:"
-						+ error);
-			}
-		});
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:"
+							+ error);
+				}
+			});
+		}else{
+			alert("ì§ˆë¬¸ ë‹µ ì–‘ì‹ì´ í‹€ë ¸ìŠµë‹ˆë‹¤.");
+		}
+		
 	});
 	$("#userId").change(function(){
-		$.ajax({
-			type : "get",
-			url : "findQuestion",
-			data : {
-				userId : $("#userId").val()
-			},
-			success : function(res) {
-				if (res.length>1) {
-					$("#passQuestion").val(res)
-					
-				} else {
-					$("#passQuestion").val("Á¶È¸µÈ Áú¹®ÀÌ ¾ø½À´Ï´Ù. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇ ÇÏ¼¼¿ä");
-				}
+		if(idCheck($("#userId").val())){
+			$.ajax({
+				type : "get",
+				url : "findQuestion",
+				data : {
+					userId : $("#userId").val()
+				},
+				success : function(res) {
+					if (res.length>1) {
+						$("#passQuestion").val(res)
+						
+					} else {
+						$("#passQuestion").val("ì¡°íšŒëœ ì§ˆë¬¸ì´ ì—†ìŠµë‹ˆë‹¤. ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜ í•˜ì„¸ìš”");
+					}
 
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:"
-						+ error);
-			}
-		});
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:"
+							+ error);
+				}
+			});
+		}else{
+			alert("ID ì–‘ì‹ì´ í‹€ë ¸ìŠµë‹ˆë‹¤.");
+		}
 	});
 </script>
 </html>

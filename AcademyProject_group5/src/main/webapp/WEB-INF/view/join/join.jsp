@@ -48,7 +48,7 @@
 				<sform:textarea placeholder="1자 이상 100자 이하 " path="passQuestion"/>
 				<br>
 				<sform:label path="passAnswer">질문 답</sform:label>
-				<sform:input type="text" path="passAnswer"/>
+				<sform:input placeholder="1자 이상 20자 이하 " type="text" path="passAnswer"/>
 				<br>
 				<sform:button id="joinBtn" type="submit">가입 하기</sform:button>
 			</div>
