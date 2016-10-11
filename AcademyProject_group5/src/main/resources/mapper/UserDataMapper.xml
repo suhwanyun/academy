@@ -18,7 +18,9 @@
 	
 	<update id="updateUser" parameterType="user_data">
 		update UserData set 
+			<if test="userPass != ''">
 			user_pass = #{userPass},
+			</if>
 			phone_num = #{phoneNum},
 			pass_question = #{passQuestion},
 			pass_answer = #{passAnswer}
