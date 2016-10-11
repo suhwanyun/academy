@@ -9,7 +9,7 @@
 <html>
 
 <head>
-<title>Radius by TEMPLATED</title>
+<title>My Campus Manager</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"

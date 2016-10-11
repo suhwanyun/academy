@@ -12,7 +12,7 @@
 </head>
 <body>
 	<footer id="footer">
-		<a href="#" class="info fa fa-info-circle"><span>About</span></a>
+		<a href="#" class="info fa fa-info-circle"><span></span></a>
 		<div class="inner">
 			<div class="content">
 				<h3>Welcome to MCM</h3>
