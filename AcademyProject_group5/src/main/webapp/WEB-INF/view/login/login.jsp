@@ -22,13 +22,13 @@
 <a href="<%=request.getContextPath() %>"><img 
 						class="circular--logo"
 						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
- 
+  <h1 class="member">member login</h1>
   <div class="form10 pad">
-   <h1 class="member">member login</h1>
+  
 
      
-      <label for="user">아이디</label><input type="text" id="userId">
-      <label for="user">비밀번호</label><input type="password" id="userPass">
+      <label for="user">아이디</label><input type="text" maxlength="10" id="userId">
+      <label for="user">비밀번호</label><input type="password" maxlength="20" id="userPass">
      <div class="pad">
      <input type="button"  value="로그인 하기"  id="loginBtn" class="bigbig">
      </div>
