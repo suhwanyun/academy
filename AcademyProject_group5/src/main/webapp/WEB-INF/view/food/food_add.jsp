@@ -20,28 +20,33 @@
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
 	<form name="writeForm" method="post" action="writePro.do">
-	<table>
+	<table class="add">
+	<colgroup>
+		<col width="40%">
+		<col width="60%">
+	</colgroup>
  	<tr>
-		<td width="70" align="center">제 목</td>
-		<td align="left" width="330">
+		<td><label>제 목</label></td>
+		<td>
 			<input type="text" maxlength="30"></td>
 	</tr>
 
 	<tr>
-		<td width="70" align="center">내 용</td>
-		<td align="left" width="330">
+		<td><label>내 용</label></td>
+		<td>
 			<textarea name="content" rows="13" cols="40"></textarea></td>
 	</tr>
 	<tr>
-		<td width="70" align="center">파일 첨부</td>
-		<td align="left" width="330">
+		<td><label>파일 첨부</label></td>
+		<td>
 			<input type="file" id="reportFile" name="reportFile"></td>
 	</tr>
 	<tr>
 	<td colspan=2 align="center">
 		<input type="button" name="save" value="글쓰기" onclick="writeSave();">
 		<input type="reset" value="다시작성">
-		</td>
+		
+		
 	</tr>
 	</table>
 	
