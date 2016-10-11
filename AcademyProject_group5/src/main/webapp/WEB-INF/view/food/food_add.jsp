@@ -19,33 +19,33 @@
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
-	<form name="writeForm" method="post" action="writePro.do">
+	<sform:form method="post" action="#" modelAttribute="postingData" enctype="multipart/form-data">
 	<table>
  	<tr>
 		<td width="70" align="center">제 목</td>
 		<td align="left" width="330">
-			<input type="text" maxlength="30"></td>
+			<sform:input type="text" maxlength="30" path="postingTitle"/></td>
 	</tr>
 
 	<tr>
 		<td width="70" align="center">내 용</td>
 		<td align="left" width="330">
-			<textarea name="content" rows="13" cols="40"></textarea></td>
+			<sform:textarea rows="13" cols="40" maxlength="300" path="postingContent"/></td>
 	</tr>
 	<tr>
-		<td width="70" align="center">파일 첨부</td>
+		<td width="70" align="center">사진 첨부</td>
 		<td align="left" width="330">
-			<input type="file" id="reportFile" name="reportFile"></td>
+			<sform:input type="file" path="postingPhoto" input accept="image/*"/></td>
 	</tr>
 	<tr>
 	<td colspan=2 align="center">
-		<input type="button" name="save" value="글쓰기" onclick="writeSave();">
-		<input type="reset" value="다시작성">
+		<sform:button id="save" value="글쓰기" />
+		<sform:button type="reset" value="다시작성"/>
 		</td>
 	</tr>
 	</table>
 	
-	</form>
+	</sform:form>
 </div>
 </body>
 </html>
