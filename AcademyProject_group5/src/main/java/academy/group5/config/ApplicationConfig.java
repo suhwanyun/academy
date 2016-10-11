@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import academy.group5.repo.TermRepo;
 import academy.group5.service.AutoService;
 import academy.group5.service.AutoServiceImpl;
 
@@ -20,8 +20,7 @@ import academy.group5.service.AutoServiceImpl;
 	@ComponentScan("academy.group5.beans"),
 	@ComponentScan("academy.group5.repo"),
 	@ComponentScan("academy.group5.service"),
-	@ComponentScan("academy.group5.controller"),
-	@ComponentScan("academy.group5.scheduler")
+	@ComponentScan("academy.group5.controller")
 })
 @EnableTransactionManagement
 public class ApplicationConfig {

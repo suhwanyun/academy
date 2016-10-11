@@ -1,4 +1,4 @@
-package academy.group5.scheduler;
+package academy.group5.config;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

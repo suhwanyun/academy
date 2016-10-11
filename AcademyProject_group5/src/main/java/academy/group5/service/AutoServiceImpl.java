@@ -2,8 +2,8 @@ package academy.group5.service;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import academy.group5.scheduler.PresidentElectionScheduler;
-import academy.group5.scheduler.TermEndScheduler;
+import academy.group5.config.PresidentElectionScheduler;
+import academy.group5.config.TermEndScheduler;
 
 public class AutoServiceImpl implements AutoService{
 	
@@ -14,6 +14,7 @@ public class AutoServiceImpl implements AutoService{
 	
 	public void startVoteScheduler(){
 		AnnotationConfigApplicationContext voteContext = new AnnotationConfigApplicationContext(PresidentElectionScheduler.class);	
+		voteContext.containsBean("termRepo");
 	}
 	
 	public void startTermScheduler(){

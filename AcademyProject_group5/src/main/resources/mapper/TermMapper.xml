@@ -27,10 +27,10 @@
 		values (#{termYear}, #{termClassify}, #{termStart}, #{termEnd})
 	</insert>
 	
-	<!-- <select id="isVote" parameterType="date" resultType="int">
+	<select id="isAfterTermExist" resultType="int">
 		select count(*)
 		from Term
-		where 
-	</select> -->
+		where term_start &gt; sysdate
+	</select>
 	
 </mapper>

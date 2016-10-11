@@ -1,4 +1,4 @@
-package academy.group5.scheduler;
+package academy.group5.config;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -22,8 +23,8 @@ public class PresidentElectionScheduler implements SchedulingConfigurer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PresidentElectionScheduler.class);
 	
-	@Autowired
-	TermRepo termRepo;
+	/*@Autowired
+	TermRepo termRepo;*/
 	
 	@Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
@@ -33,7 +34,7 @@ public class PresidentElectionScheduler implements SchedulingConfigurer {
             new Runnable() {
                 public void run() {              
 
-                	logger.trace("voteScheduler");
+                	logger.trace("voteScheduler"/*, termRepo.getTodayTerm().getTermYear()*/);
                	
                 }
             },
