@@ -22,7 +22,7 @@
 	<div class="form10 pad">
 		<table style="text-align: center">
 			<tr>
-				<th colspan="4">제목</th>
+				<td colspan="4">제목</td>
 			</tr>
 			<tr>
 				<td colspan="4">사진</td>
