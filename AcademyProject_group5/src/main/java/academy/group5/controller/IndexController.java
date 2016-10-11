@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import academy.group5.dto.UserData;
+import academy.group5.service.AutoService;
 import academy.group5.service.LoginService;
 
 @Controller
@@ -16,6 +17,9 @@ public class IndexController {
 	
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	AutoService autoService;
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -29,6 +33,13 @@ public class IndexController {
 	public String loginPage(){
 
 		return "/login/login";
+	}
+	
+	/** 관리자 로그인 화면 */
+	@RequestMapping(value="/manager_loginjsp", method=RequestMethod.GET)
+	public String managerLoginPage(){
+		autoService.voteForPresident(null);
+		return "/login/login_manager";
 	}
 
 	/** 회원가입 화면 */
@@ -58,10 +69,7 @@ public class IndexController {
 		} else {
 			model.addAttribute("msg", "회원정보를 가져오지 못했습니다.\n잠시 후 다시 시도해주세요");
 			return "index";
-		}
-		
-		
-		
+		}		
 	}
 	
 	/** 학업 메뉴 메인 페이지 */

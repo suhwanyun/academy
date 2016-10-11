@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"   pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import ="java.util.Map" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -16,7 +17,7 @@
 		<script>alert('${msg}');</script>
 		<c:remove var="msg"/>
 	</c:if>
-<form>   <!--  ·Î±×ÀÎÇÏ±âÀü È­¸é -->
+<form>   <!--  ë¡œê·¸ì¸í•˜ê¸°ì „ í™”ë©´ -->
 <div id="wrap">
 <a href="<%=request.getContextPath() %>"><img 
 						class="circular--logo"
@@ -26,14 +27,14 @@
   
 
      
-      <label for="user">¾ÆÀÌµğ</label><input type="text" id="userId">
-      <label for="user">ºñ¹Ğ¹øÈ£</label><input type="password" id="userPass">
+      <label for="user">ì•„ì´ë””</label><input type="text" id="userId">
+      <label for="user">ë¹„ë°€ë²ˆí˜¸</label><input type="password" id="userPass">
      <div class="pad">
-     <input type="button"  value="·Î±×ÀÎ ÇÏ±â"  id="loginBtn" class="bigbig">
+     <input type="button"  value="ë¡œê·¸ì¸ í•˜ê¸°"  id="loginBtn" class="bigbig">
      </div>
      <div class="pad">
-      <input type="button" value="È¸¿ø°¡ÀÔ" id="joinBtn" class="bigbig">
-      <input type="button" value="ID/Pass Ã£±â" id="searchBtn" class="bigbig">
+      <input type="button" value="íšŒì›ê°€ì…" id="joinBtn" class="bigbig">
+      <input type="button" value="ID/Pass ì°¾ê¸°" id="searchBtn" class="bigbig">
     </div>
    </div>
  </div>
@@ -41,39 +42,5 @@
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-	<c:url value="/login" var="login"/>
-	$("#loginBtn").click(function(){
-		console.log($("#userId").val()+", "+ $("#userPass").val());
-		$.ajax({
-			type: "post",
-			url : "${login}",
-			data : {
-				userId : $("#userId").val(),
-				userPass : $("#userPass").val()
-			},
-			success : function(res) {
-				if (res == "true") {
-					$(location).attr('href',"main");
-				} else {
-					alert("¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇÏ¼¼¿ä");
-				}
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:"
-						+ error);
-			}
-		});
-	});
-	
-	$("#searchBtn").click(function(){
-		
-		$(location).attr('href',"searchidpw");
-	});
-	$("#joinBtn").click(function(){
-		$(location).attr('href',"joinjsp");
-	});
-	
-</script>
+<script src="<%=request.getContextPath() %>/js/login.js"></script>
 </html>

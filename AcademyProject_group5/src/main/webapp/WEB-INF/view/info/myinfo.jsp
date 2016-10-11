@@ -22,9 +22,9 @@
 		<sform:input readonly="true" type="text" path="userId"
 			value="${user.userId}" />
 		<sform:label path="userPass">비밀번호 변경</sform:label>
-		<sform:input type="password" path="userPass" />
+		<sform:input placeholder="변경할 경우에만 입력하시오" type="password" path="userPass" />
 		<br>
-		<label for="passCheck">비밀번호 확인</label>
+		<label for="passCheck">비밀번호 변경 확인</label>
 		<input type="password" id="passCheck" />
 		<br>
 		<sform:label path="userName">이름</sform:label>
@@ -44,15 +44,7 @@
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/js/join.js"></script>
-<script type="text/javascript">
-$("#infoUpdate").click(function(event){
-	if (passSame&&passCheck($("#userPass").val()) && phoneCheck($("#phoneNum").val())
-			&& questionCheck($("#passQuestion").val()) && anserCheck($("#passAnswer").val()) == true) {
-	} else {
-		event.preventDefault();
-		alert("잘못된 부분을 수정해주세요.");
-	}
-});
-</script>
+<script src="<%=request.getContextPath() %>/js/validationcheck.js"></script>
+<script src="<%=request.getContextPath() %>/js/myinfo.js"></script>
+
 </html>
