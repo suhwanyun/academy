@@ -8,7 +8,6 @@ $("#joinBtn").click(
 					&& phoneCheck($("#phoneNum").val())
 					&& questionCheck($("#passQuestion").val())
 					&& anserCheck($("#passAnswer").val()) == true) {
-				alert("가입 성공");
 			} else {
 				event.preventDefault();
 				alert("가입 실패");

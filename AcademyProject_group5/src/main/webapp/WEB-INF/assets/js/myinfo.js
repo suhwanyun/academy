@@ -1,5 +1,4 @@
-
-var passSame =false;
+var passSame = false;
 $("#userPass").change(function() {
 	if (passCheck($("#userPass").val())) {
 		$("#userPass").attr('class', 'true');
@@ -49,11 +48,25 @@ $("#passAnswer").change(function() {
 		$("#passAnswer").attr('class', 'false');
 	}
 });
-$("#infoUpdate").click(function(event){
-	if (passSame&&passCheck($("#userPass").val()) && phoneCheck($("#phoneNum").val())
-			&& questionCheck($("#passQuestion").val()) && anserCheck($("#passAnswer").val()) == true) {
-	} else {
-		event.preventDefault();
-		alert("잘못된 부분을 수정해주세요.");
-	}
-});
+$("#infoUpdate").click(
+		function(event) {
+			if ($("#userPass").val().length == 0) {
+				if (phoneCheck($("#phoneNum").val())
+						&& questionCheck($("#passQuestion").val())
+						&& anserCheck($("#passAnswer").val()) == true) {
+				} else {
+					event.preventDefault();
+					alert("잘못된 부분을 수정해주세요1");
+				}
+			}else{
+				if (passSame && passCheck($("#userPass").val())
+						&& phoneCheck($("#phoneNum").val())
+						&& questionCheck($("#passQuestion").val())
+						&& anserCheck($("#passAnswer").val()) == true) {
+				} else {
+					event.preventDefault();
+					alert("잘못된 부분을 수정해주세요2");
+				}
+			}
+			
+		});

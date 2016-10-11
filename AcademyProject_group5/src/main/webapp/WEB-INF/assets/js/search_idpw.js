@@ -1,3 +1,4 @@
+var once = true;
 $("#idCheck").click(
 		function() {
 			if (phoneCheck($("#phoneNum").val())
@@ -31,30 +32,33 @@ $("#idCheck").click(
 		});
 $("#passCheck").click(
 		function() {
-			if (anserCheck($("#passAnswer").val())) {
-				$.ajax({
-					type : "get",
-					url : "findPass",
-					data : {
-						userId : $("#userId").val(),
-						passAnswer : $("#passAnswer").val()
-					},
-					success : function(res) {
-						if (res.length > 2) {
-							$("#res").val("임시 비밀번호 : [ " + res + " ]");
-						} else {
-							alert("아이디나 비밀번호 답을 확인하세요.");
-						}
+			if (once) {
+				if (anserCheck($("#passAnswer").val())) {
+					$.ajax({
+						type : "get",
+						url : "findPass",
+						data : {
+							userId : $("#userId").val(),
+							passAnswer : $("#passAnswer").val()
+						},
+						success : function(res) {
+							if (res.length > 2) {
+								$("#res").val("임시 비밀번호 : [ " + res + " ]");
+								once = false;
+							} else {
+								alert("아이디나 비밀번호 답을 확인하세요.");
+							}
 
-					},
-					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error);
-					}
-				});
-			} else {
-				alert("질문 답 양식이 틀렸습니다.");
+						},
+						error : function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:"
+									+ request.responseText + "\n" + "error:"
+									+ error);
+						}
+					});
+				} else {
+					alert("질문 답 양식이 틀렸습니다.");
+				}
 			}
 
 		});
