@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.TermMapper">
+	
+	<select id="selectTermByTerm" parameterType="term" resultType="term">
+		select *
+		from Term
+		where term_year = #{termYear} and term_classify = #{termClassify}
+	</select>
+	
+	<select id="selectTodayTerm" resultType="term">
+		select *
+		from Term
+		where term_start &lt;= sysdate and term_end &gt;= sysdate
+	</select>
+	
+	<select id="selectTermByDate" parameterType="term" resultType="term">
+		select *
+		from Term
+		where term_start &lt;= #{termEnd} and term_end &gt;= #{termStart}
+	</select>
+	
+	<insert id="insertTerm" parameterType="term">
+		insert into Term
+		values (#{termYear}, #{termClassify}, #{termStart}, #{termEnd})
+	</insert>
+	
+	<!-- <select id="isVote" parameterType="date" resultType="int">
+		select count(*)
+		from Term
+		where 
+	</select> -->
+	
+</mapper>

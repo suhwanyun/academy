@@ -44,7 +44,7 @@ END;
 
 CREATE OR REPLACE TRIGGER TRI_posting_game_no BEFORE INSERT ON Posting
 for each row
-when (new.posting_type = 'game')
+when (new.posting_type = 'play')
 BEGIN
   select SEQ_posting_game_no.nextval
     into :new.posting_id

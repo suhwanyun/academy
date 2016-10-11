@@ -5,12 +5,10 @@ import academy.group5.dto.Term;
 public interface AutoService {
 	/**
 	 * 반장선거
-	 * @param term
 	 */
-	void voteForPresident(Term term);
+	void startVoteScheduler();
 	/**
 	 * 학기종료
-	 * @param term
 	 */
-	void endTerm(Term term);
+	void startTermScheduler();
 }

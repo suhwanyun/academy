@@ -1,27 +1,23 @@
 package academy.group5.service;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Service;
 
-import academy.group5.config.SchedulerConfig;
-import academy.group5.dto.Term;
+import academy.group5.scheduler.PresidentElectionScheduler;
+import academy.group5.scheduler.TermEndScheduler;
 
-@Service
 public class AutoServiceImpl implements AutoService{
-
-	private AnnotationConfigApplicationContext context;
-	@Override
-	public void voteForPresident(Term term) {
-		if(term == null){
-			context = new AnnotationConfigApplicationContext(SchedulerConfig.class);
-		}
-		
+	
+	public AutoServiceImpl(){
+		startVoteScheduler();
+		startTermScheduler();
 	}
-
-	@Override
-	public void endTerm(Term term) {
-		
-		
+	
+	public void startVoteScheduler(){
+		AnnotationConfigApplicationContext voteContext = new AnnotationConfigApplicationContext(PresidentElectionScheduler.class);	
 	}
-
+	
+	public void startTermScheduler(){
+		AnnotationConfigApplicationContext termContext = new AnnotationConfigApplicationContext(TermEndScheduler.class);
+			
+	}
 }

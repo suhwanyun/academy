@@ -1221,7 +1221,11 @@
 		table td {
 			padding: 0.75em 0.75em;
 		}
-
+		table.add td{
+			padding:0.75em auto;
+			width:100%;
+			vertical-align: middle;
+		}
 		table th {
 			font-size: 0.9em;
 			font-weight: 300;
