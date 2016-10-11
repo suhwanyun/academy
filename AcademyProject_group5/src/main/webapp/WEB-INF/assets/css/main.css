@@ -1510,6 +1510,8 @@ Footer
 			color: #FFF;
 			font-size: 1.00em;
 			padding-top: .35em;
+			margin-left:48%;
+			text-align:center;
 		}
 
 			#footer .info span {
@@ -1594,7 +1596,7 @@ Footer
 					}
 /*�쐞�뿉 i�젙蹂�*/
 				#footer .info {
-					display: none;
+					
 				}
 
 		}

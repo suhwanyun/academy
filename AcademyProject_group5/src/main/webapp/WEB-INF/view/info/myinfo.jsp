@@ -21,7 +21,7 @@
 		<sform:label path="userId">아이디</sform:label>
 		<sform:input readonly="true" type="text" path="userId"
 			value="${user.userId}" />
-		<sform:label path="userPass">비밀번호</sform:label>
+		<sform:label path="userPass">비밀번호 변경</sform:label>
 		<sform:input type="password" path="userPass" />
 		<br>
 		<label for="passCheck">비밀번호 확인</label>
@@ -39,12 +39,20 @@
 		<sform:label path="passAnswer">질문 답</sform:label>
 		<sform:input type="text" path="passAnswer" value="${user.passAnswer}" />
 		<br>
-		<sform:button id="join" type="submit">수정 하기</sform:button>
+		<sform:button id="infoUpdate" type="submit">수정 하기</sform:button>
 
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
+<script src="<%=request.getContextPath() %>/js/join.js"></script>
 <script type="text/javascript">
-	
+$("#infoUpdate").click(function(event){
+	if (passSame&&passCheck($("#userPass").val()) && phoneCheck($("#phoneNum").val())
+			&& questionCheck($("#passQuestion").val()) && anserCheck($("#passAnswer").val()) == true) {
+	} else {
+		event.preventDefault();
+		alert("잘못된 부분을 수정해주세요.");
+	}
+});
 </script>
 </html>
