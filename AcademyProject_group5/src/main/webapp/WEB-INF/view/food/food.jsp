@@ -15,32 +15,30 @@
 
 
 	<!-- 테이블 시작 -->
-	<div id="wrap">
+	
 		<a href="<%=request.getContextPath()%>"> <img
 			class="circular--logo"
 			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
 		<h1 class="member">식사 게시판</h1>
-		<div class="form9 pad">
-			<table class="list_table">
-				<thead>
-					<tr>
-						<td><select id="array" title="select array">
+					<div style="width: 100%; column-count: 4; height:2.1em; margin-left:1em;">
+						<select id="array" title="select array" style="height: 2em; width:100%; margin-bottom:0.1em;">
 								<option selected="selected">기본 정렬</option>
 								<option>추천수 정렬</option>
 								<option>날짜 정렬</option>
-						</select></td>
-						<td><select id="select" title="select select">
+						</select>
+						<select id="select" title="select select" style="height: 2em; width:100%; margin-bottom:0.2em;">
 								<option selected="selected">작성자</option>
 								<option>제목</option>
 								<option>내용</option>
 								<option>제목+내용</option>
-						</select></td>
+						</select>
 
-						<td><input type="search" id="search"><span> </span> <input
-							type="button" value="찾기"></td>
-
-
-					</tr>
+						<input type="search" id="search" ><span> </span><input
+							 type="button" value="찾기" >
+</div>	
+	<div class="form9 pad">
+		<table>
+			<thead>
 					<tr>
 						<th>사진</th>
 						<th>제목</th>
@@ -81,7 +79,7 @@
 			</table>
 
 		</div>
-	</div>
+	
 
 	<!-- 테이블 종료 -->
 

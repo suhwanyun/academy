@@ -21,9 +21,9 @@
 <a href="<%=request.getContextPath() %>"><img 
 						class="circular--logo"
 						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
- 
+  <h1 class="member">member login</h1>
   <div class="form10 pad">
-   <h1 class="member">member login</h1>
+  
 
      
       <label for="user">¾ÆÀÌµð</label><input type="text" id="userId">
