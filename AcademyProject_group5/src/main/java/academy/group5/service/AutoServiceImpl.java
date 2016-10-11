@@ -14,7 +14,6 @@ public class AutoServiceImpl implements AutoService{
 	
 	public void startVoteScheduler(){
 		AnnotationConfigApplicationContext voteContext = new AnnotationConfigApplicationContext(PresidentElectionScheduler.class);	
-		voteContext.containsBean("termRepo");
 	}
 	
 	public void startTermScheduler(){

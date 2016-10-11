@@ -20,7 +20,7 @@ public class PresidentElectionTrigger implements Trigger {
 
 		int nextDateMM = nextDate.getSeconds();
 
-		nextDateMM = nextDateMM + 30;
+		nextDateMM = nextDateMM + 60;
 		nextDate.setSeconds(nextDateMM);
 
 		return nextDate;
