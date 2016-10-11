@@ -56,7 +56,7 @@ $("#infoUpdate").click(
 						&& anserCheck($("#passAnswer").val()) == true) {
 				} else {
 					event.preventDefault();
-					alert("잘못된 부분을 수정해주세요1");
+					alert("잘못된 부분을 수정해주세요");
 				}
 			}else{
 				if (passSame && passCheck($("#userPass").val())
@@ -65,7 +65,7 @@ $("#infoUpdate").click(
 						&& anserCheck($("#passAnswer").val()) == true) {
 				} else {
 					event.preventDefault();
-					alert("잘못된 부분을 수정해주세요2");
+					alert("잘못된 부분을 수정해주세요");
 				}
 			}
 			
