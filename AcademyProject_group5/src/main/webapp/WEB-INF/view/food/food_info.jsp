@@ -7,8 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 <title>식사 추가 게시판</title>
@@ -22,30 +21,16 @@
 		<h1 class="member">식사 글쓰기</h1>
 		<form name="writeForm" method="post" action="writePro.do">
 			<table class="list_table">
-				<c:set var="num" value="${requestScope.num }" />
-				<c:set var="ref" value="${requestScope.ref }" />
-				<c:set var="re_step" value="${requestScope.re_step }" />
-				<c:set var="re_level" value="${requestScope.re_level }" />
-
-
-				<%-- <input type="hidden" name="num" value="${num }"/>
-	<input type="hidden" name="ref" value="${ref }"/>
-	<input type="hidden" name="re_step" value="${re_step }"/>
-	<input type="hidden"	name="re_level" value="${re_level }"/>
-	 --%>
-
-				<thead>
 				<colgroup>
 					<col width="20%" />
 					<col width="80%" />
 				</colgroup>
+				
 				<tr>
 					<td align="center">제 목</td>
 					<td align="left"><input type="text" size="10" maxlength="10"
 						name="writer"></td>
 				</tr>
-				</thead>
-
 				<tbody>
 					<tr>
 						<td><img class="circular--small"
