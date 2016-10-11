@@ -17,8 +17,8 @@ public class TermEndTrigger implements Trigger {
 		Date nextDate = cal.getTime();
 
 		int nextDateMM = nextDate.getSeconds();
-		// 1 분 후에 Trigger 가 발생
-		nextDateMM = nextDateMM + 3;
+
+		nextDateMM = nextDateMM + 30;
 		nextDate.setSeconds(nextDateMM);
 
 		return nextDate;
