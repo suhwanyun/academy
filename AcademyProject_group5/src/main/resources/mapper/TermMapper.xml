@@ -27,4 +27,10 @@
 		values (#{termYear}, #{termClassify}, #{termStart}, #{termEnd})
 	</insert>
 	
+	<!-- <select id="isVote" parameterType="date" resultType="int">
+		select count(*)
+		from Term
+		where 
+	</select> -->
+	
 </mapper>

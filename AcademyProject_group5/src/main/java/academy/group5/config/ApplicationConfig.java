@@ -27,8 +27,8 @@ import academy.group5.service.AutoServiceImpl;
 public class ApplicationConfig {
 	
 	@Bean
-	AutoService setAutoService(TermRepo repo){
-		return new AutoServiceImpl(repo);
+	AutoService setAutoService(){
+		return new AutoServiceImpl();
 	}
 	
 	@Bean
