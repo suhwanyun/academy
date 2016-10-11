@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
-<title>식사 게시판 글 쓰기</title>
+<title>식사 게시판 글 내용</title>
 
 </head>
 <body>
@@ -18,61 +18,32 @@
 		<a href="<%=request.getContextPath()%>"> <img
 			class="circular--logo"
 			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
-		<h1 class="member">식사 게시판 글 쓰기</h1>
-		<form name="writeForm" method="post" action="writePro.do">
-			<table class="list_table">
-				<colgroup>
-					<col width="20%" />
-					<col width="80%" />
-				</colgroup>
-				
-				<tr>
-					<td align="center">제 목</td>
-					<td align="left"><input type="text" size="10" maxlength="10"
-						name="writer"></td>
-				</tr>
-				<tbody>
-					<tr>
-						<td><img class="circular--small"
-							src="<%=request.getContextPath()%>/images/pic02.png" alt="" /></td>
-					</tr>
-					<tr>
-						<td>내용</td>
-						<td><textarea name="content" rows="13" cols="40"></textarea></td>
-					</tr>
-
-					<tr>
-						<td><a href="#" class="button big alt"><span>추천</span></a></td>
-					</tr>
-				</tbody>
-
-				<tr>
-					<td width="70%"><input type="text" value="댓글 내용"></td>
-					<td width="30%"><input type="button" value="등록"></td>
-				</tr>
-				<tfoot>
-					<tr>
-						<td width="20%"><input type="date"></td>
-						<td width="40%"><input type="text" value="댓글 내용"></td>
-						<td width="20%"><input type="text" value="작성자"></td>
-						<td width="20%"><input type="button" value="댓글 달기"></td>
-					</tr>
-					<tr>
-						<td width="20%"><input type="date"></td>
-						<td width="40%"><input type="text" value="댓글 내용"></td>
-						<td width="20%"><input type="text" value="작성자"></td>
-						<td width="20%"><input type="button" value="댓글 달기"></td>
-					</tr>
-					<tr>
-						<td width="20%"><input type="date"></td>
-						<td width="40%"><input type="text" value="댓글 내용"></td>
-						<td width="20%"><input type="text" value="작성자"></td>
-						<td width="20%"><input type="button" value="댓글 달기"></td>
-					</tr>
-				</tfoot>
-			</table>
-
-		</form>
+		<h1 class="member">식사 게시판 글 내용</h1>
+		<table >
+			<tr>
+				<th colspan="4">제목</th>
+			</tr>
+			<tr>
+				<td colspan="4">사진</td>
+			</tr>
+			<tr>
+				<td colspan="4">게시글</td>
+			</tr>
+			<tr>
+				<td colspan="3">이미지</td>
+				<td>추천버튼</td>
+			</tr>
+			<tr>
+				<td colspan="3">댓글 달기</td>
+				<td>등록버튼</td>
+			</tr>
+			<tr>
+				<td>날짜</td>
+				<td>댓글내용</td>
+				<td>작성자</td>
+				<td>댓글달기버튼</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>
