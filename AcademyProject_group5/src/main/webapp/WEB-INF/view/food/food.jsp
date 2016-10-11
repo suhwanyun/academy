@@ -44,7 +44,7 @@
 			</table>
 			<table>
 				<tr>
-					<td rowspan="2">사진</td>
+					<td rowspan="2"><a href="<%=request.getContextPath()%>/food_info">사진</a></td>
 					<td colspan="3">제목</td>
 				</tr>
 				<tr>

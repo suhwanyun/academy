@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
-<title>식사 추가 게시판</title>
+<title>식사 게시판 글 쓰기</title>
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 		<a href="<%=request.getContextPath()%>"> <img
 			class="circular--logo"
 			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
-		<h1 class="member">식사 글쓰기</h1>
+		<h1 class="member">식사 게시판 글 쓰기</h1>
 		<form name="writeForm" method="post" action="writePro.do">
 			<table class="list_table">
 				<colgroup>
