@@ -62,8 +62,8 @@
 		<tbody>
 				<tr>
 				<th>시험공지</th>
-				<th>sex</th>
-				<th>야메떼</th>
+				<th>..</th>
+				<th>..</th>
 			</tr>
 				<tr>
 				<th>공지 종류</th>

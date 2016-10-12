@@ -11,7 +11,7 @@
 <!-- 테이블 시작 -->
 <div class="boardcss_list_table">
 	<table class="list_table">
-		<caption>공지 목록</caption>
+		<caption>강의 게시판</caption>
 		<colgroup>
 			<col width="30%" />
 			<col width="50%" />
@@ -28,8 +28,8 @@
 		<tbody>
 				<tr>
 				<th>시험공지</th>
-				<th>sex</th>
-				<th>야메떼</th>
+				<th>..</th>
+				<th>...</th>
 			</tr>
 				<tr>
 				<th>공지 종류</th>

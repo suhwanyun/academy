@@ -14,7 +14,7 @@
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 </head>
 <body>
-	<header id="header">
+	<header id="header" class="hide">
 		<c:choose>
 			<c:when test="${!empty user }">
 				<div class="inner">
@@ -46,4 +46,14 @@
 		</c:choose>
 	</header>
 </body>
+<script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/skel.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/util.js"></script>
+<script src="<%=request.getContextPath() %>/js/main.js"></script>
+<script type="text/javascript">
+	
+	$("h1").click(function(){
+		$(location).attr('href', "<%=request.getContextPath() %>/main");
+	})
+</script>
 </html>

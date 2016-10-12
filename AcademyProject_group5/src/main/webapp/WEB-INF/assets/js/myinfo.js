@@ -50,7 +50,7 @@ $("#passAnswer").change(function() {
 });
 $("#infoUpdate").click(
 		function(event) {
-			if ($("#userPass").val().length == 0) {
+			if ($("#userPass").val().length == 0 && $("#passCheck").val().length == 0) {
 				if (phoneCheck($("#phoneNum").val())
 						&& questionCheck($("#passQuestion").val())
 						&& anserCheck($("#passAnswer").val()) == true) {
