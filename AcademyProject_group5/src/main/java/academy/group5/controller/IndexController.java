@@ -8,8 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
-import academy.group5.service.AutoService;
+import academy.group5.service.AutoServiceImpl;
 import academy.group5.service.LoginService;
 
 @Controller
@@ -17,9 +18,6 @@ public class IndexController {
 	
 	@Autowired
 	LoginService loginService;
-	
-	@Autowired
-	AutoService autoService;
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -38,7 +36,7 @@ public class IndexController {
 	/** 관리자 로그인 화면 */
 	@RequestMapping(value="/manager_loginjsp", method=RequestMethod.GET)
 	public String managerLoginPage(){
-		autoService.voteForPresident(null);
+
 		return "/login/login_manager";
 	}
 
@@ -105,5 +103,29 @@ public class IndexController {
 	public String mileageMainPage(){
 	
 		return "/mileage/mileage";
+	}
+	
+	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
+	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
+	public String addFood(Model model){
+		Posting data = new Posting();
+		model.addAttribute("postingData", data);
+		return "food/food_add";
+	}
+	
+	/** 오락추천 게시판 글 작성 페이지 */
+	@RequestMapping(value="/write/playjsp", method=RequestMethod.GET)
+	public String addPlay(Model model){
+		Posting data = new Posting();
+		model.addAttribute("postingData", data);
+		return "play/play_add";
+	}
+	
+	/** 명소추천 게시판 글 작성 페이지 */
+	@RequestMapping(value="/write/placejsp", method=RequestMethod.GET)
+	public String addPlace(Model model){
+		Posting data = new Posting();
+		model.addAttribute("postingData", data);
+		return "place/place_add";
 	}
 }

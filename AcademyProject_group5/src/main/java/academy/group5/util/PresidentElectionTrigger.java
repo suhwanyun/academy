@@ -8,24 +8,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;
 
-public class CustomTrigger implements Trigger {
+public class PresidentElectionTrigger implements Trigger {
 
-	private static final Logger logger = LoggerFactory.getLogger(CustomTrigger.class);
+	private static final Logger logger = LoggerFactory.getLogger(PresidentElectionTrigger.class);
 
 	@SuppressWarnings("deprecation")
 	public Date nextExecutionTime(TriggerContext triggerContext) {
 
-		logger.trace("Trigger Last Completion Time :  " + triggerContext.lastCompletionTime());
-
 		Calendar cal = Calendar.getInstance();
 		Date nextDate = cal.getTime();
 
-		logger.trace("{}", nextDate);
 		int nextDateMM = nextDate.getSeconds();
-		// 1 분 후에 Trigger 가 발생
-		nextDateMM = nextDateMM + 1;
+
+		nextDateMM = nextDateMM + 60;
 		nextDate.setSeconds(nextDateMM);
-		logger.trace("{}", nextDate);
 
 		return nextDate;
 	}

@@ -38,7 +38,7 @@ public class Posting {
 	/** 게시글 내용. */
 	private String postingContent;
 
-	/** 이미지 파일명들. */
+	/** 이미지 파일명. */
 	private String postingPhoto;
 
 	/** 댓글 목록. *//*

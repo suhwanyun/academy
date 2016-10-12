@@ -10,6 +10,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import academy.group5.service.AutoService;
+import academy.group5.service.AutoServiceImpl;
+
 // Spring Core에 대한 설정
 @Configuration
 @ComponentScans({
@@ -20,6 +23,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 @EnableTransactionManagement
 public class ApplicationConfig {
+	
+	@Bean
+	AutoService setAutoService(){
+		return new AutoServiceImpl();
+	}
 	
 	@Bean
 	PlatformTransactionManager transactionManager(DataSource ds){
