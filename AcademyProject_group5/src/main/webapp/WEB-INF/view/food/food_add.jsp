@@ -21,24 +21,21 @@
 	<h1 class="member">식사 글쓰기</h1>
 	<form name="writeForm" method="post" action="writePro.do">
 	<table class="add">
-	<colgroup>
-		<col width="40%">
-		<col width="60%">
-	</colgroup>
+
  	<tr>
 		<td><label>제 목</label></td>
-		<td>
+		<td colspan=3>
 			<input type="text" maxlength="30"></td>
 	</tr>
 
 	<tr>
 		<td><label>내 용</label></td>
-		<td>
+		<td colspan=3>
 			<textarea name="content" rows="13" cols="40"></textarea></td>
 	</tr>
 	<tr>
 		<td><label>파일 첨부</label></td>
-		<td>
+		<td colspan=3>
 			<input type="file" id="reportFile" name="reportFile"></td>
 	</tr>
 	<tr>
