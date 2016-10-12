@@ -7,6 +7,19 @@
 <title>내 강의 목록</title>
 </head>
 <body>
- 내강의 목록
+<table>
+  <tr>
+    <th>강의 명</th>
+    <th>강의실</th>
+    <th>시작시간</th>
+    <th>강의 요일</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 </body>
 </html>
