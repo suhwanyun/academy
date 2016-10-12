@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
-import academy.group5.service.AutoServiceImpl;
+import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 
 @Controller
@@ -18,6 +21,9 @@ public class IndexController {
 	
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	LectureService lecService;
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -127,5 +133,15 @@ public class IndexController {
 		Posting data = new Posting();
 		model.addAttribute("postingData", data);
 		return "place/place_add";
+	}
+	
+	/** 전체 강의 목록 표시 페이지 */
+	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
+	public String allLectureList(Model model){
+		List<Lecture> lecList = lecService.allLectureList(1);
+		if(lecList != null){
+			model.addAttribute("lectureList", lecList);
+		}
+		return "campus/lecture_list";
 	}
 }

@@ -38,7 +38,7 @@ CREATE TABLE Lecture
 	lecture_id number NOT NULL,
 	lecture_class number NOT NULL,
 	lecture_name varchar2(50) NOT NULL,
-	professor_name varchar2(10) NOT NULL,
+	professor_name varchar2(15) NOT NULL,
 	CONSTRAINT Lecture_PK PRIMARY KEY (lecture_id, lecture_class)
 );
 
