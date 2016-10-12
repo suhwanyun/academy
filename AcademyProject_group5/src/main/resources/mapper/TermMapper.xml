@@ -13,7 +13,8 @@
 	<select id="selectTodayTerm" resultType="term">
 		select *
 		from Term
-		where term_start &lt;= sysdate and term_end &gt;= sysdate
+		where term_start &lt;= to_char(sysdate, 'YYYY-mm-dd') and
+				term_end &gt;= to_char(sysdate, 'YYYY-mm-dd')
 	</select>
 	
 	<select id="selectTermByDate" parameterType="term" resultType="term">
@@ -27,10 +28,11 @@
 		values (#{termYear}, #{termClassify}, #{termStart}, #{termEnd})
 	</insert>
 	
-	<select id="isAfterTermExist" resultType="int">
-		select count(*)
+	<select id="selectAfterTermStartingDate" resultType="date">
+		select term_start
 		from Term
-		where term_start &gt; sysdate
+		where term_start &gt; to_char(sysdate, 'YYYY-mm-dd') and rownum = 1
+		order by term_start
 	</select>
 	
 </mapper>
