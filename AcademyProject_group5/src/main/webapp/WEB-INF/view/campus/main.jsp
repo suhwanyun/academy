@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<div id="incluedjsp" class="form9 pad"><jsp:include page="schedule.jsp" /></div>
+					<div id="incluedjsp" class="form9 pad"><jsp:include page="lecture_list.jsp" /></div>
 				</td>
 			</tr>
 		</table>

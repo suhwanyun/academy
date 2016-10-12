@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,18 +17,21 @@
 			<td><button>검색</button></td>
 		</tr>
 	</table>
+	<p>${lectureList }</p>
 	<table>
-
 		<tr>
 			<th>강의 이름</th>
 			<th>교수 이름</th>
 			<th>강의 분반</th>
 		</tr>
+		<c:forEach items="${lectureList }" var="list">
+		
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>${list.lectureName}</td>
+			<td>${list.professorName}</td>
+			<td>${list.lectureClass}</td>
 		</tr>
+		</c:forEach>
 		<tr>
 			<td colspan="2" align="right"><button>더 보기</button></td>
 			<td align="right"><button>맨 위로</button></td>
