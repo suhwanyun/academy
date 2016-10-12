@@ -16,13 +16,6 @@
 	<jsp:include page="../../header/header.jsp" />
 	<div class="upmargin">
 		<table>
-			<colgroup>
-				<col width="25%" />
-				<col width="25%" />
-				<col width="25%" />
-				<col width="25%" />
-			</colgroup>
-
 			<tr>
 				<td><input type="button" id="mylectureBtn" value="내 강의목록" /></td>
 				<td><input type="button" id="notilistBtn" value="전체 공지목록" /></td>
@@ -31,7 +24,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<div id="incluedjsp" class="form9 pad"></div>
+					<div id="incluedjsp" class="form9 pad"><jsp:include page="schedule.jsp" /></div>
 				</td>
 			</tr>
 		</table>
@@ -43,6 +36,7 @@
 	<c:url value="/lecture/selectedLectureList" var="selectedLectureList"/>
 	<c:url value="/campus/lectureList" var="lectureList"/>
 	<c:url value="/campus/schedule" var="schedule"/>
+	
 	$("#mylectureBtn").click(function() {
 		$.ajax({
 			type : "get",
