@@ -35,4 +35,29 @@
 		order by term_start
 	</select>
 	
+	<select id="selectTermEndDate" resultType="date">
+		select term_end
+		from Term
+		where term_end &gt; to_char(sysdate, 'YYYY-mm-dd') and rownum = 1
+		order by term_end
+	</select>
+	
+	<select id="selectVoterCount" resultType="int">
+		select count(*)
+		from LectureApply
+		where is_president = '1'
+	</select>
+	
+	<update id="updateNotPresident" parameterType="int">
+		update LectureApply
+		set is_president = '0'
+		where user_id = 
+			  (select user_id
+			   from (select rownum as rnum, sub.*
+			  		 from(select user_id from UserData order by user_id) sub
+			  		 )
+			   where rnum != #{presidentNumber}	 
+			  )
+	</update>
+	
 </mapper>

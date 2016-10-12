@@ -48,8 +48,11 @@ public class TermRepo {
 	
 	public Date getNextTermStartDate() {
 		String stmt = TERM_NS + "selectAfterTermStartingDate";
-		Date result = session.selectOne(stmt);
-
-		return result;
+		return session.selectOne(stmt);
+	}
+	
+	public Date getTermEndDate() {
+		String stmt = TERM_NS + "selectTermEndDate";
+		return session.selectOne(stmt);
 	}
 }
