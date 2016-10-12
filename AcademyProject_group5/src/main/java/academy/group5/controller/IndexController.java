@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ import academy.group5.service.LoginService;
 
 @Controller
 public class IndexController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	
 	
 	@Autowired
 	LoginService loginService;
@@ -139,9 +144,12 @@ public class IndexController {
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
 	public String allLectureList(Model model){
 		List<Lecture> lecList = lecService.allLectureList(1);
-		if(lecList != null){
+		if(lecList.size() != 0){
 			model.addAttribute("lectureList", lecList);
 		}
+		
+		logger.trace("list size: {}", lecList.size());
+		logger.trace("list: {}", lecList);
 		return "campus/lecture_list";
 	}
 }
