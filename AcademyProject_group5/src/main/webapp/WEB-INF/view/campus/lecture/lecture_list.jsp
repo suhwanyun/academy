@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>공지 목록</title>
+<title>내 강의 목록</title>
 </head>
 <body>
- 공지목록
+ 내강의 목록
 </body>
 </html>
