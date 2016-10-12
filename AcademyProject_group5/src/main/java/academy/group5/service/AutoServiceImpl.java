@@ -45,7 +45,17 @@ public class AutoServiceImpl implements AutoService {
 	}
 	
 	public void startTermScheduler() {
-
+		Date nextTermDate = getScheduleTime(termRepo.getTermEndDate());
+		
+		if(nextTermDate == null){
+			return;
+		}
+		
+		scheduler.taskScheduler().schedule(new Runnable() {
+			public void run() {
+				logger.trace("schedule!!");
+			}
+		}, nextTermDate);
 	}
 	
 	private Date getScheduleTime(Date aimTime){
