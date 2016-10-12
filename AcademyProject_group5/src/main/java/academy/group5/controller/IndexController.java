@@ -21,9 +21,6 @@ import academy.group5.service.LoginService;
 @Controller
 public class IndexController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
-	
-	
 	@Autowired
 	LoginService loginService;
 	
@@ -147,9 +144,6 @@ public class IndexController {
 		if(lecList.size() != 0){
 			model.addAttribute("lectureList", lecList);
 		}
-		
-		logger.trace("list size: {}", lecList.size());
-		logger.trace("list: {}", lecList);
 		return "campus/lecture_list";
 	}
 }

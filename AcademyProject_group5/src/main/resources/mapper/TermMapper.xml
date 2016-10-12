@@ -71,9 +71,30 @@
 		where lecture_id = #{lectureId}
 	</update>
 	
-	<!-- 학기 종료 관련 쿼리 -->
-	<!-- <delete id="deleteLecture">
-		delete from Lecture cascade
-	</delete> -->
+	<!-- 학기 종료 관련 쿼리 -->	
+	<delete id="deleteRecommend">
+		delete from Recommend
+		where LPAD(posting_type, 6) = 'lecture'
+	</delete>
+	
+	<delete id="deleteLectureApply">
+		delete from LectureApply
+	</delete>
+	
+	<delete id="deleteLectureNotice">
+		delete from LectureNotice
+	</delete>
+	
+	<delete id="deleteCancelLecture">
+		delete from CancelLecture
+	</delete>
+	
+	<delete id="deleteLectureTime">
+		delete from LectureTime
+	</delete>
+	
+	<delete id="deleteLecture">
+		delete from Lecture
+	</delete>
 	
 </mapper>

@@ -4,6 +4,7 @@ CREATE SEQUENCE SEQ_mileage_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_food_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_game_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_attraction_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_posting_lecture_no INCREMENT BY 1 START WITH 1;
 
 CREATE OR REPLACE TRIGGER TRI_noti_no BEFORE INSERT ON Notifications
 for each row
@@ -54,7 +55,7 @@ END;
 
 CREATE OR REPLACE TRIGGER TRI_posting_attraction_no BEFORE INSERT ON Posting
 for each row
-when (new.posting_type = 'attraction')
+when (new.posting_type = 'attr')
 BEGIN
   select SEQ_posting_attraction_no.nextval
     into :new.posting_id
@@ -62,7 +63,15 @@ BEGIN
 END;
 /
 
-
+CREATE OR REPLACE TRIGGER TRI_posting_lecture_no BEFORE INSERT ON Posting
+for each row
+when (LPAD(new.posting_type, 4) = 'lect')
+BEGIN
+  select SEQ_posting_attraction_no.nextval
+    into :new.posting_id
+    from dual; 
+END;
+/
 
 
 
