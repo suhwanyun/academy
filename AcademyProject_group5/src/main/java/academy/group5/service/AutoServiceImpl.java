@@ -7,8 +7,6 @@ import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +28,6 @@ public class AutoServiceImpl implements AutoService {
 	
 	@Autowired
 	LectureRepo lectureRepo;
-	
-	private static final Logger logger = LoggerFactory.getLogger(AutoServiceImpl.class);
 	
 	@PostConstruct
 	public void startVoteScheduler() {
@@ -65,6 +61,7 @@ public class AutoServiceImpl implements AutoService {
 		}, nextTermDate);
 	}
 	
+	@PostConstruct
 	public void startTermScheduler() {
 		Date nextTermDate = getScheduleTime(termRepo.getTermEndDate());
 		
@@ -74,7 +71,15 @@ public class AutoServiceImpl implements AutoService {
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
-				logger.trace("schedule!!");
+				termRepo.deleteAllLectureRecommend();
+				termRepo.deleteAllLectureComment();
+				termRepo.deleteAllLecturePosting();
+				
+				termRepo.deleteAllLectureApply();
+				termRepo.deleteAllLectureNotice();
+				termRepo.deleteAllCancelLecture();
+				termRepo.deleteAllLectureTime();
+				termRepo.deleteAllLecture();
 			}
 		}, nextTermDate);
 	}

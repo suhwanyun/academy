@@ -1,12 +1,9 @@
 package academy.group5.repo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,12 +13,7 @@ import academy.group5.dto.etc.Voting;
 @Repository
 public class TermRepo {
 	
-	private static final Logger logger = LoggerFactory.getLogger(TermRepo.class);
-	
-	
 	private final String TERM_NS = "academy.repo.TermMapper.";
-	
-	private SimpleDateFormat transFormat = new SimpleDateFormat("YYYY-mm-dd");
 	
 	@Autowired
 	SqlSessionTemplate session;
@@ -72,5 +64,53 @@ public class TermRepo {
 	public int updateCoercionVoter(int lectureId) {
 		String stmt = TERM_NS + "updateCoercionPresident";
 		return session.update(stmt, lectureId);
+	}
+	
+	/** 추천 테이블 제거 */
+	public int deleteAllLectureRecommend(){
+		String stmt = TERM_NS + "deleteAllLectureRecommend";
+		return session.delete(stmt);
+	}
+	
+	/** 추천 테이블 제거 */
+	public int deleteAllLectureComment(){
+		String stmt = TERM_NS + "deleteAllLectureComment";
+		return session.delete(stmt);
+	}
+	
+	/** 추천 테이블 제거 */
+	public int deleteAllLecturePosting(){
+		String stmt = TERM_NS + "deleteAllLecturePosting";
+		return session.delete(stmt);
+	}
+	
+	/** 강의신청 테이블 제거 */
+	public int deleteAllLectureApply(){
+		String stmt = TERM_NS + "deleteAllLectureApply";
+		return session.delete(stmt);
+	}
+	
+	/** 강의공지 테이블 제거 */
+	public int deleteAllLectureNotice(){
+		String stmt = TERM_NS + "deleteAllLectureNotice";
+		return session.delete(stmt);
+	}
+	
+	/** 휴강 테이블 제거 */
+	public int deleteAllCancelLecture(){
+		String stmt = TERM_NS + "deleteAllCancelLecture";
+		return session.delete(stmt);
+	}
+	
+	/** 강의시간 테이블 제거 */
+	public int deleteAllLectureTime(){
+		String stmt = TERM_NS + "deleteAllLectureTime";
+		return session.delete(stmt);
+	}
+	
+	/** 강의 테이블 제거 */
+	public int deleteAllLecture(){
+		String stmt = TERM_NS + "deleteAllLecture";
+		return session.delete(stmt);
 	}
 }

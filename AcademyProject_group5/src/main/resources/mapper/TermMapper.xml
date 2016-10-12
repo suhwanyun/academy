@@ -72,28 +72,38 @@
 	</update>
 	
 	<!-- 학기 종료 관련 쿼리 -->	
-	<delete id="deleteRecommend">
+	<delete id="deleteAllLectureRecommend">
 		delete from Recommend
-		where LPAD(posting_type, 6) = 'lecture'
+		where LPAD(posting_type, 4) = 'lect'
 	</delete>
 	
-	<delete id="deleteLectureApply">
+	<delete id="deleteAllLectureComment">
+		delete from PostingComment
+		where LPAD(posting_type, 4) = 'lect'
+	</delete>
+	
+	<delete id="deleteAllLecturePosting">
+		delete from Posting
+		where LPAD(posting_type, 4) = 'lect'
+	</delete>
+	
+	<delete id="deleteAllLectureApply">
 		delete from LectureApply
 	</delete>
 	
-	<delete id="deleteLectureNotice">
+	<delete id="deleteAllLectureNotice">
 		delete from LectureNotice
 	</delete>
 	
-	<delete id="deleteCancelLecture">
+	<delete id="deleteAllCancelLecture">
 		delete from CancelLecture
 	</delete>
 	
-	<delete id="deleteLectureTime">
+	<delete id="deleteAllLectureTime">
 		delete from LectureTime
 	</delete>
 	
-	<delete id="deleteLecture">
+	<delete id="deleteAllLecture">
 		delete from Lecture
 	</delete>
 	
