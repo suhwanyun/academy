@@ -42,6 +42,8 @@
 		order by term_end
 	</select>
 	
+	<!-- 반장 투표 관련 쿼리 -->
+	
 	<select id="selectVoterCount" parameterType="int" resultType="int">
 		select count(*)
 		from LectureApply
@@ -68,5 +70,10 @@
 		set is_president = '1'
 		where lecture_id = #{lectureId}
 	</update>
+	
+	<!-- 학기 종료 관련 쿼리 -->
+	<!-- <delete id="deleteLecture">
+		delete from Lecture cascade
+	</delete> -->
 	
 </mapper>

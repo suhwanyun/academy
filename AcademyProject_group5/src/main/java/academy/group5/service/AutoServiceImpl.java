@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.etc.Voting;
 import academy.group5.repo.LectureRepo;
@@ -18,6 +19,7 @@ import academy.group5.repo.TermRepo;
 import academy.group5.scheduler.MyScheduler;
 
 @Service
+@Transactional
 public class AutoServiceImpl implements AutoService {
 
 	@Autowired
