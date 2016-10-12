@@ -1,19 +1,19 @@
 package academy.group5.service;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 
+import academy.group5.dto.etc.Voting;
+import academy.group5.repo.LectureRepo;
 import academy.group5.repo.TermRepo;
 import academy.group5.scheduler.MyScheduler;
 
@@ -25,6 +25,9 @@ public class AutoServiceImpl implements AutoService {
 	
 	@Autowired
 	TermRepo termRepo;
+	
+	@Autowired
+	LectureRepo lectureRepo;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AutoServiceImpl.class);
 	
@@ -39,7 +42,23 @@ public class AutoServiceImpl implements AutoService {
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
-				logger.trace("schedule!!");
+				List<Integer> lectureIdList = lectureRepo.getAllLectureId();
+				for(Integer lectureId : lectureIdList){
+					int voterCount = termRepo.getVoterCount(lectureId);
+					
+					// 강제로 투표
+					if(voterCount == 0){
+						voterCount = termRepo.updateCoercionVoter(lectureId);
+					}
+					// 아예 강의를 신청한 인원이 없음
+					if(voterCount == 0){
+						continue;
+					}
+					Random random = new Random();
+					int votingResult = random.nextInt(voterCount) + 1;
+					termRepo.updateVoting(new Voting(lectureId, votingResult));
+					
+				}
 			}
 		}, nextTermDate);
 	}

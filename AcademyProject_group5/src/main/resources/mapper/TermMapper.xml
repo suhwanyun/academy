@@ -42,22 +42,31 @@
 		order by term_end
 	</select>
 	
-	<select id="selectVoterCount" resultType="int">
+	<select id="selectVoterCount" parameterType="int" resultType="int">
 		select count(*)
 		from LectureApply
-		where is_president = '1'
+		where is_president = '1' and lecture_id = #{lectureId}
 	</select>
 	
-	<update id="updateNotPresident" parameterType="int">
+	<update id="updateNotPresident" parameterType="voting">
 		update LectureApply
 		set is_president = '0'
-		where user_id = 
+		where user_id in
 			  (select user_id
 			   from (select rownum as rnum, sub.*
-			  		 from(select user_id from UserData order by user_id) sub
+			  		 from(select user_id 
+			  		 	  from LectureApply 
+			  		 	  where lecture_id = #{lectureId} 
+			  		 	  order by user_id) sub
 			  		 )
-			   where rnum != #{presidentNumber}	 
+			   where rnum != #{votingResult}	 
 			  )
+	</update>
+	
+	<update id="updateCoercionPresident" parameterType="int">
+		update LectureApply
+		set is_president = '1'
+		where lecture_id = #{lectureId}
 	</update>
 	
 </mapper>
