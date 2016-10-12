@@ -5,7 +5,6 @@
 */
 
 (function($) {
-
 	skel.breakpoints({
 		xlarge:	'(max-width: 1680px)',
 		large:	'(max-width: 1280px)',
@@ -48,9 +47,12 @@
 					button 	= t.find('.button');
 
 				button.click(function(e) {
-
-					t.toggleClass('hide');
-
+					
+					
+					if(t.attr("class")==null){
+						t.attr("class", 'hide');
+					}else
+						t.removeAttr("class");
 					if ( t.hasClass('preview') ) {
 						return true;
 					} else {

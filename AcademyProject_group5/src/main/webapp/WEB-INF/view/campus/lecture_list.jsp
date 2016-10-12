@@ -12,13 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/main">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
-	 
-<!-- 테이블 시작 -->
-<div class="form5">
-<div class="boardcss_list_table">
+	
 	<table class="list_table">
 		<caption>전체 강의 목록입니다. 원하는 강의를 선택하세요.</caption>
 		<colgroup>
@@ -68,8 +62,6 @@
 		
 		
 	</table>
-</div>
-</div>
 <!-- 테이블 종료 -->
 	
 </body>
