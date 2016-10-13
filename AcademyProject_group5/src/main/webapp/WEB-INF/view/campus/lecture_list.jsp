@@ -42,26 +42,39 @@
 
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-<c:set value=1 var="pageIndex"/>
-<c:url value="/campus/lectureList" var="lectureList"/>
+var pageIndex = 1;
+<c:url value="/campus/lectureList" var="nextlectureList"/>
 
-$("#moreBtn").click(function(){
-		pageIndex++;
-		$.ajax({
-			type : "get",
-			url : "${lectureList}",
-			data : {page : pageIndex},
-			success : function(result) {
-				$(result).each(function(index,item){
-					$("#beforeLocation").before(
-						$("<tr>
-							<td>${item.lectureName}</td>
-							<td>${item.professorName}</td>
-							<td>${item.lectureClass}</td>
-						</tr>"));
-				})
-			}
+	$("#moreBtn").click(function(){
+				
+			pageIndex++;
+			
+			$.ajax({
+				type : "get",
+				url : "${nextlectureList}",
+				data : {
+					page : pageIndex
+				},
+				 success : function(result) {
+					var itemCount = 0;
+					$(result).each(function(index,item){
+						itemCount++;
+						$("#beforeLocation").before(
+							$("<tr><td>"+item.lectureName+"</td>"+
+							  "<td>"+item.professorName+"</td>"+
+							  "<td>"+item.lectureClass+"</td></tr>"));
+					});
+					
+					if(itemCount == 0){
+						alert("더 이상 목록이 없습니다.");
+					}
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:"
+							+ error);
+				}
+			});
 		});
-	});
 </script>
 </html>
