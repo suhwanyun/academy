@@ -1799,5 +1799,8 @@ margin:1em auto;
 .upmargin{
 	margin-top: 80px;
 }
+.upmargin td input[type="button"]{
+	width:100%;
+}
 
 	
