@@ -1,4 +1,4 @@
-﻿/*package academy.group5.util;
+﻿package academy.group5.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -50,4 +50,4 @@ class GCM {
 			e.printStackTrace();
 		}
 	}
-}*/
+}

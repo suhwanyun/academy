@@ -32,7 +32,7 @@
 		</tr>
 		<c:forEach items="${lectureList }" var="list">
 			<tr class="tableData">
-				<td>${list.lectureName}</td>
+				<td><a href="<%=request.getContextPath() %>/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
 				<td>${list.professorName}</td>
 				<td>${list.lectureClass}</td>
 			</tr>
@@ -66,7 +66,10 @@ var pageIndex = 1;
 				 }else{
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
-							$("<tr class = 'tableData'><td>"+item.lectureName+"</td>"+
+							$("<tr class = 'tableData'><td>"+
+							"<a href=<%=request.getContextPath() %>"+
+							"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
+							">"+item.lectureName+"</a></td>"+
 							  "<td>"+item.professorName+"</td>"+
 							  "<td>"+item.lectureClass+"</td></tr>"));
 					});
@@ -90,8 +93,11 @@ var pageIndex = 1;
 					$(result).each(function(index,item){
 						itemCount++;
 						$("#beforeLocation").before(
-							$("<tr class = 'tableData'><td>"+item.lectureName+"</td>"+
-							  "<td>"+item.professorName+"</td>"+
+							$("<tr class = 'tableData'><td>"+
+									"<a href=<%=request.getContextPath() %>"+
+									"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
+									">"+item.lectureName+"</a></td>"+
+									"<td>"+item.professorName+"</td>"+
 							  "<td>"+item.lectureClass+"</td></tr>"));
 					});
 					
