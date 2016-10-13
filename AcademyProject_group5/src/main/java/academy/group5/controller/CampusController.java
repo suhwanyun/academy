@@ -35,7 +35,7 @@ public class CampusController {
 		return "campus/noti_info";
 	}
 	
-	/** 전체 강의 목록 표시 */
+	/** 전체 강의 목록 표시(더보기) */
 	@RequestMapping(value="/campus/lectureList", method=RequestMethod.GET)
 	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
 				@RequestParam(required=false) String page){
@@ -50,28 +50,22 @@ public class CampusController {
 		return lecList;
 	}
 	
-	/** 전체 강의 목록 중 강의명 검색 */
+	/** 전체 강의 목록 중 검색 */
 	@RequestMapping(value="/campus/lectureListSearch", method=RequestMethod.GET)
-	public String setSearchDataForGetlectureList(Model model, HttpSession session,
+	public @ResponseBody List<Lecture> setSearchDataForGetlectureList(Model model, HttpSession session,
 			@RequestParam String searchType, @RequestParam String searchData){
 		
 		if(searchType.equals("") || searchData.equals("")){
 			session.removeAttribute("searchType");
 			session.removeAttribute("searchData");
 			
-			searchType = null;
-			searchData = null;
+			return lecService.allLectureList(1, null, null);
 		} else {
 			session.setAttribute("searchType", searchType);
 			session.setAttribute("searchData", searchData);
+			
+			return lecService.allLectureList(1, searchData, searchType);
 		}
-		
-		List<Lecture> lecList = lecService.allLectureList(1, searchData, searchType);
-		if(lecList.size() != 0){
-			model.addAttribute("lectureList", lecList);
-		}
-
-		return "/campus/lecture_list";
 	}
 	
 	/** 선택한 강의들의 시간표 */
