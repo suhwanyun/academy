@@ -36,8 +36,8 @@
 						<td><a href="<%=request.getContextPath()%>/write/food">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select" title="select select">
-								<option selected="selected">작성자</option>
+						<td><select id="select" title="select select" >
+								<option selected="selected" >작성자</option>
 								<option>제목</option>
 								<option>내용</option>
 								<option>제목+내용</option>
