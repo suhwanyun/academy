@@ -19,20 +19,19 @@ public class LectureServiceImpl implements LectureService{
 	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
+	private final String [] DAYS = {"월", "화", "수", "목", "금", "토", "일"};
 
 	@Autowired
 	LectureRepo lecRepo;
 	
-	// 전체 강의 목록
 	@Override
 	public List<Lecture> allLectureList(int page, String searchData, String searchType) {
 		return lecRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE, searchData, searchType));
 	}
 
-	// 강의 신청
 	@Override
 	public boolean apply(Integer lectureId, Integer lectureClass, String userId) {
-		lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "0", null));
+		lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
 		return false;
 	}
 
@@ -50,6 +49,24 @@ public class LectureServiceImpl implements LectureService{
 	public List<Lecture> userLectureList(String userId) {
 		return lecRepo.getUserLecture(userId);
 	}
+	
+	@Override
+	public Lecture lectureClassInfo(Integer lectureId, Integer lectureClass) {
+		return lecRepo.getLectureByClass(new LectureTime(lectureId, lectureClass));
+	}
+	
+	@Override
+	public List<LectureTime> lectureTimeInfo(Lecture lecture) {
+		
+		List<LectureTime> lectureTImes = lecRepo.getLectureTime(lecture);
+		
+		for(LectureTime time : lectureTImes){
+			time.setLectureWeek(DAYS[Integer.parseInt(time.getLectureWeek()) - 1]);
+		}
+		
+		return lectureTImes;
+	}
+	
 
 	@Override
 	public List<LectureTime> timetable(String userId) {
@@ -65,7 +82,7 @@ public class LectureServiceImpl implements LectureService{
 		Date time = result.getRightEndTime();
 		
 		// 처음부터 반장이 아님
-		if(president.equals("0")){
+		if(president.equals("N")){
 			return false;
 		// (임시)반장
 		} else if(time.compareTo(new Date()) <= 0){

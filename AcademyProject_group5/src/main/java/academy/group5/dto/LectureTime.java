@@ -30,7 +30,7 @@ public class LectureTime {
 	private String lecturePlace;
 
 	/** 강의 요일. */
-	private Integer lectureWeek;
+	private String lectureWeek;
 
 	/** 임시 등록 날짜. */
 	private Date isTempDate;
@@ -38,4 +38,9 @@ public class LectureTime {
 	/** 휴강 목록. *//*
 	private Set<CancelLecture> cancelSet;*/
 
+	public LectureTime(Integer lectureId, Integer lectureClass) {
+		super();
+		this.lectureId = lectureId;
+		this.lectureClass = lectureClass;
+	}
 }

@@ -33,6 +33,22 @@ public interface LectureService {
 	 * @return
 	 */
 	List<Lecture> userLectureList(String userId);
+	
+	/**
+	 * 강의 정보(분반 별)
+	 * @param lectureId
+	 * @param lectureClass
+	 * @return
+	 */
+	Lecture lectureClassInfo(Integer lectureId, Integer lectureClass);
+	
+	/**
+	 * 강의 시간 정보
+	 * @param lecture
+	 * @return
+	 */
+	List<LectureTime> lectureTimeInfo(Lecture lecture);
+	
 	/**
 	 * 시간표
 	 * @return

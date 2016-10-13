@@ -47,12 +47,12 @@
 	<select id="selectVoterCount" parameterType="int" resultType="int">
 		select count(*)
 		from LectureApply
-		where is_president = '1' and lecture_id = #{lectureId}
+		where is_president = 'Y' and lecture_id = #{lectureId}
 	</select>
 	
 	<update id="updateNotPresident" parameterType="voting">
 		update LectureApply
-		set is_president = '0'
+		set is_president = 'N'
 		where user_id in
 			  (select user_id
 			   from (select rownum as rnum, sub.*
@@ -67,7 +67,7 @@
 	
 	<update id="updateCoercionPresident" parameterType="int">
 		update LectureApply
-		set is_president = '1'
+		set is_president = 'Y'
 		where lecture_id = #{lectureId}
 	</update>
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
@@ -29,7 +30,7 @@ public class IndexController {
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainPage(){
 
-		return "index";
+		return "/index";
 	}
 		
 	/** 로그인 화면 */
@@ -72,7 +73,7 @@ public class IndexController {
 			return "/info/myinfo";
 		} else {
 			model.addAttribute("msg", "회원정보를 가져오지 못했습니다.\n잠시 후 다시 시도해주세요");
-			return "index";
+			return "/index";
 		}		
 	}
 	

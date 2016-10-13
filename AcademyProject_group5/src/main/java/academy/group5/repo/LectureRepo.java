@@ -39,9 +39,19 @@ public class LectureRepo {
 		return session.selectList(stmt, id);
 	}
 	
+	public Lecture getLectureByClass(LectureTime data) {
+		String stmt = LECTURE_NS + "selectLectureByClass";
+		return session.selectOne(stmt, data);
+	}
+	
 	public List<LectureTime> getUserTimetable(String id){
 		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);
+	}
+	
+	public List<LectureTime> getLectureTime(Lecture data){
+		String stmt = LECTURE_NS + "selectLectureTimeByLecture";
+		return session.selectList(stmt, data);
 	}
 	
 	public LectureApply getIsPresident(LectureApply data){

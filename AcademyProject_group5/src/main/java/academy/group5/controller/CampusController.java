@@ -25,14 +25,14 @@ public class CampusController {
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
 	public String userNotiList(){
 		
-		return "campus/noti_list";
+		return "/campus/noti_list";
 	}
 	
 	/** 선택한 알림의 자세한 내용 표시 */
 	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.GET)
 	public String userNotiInfo(){
 		
-		return "campus/noti_info";
+		return "/campus/noti_info";
 	}
 	
 	/** 전체 강의 목록 표시(더보기) */
@@ -72,6 +72,6 @@ public class CampusController {
 	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
 	public String schedule(){
 		
-		return "campus/schedule";
+		return "/campus/schedule";
 	}
 }

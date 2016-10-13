@@ -32,13 +32,4 @@ public class Lecture {
 
 	*//** 강의시간 목록. *//*
 	private Set<Lecturetime> lecturetimeSet;*/
-
-	public Lecture(Integer lectureClass, String lectureName, String professorName) {
-		super();
-		this.lectureClass = lectureClass;
-		this.lectureName = lectureName;
-		this.professorName = professorName;
-	}
-
-	
 }
