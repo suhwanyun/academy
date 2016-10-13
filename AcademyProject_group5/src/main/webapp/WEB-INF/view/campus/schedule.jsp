@@ -17,7 +17,7 @@
     <th>fri</th>
   </tr>
    <tr>
-        <th>01 교시<br>9:00~9:50</th>
+        <th>1교시<br>09:00~<br>09:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -26,7 +26,7 @@
         
     </tr>
    <tr>
-        <th>02 교시<br>10:00~10:50</th>
+        <th>2교시<br>10:00~<br>10:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -35,7 +35,7 @@
      
     </tr>
    <tr>
-        <th>03 교시<br>11:00~11:50</th>
+        <th>3교시<br>11:00~<br>11:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -44,7 +44,7 @@
        
     </tr>
    <tr>
-        <th>04 교시<br>12:00~12:50</th>
+        <th>4교시<br>12:00~<br>12:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -53,7 +53,7 @@
        
     </tr>
    <tr>
-         <th>05 교시<br>13:00~13:50</th>
+         <th>5교시<br>13:00~<br>13:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -62,7 +62,7 @@
        
     </tr>
    <tr>
-        <th>06 교시<br>14:00~14:50</th>
+        <th>6교시<br>14:00~<br>14:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -71,7 +71,7 @@
         
     </tr>
    <tr>
-        <th>07 교시<br>15:00~15:50</th>
+        <th>7교시<br>15:00~<br>15:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -80,7 +80,7 @@
        
     </tr>
    <tr>
-        <th>08 교시<br>16:00~16:50</th>
+        <th>8교시<br>16:00~<br>16:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -89,7 +89,7 @@
         
     </tr>
    <tr>
-        <th>09 교시<br>17:00~17:50</th>
+        <th>9교시<br>17:00~<br>17:50</th>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
