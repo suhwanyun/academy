@@ -3,11 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<style>
-.tableData td {
-	text-align: center;
-}
-</style>
+
 <head>
 <title>전체 강의 목록</title>
 </head>
