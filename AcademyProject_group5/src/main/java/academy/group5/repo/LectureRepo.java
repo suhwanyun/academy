@@ -20,7 +20,7 @@ public class LectureRepo {
 	SqlSessionTemplate session;
 	
 	public List<Lecture> getAllLecture(Paging data) {
-		String stmt = LECTURE_NS + "selectLectureByPage";
+		String stmt = LECTURE_NS + "selectAllLecture";
 		return session.selectList(stmt, data);
 	}
 	

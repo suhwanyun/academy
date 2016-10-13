@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -118,7 +116,7 @@ public class IndexController {
 	public String addFood(Model model){
 		Posting data = new Posting();
 		model.addAttribute("postingData", data);
-		return "food/food_add";
+		return "/food/food_add";
 	}
 	
 	/** 오락추천 게시판 글 작성 페이지 */
@@ -126,7 +124,7 @@ public class IndexController {
 	public String addPlay(Model model){
 		Posting data = new Posting();
 		model.addAttribute("postingData", data);
-		return "play/play_add";
+		return "/play/play_add";
 	}
 	
 	/** 명소추천 게시판 글 작성 페이지 */
@@ -134,16 +132,19 @@ public class IndexController {
 	public String addPlace(Model model){
 		Posting data = new Posting();
 		model.addAttribute("postingData", data);
-		return "place/place_add";
+		return "/place/place_add";
 	}
 	
 	/** 전체 강의 목록 표시 페이지 */
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
-	public String allLectureList(Model model){
-		List<Lecture> lecList = lecService.allLectureList(1);
+	public String allLectureList(Model model, HttpSession session){
+		session.removeAttribute("searchType");
+		session.removeAttribute("searchData");
+		
+		List<Lecture> lecList = lecService.allLectureList(1, null, null);
 		if(lecList.size() != 0){
 			model.addAttribute("lectureList", lecList);
 		}
-		return "campus/lecture_list";
+		return "/campus/lecture_list";
 	}
 }

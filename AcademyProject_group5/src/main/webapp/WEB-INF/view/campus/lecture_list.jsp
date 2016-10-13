@@ -3,19 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<style>
+.tableData td {
+	text-align: center;
+}
+</style>
 <head>
 <title>전체 강의 목록</title>
 </head>
 <body>
 	<table>
 		<tr>
-			<td><select>
-					<option selected="selected">선택</option>
-					<option>강의 이름</option>
-					<option>교수 이름</option>
+			<td><select id="serchType">
+					<option selected="selected" value="">선택</option>
+					<option value="lecture">강의 이름</option>
+					<option value="professor">교수 이름</option>
 			</select></td>
-			<td><input type="search" /></td>
-			<td><button>검색</button></td>
+			<td><input type="search" id="serachInput" /></td>
+			<td><button id="searchBtn">검색</button></td>
+
 		</tr>
 	</table>
 	<table>
@@ -25,15 +31,14 @@
 			<th>강의 분반</th>
 		</tr>
 		<c:forEach items="${lectureList }" var="list">
-
-			<tr>
+			<tr class="tableData">
 				<td>${list.lectureName}</td>
 				<td>${list.professorName}</td>
 				<td>${list.lectureClass}</td>
 			</tr>
 		</c:forEach>
 		<tr id="beforeLocation">
-			<td colspan="2" align="center" ><button id="moreBtn" >더보기</button></td>
+			<td colspan="2" align="center"><button id="moreBtn">더보기</button></td>
 			<td align="right"><button>맨 위로</button></td>
 		</tr>
 	</table>
@@ -44,7 +49,32 @@
 <script type="text/javascript">
 var pageIndex = 1;
 <c:url value="/campus/lectureList" var="nextlectureList"/>
-
+<c:url value="/campus/lectureListSearch" var="lectureListSearch"/>
+	$("#searchBtn").click(function(){
+		$.ajax({
+			type : "get",
+			url : "${lectureListSearch}",
+			data : {
+				searchType : $("#serchType").val(),
+				searchData : $("#serachInput").val()
+			},
+			 success : function(result) {
+				 $(".tableData").remove();
+				 pageIndex = 1;
+				 if(result.length==0){
+					 alert("검색 결과가 없습니다.");
+				 }else{
+				 $(result).each(function(index,item){
+						$("#beforeLocation").before(
+							$("<tr class = 'tableData'><td>"+item.lectureName+"</td>"+
+							  "<td>"+item.professorName+"</td>"+
+							  "<td>"+item.lectureClass+"</td></tr>"));
+					});
+				 }
+			 } 
+		
+		});
+	});
 	$("#moreBtn").click(function(){
 				
 			pageIndex++;
@@ -60,7 +90,7 @@ var pageIndex = 1;
 					$(result).each(function(index,item){
 						itemCount++;
 						$("#beforeLocation").before(
-							$("<tr><td>"+item.lectureName+"</td>"+
+							$("<tr class = 'tableData'><td>"+item.lectureName+"</td>"+
 							  "<td>"+item.professorName+"</td>"+
 							  "<td>"+item.lectureClass+"</td></tr>"));
 					});
