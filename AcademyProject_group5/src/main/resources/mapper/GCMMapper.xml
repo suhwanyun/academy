@@ -17,5 +17,20 @@
 			  lecture_id = #{lectureId} and 
 			  is_president = 'Y'
 	</select>
+	
+	<select id="lectureApplyUser" parameterType="lecture" resultType="String">
+		select phone_id
+		from UserData join LectureApply using (user_id)
+		where phone_id is not null and
+			  lecture_id = #{lectureId} and
+			  lecture_class = #{lectureClass}
+	</select>
+	
+	<select id="oneUser" parameterType="String" resultType="String">
+		select phone_id
+		from UserData
+		where phone_id is not null and
+			  user_id = #{userId}
+	</select>
 
 </mapper>
