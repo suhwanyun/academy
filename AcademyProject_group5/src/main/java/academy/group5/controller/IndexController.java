@@ -138,9 +138,10 @@ public class IndexController {
 	/** 전체 강의 목록 표시 페이지 */
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
 	public String allLectureList(Model model, HttpSession session){
+		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");
 		
-		List<Lecture> lecList = lecService.allLectureList(1, null);
+		List<Lecture> lecList = lecService.allLectureList(1, null, null);
 		if(lecList.size() != 0){
 			model.addAttribute("lectureList", lecList);
 		}

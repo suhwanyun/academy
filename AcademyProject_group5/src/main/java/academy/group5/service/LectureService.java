@@ -10,7 +10,7 @@ public interface LectureService {
 	 * 전체 강의목록 가져오기 page=10
 	 * @return
 	 */
-	List<Lecture> allLectureList(int page, String searchData);
+	List<Lecture> allLectureList(int page, String searchData, String searchType);
 	/**
 	 * 강의 신청
 	 * @param lectureId

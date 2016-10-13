@@ -41,21 +41,26 @@ public class CampusController {
 	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
 				@RequestParam(required=false) String page){
 		
-		Object dataObj = session.getAttribute("searchData");	
+		Object dataObj = session.getAttribute("searchData");
+		Object typeObj = session.getAttribute("searchType");
 		String searchData = dataObj == null ? null : (String)dataObj;
+		String searchType = dataObj == null ? null : (String)typeObj;
 		
 		List<Lecture> lecList = lecService.allLectureList(page == null ? 
-									1 : Integer.parseInt(page), searchData);
+									1 : Integer.parseInt(page), searchData, searchType);
 		return lecList;
 	}
 	
 	/** 전체 강의 목록 중 강의명 검색 */
 	@RequestMapping(value="/campus/lectureListSearch", method=RequestMethod.GET)
-	public String setSearchDataForGetlectureList(HttpSession session, @RequestParam String searchData){
+	public String setSearchDataForGetlectureList(HttpSession session,
+			@RequestParam String searchType, @RequestParam String searchData){
 		
-		if(searchData == null || searchData.equals("")){
+		if(searchType.equals("") || searchData.equals("")){
+			session.removeAttribute("searchType");
 			session.removeAttribute("searchData");
 		} else {
+			session.setAttribute("searchType", searchType);
 			session.setAttribute("searchData", searchData);
 		}
 
