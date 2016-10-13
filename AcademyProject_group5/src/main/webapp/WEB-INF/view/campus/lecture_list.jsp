@@ -33,8 +33,7 @@
 			</tr>
 		</c:forEach>
 		<tr id="beforeLocation">
-			<td colspan="2" align="center"><button id="moreBtn">더
-					보기</button></td>
+			<td colspan="3" align="center" ><button id="moreBtn" >더보기</button></td>
 			<td align="right"><button>맨 위로</button></td>
 		</tr>
 	</table>
