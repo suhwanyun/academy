@@ -31,8 +31,13 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public boolean apply(Integer lectureId, Integer lectureClass, String userId) {
-		lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
-		return false;
+		int result = lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
+		
+		if(result != 1){
+			return false;
+		} 
+			
+		return true;	
 	}
 
 	@Override
