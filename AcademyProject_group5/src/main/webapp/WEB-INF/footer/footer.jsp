@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 </head>
 <body>
 	<footer id="footer">
-		<a href="#" class="info fa fa-info-circle"><span></span></a>
+		<a href="#" class="info fa fa-info-circle"><span>about</span></a>
 		<div class="inner">
 			<div class="content">
 				<h3>Welcome to MCM</h3>
@@ -35,5 +35,11 @@
 			</div>
 		</div>
 	</footer>
+	<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/skel.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/util.js"></script>
+	<script src="<%=request.getContextPath()%>/js/main.js"></script>
+
 </body>
+
 </html>

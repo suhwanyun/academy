@@ -68,7 +68,7 @@
 
 				var t 		= jQuery(this),
 					inner 	= t.find('.inner'),
-					button 	= t.find('.info');
+					button= t.find('.info');
 
 				button.click(function(e) {
 					t.toggleClass('show');

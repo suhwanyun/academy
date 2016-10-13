@@ -1238,8 +1238,11 @@
 
 		table thead {
 			border-bottom: solid 2px;
+			
 		}
-
+		table thead th{
+			height: 2em;
+		}
 		table tfoot {
 			border-top: solid 2px;
 		}
@@ -1533,11 +1536,11 @@ Footer
 		text-align: center;
 		z-index: 9999;
 	}
-
+	
 		#footer.show {
 			bottom: 0;
 		}
-
+	
 		#footer .info {
 			position: relative;
 			display: inline-block;
@@ -1780,7 +1783,7 @@ margin:1em auto;
 /* .list_table caption { display: none; } */
 
 /* list_table 에서 사용되는 thead */
- .list_table thead th { text-align: center; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; height:100px; padding: 10px; background: #faf9fa; } 
+ .list_table thead th { text-align: center; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; height:100%; padding: 10px; background: #faf9fa; } 
 
 /* list_table 에서 사용되는 tbody */
 .list_table tbody th { text-align: center;  border-bottom: 1px solid #e5e5e5; padding: 5px 0; }

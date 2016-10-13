@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
@@ -99,5 +100,17 @@ public class LectureController {
 		model.addAttribute("lectureTime", selectedLectureTimes);
 		
 		return "/campus/lecture/lecture_info";
+	}
+	
+	/** 강의 신청 */
+	@RequestMapping(value="/lecture/lectureApply", method=RequestMethod.GET)
+	public @ResponseBody String lectureApplying(@RequestParam String userId,
+			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+		
+		if(lecService.apply(lectureId, lectureClass, userId)){
+			return "신청이 정상적으로 되었습니다.";
+		} else {
+			return "신청에 실패하였습니다.\n잠시 후 다시 시도해주세요.";
+		}
 	}
 }
