@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,6 @@
 			<td><button>검색</button></td>
 		</tr>
 	</table>
-	<p>${lectureList }</p>
 	<table>
 		<tr>
 			<th>강의 이름</th>
@@ -25,18 +25,44 @@
 			<th>강의 분반</th>
 		</tr>
 		<c:forEach items="${lectureList }" var="list">
-		
-		<tr>
-			<td>${list.lectureName}</td>
-			<td>${list.professorName}</td>
-			<td>${list.lectureClass}</td>
-		</tr>
+
+			<tr>
+				<td>${list.lectureName}</td>
+				<td>${list.professorName}</td>
+				<td>${list.lectureClass}</td>
+			</tr>
 		</c:forEach>
-		<tr>
-			<td colspan="2" align="right"><button>더 보기</button></td>
+		<tr id="beforeLocation">
+			<td colspan="2" align="center"><button id="moreBtn">더
+					보기</button></td>
 			<td align="right"><button>맨 위로</button></td>
 		</tr>
 	</table>
 
 </body>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+<c:set value=1 var="pageIndex"/>
+<c:url value="/campus/lectureList" var="lectureList"/>
+
+$("#moreBtn").click(function(){
+		pageIndex++;
+		$.ajax({
+			type : "get",
+			url : "${lectureList}",
+			data : {page : pageIndex},
+			success : function(result) {
+				$(result).each(function(index,item){
+					$("#beforeLocation").before(
+						$("<tr>
+							<td>${item.lectureName}</td>
+							<td>${item.professorName}</td>
+							<td>${item.lectureClass}</td>
+						</tr>"));
+				})
+			}
+		});
+	});
+</script>
 </html>
