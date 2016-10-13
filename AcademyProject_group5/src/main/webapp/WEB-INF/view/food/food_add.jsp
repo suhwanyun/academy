@@ -20,36 +20,6 @@
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
-	<form name="writeForm" method="post" action="writePro.do">
-	<table class="add">
-
- 	<tr>
-		<td><label>제 목</label></td>
-		<td colspan=3>
-			<input type="text" maxlength="30"></td>
-	</tr>
-	<tr>
-		<td><label>내 용</label></td>
-		<td colspan=3>
-			<textarea name="content" rows="13" cols="40"></textarea></td>
-	</tr>
-	<tr>
-		<td><label>파일 첨부</label></td>
-		<td colspan=3>
-			<input type="file" id="reportFile" name="reportFile"></td>
-	</tr>
-	<tr>
-	<td colspan=2 align="center">
-		<input type="button" name="save" value="글쓰기" onclick="writeSave();">
-		<input type="reset" value="다시작성">
-		
-		
-	</tr>
-	</table>
-	
-	</form>
-</div>
-=======
 		<sform:form method="post" action="#" modelAttribute="postingData"
 			enctype="multipart/form-data">
 			<table class="add">
@@ -90,6 +60,6 @@
 
 		</sform:form>
 	</div>
->>>>>>> branch 'master' of https://github.com/suhwanyun/academy.git
+
 </body>
 </html>
