@@ -42,7 +42,7 @@
 	<select id="selectLectureByClass" parameterType="lecture_time" resultType="lecture">
 		select *
 		from Lecture
-		where lecture_id = #{lectureId}, lecture_class = #{lectureClass}
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</select>
 	
 	<select id="selectLectureTimeByUser" parameterType="String" resultType="lecture_time">
