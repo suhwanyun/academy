@@ -29,14 +29,23 @@ public class AutoServiceImpl implements AutoService {
 	@Autowired
 	LectureRepo lectureRepo;
 	
+	private boolean nowVoteScheduling;
+	private boolean nowTermScheduling;
+	
+	public AutoServiceImpl(){
+		nowVoteScheduling = false;
+		nowTermScheduling = false;
+	}
+	
 	@PostConstruct
 	public void startVoteScheduler() {
 		
 		Date nextTermDate = getScheduleTime(termRepo.getNextTermStartDate());
 		
-		if(nextTermDate == null){
+		if(nextTermDate == null || nowVoteScheduling){
 			return;
 		}
+		nowVoteScheduling = true;
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
@@ -56,6 +65,7 @@ public class AutoServiceImpl implements AutoService {
 					int votingResult = random.nextInt(voterCount) + 1;
 					termRepo.updateVoting(new Voting(lectureId, votingResult));
 					
+					nowVoteScheduling = false;
 				}
 			}
 		}, nextTermDate);
@@ -65,9 +75,10 @@ public class AutoServiceImpl implements AutoService {
 	public void startTermScheduler() {
 		Date nextTermDate = getScheduleTime(termRepo.getTermEndDate());
 		
-		if(nextTermDate == null){
+		if(nextTermDate == null || nowTermScheduling){
 			return;
 		}
+		nowTermScheduling = true;
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
@@ -80,6 +91,8 @@ public class AutoServiceImpl implements AutoService {
 				termRepo.deleteAllCancelLecture();
 				termRepo.deleteAllLectureTime();
 				termRepo.deleteAllLecture();
+				
+				nowTermScheduling = false;
 			}
 		}, nextTermDate);
 	}
