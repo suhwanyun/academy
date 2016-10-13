@@ -2,12 +2,11 @@ package academy.group5.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,18 +52,26 @@ public class CampusController {
 	
 	/** 전체 강의 목록 중 강의명 검색 */
 	@RequestMapping(value="/campus/lectureListSearch", method=RequestMethod.GET)
-	public String setSearchDataForGetlectureList(HttpSession session,
+	public String setSearchDataForGetlectureList(Model model, HttpSession session,
 			@RequestParam String searchType, @RequestParam String searchData){
 		
 		if(searchType.equals("") || searchData.equals("")){
 			session.removeAttribute("searchType");
 			session.removeAttribute("searchData");
+			
+			searchType = null;
+			searchData = null;
 		} else {
 			session.setAttribute("searchType", searchType);
 			session.setAttribute("searchData", searchData);
 		}
+		
+		List<Lecture> lecList = lecService.allLectureList(1, searchData, searchType);
+		if(lecList.size() != 0){
+			model.addAttribute("lectureList", lecList);
+		}
 
-		return "redirect:/campus/lectureList";
+		return "/campus/lecture_list";
 	}
 	
 	/** 선택한 강의들의 시간표 */
