@@ -3,13 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.LectureMapper">
-
-	<!-- <resultMap type="lecture" id="lectureMapping">
-		<id column="lecture_id" property="lectureId"/>
-		<id column="lecture_class" property="lectureClass"/>
-		<result column="lecture_name" property="lectureName"/>
-		<result column="professor_name" property="professorName"/>
-	</resultMap> -->
 	
 	<select id="selectLectureByPage" parameterType="paging" resultType="lecture">
 		select *
@@ -50,6 +43,11 @@
 		where lecture_id = #{lectureId} 
 			and lecture_class = #{lectureClass}
 			and user_id = #{userId}
+	</select>
+	
+	<select id="selectLectureIdList" resultType="int">
+		select lecture_id
+		from Lecture
 	</select>
 	
 </mapper>

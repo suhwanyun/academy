@@ -48,4 +48,9 @@ public class LectureRepo {
 		String stmt = LECTURE_NS + "selectIsPresident";
 		return session.selectOne(stmt, data);
 	}
+	
+	public List<Integer> getAllLectureId(){
+		String stmt = LECTURE_NS + "selectLectureIdList";
+		return session.selectList(stmt);
+	}
 }

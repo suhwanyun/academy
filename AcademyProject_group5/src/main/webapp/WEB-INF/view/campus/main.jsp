@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
-<title>Insert title here</title>
+<title>학업페이지</title>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<div id="incluedjsp" class="form9 pad"><jsp:include page="schedule.jsp" /></div>
+					<div id="incluedjsp" class="form9 pad"><jsp:include page="lecture_list.jsp" /></div>
 				</td>
 			</tr>
 		</table>
@@ -34,7 +34,7 @@
 <script type="text/javascript">
 	<c:url value="/campus/notiList" var="notiList"/>
 	<c:url value="/lecture/selectedLectureList" var="selectedLectureList"/>
-	<c:url value="/campus/lectureList" var="lectureList"/>
+	<c:url value="/campus/lectureListJsp" var="lectureList"/>
 	<c:url value="/campus/schedule" var="schedule"/>
 	
 	$("#mylectureBtn").click(function() {

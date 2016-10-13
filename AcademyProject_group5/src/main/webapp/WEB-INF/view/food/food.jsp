@@ -58,6 +58,9 @@
 						<td>추천수</td>
 						<td>날짜</td>
 					</tr>
+					<tr>
+						<td colspan="4" align="center"><button>더 보기</button></td>
+					</tr>
 				</table>
 			</div>
 		</div>
