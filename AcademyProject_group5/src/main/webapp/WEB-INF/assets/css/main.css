@@ -1803,5 +1803,7 @@ margin:1em auto;
 .upmargin td input[type="button"]{
 	width:100%;
 }
-
+.tableData td {
+	text-align: center;
+}
 	
