@@ -32,7 +32,7 @@
 			<a href="<%=request.getContextPath()%>/mileage/confirm"
 				class="button big altButton" style="margin-left: 15%;"><span>아메리카노</span></a> 
 			
-		</div>
+		</div> 
 	
 
 		<div class="inner">
