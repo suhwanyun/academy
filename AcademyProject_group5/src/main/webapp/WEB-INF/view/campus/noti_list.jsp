@@ -21,7 +21,7 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><button>더보기</button></td>
+			<td colspan="3" align="center"><button id="moreBtn">더보기</button></td>
 			<td align="right"><button>맨위로</button></td>
 		</tr>
 	</table>
