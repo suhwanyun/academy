@@ -12,94 +12,60 @@
 <title>오락게시판</title>
 </head>
 <body>
-	
-	 
-<!-- 테이블 시작 -->
-<div id="wrap">
-<a href="<%=request.getContextPath() %>">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
-	<h1 class="member">오락 게시판</h1>
-<div class="form9 pad">
-<div class="boardcss_list_table">
-	<table class="list_table">
-			<colgroup>
-			<col width="30%" />
-			<col width="40%" />
-			<col width="30%" />
-		</colgroup>
-		
-		<thead>
-		<tr>
-				<td>
-				<select id="array" title="select array">
-				<option selected="selected">정렬 기준</option>
-				<option>red</option>
-        		<option>blue</option>
-				<option>yellow</option>
-       			<option>black</option>
-    			</select></td>
-				<td>
-				<select id="select" title="select select">
-				<option selected="selected">선택</option>
-				<option>red</option>
-        		<option>blue</option>
-				<option>yellow</option>
-       			<option>black</option>
-    			</select></td>
-    		
-				<td><input type="search" id="searchBtn"></td>
-				
-			
-		</tr>
-			<tr id="gomchi2">
-				<th>사진</th>
-				<th>제목</th>
-				<th>추천수</th>
-			</tr>
-		</thead>
-		<!--  데이터 넣기 -->
-		<tbody>
-				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>사진</span></a></th>
-				<th>제목</th>
-				<th>추천수</th>
-			</tr>
-				<tr>
-					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>사진</span></a></th>
-				<th>제목</th>
-				<th>추천수</th>
-			</tr>
-				<tr>
-					<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>사진</span></a></th>
-				<th>제목</th>
-				<th>추천수</th>
-			</tr>
-				<tr>
-				<th><a href="<%=request.getContextPath() %>/lectureInfo" 
-				class="button big"><span>강의 이름</span></a></th>
-				<th>교수 이름</th>
-				<th>강의 분반</th>
-			</tr>
-			<tr>
-			<th></th>
-			<th><a href="#"  class="button big alt"><span>더보기</span></a></th>
-			<th><a href="<%=request.getContextPath() %>/write/play"  class="button big alt"><span>글쓰기 이동</span></a></th>
-			<th></th>
-			</tr>
-		</tbody>
-		
-		
-	</table>
-	
-</div>
-</div>
-</div>
+	<!-- 테이블 시작 -->
+	<jsp:include page="../../header/header.jsp" />
+	<div id="wrap">
+		<div class="upmargin">
+			<h1 class="member">오락 게시판</h1>
+			<div class="form9 pad">
+				<table>
+					<colgroup>
+						<col width="30%">
+						<col width="20%">
+						<col width="25%">
+						<col width="25%">
+					</colgroup>
+					<tr>
+						<td><select id="array" title="select array">
+								<option selected="selected">정렬</option>
+								<option>추천수 정렬</option>
+								<option>날짜 정렬</option>
+						</select></td>
+						<td></td>
+						<td></td>
+						<td><a href="<%=request.getContextPath()%>/write/play">글쓰기</a></td>
+					</tr>
+					<tr>
+						<td><select id="select" title="select select" >
+								<option selected="selected" >작성자</option>
+								<option>제목</option>
+								<option>내용</option>
+								<option>제목+내용</option>
+						</select></td>
+						<td colspan="2"><input type="search" id="search"></td>
+						<td><input type="button" class="boardBtn" value="찾기"></td>
+					</tr>
 
-<!-- 테이블 종료 -->
-	
+				</table>
+				<table style="text-align: center">
+					<tr>
+						<td rowspan="2"><a
+							href="<%=request.getContextPath()%>/play_info">사진</a></td>
+						<td colspan="3">제목</td>
+					</tr>
+					<tr>
+						<td>작성자</td>
+						<td>추천수</td>
+						<td>날짜</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="center"><button>더 보기</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 테이블 종료 -->
 </body>
+
 </html>

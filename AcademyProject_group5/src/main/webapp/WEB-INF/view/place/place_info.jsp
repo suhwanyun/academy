@@ -15,69 +15,38 @@
 
 </head>
 <body>
-<div id="wrap">
-<a href="<%=request.getContextPath() %>">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
-	<h1 class="member">명소 글쓰기</h1>
-	<form name="writeForm" method="post" action="writePro.do">
-	<table>
-		<c:set var="num" value="${requestScope.num }"/>
-		<c:set var="ref" value="${requestScope.ref }"/>
-		<c:set var="re_step" value="${requestScope.re_step }"/>
-		<c:set var="re_level" value="${requestScope.re_level }"/>
-		
-		
-	<%-- <input type="hidden" name="num" value="${num }"/>
-	<input type="hidden" name="ref" value="${ref }"/>
-	<input type="hidden" name="re_step" value="${re_step }"/>
-	<input type="hidden"	name="re_level" value="${re_level }"/>
-	 --%>
-	<tr>
-		<td width="70" align="center">제 목</td>
-		<td align="left" width="330">
-			<input type="text" size="10" maxlength="10" name="writer"></td>
-	</tr>
-	<tr>
-		<td><img class="circular--square"
-						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></td>
-	</tr>
-	<tr>
-		<td width="70" align="center">내 용</td>
-		<td align="left" width="330">
-			<textarea name="content" rows="13" cols="40"></textarea></td>
-	</tr>
-
-	<tr>
-	<td>
-		<a href="#" class="button big alt"><span>추천</span></a> 
-		</td>
-	</tr>
-	<tr>
-		<td width="70%"><input type="text" value="댓글 내용"></td>
-		<td width="30%"><input type="button" value="등록"></td>
-	</tr>
-	<tr>
-		<td width="20%"><input type="date"></td>
-		<td width="40%"><input type="text" value="댓글 내용"></td>
-		<td width="20%"><input type="text" value="작성자"></td>
-		<td width="20%"><input type="button" value="댓글 달기"></td>
-	</tr>
-		<tr>
-		<td width="20%"><input type="date"></td>
-		<td width="40%"><input type="text" value="댓글 내용"></td>
-		<td width="20%"><input type="text" value="작성자"></td>
-		<td width="20%"><input type="button" value="댓글 달기"></td>
-	</tr>
-		<tr>
-		<td width="20%"><input type="date"></td>
-		<td width="40%"><input type="text" value="댓글 내용"></td>
-		<td width="20%"><input type="text" value="작성자"></td>
-		<td width="20%"><input type="button" value="댓글 달기"></td>
-	</tr>
-	</table>
-	
-	</form>
-</div>
+	<div id="wrap">
+		<a href="<%=request.getContextPath()%>"> <img
+			class="circular--logo"
+			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+		<h1 class="member">명소 게시판 글 내용</h1>
+	<div class="form10 pad">
+		<table style="text-align: center">
+			<tr>
+				<td colspan="4">제목</td>
+			</tr>
+			<tr>
+				<td colspan="4">사진</td>
+			</tr>
+			<tr>
+				<td colspan="4">게시글</td>
+			</tr>
+			<tr>
+				<td colspan="3">이미지</td>
+				<td>추천버튼</td>
+			</tr>
+			<tr>
+				<td colspan="3">댓글 달기</td>
+				<td>등록버튼</td>
+			</tr>
+			<tr>
+				<td>날짜</td>
+				<td>댓글내용</td>
+				<td>작성자</td>
+				<td>댓글달기버튼</td>
+			</tr>
+		</table>
+		</div>
+	</div>
 </body>
 </html>
