@@ -2,9 +2,12 @@ package academy.group5.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,14 +38,28 @@ public class CampusController {
 	
 	/** 전체 강의 목록 표시 */
 	@RequestMapping(value="/campus/lectureList", method=RequestMethod.GET)
-	public @ResponseBody List<Lecture> getlectureList(Model model, @RequestParam String page){
-		List<Lecture> lecList = null;
+	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
+				@RequestParam(required=false) String page){
 		
-		if(page != null){
-			lecList = lecService.allLectureList(Integer.parseInt(page));
+		Object dataObj = session.getAttribute("searchData");	
+		String searchData = dataObj == null ? null : (String)dataObj;
+		
+		List<Lecture> lecList = lecService.allLectureList(page == null ? 
+									1 : Integer.parseInt(page), searchData);
+		return lecList;
+	}
+	
+	/** 전체 강의 목록 중 강의명 검색 */
+	@RequestMapping(value="/campus/lectureListSearch", method=RequestMethod.GET)
+	public String setSearchDataForGetlectureList(HttpSession session, @RequestParam String searchData){
+		
+		if(searchData == null || searchData.equals("")){
+			session.removeAttribute("searchData");
+		} else {
+			session.setAttribute("searchData", searchData);
 		}
 
-		return lecList;
+		return "redirect:/campus/lectureList";
 	}
 	
 	/** 선택한 강의들의 시간표 */

@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -139,8 +137,10 @@ public class IndexController {
 	
 	/** 전체 강의 목록 표시 페이지 */
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
-	public String allLectureList(Model model){
-		List<Lecture> lecList = lecService.allLectureList(1);
+	public String allLectureList(Model model, HttpSession session){
+		session.removeAttribute("searchData");
+		
+		List<Lecture> lecList = lecService.allLectureList(1, null);
 		if(lecList.size() != 0){
 			model.addAttribute("lectureList", lecList);
 		}

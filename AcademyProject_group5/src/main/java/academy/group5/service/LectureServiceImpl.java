@@ -25,8 +25,8 @@ public class LectureServiceImpl implements LectureService{
 	
 	// 전체 강의 목록
 	@Override
-	public List<Lecture> allLectureList(int page) {
-		return lecRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
+	public List<Lecture> allLectureList(int page, String searchData) {
+		return lecRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE, searchData));
 	}
 
 	// 강의 신청

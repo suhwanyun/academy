@@ -4,11 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.LectureMapper">
 	
-	<select id="selectLectureByPage" parameterType="paging" resultType="lecture">
+	<select id="selectAllLecture" parameterType="paging" resultType="lecture">
 		select *
 		from (select rownum as rnum, sub.*
 			 from (select *
 				  from Lecture 
+				  <if test="data != null">
+			      		lecture_name like '%'||#{data}||'%'
+			      </if>
 				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
