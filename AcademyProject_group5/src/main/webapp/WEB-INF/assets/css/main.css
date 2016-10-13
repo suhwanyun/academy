@@ -1230,7 +1230,7 @@
 			font-size: 0.9em;
 			font-weight: 300;
 			padding: 0 0.75em 0.75em 0.75em;
-			text-align: left;
+			text-align: center;
 		}
 
 		table thead {
@@ -1290,7 +1290,28 @@
 	table.alt tbody tr td {
 		border-color: rgba(144, 144, 144, 0.25);
 	}
-
+	
+	.t {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    border-top: 2px solid #aaa;
+    border-collapse: collapse;
+}
+.t th, .t td {
+    border: 1px solid #d2d2d2;
+    padding: 4px;
+}
+.t th {
+    background-color: #f7f7f7;
+    height: 36px;
+    vertical-align: middle;
+    color: black;
+}
+.t .none_border th {
+    border-top: none;
+}
+	
 /* Header */
 
 	#header {
