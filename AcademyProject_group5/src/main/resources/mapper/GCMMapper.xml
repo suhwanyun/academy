@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.GCMMapper">
+	
+	<select id="allUser" resultType="String">
+		select phone_id
+		from UserData
+		where phone_id is not null
+	</select>
+	
+	<select id="president" parameterType="int" resultType="String">
+		select phone_id
+		from UserData join LectureApply using (user_id)
+		where phone_id is not null and
+			  lecture_id = #{lectureId} and 
+			  is_president = 'Y'
+	</select>
+
+</mapper>

@@ -7,10 +7,10 @@ import java.util.List;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Sender;
 
-class GCM {
+public class GCM {
 	private final String GCM_TITLE = "MCM";
 
-	GCM(String msg, String submsg, List<String> userIdList) {
+	public GCM(String msg, String submsg, List<String> userIdList) {
 
 		String title = null;
 		
