@@ -15,10 +15,9 @@
 
 </head>
 <body>
+<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">
-		<a href="<%=request.getContextPath()%>"> <img
-			class="circular--logo"
-			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+		<div class="upmargin">
 		<h1 class="member">명소 게시판 글 내용</h1>
 	<div class="form10 pad">
 		<table style="text-align: center">
@@ -46,6 +45,7 @@
 				<td>댓글달기버튼</td>
 			</tr>
 		</table>
+		</div>
 		</div>
 	</div>
 </body>

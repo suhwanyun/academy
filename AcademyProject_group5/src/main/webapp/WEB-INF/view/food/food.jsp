@@ -33,7 +33,7 @@
 						</select></td>
 						<td></td>
 						<td></td>
-						<td><a href="<%=request.getContextPath()%>/write/food">글쓰기</a></td>
+						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
 					</tr>
 					<tr>
 						<td><select id="select" title="select select" >
