@@ -11,10 +11,9 @@
 <title>마일리지</title>
 </head>
 <body>
-<div id="wrap">
-	<a href="<%=request.getContextPath()%>"><img
-		class="circular--logo"
-		src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+<jsp:include page="../../header/header.jsp" />
+	<div id="wrap">
+		<div class="upmargin">
 	<h1 class="member">물품 구매</h1>
 	<div id="main">
 		<div class="inner">
@@ -52,7 +51,7 @@
 		</div>	
 		</div>
 
-
+</div>
 
 
 	</div>
