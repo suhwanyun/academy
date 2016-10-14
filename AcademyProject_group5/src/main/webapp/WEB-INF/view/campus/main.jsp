@@ -29,7 +29,7 @@
 			</tr>
 		</table>
 	</div>
-</body>
+	</body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	<c:url value="/campus/notiList" var="notiList"/>
@@ -38,7 +38,7 @@
 	<c:url value="/campus/schedule" var="schedule"/>
 	
 	$("#mylectureBtn").click(function() {
-		$.ajax({
+		$.ajax({ 
 			type : "get",
 			url : "${selectedLectureList}",
 			success : function(result) {
