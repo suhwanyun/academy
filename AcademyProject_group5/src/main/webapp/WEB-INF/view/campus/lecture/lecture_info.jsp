@@ -49,6 +49,7 @@
 			</table>
 			
 			<table>
+			
 				<tr>
 					<td colspan="2" align="center">
 					<input type="checkbox" name="ban"  id="attention1">
@@ -56,6 +57,7 @@
 					<td><button class="fit">신청</button></td>
 					<td><button class="fit">취소</button></td>
 				</tr>
+		
 			</table>
 				
 		

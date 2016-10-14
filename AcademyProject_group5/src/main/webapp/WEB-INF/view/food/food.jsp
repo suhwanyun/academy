@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,12 @@
 <title>식사게시판</title>
 </head>
 <body>
+	<c:if test="${!empty msg}">
+		<script>
+			alert('${msg}');
+		</script>
+		<c:remove var="msg" />
+	</c:if>
 	<!-- 테이블 시작 -->
 	<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">
@@ -36,8 +43,8 @@
 						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select" title="select select" >
-								<option selected="selected" >작성자</option>
+						<td><select id="select" title="select select">
+								<option selected="selected">작성자</option>
 								<option>제목</option>
 								<option>내용</option>
 								<option>제목+내용</option>
