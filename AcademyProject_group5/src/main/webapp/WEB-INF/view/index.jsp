@@ -49,5 +49,5 @@
 		<jsp:include page="../footer/footer.jsp" />
 
 </body>
-<!-- Scripts -->
+
 </html>
