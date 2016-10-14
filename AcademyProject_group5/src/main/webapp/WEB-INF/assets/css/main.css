@@ -555,7 +555,7 @@
 		z-index: -1;
 	}
 	input[type="checkbox"]{
-	
+	margin-left:3em;
 	}
  
 		input[type="checkbox"] + label,
