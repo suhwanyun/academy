@@ -27,7 +27,6 @@
 					<a href="<%=request.getContextPath() %>/campus/campusMain"><img 
 						class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic01.png" alt="" /></a>
-					
 					<a href="<%=request.getContextPath() %>/foodMain"><img class="circular--square"
 						src="<%=request.getContextPath() %>/images/pic02.png" alt="" /></a>
 						
@@ -51,5 +50,4 @@
 
 </body>
 <!-- Scripts -->
-<script src="<%=request.getContextPath() %>/js/main.js"></script>
 </html>
