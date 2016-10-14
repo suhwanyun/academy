@@ -80,7 +80,10 @@
 			$.ajax({
 			type : "post",
 			url : "${uploadfile}",
-			data :  formData,
+			data : {
+				file : formData,
+				name : "${postingType}"
+			},
 			contentType: false,
 		    processData: false,
 			success : function(res) {
