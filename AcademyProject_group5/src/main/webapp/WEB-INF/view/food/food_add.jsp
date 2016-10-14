@@ -20,17 +20,16 @@
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
-		<sform:form method="post" action="#" modelAttribute="postingData"
-			enctype="multipart/form-data">
-			<table class="add">
+		<sform:form method="post" action="food" modelAttribute="postingData">
+			<table>
 				<colgroup>
-					<col width="40%">
-					<col width="60%">
+					<col width="10%">
+					<col width="90%">
 				</colgroup>
-
+				
 				<tr>
 
-					<td><label>제 목</label></td>
+					<td><label for="postingTitle">제 목</label></td>
 					<td><sform:input type="text" maxlength="30"
 							path="postingTitle" /></td>
 
@@ -38,28 +37,31 @@
 
 				<tr>
 
-					<td><label>내 용</label></td>
+					<td><label for="postingContent">내 용</label></td>
 					<td><sform:textarea rows="13" cols="40" maxlength="300"
 							path="postingContent" /></td>
 
 				</tr>
+				
 				<tr>
-
-					<td><label>파일 첨부</label></td>
-					<td><sform:input type="file" path="postingPhoto" input
-							accept="image/*" /></td>
-
-				</tr>
-				<tr>
-					<td colspan=2 align="center"><sform:button id="save"
-							value="글쓰기" /> <sform:button type="reset" value="다시작성" /></td>
+					<td colspan=2 align="center"><sform:button id="save" >글 쓰기</sform:button>
+					<sform:button type="reset">다시 작성</sform:button></td>
 
 
 				</tr>
+				<sform:hidden path="postingType" value="food"/>
+				<sform:hidden path="userId" value="${user.userId }" />
+				<sform:hidden path="postingTime" value=""/>
+				<sform:hidden path="postingPhoto" value=""/>
 			</table>
 
 		</sform:form>
+		<form>
+			<label for="fileInput">사진 첨부</label>
+			<input id="fileInput" type="file" accept="image/*"/>
+		</form>
 	</div>
 
 </body>
+<script src="http://code.jquery.com/jquery.js"></script>
 </html>

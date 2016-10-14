@@ -554,10 +554,13 @@
 		width: 1em;
 		z-index: -1;
 	}
-	input[type="checkbox"]{
-	margin-left:4em;
-		margin-top:1em;
+	input[type="checkbox"].captain{
+		margin-left:4em;
+		margin-top:-2em;
 		margin-right:-2em;
+		
+		width:25px;
+		height:25px;
 	}
  
 		input[type="checkbox"] + label,

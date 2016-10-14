@@ -48,11 +48,14 @@
 				</c:forEach>
 			</table>
 			<table>
+			
 				<tr>
-					<td><input type="checkbox" name="ban" value="yes"> <label for="ban">반장여부</label></td>
+					<td><input type="checkbox" name="ban" value="yes"></td>
+					<td>반장여부</td>
 					<td><button class="fit">신청</button></td>
 					<td><button class="fit">취소</button></td>
 				</tr>
+		
 			</table>
 				
 		
