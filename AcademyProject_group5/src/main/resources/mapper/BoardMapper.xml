@@ -36,6 +36,10 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<!-- <insert id="" -->
+	<insert id="insertPosting" parameterType="posting">
+		insert into Posting
+		values(#{postingId}, #{postingType}, #{userId}, #{, postingTime), #{postingHits},
+				#{postingRecommand}, #{postingTitle}, #{postingContent}, #{postingPhoto}) 
+	</insert>
 
 </mapper>

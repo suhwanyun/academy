@@ -17,9 +17,15 @@ public class BoardRepo {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	/** 전체 학생 */
-	public List<Posting> getAllUser(Paging data) {
+	/** 전체 글 목록 출력 */
+	public List<Posting> getAllPosting(Paging data) {
 		String stmt = BOARD_NS + "selectAllPosting";
 		return session.selectList(stmt, data);
+	}
+	
+	/** 글 작성 */
+	public int posting(Posting data) {
+		String stmt = BOARD_NS + "insertPosting";
+		return session.insert(stmt, data);
 	}
 }

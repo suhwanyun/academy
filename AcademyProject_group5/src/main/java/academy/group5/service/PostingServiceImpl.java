@@ -24,13 +24,18 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public List<Posting> postingList(String lec_lecId_lecNum, int page) {
 		
-		return boardRepo.getAllUser(new Paging(page, POSTING_MAX_PAGE, lec_lecId_lecNum));
+		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, lec_lecId_lecNum));
 	}
 
 	@Override
-	public boolean postWrite(Posting posting) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean postWrite(Posting data) {
+		
+		int result = boardRepo.posting(data);
+		
+		if(result != 1){
+			return false;
+		}
+		return true;
 	}
 
 	@Override
