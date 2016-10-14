@@ -57,38 +57,4 @@
 	</div>
 
 </body>
-<script src="http://code.jquery.com/jquery.js"></script>
-<script>
-<c:url value="/uploadfile" var="uploadfile"/>
-	$("#fileInput").change(function(event){
-		var form = $("#fileform")[0];
-		var formData = new FormData(form);
-
-		console.log(formData);
-		console.log(typeof formData);
-			$.ajax({
-			type : "post",
-			url : "${uploadfile}",
-			data : {
-				file : formData,
-				name : "${posting.postingType}"
-			},
-			contentType: false,
-		    processData: false,
-			success : function(res) {
-				if(res == ""){
-					// 기본 이미지 경로 작성
-				}
-				else {
-				$("#postingPhoto").val(res);
-				}
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:"
-						+ request.responseText + "\n" + "error:"
-						+ error);
-			}
-		});
-	});
-</script>
 </html>
