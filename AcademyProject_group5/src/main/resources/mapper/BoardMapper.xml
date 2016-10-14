@@ -36,6 +36,6 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<insert id=""
+	<!-- <insert id="" -->
 
 </mapper>
