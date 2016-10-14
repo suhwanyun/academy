@@ -50,6 +50,4 @@
 		<jsp:include page="../footer/footer.jsp" />
 
 </body>
-<!-- Scripts -->
-<script src="<%=request.getContextPath() %>/js/main.js"></script>
 </html>
