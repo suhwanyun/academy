@@ -12,7 +12,7 @@ import academy.group5.dto.Posting;
 public class BoardController {
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
-	@RequestMapping(value="/write/food", method=RequestMethod.GET)
+	@RequestMapping(value="/write/food", method=RequestMethod.POST)
 	public String addFood(Model model, @RequestParam Posting data){
 		return "/food/food_add";
 	}

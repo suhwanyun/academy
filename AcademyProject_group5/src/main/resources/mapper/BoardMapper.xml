@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.BoardMapper">
+	
+	<select id="selectAllPosting" parameterType="paging" resultType="posting">
+		select *
+		from (select rownum as rnum, sub.*
+			 from (select posting_id, posting_time, posting_hits, 
+			 			  posting_recommand, posting_title, posting_photo
+				  from Posting 
+				  where	posting_type = #{data}
+				  <choose>
+					  <when test="data2 != null and data3 == 'title'">
+				      and posting_title like '%'||#{data2}||'%' 
+				      </when>
+				      <when test="data2 != null and data3 == 'content'">
+				      and posting_content like '%'||#{data2}||'%' 
+				      </when>
+				      <when test="data2 != null and data3 == 'all'">
+				      and posting_title like '%'||#{data2}||'%' or
+				      	  posting_content like '%'||#{data2}||'%'
+				      </when>
+			      </choose>
+			      <choose>
+				      <when test="orderData != null">
+					  order by #{orderData} desc
+					  </when>
+					  <otherwise>
+					  order by posting_time desc
+					  </otherwise>
+				  </choose>
+				  ) sub
+			 )
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	<insert id=""
+
+</mapper>
