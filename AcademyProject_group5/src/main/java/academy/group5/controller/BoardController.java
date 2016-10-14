@@ -43,7 +43,7 @@ public class BoardController {
 		
 		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent);
 		
-		if(postingType == null || postingTitle == null || postingContent == null){
+		if(userId == null || postingType == null || postingTitle == null || postingContent == null){
 			model.addAttribute("msg", "입력된 정보가 올바르지 않습니다.");
 			model.addAttribute("posting", postingData);
 			return "/food/food_add";
@@ -58,7 +58,7 @@ public class BoardController {
 				// 게시글 번호
 				Integer postingId = postService.getPostingId(postingData);
 				
-				if(postingId == null){
+				if(postingId == 0){
 					return uploadError(redAttr);
 				}
 				// 파일명 : 게시판종류 + 게시글번호 + 확장자

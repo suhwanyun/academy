@@ -10,7 +10,7 @@
 			 from (select posting_id, posting_time, posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
-				  where	posting_type = #{data} and posting_title != ''
+				  where	posting_type = #{data}
 				  <choose>
 					  <when test="data2 != null and data3 == 'title'">
 				      and posting_title like '%'||#{data2}||'%' 
@@ -58,7 +58,7 @@
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
-	<select id="selectPostingId" parameterType="posting">
+	<select id="selectPostingId" parameterType="posting" resultType="int">
 		select posting_id
 		from Posting
 		where posting_type = #{postingType} and posting_id = #{postingId}

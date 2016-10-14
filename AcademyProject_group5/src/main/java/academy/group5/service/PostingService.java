@@ -30,7 +30,7 @@ public interface PostingService {
 	 * @param posting
 	 * @return
 	 */
-	Integer getPostingId(Posting posting);
+	int getPostingId(Posting posting);
 	/**
 	 * 작성한 글에 이미지 등록
 	 * @param posting
