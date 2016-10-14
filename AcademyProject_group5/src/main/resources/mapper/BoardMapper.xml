@@ -10,7 +10,7 @@
 			 from (select posting_id, posting_time, posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
-				  where	posting_type = #{data}
+				  where	posting_type = #{data} and posting_title != ''
 				  <choose>
 					  <when test="data2 != null and data3 == 'title'">
 				      and posting_title like '%'||#{data2}||'%' 
@@ -38,10 +38,30 @@
 	
 	<insert id="insertPosting" parameterType="posting">
 		insert into Posting
-		(posting_type, user_id, posting_time, posting_hits, posting_recommand,
-			posting_title, posting_content, posting_photo)
-		values(#{postingType}, #{userId}, sysdate, #{postingHits},
-				#{postingRecommand}, #{postingTitle}, #{postingContent}, #{postingPhoto}) 
+		(posting_type, user_id, posting_time, posting_hits,
+			posting_recommand, posting_title, posting_content)
+		values(#{postingType}, #{userId}, sysdate, 0, 0, #{postingTitle}, #{postingContent}) 
 	</insert>
+	
+	<update id="updatePosting" parameterType="posting">
+		update Posting 
+		set	user_id = #{userId},
+			posting_title = #{postingTitle},
+			posting_content = #{postingContent},
+			posting_photo = #{postingPhoto}
+		where posting_type = #{postingType} and posting_id = #{postingId}
+	</update>
+	
+	<update id="updatePhoto" parameterType="posting">
+		update Posting
+		set posting_photo = #{postingPhoto}
+		where posting_type = #{postingType} and posting_id = #{postingId}
+	</update>
+	
+	<select id="selectPostingId" parameterType="posting">
+		select posting_id
+		from Posting
+		where posting_type = #{postingType} and posting_id = #{postingId}
+	</select>
 
 </mapper>

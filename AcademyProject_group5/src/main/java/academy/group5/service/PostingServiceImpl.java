@@ -23,14 +23,12 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Override
 	public List<Posting> postingList(String lec_lecId_lecNum, int page) {
-		
 		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, lec_lecId_lecNum));
 	}
 
 	@Override
-	public boolean postWrite(Posting data) {
-		
-		int result = boardRepo.posting(data);
+	public boolean postWrite(Posting posting) {
+		int result = boardRepo.setPosting(posting);
 		
 		if(result != 1){
 			return false;
@@ -40,8 +38,27 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postModify(Posting posting) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = boardRepo.updateposting(posting);
+		
+		if(result != 1){
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean photoRegister(Posting posting) {
+		int result = boardRepo.updatePhoto(posting);
+		
+		if(result != 1){
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public Integer getPostingId(Posting posting) {
+		return boardRepo.getPostingId(posting);
 	}
 
 	@Override
@@ -85,5 +102,4 @@ public class PostingServiceImpl implements PostingService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
