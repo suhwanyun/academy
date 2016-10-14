@@ -14,10 +14,9 @@
 
 </head>
 <body>
-<div id="wrap">
-<a href="<%=request.getContextPath() %>">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+<jsp:include page="../../header/header.jsp" />
+	<div id="wrap">
+		<div class="upmargin">
 	<h1 class="member">오락 글쓰기</h1>
 	<sform:form method="post" action="#" modelAttribute="postingData"
 			enctype="multipart/form-data">
@@ -59,6 +58,6 @@
 
 		</sform:form>
 	</div>
-
+</div>
 </body>
 </html>

@@ -20,9 +20,10 @@ public class Paging {
 	
 	/** 부가 데이터 */
 	private Object data;
-	
-	/** 부가 데이터 */
 	private Object data2;
+	
+	/** 정렬정보 */
+	private String orderData;
 	
 	public Paging(int page, int size){
 		this(page, size, null);
@@ -33,9 +34,14 @@ public class Paging {
 	}
 	
 	public Paging(int page, int size, Object data, Object data2){
+		this(page, size, data, data2, null);
+	}
+	
+	public Paging(int page, int size, Object data, Object data2, String orderData){
 		this.startIdx = (page - 1) * size + 1;
 		this.endIdx = page * size;
 		this.data = data;
 		this.data2 = data2;
+		this.orderData = orderData;
 	}
 }

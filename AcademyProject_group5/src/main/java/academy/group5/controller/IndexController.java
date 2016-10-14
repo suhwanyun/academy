@@ -9,13 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
+import academy.group5.service.PostingService;
 
 @Controller
 public class IndexController {
@@ -25,6 +25,9 @@ public class IndexController {
 	
 	@Autowired
 	LectureService lecService;
+	
+	@Autowired
+	PostingService postService;
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -86,8 +89,9 @@ public class IndexController {
 	
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
-	public String foodMainPage(){
-	
+	public String foodMainPage(Model model){
+		List<Posting> postingList = postService.postingList("food", 1);
+		model.addAttribute("postingDataList", postingList);
 		return "/food/food";
 	}
 	
