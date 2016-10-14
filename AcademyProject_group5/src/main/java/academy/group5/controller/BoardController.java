@@ -19,17 +19,16 @@ public class BoardController {
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
-	public String addFood(Model model, RedirectAttributes redAttr, @RequestParam Posting data){
+	public String addFood(Model model, RedirectAttributes redAttr, Posting posting){
 		
-		if(postService.postWrite(data)){
+		if(postService.postWrite(posting)){
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return "redirect:/foodMain";
 		} else {
 			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n인터넷 연결을 확인하세요");
-			model.addAttribute("postingData", data);
+			model.addAttribute("posting", posting);
 			return "/food/food_add";
 		}
-		
 	}
 	
 	/** 오락추천 게시판에 글 작성 */

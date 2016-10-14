@@ -120,7 +120,7 @@ public class IndexController {
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
 	public String addFood(Model model){
 		Posting data = new Posting();
-		model.addAttribute("postingData", data);
+		model.addAttribute("posting", data);
 		return "/food/food_add";
 	}
 	

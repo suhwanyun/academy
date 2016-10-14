@@ -38,7 +38,9 @@
 	
 	<insert id="insertPosting" parameterType="posting">
 		insert into Posting
-		values(#{postingId}, #{postingType}, #{userId}, #{, postingTime), #{postingHits},
+		(posting_type, user_id, posting_time, posting_hits, posting_recommand,
+			posting_title, posting_content, posting_photo)
+		values(#{postingType}, #{userId}, sysdate, #{postingHits},
 				#{postingRecommand}, #{postingTitle}, #{postingContent}, #{postingPhoto}) 
 	</insert>
 
