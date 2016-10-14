@@ -38,8 +38,8 @@
 						<td>${list.lectureEnd }교시</td>
 					</tr>
 					<tr>
-						<td>강의 장소</td>
-						<td>강의 요일</td>
+						<th>강의 장소</th>
+						<th>강의 요일</th>
 					</tr>
 					<tr>
 						<td>${list.lecturePlace }</td>
