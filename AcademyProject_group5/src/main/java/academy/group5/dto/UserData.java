@@ -57,11 +57,5 @@ public class UserData {
 	public UserData(String userId, String userPass){
 		this.userId = userId;
 		this.userPass = userPass;
-		this.userName = null;
-		this.userMileage = null;
-		this.phoneId = null;
-		this.phoneNum = null;
-		this.passQuestion = null;
-		this.passAnswer = null;
 	}
 }
