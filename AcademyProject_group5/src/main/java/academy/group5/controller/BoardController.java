@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
@@ -29,15 +30,24 @@ public class BoardController {
 	 * @throws IllegalStateException */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
 	public String addFood(Model model, HttpSession session, RedirectAttributes redAttr,
-			@RequestParam String postingTitle,
-			@RequestParam String postingContent,
-			@RequestParam String postingType,
+			MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
 		// 로그인된 id 확인
 		String userId = ((UserData)session.getAttribute("user")).getUserId();
 		
+		// multipart/form-data 타입 form 데이터 전달
+		String postingType = mrequest.getParameter("postingType");
+		String postingTitle = mrequest.getParameter("postingTitle");
+		String postingContent = mrequest.getParameter("postingContent");
+		
 		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent);
+		
+		if(postingType == null || postingTitle == null || postingContent == null){
+			model.addAttribute("msg", "입력된 정보가 올바르지 않습니다.");
+			model.addAttribute("posting", postingData);
+			return "/food/food_add";
+		}
 		
 		if(postService.postWrite(postingData)){
 			if(uploadPhoto != null){
