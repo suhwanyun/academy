@@ -541,7 +541,7 @@
 		padding: 0.75em 1em;
 	}
 
-	
+	input[type="checkbox"],
 	input[type="radio"] {
 		-moz-appearance: none;
 		-webkit-appearance: none;
@@ -554,11 +554,13 @@
 		width: 1em;
 		z-index: -1;
 	}
-	input[type="checkbox"]{
-	margin-left:4em;
-		margin-top:1em;
-		margin-right:-2em;
-	}
+
+
+
+
+
+
+
  
 		input[type="checkbox"] + label,
 		input[type="radio"] + label {
