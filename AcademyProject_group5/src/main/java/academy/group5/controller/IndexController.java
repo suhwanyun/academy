@@ -118,25 +118,22 @@ public class IndexController {
 	
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
-	public String addFood(Model model){
-		Posting data = new Posting();
-		model.addAttribute("posting", data);
+	public String addFood(){
+		
 		return "/food/food_add";
 	}
 	
 	/** 오락추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/playjsp", method=RequestMethod.GET)
-	public String addPlay(Model model){
-		Posting data = new Posting();
-		model.addAttribute("postingData", data);
+	public String addPlay(){
+
 		return "/play/play_add";
 	}
 	
 	/** 명소추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/placejsp", method=RequestMethod.GET)
-	public String addPlace(Model model){
-		Posting data = new Posting();
-		model.addAttribute("postingData", data);
+	public String addPlace(){
+
 		return "/place/place_add";
 	}
 	

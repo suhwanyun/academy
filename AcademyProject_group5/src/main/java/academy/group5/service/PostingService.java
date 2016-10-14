@@ -26,6 +26,18 @@ public interface PostingService {
 	 */
 	boolean postModify(Posting posting);
 	/**
+	 * 작성한 게시글 id 확인
+	 * @param posting
+	 * @return
+	 */
+	Integer getPostingId(Posting posting);
+	/**
+	 * 작성한 글에 이미지 등록
+	 * @param posting
+	 * @return
+	 */
+	boolean photoRegister(Posting posting);
+	/**
 	 * 게시글 삭제
 	 * @param postingId
 	 * @param postingType
