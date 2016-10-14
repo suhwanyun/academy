@@ -73,8 +73,8 @@
 	body {
 		background-image:url("../images/back01.png");
 			background-repeat: no-repeat;
-			
 			background-size: cover;
+			background-position: center;
 			
 			
 	}
@@ -1540,6 +1540,7 @@ Footer
 		width: 100%;
 		text-align: center;
 		z-index: 9999;
+	
 	}
 	
 		#footer.show {
