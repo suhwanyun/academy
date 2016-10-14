@@ -557,7 +557,7 @@
 	input[type="checkbox"]{
 	
 	}
-
+ 
 		input[type="checkbox"] + label,
 		input[type="radio"] + label {
 			text-decoration: none;
