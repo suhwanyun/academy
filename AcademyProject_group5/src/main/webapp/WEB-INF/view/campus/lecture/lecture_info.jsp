@@ -49,8 +49,8 @@
 			</table>
 			<table>
 				<tr>
-					<td><input type="checkbox" name="ban" value="yes"> </td>
-					<td><label for="ban">반장여부</label> </td>
+					<td><input type="checkbox" name="ban" value="yes"> <label for="ban">반장여부</label></td>
+					
 					<td><button>신청</button></td>
 					<td><button>취소</button></td>
 				</tr>
