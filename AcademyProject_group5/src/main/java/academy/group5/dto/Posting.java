@@ -47,4 +47,11 @@ public class Posting {
 	*//** 추천 목록. *//*
 	private Set<Recommend> recommendSet;*/
 
+	public Posting(String postingType, String userId, String postingTitle, String postingContent) {
+		super();
+		this.postingType = postingType;
+		this.userId = userId;
+		this.postingTitle = postingTitle;
+		this.postingContent = postingContent;
+	}
 }
