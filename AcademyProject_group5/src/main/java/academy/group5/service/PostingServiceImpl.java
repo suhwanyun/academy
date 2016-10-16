@@ -57,7 +57,7 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
-	public int getPostingId(Posting posting) {
+	public Integer getPostingId(Posting posting) {
 		return boardRepo.getPostingId(posting);
 	}
 

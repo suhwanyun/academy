@@ -32,14 +32,14 @@
 
 					<td><label for="postingTitle">제 목</label></td>
 					<td><input type="text" maxlength="30"
-							name="postingTitle" /></td>
+							name="postingTitle" value="${posting.postingTitle }"/></td>
 
 				</tr>
 
 				<tr>
 
 					<td><label for="postingContent">내 용</label></td>
-					<td><textarea rows="13" cols="40" maxlength="1300" name="postingContent"></textarea></td>
+					<td><textarea rows="13" cols="40" maxlength="1300" name="postingContent">${posting.postingContent }</textarea></td>
 
 				</tr>
 				<tr>

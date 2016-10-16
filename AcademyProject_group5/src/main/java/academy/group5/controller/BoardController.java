@@ -26,6 +26,7 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+	private static final String IMG_PATH = "d:/academyImg/";
 	@Autowired
 	PostingService postService;
 	
@@ -50,7 +51,7 @@ public class BoardController {
 		// 에러 발생여부 플래그
 		boolean isError = false;
 		
-		if(postingType == null || postingTitle == null || postingContent == null) {
+		if(userId == null || postingType == null || postingTitle == null || postingContent == null) {
 			model.addAttribute("msg", "잘못된 접근입니다.");
 			isError = true;		
 		} else if(postingTitle.equals("")){
@@ -69,23 +70,25 @@ public class BoardController {
 				String fileTypeStr = originalName.substring(originalName.lastIndexOf("."), originalName.length());
 				// 게시글 번호
 				Integer postingId = postService.getPostingId(postingData);
-				
-				if(postingId == 0){
+
+				if(postingId == null){
 					return uploadError(redAttr);
 				}
 				// 파일명 : 게시판종류 + 게시글번호 + 확장자
 				String fileName = postingType + "_" + postingId + fileTypeStr;			
-				File file = new File(fileName);
+				File file = new File(IMG_PATH + fileName);
 				
 				// 파일 업로드
 				try {
 					uploadPhoto.transferTo(file);
 				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
 					return uploadError(redAttr);
 				}
 				
-				// DB에 저장된 파일의 이름을 등록
 				postingData.setPostingPhoto(fileName);
+				postingData.setPostingId(postingId);
+				// DB에 저장된 파일의 이름을 등록
 				if(!postService.photoRegister(postingData)){
 					return uploadError(redAttr);
 				}
@@ -93,10 +96,10 @@ public class BoardController {
 			
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return "redirect:/foodMain";
-		} else {
+		} else if(!isError){
 			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n인터넷 연결을 확인하세요");
 		}
-		logger.trace("iserror:{}", isError);
+
 		// 에러가 발생하여 작성화면으로 돌아가기
 		model.addAttribute("posting", postingData);
 		return "/food/food_add";

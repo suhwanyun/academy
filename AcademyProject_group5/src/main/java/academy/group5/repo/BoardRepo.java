@@ -46,7 +46,7 @@ public class BoardRepo {
 	}
 	
 	/** 게시글 번호 확인 */
-	public int getPostingId(Posting selectData){
+	public Integer getPostingId(Posting selectData){
 		String stmt = BOARD_NS + "selectPostingId";
 		return session.selectOne(stmt, selectData);
 	}

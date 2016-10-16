@@ -61,7 +61,8 @@
 	<select id="selectPostingId" parameterType="posting" resultType="int">
 		select posting_id
 		from Posting
-		where posting_type = #{postingType} and posting_id = #{postingId}
+		where posting_type = #{postingType} and user_id = #{userId} and rownum = 1
+		order by posting_time
 	</select>
 
 </mapper>
