@@ -2,7 +2,7 @@ $("#loginBtn").click(
 		function() {
 			$.ajax({
 				type : "post",
-				url : "login",
+				url : "/AcedemyProject_group5/login",
 				data : {
 					userId : $("#userId").val(),
 					userPass : $("#userPass").val()
@@ -23,8 +23,8 @@ $("#loginBtn").click(
 
 $("#searchBtn").click(function() {
 
-	$(location).attr('href', "searchidpw");
+	$(location).attr('href', "/AcedemyProject_group5/searchidpw");
 });
 $("#joinBtn").click(function() {
-	$(location).attr('href', "joinjsp");
+	$(location).attr('href', "/AcedemyProject_group5/joinjsp");
 });
