@@ -9,7 +9,7 @@ $("#loginBtn").click(
 				},
 				success : function(res) {
 					if (res == "true") {
-						$(location).attr('href', "main");
+						$(location).attr('href', "/AcedemyProject_group5/main");
 					} else {
 						alert("아이디, 비밀번호를 확인하세요");
 					}
