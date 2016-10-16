@@ -37,7 +37,7 @@
 		        order by term_start
 		        ) sub
 		    )
-		where rnum = 1;
+		where rnum = 1
 	</select>
 	
 	<select id="selectTermEndDate" resultType="date">
@@ -49,7 +49,7 @@
 		        order by term_end
 		        ) sub
 		    )
-		where rnum = 1;
+		where rnum = 1
 	</select>
 	
 	<!-- 반장 투표 관련 쿼리 -->
