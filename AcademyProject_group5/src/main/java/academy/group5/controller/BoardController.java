@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import academy.group5.service.PostingService;
 
 @Controller
 public class BoardController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
 	PostingService postService;
@@ -40,17 +44,25 @@ public class BoardController {
 		String postingType = mrequest.getParameter("postingType");
 		String postingTitle = mrequest.getParameter("postingTitle");
 		String postingContent = mrequest.getParameter("postingContent");
-		
+			
 		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent);
 		
-		if(userId == null || postingType == null || postingTitle == null || postingContent == null){
-			model.addAttribute("msg", "입력된 정보가 올바르지 않습니다.");
-			model.addAttribute("posting", postingData);
-			return "/food/food_add";
-		}
+		// 에러 발생여부 플래그
+		boolean isError = false;
 		
-		if(postService.postWrite(postingData)){
-			if(uploadPhoto != null){
+		if(postingType == null || postingTitle == null || postingContent == null) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			isError = true;		
+		} else if(postingTitle.equals("")){
+			model.addAttribute("msg", "제목을 입력해주세요.");
+			isError = true;
+		} else if(postingContent.equals("")){
+			model.addAttribute("msg", "내용을 입력해주세요.");
+			isError = true;
+		}
+
+		if(!isError && postService.postWrite(postingData)){
+			if(!uploadPhoto.isEmpty()){
 				// 원본 파일명
 				String originalName = uploadPhoto.getOriginalFilename();
 				// 파일 확장자 추출
@@ -83,9 +95,12 @@ public class BoardController {
 			return "redirect:/foodMain";
 		} else {
 			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n인터넷 연결을 확인하세요");
-			model.addAttribute("posting", postingData);
-			return "/food/food_add";
 		}
+		logger.trace("iserror:{}", isError);
+		// 에러가 발생하여 작성화면으로 돌아가기
+		model.addAttribute("posting", postingData);
+		return "/food/food_add";
+		
 	}
 	
 	// 이미지 업로드 실패시 처리

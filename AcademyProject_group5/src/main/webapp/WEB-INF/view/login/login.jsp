@@ -13,10 +13,7 @@
 	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 
 </head>
-	<c:if test="${!empty msg}">
-		<script>alert('${msg}');</script>
-		<c:remove var="msg"/>
-	</c:if>
+<jsp:include page="<%=request.getContextPath() %>/message.jsp" />
 <form>   <!--  로그인하기전 화면 -->
 <div id="wrap">
 <a href="<%=request.getContextPath() %>"><img 

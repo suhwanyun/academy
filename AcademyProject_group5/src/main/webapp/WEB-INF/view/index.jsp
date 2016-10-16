@@ -15,12 +15,6 @@
 </head>
 
 <body>
-	<c:if test="${!empty msg}">
-		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var="msg" />
-	</c:if>
 	<jsp:include page="../header/header.jsp" />
 
 	<!-- Main -->

@@ -13,12 +13,6 @@
 <title>식사게시판</title>
 </head>
 <body>
-	<c:if test="${!empty msg}">
-		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var="msg" />
-	</c:if>
 	<!-- 테이블 시작 -->
 	<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">

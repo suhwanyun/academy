@@ -14,6 +14,8 @@
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 </head>
 <body>
+	<jsp:include page="<%=request.getContextPath() %>/message.jsp" />
+	
 	<header id="header" class="hide">
 		<c:choose>
 			<c:when test="${!empty user }">
