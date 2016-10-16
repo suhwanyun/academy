@@ -5,10 +5,10 @@
 <html>
 	<body>
 		<c:if test="${!empty msg}">
-		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var="msg" />
-	</c:if>
+			<script>
+				alert('${msg}');
+			</script>
+			<c:remove var="msg" />
+		</c:if>
 	</body>
 </html>

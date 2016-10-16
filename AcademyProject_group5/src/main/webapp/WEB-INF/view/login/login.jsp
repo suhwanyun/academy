@@ -13,7 +13,8 @@
 	href="<%=request.getContextPath() %>/css/font-awesome.css" />
 
 </head>
-<jsp:include page="<%=request.getContextPath() %>/message.jsp" />
+<body>
+<jsp:include page="../message.jsp" />
 <form>   <!--  로그인하기전 화면 -->
 <div id="wrap">
 <a href="<%=request.getContextPath() %>"><img 

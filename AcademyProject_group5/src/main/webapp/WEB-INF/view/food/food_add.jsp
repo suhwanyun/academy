@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<jsp:include page="<%=request.getContextPath() %>/message.jsp" />
+<jsp:include page="../message.jsp" />
 
 <div id="wrap">
 <a href="<%=request.getContextPath() %>">
