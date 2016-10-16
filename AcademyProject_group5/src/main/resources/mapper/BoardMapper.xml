@@ -60,9 +60,14 @@
 	
 	<select id="selectPostingId" parameterType="posting" resultType="int">
 		select posting_id
-		from Posting
-		where posting_type = #{postingType} and user_id = #{userId} and rownum = 1
-		order by posting_time
+		from(select rownum as rnum, sub.*
+		    from(select posting_id
+		        from Posting
+		        where posting_type = #{postingType} and user_id = #{userId}
+		        order by posting_id desc
+		        ) sub
+		    )
+		where rnum = 1;
 	</select>
 
 </mapper>
