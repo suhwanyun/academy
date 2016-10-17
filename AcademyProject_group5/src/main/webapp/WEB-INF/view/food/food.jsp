@@ -50,13 +50,13 @@
 				<table style="text-align: center">
 					<colgroup>
 						<col width="20%">
-						<col width="80%">
-						
+						<col width="35%">
+						<col width="10%">
+						<col width="35%">
 					</colgroup>
 					<c:forEach items="${postingDataList }" var="list">
 						<tr>
-							<td rowspan="2"><img class="imgboard" style="position:relative;  width:20%;"
-								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
+							<td rowspan="2"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
 							<td colspan="3">${list.postingTitle }</td>
 						</tr>
 						<tr> 
@@ -65,8 +65,8 @@
 							<td>${list.postingTime }</td>
 						</tr>
 						</c:forEach>
-						<tr>
-							<td colspan="4" align="center"><button>더 보기</button></td>
+						<tr id="beforeLocation">
+							<td colspan="4" align="center" id="moreBtn"><button>더 보기</button></td>
 						</tr>
 					
 				</table>
@@ -75,5 +75,50 @@
 	</div>
 	<!-- 테이블 종료 -->
 </body>
-
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+<c:url value="/postingList" var="postingList"/>
+<c:url value="/postingSearch" var="postingSearch"/>
+var pageIndex = 1;
+$("#moreBtn").click(function(){
+	
+	pageIndex++;
+	
+	$.ajax({
+		type : "get",
+		url : "${nextBoardList}",
+		data : {
+			page : pageIndex
+		},
+		 success : function(result) {
+			var itemCount = 0;
+			$(result).each(function(index,item){
+				itemCount++;
+				$("#beforeLocation").before(
+					$("<tr>"+
+					"<td rowspan='2'><img class='imgBoard'"+
+					"src="<%=request.getContextPath()%>/upload/"+
+					${list.postingPhoto}+  "/></td>"+
+					"<td colspan='3'>"+${list.postingTitle }+"</td>"+
+				"</tr>"+
+				"<tr>"+ 
+					"<td>"+${list.userId }+"</td>"+
+					"<td>"+${list.postingRecommand }+"</td>"+
+					"<td>"+${list.postingTime }+"</td>"+
+				"</tr>"));
+				
+			});
+			
+			if(itemCount == 0){
+				alert("더 이상 목록이 없습니다.");
+			}
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "message:"
+					+ request.responseText + "\n" + "error:"
+					+ error);
+		}
+	});
+});
+</script>
 </html>
