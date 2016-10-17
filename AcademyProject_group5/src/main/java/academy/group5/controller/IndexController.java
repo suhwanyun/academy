@@ -98,15 +98,19 @@ public class IndexController {
 	
 	/** 오락 추천 게시판 페이지 */
 	@RequestMapping(value="/playMain", method=RequestMethod.GET)
-	public String playMainPage(){
-	
+	public String playMainPage(HttpSession session){
+		List<Posting> postingList = postService.postingList(1, "play");
+		session.setAttribute("postingDataList", postingList);
+		session.setAttribute("postingType", "play");
 		return "/play/play";
 	}
 	
 	/** 명소 추천 게시판 페이지 */
 	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
-	public String placeMainPage(){
-	
+	public String placeMainPage(HttpSession session){
+		List<Posting> postingList = postService.postingList(1, "place");
+		session.setAttribute("postingDataList", postingList);
+		session.setAttribute("postingType", "place");
 		return "/place/place";
 	}
 	
