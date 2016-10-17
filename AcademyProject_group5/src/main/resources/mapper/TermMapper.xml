@@ -30,16 +30,26 @@
 	
 	<select id="selectAfterTermStartingDate" resultType="date">
 		select term_start
-		from Term
-		where term_start &gt; to_char(sysdate, 'YYYY-mm-dd') and rownum = 1
-		order by term_start
+		from(select rownum as rnum, sub.*
+		    from(select term_start
+		        from Term
+		        where term_start > to_char(sysdate, 'YYYY-mm-dd')
+		        order by term_start
+		        ) sub
+		    )
+		where rnum = 1
 	</select>
 	
 	<select id="selectTermEndDate" resultType="date">
 		select term_end
-		from Term
-		where term_end &gt; to_char(sysdate, 'YYYY-mm-dd') and rownum = 1
-		order by term_end
+		from(select rownum as rnum, sub.*
+			from(select term_end
+		        from Term
+		        where term_end > to_char(sysdate, 'YYYY-mm-dd')
+		        order by term_end
+		        ) sub
+		    )
+		where rnum = 1
 	</select>
 	
 	<!-- 반장 투표 관련 쿼리 -->
