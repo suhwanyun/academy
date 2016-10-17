@@ -43,7 +43,7 @@
 								<option>제목+내용</option>
 						</select></td>
 						<td colspan="2"><input type="search" id="search"></td>
-						<td><input type="button" class="boardBtn" value="찾기"></td>
+						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>
 					</tr>
 
 				</table>
@@ -79,6 +79,34 @@
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
+	$("#searchBtn").click(function(){
+		$.ajax({
+			type : "get",
+			url : "${lectureListSearch}",
+			data : {
+				searchType : $("#serchType").val(),
+				searchData : $("#serachInput").val()
+			},
+			 success : function(result) {
+				 $(".tableData").remove();
+				 pageIndex = 1;
+				 if(result.length==0){
+					 alert("검색 결과가 없습니다.");
+				 }else{
+				 $(result).each(function(index,item){
+						$("#beforeLocation").before(
+							$("<tr class = 'tableData'><td>"+
+							"<a href=<%=request.getContextPath() %>"+
+							"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
+							">"+item.lectureName+"</a></td>"+
+							  "<td>"+item.professorName+"</td>"+
+							  "<td>"+item.lectureClass+"</td></tr>"));
+					});
+				 }
+			 } 
+		
+		});
+	});
 var pageIndex = 1;
 $("#moreBtn").click(function(){
 	
