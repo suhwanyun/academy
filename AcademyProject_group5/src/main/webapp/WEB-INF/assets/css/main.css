@@ -1833,4 +1833,10 @@ margin:1em auto;
 }
 #beforeLocation td{
 padding: 0.75em 0.75em;
+text-align:right;
+
+
+}
+#beforeLocation button{
+	
 }

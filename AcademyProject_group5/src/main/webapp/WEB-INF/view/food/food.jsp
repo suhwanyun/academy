@@ -70,8 +70,8 @@
 						</tr>
 						</c:forEach>
 						<tr id="beforeLocation">
-							<td colspan="3" align="center"><button id="moreBtn">더보기</button></td>
-							<td align="right"><button>맨 위로</button></td></tr>
+							<td colspan="3"><button  id="moreBtn">더보기</button></td>
+							<td><button>맨 위로</button></td></tr>
 					
 				</table>
 				
