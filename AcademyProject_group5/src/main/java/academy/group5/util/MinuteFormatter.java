@@ -12,9 +12,12 @@ import academy.group5.dto.etc.DateDto;
 
 public class MinuteFormatter implements Formatter<DateDto>{
 	
+	private static final Logger logger = LoggerFactory.getLogger(MinuteFormatter.class);
+	
 	private final SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	@Override
 	public String print(DateDto object, Locale locale) {
+		logger.trace("dto:{}, str:{}", object.getTime(), fm.format(object.getTime()));
 		return fm.format(object.getTime());
 	}
 
