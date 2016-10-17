@@ -5,6 +5,7 @@ CREATE SEQUENCE SEQ_posting_food_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_game_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_attraction_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_lecture_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_comment_no INCREMENT BY 1 START WITH 1;
 
 CREATE OR REPLACE TRIGGER TRI_noti_no BEFORE INSERT ON Notifications
 for each row
@@ -69,6 +70,15 @@ when (LPAD(new.posting_type, 4) = 'lect')
 BEGIN
   select SEQ_posting_attraction_no.nextval
     into :new.posting_id
+    from dual; 
+END;
+/
+
+CREATE OR REPLACE TRIGGER TRI_comment_no BEFORE INSERT ON PostingComment
+for each row
+BEGIN
+  select SEQ_comment_no.nextval
+    into :new.comment_id
     from dual; 
 END;
 /
