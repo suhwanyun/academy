@@ -28,14 +28,40 @@ public class BoardController {
 	
 	private final static String DEFAULT_PHOTO_NAME = "default.jpg";
 	
-	/** 식사(먹거리)추천 게시판에 글 작성 
-	 * @throws IOException 
-	 * @throws IllegalStateException */
+	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
 	public String addFood(Model model, HttpSession session, RedirectAttributes redAttr,
 			MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
+		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
+							"redirect:/foodMain", "/food/food_add");	
+	}
+	
+	/** 오락추천 게시판에 글 작성 */
+	@RequestMapping(value="/write/play", method=RequestMethod.POST)
+	public String addPlay(Model model, HttpSession session, RedirectAttributes redAttr,
+			MultipartHttpServletRequest mrequest,
+			@RequestParam(required=false) MultipartFile uploadPhoto){
+		
+		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
+				"redirect:/playMain", "/play/play_add");
+	}
+	
+	/** 명소추천 게시판에 글 작성 */
+	@RequestMapping(value="/write/place", method=RequestMethod.POST)
+	public String addPlace(Model model, HttpSession session, RedirectAttributes redAttr,
+			MultipartHttpServletRequest mrequest,
+			@RequestParam(required=false) MultipartFile uploadPhoto){
+		
+		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
+				"redirect:/placeMain", "/place/place_add");
+	}
+	
+	/** 게시판 글 작성 로직 */
+	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
+			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
+			String okMapping, String failMapping){
 		// 로그인된 id 확인
 		String userId = ((UserData)session.getAttribute("user")).getUserId();
 		
@@ -68,33 +94,20 @@ public class BoardController {
 				// 이미지 업로드 실패시 처리
 				if(uploadResult == -1){
 					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
-					return "redirect:/foodMain";
+					return okMapping;
 				}
 			}
 			
 			/* 정상 처리 */
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
-			return "redirect:/foodMain";
+			return okMapping;
 		} else if(!isError){
 			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n인터넷 연결을 확인하세요");
 		}
 
 		// 에러가 발생하여 작성화면으로 돌아가기
 		model.addAttribute("posting", postingData);
-		return "/food/food_add";
-		
-	}
-	
-	/** 오락추천 게시판에 글 작성 */
-	@RequestMapping(value="/write/play", method=RequestMethod.POST)
-	public String addPlay(Model model, @RequestParam Posting data){
-		return "/play/play_add";
-	}
-	
-	/** 명소추천 게시판에 글 작성 */
-	@RequestMapping(value="/write/place", method=RequestMethod.POST)
-	public String addPlace(Model model, @RequestParam Posting data){
-		return "/place/place_add";
+		return failMapping;
 	}
 	
 	/** 게시글 목록 표시 */
