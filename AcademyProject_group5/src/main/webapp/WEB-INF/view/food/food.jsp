@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,19 +48,22 @@
 
 				</table>
 				<table style="text-align: center">
-					<tr>
-						<td rowspan="2"><a
-							href="<%=request.getContextPath()%>/food_info">사진</a></td>
-						<td colspan="3">제목</td>
-					</tr>
-					<tr>
-						<td>작성자</td>
-						<td>추천수</td>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="center"><button>더 보기</button></td>
-					</tr>
+					<c:forEach items="${postingDataList }" var="list">
+						<tr>
+							<td rowspan="2"><img
+								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}" /></td>
+							<td colspan="3">${list.postingTitle }</td>
+						</tr>
+						<tr>
+							<td>${list.userId }</td>
+							<td>${list.postingRecommand }</td>
+							<td>${list.postingTime }</td>
+						</tr>
+						</c:forEach>
+						<tr>
+							<td colspan="4" align="center"><button>더 보기</button></td>
+						</tr>
+					
 				</table>
 			</div>
 		</div>

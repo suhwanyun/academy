@@ -14,14 +14,13 @@
 
 </head>
 <body>
-<jsp:include page="../message.jsp" />
 
 <div id="wrap">
 <a href="<%=request.getContextPath() %>">
 	<img class="circular--logo"
 	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
-		<form method="post" action="food" enctype="multipart/form-data">
+		<form method="post" action="food" >
 			<table>
 				<colgroup>
 					<col width="10%">
@@ -32,20 +31,20 @@
 
 					<td><label for="postingTitle">제 목</label></td>
 					<td><input type="text" maxlength="30"
-							name="postingTitle" value="${posting.postingTitle }"/></td>
+							name="postingTitle" /></td>
 
 				</tr>
 
 				<tr>
 
 					<td><label for="postingContent">내 용</label></td>
-					<td><textarea rows="13" cols="40" maxlength="1300" name="postingContent">${posting.postingContent }</textarea></td>
+					<td><textarea rows="13" cols="40" maxlength="1300" name="postingContent"></textarea></td>
 
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td colspan="2" align="left"><label for="fileInput">사진 첨부</label>
 					<input id="fileInput" type="file" name="uploadPhoto" accept="image/*"/></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>
 					<button type="reset">다시 작성</button></td>
