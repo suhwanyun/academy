@@ -51,9 +51,9 @@
 				<table style="text-align: center;" class="imgTable">
 					<colgroup>
 						<col width="20%">
-						<col width="35%">
+						<col width="20%">
 						<col width="10%">
-						<col width="35%">
+						<col width="50%">
 					</colgroup>
 					
 					<c:forEach items="${postingDataList }" var="list">
@@ -70,8 +70,8 @@
 						</tr>
 						</c:forEach>
 						<tr id="beforeLocation">
-							<td colspan="4" align="center" id="moreBtn"><button>더 보기</button></td>
-						</tr>
+							<td colspan="3" align="center"><button id="moreBtn">더보기</button></td>
+							<td align="right"><button>맨 위로</button></td></tr>
 					
 				</table>
 				
