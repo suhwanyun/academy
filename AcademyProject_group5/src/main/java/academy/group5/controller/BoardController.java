@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +22,6 @@ import academy.group5.service.PostingService;
 @Controller
 public class BoardController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
-	private static final String IMG_PATH = "d:/academyImg/";
 	@Autowired
 	PostingService postService;
 	
@@ -63,37 +58,18 @@ public class BoardController {
 		}
 
 		if(!isError && postService.postWrite(postingData)){
+			// 이미지 업로드 처리
 			if(!uploadPhoto.isEmpty()){
-				// 원본 파일명
-				String originalName = uploadPhoto.getOriginalFilename();
-				// 파일 확장자 추출
-				String fileTypeStr = originalName.substring(originalName.lastIndexOf("."), originalName.length());
-				// 게시글 번호
-				Integer postingId = postService.getPostingId(postingData);
-
-				if(postingId == null){
-					return uploadError(redAttr);
-				}
-				// 파일명 : 게시판종류 + 게시글번호 + 확장자
-				String fileName = postingType + "_" + postingId + fileTypeStr;			
-				File file = new File(IMG_PATH + fileName);
+				int uploadResult = postService.upload(uploadPhoto, postingData);
 				
-				// 파일 업로드
-				try {
-					uploadPhoto.transferTo(file);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-					return uploadError(redAttr);
-				}
-				
-				postingData.setPostingPhoto(fileName);
-				postingData.setPostingId(postingId);
-				// DB에 저장된 파일의 이름을 등록
-				if(!postService.photoRegister(postingData)){
-					return uploadError(redAttr);
+				// 이미지 업로드 실패시 처리
+				if(uploadResult == -1){
+					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
+					return "redirect:/foodMain";
 				}
 			}
 			
+			/* 정상 처리 */
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return "redirect:/foodMain";
 		} else if(!isError){
@@ -104,12 +80,6 @@ public class BoardController {
 		model.addAttribute("posting", postingData);
 		return "/food/food_add";
 		
-	}
-	
-	// 이미지 업로드 실패시 처리
-	private String uploadError(RedirectAttributes redAttr){
-		redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
-		return "redirect:/foodMain";
 	}
 	
 	/** 오락추천 게시판에 글 작성 */

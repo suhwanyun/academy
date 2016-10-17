@@ -2,6 +2,8 @@ package academy.group5.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
 
@@ -37,6 +39,14 @@ public interface PostingService {
 	 * @return
 	 */
 	boolean photoRegister(Posting posting);
+	
+	/**
+	 * 이미지 업로드 처리
+	 * @param uploadData
+	 * @param postingData
+	 * @return
+	 */
+	int upload(MultipartFile uploadData, Posting postingData);
 	/**
 	 * 게시글 삭제
 	 * @param postingId
