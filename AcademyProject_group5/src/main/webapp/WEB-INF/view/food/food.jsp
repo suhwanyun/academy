@@ -59,7 +59,7 @@
 								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
 							<td colspan="3">${list.postingTitle }</td>
 						</tr>
-						<tr>
+						<tr> 
 							<td>${list.userId }</td>
 							<td>${list.postingRecommand }</td>
 							<td>${list.postingTime }</td>
