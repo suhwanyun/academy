@@ -7,7 +7,7 @@
 	<select id="selectAllPosting" parameterType="paging" resultType="posting">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi:ss') as posting_time, posting_hits, 
+			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time, posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{data}
@@ -39,8 +39,8 @@
 	<insert id="insertPosting" parameterType="posting">
 		insert into Posting
 		(posting_type, user_id, posting_time, posting_hits,
-			posting_recommand, posting_title, posting_content)
-		values(#{postingType}, #{userId}, sysdate, 0, 0, #{postingTitle}, #{postingContent}) 
+			posting_recommand, posting_title, posting_content, posting_photo)
+		values(#{postingType}, #{userId}, sysdate, 0, 0, #{postingTitle}, #{postingContent}, #{postingPhoto}) 
 	</insert>
 	
 	<update id="updatePosting" parameterType="posting">

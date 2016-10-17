@@ -24,7 +24,7 @@ public class Posting {
 	private String userId;
 
 	/** 게시글 등록 날짜. */
-	private Date postingTime;
+	private String postingTime;
 
 	/** 게시판 조회수. */
 	private Integer postingHits;
@@ -47,11 +47,13 @@ public class Posting {
 	*//** 추천 목록. *//*
 	private Set<Recommend> recommendSet;*/
 
-	public Posting(String postingType, String userId, String postingTitle, String postingContent) {
+	public Posting(String postingType, String userId, 
+			String postingTitle, String postingContent, String postingPhoto) {
 		super();
 		this.postingType = postingType;
 		this.userId = userId;
 		this.postingTitle = postingTitle;
 		this.postingContent = postingContent;
+		this.postingPhoto = postingPhoto;
 	}
 }

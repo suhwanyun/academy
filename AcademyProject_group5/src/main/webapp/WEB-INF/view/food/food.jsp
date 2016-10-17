@@ -88,10 +88,9 @@ var pageIndex = 1;
 $("#moreBtn").click(function(){
 	
 	pageIndex++;
-	
 	$.ajax({
 		type : "get",
-		url : "${nextBoardList}",
+		url : "${postingList}",
 		data : {
 			page : pageIndex
 		},
@@ -102,16 +101,15 @@ $("#moreBtn").click(function(){
 				$("#beforeLocation").before(
 					$("<tr>"+
 					"<td rowspan='2'><img class='imgBoard'"+
-					"src="<%=request.getContextPath()%>/upload/"+
-					${list.postingPhoto}+  "/></td>"+
-					"<td colspan='3'>"+${list.postingTitle }+"</td>"+
+					"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
+					"<td colspan='3'>"+item.postingTitle+"</td>"+
 				"</tr>"+
 				"<tr>"+ 
-					"<td>"+${list.userId }+"</td>"+
-					"<td>"+${list.postingRecommand }+"</td>"+
-					"<td>"+${list.postingTime }+"</td>"+
+					"<td>"+item.userId+"</td>"+
+					"<td>"+item.postingRecommand+"</td>"+
+					"<td>"+item.postingTime+"</td>"+
 				"</tr>"));
-				
+				console.log(item.postingPhoto);
 			});
 			
 			if(itemCount == 0){

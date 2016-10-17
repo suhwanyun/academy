@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.service.PostingService;
@@ -26,6 +25,8 @@ public class BoardController {
 	
 	@Autowired
 	PostingService postService;
+	
+	private final static String DEFAULT_PHOTO_NAME = "default.jpg";
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 
 	 * @throws IOException 
@@ -43,7 +44,7 @@ public class BoardController {
 		String postingTitle = mrequest.getParameter("postingTitle");
 		String postingContent = mrequest.getParameter("postingContent");
 			
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent);
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
 		
 		// 에러 발생여부 플래그
 		boolean isError = false;
