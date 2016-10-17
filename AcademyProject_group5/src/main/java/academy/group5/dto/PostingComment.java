@@ -1,7 +1,6 @@
 package academy.group5.dto;
 
-import java.util.Date;
-
+import academy.group5.dto.etc.DateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +29,7 @@ public class PostingComment {
 	private Integer commentParentId;
 
 	/** 댓글등록 날짜. */
-	private Date commentTime;
+	private DateDto commentTime;
 
 	/** 댓글 내용. */
 	private String commentContent;

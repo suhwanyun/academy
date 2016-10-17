@@ -3,6 +3,7 @@ package academy.group5.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import academy.group5.interceptor.SessionCheckInterceptor;
+import academy.group5.util.MinuteFormatter;
 
 // Spring@MVC에 대한 빈들을 설정
 @Configuration
@@ -46,6 +48,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		resolver.setDefaultEncoding("utf-8");
 		return resolver;
+	}
+	
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addFormatter(new MinuteFormatter());
+		super.addFormatters(registry);
 	}
 	
 	@Override

@@ -1,7 +1,6 @@
 package academy.group5.dto;
 
-import java.util.Date;
-
+import academy.group5.dto.etc.DateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,7 @@ public class Posting {
 	private String userId;
 
 	/** 게시글 등록 날짜. */
-	private Date postingTime;
+	private DateDto postingTime;
 
 	/** 게시판 조회수. */
 	private Integer postingHits;
