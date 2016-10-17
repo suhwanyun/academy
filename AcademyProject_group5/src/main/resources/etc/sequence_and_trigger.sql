@@ -3,7 +3,7 @@ CREATE SEQUENCE SEQ_lecture_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_mileage_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_food_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_game_no INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_posting_attraction_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_posting_place_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_lecture_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_comment_no INCREMENT BY 1 START WITH 1;
 
@@ -54,21 +54,21 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE TRIGGER TRI_posting_attraction_no BEFORE INSERT ON Posting
+CREATE OR REPLACE TRIGGER TRI_posting_place_no BEFORE INSERT ON Posting
 for each row
-when (new.posting_type = 'attr')
+when (new.posting_type = 'place')
 BEGIN
-  select SEQ_posting_attraction_no.nextval
+  select SEQ_posting_place_no.nextval
     into :new.posting_id
     from dual; 
 END;
 /
 
-CREATE OR REPLACE TRIGGER TRI_posting_lecture_no BEFORE INSERT ON Posting
+create or replace TRIGGER TRI_posting_lecture_no BEFORE INSERT ON Posting
 for each row
 when (LPAD(new.posting_type, 4) = 'lect')
 BEGIN
-  select SEQ_posting_attraction_no.nextval
+  select SEQ_posting_lecture_no.nextval
     into :new.posting_id
     from dual; 
 END;
