@@ -89,10 +89,10 @@ public class IndexController {
 	
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
-	public String foodMainPage(Model model){
-		List<Posting> postingList = postService.postingList("food", 1);
-		model.addAttribute("postingDataList", postingList);
-		model.addAttribute("postingType", "food");
+	public String foodMainPage(HttpSession session){
+		List<Posting> postingList = postService.postingList(1, "food");
+		session.setAttribute("postingDataList", postingList);
+		session.setAttribute("postingType", "food");
 		return "/food/food";
 	}
 	

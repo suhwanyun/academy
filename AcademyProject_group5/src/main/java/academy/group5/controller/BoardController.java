@@ -1,6 +1,7 @@
 package academy.group5.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.service.PostingService;
@@ -92,6 +95,44 @@ public class BoardController {
 	public String addPlace(Model model, @RequestParam Posting data){
 		return "/place/place_add";
 	}
+	
+	/** 게시글 목록 표시 */
+	@RequestMapping(value="/postingList", method=RequestMethod.GET)
+	public @ResponseBody List<Posting> getPostingList(HttpSession session,
+				@RequestParam(required=false) String page){
+		
+		String postingType = (String)session.getAttribute("postingType");
+		
+		Object dataObj = session.getAttribute("searchData");
+		Object typeObj = session.getAttribute("searchType");
+		String searchData = dataObj == null ? null : (String)dataObj;
+		String searchType = dataObj == null ? null : (String)typeObj;
+		
+		List<Posting> postingList = postService.postingList(page == null ? 1 : Integer.parseInt(page),
+															postingType, searchData, searchType);
+		return postingList;
+	}
+	
+	/** 식사(먹거리)추천 게시판 검색 */
+	@RequestMapping(value="/postingSearch", method=RequestMethod.GET)
+	public @ResponseBody List<Posting> setSearchDataForGetlectureList(Model model, HttpSession session,
+			@RequestParam String searchType, @RequestParam String searchData){
+		
+		String postingType = (String)session.getAttribute("postingType");
+		
+		if(searchType.equals("") || searchData.equals("")){
+			session.removeAttribute("searchType");
+			session.removeAttribute("searchData");
+			
+			return postService.postingList(1, postingType);
+		} else {
+			session.setAttribute("searchType", searchType);
+			session.setAttribute("searchData", searchData);
+			
+			return postService.postingList(1, postingType, searchData, searchType);
+		}
+	}
+	
 	
 
 	/** 식사(먹거리)추천 게시판 글 내용 */

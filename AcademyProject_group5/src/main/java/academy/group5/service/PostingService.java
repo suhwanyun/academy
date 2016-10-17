@@ -9,12 +9,16 @@ import academy.group5.dto.PostingComment;
 
 public interface PostingService {
 	/**
-	 * 게시글 리스트 불러오기 lecture_강의ID_강의분반
-	 * @param lec_lecId_lecNum 
+	 * 게시글 리스트 불러오기
 	 * @param page
+	 * @param postingType
+	 * @param searchData
+	 * @param searchType
 	 * @return
 	 */
-	List<Posting> postingList(String lec_lecId_lecNum, int page);
+	List<Posting> postingList(int page, String postingType, String searchData, String searchType);
+	
+	List<Posting> postingList(int page, String postingType);
 	/**
 	 * 게시글 쓰기
 	 * @param posting
