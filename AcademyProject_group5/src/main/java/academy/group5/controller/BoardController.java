@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.service.PostingService;
@@ -26,6 +25,8 @@ public class BoardController {
 	
 	@Autowired
 	PostingService postService;
+	
+	private final static String DEFAULT_PHOTO_NAME = "default.jpg";
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 
 	 * @throws IOException 
@@ -69,6 +70,8 @@ public class BoardController {
 					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
 					return "redirect:/foodMain";
 				}
+			} else{
+				postingData.setPostingPhoto(DEFAULT_PHOTO_NAME);
 			}
 			
 			/* 정상 처리 */

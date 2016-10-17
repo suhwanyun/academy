@@ -24,7 +24,7 @@ public class Posting {
 	private String userId;
 
 	/** 게시글 등록 날짜. */
-	private Date postingTime;
+	private String postingTime;
 
 	/** 게시판 조회수. */
 	private Integer postingHits;
