@@ -7,7 +7,7 @@
 	<select id="selectAllPosting" parameterType="paging" resultType="posting">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi'), posting_hits, 
+			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time, posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{data}
@@ -82,7 +82,7 @@
 	</select>
 	
 	<select id="selectComment" parameterType="posting" resultType="posting_comment">
-		select *
+		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YYYY-mm-dd hh24:mi'), comment_content
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
@@ -93,6 +93,15 @@
 		values (#{postingId}, #{postingType}, #{userId}, #{commentParentId}, sysdate, #{commentContent})
 	</insert>
 	
-	<!-- <delete id="deleteComment" parameterType= -->
+	<delete id="deleteComment" parameterType="int">
+		delete from PostingComment
+		where comment_id = #{commentId}
+	</delete>
+	
+	<update id="updateComment" parameterType="posting_comment">
+		update PostingComment 
+		set comment_content = #{comment_content}
+		where comment_id = #{commentId}
+	</update>
 
 </mapper>
