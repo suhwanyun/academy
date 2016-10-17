@@ -55,9 +55,9 @@
 					</colgroup>
 					<c:forEach items="${postingDataList }" var="list">
 						<tr>
-							<td rowspan="2"><img class="imgboard" style="position:relative;  width:20%;"
-								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
-							<td colspan="3">${list.postingTitle }</td>
+							<th rowspan="2"><img style="size: portrait;"
+								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></th>
+							<th colspan="3">${list.postingTitle }</th>
 						</tr>
 						<tr> 
 							<td>${list.userId }</td>
