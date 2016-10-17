@@ -47,17 +47,21 @@
 					</tr>
 
 				</table>
-				<table style="text-align: center">
+			
+				<table style="text-align: center;" class="imgTable">
 					<colgroup>
 						<col width="20%">
 						<col width="35%">
 						<col width="10%">
 						<col width="35%">
 					</colgroup>
+					
 					<c:forEach items="${postingDataList }" var="list">
 						<tr>
+
 							<td rowspan="2"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
 							<td colspan="3">${list.postingTitle }</td>
+
 						</tr>
 						<tr> 
 							<td>${list.userId }</td>
@@ -70,6 +74,7 @@
 						</tr>
 					
 				</table>
+				
 			</div>
 		</div>
 	</div>
@@ -96,8 +101,7 @@ $("#moreBtn").click(function(){
 				$("#beforeLocation").before(
 					$("<tr>"+
 					"<td rowspan='2'><img class='imgBoard'"+
-					"src='<%=request.getContextPath()%>/upload/'"+
-					item.postingPhoto +"/></td>"+
+					"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
 					"<td colspan='3'>"+item.postingTitle+"</td>"+
 				"</tr>"+
 				"<tr>"+ 
@@ -105,7 +109,7 @@ $("#moreBtn").click(function(){
 					"<td>"+item.postingRecommand+"</td>"+
 					"<td>"+item.postingTime+"</td>"+
 				"</tr>"));
-				console.log(item.postingTime);
+				console.log(item.postingPhoto);
 			});
 			
 			if(itemCount == 0){
