@@ -48,13 +48,18 @@
 
 				</table>
 				<table style="text-align: center">
+					<colgroup>
+						<col width="20%">
+						<col width="80%">
+						
+					</colgroup>
 					<c:forEach items="${postingDataList }" var="list">
 						<tr>
-							<td rowspan="2"><img
-								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}" /></td>
+							<td rowspan="2"><img class="imgboard" style="position:relative;  width:20%;"
+								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
 							<td colspan="3">${list.postingTitle }</td>
 						</tr>
-						<tr>
+						<tr> 
 							<td>${list.userId }</td>
 							<td>${list.postingRecommand }</td>
 							<td>${list.postingTime }</td>
