@@ -99,7 +99,8 @@ public class BoardController {
 	/** 게시글 목록 표시 */
 	@RequestMapping(value="/postingList", method=RequestMethod.GET)
 	public @ResponseBody List<Posting> getPostingList(HttpSession session,
-				@RequestParam(required=false) String page){
+				@RequestParam(required=false) String page,
+				@RequestParam(required=false) String orderData){
 		
 		String postingType = (String)session.getAttribute("postingType");
 		
@@ -116,7 +117,8 @@ public class BoardController {
 	/** 식사(먹거리)추천 게시판 검색 */
 	@RequestMapping(value="/postingSearch", method=RequestMethod.GET)
 	public @ResponseBody List<Posting> setSearchDataForGetlectureList(Model model, HttpSession session,
-			@RequestParam String searchType, @RequestParam String searchData){
+			@RequestParam String searchType, @RequestParam String searchData, 
+			@RequestParam(required=false) String orderData){
 		
 		String postingType = (String)session.getAttribute("postingType");
 		
