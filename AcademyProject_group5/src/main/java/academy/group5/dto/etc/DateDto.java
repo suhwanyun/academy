@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
  * @author YSH
  *
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class DateDto {
 	
 	private Date time;
+	
 }

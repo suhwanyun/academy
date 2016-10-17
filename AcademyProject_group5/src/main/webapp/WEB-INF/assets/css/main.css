@@ -747,7 +747,17 @@
 
 /* Image */
  
-	
+
+	table.imgTable td{
+		padding:0;
+		height:100%;
+		
+	}
+	.imgBoard{
+		width:100%;
+		height:5em;
+		vertical-align:middle;
+	}
  
  
 	.image {
