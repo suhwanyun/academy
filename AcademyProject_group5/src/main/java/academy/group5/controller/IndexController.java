@@ -92,6 +92,7 @@ public class IndexController {
 	public String foodMainPage(Model model){
 		List<Posting> postingList = postService.postingList("food", 1);
 		model.addAttribute("postingDataList", postingList);
+		model.addAttribute("postingType", "food");
 		return "/food/food";
 	}
 	

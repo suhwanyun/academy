@@ -7,7 +7,7 @@
 	<select id="selectAllPosting" parameterType="paging" resultType="posting">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select posting_id, posting_time, posting_hits, 
+			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi'), posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{data}
@@ -68,6 +68,23 @@
 		        ) sub
 		    )
 		where rnum = 1
+	</select>
+	
+	<delete id="deletePosting" parameterType="posting">
+		delete from Posting
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</delete>
+	
+	<select id="selectPostingInfo" parameterType="posting" resultType="posting">
+		select *
+		from Posting
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</select>
+	
+	<select id="selectPostingComment" parameterType="posting" resultType="posting_comment">
+		select *
+		from PostingComment
+		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
 
 </mapper>
