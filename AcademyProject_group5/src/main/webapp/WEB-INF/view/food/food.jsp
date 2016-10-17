@@ -96,8 +96,7 @@ $("#moreBtn").click(function(){
 				$("#beforeLocation").before(
 					$("<tr>"+
 					"<td rowspan='2'><img class='imgBoard'"+
-					"src='<%=request.getContextPath()%>/upload/'"+
-					item.postingPhoto +"/></td>"+
+					"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
 					"<td colspan='3'>"+item.postingTitle+"</td>"+
 				"</tr>"+
 				"<tr>"+ 
@@ -105,7 +104,7 @@ $("#moreBtn").click(function(){
 					"<td>"+item.postingRecommand+"</td>"+
 					"<td>"+item.postingTime+"</td>"+
 				"</tr>"));
-				console.log(item.postingTime);
+				console.log(item.postingPhoto);
 			});
 			
 			if(itemCount == 0){
