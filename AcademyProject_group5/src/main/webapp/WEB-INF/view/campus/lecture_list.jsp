@@ -33,7 +33,7 @@
 				<td>${list.lectureClass}</td>
 			</tr>
 		</c:forEach>
-		<tr id="beforeLocation">
+		<tr id="beforeLectureLocation">
 			<td colspan="2" align="center"><button id="moreBtn">더보기</button></td>
 			<td align="right"><button>맨 위로</button></td>
 		</tr>
@@ -61,7 +61,7 @@ var pageIndex = 1;
 					 alert("검색 결과가 없습니다.");
 				 }else{
 				 $(result).each(function(index,item){
-						$("#beforeLocation").before(
+						$("#beforeLectureLocation").before(
 							$("<tr class = 'tableData'><td>"+
 							"<a href=<%=request.getContextPath() %>"+
 							"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
@@ -88,7 +88,7 @@ var pageIndex = 1;
 					var itemCount = 0;
 					$(result).each(function(index,item){
 						itemCount++;
-						$("#beforeLocation").before(
+						$("#beforeLectureLocation").before(
 							$("<tr class = 'tableData'><td>"+
 									"<a href=<%=request.getContextPath() %>"+
 									"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
