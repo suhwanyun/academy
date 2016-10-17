@@ -814,6 +814,11 @@
 			width: 100px;
 		 	height:100px;
 		 	margin-left: 45%;
+		 	border-radius: 50%;
+		 	border-top-left-radius: 50% 50%;
+		 	border-top-right-radius: 50% 50%;
+		 	border-bottom-left-radius: 50% 50%;
+		 	border-bottom-left-radius: 50% 50%;
 			}
 			.image.fit img {
 				width: 100%;
