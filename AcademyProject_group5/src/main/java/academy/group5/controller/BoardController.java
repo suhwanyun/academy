@@ -44,7 +44,7 @@ public class BoardController {
 		String postingTitle = mrequest.getParameter("postingTitle");
 		String postingContent = mrequest.getParameter("postingContent");
 			
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent);
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
 		
 		// 에러 발생여부 플래그
 		boolean isError = false;
@@ -70,8 +70,6 @@ public class BoardController {
 					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
 					return "redirect:/foodMain";
 				}
-			} else{
-				postingData.setPostingPhoto(DEFAULT_PHOTO_NAME);
 			}
 			
 			/* 정상 처리 */
