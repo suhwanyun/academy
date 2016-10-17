@@ -7,7 +7,7 @@
 	<select id="selectAllPosting" parameterType="paging" resultType="posting">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select posting_id, user_id, posting_time, posting_hits, 
+			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd'), posting_hits, 
 			 			  posting_recommand, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{data}
