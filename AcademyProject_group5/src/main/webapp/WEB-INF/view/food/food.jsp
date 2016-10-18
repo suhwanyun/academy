@@ -36,13 +36,13 @@
 						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select" title="select select">
-								<option selected="selected">작성자</option>
-								<option>제목</option>
-								<option>내용</option>
-								<option>제목+내용</option>
+						<td><select id="serchType">
+								<option selected="selected" value="user">작성자</option>
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+								<option value="all">제목+내용</option>
 						</select></td>
-						<td colspan="2"><input type="search" id="search"></td>
+						<td colspan="2"><input type="search" id="searchInput"></td>
 						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>
 					</tr>
 
@@ -57,7 +57,7 @@
 					</colgroup>
 					
 					<c:forEach items="${postingDataList }" var="list">
-						<tr>
+						<tr class="tableData">
 
 							<td rowspan="2"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
 							<td colspan="3">${list.postingTitle }</td>
@@ -85,12 +85,13 @@
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
 	$("#searchBtn").click(function(){
+		alert($("#searchInput").val());
 		$.ajax({
 			type : "get",
-			url : "${lectureListSearch}",
+			url : "${postingSearch}",
 			data : {
 				searchType : $("#serchType").val(),
-				searchData : $("#serachInput").val()
+				searchData : $("#searchInput").val()
 			},
 			 success : function(result) {
 				 $(".tableData").remove();
@@ -99,13 +100,18 @@
 					 alert("검색 결과가 없습니다.");
 				 }else{
 				 $(result).each(function(index,item){
+					 alert("성공");
 						$("#beforeLocation").before(
-							$("<tr class = 'tableData'><td>"+
-							"<a href=<%=request.getContextPath() %>"+
-							"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
-							">"+item.lectureName+"</a></td>"+
-							  "<td>"+item.professorName+"</td>"+
-							  "<td>"+item.lectureClass+"</td></tr>"));
+								$("<tr>"+
+								"<td rowspan='2'><img class='imgBoard'"+
+								"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
+								"<td colspan='3'>"+item.postingTitle+"</td>"+
+							"</tr>"+
+							"<tr>"+ 
+								"<td>"+item.userId+"</td>"+
+								"<td>"+item.postingRecommand+"</td>"+
+								"<td>"+item.postingTime+"</td>"+
+							"</tr>"));
 					});
 				 }
 			 } 
@@ -137,7 +143,6 @@ $("#moreBtn").click(function(){
 					"<td>"+item.postingRecommand+"</td>"+
 					"<td>"+item.postingTime+"</td>"+
 				"</tr>"));
-				console.log(item.postingPhoto);
 			});
 			
 			if(itemCount == 0){
