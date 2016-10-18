@@ -162,8 +162,6 @@ public class BoardController {
 			return postService.postingList(1, postingType, searchData, searchType, orderData);
 		}
 	}
-	
-	
 
 	/** 식사(먹거리)추천 게시판 글 내용 */
 	@RequestMapping(value="/food_info", method=RequestMethod.GET)
