@@ -124,7 +124,7 @@ public class BoardController {
 		String searchType = dataObj == null ? null : (String)typeObj;
 		
 		List<Posting> postingList = postService.postingList(page == null ? 1 : Integer.parseInt(page),
-															postingType, searchData, searchType);
+															postingType, searchData, searchType, orderData);
 		return postingList;
 	}
 	
@@ -140,12 +140,12 @@ public class BoardController {
 			session.removeAttribute("searchType");
 			session.removeAttribute("searchData");
 			
-			return postService.postingList(1, postingType);
+			return postService.postingList(1, postingType, null, null, orderData);
 		} else {
 			session.setAttribute("searchType", searchType);
 			session.setAttribute("searchData", searchData);
 			
-			return postService.postingList(1, postingType, searchData, searchType);
+			return postService.postingList(1, postingType, searchData, searchType, orderData);
 		}
 	}
 	

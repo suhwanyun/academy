@@ -16,7 +16,7 @@ public interface PostingService {
 	 * @param searchType
 	 * @return
 	 */
-	List<Posting> postingList(int page, String postingType, String searchData, String searchType);
+	List<Posting> postingList(int page, String postingType, String orderData, String searchData, String searchType);
 	
 	List<Posting> postingList(int page, String postingType);
 	/**

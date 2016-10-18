@@ -18,6 +18,9 @@
 				      <when test="data2 != null and data3 == 'content'">
 				      and posting_content like '%'||#{data2}||'%' 
 				      </when>
+				      <when test="data2 != null and data3 == 'user'">
+				      and user_id like '%'||#{data2}||'%' 
+				      </when>
 				      <when test="data2 != null and data3 == 'all'">
 				      and posting_title like '%'||#{data2}||'%' or
 				      	  posting_content like '%'||#{data2}||'%'
@@ -81,16 +84,16 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
 	
-	<select id="selectComment" parameterType="posting" resultType="posting_comment">
-		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YYYY-mm-dd hh24:mi'), comment_content
+	<select id="selectAllComment" parameterType="posting" resultType="posting_comment">
+		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YYYY-mm-dd hh24:mi:ss'), comment_content
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
 	
 	<insert id="insertComment" parameterType="posting_comment">
 		insert into PostingComment
-		(posting_id, posting_type, user_id, comment_parent_id, comment_time, comment_content)
-		values (#{postingId}, #{postingType}, #{userId}, #{commentParentId}, sysdate, #{commentContent})
+		(posting_type, user_id, comment_parent_id, comment_time, comment_content)
+		values (#{postingType}, #{userId}, #{commentParentId}, sysdate, #{commentContent})
 	</insert>
 	
 	<delete id="deleteComment" parameterType="int">
@@ -104,4 +107,15 @@
 		where comment_id = #{commentId}
 	</update>
 
+	<select id="selectRecommend" parameterType="recommend" resultType="int">
+		select count(*)
+		from Recommend
+		where posting_id = #{postingId} and posting_type = #{postingType}
+			 and user_id = #{userId}
+	</select>
+	
+	<insert id="insertRecommend" parameterType="recommend">
+		insert into Recommend 
+		values (#{postingId}, #{postingType}, #{userId})
+	</insert>
 </mapper>

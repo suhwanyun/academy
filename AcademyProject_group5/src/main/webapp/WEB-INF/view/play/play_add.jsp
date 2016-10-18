@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
@@ -14,50 +14,46 @@
 
 </head>
 <body>
-<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">
-		<div class="upmargin">
-	<h1 class="member">오락 글쓰기</h1>
-	<sform:form method="post" action="#" modelAttribute="postingData"
-			enctype="multipart/form-data">
-			<table class="add">
+		<a href="<%=request.getContextPath()%>"> <img
+			class="circular--logo"
+			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+		<h1 class="member">오락 글쓰기</h1>
+		<form method="post" action="play" enctype="multipart/form-data">
+			<table>
 				<colgroup>
-					<col width="40%">
-					<col width="60%">
+					<col width="10%">
+					<col width="90%">
 				</colgroup>
 
 				<tr>
 
-					<td><label>제 목</label></td>
-					<td><sform:input type="text" maxlength="30"
-							path="postingTitle" /></td>
+					<td><label for="postingTitle">제 목</label></td>
+					<td><input type="text" maxlength="30" name="postingTitle" /></td>
 
 				</tr>
 
 				<tr>
 
-					<td><label>내 용</label></td>
-					<td><sform:textarea rows="13" cols="40" maxlength="300"
-							path="postingContent" /></td>
+					<td><label for="postingContent">내 용</label></td>
+					<td><textarea rows="13" cols="40" maxlength="1300"
+							name="postingContent"></textarea></td>
 
 				</tr>
 				<tr>
-
-					<td><label>파일 첨부</label></td>
-					<td><sform:input type="file" path="postingPhoto" input
-							accept="image/*" /></td>
-
+					<td colspan="2" align="left"><label for="fileInput">사진
+							첨부</label> <input id="fileInput" type="file" name="uploadPhoto"
+						accept="image/*" /></td>
 				</tr>
 				<tr>
-					<td colspan=2 align="center"><sform:button id="save"
-							value="글쓰기" /> <sform:button type="reset" value="다시작성" /></td>
-
-
+					<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>
+						<button type="reset">다시 작성</button></td>
+					<td><input type="hidden" name="postingType" value="food" /></td>
 				</tr>
+
 			</table>
 
-		</sform:form>
+		</form>
 	</div>
-</div>
 </body>
 </html>

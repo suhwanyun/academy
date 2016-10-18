@@ -36,11 +36,11 @@
 						<td><a href="<%=request.getContextPath()%>/write/playjsp">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select">
-								<option selected="selected">작성자</option>
-								<option>제목</option>
-								<option>내용</option>
-								<option>제목+내용</option>
+						<td><select id="serchType">
+								<option selected="selected" value="user">작성자</option>
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+								<option value="all">제목+내용</option>
 						</select></td>
 						<td colspan="2"><input type="search" id="search"></td>
 						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>

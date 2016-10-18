@@ -25,12 +25,12 @@ public class PostingServiceImpl implements PostingService {
 	BoardRepo boardRepo;
 	
 	@Override
-	public List<Posting> postingList(int page, String postingType, String searchData, String searchType) {
-		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, postingType, searchData, searchType));
+	public List<Posting> postingList(int page, String postingType, String searchData, String searchType, String orderData) {
+		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, postingType, searchData, searchType, orderData));
 	}
 	
 	@Override
-	public List<Posting> postingList(int page, String postingType) {
+	public List<Posting> postingList(int page, String postingType){
 		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, postingType));
 	}
 
