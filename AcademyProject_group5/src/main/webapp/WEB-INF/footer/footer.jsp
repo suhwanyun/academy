@@ -21,13 +21,13 @@
 			<div class="copyright">
 				<h3>Follow me</h3>
 				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span
+					<li><a href="<%=request.getContextPath()%>/images/per01.png" class="icon fa-twitter"><span
 							class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-facebook"><span
+					<li><a href="<%=request.getContextPath()%>/images/per03.png" class="icon fa-facebook"><span
 							class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span
+					<li><a href="<%=request.getContextPath()%>/images/per02.png" class="icon fa-instagram"><span
 							class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-dribbble"><span
+					<li><a href="<%=request.getContextPath()%>/images/per04.png" class="icon fa-dribbble"><span
 							class="label">Dribbble</span></a></li>
 				</ul>
 				&copy; Untitled. Design: <a href="https://templated.co">MCM</a>.

@@ -36,7 +36,7 @@
 						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select" title="select select">
+						<td><select id="select">
 								<option selected="selected">작성자</option>
 								<option>제목</option>
 								<option>내용</option>
@@ -70,8 +70,8 @@
 						</tr>
 						</c:forEach>
 						<tr id="beforeLocation">
-							<td colspan="3"><button  id="moreBtn">더보기</button></td>
-							<td><button>맨 위로</button></td></tr>
+							<td colspan="3"><button  id="moreBtn" class="myButton">더보기</button></td>
+							<td><button class="myButton">맨 위로</button></td></tr>
 					
 				</table>
 				

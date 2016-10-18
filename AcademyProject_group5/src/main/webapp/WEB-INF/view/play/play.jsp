@@ -12,7 +12,7 @@
 <title>오락게시판</title>
 </head>
 <body>
-	<!-- 테이블 시작 -->
+<!-- 테이블 시작 -->
 	<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
@@ -33,39 +33,51 @@
 						</select></td>
 						<td></td>
 						<td></td>
-						<td><a href="<%=request.getContextPath()%>/write/play">글쓰기</a></td>
+						<td><a href="<%=request.getContextPath()%>/write/playjsp">글쓰기</a></td>
 					</tr>
 					<tr>
-						<td><select id="select" title="select select" >
-								<option selected="selected" >작성자</option>
+						<td><select id="select">
+								<option selected="selected">작성자</option>
 								<option>제목</option>
 								<option>내용</option>
 								<option>제목+내용</option>
 						</select></td>
 						<td colspan="2"><input type="search" id="search"></td>
-						<td><input type="button" class="boardBtn" value="찾기"></td>
+						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>
 					</tr>
 
 				</table>
-				<table style="text-align: center">
-					<tr>
-						<td rowspan="2"><a
-							href="<%=request.getContextPath()%>/play_info">사진</a></td>
-						<td colspan="3">제목</td>
-					</tr>
-					<tr>
-						<td>작성자</td>
-						<td>추천수</td>
-						<td>날짜</td>
-					</tr>
-					<tr>
-						<td colspan="4" align="center"><button>더 보기</button></td>
-					</tr>
+			
+				<table style="text-align: center;" class="imgTable">
+					<colgroup>
+						<col width="20%">
+						<col width="20%">
+						<col width="10%">
+						<col width="50%">
+					</colgroup>
+					
+					<c:forEach items="${postingDataList }" var="list">
+						<tr>
+
+							<td rowspan="2"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
+							<td colspan="3">${list.postingTitle }</td>
+
+						</tr>
+						<tr> 
+							<td>${list.userId }</td>
+							<td>${list.postingRecommand }</td>
+							<td>${list.postingTime }</td>
+						</tr>
+						</c:forEach>
+						<tr id="beforeLocation">
+							<td colspan="3"><button  id="moreBtn" class="myButton">더보기</button></td>
+							<td><button class="myButton">맨 위로</button></td></tr>
+					
 				</table>
+				
 			</div>
 		</div>
 	</div>
-	<!-- 테이블 종료 -->
 </body>
 
 </html>
