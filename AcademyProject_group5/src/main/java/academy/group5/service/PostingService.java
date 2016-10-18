@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
+import academy.group5.dto.etc.MostRecommend;
 
 public interface PostingService {
 	/**
@@ -24,7 +25,7 @@ public interface PostingService {
 	 * 가장 추천을 많이 받은 게시글
 	 * @return
 	 */
-	Posting mostRecommend(int period);
+	Posting mostRecommend(MostRecommend searchData);
 	/**
 	 * 게시글 쓰기
 	 * @param posting

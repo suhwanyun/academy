@@ -770,9 +770,8 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 
 
 	.imgBoard{
-	
 		max-width:100%;
-		height:auto;
+		height:100%;
 		vertical-align:middle;
 	}
  
@@ -1358,7 +1357,6 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 }
 	table.imgTable td{
 		padding:0;
-		height:100%;
 		
 	}
 	

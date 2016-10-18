@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.LectureNotice;
-import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.LecturePaging;
 
 @Repository
 public class NoticeRepo {
@@ -17,12 +17,12 @@ public class NoticeRepo {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public List<LectureNotice> getAllLectureNoticeList(Paging data) {
+	public List<LectureNotice> getAllLectureNoticeList(LecturePaging data) {
 		String stmt = LOGIN_NS + "selectAllLectureNoticeByUser";
 		return session.selectList(stmt, data);
 	}
 	
-	public List<LectureNotice> getLectureNoticeList(Paging data) {
+	public List<LectureNotice> getLectureNoticeList(LecturePaging data) {
 		String stmt = LOGIN_NS + "selectLectureNotice";
 		return session.selectList(stmt, data);
 	}
