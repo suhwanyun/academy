@@ -26,10 +26,10 @@
 						<col width="25%">
 					</colgroup>
 					<tr>
-						<td><select id="array" title="select array">
-								<option selected="selected">정렬</option>
-								<option>추천수 정렬</option>
-								<option>날짜 정렬</option>
+						<td><select id="sort">
+								<option value="posting_time">날짜 정렬</option>
+								<option value="posting_recommand">추천수 정렬</option>
+
 						</select></td>
 						<td></td>
 						<td></td>
@@ -63,7 +63,7 @@
 						<tr class="tableData">
 
 							<td rowspan="2"><img class="imgBoard"
-								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}" /></td>
+								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}" /></td>
 							<td colspan="3">${list.postingTitle }</td>
 
 						</tr>
@@ -73,11 +73,12 @@
 							<td>${list.postingTime }</td>
 						</tr>
 
-						</c:forEach>
-						<tr id="beforeLocation">
-							<td colspan="3"><button  id="moreBtn" class="myButton">더보기</button></td>
-							<td><button class="myButton">맨 위로</button></td></tr>
-					
+					</c:forEach>
+					<tr id="beforeLocation">
+						<td colspan="3"><button id="moreBtn" class="myButton">더보기</button></td>
+						<td><button class="myButton">맨 위로</button></td>
+					</tr>
+
 				</table>
 
 			</div>
@@ -90,6 +91,38 @@
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
 var pageIndex = 1;
+$("#sort").change(function(){
+	$.ajax({
+		type : "get",
+		url : "${postingList}",
+		data : {
+			orderData : $("#sort").val(),
+			page : pageIndex
+		},
+		success : function(result) {
+			 $(".tableData").remove();
+			 pageIndex = 1;
+			 if(result.length==0){
+				 alert("검색 결과가 없습니다.");
+			 }else{
+			 $(result).each(function(index,item){
+					$("#beforeLocation").before(
+							 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
+						               "src=<%=request.getContextPath()%>/upload/preview_"+
+						               item.postingPhoto +"/></td><td colspan='3'>"+
+						               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+						               item.userId+"</td><td>"+
+						               item.postingRecommand+"</td><td>"+
+						               item.postingTime+"</td></tr>"));
+				});
+			 }
+		 } 
+	
+		
+	
+	});
+	
+});
 $("#searchBtn").click(function(){
 		$.ajax({
 			type : "get",
@@ -107,7 +140,7 @@ $("#searchBtn").click(function(){
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
 								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
-							               "src=<%=request.getContextPath()%>/upload/"+
+							               "src=<%=request.getContextPath()%>/upload/preview_"+
 							               item.postingPhoto +"/></td><td colspan='3'>"+
 							               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
 							               item.userId+"</td><td>"+
@@ -137,7 +170,7 @@ $("#moreBtn").click(function(){
 	            itemCount++;
 	            $("#beforeLocation").before(
 	               $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
-	               "src=<%=request.getContextPath()%>/upload/"+
+	               "src=<%=request.getContextPath()%>/upload/preview_"+
 	               item.postingPhoto +"/></td><td colspan='3'>"+
 	               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
 	               item.userId+"</td><td>"+

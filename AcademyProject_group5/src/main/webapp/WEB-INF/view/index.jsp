@@ -27,7 +27,7 @@
 	<div id="main">
 		<div class="inner">
 
-			<div class="columns">
+			<div >
 				<a href="<%=request.getContextPath()%>/campus/campusMain"><img
 					class="circular--square"
 					src="<%=request.getContextPath()%>/images/pic01.png" alt="" /></a> <a
@@ -36,14 +36,14 @@
 					src="<%=request.getContextPath()%>/images/pic02.png" alt="" /></a>
 
 			</div>
-			<div class="columns">
+			<div>
 				<a href="<%=request.getContextPath()%>/mileageMain"><img
 					class="circular--square"
 					src="<%=request.getContextPath()%>/images/pic05.png" alt=""
 					style="margin-left: 30%;" /></a>
 			</div>
 
-			<div class="columns">
+			<div>
 				<a href="<%=request.getContextPath()%>/playMain"><img
 					class="circular--square"
 					src="<%=request.getContextPath()%>/images/pic03.png" alt="" /></a> <a
