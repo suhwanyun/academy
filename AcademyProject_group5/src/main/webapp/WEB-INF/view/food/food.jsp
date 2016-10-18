@@ -91,50 +91,19 @@
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
 var pageIndex = 1;
-$("#sort").change(function(){
+
+$("#searchBtn").click(function(){
 	pageIndex = 1;
 	$.ajax({
-		type : "get",
-		url : "${postingList}",
-		data : {
-			orderData : $("#sort").val(),
-			page : pageIndex
-		},
-		success : function(result) {
-			 $(".tableData").remove();
-			 
-			 if(result.length==0){
-				 alert("검색 결과가 없습니다.");
-			 }else{
-			 $(result).each(function(index,item){
-					$("#beforeLocation").before(
-							 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
-						               "src=<%=request.getContextPath()%>/upload/preview_"+
-						               item.postingPhoto +"/></td><td colspan='3'>"+
-						               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
-						               item.userId+"</td><td>"+
-						               item.postingRecommand+"</td><td>"+
-						               item.postingTime+"</td></tr>"));
-				});
-			 }
-		 } 
-	
-		
-	
-	});
-	
-});
-$("#searchBtn").click(function(){
-		$.ajax({
 			type : "get",
 			url : "${postingSearch}",
 			data : {
 				searchType : $("#serchType").val(),
-				searchData : $("#searchInput").val()
+				searchData : $("#searchInput").val(),
+				orderData : $("#sort").val()
 			},
 			success : function(result) {
 				 $(".tableData").remove();
-				 pageIndex = 1;
 				 if(result.length==0){
 					 alert("검색 결과가 없습니다.");
 				 }else{
