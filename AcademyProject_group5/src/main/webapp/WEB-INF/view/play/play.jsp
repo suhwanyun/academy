@@ -44,7 +44,7 @@
 						</select></td>
 						<td colspan="2"><input type="search" id="search"></td>
 						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>
-					</tr>
+					</tr> 
 
 				</table>
 			
