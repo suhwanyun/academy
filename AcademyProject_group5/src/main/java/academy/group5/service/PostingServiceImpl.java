@@ -168,7 +168,7 @@ public class PostingServiceImpl implements PostingService {
 		BufferedImage scaledImage = Scalr.crop(originalImage,
 												(imgWidth - minLength)/2,
 												(imgHeight - minLength)/2,
-												imgWidth, imgHeight);		
+												minLength, minLength);		
 		// 이미지 크기 줄이기
 		BufferedImage resizedImage = Scalr.resize(scaledImage, TMP_IMG_SIZE, TMP_IMG_SIZE);
 		// 이미지 저장
