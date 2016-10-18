@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.Posting;
+import academy.group5.dto.PostingComment;
+import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.Paging;
 
 @Repository
@@ -49,5 +51,47 @@ public class BoardRepo {
 	public Integer getPostingId(Posting selectData){
 		String stmt = BOARD_NS + "selectPostingId";
 		return session.selectOne(stmt, selectData);
+	}
+	
+	/** 게시글 삭제 */
+	public Integer delPosting(Posting delData){
+		String stmt = BOARD_NS + "deletePosting";
+		return session.delete(stmt, delData);
+	}
+	
+	/** 댓글 확인 */
+	public List<PostingComment> getAllComment(Posting postingData){
+		String stmt = BOARD_NS + "selectAllComment";
+		return session.selectList(stmt, postingData);
+	}
+	
+	/** 댓글 등록 */
+	public int setComment(PostingComment commentData) {
+		String stmt = BOARD_NS + "insertComment";
+		return session.insert(stmt, commentData);
+	}
+
+	/** 댓글 삭제 */
+	public Integer delComment(int commentId){
+		String stmt = BOARD_NS + "deleteComment";
+		return session.delete(stmt, commentId);
+	}
+	
+	/** 댓글 수정 */
+	public int updateComment(PostingComment updateData) {
+		String stmt = BOARD_NS + "updateComment";
+		return session.update(stmt, updateData);
+	}
+	
+	/** 추천 여부 확인 */
+	public int getRecommend(Recommend recommendData) {
+		String stmt = BOARD_NS + "selectRecommend";
+		return session.selectOne(stmt, recommendData);
+	}
+
+	/** 추천 */
+	public int setRecommend(Recommend recommendData) {
+		String stmt = BOARD_NS + "insertRecommend";
+		return session.insert(stmt, recommendData);
 	}
 }
