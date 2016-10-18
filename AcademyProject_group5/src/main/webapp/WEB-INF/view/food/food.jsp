@@ -76,7 +76,7 @@
 							<td><button class="myButton">맨 위로</button></td></tr>
 					
 				</table>
-				
+		
 			</div>
 		</div>
 	</div>

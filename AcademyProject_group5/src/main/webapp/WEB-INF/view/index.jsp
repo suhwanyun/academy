@@ -26,34 +26,35 @@
 	<!-- Main -->
 	<div id="main">
 		<div class="inner">
-
-			<div class="columns">
-				<a href="<%=request.getContextPath()%>/campus/campusMain"><img
+			
+			<div>
+			
+			<a href="<%=request.getContextPath()%>/campus/campusMain"><img
 					class="circular--square"
-					src="<%=request.getContextPath()%>/images/pic01.png" alt="" /></a> <a
-					href="<%=request.getContextPath()%>/foodMain"><img
-					class="circular--square"
+					src="<%=request.getContextPath()%>/images/pic01.png" alt="" /></a>
+					<a href="<%=request.getContextPath()%>/foodMain"><img
+					class="circular--square" 
 					src="<%=request.getContextPath()%>/images/pic02.png" alt="" /></a>
-
+			
 			</div>
-			<div class="columns">
-				<a href="<%=request.getContextPath()%>/mileageMain"><img
-					class="circular--square"
+			
+			<div align="center">
+			<a href="<%=request.getContextPath()%>/mileageMain"><img
+					class="circular--square" 
 					src="<%=request.getContextPath()%>/images/pic05.png" alt=""
-					style="margin-left: 30%;" /></a>
+					 /></a>
 			</div>
-
-			<div class="columns">
-				<a href="<%=request.getContextPath()%>/playMain"><img
+		
+			
+			<div>
+			<a href="<%=request.getContextPath()%>/playMain"><img
 					class="circular--square"
-					src="<%=request.getContextPath()%>/images/pic03.png" alt="" /></a> <a
-					href="<%=request.getContextPath()%>/placeMain"><img
-					class="circular--square"
+					src="<%=request.getContextPath()%>/images/pic03.png" alt="" /></a> 
+			<a href="<%=request.getContextPath()%>/placeMain"><img
+					class="circular--square" 
 					src="<%=request.getContextPath()%>/images/pic04.png" alt="" /></a>
 			</div>
-
 		</div>
-
 	</div>
 	<jsp:include page="../footer/footer.jsp" />
 
