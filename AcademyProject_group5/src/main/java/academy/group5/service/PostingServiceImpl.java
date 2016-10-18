@@ -154,7 +154,7 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	// 축소할 이미지의 픽셀크기
-	private static final int TMP_IMG_SIZE = 200;	
+	private static final int TMP_IMG_SIZE = 150;	
 	/** 미리보기 이미지 리사이징 및 저장 */
 	private void previewImageResize(String orgFilePath, String targetFilePath, String imageType) throws IOException{
 

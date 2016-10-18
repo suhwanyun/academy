@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ import academy.group5.service.PostingService;
 
 @Controller
 public class BoardController {
-	
+	static Logger logger = LoggerFactory.getLogger(BoardController.class);
 	@Autowired
 	PostingService postService;
 	
@@ -136,13 +138,10 @@ public class BoardController {
 			}
 		}
 		
-		int endPage = page == null ? 1 : Integer.parseInt(page);
-		
+		int nowPage = page == null ? 1 : Integer.parseInt(page);
 		// 게시글 목록 출력
-		for(int pageIdx = 1; pageIdx <= endPage; pageIdx++){
-			postingList.addAll(postService.postingList(pageIdx, postingType, searchData, searchType, orderData));
-		}
-		
+		postingList.addAll(postService.postingList(nowPage, postingType, searchData, searchType, orderData));
+	
 		return postingList;
 	}
 	

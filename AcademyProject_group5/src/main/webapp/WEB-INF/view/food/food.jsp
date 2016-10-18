@@ -92,6 +92,7 @@
 <c:url value="/postingSearch" var="postingSearch"/>
 var pageIndex = 1;
 $("#sort").change(function(){
+	pageIndex = 1;
 	$.ajax({
 		type : "get",
 		url : "${postingList}",
@@ -101,7 +102,7 @@ $("#sort").change(function(){
 		},
 		success : function(result) {
 			 $(".tableData").remove();
-			 pageIndex = 1;
+			 
 			 if(result.length==0){
 				 alert("검색 결과가 없습니다.");
 			 }else{
@@ -157,7 +158,7 @@ $("#searchBtn").click(function(){
 
 $("#moreBtn").click(function(){
 	   
-	   pageIndex++;
+	pageIndex++;
 	   $.ajax({
 	      type : "get",
 	      url : "${postingList}",
