@@ -95,7 +95,7 @@
 				</table>
 
 			</div>
-		</div>
+		</div> 
 	</div>
 	<!-- 테이블 종료 -->
 </body>
