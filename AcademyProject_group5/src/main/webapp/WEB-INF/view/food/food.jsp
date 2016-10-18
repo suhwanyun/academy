@@ -45,11 +45,12 @@
 
 						</select></td>
 						<td colspan="2"><input type="search" id="searchInput"></td>
-						<td><input type="button" id="searchBtn" class="boardBtn" value="찾기"></td>
+						<td><input type="button" id="searchBtn" class="boardBtn"
+							value="찾기"></td>
 					</tr>
 
 				</table>
-			
+
 				<table style="text-align: center;" class="imgTable">
 					<colgroup>
 						<col width="20%">
@@ -57,26 +58,32 @@
 						<col width="10%">
 						<col width="50%">
 					</colgroup>
-					
+
 					<c:forEach items="${postingDataList }" var="list">
 						<tr class="tableData">
 
-							<td rowspan="2"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${list.postingPhoto}"  /></td>
+							<td rowspan="2"><img class="imgBoard"
+								src="<%=request.getContextPath()%>/upload/${list.postingPhoto}" /></td>
 							<td colspan="3">${list.postingTitle }</td>
 
 						</tr>
-						<tr> 
+						<tr class="tableData">
 							<td>${list.userId }</td>
 							<td>${list.postingRecommand }</td>
 							<td>${list.postingTime }</td>
 						</tr>
+
 						</c:forEach>
 						<tr id="beforeLocation">
 							<td colspan="3"><button  id="moreBtn" class="myButton">더보기</button></td>
 							<td><button class="myButton">맨 위로</button></td></tr>
 					
 				</table>
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> branch 'master' of https://github.com/suhwanyun/academy.git
 			</div>
 		</div>
 	</div>
@@ -86,8 +93,8 @@
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
-	$("#searchBtn").click(function(){
-		alert($("#searchInput").val());
+var pageIndex = 1;
+$("#searchBtn").click(function(){
 		$.ajax({
 			type : "get",
 			url : "${postingSearch}",
@@ -95,7 +102,7 @@
 				searchType : $("#serchType").val(),
 				searchData : $("#searchInput").val()
 			},
-			 success : function(result) {
+			success : function(result) {
 				 $(".tableData").remove();
 				 pageIndex = 1;
 				 if(result.length==0){
@@ -103,59 +110,56 @@
 				 }else{
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
-								$("<tr>"+
-								"<td rowspan='2'><img class='imgBoard'"+
-								"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
-								"<td colspan='3'>"+item.postingTitle+"</td>"+
-							"</tr>"+
-							"<tr>"+ 
-								"<td>"+item.userId+"</td>"+
-								"<td>"+item.postingRecommand+"</td>"+
-								"<td>"+item.postingTime+"</td>"+
-							"</tr>"));
+								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
+							               "src=<%=request.getContextPath()%>/upload/"+
+							               item.postingPhoto +"/></td><td colspan='3'>"+
+							               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+							               item.userId+"</td><td>"+
+							               item.postingRecommand+"</td><td>"+
+							               item.postingTime+"</td></tr>"));
 					});
 				 }
 			 } 
 		
+			
+		
 		});
 	});
-var pageIndex = 1;
+
 $("#moreBtn").click(function(){
-	
-	pageIndex++;
-	$.ajax({
-		type : "get",
-		url : "${postingList}",
-		data : {
-			page : pageIndex
-		},
-		 success : function(result) {
-			var itemCount = 0;
-			$(result).each(function(index,item){
-				itemCount++;
-				$("#beforeLocation").before(
-					$("<tr>"+
-					"<td rowspan='2'><img class='imgBoard'"+
-					"src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
-					"<td colspan='3'>"+item.postingTitle+"</td>"+
-				"</tr>"+
-				"<tr>"+ 
-					"<td>"+item.userId+"</td>"+
-					"<td>"+item.postingRecommand+"</td>"+
-					"<td>"+item.postingTime+"</td>"+
-				"</tr>"));
-			});
-			
-			if(itemCount == 0){
-				alert("더 이상 목록이 없습니다.");
-			}
-		},
-		error : function(request, status, error) {
-			alert("code:" + request.status + "\n" + "message:"
-					+ request.responseText + "\n" + "error:"
-					+ error);
-		}
+	   
+	   pageIndex++;
+	   $.ajax({
+	      type : "get",
+	      url : "${postingList}",
+	      data : {
+	         page : pageIndex
+	      },
+	       success : function(result) {
+	         var itemCount = 0;
+	         $(result).each(function(index,item){
+	            itemCount++;
+	            $("#beforeLocation").before(
+	               $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
+	               "src=<%=request.getContextPath()%>/upload/"+
+	               item.postingPhoto +"/></td><td colspan='3'>"+
+	               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+	               item.userId+"</td><td>"+
+	               item.postingRecommand+"</td><td>"+
+	               item.postingTime+"</td></tr>"));
+	         });
+	         
+	         if(itemCount == 0){
+	            alert("더 이상 목록이 없습니다.");
+	         }
+	      },
+	      error : function(request, status, error) {
+	         alert("code:" + request.status + "\n" + "message:"
+	               + request.responseText + "\n" + "error:"
+	               + error);
+	      }
+	   });
 	});
-});
+
 </script>
 </html>

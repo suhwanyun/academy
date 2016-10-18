@@ -1,6 +1,5 @@
 package academy.group5.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,7 +25,7 @@ public class BoardController {
 	@Autowired
 	PostingService postService;
 	
-	private final static String DEFAULT_PHOTO_NAME = "default.jpg";
+	private final static String DEFAULT_PHOTO_NAME = "default.png";
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)

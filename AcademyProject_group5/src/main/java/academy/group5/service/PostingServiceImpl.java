@@ -65,6 +65,7 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	private static final String IMG_PATH = "d:/academyImg/";
+	private static final String PREVIEW_IMG_PATH = "d:/academyImg/preview_";
 	
 	@Override
 	public int upload(MultipartFile uploadData, Posting postingData){
@@ -84,10 +85,13 @@ public class PostingServiceImpl implements PostingService {
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + fileTypeStr;			
 		File file = new File(IMG_PATH + fileName);
+		File previewFile = new File(PREVIEW_IMG_PATH + fileName);
+		MultipartFile previewData = uploadData;
 		
 		// 파일 업로드
 		try {
 			uploadData.transferTo(file);
+			previewData.transferTo(previewFile);
 		} catch (IllegalStateException | IOException e) {
 			return -1;
 		}
