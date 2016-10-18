@@ -30,7 +30,7 @@ public class Posting {
 	private Integer postingHits;
 
 	/** 게시판 추천수. */
-	private Integer postingRecommand;
+	private Integer postingRecommend;
 
 	/** 게시글 제목. */
 	private String postingTitle;

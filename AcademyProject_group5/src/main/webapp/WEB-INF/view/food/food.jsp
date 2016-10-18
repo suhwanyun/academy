@@ -28,7 +28,7 @@
 					<tr>
 						<td><select id="sort">
 								<option value="time">날짜 정렬</option>
-								<option value="recommand">추천수 정렬</option>
+								<option value="recommend">추천수 정렬</option>
 
 						</select></td>
 						<td></td>
@@ -58,7 +58,18 @@
 						<col width="10%">
 						<col width="50%">
 					</colgroup>
+						<tr>
 
+							<td rowspan="2"><img class="imgBoard"
+								src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}" /></td>
+							<td colspan="3">${mostRecommendData.postingTitle }</td>
+
+						</tr>
+						<tr>
+							<td>${mostRecommendData.userId }</td>
+							<td>${mostRecommendData.postingRecommend }</td>
+							<td>${mostRecommendData.postingTime }</td>
+						</tr>
 					<c:forEach items="${postingDataList }" var="list">
 						<tr class="tableData">
 
@@ -69,7 +80,7 @@
 						</tr>
 						<tr class="tableData">
 							<td>${list.userId }</td>
-							<td>${list.postingRecommand }</td>
+							<td>${list.postingRecommend }</td>
 							<td>${list.postingTime }</td>
 						</tr>
 
@@ -115,7 +126,7 @@ $("#searchBtn").click(function(){
 							               item.postingPhoto +"/></td><td colspan='3'>"+
 							               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
 							               item.userId+"</td><td>"+
-							               item.postingRecommand+"</td><td>"+
+							               item.postingRecommend+"</td><td>"+
 							               item.postingTime+"</td></tr>"));
 					});
 				 }
@@ -145,7 +156,7 @@ $("#moreBtn").click(function(){
 	               item.postingPhoto +"/></td><td colspan='3'>"+
 	               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
 	               item.userId+"</td><td>"+
-	               item.postingRecommand+"</td><td>"+
+	               item.postingRecommend+"</td><td>"+
 	               item.postingTime+"</td></tr>"));
 	         });
 	         
