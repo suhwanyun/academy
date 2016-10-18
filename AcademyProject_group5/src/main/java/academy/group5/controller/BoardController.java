@@ -99,7 +99,6 @@ public class BoardController {
 					return okMapping;
 				}
 			}
-			
 			/* 정상 처리 */
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return okMapping;
