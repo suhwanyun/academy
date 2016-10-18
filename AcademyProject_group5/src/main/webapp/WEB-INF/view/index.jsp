@@ -31,7 +31,7 @@
 			
 			<a href="<%=request.getContextPath()%>/campus/campusMain"><img
 					class="circular--square"
-					src="<%=request.getContextPath()%>/images/pic01.png" alt="" /></a>
+					src="<%=request.getContextPath()%>/images/pic01.png" alt=""  style="display: "/></a>
 					<a href="<%=request.getContextPath()%>/foodMain"><img
 					class="circular--square" 
 					src="<%=request.getContextPath()%>/images/pic02.png" alt="" /></a>
