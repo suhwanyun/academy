@@ -100,7 +100,6 @@
 					 alert("검색 결과가 없습니다.");
 				 }else{
 				 $(result).each(function(index,item){
-					 alert("성공");
 						$("#beforeLocation").before(
 								$("<tr>"+
 								"<td rowspan='2'><img class='imgBoard'"+
