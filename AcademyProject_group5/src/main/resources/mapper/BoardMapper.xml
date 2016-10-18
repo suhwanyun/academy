@@ -39,12 +39,18 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<!-- <select id="selectMostRecommendPosting" resultType="posting">
-		select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time,
-			   posting_hits, posting_recommand, posting_title, posting_photo
-		from Posting
-		where (select )
-	</select> -->
+	 <select id="selectMostRecommendPosting" parameterType="int" resultType="posting">
+	 	select *
+	 	from (select rownum as rnum, sub.*
+	 		  from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time,
+			   		 	   posting_hits, posting_recommand, posting_title, posting_photo
+			 	    from Posting
+			 	    where posting_recommand &gt; 0 and posting_time &gt; sysdate - #{period}
+			 	    order by posting_recommand desc
+			 	    ) sub
+			  )
+		where rnum = 1
+	</select>
 	
 	<insert id="insertPosting" parameterType="posting">
 		insert into Posting

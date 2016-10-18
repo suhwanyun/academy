@@ -1,9 +1,13 @@
 package academy.group5.service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,11 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public List<Posting> postingList(int page, String postingType, String searchData, String searchType, String orderData) {
 		return boardRepo.getAllPosting(new Paging(page, POSTING_MAX_PAGE, postingType, searchData, searchType, orderData));
+	}
+	
+	@Override
+	public Posting mostRecommend(int period){
+		return boardRepo.getMostRecommendPosting(period);
 	}
 	
 	@Override
@@ -66,13 +75,14 @@ public class PostingServiceImpl implements PostingService {
 	
 	private static final String IMG_PATH = "d:/academyImg/";
 	private static final String PREVIEW_IMG_PATH = "d:/academyImg/preview_";
+	private static final String TMP_PREFIX = "tmp_";
 	
 	@Override
 	public int upload(MultipartFile uploadData, Posting postingData){
 		// 원본 파일명
 		String originalName = uploadData.getOriginalFilename();
 		// 파일 확장자 추출
-		String fileTypeStr = originalName.substring(originalName.lastIndexOf("."), originalName.length());
+		String fileType = originalName.substring(originalName.lastIndexOf(".") + 1, originalName.length());
 		// 게시글 번호
 		Integer postingId = getPostingId(postingData);
 		// 게시판 종류
@@ -83,17 +93,23 @@ public class PostingServiceImpl implements PostingService {
 			return -1;
 		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
-		String fileName = postingType + "_" + postingId + fileTypeStr;			
-		File file = new File(IMG_PATH + fileName);
-		File previewFile = new File(PREVIEW_IMG_PATH + fileName);
-		MultipartFile previewData = uploadData;
+		String fileName = postingType + "_" + postingId + "." + fileType;	
 		
+		String tmpFilePath = IMG_PATH + TMP_PREFIX + fileName;
+		String filePath = IMG_PATH + fileName;
+		String previewPath = PREVIEW_IMG_PATH + fileName;
+		
+		File originalFile = new File(tmpFilePath);
 		// 파일 업로드
 		try {
-			uploadData.transferTo(file);
-			previewData.transferTo(previewFile);
+			uploadData.transferTo(originalFile);
+			imageResize(tmpFilePath, filePath, fileType);
+			previewImageResize(tmpFilePath, previewPath, fileType);
 		} catch (IllegalStateException | IOException e) {
 			return -1;
+		} finally{
+			// 임시 파일 삭제
+			originalFile.delete();
 		}
 		
 		postingData.setPostingPhoto(fileName);
@@ -104,6 +120,59 @@ public class PostingServiceImpl implements PostingService {
 		}
 		
 		return 0;
+	}
+	
+	// 이미지 최대 픽셀크기
+	private static final int MAX_IMG_SIZE = 1280;
+	/** 이미지 저장 및 리사이징 */
+	private void imageResize(String orgFilePath, String targetFilePath, String imageType) throws IOException{
+
+		BufferedImage originalImage = ImageIO.read(new File(orgFilePath));
+			
+		int imgWidth = originalImage.getWidth();
+		int imgHeight = originalImage.getHeight();
+		
+		double sizeRate;
+		
+		if(imgWidth > MAX_IMG_SIZE){
+			sizeRate = imgWidth / imgHeight;
+			
+			imgWidth = MAX_IMG_SIZE;
+			imgHeight = (int) (MAX_IMG_SIZE / sizeRate);
+		} else if(imgHeight > MAX_IMG_SIZE){
+			sizeRate = imgHeight / imgWidth;
+			
+			imgHeight = MAX_IMG_SIZE;
+			imgWidth = (int) (MAX_IMG_SIZE / sizeRate);
+		}
+
+		// 이미지 크기 줄이기
+		BufferedImage resizedImage = Scalr.resize(originalImage, imgWidth, imgHeight);
+		
+		// 이미지 저장
+		ImageIO.write(resizedImage, imageType, new File(targetFilePath));
+	}
+	
+	// 축소할 이미지의 픽셀크기
+	private static final int TMP_IMG_SIZE = 200;	
+	/** 미리보기 이미지 리사이징 및 저장 */
+	private void previewImageResize(String orgFilePath, String targetFilePath, String imageType) throws IOException{
+
+		BufferedImage originalImage = ImageIO.read(new File(orgFilePath));
+			
+		int imgWidth = originalImage.getWidth();
+		int imgHeight = originalImage.getHeight();
+		int minLength = Math.min(imgWidth, imgHeight);
+		
+		// 이미지 정사각형으로 자르기
+		BufferedImage scaledImage = Scalr.crop(originalImage,
+												(imgWidth - minLength)/2,
+												(imgHeight - minLength)/2,
+												imgWidth, imgHeight);		
+		// 이미지 크기 줄이기
+		BufferedImage resizedImage = Scalr.resize(scaledImage, TMP_IMG_SIZE, TMP_IMG_SIZE);
+		// 이미지 저장
+		ImageIO.write(resizedImage, imageType, new File(targetFilePath));
 	}
 	
 	@Override

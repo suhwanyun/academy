@@ -19,6 +19,12 @@ public interface PostingService {
 	List<Posting> postingList(int page, String postingType, String orderData, String searchData, String searchType);
 	
 	List<Posting> postingList(int page, String postingType);
+	
+	/**
+	 * 가장 추천을 많이 받은 게시글
+	 * @return
+	 */
+	Posting mostRecommend(int period);
 	/**
 	 * 게시글 쓰기
 	 * @param posting
@@ -43,7 +49,6 @@ public interface PostingService {
 	 * @return
 	 */
 	boolean photoRegister(Posting posting);
-	
 	/**
 	 * 이미지 업로드 처리
 	 * @param uploadData

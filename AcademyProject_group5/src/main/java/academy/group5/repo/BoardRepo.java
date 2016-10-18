@@ -25,6 +25,12 @@ public class BoardRepo {
 		return session.selectList(stmt, page);
 	}
 	
+	/** 가장 추천을 많이 받은 글 탐색 */
+	public Posting getMostRecommendPosting(int period) {
+		String stmt = BOARD_NS + "selectMostRecommendPosting";
+		return session.selectOne(stmt, period);
+	}
+	
 	/** 
 	 * 글 작성
 	 * @param postingData (required = userId, postingType)

@@ -1,5 +1,6 @@
 package academy.group5.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -122,8 +123,26 @@ public class BoardController {
 		String searchData = dataObj == null ? null : (String)dataObj;
 		String searchType = dataObj == null ? null : (String)typeObj;
 		
-		List<Posting> postingList = postService.postingList(page == null ? 1 : Integer.parseInt(page),
-															postingType, searchData, searchType, orderData);
+		List<Posting> postingList = new ArrayList<>();
+		
+		// 검색 데이터가 없을 경우 최상단에 추천 제일 많이 받은 게시글 출력
+		if(searchData == null){
+			// 명소 게시판일 때만 7일전까지 계산
+			int period = postingType.equals("place") ? 7 : 1;
+			Posting mostRecommendData = postService.mostRecommend(period);
+			
+			if(mostRecommendData != null){
+				postingList.add(mostRecommendData);
+			}
+		}
+		
+		int endPage = page == null ? 1 : Integer.parseInt(page);
+		
+		// 게시글 목록 출력
+		for(int pageIdx = 1; pageIdx <= endPage; pageIdx++){
+			postingList.addAll(postService.postingList(pageIdx, postingType, searchData, searchType, orderData));
+		}
+		
 		return postingList;
 	}
 	
