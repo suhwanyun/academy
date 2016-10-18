@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
+import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
 import academy.group5.repo.BoardRepo;
 
@@ -34,8 +35,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
-	public Posting mostRecommend(int period){
-		return boardRepo.getMostRecommendPosting(period);
+	public Posting mostRecommend(MostRecommend searchData){
+		return boardRepo.getMostRecommendPosting(searchData);
 	}
 	
 	@Override

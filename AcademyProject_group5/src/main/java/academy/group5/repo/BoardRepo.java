@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
+import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
 
 @Repository
@@ -26,9 +27,9 @@ public class BoardRepo {
 	}
 	
 	/** 가장 추천을 많이 받은 글 탐색 */
-	public Posting getMostRecommendPosting(int period) {
+	public Posting getMostRecommendPosting(MostRecommend searchData) {
 		String stmt = BOARD_NS + "selectMostRecommendPosting";
-		return session.selectOne(stmt, period);
+		return session.selectOne(stmt, searchData);
 	}
 	
 	/** 

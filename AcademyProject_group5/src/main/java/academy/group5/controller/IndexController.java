@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.MostRecommend;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.PostingService;
@@ -90,9 +91,18 @@ public class IndexController {
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
 	public String foodMainPage(HttpSession session){
+		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, "food"));
+		
+		if(mostRecommendData != null){
+			session.setAttribute("mostRecommendData", mostRecommendData);
+		} else {
+			session.removeAttribute("mostRecommendData");
+		}
+		
 		List<Posting> postingList = postService.postingList(1, "food");
 		session.setAttribute("postingDataList", postingList);
 		session.setAttribute("postingType", "food");
+		
 		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");
 		session.removeAttribute("orderData");

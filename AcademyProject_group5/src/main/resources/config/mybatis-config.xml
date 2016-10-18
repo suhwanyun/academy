@@ -31,6 +31,7 @@
 		<typeAlias type="academy.group5.dto.etc.Paging" alias="paging"/>
 		<typeAlias type="academy.group5.dto.etc.LecturePaging" alias="lecture_paging"/>
 		<typeAlias type="academy.group5.dto.etc.Voting" alias="voting"/>
+		<typeAlias type="academy.group5.dto.etc.MostRecommand" alias="most_recommend"/>
 	</typeAliases>
 	
 	<mappers>

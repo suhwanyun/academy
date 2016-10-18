@@ -133,17 +133,6 @@ public class BoardController {
 		
 		List<Posting> postingList = new ArrayList<>();
 		
-		/*// 검색 데이터가 없을 경우 최상단에 추천 제일 많이 받은 게시글 출력
-		if(searchData == null && (page == null || page.equals("1"))){
-			// 명소 게시판일 때만 7일전까지 계산
-			int period = postingType.equals("place") ? 7 : 1;
-			Posting mostRecommendData = postService.mostRecommend(period);
-			
-			if(mostRecommendData != null){
-				postingList.add(mostRecommendData);
-			}
-		}*/
-		
 		int nowPage = page == null ? 1 : Integer.parseInt(page);
 		// 게시글 목록 출력
 		postingList.addAll(postService.postingList(nowPage, postingType, searchData, searchType, orderData));

@@ -8,7 +8,7 @@
 		select *
 		from (select rownum as rnum, sub.*
 			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time,
-			 			  posting_hits, posting_recommand, posting_title, posting_photo
+			 			  posting_hits, posting_recommend, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{postingType}
 				  <choose>
@@ -27,8 +27,8 @@
 				      </when>
 			      </choose>
 			      <choose>
-				      <when test="orderType == 'recommand'">
-					  order by posting_recommand desc
+				      <when test="orderType == 'recommend'">
+					  order by posting_recommend desc
 					  </when>
 					  <otherwise>
 					  order by posting_time desc
@@ -39,14 +39,16 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	 <select id="selectMostRecommendPosting" parameterType="int" resultType="posting">
+	 <select id="selectMostRecommendPosting" parameterType="most_recommend" resultType="posting">
 	 	select *
 	 	from (select rownum as rnum, sub.*
 	 		  from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time,
-			   		 	   posting_hits, posting_recommand, posting_title, posting_photo
+			   		 	   posting_hits, posting_recommend, posting_title, posting_photo
 			 	    from Posting
-			 	    where posting_recommand &gt; 0 and posting_time &gt; sysdate - #{period}
-			 	    order by posting_recommand desc
+			 	    where posting_recommend &gt; 0
+			 	      and posting_time &gt; sysdate - #{period}
+			 	      and posting_type = #{postingType}
+			 	    order by posting_recommend desc
 			 	    ) sub
 			  )
 		where rnum = 1
@@ -55,7 +57,7 @@
 	<insert id="insertPosting" parameterType="posting">
 		insert into Posting
 		(posting_type, user_id, posting_time, posting_hits,
-			posting_recommand, posting_title, posting_content, posting_photo)
+			posting_recommend, posting_title, posting_content, posting_photo)
 		values(#{postingType}, #{userId}, sysdate, 0, 0, #{postingTitle}, #{postingContent}, #{postingPhoto}) 
 	</insert>
 	

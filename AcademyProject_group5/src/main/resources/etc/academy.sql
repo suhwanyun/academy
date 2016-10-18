@@ -139,7 +139,7 @@ CREATE TABLE Posting
 	user_id varchar2(10) NOT NULL,
 	posting_time date NOT NULL,
 	posting_hits number NOT NULL,
-	posting_recommand number NOT NULL,
+	posting_recommend number NOT NULL,
 	posting_title varchar2(100) NOT NULL,
 	posting_content varchar2(4000) NOT NULL,
 	posting_photo varchar2(100),
