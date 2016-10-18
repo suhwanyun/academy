@@ -10,11 +10,11 @@
 			 from (select *
 				  from Lecture 
 				  <choose>
-				  <when test="data != null and data2 == 'lecture'">
-			      where	lecture_name like '%'||#{data}||'%' 
+				  <when test="searchData != null and searchDataType == 'lecture'">
+			      where	lecture_name like '%'||#{searchData}||'%' 
 			      </when>
-			      <when test="data != null and data2 == 'professor'">
-			      where	professor_name like '%'||#{data}||'%' 
+			      <when test="searchData != null and searchDataType == 'professor'">
+			      where	professor_name like '%'||#{searchData}||'%' 
 			      </when>
 			      </choose>
 				  order by lecture_id) sub)

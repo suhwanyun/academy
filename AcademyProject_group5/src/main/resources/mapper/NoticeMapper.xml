@@ -4,23 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.NoticeMapper">
 	
-	<select id="selectAllLectureNoticeByUser" parameterType="paging" resultType="lecture_notice">
+	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="lecture_notice">
 		select notice_time, lecture_id, notice_type, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)
 			 	 					   join LectureApply using (lecture_id)
-			 	 	where user_id = #{data}
+			 	 	where user_id = #{userId}
 					order by notice_time) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<select id="selectLectureNotice" parameterType="paging" resultType="lecture_notice">
+	<select id="selectLectureNotice" parameterType="lecture_paging" resultType="lecture_notice">
 		select notice_time, notice_type, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice 
-			 	 	where lecture_id = #{data} and lecture_class = #{data2}
+			 	 	where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 					order by notice_time) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>

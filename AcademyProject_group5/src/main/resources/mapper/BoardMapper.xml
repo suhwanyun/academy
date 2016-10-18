@@ -10,25 +10,25 @@
 			 from (select posting_id, user_id, to_char(posting_time, 'YYYY-mm-dd hh24:mi') as posting_time,
 			 			  posting_hits, posting_recommand, posting_title, posting_photo
 				  from Posting 
-				  where	posting_type = #{data}
+				  where	posting_type = #{postingType}
 				  <choose>
-					  <when test="data2 != null and data3 == 'title'">
-				      and posting_title like '%'||#{data2}||'%' 
+					  <when test="searchData != null and searchDataType == 'title'">
+				      and posting_title like '%'||#{searchData}||'%' 
 				      </when>
-				      <when test="data2 != null and data3 == 'content'">
-				      and posting_content like '%'||#{data2}||'%' 
+				      <when test="searchData != null and searchDataType == 'content'">
+				      and posting_content like '%'||#{searchData}||'%' 
 				      </when>
-				      <when test="data2 != null and data3 == 'user'">
-				      and user_id like '%'||#{data2}||'%' 
+				      <when test="searchData != null and searchDataType == 'user'">
+				      and user_id like '%'||#{searchData}||'%' 
 				      </when>
-				      <when test="data2 != null and data3 == 'all'">
-				      and posting_title like '%'||#{data2}||'%' or
-				      	  posting_content like '%'||#{data2}||'%'
+				      <when test="searchData != null and searchDataType == 'all'">
+				      and posting_title like '%'||#{searchData}||'%' or
+				      	  posting_content like '%'||#{searchData}||'%'
 				      </when>
 			      </choose>
 			      <choose>
-				      <when test="data4 != null">
-					  order by #{data4} desc
+				      <when test="orderType != null">
+					  order by #{orderType} desc
 					  </when>
 					  <otherwise>
 					  order by posting_time desc

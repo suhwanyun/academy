@@ -19,36 +19,26 @@ public class Paging {
 	private Integer endIdx;
 	
 	/** 부가 데이터 */
-	private Object data;
-	private Object data2;
-	private Object data3;
-	private Object data4;
-	
-	/** 정렬정보 */
+	private String postingType;
+	private String searchData;
+	private String searchDataType;
+	private String orderType;
 	private String orderData;
 	
-	public Paging(int page, int size){
-		this(page, size, null);
+	public Paging(int page, int size, String postingType){
+		this(page, size, postingType, null, null, null);
 	}
 	
-	public Paging(int page, int size, Object data){
-		this(page, size, data, null);
+	public Paging(int page, int size, String searchData, String searchDataType){
+		this(page, size, null, searchData, searchDataType, null);
 	}
-	
-	public Paging(int page, int size, Object data, Object data2){
-		this(page, size, data, data2, null);
-	}
-	
-	public Paging(int page, int size, Object data, Object data2, Object data3){
-		this(page, size, data, data2, data3, null);
-	}
-	
-	public Paging(int page, int size, Object data, Object data2, Object data3, Object data4){
+
+	public Paging(int page, int size, String postingType, String searchData, String searchDataType, String orderType){
 		this.startIdx = (page - 1) * size + 1;
 		this.endIdx = page * size;
-		this.data = data;
-		this.data2 = data2;
-		this.data3 = data3;
-		this.data4 = data4;
+		this.postingType = postingType;
+		this.searchData = searchData;
+		this.searchDataType = searchDataType;
+		this.orderType = orderType;
 	}
 }

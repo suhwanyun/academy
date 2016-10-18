@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.LectureNotice;
+import academy.group5.dto.etc.LecturePaging;
 import academy.group5.dto.etc.Paging;
 import academy.group5.repo.NoticeRepo;
 
@@ -22,12 +23,12 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	@Override
 	public List<LectureNotice> allLectureNoticeList(String userId, int page) {
-		return notiRepo.getAllLectureNoticeList(new Paging(page, NOTICE_MAX_PAGE, userId));
+		return notiRepo.getAllLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, userId));
 	}
 
 	@Override
 	public List<LectureNotice> lectureNoticeList(Integer lectureId, Integer lectureClass, int page) {
-		return notiRepo.getLectureNoticeList(new Paging(page, NOTICE_MAX_PAGE, lectureId, lectureClass));
+		return notiRepo.getLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, lectureId, lectureClass));
 	}
 
 	@Override
