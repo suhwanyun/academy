@@ -1817,13 +1817,23 @@ margin:1em auto;
 .boardcss_list_table { width: 100%;}
 
 /* 화면에 보여지는 글 목록 테이블 */
-.list_table { width: 100%; columns: 0em;}
+.list_table { width: 100%; columns: 0em; 
+
+}
 
 .list_table_array{
 	width:100%;
 	column-width: 10 10 10 10;
 }
-
+.list_table td{
+	
+	padding:0.1em 0.1em;
+	
+	vertical-align: middle;
+}
+.list_table tr{
+	width:100%;
+}
 /* 화면에 보여지는 caption */
 /* .list_table caption { display: none; } */
 

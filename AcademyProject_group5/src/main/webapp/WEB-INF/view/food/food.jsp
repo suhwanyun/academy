@@ -51,7 +51,7 @@
 
 				</table>
 
-				<table style="text-align: center;" class="imgTable">
+				<table class="list_table">
 					<colgroup>
 						<col width="20%">
 						<col width="20%">
@@ -60,17 +60,15 @@
 					</colgroup>
 
 					<c:forEach items="${postingDataList }" var="list">
-						<tr class="tableData">
-
-							<td rowspan="2"><img class="imgBoard"
-								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}" /></td>
-							<td colspan="3">${list.postingTitle }</td>
-
-						</tr>
-						<tr class="tableData">
-							<td>${list.userId }</td>
-							<td>${list.postingRecommand }</td>
-							<td>${list.postingTime }</td>
+						<tr class="tableData" >
+							<td rowspan="2" ><img class="imgBoard"
+								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}"  /></td>
+							<td colspan="3" >${list.postingTitle }</td>
+							</tr>
+							<tr class="tableData" >
+								<td>${list.userId }</td>
+								<td>${list.postingRecommand }</td>
+								<td>${list.postingTime }</td>
 						</tr>
 
 					</c:forEach>
