@@ -65,7 +65,7 @@
 							<td colspan="3">${list.postingTitle }</td>
 
 						</tr>
-						<tr>
+						<tr class="tableData">
 							<td>${list.userId }</td>
 							<td>${list.postingRecommand }</td>
 							<td>${list.postingTime }</td>
@@ -87,8 +87,8 @@
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
+var pageIndex = 1;
 $("#searchBtn").click(function(){
-		alert($("#searchInput").val());
 		$.ajax({
 			type : "get",
 			url : "${postingSearch}",
@@ -103,17 +103,14 @@ $("#searchBtn").click(function(){
 					 alert("검색 결과가 없습니다.");
 				 }else{
 				 $(result).each(function(index,item){
-						$("#beforeLectureLocation").before(
-								$("<tr>"+
-							               "<td rowspan='2'><img class='imgBoard'"+
-							               "src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
-							               "<td colspan='3'>"+item.postingTitle+"</td>"+
-							            "</tr>"+
-							            "<tr>"+ 
-							               "<td>"+item.userId+"</td>"+
-							               "<td>"+item.postingRecommand+"</td>"+
-							               "<td>"+item.postingTime+"</td>"+
-							            "</tr>"));
+						$("#beforeLocation").before(
+								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
+							               "src=<%=request.getContextPath()%>/upload/"+
+							               item.postingPhoto +"/></td><td colspan='3'>"+
+							               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+							               item.userId+"</td><td>"+
+							               item.postingRecommand+"</td><td>"+
+							               item.postingTime+"</td></tr>"));
 					});
 				 }
 			 } 
@@ -122,7 +119,7 @@ $("#searchBtn").click(function(){
 		
 		});
 	});
-var pageIndex = 1;
+
 $("#moreBtn").click(function(){
 	   
 	   pageIndex++;
@@ -137,17 +134,13 @@ $("#moreBtn").click(function(){
 	         $(result).each(function(index,item){
 	            itemCount++;
 	            $("#beforeLocation").before(
-	               $("<tr>"+
-	               "<td rowspan='2'><img class='imgBoard'"+
-	               "src=<%=request.getContextPath()%>/upload/"+item.postingPhoto +"/></td>"+
-	               "<td colspan='3'>"+item.postingTitle+"</td>"+
-	            "</tr>"+
-	            "<tr>"+ 
-	               "<td>"+item.userId+"</td>"+
-	               "<td>"+item.postingRecommand+"</td>"+
-	               "<td>"+item.postingTime+"</td>"+
-	            "</tr>"));
-	            console.log(item.postingPhoto);
+	               $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
+	               "src=<%=request.getContextPath()%>/upload/"+
+	               item.postingPhoto +"/></td><td colspan='3'>"+
+	               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+	               item.userId+"</td><td>"+
+	               item.postingRecommand+"</td><td>"+
+	               item.postingTime+"</td></tr>"));
 	         });
 	         
 	         if(itemCount == 0){
