@@ -79,11 +79,7 @@
 							<td><button class="myButton">맨 위로</button></td></tr>
 					
 				</table>
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'master' of https://github.com/suhwanyun/academy.git
 			</div>
 		</div>
 	</div>
