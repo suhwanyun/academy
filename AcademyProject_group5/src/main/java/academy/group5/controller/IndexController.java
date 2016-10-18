@@ -29,6 +29,12 @@ public class IndexController {
 	@Autowired
 	PostingService postService;
 	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public String test(Model model){
+		model.addAttribute("msg", "테스트 성공");
+		return "/index";
+	}
+	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainPage(){
