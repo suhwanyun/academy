@@ -27,8 +27,8 @@
 				      </when>
 			      </choose>
 			      <choose>
-				      <when test="orderData != null">
-					  order by #{orderData} desc
+				      <when test="data4 != null">
+					  order by #{data4} desc
 					  </when>
 					  <otherwise>
 					  order by posting_time desc

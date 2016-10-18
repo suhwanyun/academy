@@ -36,11 +36,13 @@
 						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
 					</tr>
 					<tr>
+
 						<td><select id="serchType">
 								<option selected="selected" value="user">작성자</option>
 								<option value="title">제목</option>
 								<option value="content">내용</option>
 								<option value="all">제목+내용</option>
+
 						</select></td>
 						<td colspan="2"><input type="search" id="searchInput"></td>
 						<td><input type="button" id="searchBtn" class="boardBtn"
@@ -70,12 +72,12 @@
 							<td>${list.postingRecommand }</td>
 							<td>${list.postingTime }</td>
 						</tr>
-					</c:forEach>
-					<tr id="beforeLocation">
-						<td colspan="3"><button id="moreBtn">더보기</button></td>
-						<td><button>맨 위로</button></td>
-					</tr>
 
+						</c:forEach>
+						<tr id="beforeLocation">
+							<td colspan="3"><button  id="moreBtn" class="myButton">더보기</button></td>
+							<td><button class="myButton">맨 위로</button></td></tr>
+					
 				</table>
 
 			</div>
