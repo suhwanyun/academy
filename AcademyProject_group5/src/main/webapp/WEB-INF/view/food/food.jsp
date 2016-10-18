@@ -58,14 +58,14 @@
 						<col width="10%">
 						<col width="50%">
 					</colgroup>
-						<tr>
+						<tr class="mostRecommend tableData">
 
 							<td rowspan="2"><img class="imgBoard"
-								src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}" /></td>
+								src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}" onerror="this.src='<%=request.getContextPath()%>/upload/preview_default.png'" /></td>
 							<td colspan="3">${mostRecommendData.postingTitle }</td>
 
 						</tr>
-						<tr>
+						<tr class="mostRecommend tableData">
 							<td>${mostRecommendData.userId }</td>
 							<td>${mostRecommendData.postingRecommend }</td>
 							<td>${mostRecommendData.postingTime }</td>
@@ -103,10 +103,18 @@
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
+
+var mostRecommend;
+$("document").ready(function(){
+	mostRecommend = "<tr class='mostRecommend tableData'>";
+	mostRecommend += $(".mostRecommend").html();
+	mostRecommend += "</tr><tr class='mostRecommend tableData'>";
+	mostRecommend += $(".mostRecommend + tr").html();
+	mostRecommend += "</tr>";
+});
 var pageIndex = 1;
 
 $("#searchBtn").click(function(){
-	alert($("#serchType").val()+", "+$("#searchInput").val()+", "+$("#sort").val());
 	pageIndex = 1;
 	$.ajax({
 			type : "get",
@@ -118,6 +126,10 @@ $("#searchBtn").click(function(){
 			},
 			success : function(result) {
 				 $(".tableData").remove();
+				 $(".mostRecommend").remove();
+				 if($("#searchInput").val().length < 1){
+					 $("#beforeLocation").before(mostRecommend);
+				 }
 				 if(result.length==0){
 					 alert("검색 결과가 없습니다.");
 				 }else{
