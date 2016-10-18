@@ -72,7 +72,7 @@ public class BoardController {
 		// 로그인된 id 확인
 		Object userAttrObj = session.getAttribute("user");
 		if(userAttrObj != null){
-			userId = ((UserData)session.getAttribute("user")).getUserId();
+			userId = ((UserData)userAttrObj).getUserId();
 		}else {		
 			isError = true;		
 		}
