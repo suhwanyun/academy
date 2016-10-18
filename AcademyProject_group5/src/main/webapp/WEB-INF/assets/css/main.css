@@ -66,6 +66,7 @@
 
 		html, body {
 			min-width: 320px;
+			max-height:480px;
 		}
 
 	}
@@ -1837,4 +1838,6 @@ text-align:right;
 
 
 }
-
+.index{
+	text-align: center;
+}
