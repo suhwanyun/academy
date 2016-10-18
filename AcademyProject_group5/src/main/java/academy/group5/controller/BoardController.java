@@ -64,9 +64,18 @@ public class BoardController {
 	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
 			String okMapping, String failMapping){
-		// 로그인된 id 확인
-		String userId = ((UserData)session.getAttribute("user")).getUserId();
 		
+		String userId = null;
+		// 에러 발생여부 플래그
+		boolean isError = false;
+			
+		// 로그인된 id 확인
+		Object userAttrObj = session.getAttribute("user");
+		if(userAttrObj != null){
+			userId = ((UserData)session.getAttribute("user")).getUserId();
+		}else {		
+			isError = true;		
+		}
 		// multipart/form-data 타입 form 데이터 전달
 		String postingType = mrequest.getParameter("postingType");
 		String postingTitle = mrequest.getParameter("postingTitle");
@@ -74,10 +83,7 @@ public class BoardController {
 			
 		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
 		
-		// 에러 발생여부 플래그
-		boolean isError = false;
-		
-		if(userId == null || postingType == null || postingTitle == null || postingContent == null) {
+		if(isError || postingType == null || postingTitle == null || postingContent == null) {
 			model.addAttribute("msg", "잘못된 접근입니다.");
 			isError = true;		
 		} else if(postingTitle.equals("")){
