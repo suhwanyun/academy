@@ -27,8 +27,8 @@
 					</colgroup>
 					<tr>
 						<td><select id="sort">
-								<option value="posting_time">날짜 정렬</option>
-								<option value="posting_recommand">추천수 정렬</option>
+								<option value="time">날짜 정렬</option>
+								<option value="recommand">추천수 정렬</option>
 
 						</select></td>
 						<td></td>
@@ -93,6 +93,7 @@
 var pageIndex = 1;
 
 $("#searchBtn").click(function(){
+	alert($("#serchType").val()+", "+$("#searchInput").val()+", "+$("#sort").val());
 	pageIndex = 1;
 	$.ajax({
 			type : "get",

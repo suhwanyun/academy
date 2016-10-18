@@ -27,8 +27,8 @@
 				      </when>
 			      </choose>
 			      <choose>
-				      <when test="orderType != null">
-					  order by #{orderType} desc
+				      <when test="orderType == 'recommand'">
+					  order by posting_recommand desc
 					  </when>
 					  <otherwise>
 					  order by posting_time desc

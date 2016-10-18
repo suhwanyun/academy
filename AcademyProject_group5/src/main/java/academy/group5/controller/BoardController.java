@@ -120,20 +120,21 @@ public class BoardController {
 	/** 게시글 목록 표시 */
 	@RequestMapping(value="/postingList", method=RequestMethod.GET)
 	public @ResponseBody List<Posting> getPostingList(HttpSession session,
-				@RequestParam(required=false) String page,
-				@RequestParam(required=false) String orderData){
+				@RequestParam(required=false) String page){
 		
 		String postingType = (String)session.getAttribute("postingType");
 		
 		Object dataObj = session.getAttribute("searchData");
 		Object typeObj = session.getAttribute("searchType");
+		Object orderObj = session.getAttribute("orderData");
 		String searchData = dataObj == null ? null : (String)dataObj;
 		String searchType = dataObj == null ? null : (String)typeObj;
+		String orderData = orderObj == null ? null : (String)orderObj;
 		
 		List<Posting> postingList = new ArrayList<>();
 		
-		// 검색 데이터가 없을 경우 최상단에 추천 제일 많이 받은 게시글 출력
-		if(searchData == null){
+		/*// 검색 데이터가 없을 경우 최상단에 추천 제일 많이 받은 게시글 출력
+		if(searchData == null && (page == null || page.equals("1"))){
 			// 명소 게시판일 때만 7일전까지 계산
 			int period = postingType.equals("place") ? 7 : 1;
 			Posting mostRecommendData = postService.mostRecommend(period);
@@ -141,12 +142,12 @@ public class BoardController {
 			if(mostRecommendData != null){
 				postingList.add(mostRecommendData);
 			}
-		}
+		}*/
 		
 		int nowPage = page == null ? 1 : Integer.parseInt(page);
 		// 게시글 목록 출력
 		postingList.addAll(postService.postingList(nowPage, postingType, searchData, searchType, orderData));
-	
+
 		return postingList;
 	}
 	
@@ -154,9 +155,11 @@ public class BoardController {
 	@RequestMapping(value="/postingSearch", method=RequestMethod.GET)
 	public @ResponseBody List<Posting> setSearchDataForGetlectureList(Model model, HttpSession session,
 			@RequestParam String searchType, @RequestParam String searchData, 
-			@RequestParam(required=false) String orderData){
+			@RequestParam String orderData){
 		
 		String postingType = (String)session.getAttribute("postingType");
+		
+		session.setAttribute("orderData", orderData);
 		
 		if(searchType.equals("") || searchData.equals("")){
 			session.removeAttribute("searchType");

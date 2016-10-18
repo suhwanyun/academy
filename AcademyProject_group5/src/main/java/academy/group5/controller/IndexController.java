@@ -93,6 +93,9 @@ public class IndexController {
 		List<Posting> postingList = postService.postingList(1, "food");
 		session.setAttribute("postingDataList", postingList);
 		session.setAttribute("postingType", "food");
+		session.removeAttribute("searchType");
+		session.removeAttribute("searchData");
+		session.removeAttribute("orderData");
 		return "/food/food";
 	}
 	
