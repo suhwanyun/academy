@@ -64,6 +64,7 @@ function errorFun(e){
 						<col width="10%">
 						<col width="50%">
 					</colgroup>
+					<c:if test="${!empty mostRecommendData}">
 					<tr class="mostRecommend tableData">
 
 						<td rowspan="2"><img class="imgBoard"
@@ -78,6 +79,7 @@ function errorFun(e){
 						<td>${mostRecommendData.postingRecommend }</td>
 						<td>${mostRecommendData.postingTime }</td>
 					</tr>
+					</c:if>
 					<c:forEach items="${postingDataList }" var="list">
 
 						<tr class="tableData">

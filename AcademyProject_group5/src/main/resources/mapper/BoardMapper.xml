@@ -114,8 +114,8 @@
 	
 	<insert id="insertComment" parameterType="posting_comment">
 		insert into PostingComment
-		(posting_type, user_id, comment_parent_id, comment_time, comment_content)
-		values (#{postingType}, #{userId}, #{commentParentId}, sysdate, #{commentContent})
+		(posting_id, posting_type, user_id, comment_parent_id, comment_time, comment_content)
+		values (#{postingId}, #{postingType}, #{userId}, #{commentParentId}, sysdate, #{commentContent})
 	</insert>
 	
 	<delete id="deleteComment" parameterType="int">

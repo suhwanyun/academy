@@ -186,8 +186,6 @@ public class BoardController {
 		}
 		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
-		model.addAttribute("commentList", commentList.get("parent"));
-		model.addAttribute("childCommentList", commentList.get("child"));
 		
 		return commentList;
 	}
