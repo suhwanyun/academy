@@ -66,6 +66,12 @@ public class BoardRepo {
 		return session.delete(stmt, delData);
 	}
 	
+	/** 게시글 정보 */
+	public Posting getPostingInfo(Posting selectData){
+		String stmt = BOARD_NS + "selectPostingInfo";
+		return session.selectOne(stmt, selectData);
+	}
+	
 	/** 댓글 확인 */
 	public List<PostingComment> getAllComment(Posting postingData){
 		String stmt = BOARD_NS + "selectAllComment";

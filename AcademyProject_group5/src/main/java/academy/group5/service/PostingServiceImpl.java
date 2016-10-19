@@ -183,14 +183,13 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postDelete(Integer postingId, String postingType) {
-		// TODO Auto-generated method stub
+		//int result = boardRepo.delPosting(new Posting(postingId, postingType));
 		return false;
 	}
 
 	@Override
 	public Posting postView(Integer postingId, String postingType) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardRepo.getPostingInfo(new Posting(postingId, postingType));
 	}
 
 	@Override

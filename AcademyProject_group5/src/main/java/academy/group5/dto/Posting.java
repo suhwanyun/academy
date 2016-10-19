@@ -1,7 +1,5 @@
 package academy.group5.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,6 +45,11 @@ public class Posting {
 	*//** 추천 목록. *//*
 	private Set<Recommend> recommendSet;*/
 
+	public Posting(Integer postingId, String postingType){
+		this.postingId = postingId;
+		this.postingType = postingType;
+	}
+	
 	public Posting(String postingType, String userId, 
 			String postingTitle, String postingContent, String postingPhoto) {
 		super();

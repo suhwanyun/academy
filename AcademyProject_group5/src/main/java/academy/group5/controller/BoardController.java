@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.exception.SessionNotFoundException;
 import academy.group5.service.PostingService;
 
 @Controller
@@ -76,8 +77,9 @@ public class BoardController {
 		}else {		
 			isError = true;		
 		}
+		
+		String postingType = getPostingType(session);
 		// multipart/form-data 타입 form 데이터 전달
-		String postingType = mrequest.getParameter("postingType");
 		String postingTitle = mrequest.getParameter("postingTitle");
 		String postingContent = mrequest.getParameter("postingContent");
 			
@@ -122,7 +124,7 @@ public class BoardController {
 	public @ResponseBody List<Posting> getPostingList(HttpSession session,
 				@RequestParam(required=false) String page){
 		
-		String postingType = (String)session.getAttribute("postingType");
+		String postingType = getPostingType(session);
 		
 		Object dataObj = session.getAttribute("searchData");
 		Object typeObj = session.getAttribute("searchType");
@@ -146,7 +148,7 @@ public class BoardController {
 			@RequestParam String searchType, @RequestParam String searchData, 
 			@RequestParam String orderData){
 		
-		String postingType = (String)session.getAttribute("postingType");
+		String postingType = getPostingType(session);
 		
 		session.setAttribute("orderData", orderData);
 		
@@ -163,25 +165,37 @@ public class BoardController {
 		}
 	}
 
-	/** 식사(먹거리)추천 게시판 글 내용 */
-	@RequestMapping(value="/food_info", method=RequestMethod.GET)
-	public String foodInfo(){
+	/** 게시판 글 내용 */
+	@RequestMapping(value="/postingInfo", method=RequestMethod.GET)
+	public String postingInfo(Model model, HttpSession session, @RequestParam int postingId){
+		String postingType = getPostingType(session);
 		
-		return "/food/food_info";
+		Posting postingData = postService.postView(postingId, postingType);
+		model.addAttribute("postingData", postingData);
+		
+		switch(postingType){
+		case "food":
+			return "/food/food_info";
+		case "play":
+			return "/play/play_info";
+		default: // "place"
+			return "/place/place_info";
+		}	
 	}
 	
-	/** 오락추천 게시판 글 내용 */
-	@RequestMapping(value="/play_info", method=RequestMethod.GET)
-	public String playInfo(){
+	/** 게시판 종류 확인 */
+	private String getPostingType(HttpSession session){
+		Object postingTypeObj = session.getAttribute("postingType");
+		String postingType = null;
 		
-		return "/play/play_info";
-	}
-	
-	/** 오락추천 게시판 글 내용 */
-	@RequestMapping(value="/place_info", method=RequestMethod.GET)
-	public String placeInfo(){
+		if(postingTypeObj != null){
+			postingType = (String)postingTypeObj;
+		} else {
+			session.setAttribute("msg", "잘못된 접근입니다.");
+			throw new SessionNotFoundException();
+		}
 		
-		return "/place/place_info";
+		return postingType;
 	}
 	
 }
