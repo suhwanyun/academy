@@ -9,7 +9,7 @@
 	
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/error_page</location>
+		<location>/WEB-INF/view/error/error_page.jsp</location>
 	</error-page>
 	
 	<context-param>

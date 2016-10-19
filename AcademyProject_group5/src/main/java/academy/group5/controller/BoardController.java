@@ -178,8 +178,10 @@ public class BoardController {
 			return "/food/food_info";
 		case "play":
 			return "/play/play_info";
-		default: // "place"
+		case "place":
 			return "/place/place_info";
+		default:
+			return "/campus/lecture/lecture_board_info";
 		}	
 	}
 	
@@ -191,7 +193,6 @@ public class BoardController {
 		if(postingTypeObj != null){
 			postingType = (String)postingTypeObj;
 		} else {
-			session.setAttribute("msg", "잘못된 접근입니다.");
 			throw new SessionNotFoundException();
 		}
 		
