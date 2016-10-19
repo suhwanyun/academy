@@ -91,7 +91,27 @@ public class IndexController {
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
 	public String foodMainPage(HttpSession session){
-		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, "food"));
+		boardMainSetup(session, "food");
+		return "/food/food";
+	}
+	
+	/** 오락 추천 게시판 페이지 */
+	@RequestMapping(value="/playMain", method=RequestMethod.GET)
+	public String playMainPage(HttpSession session){
+		boardMainSetup(session, "play");
+		return "/play/play";
+	}
+	
+	/** 명소 추천 게시판 페이지 */
+	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
+	public String placeMainPage(HttpSession session){
+		boardMainSetup(session, "place");
+		return "/place/place";
+	}
+	
+	/** 게시판 메인 페이지 초기화 설정 */
+	private void boardMainSetup(HttpSession session, String PostingType){
+		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, PostingType));
 		
 		if(mostRecommendData != null){
 			session.setAttribute("mostRecommendData", mostRecommendData);
@@ -99,32 +119,13 @@ public class IndexController {
 			session.removeAttribute("mostRecommendData");
 		}
 		
-		List<Posting> postingList = postService.postingList(1, "food");
+		List<Posting> postingList = postService.postingList(1, PostingType);
 		session.setAttribute("postingDataList", postingList);
-		session.setAttribute("postingType", "food");
+		session.setAttribute("postingType", PostingType);
 		
 		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");
 		session.removeAttribute("orderData");
-		return "/food/food";
-	}
-	
-	/** 오락 추천 게시판 페이지 */
-	@RequestMapping(value="/playMain", method=RequestMethod.GET)
-	public String playMainPage(HttpSession session){
-		List<Posting> postingList = postService.postingList(1, "play");
-		session.setAttribute("postingDataList", postingList);
-		session.setAttribute("postingType", "play");
-		return "/play/play";
-	}
-	
-	/** 명소 추천 게시판 페이지 */
-	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
-	public String placeMainPage(HttpSession session){
-		List<Posting> postingList = postService.postingList(1, "place");
-		session.setAttribute("postingDataList", postingList);
-		session.setAttribute("postingType", "place");
-		return "/place/place";
 	}
 	
 	/** 마일리지 페이지 */

@@ -51,7 +51,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/error/error_page").setViewName("ERROR");
+		registry.addViewController("/WEB-INF/view/error/*").setViewName("ERROR");
 		super.addViewControllers(registry);
 	}
 	
