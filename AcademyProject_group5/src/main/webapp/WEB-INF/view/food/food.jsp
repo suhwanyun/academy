@@ -33,7 +33,7 @@
 						</select></td>
 						<td></td>
 						<td></td>
-						<td><a href="<%=request.getContextPath()%>/write/foodjsp">글쓰기</a></td>
+						<td><button id="writeBtn">글쓰기</button></td>
 					</tr>
 					<tr>
 
@@ -185,6 +185,8 @@ $("#moreBtn").click(function(){
 	      }
 	   });
 	});
-
+$("#writeBtn").click(function(){
+	$(location).attr('href', "<%=request.getContextPath()%>/write/foodjsp");
+});
 </script>
 </html>
