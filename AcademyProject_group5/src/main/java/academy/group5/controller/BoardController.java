@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
-import academy.group5.exception.SessionNotFoundException;
+import academy.group5.exception.MyException;
 import academy.group5.service.PostingService;
 
 @Controller
@@ -192,7 +192,7 @@ public class BoardController {
 			postingType = (String)postingTypeObj;
 		} else {
 			session.setAttribute("msg", "잘못된 접근입니다.");
-			throw new SessionNotFoundException();
+			throw new MyException();
 		}
 		
 		return postingType;
