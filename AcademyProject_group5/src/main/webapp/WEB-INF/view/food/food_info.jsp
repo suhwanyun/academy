@@ -11,7 +11,11 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 <title>식사 게시판 글 내용</title>
-
+<script type="text/javascript">
+function errorFun(e){
+	e.src="<%=request.getContextPath()%>/upload/notFoundImg.png";
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -22,30 +26,25 @@
 	<div class="form10 pad">
 		<table style="text-align: center">
 			<tr>
-				<td colspan="4">제목</td>
+				<td colspan="4">${postingData.postingTitle }</td>
 			</tr>
+			<c:if test="${postingData.postingPhoto ne 'default.png'}">
 			<tr>
-				<td colspan="4">사진</td>
+				<td colspan="4"><img onerror="errorFun(this)" src="<%=request.getContextPath()%>/upload/${postingData.postingPhoto}" /></td>
 			</tr>
+			</c:if>
 			<tr>
-				<td colspan="4">게시글</td>
+				<td colspan="4">${postingData.postingContent } </td>
 			</tr>
 			<tr>
 				<td colspan="3">이미지</td>
 				<td>추천버튼</td>
 			</tr>
-			<tr>
-				<td colspan="3">댓글 달기</td>
-				<td>등록버튼</td>
-			</tr>
-			<tr>
-				<td>날짜</td>
-				<td>댓글내용</td>
-				<td>작성자</td>
-				<td>댓글달기버튼</td>
-			</tr>
 		</table>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	alert("${postingData.postingPhoto}");
+</script>
 </html>

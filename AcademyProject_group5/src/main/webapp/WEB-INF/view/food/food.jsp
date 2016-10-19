@@ -10,6 +10,12 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/font-awesome.css" />
 <title>식사게시판</title>
+<script type="text/javascript">
+function errorFun(e){
+	e.src="<%=request.getContextPath()%>/upload/notFoundImg.png";
+}
+
+</script>
 </head>
 <body>
 	<!-- 테이블 시작 -->
@@ -58,25 +64,28 @@
 						<col width="10%">
 						<col width="50%">
 					</colgroup>
-						<tr class="mostRecommend tableData">
+					<tr class="mostRecommend tableData">
 
-							<td rowspan="2"><img class="imgBoard"
-								src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}" onerror="this.src='<%=request.getContextPath()%>/upload/preview_default.png'" /></td>
-							<td colspan="3"><a href="<%=request.getContextPath()%>/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
+						<td rowspan="2"><img class="imgBoard"
+							src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}"
+							onerror="errorFun(this);"/></td>
+						<td colspan="3"><a
+							href="<%=request.getContextPath()%>/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
 
-						</tr>
-						<tr class="mostRecommend tableData">
-							<td>${mostRecommendData.userId }</td>
-							<td>${mostRecommendData.postingRecommend }</td>
-							<td>${mostRecommendData.postingTime }</td>
-						</tr>
+					</tr>
+					<tr class="mostRecommend tableData">
+						<td>${mostRecommendData.userId }</td>
+						<td>${mostRecommendData.postingRecommend }</td>
+						<td>${mostRecommendData.postingTime }</td>
+					</tr>
 					<c:forEach items="${postingDataList }" var="list">
 
 						<tr class="tableData">
 
-							<td rowspan="2"><img class="imgBoard"
+							<td rowspan="2"><img class="imgBoard" onerror="errorFun(this);"
 								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}" /></td>
-							<td colspan="3"><a href="<%=request.getContextPath()%>/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
+							<td colspan="3"><a
+								href="<%=request.getContextPath()%>/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
 
 						</tr>
 						<tr class="tableData">
@@ -95,7 +104,7 @@
 				</table>
 
 			</div>
-		</div> 
+		</div>
 	</div>
 	<!-- 테이블 종료 -->
 </body>
@@ -103,7 +112,6 @@
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
-
 var mostRecommend;
 $("document").ready(function(){
 	mostRecommend = "<tr class='mostRecommend tableData'>";
@@ -135,8 +143,8 @@ $("#searchBtn").click(function(){
 				 }else{						
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
-								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
-							               "src=<%=request.getContextPath()%>/upload/preview_"+
+								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard' onerror='errorFun(this);'"+
+										 "src=<%=request.getContextPath()%>/upload/preview_"+
 							               item.postingPhoto +"/></td><td colspan='3'>"+
 							               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
 							               item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
@@ -166,14 +174,14 @@ $("#moreBtn").click(function(){
 	         $(result).each(function(index,item){
 	            itemCount++;
 	            $("#beforeLocation").before(
-	               $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
-	               "src=<%=request.getContextPath()%>/upload/preview_"+
-	               item.postingPhoto +"/></td><td colspan='3'>"+
-	               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
-	      		   item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
-	               item.userId+"</td><td>"+
-	               item.postingRecommend+"</td><td>"+
-	               item.postingTime+"</td></tr>"));
+	            		$("<tr class='tableData'><td rowspan='2'><img class='imgBoard' onerror='errorFun(this);'"+
+	            				"src=<%=request.getContextPath()%>/upload/preview_"+
+					               item.postingPhoto +"/></td><td colspan='3'>"+
+					               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
+					               item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
+					               item.userId+"</td><td>"+
+					               item.postingRecommend+"</td><td>"+
+					               item.postingTime+"</td></tr>"));
 	         });
 	         
 	         if(itemCount == 0){
