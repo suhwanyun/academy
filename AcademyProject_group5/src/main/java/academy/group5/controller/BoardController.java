@@ -170,7 +170,7 @@ public class BoardController {
 	/** 댓글 추가 */
 	@RequestMapping(value="/addComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
-				@RequestParam int postingId, @RequestParam(required=false) int commentParentId, @RequestParam String commentContent){
+				@RequestParam Integer postingId, @RequestParam(required=false) Integer commentParentId, @RequestParam String commentContent){
 		String userId = identify.getUserId(session);		
 				
 		String postingType = getPostingType(session);
