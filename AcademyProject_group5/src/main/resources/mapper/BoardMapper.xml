@@ -65,8 +65,7 @@
 		update Posting 
 		set	user_id = #{userId},
 			posting_title = #{postingTitle},
-			posting_content = #{postingContent},
-			posting_photo = #{postingPhoto}
+			posting_content = #{postingContent}
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
@@ -99,10 +98,18 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
 	
-	<select id="selectAllComment" parameterType="posting" resultType="posting_comment">
+	<select id="selectAllParentComment" parameterType="posting" resultType="posting_comment">
 		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YYYY-mm-dd hh24:mi:ss') as comment_time, comment_content
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
+		  and comment_parent_id is null
+	</select>
+	
+	<select id="selectAllChildComment" parameterType="posting" resultType="posting_comment">
+		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YYYY-mm-dd hh24:mi:ss') as comment_time, comment_content
+		from PostingComment
+		where posting_id = #{postingId} and posting_type = #{postingType}
+		  and comment_parent_id is not null
 	</select>
 	
 	<insert id="insertComment" parameterType="posting_comment">

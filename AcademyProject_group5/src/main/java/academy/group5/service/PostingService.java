@@ -1,6 +1,7 @@
 package academy.group5.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -77,7 +78,7 @@ public interface PostingService {
 	 * @param postingType
 	 * @return
 	 */
-	List<PostingComment> commentList(Integer postingId, String postingType);
+	Map<String, List<PostingComment>> commentList(Integer postingId, String postingType);
 	/**
 	 * 댓글 작성
 	 * @param comment
@@ -98,12 +99,12 @@ public interface PostingService {
 	boolean commentModify(PostingComment comment);
 	
 	/**
-	 * 추천 서비스(1.등록이된지 확인하고 2.등록이 되지않았다면 등록하고)
+	 * 추천
 	 * @param postingId
 	 * @param postingType
 	 * @param userId
 	 * @return
 	 */
-	boolean recommend(Integer postingId, String postingType, String userId);
+	boolean setRecommend(Integer postingId, String postingType, String userId);
 	
 }

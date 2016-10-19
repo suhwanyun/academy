@@ -2,9 +2,11 @@ package academy.group5.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
+import academy.group5.dto.PostingComment;
 import academy.group5.dto.UserData;
 import academy.group5.exception.SessionNotFoundException;
 import academy.group5.service.PostingService;
@@ -66,17 +69,9 @@ public class BoardController {
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
 			String okMapping, String failMapping){
 		
-		String userId = null;
+		String userId = getUserId(session);
 		// 에러 발생여부 플래그
 		boolean isError = false;
-			
-		// 로그인된 id 확인
-		Object userAttrObj = session.getAttribute("user");
-		if(userAttrObj != null){
-			userId = ((UserData)userAttrObj).getUserId();
-		}else {		
-			isError = true;		
-		}
 		
 		String postingType = getPostingType(session);
 		// multipart/form-data 타입 form 데이터 전달
@@ -86,8 +81,7 @@ public class BoardController {
 		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
 		
 		if(isError || postingType == null || postingTitle == null || postingContent == null) {
-			model.addAttribute("msg", "잘못된 접근입니다.");
-			isError = true;		
+			throw new SessionNotFoundException();	
 		} else if(postingTitle.equals("")){
 			model.addAttribute("msg", "제목을 입력해주세요.");
 			isError = true;
@@ -111,7 +105,7 @@ public class BoardController {
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return okMapping;
 		} else if(!isError){
-			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n인터넷 연결을 확인하세요");
+			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n잠시 후 다시 시도해주세요.");
 		}
 
 		// 에러가 발생하여 작성화면으로 돌아가기
@@ -173,6 +167,10 @@ public class BoardController {
 		Posting postingData = postService.postView(postingId, postingType);
 		model.addAttribute("postingData", postingData);
 		
+		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
+		model.addAttribute("commentList", commentList.get("parent"));
+		model.addAttribute("childCommentList", commentList.get("child"));
+		
 		switch(postingType){
 		case "food":
 			return "/food/food_info";
@@ -183,6 +181,60 @@ public class BoardController {
 		default:
 			return "/campus/lecture/lecture_board_info";
 		}	
+	}
+	
+	/** 게시판 글 수정 */ //수정필요!!!!!!!!!!!!!!!!!
+	@RequestMapping(value="/postingUpdate", method=RequestMethod.POST)
+	public String postingUpdate(Model model, HttpSession session, RedirectAttributes redAttr,
+			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto){
+		String postingType = getPostingType(session);
+		
+		String okMappingStr;
+		String failMappingStr;
+		
+		switch(postingType){
+		case "food":
+			okMappingStr = "/foodMain";
+			failMappingStr = "/food/food_add";
+		case "play":
+			okMappingStr = "/playMain";
+			failMappingStr = "/play/play_add";
+		case "place":
+			okMappingStr = "/placeMain";
+			failMappingStr = "/place/place_add";
+		default: // 학업 게시판, 미구현
+			okMappingStr = "/index";
+			failMappingStr = "/index";
+		}	
+		
+		
+		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
+				okMappingStr, failMappingStr);	
+	}
+	
+	/** 댓글 추가 */
+	@RequestMapping(value="/addComment", method=RequestMethod.GET)
+	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
+				@RequestParam int postingId, @RequestParam(required=false) int commentParentId, @RequestParam String commentContent){
+		String userId = getUserId(session);		
+				
+		String postingType = getPostingType(session);
+		
+		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
+														commentParentId, null, commentContent);
+		try{
+			if(!postService.commentWrite(commentData)){
+				model.addAttribute("error", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요");
+			}
+		} catch(PersistenceException e){
+			model.addAttribute("error", "이미 삭제된 댓글입니다.");
+		}
+		
+		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
+		model.addAttribute("commentList", commentList.get("parent"));
+		model.addAttribute("childCommentList", commentList.get("child"));
+		
+		return commentList;
 	}
 	
 	/** 게시판 종류 확인 */
@@ -197,6 +249,16 @@ public class BoardController {
 		}
 		
 		return postingType;
+	}
+	
+	/** 로그인된 id 확인 */
+	private String getUserId(HttpSession session){
+		Object userAttrObj = session.getAttribute("user");
+		if(userAttrObj != null){
+			return ((UserData)userAttrObj).getUserId();
+		}else {		
+			throw new SessionNotFoundException();		
+		}
 	}
 	
 }

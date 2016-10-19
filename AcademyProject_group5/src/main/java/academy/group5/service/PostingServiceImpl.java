@@ -3,7 +3,9 @@ package academy.group5.service;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
+import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
 import academy.group5.repo.BoardRepo;
@@ -198,8 +201,12 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public List<PostingComment> commentList(Integer postingId, String postingType) {
-		return boardRepo.getAllComment(new Posting(postingId, postingType));
+	public Map<String, List<PostingComment>> commentList(Integer postingId, String postingType) {
+		Map<String, List<PostingComment>> commentMap = new HashMap<>();
+		commentMap.put("parent", boardRepo.getAllParentComment(new Posting(postingId, postingType)));
+		commentMap.put("child", boardRepo.getAllChildComment(new Posting(postingId, postingType)));
+		
+		return commentMap;
 	}
 
 	@Override
@@ -215,19 +222,41 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
+		int result = boardRepo.delComment(commentId);
 		
-		return false;
+		if(result == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean commentModify(PostingComment comment) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = boardRepo.updateComment(comment);
+		
+		if(result == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean recommend(Integer postingId, String postingType, String userId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean setRecommend(Integer postingId, String postingType, String userId) {
+		Recommend recommendData = new Recommend(postingId, postingType, userId);
+		int already = boardRepo.getRecommend(recommendData);
+		
+		if(already != 0){
+			return false;
+		}
+		
+		int result = boardRepo.setRecommend(recommendData);
+		
+		if(result == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

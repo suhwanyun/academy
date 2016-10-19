@@ -72,9 +72,15 @@ public class BoardRepo {
 		return session.selectOne(stmt, selectData);
 	}
 	
-	/** 댓글 확인 */
-	public List<PostingComment> getAllComment(Posting postingData){
-		String stmt = BOARD_NS + "selectAllComment";
+	/** 댓글 확인(부모 댓글) */
+	public List<PostingComment> getAllParentComment(Posting postingData){
+		String stmt = BOARD_NS + "selectAllParentComment";
+		return session.selectList(stmt, postingData);
+	}
+	
+	/** 댓글 확인(자식 댓글) */
+	public List<PostingComment> getAllChildComment(Posting postingData){
+		String stmt = BOARD_NS + "selectAllChildComment";
 		return session.selectList(stmt, postingData);
 	}
 	
