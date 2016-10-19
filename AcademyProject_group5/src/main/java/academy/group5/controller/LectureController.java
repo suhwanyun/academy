@@ -2,6 +2,8 @@ package academy.group5.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.service.LectureService;
+import academy.group5.util.Identify;
 
 @Controller
 public class LectureController {
 	
 	@Autowired
 	LectureService lecService;
+	
+	Identify identify = new Identify();
 	
 	/** 학생이 선택한 강의 목록 표시 */
 	@RequestMapping(value="/lecture/selectedLectureList", method=RequestMethod.GET)
@@ -104,13 +109,14 @@ public class LectureController {
 	
 	/** 강의 신청 */
 	@RequestMapping(value="/lecture/lectureApply", method=RequestMethod.GET)
-	public @ResponseBody String lectureApplying(@RequestParam String userId,
+	public @ResponseBody String lectureApplying(HttpSession session,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		String userId = identify.getUserId(session);
 		if(lecService.apply(lectureId, lectureClass, userId)){
 			return "신청이 정상적으로 되었습니다.";
 		} else {
-			return "신청에 실패하였습니다.\n잠시 후 다시 시도해주세요.";
+			return "신청에 실패하였습니다.\\n잠시 후 다시 시도해주세요.";
 		}
 	}
 }

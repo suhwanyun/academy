@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.UserData;
 import academy.group5.service.NotificationService;
+import academy.group5.util.Identify;
 
 @Controller
 public class NotificationController {
@@ -22,18 +23,13 @@ public class NotificationController {
 	@Autowired
 	NotificationService service;
 	
-	/*@ModelAttribute
-	private String getId(HttpSession session){
-		// 로그인된 id 확인
-		String id = ((UserData)session.getAttribute("user")).getUserId();
-		return id;
-	}*/
+	Identify identify = new Identify();
 	
 	/** 알림 설정 목록 표시 */
 	@RequestMapping(value="/noti/notiSettingList", method=RequestMethod.GET)
 	public String notiSettingList(Model model, HttpSession session){
 		// 로그인된 id 확인
-		String id = ((UserData)session.getAttribute("user")).getUserId();
+		String id = identify.getUserId(session);
 		
 		if(id == null || id.equals("")){
 			return "index";

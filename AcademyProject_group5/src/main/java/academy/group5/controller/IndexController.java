@@ -17,6 +17,7 @@ import academy.group5.dto.etc.MostRecommend;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.PostingService;
+import academy.group5.util.Identify;
 
 @Controller
 public class IndexController {
@@ -29,6 +30,8 @@ public class IndexController {
 	
 	@Autowired
 	PostingService postService;
+	
+	Identify identify = new Identify();
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
@@ -69,14 +72,14 @@ public class IndexController {
 	/** 회원정보 수정화면 */
 	@RequestMapping(value="/info/myinfo", method=RequestMethod.GET)
 	public String infoUpdatePage(Model model, HttpSession session){
-		String id = ((UserData)session.getAttribute("user")).getUserId();
+		String id = identify.getUserId(session);
 		
 		UserData info = loginService.getInfo(id);
 		if(info != null){
 			model.addAttribute("userData", info);
 			return "/info/myinfo";
 		} else {
-			model.addAttribute("msg", "회원정보를 가져오지 못했습니다.\n잠시 후 다시 시도해주세요");
+			model.addAttribute("msg", "회원정보를 가져오지 못했습니다.\\n잠시 후 다시 시도해주세요");
 			return "/index";
 		}		
 	}

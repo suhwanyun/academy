@@ -40,7 +40,7 @@ public class LoginController {
 			model.addAttribute("msg", "회원가입 되었습니다.");
 			return "index";
 		} else {
-			model.addAttribute("msg", "오류가 발생하였습니다.\n 잠시 후 다시시도해주세요.");
+			model.addAttribute("msg", "오류가 발생하였습니다.\\n 잠시 후 다시시도해주세요.");
 			return "index";
 		}
 	}
@@ -73,7 +73,7 @@ public class LoginController {
 		if(service.update(data)){
 			model.addAttribute("msg", "회원정보가 수정되었습니다.");
 		}else {
-			model.addAttribute("msg", "오류가 발생했습니다.\n잠시 후 다시시도해주세요.");
+			model.addAttribute("msg", "오류가 발생했습니다.\\n잠시 후 다시시도해주세요.");
 		}
 		return "index";
 	}

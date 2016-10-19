@@ -22,15 +22,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
-import academy.group5.dto.UserData;
 import academy.group5.exception.SessionNotFoundException;
 import academy.group5.service.PostingService;
+import academy.group5.util.Identify;
 
 @Controller
 public class BoardController {
 	static Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Autowired
 	PostingService postService;
+	
+	Identify identify = new Identify();
 	
 	private final static String DEFAULT_PHOTO_NAME = "default.png";
 	
@@ -69,7 +72,7 @@ public class BoardController {
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
 			String okMapping, String failMapping){
 		
-		String userId = getUserId(session);
+		String userId = identify.getUserId(session);
 		// 에러 발생여부 플래그
 		boolean isError = false;
 		
@@ -216,7 +219,7 @@ public class BoardController {
 	@RequestMapping(value="/addComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
 				@RequestParam int postingId, @RequestParam(required=false) int commentParentId, @RequestParam String commentContent){
-		String userId = getUserId(session);		
+		String userId = identify.getUserId(session);		
 				
 		String postingType = getPostingType(session);
 		
@@ -249,16 +252,6 @@ public class BoardController {
 		}
 		
 		return postingType;
-	}
-	
-	/** 로그인된 id 확인 */
-	private String getUserId(HttpSession session){
-		Object userAttrObj = session.getAttribute("user");
-		if(userAttrObj != null){
-			return ((UserData)userAttrObj).getUserId();
-		}else {		
-			throw new SessionNotFoundException();		
-		}
 	}
 	
 }
