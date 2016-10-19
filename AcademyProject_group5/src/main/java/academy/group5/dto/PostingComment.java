@@ -30,7 +30,7 @@ public class PostingComment {
 	private Integer commentParentId;
 
 	/** 댓글등록 날짜. */
-	private Date commentTime;
+	private String commentTime;
 
 	/** 댓글 내용. */
 	private String commentContent;
