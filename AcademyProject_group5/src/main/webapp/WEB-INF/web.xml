@@ -11,6 +11,10 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/view/error/error_page.jsp</location>
 	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/view/error/error_page.jsp</location>
+	</error-page>
 	
 	<context-param>
 		<param-name>contextClass</param-name>
