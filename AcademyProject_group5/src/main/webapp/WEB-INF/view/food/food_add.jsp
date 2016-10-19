@@ -48,7 +48,6 @@
 				<tr>
 					<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>
 					<button type="reset">다시 작성</button></td>
-					<td><input type="hidden" name="postingType" value="food"/></td>
 				</tr>
 				
 			</table>

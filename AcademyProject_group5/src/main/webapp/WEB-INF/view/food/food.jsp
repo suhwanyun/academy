@@ -62,7 +62,7 @@
 
 							<td rowspan="2"><img class="imgBoard"
 								src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}" onerror="this.src='<%=request.getContextPath()%>/upload/preview_default.png'" /></td>
-							<td colspan="3">${mostRecommendData.postingTitle }</td>
+							<td colspan="3"><a href="<%=request.getContextPath()%>/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
 
 						</tr>
 						<tr class="mostRecommend tableData">
@@ -76,7 +76,7 @@
 
 							<td rowspan="2"><img class="imgBoard"
 								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}" /></td>
-							<td colspan="3">${list.postingTitle }</td>
+							<td colspan="3"><a href="<%=request.getContextPath()%>/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
 
 						</tr>
 						<tr class="tableData">
@@ -132,13 +132,14 @@ $("#searchBtn").click(function(){
 				 }
 				 if(result.length==0){
 					 alert("검색 결과가 없습니다.");
-				 }else{
+				 }else{						
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
 								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
 							               "src=<%=request.getContextPath()%>/upload/preview_"+
 							               item.postingPhoto +"/></td><td colspan='3'>"+
-							               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+							               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
+							               item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
 							               item.userId+"</td><td>"+
 							               item.postingRecommend+"</td><td>"+
 							               item.postingTime+"</td></tr>"));
@@ -168,7 +169,8 @@ $("#moreBtn").click(function(){
 	               $("<tr class='tableData'><td rowspan='2'><img class='imgBoard'"+
 	               "src=<%=request.getContextPath()%>/upload/preview_"+
 	               item.postingPhoto +"/></td><td colspan='3'>"+
-	               item.postingTitle+"</td></tr><tr class='tableData'><td>"+
+	               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
+	      		   item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
 	               item.userId+"</td><td>"+
 	               item.postingRecommend+"</td><td>"+
 	               item.postingTime+"</td></tr>"));
