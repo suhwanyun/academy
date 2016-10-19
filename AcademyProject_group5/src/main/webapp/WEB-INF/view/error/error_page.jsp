@@ -8,11 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${!empty msg}">
-		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var="msg" />
-	</c:if>
+	<jsp:include page="<%=request.getContextPath() %>/message.jsp" />
+	
 </body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(location).attr('href', "<%=request.getContextPath()%>/main");
+});
+</script>
 </html>
