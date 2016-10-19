@@ -183,8 +183,13 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postDelete(Integer postingId, String postingType) {
-		//int result = boardRepo.delPosting(new Posting(postingId, postingType));
-		return false;
+		int result = boardRepo.delPosting(new Posting(postingId, postingType));
+		
+		if(result == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -194,19 +199,23 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public List<PostingComment> commentList(Integer postingId, String postingType) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardRepo.getAllComment(new Posting(postingId, postingType));
 	}
 
 	@Override
 	public boolean commentWrite(PostingComment comment) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = boardRepo.setComment(comment);
+		
+		if(result == 1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
