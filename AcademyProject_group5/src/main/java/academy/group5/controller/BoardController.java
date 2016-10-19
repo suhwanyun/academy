@@ -67,54 +67,7 @@ public class BoardController {
 				"redirect:/placeMain", "/place/place_add");
 	}
 	
-	/** 게시판 글 작성 로직 */
-	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
-			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
-			String okMapping, String failMapping){
-		
-		String userId = identify.getUserId(session);
-		// 에러 발생여부 플래그
-		boolean isError = false;
-		
-		String postingType = getPostingType(session);
-		// multipart/form-data 타입 form 데이터 전달
-		String postingTitle = mrequest.getParameter("postingTitle");
-		String postingContent = mrequest.getParameter("postingContent");
-			
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
-		
-		if(isError || postingType == null || postingTitle == null || postingContent == null) {
-			throw new SessionNotFoundException();	
-		} else if(postingTitle.equals("")){
-			model.addAttribute("msg", "제목을 입력해주세요.");
-			isError = true;
-		} else if(postingContent.equals("")){
-			model.addAttribute("msg", "내용을 입력해주세요.");
-			isError = true;
-		}
-
-		if(!isError && postService.postWrite(postingData)){
-			// 이미지 업로드 처리
-			if(!uploadPhoto.isEmpty()){
-				int uploadResult = postService.upload(uploadPhoto, postingData);
-				
-				// 이미지 업로드 실패시 처리
-				if(uploadResult == -1){
-					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
-					return okMapping;
-				}
-			}
-			/* 정상 처리 */
-			redAttr.addFlashAttribute("msg", "등록되었습니다.");
-			return okMapping;
-		} else if(!isError){
-			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n잠시 후 다시 시도해주세요.");
-		}
-
-		// 에러가 발생하여 작성화면으로 돌아가기
-		model.addAttribute("posting", postingData);
-		return failMapping;
-	}
+	
 	
 	/** 게시글 목록 표시 */
 	@RequestMapping(value="/postingList", method=RequestMethod.GET)
@@ -210,7 +163,6 @@ public class BoardController {
 			failMappingStr = "/index";
 		}	
 		
-		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
 				okMappingStr, failMappingStr);	
 	}
@@ -238,6 +190,56 @@ public class BoardController {
 		model.addAttribute("childCommentList", commentList.get("child"));
 		
 		return commentList;
+	}
+	
+	
+	/** 게시판 글 작성 로직 */
+	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
+			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
+			String okMapping, String failMapping){
+		
+		String userId = identify.getUserId(session);
+		// 에러 발생여부 플래그
+		boolean isError = false;
+		
+		String postingType = getPostingType(session);
+		// multipart/form-data 타입 form 데이터 전달
+		String postingTitle = mrequest.getParameter("postingTitle");
+		String postingContent = mrequest.getParameter("postingContent");
+			
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
+		
+		if(isError || postingType == null || postingTitle == null || postingContent == null) {
+			throw new SessionNotFoundException();	
+		} else if(postingTitle.equals("")){
+			model.addAttribute("msg", "제목을 입력해주세요.");
+			isError = true;
+		} else if(postingContent.equals("")){
+			model.addAttribute("msg", "내용을 입력해주세요.");
+			isError = true;
+		}
+
+		if(!isError && postService.postWrite(postingData)){
+			// 이미지 업로드 처리
+			if(!uploadPhoto.isEmpty()){
+				int uploadResult = postService.upload(uploadPhoto, postingData);
+				
+				// 이미지 업로드 실패시 처리
+				if(uploadResult == -1){
+					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
+					return okMapping;
+				}
+			}
+			/* 정상 처리 */
+			redAttr.addFlashAttribute("msg", "등록되었습니다.");
+			return okMapping;
+		} else if(!isError){
+			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n잠시 후 다시 시도해주세요.");
+		}
+
+		// 에러가 발생하여 작성화면으로 돌아가기
+		model.addAttribute("posting", postingData);
+		return failMapping;
 	}
 	
 	/** 게시판 종류 확인 */

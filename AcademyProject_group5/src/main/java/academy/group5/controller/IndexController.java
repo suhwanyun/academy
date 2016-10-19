@@ -112,25 +112,6 @@ public class IndexController {
 		return "/place/place";
 	}
 	
-	/** 게시판 메인 페이지 초기화 설정 */
-	private void boardMainSetup(HttpSession session, String PostingType){
-		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, PostingType));
-		
-		if(mostRecommendData != null){
-			session.setAttribute("mostRecommendData", mostRecommendData);
-		} else {
-			session.removeAttribute("mostRecommendData");
-		}
-		
-		List<Posting> postingList = postService.postingList(1, PostingType);
-		session.setAttribute("postingDataList", postingList);
-		session.setAttribute("postingType", PostingType);
-		
-		session.removeAttribute("searchType");
-		session.removeAttribute("searchData");
-		session.removeAttribute("orderData");
-	}
-	
 	/** 마일리지 페이지 */
 	@RequestMapping(value="/mileageMain", method=RequestMethod.GET)
 	public String mileageMainPage(){
@@ -194,5 +175,25 @@ public class IndexController {
 			model.addAttribute("lectureList", lecList);
 		}
 		return "/campus/lecture_list";
+	}
+	
+	
+	/** 게시판 메인 페이지 초기화 설정 */
+	private void boardMainSetup(HttpSession session, String PostingType){
+		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, PostingType));
+		
+		if(mostRecommendData != null){
+			session.setAttribute("mostRecommendData", mostRecommendData);
+		} else {
+			session.removeAttribute("mostRecommendData");
+		}
+		
+		List<Posting> postingList = postService.postingList(1, PostingType);
+		session.setAttribute("postingDataList", postingList);
+		session.setAttribute("postingType", PostingType);
+		
+		session.removeAttribute("searchType");
+		session.removeAttribute("searchData");
+		session.removeAttribute("orderData");
 	}
 }
