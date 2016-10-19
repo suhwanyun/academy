@@ -119,7 +119,7 @@ function tableSetting(comment, child){
 						  )
 					);
 				}
-				$("#"+item.commentId).append(
+				$("#"+item.commentId).after(
 					$("<tr><td colspan='3'>"+item.commentContent+"</td></tr>")
 				);
 		});
@@ -150,19 +150,14 @@ function tableSetting(comment, child){
 				  )
 			);
 		}
-		$("#"+item.commentId).append(
-			$("<tr><td colspan='3'>"+item.commentContent+"</td>")
+		$("#"+item.commentId).after(
+			$("<tr><td colspan='3'>"+item.commentContent+"</td></tr>")
 		);
 	});
 }
-$("document").ready(function(){
-	tableInit = $("#commentTable");
-	/* var comment = ${commentList};
-	var child = ${childCommentList}; */
-	tableSetting(comment, child);
-	
-});
+
 $("#commentBtn").click(function(){
+	if(${!empty user.userId}){	
 	$.ajax({
 	      type : "post",
 	      url : "${addComment}",
@@ -171,11 +166,8 @@ $("#commentBtn").click(function(){
 	    	  commentContent : $("#commentInput").val()
 	      },
 	       success : function(result) {
-	    	   alert(result);
-	         	$("#commentTable").remove();
-	         	$(".tableData").after(tableInit);
-	         	tableSetting(result["parent"], result["child"]);
-	         	
+	    	   $("#commentTable").empty();
+	    	   tableSetting(result["parent"],result["child"])	
 	      },
 	      error : function(request, status, error) {
 	         alert("code:" + request.status + "\n" + "message:"
@@ -183,6 +175,11 @@ $("#commentBtn").click(function(){
 	               + error);
 	      }
 	   });
+	}else{
+		alert("로그인후 이용하세요.");
+		$(location).attr('href', "/AcedemyProject_group5/loginjsp");
+		
+	}
 });
 </script>
 </html>
