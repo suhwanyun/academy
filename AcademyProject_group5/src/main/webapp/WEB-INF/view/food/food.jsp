@@ -31,7 +31,7 @@ function errorFun(e){
 						<col width="25%">
 						<col width="25%">
 					</colgroup>
-					<tr>
+					<tr  class="tableData">
 						<td><select id="sort">
 								<option value="time">날짜 정렬</option>
 								<option value="recommend">추천수 정렬</option>
@@ -39,7 +39,7 @@ function errorFun(e){
 						</select></td>
 						<td></td>
 						<td></td>
-						<td><button id="writeBtn">글쓰기</button></td>
+						<td><button id="writeBtn" class="myButton">글쓰기</button></td>
 					</tr>
 					<tr>
 

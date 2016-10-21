@@ -168,6 +168,7 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 	a {
 		text-decoration: underline;
 		outline: 0;
+		
 	}
 
 		a:hover {
@@ -287,6 +288,8 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 
 	a {
 		color: #e74c3c;
+		text-decoration:none;
+		
 	}
 
 	strong, b {
@@ -1263,6 +1266,7 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 		table td {
 			padding: 0.75em 0.75em;
 		}
+		
 		table.add td{
 			padding:0.75em auto;
 			width:100%;
@@ -1862,10 +1866,12 @@ margin:1em auto;
 }
 .tableData td {
 	text-align: center;
+	vertical-align:middle;
 }
 .tableData tr{
 	height: width*20%;
 }
+
 #beforeLocation td{
 padding: 0.75em 0.75em;
 text-align:right;

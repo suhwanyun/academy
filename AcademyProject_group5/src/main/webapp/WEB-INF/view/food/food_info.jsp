@@ -42,8 +42,9 @@ function errorFun(e){
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
 					<tr>
-						<td colspan="3"></td>
-						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"><button>추천</button></td>
+						<td colspan="2"></td>
+						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"></td>
+						<td><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
 					<tr>
