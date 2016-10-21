@@ -139,7 +139,7 @@ function tableSetting(comment, child){
 	
 	
 	$.each(child, function(index, item){
-		$("#"+item.commentParentId).after(
+		$("#"+item.commentParentId).next().after(
 			$("<tr id="+item.commentId +">"+
 				"<td>└</td>"+
 				"<td>"+item.userId +"</td>"+
