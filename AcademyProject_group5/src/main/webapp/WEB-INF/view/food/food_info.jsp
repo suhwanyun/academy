@@ -127,7 +127,7 @@ function tableSetting(comment, child){
 				}else{
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button class='childCommentBtn'>댓글달기</button>"+
+							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						  )
 					);
@@ -158,8 +158,7 @@ function tableSetting(comment, child){
 			);
 		}else{
 			$("#"+item.commentId).append(
-				$("<td></td>"
-				  )
+				$("<td></td>")
 			);
 		}
 		$("#"+item.commentId).after(
@@ -195,7 +194,14 @@ $("#commentBtn").click(function(){
 	}
 	}else{alert("1자이상 입력하시오")}
 });
-
+function recomment(el){
+	$(".childCommentSendBtn").parent().parent().remove();
+	$(".childCommentSendInput").parent().parent().remove();
+	$(el).parent().parent().next().after(
+		$("<tr><td colspan='3'><input class='childCommentSendInput' type='text' maxlength='250'></td>"+
+		"<td><button class='childCommentSendBtn' onclick='sendComment()'>입력</button></td></tr>")		
+	);
+}
 $(".childCommentBtn").click(function(){
 	$(".childCommentSendBtn").parent().parent().remove();
 	$(".childCommentSendInput").parent().parent().remove();
