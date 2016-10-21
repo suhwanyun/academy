@@ -16,5 +16,7 @@
     <Resources>
     	<PreResources className="org.apache.catalina.webresources.DirResourceSet" 
     					base="d:/academyImg/" webAppMount="/WEB-INF/upload/" />
+		<!-- <PreResources className="org.apache.catalina.webresources.DirResourceSet" 
+    					base="d:/academyPhp/" webAppMount="/WEB-INF/php/" /> -->    					
     </Resources>
 </Context>

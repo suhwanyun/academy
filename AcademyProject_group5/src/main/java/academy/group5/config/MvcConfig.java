@@ -56,27 +56,30 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 	}
 	
 	@Override
-	   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	
 		registry.addResourceHandler("/upload/**")
-	      .addResourceLocations("/WEB-INF/upload/");
+			.addResourceLocations("/WEB-INF/upload/");
+		
+		/*registry.addResourceHandler("/php/**")
+			.addResourceLocations("/WEB-INF/php/");*/
 	      
-	      registry.addResourceHandler("/html/**")
-	      .addResourceLocations("WEB-INF/html/");
+	    registry.addResourceHandler("/html/**")
+	    	.addResourceLocations("WEB-INF/html/");
 	      
-	      registry.addResourceHandler("/css/**")
-	      .addResourceLocations("WEB-INF/assets/css/");
+	    registry.addResourceHandler("/css/**")
+			.addResourceLocations("WEB-INF/assets/css/");
 	      
-	      registry.addResourceHandler("/images/**")
-	      .addResourceLocations("WEB-INF/assets/images/");
+	    registry.addResourceHandler("/images/**")
+	    	.addResourceLocations("WEB-INF/assets/images/");
 	      
-	      registry.addResourceHandler("/fonts/**")
-	      .addResourceLocations("WEB-INF/assets/fonts/");
+	    registry.addResourceHandler("/fonts/**")
+	    	.addResourceLocations("WEB-INF/assets/fonts/");
 	      
-	      registry.addResourceHandler("/fonts/**")
-	      .addResourceLocations("WEB-INF/assets/fonts/");
+	    registry.addResourceHandler("/fonts/**")
+	    	.addResourceLocations("WEB-INF/assets/fonts/");
 	      
-	      registry.addResourceHandler("/js/**")
-	      .addResourceLocations("WEB-INF/assets/js/");
+	    registry.addResourceHandler("/js/**")
+	    	.addResourceLocations("WEB-INF/assets/js/");
 	   }
 }

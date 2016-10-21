@@ -8,9 +8,12 @@ import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Sender;
 
 public class GCM {
+	
+	public static final String TYPE_NOTI = "noti";
+	
 	private final String GCM_TITLE = "MCM";
 
-	public GCM(String msg, String submsg, List<String> userIdList) {
+	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
 
 		String title = null;
 		
@@ -32,6 +35,7 @@ public class GCM {
 				.addData("title", title)
 				.addData("message", msg)
 				.addData("submsg", submsg)
+				.addData("msgtype", msgtype)
 				.build();
 
 		try {
