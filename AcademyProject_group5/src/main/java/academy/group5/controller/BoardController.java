@@ -44,7 +44,7 @@ public class BoardController {
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
-							"redirect:/foodMain", "/food/food_add");	
+							"redirect:/foodMain", "/food/food_add", true);	
 	}
 	
 	/** 오락추천 게시판에 글 작성 */
@@ -54,7 +54,7 @@ public class BoardController {
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
-				"redirect:/playMain", "/play/play_add");
+				"redirect:/playMain", "/play/play_add", true);
 	}
 	
 	/** 명소추천 게시판에 글 작성 */
@@ -64,7 +64,7 @@ public class BoardController {
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
-				"redirect:/placeMain", "/place/place_add");
+				"redirect:/placeMain", "/place/place_add", true);
 	}
 	
 	
@@ -123,10 +123,48 @@ public class BoardController {
 		Posting postingData = postService.postView(postingId, postingType);
 		model.addAttribute("postingData", postingData);
 		
-		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
-		model.addAttribute("commentList", commentList.get("parent"));
-		model.addAttribute("childCommentList", commentList.get("child"));
+		// 전체 댓글 리스트(부모와 자식으로 분할됨)
+		Map<String, List<PostingComment>> commentDataList = postService.commentList(postingId, postingType);
+		// 부모 댓글 리스트
+		List<PostingComment> parentDataList = commentDataList.get("parent");
+		// 자식 댓글 리스트
+		List<PostingComment> childDataList = commentDataList.get("child");
 		
+		// 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침
+		List<PostingComment> commentList = new ArrayList<>();
+		int childIdx = 0;
+		
+		for(PostingComment parentData : parentDataList){
+			int parentId = parentData.getCommentParentId();
+			commentList.add(parentData);
+			
+			for(; childIdx < childDataList.size();){
+				PostingComment childData = childDataList.get(childIdx);
+				int childId = childData.getCommentParentId();
+				// 현재 댓글이 부모 댓글일 때
+				if(childId == parentId){
+					commentList.add(childData);
+					childIdx++;
+				}
+				else{
+					break;
+				}
+				/*// 답글의 답글 확인(자손 댓글)
+				else {
+					for(int grandpaIdx = parentId + 1; grandpaIdx < childDataList.size(); grandpaIdx++){
+						PostingComment grandpaData = childDataList.get(grandpaIdx);
+						int grandpaId = grandpaData.getCommentParentId();
+						
+						if(grandpaId == childId){
+							commentList.add(childData);
+						}
+					}
+				}*/
+				
+			}
+		}
+		model.addAttribute("commentList", commentList);
+				
 		switch(postingType){
 		case "food":
 			return "/food/food_info";
@@ -139,7 +177,7 @@ public class BoardController {
 		}	
 	}
 	
-	/** 게시판 글 수정 */ //수정필요!!!!!!!!!!!!!!!!!
+	/** 게시판 글 수정 */
 	@RequestMapping(value="/postingUpdate", method=RequestMethod.POST)
 	public String postingUpdate(Model model, HttpSession session, RedirectAttributes redAttr,
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto){
@@ -164,7 +202,7 @@ public class BoardController {
 		}	
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
-				okMappingStr, failMappingStr);	
+				okMappingStr, failMappingStr, false);	
 	}
 	
 	/** 댓글 추가 */
@@ -194,7 +232,7 @@ public class BoardController {
 	/** 게시판 글 작성 로직 */
 	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
-			String okMapping, String failMapping){
+			String okMapping, String failMapping, boolean isNewPosting){
 		
 		String userId = identify.getUserId(session);
 		// 에러 발생여부 플래그
@@ -217,7 +255,9 @@ public class BoardController {
 			isError = true;
 		}
 
-		if(!isError && postService.postWrite(postingData)){
+		if(!isError && ((isNewPosting && postService.postWrite(postingData)) ||
+						(!isNewPosting && postService.postModify(postingData)))
+			){
 			// 이미지 업로드 처리
 			if(!uploadPhoto.isEmpty()){
 				int uploadResult = postService.upload(uploadPhoto, postingData);

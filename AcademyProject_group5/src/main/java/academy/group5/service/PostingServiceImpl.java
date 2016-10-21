@@ -49,6 +49,10 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postWrite(Posting posting) {
+		String contentStr = posting.getPostingContent();
+		contentStr = contentStr.replaceAll("\n", "<br>");
+		posting.setPostingContent(contentStr);
+		
 		int result = boardRepo.setPosting(posting);
 		
 		if(result != 1){
@@ -211,6 +215,10 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean commentWrite(PostingComment comment) {
+		String contentStr = comment.getCommentContent();
+		contentStr = contentStr.replaceAll("\n", "<br>");
+		comment.setCommentContent(contentStr);
+		
 		int result = boardRepo.setComment(comment);
 		
 		if(result == 1){
