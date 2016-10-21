@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="<%=request.getContextPath()%>asset/css/font-awesome.css" />
 <title>식사 게시판 글 내용</title>
 <script type="text/javascript">
 function errorFun(e){
@@ -42,7 +42,8 @@ function errorFun(e){
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
 					<tr>
-						<td colspan="4" align="right">이미지, 추천버튼</td>
+						<td colspan="3"></td>
+						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
 					<tr>
@@ -57,6 +58,7 @@ function errorFun(e){
 				</table>
 				<table id="commentTable">
 					<colgroup>
+						<col width="5">
 						<col width="30%">
 						<col width="40%">
 						<col width="30%">
@@ -64,25 +66,36 @@ function errorFun(e){
 					<c:forEach items="${commentList }" var="list">
 					
 					<tr id="${list.commentId }" >
+						<c:if test="${list.commentParentId != null }">
+						<td>└</td>
 						<td>${list.userId } </td>
+						</c:if>
+						<c:if test="${list.commentParentId == null }">
+						<td colspan="2">${list.userId } </td>
+						</c:if>
 						<td>${list.commentTime }</td>
 						<c:choose>
 							<c:when test="${!empty user && list.userId==user.userId}">
 							<td>
-								<button  id='commentUpdateBtn'>수정</button>
-								<button  id='commentDeleteBtn'>삭제</button>
+								<button class='commentUpdateBtn'>수정</button>
+								<button class='commentDeleteBtn'>삭제</button>
 				 			</td>
 							</c:when>
 							<c:otherwise>
 							<td>
-								<button  id='childCommentBtn'>댓글달기</button>
+								<button class='childCommentBtn'>댓글 달기</button>
 						    </td>
 							</c:otherwise>
 						</c:choose>
 					  </tr>
+					  <c:if test="${list.commentParentId != null }">
+					  	<td></td><td colspan='3'>${list.commentContent }</td>
+					  </c:if>
+					  <c:if test="${list.commentParentId == null }">
 					  <tr>
-					  	<td colspan='3'>${list.commentContent }</td>
+					  	<td colspan='4'>${list.commentContent }</td>
 					  </tr>
+					  </c:if>
 					  </c:forEach>
 				</table>
 			</div>
@@ -98,7 +111,7 @@ function tableSetting(comment, child){
 	$.each(comment, function(index, item){
 		$("#commentTable").append(
 				$("<tr id="+item.commentId +">"+
-						"<td>"+item.userId +"</td>"+
+						"<td colspan='2'>"+item.userId +"</td>"+
 						"<td>"+item.commentTime+"</td>"+
 					  "</tr>"
 					)
@@ -106,28 +119,29 @@ function tableSetting(comment, child){
 				if(${!empty user} && item.userId=='${user.userId}'){
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button  id='commentUpdateBtn'>수정</button>"+
-							"<button  id='commentDeleteBtn'>삭제</button>"+
+							"<button class='commentUpdateBtn'>수정</button>"+
+							"<button class='commentDeleteBtn'>삭제</button>"+
 						  "</td>"
 						)
 					);
 				}else{
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button  id='childCommentBtn'>댓글달기</button>"+
+							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						  )
 					);
 				}
 				$("#"+item.commentId).after(
-					$("<tr><td colspan='3'>"+item.commentContent+"</td></tr>")
+					$("<tr><td colspan='4'>"+item.commentContent+"</td></tr>")
 				);
 		});
 	
 	
 	$.each(child, function(index, item){
-		$("#"+item.commentParentId).after(
+		$("#"+item.commentParentId).next().after(
 			$("<tr id="+item.commentId +">"+
+				"<td>└</td>"+
 				"<td>"+item.userId +"</td>"+
 				"<td>"+item.commentTime+"</td>"+
 			  "</tr>"
@@ -137,26 +151,24 @@ function tableSetting(comment, child){
 		if(${!empty user} && item.userId=='${user.userId}'){
 			$("#"+item.commentId).append(
 				$("<td>"+
-					"<button  id='commentUpdateBtn'>수정</button>"+
-					"<button  id='commentDeleteBtn'>삭제</button>"+
+					"<button class='commentUpdateBtn'>수정</button>"+
+					"<button class='commentDeleteBtn'>삭제</button>"+
 				  "</td>"
 				)
 			);
 		}else{
 			$("#"+item.commentId).append(
-				$("<td>"+
-					"<button  id='childCommentBtn'>댓글달기</button>"+
-				  "</td>"
-				  )
+				$("<td></td>")
 			);
 		}
 		$("#"+item.commentId).after(
-			$("<tr><td colspan='3'>"+item.commentContent+"</td></tr>")
+			$("<tr><td></td><td colspan='3'>"+item.commentContent+"</td></tr>")
 		);
 	});
 }
 
 $("#commentBtn").click(function(){
+	if($("#commentInput").val().length>1){
 	if(${!empty user.userId}){	
 	$.ajax({
 	      type : "post",
@@ -180,6 +192,51 @@ $("#commentBtn").click(function(){
 		$(location).attr('href', "/AcedemyProject_group5/loginjsp");
 		
 	}
+	}else{alert("1자이상 입력하시오")}
 });
+function recomment(el){
+	$(".childCommentSendBtn").parent().parent().remove();
+	$(".childCommentSendInput").parent().parent().remove();
+	$(el).parent().parent().next().after(
+		$("<tr><td colspan='3'><input class='childCommentSendInput' type='text' maxlength='250'></td>"+
+		"<td><button class='childCommentSendBtn' onclick='sendComment()'>입력</button></td></tr>")		
+	);
+}
+$(".childCommentBtn").click(function(){
+	$(".childCommentSendBtn").parent().parent().remove();
+	$(".childCommentSendInput").parent().parent().remove();
+	$(this).parent().parent().next().after(
+		$("<tr><td colspan='3'><input class='childCommentSendInput' type='text' maxlength='250'></td>"+
+		"<td><button class='childCommentSendBtn' onclick='sendComment()'>입력</button></td></tr>")		
+	);
+});
+function sendComment(){
+	  if($(".childCommentSendInput").val().length>0){
+		if(${!empty user.userId}){	
+		$.ajax({
+		      type : "post",
+		      url : "${addComment}",
+		      data : {
+		    	  postingId : ${postingData.postingId},
+		    	  commentContent : $(".childCommentSendInput").val(),
+		    	  commentParentId : $(".childCommentSendInput").parent().parent().prev().prev().attr("id")
+		      },
+		       success : function(result) {
+		    	   $("#commentTable").empty();
+		    	   tableSetting(result["parent"],result["child"])	
+		      },
+		      error : function(request, status, error) {
+		         alert("code:" + request.status + "\n" + "message:"
+		               + request.responseText + "\n" + "error:"
+		               + error);
+		      }
+		   });
+		}else{
+			alert("로그인후 이용하세요.");
+			$(location).attr('href', "/AcedemyProject_group5/loginjsp");
+			
+		}
+		}else{alert("1자이상 입력하시오");} 
+}
 </script>
 </html>
