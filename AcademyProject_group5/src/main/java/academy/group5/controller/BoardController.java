@@ -135,12 +135,17 @@ public class BoardController {
 		int childIdx = 0;
 		
 		for(PostingComment parentData : parentDataList){
-			int parentId = parentData.getCommentParentId();
+			int parentId = parentData.getCommentId();
 			commentList.add(parentData);
 			
 			for(; childIdx < childDataList.size();){
 				PostingComment childData = childDataList.get(childIdx);
-				int childId = childData.getCommentParentId();
+				Integer childId = childData.getCommentParentId();
+				if(childId == null){
+					childIdx++;
+					continue;
+				}
+				
 				// 현재 댓글이 부모 댓글일 때
 				if(childId == parentId){
 					commentList.add(childData);
