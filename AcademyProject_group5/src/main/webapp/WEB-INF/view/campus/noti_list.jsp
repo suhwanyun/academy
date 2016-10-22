@@ -7,23 +7,29 @@
 <title>공지 목록</title>
 </head>
 <body>
-	<table>
+	<table class="list_table">
+		<thead>
 		<tr>
 			<th>공지 종류</th>
 			<th>강의 이름</th>
 			<th>공지 제목</th>
 			<th>날 짜</th>
 		</tr>
+		</thead>
+		<tbody>
 		<tr>
 			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
-		<tr>
-			<td colspan="3" align="center"><button id="moreBtn">더보기</button></td>
-			<td align="right"><button>맨위로</button></td>
+		</tbody>
+		<tfoot>
+		<tr class="tableData">
+			<td colspan="3" align="center"><button id="moreBtn" class="myButton">더보기</button></td>
+			<td align="right"><button class="myButton">맨위로</button></td>
 		</tr>
+		</tfoot>
 	</table>
 </body>
 </html>

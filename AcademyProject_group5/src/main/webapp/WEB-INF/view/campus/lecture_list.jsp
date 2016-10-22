@@ -9,23 +9,26 @@
 </head>
 <body>
 	<table>
-		<tr>
+		<tr class="tableData">
 			<td><select id="serchType">
 					<option selected="selected" value="">선택</option>
 					<option value="lecture">강의 이름</option>
 					<option value="professor">교수 이름</option>
 			</select></td>
 			<td><input type="search" id="serachInput" /></td>
-			<td><button id="searchBtn">검색</button></td>
+			<td><button id="searchBtn" class="myButton">검색</button></td>
 
 		</tr>
 	</table>
-	<table>
+	<table class="list_table">
+		<thead>
 		<tr>
 			<th>강의 이름</th>
 			<th>교수 이름</th>
 			<th>강의 분반</th>
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach items="${lectureList }" var="list">
 			<tr class="tableData">
 				<td><a href="<%=request.getContextPath() %>/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
@@ -33,9 +36,10 @@
 				<td>${list.lectureClass}</td>
 			</tr>
 		</c:forEach>
-		<tr id="beforeLectureLocation">
-			<td colspan="2" align="center"><button id="moreBtn">더보기</button></td>
-			<td align="right"><button>맨 위로</button></td>
+		</tbody>
+		<tr id="beforeLectureLocation" class="tableData">
+			<td colspan="2" align="center"><button id="moreBtn" class="myButton">더보기</button></td>
+			<td><button class="myButton">맨 위로</button></td>
 		</tr>
 	</table>
 

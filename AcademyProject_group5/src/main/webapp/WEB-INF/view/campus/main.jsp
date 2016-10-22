@@ -17,10 +17,10 @@
 	<div class="upmargin">
 		<table>
 			<tr>
-				<td><input type="button" id="mylectureBtn" value="내 강의목록" /></td>
-				<td><input type="button" id="notilistBtn" value="전체 공지목록" /></td>
-				<td><input type="button" id="lecturelistBtn" value="강의 선택" /></td>
-				<td><input type="button" id="schedule" value="내 시간표" /></td>
+				<td><input type="button" id="mylectureBtn" class="myButton" value="내 강의목록" /></td>
+				<td><input type="button" id="notilistBtn" class="myButton" value="전체 공지목록" /></td>
+				<td><input type="button" id="lecturelistBtn" class="myButton" value="강의 선택" /></td>
+				<td><input type="button" id="schedule" class="myButton" value="내 시간표" /></td>
 			</tr>
 			<tr>
 				<td colspan="4">

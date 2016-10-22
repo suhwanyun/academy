@@ -25,6 +25,7 @@ function errorFun(e){
 			<h1 class="member">식사 게시판</h1>
 			<div class="form9 pad">
 				<table>
+					
 					<colgroup>
 						<col width="30%">
 						<col width="20%">
