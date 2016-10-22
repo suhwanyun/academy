@@ -44,15 +44,16 @@ function errorFun(e){
 					<tr>
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
-					<tr>
+					<tr style="text-align: right;">
 						<td colspan="2"></td >
 						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"></td>
 						<td><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
-					<tr>
-						<td colspan="2"><button>수정</button></td>
-						<td colspan="2"><button>삭제</button></td>
+					<tr style="text-align: right;">
+						<td colspan="2"></td>
+						<td><button>수정</button></td>
+						<td><button>삭제</button></td>
 					</tr>
 					
 					</c:if>
