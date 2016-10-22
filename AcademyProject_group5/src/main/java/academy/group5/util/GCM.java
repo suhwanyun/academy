@@ -27,16 +27,20 @@ public class GCM {
 			e1.printStackTrace();
 		}
 		
-		Sender sender = new Sender("AIzaSyBOaaj7W42iQ2YZPzqbQXK4539K3pyPvk8");
-		Message message = new Message.Builder()
+		Sender sender = new Sender("AIzaSyAZzYD08MWTKY_AmD-PXJ2qcbq3Uh4-0so");
+		Message.Builder builder = new Message.Builder()
 				//.collapseKey(String.valueOf(Math.random() % 100 + 1)) // 중복체크
 				//.timeToLive(3600) //  대기시간
 				//.delayWhileIdle(false)
 				.addData("title", title)
 				.addData("message", msg)
-				.addData("submsg", submsg)
-				.addData("msgtype", msgtype)
-				.build();
+				.addData("msgtype", msgtype);
+		
+		if(submsg != null){
+			builder.addData("submsg", submsg);
+		}
+		
+		Message message = builder.build();
 
 		try {
 			/*MulticastResult multiResult = */

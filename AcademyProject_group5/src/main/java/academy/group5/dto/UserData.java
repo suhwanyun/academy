@@ -55,7 +55,12 @@ public class UserData {
 	private Set<Usermileage> usermileageSet;*/	
 
 	public UserData(String userId, String userPass){
+		this(userId, userPass, null);
+	}
+	
+	public UserData(String userId, String userPass, String phoneId){
 		this.userId = userId;
 		this.userPass = userPass;
+		this.phoneId = phoneId;
 	}
 }

@@ -23,16 +23,19 @@ function errorFun(e){
 	<div id="wrap">
 		<div class="upmargin">
 			<div class="form9 pad">
-				<table class="tableData">
+				<table class="list_table">
 					<colgroup>
 						<col width="20%">
 						<col width="50%">
 						<col width="15%">
 						<col width="15%">
 					</colgroup>
+					<thead>
 					<tr>
-						<td colspan="4">${postingData.postingTitle }</td>
+						<th colspan="4">${postingData.postingTitle }</th>
 					</tr>
+					</thead>
+					<tbody>
 					<c:if test="${postingData.postingPhoto ne 'default.png'}">
 						<tr>
 							<td colspan="4"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${postingData.postingPhoto}"  onerror="errorFun(this)"/></td>
@@ -42,8 +45,9 @@ function errorFun(e){
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
 					<tr>
-						<td colspan="3"></td>
-						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"><button>추천</button></td>
+						<td colspan="2"></td>
+						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"></td>
+						<td><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
 					<tr>
@@ -56,6 +60,7 @@ function errorFun(e){
 						<td colspan="3"><input id="commentInput" type="text" maxlength="250"></td>
 						<td align="right"><button id="commentBtn">댓글 달기</button></td>
 					</tr>
+					</tbody>
 				</table>
 				<table id="commentTable">
 					<colgroup>
