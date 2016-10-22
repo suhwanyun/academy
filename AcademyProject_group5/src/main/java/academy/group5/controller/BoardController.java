@@ -153,19 +153,7 @@ public class BoardController {
 				}
 				else{
 					break;
-				}
-				/*// 답글의 답글 확인(자손 댓글)
-				else {
-					for(int grandpaIdx = parentId + 1; grandpaIdx < childDataList.size(); grandpaIdx++){
-						PostingComment grandpaData = childDataList.get(grandpaIdx);
-						int grandpaId = grandpaData.getCommentParentId();
-						
-						if(grandpaId == childId){
-							commentList.add(childData);
-						}
-					}
-				}*/
-				
+				}	
 			}
 		}
 		model.addAttribute("commentList", commentList);
