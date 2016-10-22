@@ -47,7 +47,8 @@ function errorFun(e){
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
 					<tr>
-						<td colspan="4">수정, 삭제</td>
+						<td colspan="2"><button>수정</button></td>
+						<td colspan="2"><button>삭제</button></td>
 					</tr>
 					
 					</c:if>
@@ -168,7 +169,7 @@ function tableSetting(comment, child){
 }
 
 $("#commentBtn").click(function(){
-	if($("#commentInput").val().length>1){
+	if($("#commentInput").val().length>0){
 	if(${!empty user.userId}){	
 	$.ajax({
 	      type : "post",
