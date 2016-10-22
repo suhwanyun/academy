@@ -22,7 +22,9 @@ function errorFun(e){
 	<jsp:include page="../../header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
+		<h1 class="member">식사 게시글</h1>
 			<div class="form9 pad">
+			
 				<table class="list_table">
 					<colgroup>
 						<col width="20%">

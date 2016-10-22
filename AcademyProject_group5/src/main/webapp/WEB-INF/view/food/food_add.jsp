@@ -14,22 +14,20 @@
 
 </head>
 <body>
-
+<jsp:include page="../../header/header.jsp" />
 <div id="wrap">
-<a href="<%=request.getContextPath() %>">
-	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+<div class="upmargin">
 	<h1 class="member">식사 글쓰기</h1>
 		<form method="post" action="food" enctype="multipart/form-data">
-			<table>
+			<table class="list_table">
 				<colgroup>
-					<col width="10%">
-					<col width="90%">
+					<col width="15%">
+					<col width="85%">
 				</colgroup>
 				
 				<tr>
 
-					<td><label for="postingTitle">제 목</label></td>
+					<td ><label for="postingTitle">제 목</label></td>
 					<td><input type="text" maxlength="30"
 							name="postingTitle" /></td>
 
@@ -37,7 +35,7 @@
 
 				<tr>
 
-					<td><label for="postingContent">내 용</label></td>
+					<td ><label  for="postingContent">내 용</label></td>
 					<td><textarea rows="13" cols="40" maxlength="1300" name="postingContent"></textarea></td>
 
 				</tr>
@@ -54,6 +52,6 @@
 
 		</form>
 	</div>
-
+</div>
 </body>
 </html>
