@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:/config/dbconfigTesting.properties")
+@PropertySource("classpath:/config/dbconfig.properties")
 public class JDBCDataSource {
 	
 	@Bean

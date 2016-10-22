@@ -126,7 +126,7 @@ public class AutoServiceImpl implements AutoService {
 				
 				// 전체 공지
 				List<String> userList = gcmRepo.getAllUser();
-				new GCM("수고하셨습니다.", "학기가 종료되어 강의와 관련된 모든 정보가 삭제되었습니다.", userList, GCM.TYPE_NOTI);
+				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTI);
 			}
 		}, nextTermDate);
 	}

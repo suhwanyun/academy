@@ -12,18 +12,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.UserData;
 import academy.group5.service.LoginService;
+import academy.group5.service.NotificationService;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-	LoginService service;	
+	LoginService loginService;	
+	
+	@Autowired
+	NotificationService notificationService;
 	 
 	/** 회원가입시 아이디 중복확인 */
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
 	public @ResponseBody String findUser(@RequestParam String userId){
 		
-		if(service.findUser(userId)){
+		if(loginService.findUser(userId)){
 			return "true";
 		} else{
 			return "false";
@@ -36,7 +40,7 @@ public class LoginController {
 		
 		data.setUserMileage(new Integer(0));
 		
-		if(service.join(data)){
+		if(loginService.join(data) && notificationService.settingSet(data.getUserId())){
 			model.addAttribute("msg", "회원가입 되었습니다.");
 			return "index";
 		} else {
@@ -50,7 +54,7 @@ public class LoginController {
 	public @ResponseBody String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
-		UserData data = service.login(userId, userPass);
+		UserData data = loginService.login(userId, userPass);
 				
 		if(data != null){	
 			session.setAttribute("user", data);
@@ -70,7 +74,7 @@ public class LoginController {
 	/** 회원정보 수정 */
 	@RequestMapping(value="/info/update", method=RequestMethod.POST)
 	public String infoUpdate(Model model, UserData data){
-		if(service.update(data)){
+		if(loginService.update(data)){
 			model.addAttribute("msg", "회원정보가 수정되었습니다.");
 		}else {
 			model.addAttribute("msg", "오류가 발생했습니다.\\n잠시 후 다시시도해주세요.");
@@ -82,7 +86,7 @@ public class LoginController {
 	@RequestMapping(value="findId", method=RequestMethod.GET)
 	public @ResponseBody String findId(@RequestParam String userName, @RequestParam Integer phoneNum){
 		
-		String result = service.findId(userName, phoneNum);
+		String result = loginService.findId(userName, phoneNum);
 		
 		return result == null ? "" : result;
 
@@ -92,7 +96,7 @@ public class LoginController {
 	@RequestMapping(value="findPass", method=RequestMethod.GET)
 	public @ResponseBody String findPass(@RequestParam String userId, @RequestParam String passAnswer){
 		
-		return service.getPass(userId, passAnswer);
+		return loginService.getPass(userId, passAnswer);
 
 	}
 	
@@ -100,7 +104,7 @@ public class LoginController {
 	@RequestMapping(value="findQuestion", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public @ResponseBody String findQuestion(@RequestParam String userId){
 		
-		return service.getQuestion(userId);
+		return loginService.getQuestion(userId);
 
 	}
 }

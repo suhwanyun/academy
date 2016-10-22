@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
 
 @Service
@@ -15,6 +16,9 @@ public class NotificationServiceImpl implements NotificationService{
 
 	@Autowired
 	NotificationRepo notiRepo;
+	
+	@Autowired
+	GCMRepo gcmRepo;
 	
 	@Override
 	public List<NotificationSetting> settingList(String userId) {
@@ -51,9 +55,13 @@ public class NotificationServiceImpl implements NotificationService{
 				};
 		
 		for(NotificationSetting setting : settingList){
-			notiRepo.setNotificationSetting(setting);
+			int result = notiRepo.setNotificationSetting(setting);
+			
+			if(result != 1){
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
 }
