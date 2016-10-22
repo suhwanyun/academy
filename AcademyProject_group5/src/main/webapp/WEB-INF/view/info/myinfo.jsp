@@ -6,16 +6,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 <title>회원정보 수정</title>
 </head>
 <body>
 
-<a href="<%=request.getContextPath()%>"><img
+<a href=""><img
 				class="circular--logo"
-				src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+				src="/images/logo.png" alt="" /></a>
 			<h1 class="member">내 정보 수정</h1>
 	<sform:form method="post" action="update" modelAttribute="userData">
 		<sform:label path="userId">아이디</sform:label>
@@ -44,7 +44,7 @@
 	</sform:form>
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/js/validationcheck.js"></script>
-<script src="<%=request.getContextPath() %>/js/myinfo.js"></script>
+<script src="/js/validationcheck.js"></script>
+<script src="/js/myinfo.js"></script>
 
 </html>

@@ -2,14 +2,14 @@ $("#loginBtn").click(
 		function() {
 			$.ajax({
 				type : "post",
-				url : "/AcedemyProject_group5/login",
+				url : "/login",
 				data : {
 					userId : $("#userId").val(),
 					userPass : $("#userPass").val()
 				},
 				success : function(res) {
 					if (res == "true") {
-						$(location).attr('href', "/AcedemyProject_group5/main");
+						$(location).attr('href', "/main");
 					} else {
 						alert("아이디, 비밀번호를 확인하세요");
 					}
@@ -23,8 +23,8 @@ $("#loginBtn").click(
 
 $("#searchBtn").click(function() {
 
-	$(location).attr('href', "/AcedemyProject_group5/searchidpw");
+	$(location).attr('href', "/searchidpw");
 });
 $("#joinBtn").click(function() {
-	$(location).attr('href', "/AcedemyProject_group5/joinjsp");
+	$(location).attr('href', "/joinjsp");
 });

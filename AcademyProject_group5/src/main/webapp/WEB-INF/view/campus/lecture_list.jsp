@@ -31,7 +31,7 @@
 		<tbody>
 		<c:forEach items="${lectureList }" var="list">
 			<tr class="tableData">
-				<td><a href="<%=request.getContextPath() %>/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
+				<td><a href="/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
 				<td>${list.professorName}</td>
 				<td>${list.lectureClass}</td>
 			</tr>
@@ -67,7 +67,7 @@ var pageIndex = 1;
 				 $(result).each(function(index,item){
 						$("#beforeLectureLocation").before(
 							$("<tr class = 'tableData'><td>"+
-							"<a href=<%=request.getContextPath() %>"+
+							"<a href="+
 							"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
 							">"+item.lectureName+"</a></td>"+
 							  "<td>"+item.professorName+"</td>"+
@@ -94,7 +94,7 @@ var pageIndex = 1;
 						itemCount++;
 						$("#beforeLectureLocation").before(
 							$("<tr class = 'tableData'><td>"+
-									"<a href=<%=request.getContextPath() %>"+
+									"<a href="+
 									"/lecture/lectureInfo?lectureId="+item.lectureId+"&lectureClass="+item.lectureClass+
 									">"+item.lectureName+"</a></td>"+
 									"<td>"+item.professorName+"</td>"+

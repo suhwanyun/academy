@@ -8,18 +8,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath() %>/css/main.css" />
+	href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath() %>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 
 </head>
 <body>
 <jsp:include page="../message.jsp" />
 <form>   <!--  로그인하기전 화면 -->
 <div id="wrap">
-<a href="<%=request.getContextPath() %>"><img 
+<a href=""><img 
 						class="circular--logo"
-						src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+						src="/images/logo.png" alt="" /></a>
   <h1 class="member">member login</h1>
   <div class="form10 pad">
   
@@ -40,5 +40,5 @@
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/js/login.js"></script>
+<script src="/js/login.js"></script>
 </html>

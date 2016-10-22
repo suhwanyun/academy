@@ -129,7 +129,7 @@ public class BoardController {
 		List<PostingComment> parentDataList = commentDataList.get("parent");
 		// 자식 댓글 리스트
 		List<PostingComment> childDataList = commentDataList.get("child");
-		
+	
 		// 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침
 		List<PostingComment> commentList = new ArrayList<>();
 		int childIdx = 0;
@@ -137,10 +137,11 @@ public class BoardController {
 		for(PostingComment parentData : parentDataList){
 			int parentId = parentData.getCommentId();
 			commentList.add(parentData);
-			
+			logger.trace("parent:{}", parentData);
 			for(; childIdx < childDataList.size();){
 				PostingComment childData = childDataList.get(childIdx);
 				Integer childId = childData.getCommentParentId();
+				logger.trace("child:{}", childData);
 				if(childId == null){
 					childIdx++;
 					continue;
@@ -157,7 +158,7 @@ public class BoardController {
 			}
 		}
 		model.addAttribute("commentList", commentList);
-				
+		
 		switch(postingType){
 		case "food":
 			return "/food/food_info";

@@ -6,9 +6,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 <title>학업페이지</title>
 </head>
 <body>

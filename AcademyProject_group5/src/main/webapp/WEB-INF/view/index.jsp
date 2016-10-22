@@ -8,9 +8,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.css" />
+	href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 
 </head>
 
@@ -29,31 +29,31 @@
 			
 			<div>
 			
-			<a href="<%=request.getContextPath()%>/campus/campusMain"><img
+			<a href="/campus/campusMain"><img
 					class="circular--square"
-					src="<%=request.getContextPath()%>/images/pic01.png" alt=""  style="display: "/></a>
-					<a href="<%=request.getContextPath()%>/foodMain"><img
+					src="/images/pic01.png" alt=""  style="display: "/></a>
+					<a href="/foodMain"><img
 					class="circular--square" 
-					src="<%=request.getContextPath()%>/images/pic02.png" alt="" /></a>
+					src="/images/pic02.png" alt="" /></a>
 			
 			</div>
 			
 			<div align="center">
-			<a href="<%=request.getContextPath()%>/mileageMain"><img
+			<a href="/mileageMain"><img
 					class="circular--square" 
-					src="<%=request.getContextPath()%>/images/pic05.png" alt=""
+					src="/images/pic05.png" alt=""
 					 /></a>
 			</div>
 
 		
 			
 			<div>
-			<a href="<%=request.getContextPath()%>/playMain"><img
+			<a href="/playMain"><img
 					class="circular--square"
-					src="<%=request.getContextPath()%>/images/pic03.png" alt="" /></a> 
-			<a href="<%=request.getContextPath()%>/placeMain"><img
+					src="/images/pic03.png" alt="" /></a> 
+			<a href="/placeMain"><img
 					class="circular--square" 
-					src="<%=request.getContextPath()%>/images/pic04.png" alt="" /></a>
+					src="/images/pic04.png" alt="" /></a>
 			</div>
 		</div>
 	</div>

@@ -6,13 +6,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 <title>식사게시판</title>
 <script type="text/javascript">
 function errorFun(e){
-	e.src="<%=request.getContextPath()%>/upload/notFoundImg.png";
+	e.src="/upload/notFoundImg.png";
 }
 
 </script>
@@ -69,10 +69,10 @@ function errorFun(e){
 					<tr class="mostRecommend tableData">
 
 						<td rowspan="2"><img class="imgBoard"
-							src="<%=request.getContextPath()%>/upload/preview_${mostRecommendData.postingPhoto}"
+							src="/upload/preview_${mostRecommendData.postingPhoto}"
 							onerror="errorFun(this);"/></td>
 						<td colspan="3"><a
-							href="<%=request.getContextPath()%>/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
+							href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
 
 					</tr>
 					<tr class="mostRecommend tableData">
@@ -86,9 +86,9 @@ function errorFun(e){
 						<tr class="tableData">
 
 							<td rowspan="2"><img class="imgBoard" onerror="errorFun(this);"
-								src="<%=request.getContextPath()%>/upload/preview_${list.postingPhoto}" /></td>
+								src="/upload/preview_${list.postingPhoto}" /></td>
 							<td colspan="3"><a
-								href="<%=request.getContextPath()%>/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
+								href="/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
 
 						</tr>
 						<tr class="tableData">
@@ -147,9 +147,9 @@ $("#searchBtn").click(function(){
 				 $(result).each(function(index,item){
 						$("#beforeLocation").before(
 								 $("<tr class='tableData'><td rowspan='2'><img class='imgBoard' onerror='errorFun(this);'"+
-										 "src=<%=request.getContextPath()%>/upload/preview_"+
+										 "src=/upload/preview_"+
 							               item.postingPhoto +"/></td><td colspan='3'>"+
-							               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
+							               "<a href='/postingInfo?postingId="+item.postingId+"'>"+
 							               item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
 							               item.userId+"</td><td>"+
 							               item.postingRecommend+"</td><td>"+
@@ -178,9 +178,9 @@ $("#moreBtn").click(function(){
 	            itemCount++;
 	            $("#beforeLocation").before(
 	            		$("<tr class='tableData'><td rowspan='2'><img class='imgBoard' onerror='errorFun(this);'"+
-	            				"src=<%=request.getContextPath()%>/upload/preview_"+
+	            				"src=/upload/preview_"+
 					               item.postingPhoto +"/></td><td colspan='3'>"+
-					               "<a href='<%=request.getContextPath()%>/postingInfo?postingId="+item.postingId+"'>"+
+					               "<a href='/postingInfo?postingId="+item.postingId+"'>"+
 					               item.postingTitle+"</a></td></tr><tr class='tableData'><td>"+
 					               item.userId+"</td><td>"+
 					               item.postingRecommend+"</td><td>"+
@@ -199,7 +199,7 @@ $("#moreBtn").click(function(){
 	   });
 	});
 $("#writeBtn").click(function(){
-	$(location).attr('href', "<%=request.getContextPath()%>/write/foodjsp");
+	$(location).attr('href', "/write/foodjsp");
 });
 </script>
 </html>

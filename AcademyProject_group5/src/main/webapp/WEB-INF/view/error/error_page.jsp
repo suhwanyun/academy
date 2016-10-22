@@ -12,7 +12,7 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(location).attr('href', "<%=request.getContextPath()%>/main");
+	$(location).attr('href', "/main");
 });
 </script>
 </html>

@@ -7,13 +7,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>asset/css/font-awesome.css" />
+	href="asset/css/font-awesome.css" />
 <title>식사 게시판 글 내용</title>
 <script type="text/javascript">
 function errorFun(e){
-	e.src="<%=request.getContextPath()%>/upload/notFoundImg.png";
+	e.src="/upload/notFoundImg.png";
 	}
 </script>
 </head>
@@ -38,7 +38,7 @@ function errorFun(e){
 					<tbody>
 					<c:if test="${postingData.postingPhoto ne 'default.png'}">
 						<tr>
-							<td colspan="4"><img class="imgBoard" src="<%=request.getContextPath()%>/upload/${postingData.postingPhoto}"  onerror="errorFun(this)"/></td>
+							<td colspan="4"><img class="imgBoard" src="/upload/${postingData.postingPhoto}"  onerror="errorFun(this)"/></td>
 						</tr>
 					</c:if>
 					<tr>
@@ -46,7 +46,7 @@ function errorFun(e){
 					</tr>
 					<tr style="text-align: right;">
 						<td colspan="2"></td >
-						<td><img alt="추천" src="<%=request.getContextPath()%>/upload/recommend.png"></td>
+						<td><img alt="추천" src="/upload/recommend.png"></td>
 						<td><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
@@ -63,12 +63,12 @@ function errorFun(e){
 					</tr>
 					</tbody>
 				</table>
-				<table id="commentTable" class="list_table">
+				<table id="commentTable">
 					<colgroup>
-						<col width="5%">
-						<col width="15%">
+						<col width="5">
+						<col width="30%">
 						<col width="40%">
-						<col width="40%">
+						<col width="30%">
 					</colgroup>
 					<c:forEach items="${commentList }" var="list">
 					
@@ -88,9 +88,13 @@ function errorFun(e){
 								<button class='commentDeleteBtn'>삭제</button>
 				 			</td>
 							</c:when>
-							<c:otherwise>
+							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
 							<td>
 								<button class='childCommentBtn'>댓글 달기</button>
+				 			</td>
+							</c:when>
+							<c:otherwise>
+							<td>
 						    </td>
 							</c:otherwise>
 						</c:choose>

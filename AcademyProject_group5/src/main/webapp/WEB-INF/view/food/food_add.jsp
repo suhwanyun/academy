@@ -7,18 +7,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/main.css" />
+	href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 <title>식사 추가 게시판</title>
 
 </head>
 <body>
 
 <div id="wrap">
-<a href="<%=request.getContextPath() %>">
+<a href="">
 	<img class="circular--logo"
-	src="<%=request.getContextPath() %>/images/logo.png" alt="" /></a>
+	src="/images/logo.png" alt="" /></a>
 	<h1 class="member">식사 글쓰기</h1>
 		<form method="post" action="food" enctype="multipart/form-data">
 			<table>

@@ -6,9 +6,9 @@
 <title>ID, Pass 찾기</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 
 </head>
 
@@ -16,9 +16,9 @@
 	<!--  로그인하기전 화면 -->
 
 	<div id="wrap">
-		<a href="<%=request.getContextPath()%>"><img
+		<a href=""><img
 			class="circular--logo"
-			src="<%=request.getContextPath()%>/images/logo.png" alt="" /></a>
+			src="/images/logo.png" alt="" /></a>
 
 		<div class="form7">
 			<div class="form6">

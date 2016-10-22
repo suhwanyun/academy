@@ -103,6 +103,7 @@
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is null
+		order by comment_id
 	</select>
 	
 	<select id="selectAllChildComment" parameterType="posting" resultType="posting_comment">
@@ -110,6 +111,7 @@
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is not null
+		order by comment_parent_id, comment_id
 	</select>
 	
 	<insert id="insertComment" parameterType="posting_comment">

@@ -6,9 +6,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 </head>
 <body>
 	<footer id="footer">
@@ -21,13 +21,13 @@
 			<div class="copyright">
 				<h3>Follow me</h3>
 				<ul class="icons">
-					<li><a href="<%=request.getContextPath()%>/images/per01.png" class="icon fa-twitter"><span
+					<li><a href="/images/per01.png" class="icon fa-twitter"><span
 							class="label">Twitter</span></a></li>
-					<li><a href="<%=request.getContextPath()%>/images/per03.png" class="icon fa-facebook"><span
+					<li><a href="/images/per03.png" class="icon fa-facebook"><span
 							class="label">Facebook</span></a></li>
-					<li><a href="<%=request.getContextPath()%>/images/per02.png" class="icon fa-instagram"><span
+					<li><a href="/images/per02.png" class="icon fa-instagram"><span
 							class="label">Instagram</span></a></li>
-					<li><a href="<%=request.getContextPath()%>/images/per04.png" class="icon fa-dribbble"><span
+					<li><a href="/images/per04.png" class="icon fa-dribbble"><span
 							class="label">Dribbble</span></a></li>
 				</ul>
 				&copy; Untitled. Design: <a href="https://templated.co">MCM</a>.

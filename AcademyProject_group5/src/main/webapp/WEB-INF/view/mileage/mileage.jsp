@@ -5,9 +5,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/font-awesome.css" />
+	href="/css/font-awesome.css" />
 <title>마일리지</title>
 </head>
 <body>
@@ -18,35 +18,35 @@
 	<div id="main">
 		<div class="inner">
 		<a
-				href="<%=request.getContextPath()%>/mileage/confirm"><img
+				href="/mileage/confirm"><img
 				class="circular--square" style="margin-left: 5%;"
-				src="<%=request.getContextPath()%>/images/mil02.png" alt="" /></a>
-			<a href="<%=request.getContextPath()%>/mileage/confirm"><img
+				src="/images/mil02.png" alt="" /></a>
+			<a href="/mileage/confirm"><img
 				class="circular--square"  style="margin-left: 10%;"
-				src="<%=request.getContextPath()%>/images/mil01.png" alt="" /></a> 
+				src="/images/mil01.png" alt="" /></a> 
 		</div>
 		<div class="inner">
-			<a href="<%=request.getContextPath()%>/mileage/confirm"
+			<a href="/mileage/confirm"
 				class="button big altButton" style="margin-left: 5%;"><span>CU 모바일 상품권</span></a>
-			<a href="<%=request.getContextPath()%>/mileage/confirm"
+			<a href="/mileage/confirm"
 				class="button big altButton" style="margin-left: 15%;"><span>아메리카노</span></a> 
 			
 		</div> 
 	
 
 		<div class="inner">
-			<a href="<%=request.getContextPath()%>/mileage/confirm"><img
+			<a href="/mileage/confirm"><img
 				class="circular--square" style="margin-left: 5%;"
-				src="<%=request.getContextPath()%>/images/mil03.png" alt="" /></a> <a
-				href="<%=request.getContextPath()%>/mileage/confirm"><img
+				src="/images/mil03.png" alt="" /></a> <a
+				href="/mileage/confirm"><img
 				class="circular--square" style="margin-left: 10%;"
-				src="<%=request.getContextPath()%>/images/mil04.png" alt="" /></a>
+				src="/images/mil04.png" alt="" /></a>
 		</div>
 		
 		<div class="inner">
-			<a href="<%=request.getContextPath()%>/mileage/confirm"
+			<a href="/mileage/confirm"
 				class="button big altButton" style="margin-left: 5%;"><span>허쉬초콜릿드링크</span></a>
-			<a href="<%=request.getContextPath()%>/mileage/confirm"
+			<a href="/mileage/confirm"
 				class="button big altButton" style="margin-left: 15%;"><span>ABC초콜릿</span></a>
 		</div>	
 		</div>
