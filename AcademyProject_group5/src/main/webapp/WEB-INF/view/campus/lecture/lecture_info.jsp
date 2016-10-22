@@ -22,7 +22,7 @@
 					<th>강의 분반</th>
 					<th>교수 이름</th>
 				</tr>
-			</thead>
+			</thead> 
 				<tr>
 					<td>${lectureData.lectureName }</td>
 					<td>${lectureData.lectureClass }반</td>
