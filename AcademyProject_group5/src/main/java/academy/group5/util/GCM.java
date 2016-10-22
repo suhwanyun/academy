@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Sender;
 
@@ -12,6 +15,9 @@ public class GCM {
 	public static final String TYPE_NOTI = "noti";
 	
 	private final String GCM_TITLE = "MCM";
+	
+	private static final Logger logger = LoggerFactory.getLogger(GCM.class);
+	
 
 	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
 
@@ -41,7 +47,7 @@ public class GCM {
 		}
 		
 		Message message = builder.build();
-
+		
 		try {
 			/*MulticastResult multiResult = */
 			sender.send(message, userIdList, 5);

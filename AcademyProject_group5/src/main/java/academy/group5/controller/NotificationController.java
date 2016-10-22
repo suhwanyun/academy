@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.NotificationSetting;
-import academy.group5.dto.UserData;
+import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
@@ -26,7 +26,7 @@ public class NotificationController {
 	Identify identify = new Identify();
 	
 	/** 알림 설정 목록 표시 */
-	@RequestMapping(value="/noti/notiSettingList", method=RequestMethod.GET)
+	@RequestMapping(value="/noti/notiSettingjsp", method=RequestMethod.GET)
 	public String notiSettingList(Model model, HttpSession session){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
@@ -35,24 +35,19 @@ public class NotificationController {
 			return "index";
 		}
 		
-		List<NotificationSetting> settingList = service.settingList(id);
-		model.addAttribute("settingList", settingList);
+		NotificationSettingList settingData = new NotificationSettingList(); 
+		settingData.setSettingList(service.settingList(id));
+		model.addAttribute("settingData", settingData);
 		
 		return "noti/noti";
 	}
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
-	public @ResponseBody String notiSetting(Model model, @RequestParam List<NotificationSetting> settingList){
+	public @ResponseBody String notiSetting(Model model, @RequestParam NotificationSettingList settingData){
+	
 		
-		int successCount = 0;
-		for(NotificationSetting setting : settingList){
-			if(service.settingModify(setting)){
-				successCount++;
-			}
-		}
-		
-		if(successCount < settingList.size()){
+		if(service.settingModify(settingData)){
 			return "false";
 		}
 		
