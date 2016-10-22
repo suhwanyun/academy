@@ -63,12 +63,12 @@ function errorFun(e){
 					</tr>
 					</tbody>
 				</table>
-				<table id="commentTable">
+				<table id="commentTable" class="list_table">
 					<colgroup>
-						<col width="5">
-						<col width="30%">
+						<col width="5%">
+						<col width="15%">
 						<col width="40%">
-						<col width="30%">
+						<col width="40%">
 					</colgroup>
 					<c:forEach items="${commentList }" var="list">
 					

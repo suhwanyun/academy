@@ -15,19 +15,21 @@
 	<div id="wrap">
 		<div class="upmargin">
 			<div  class="form9 pad">
-			<table class="tableData">
+			<table class="list_table">
+			<thead>
 				<tr>
 					<th>강의 이름</th>
 					<th>강의 분반</th>
 					<th>교수 이름</th>
 				</tr>
+			</thead>
 				<tr>
 					<td>${lectureData.lectureName }</td>
 					<td>${lectureData.lectureClass }반</td>
 					<td>${lectureData.professorName }</td>
 				</tr>
 			</table>
-			<table class="tableData">
+			<table class="list_table">
 				<c:forEach items="${lectureTime }" var="list">
 					<tr>
 						<th>강의 시작 시간</th>
