@@ -58,6 +58,13 @@ public interface PostingService {
 	 * @return
 	 */
 	int upload(MultipartFile uploadData, Posting postingData);
+	
+	/**
+	 * 이미지 삭제 처리
+	 * @param postingData
+	 * @return
+	 */
+	int uploadCancel(Posting postingData);
 	/**
 	 * 게시글 삭제
 	 * @param postingId

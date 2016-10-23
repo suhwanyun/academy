@@ -85,6 +85,9 @@ public class PostingServiceImpl implements PostingService {
 	private static final String PREVIEW_IMG_PATH = "d:/academyImg/preview_";
 	private static final String TMP_PREFIX = "tmp_";
 	
+	/**
+	 * 이미지 업로드
+	 */
 	@Override
 	public int upload(MultipartFile uploadData, Posting postingData){
 		// 원본 파일명
@@ -126,6 +129,25 @@ public class PostingServiceImpl implements PostingService {
 		if(!photoRegister(postingData)){
 			return -1;
 		}
+		
+		return 0;
+	}
+	
+	/**
+	 * 업로드된 이미지 삭제
+	 */
+	@Override
+	public int uploadCancel(Posting postingData){
+		// 파일명
+		String fileName = postingData.getPostingPhoto();		
+
+		String filePath = IMG_PATH + fileName;
+		String previewPath = PREVIEW_IMG_PATH + fileName;
+		
+		new File(filePath).delete();
+		new File(previewPath).delete();
+		
+		boardRepo.deletePhoto(postingData);
 		
 		return 0;
 	}

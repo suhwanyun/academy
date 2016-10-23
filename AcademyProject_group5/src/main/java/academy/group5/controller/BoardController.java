@@ -236,8 +236,8 @@ public class BoardController {
 		// multipart/form-data 타입 form 데이터 전달
 		String postingTitle = mrequest.getParameter("postingTitle");
 		String postingContent = mrequest.getParameter("postingContent");
-			
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
+		String postingId = mrequest.getParameter("postingId");
+		String isDeletePhoto = mrequest.getParameter("deletePhoto");
 		
 		if(isError || postingType == null || postingTitle == null || postingContent == null) {
 			throw new SessionNotFoundException();	
@@ -247,6 +247,20 @@ public class BoardController {
 		} else if(postingContent.equals("")){
 			model.addAttribute("msg", "내용을 입력해주세요.");
 			isError = true;
+		}
+		
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
+		
+		// 게시글 수정시
+		if(!isNewPosting && postingId != null && isDeletePhoto != null){
+			postingData.setPostingId(Integer.parseInt(postingId));
+			// 업로드 되어있던 파일 삭제
+			if(!isDeletePhoto.equals("false")){
+				postingData.setPostingPhoto(isDeletePhoto);
+				postService.uploadCancel(postingData);
+			}
+		} else if(!isNewPosting){
+			throw new SessionNotFoundException();
 		}
 
 		if(!isError && ((isNewPosting && postService.postWrite(postingData)) ||

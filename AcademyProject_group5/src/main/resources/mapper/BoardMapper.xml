@@ -63,15 +63,21 @@
 	
 	<update id="updatePosting" parameterType="posting">
 		update Posting 
-		set	user_id = #{userId},
-			posting_title = #{postingTitle},
-			posting_content = #{postingContent}
+		set	posting_title = #{postingTitle},
+			posting_content = #{postingContent},
+			posting_photo = #{postingPhoto}
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
 	<update id="updatePhoto" parameterType="posting">
 		update Posting
 		set posting_photo = #{postingPhoto}
+		where posting_type = #{postingType} and posting_id = #{postingId}
+	</update>
+	
+	<update id="deletePhoto" parameterType="posting">
+		update Posting
+		set posting_photo = null
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
