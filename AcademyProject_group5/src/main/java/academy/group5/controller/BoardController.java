@@ -182,14 +182,14 @@ public class BoardController {
 		
 		switch(postingType){
 		case "food":
-			okMappingStr = "/foodMain";
-			failMappingStr = "/food/food_add";
+			okMappingStr = "redirect:/foodMain";
+			failMappingStr = "/write/foodUpdatejsp";
 		case "play":
-			okMappingStr = "/playMain";
-			failMappingStr = "/play/play_add";
+			okMappingStr = "redirect:/playMain";
+			failMappingStr = "/write/playUpdatejsp";
 		case "place":
-			okMappingStr = "/placeMain";
-			failMappingStr = "/place/place_add";
+			okMappingStr = "redirect:/placeMain";
+			failMappingStr = "/write/placeUpdatejsp";
 		default: // 학업 게시판, 미구현
 			okMappingStr = "/index";
 			failMappingStr = "/index";
@@ -286,7 +286,7 @@ public class BoardController {
 		}
 
 		// 에러가 발생하여 작성화면으로 돌아가기
-		model.addAttribute("posting", postingData);
+		model.addAttribute("postingData", postingData);
 		return failMapping;
 	}
 	
