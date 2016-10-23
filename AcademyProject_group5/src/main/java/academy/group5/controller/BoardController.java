@@ -187,15 +187,19 @@ public class BoardController {
 		case BOARD_TYPE_FOOD:
 			okMappingStr = "redirect:/foodMain";
 			failMappingStr = "/write/foodUpdatejsp";
+			break;
 		case BOARD_TYPE_PLAY:
 			okMappingStr = "redirect:/playMain";
 			failMappingStr = "/write/playUpdatejsp";
+			break;
 		case BOARD_TYPE_PLACE:
 			okMappingStr = "redirect:/placeMain";
 			failMappingStr = "/write/placeUpdatejsp";
+			break;
 		default: // 학업 게시판, 미구현
 			okMappingStr = "/index";
 			failMappingStr = "/index";
+			break;
 		}
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
