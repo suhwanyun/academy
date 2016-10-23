@@ -1419,7 +1419,7 @@ background: linear-gradient(to left, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, F
 			display: -ms-flexbox;
 			-ms-flex-align: center;
 			-ms-flex-pack: center;
-			background: #e74c3c;
+			background: #F6755E;
 			border-radius: 100%;
 			width: 35em;
 			height: 35em;
@@ -1577,7 +1577,7 @@ Footer
 		transition: bottom 0.2s ease;
 		position: fixed;
 		bottom: -20em;
-		color: #FFF;
+		color: #F6755E;
 		left: 0;
 		width: 100%;
 		text-align: center;
@@ -1594,7 +1594,7 @@ Footer
 			display: inline-block;
 			text-decoration: none;
 			border-radius: 50% 50% 0 0;
-			background: #e74c3c;
+			background: #F6755E;;
 			width: 3em;
 			height: 3em;
 			margin-bottom: -1.75em;
@@ -1627,7 +1627,7 @@ Footer
 			-ms-flex-pack: center;
 			position: relative;
 			z-index: 10003;
-			background: #e74c3c;
+			background: #F6755E;;
 			padding: 2em;
 			height: 20em;
 		}

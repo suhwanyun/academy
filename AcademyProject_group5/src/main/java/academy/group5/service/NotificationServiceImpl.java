@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
 
@@ -26,15 +27,19 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
 	@Override
-	public boolean settingModify(NotificationSetting notificationsetting) {
+	public boolean settingModify(NotificationSettingList settingData) {
 
-		int result = notiRepo.setNotificationSetting(notificationsetting);
+		List<NotificationSetting> settingList = settingData.getSettingList();
 		
-		if(result == 1){
-			return true;
-		} else{
-			return false;
+		for(NotificationSetting setting : settingList) {
+			int result = notiRepo.updateNotificationSetting(setting);
+			
+			if(result != 1){
+				return false;
+			} 
 		}
+		
+		return true;
 	}
 
 	@Override
