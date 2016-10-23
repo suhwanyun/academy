@@ -42,7 +42,7 @@
 						<td align="left"><label for="fileInput">사진
 								첨부</label> <input id="fileInput" type="file" name="uploadPhoto"
 							accept="image/*" /></td>
-							<td align="left"><button id="imgCancel">이미지 취소</button></td>
+							<td align="left"><button id="imgCancel">선택 취소</button></td>
 					</tr>
 					<tr>
 						<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>
