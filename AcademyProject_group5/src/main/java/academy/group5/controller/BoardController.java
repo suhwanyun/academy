@@ -174,7 +174,7 @@ public class BoardController {
 	/** 게시판 글 수정 */
 	@RequestMapping(value="/write/postingUpdate", method=RequestMethod.POST)
 	public String postingUpdate(Model model, HttpSession session, RedirectAttributes redAttr,
-			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto){
+			MultipartHttpServletRequest mrequest, @RequestParam(required=false) MultipartFile uploadPhoto){
 		String postingType = getPostingType(session);
 		
 		String okMappingStr;

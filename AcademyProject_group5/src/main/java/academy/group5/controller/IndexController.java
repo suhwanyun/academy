@@ -149,32 +149,37 @@ public class IndexController {
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
 	public String updateFood(HttpSession session, RedirectAttributes redAttr, 
 								@RequestParam int postingId){
-		String userId = identify.getUserId(session);
-		String postingType = getPostingType(session);
-		Posting postingData = postService.postView(postingId, postingType);
 		
-		// 본인이 작성한 글이 아니면
-		if(!userId.equals(postingData.getUserId())){
-			redAttr.addFlashAttribute("msg", "잘못된 접근입니다.");
+		if(getPostingData(session, redAttr, postingId)){
+			return "/food/food_update";
+		} else {
 			return "redirect:/foodMain";
 		}
 		
-		session.setAttribute("postingData", postingData);
-		return "/food/food_update";
 	}
 	
 	/** 오락추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
-	public String updatePlay(HttpSession session){
-		session.setAttribute("nowUpdating", true);
-		return "/play/play_update";
+	public String updatePlay(HttpSession session, RedirectAttributes redAttr, 
+			@RequestParam int postingId){
+		
+		if(getPostingData(session, redAttr, postingId)){
+			return "/play/play_update";
+		} else {
+			return "redirect:/playMain";
+		}
 	}
 	
 	/** 명소추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
-	public String updatePlace(HttpSession session){
-		session.setAttribute("nowUpdating", true);
-		return "/place/place_update";
+	public String updatePlace(HttpSession session, RedirectAttributes redAttr, 
+			@RequestParam int postingId){
+		
+		if(getPostingData(session, redAttr, postingId)){
+			return "/place/place_update";
+		} else {
+			return "redirect:/placeMain";
+		}
 	}
 	
 	
@@ -223,5 +228,21 @@ public class IndexController {
 		}
 		
 		return postingType;
+	}
+	
+	/** 게시판 글 수정시, 글 정보 가져오기 */
+	private boolean getPostingData(HttpSession session, RedirectAttributes redAttr, int postingId){
+		String userId = identify.getUserId(session);
+		String postingType = getPostingType(session);
+		Posting postingData = postService.postView(postingId, postingType);
+		
+		// 본인이 작성한 글이 아니면
+		if(!userId.equals(postingData.getUserId())){
+			redAttr.addFlashAttribute("msg", "잘못된 접근입니다.");
+			return false;
+		}
+		
+		session.setAttribute("postingData", postingData);
+		return true;
 	}
 }
