@@ -20,8 +20,8 @@
 			<form method="post" action="/write/postingUpdate" enctype="multipart/form-data">
 				<table class="list_table">
 					<colgroup>
-						<col width="15%">
-						<col width="85%">
+						<col width="10%">
+						<col width="90%">
 					</colgroup>
 
 					<tr>
@@ -39,15 +39,24 @@
 
 					</tr>
 					<tr>
-						<td align="left"><label for="fileInput">사진
-								첨부</label> <input id="fileInput" type="file" name="uploadPhoto"
-							accept="image/*" value="${postingData.postingPhoto }" /></td>
-							<td align="left"><button id="imgCancel">이미지 취소</button></td>
+						<td id="imgShow" colspan="2" align="left">
+							<button id="imgUpdate">이미지 수정 </button>
+							<button id="imgdelete">이미지 삭제 </button>
+							<span id="checkImg">기존 이미지</span>
+						</td>
+						<td class="imgSetting" align="left" hidden="true" colspan="2">
+							<input id="fileInput" type="file" name="uploadPhoto" accept="image/*" />
+							<button id="imgCancel">기존 이미지로</button>
+						</td>
 					</tr>
 					<tr>
-						<td colspan=2 align="center"><button type="submit" id="save">글 수정</button></td>
+						<td colspan="2" align="center">
+							<input type="hidden" id="deletePhoto" name="deletePhoto" value="false">
+							<input type="hidden" name="postingId" value="${postingData.postingId}">
+							<button type="submit" id="save">글 수정</button>
+							<button id="cancel">취소</button>
+						</td>
 					</tr>
-
 				</table>
 
 			</form>
@@ -56,9 +65,27 @@
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+//기존 이미지
 	$("#imgCancel").click(function(event){
-		$("#fileInput").val("");
 		event.preventDefault();
+		$("#fileInput").val("");
+		$(".imgSetting").attr("hidden","true");
+		$("#imgShow").removeAttr("hidden");
+		$("#deletePhoto").val("false");
+		$("#checkImg").html("기존 이미지")	
 	});
+	//이미지 수정
+	$("#imgUpdate").click(function(event){
+		event.preventDefault();
+		$("#imgShow").attr("hidden","true");
+		$(".imgSetting").removeAttr("hidden");
+		$("#deletePhoto").val("false");
+	});
+	$("#imgdelete").click(function(event){
+		event.preventDefault();
+		$("#fileInput").val("");
+		$("#deletePhoto").val("${postingData.postingPhoto}");
+		$("#checkImg").html("이미지 없음")	
+		});
 </script>
 </html>

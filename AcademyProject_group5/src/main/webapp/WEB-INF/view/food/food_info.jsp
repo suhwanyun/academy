@@ -249,7 +249,7 @@ function sendComment(){
 }
 
 $("#postingUpdateBtn").click(function(){
-	$(location).attr('href', "/write/postingUpdatejsp");
+	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
 });
 </script>
 </html>
