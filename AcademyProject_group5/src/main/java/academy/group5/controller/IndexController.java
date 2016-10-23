@@ -126,7 +126,6 @@ public class IndexController {
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
 	public String addFood(){	
-		
 		return "/food/food_add";
 	}
 	
@@ -147,10 +146,10 @@ public class IndexController {
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
-	public String updateFood(HttpSession session, RedirectAttributes redAttr, 
+	public String updateFood(Model model, HttpSession session, RedirectAttributes redAttr, 
 								@RequestParam int postingId){
 		
-		if(getPostingData(session, redAttr, postingId)){
+		if(getPostingData(model, session, redAttr, postingId)){
 			return "/food/food_update";
 		} else {
 			return "redirect:/foodMain";
@@ -160,10 +159,10 @@ public class IndexController {
 	
 	/** 오락추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
-	public String updatePlay(HttpSession session, RedirectAttributes redAttr, 
+	public String updatePlay(Model model, HttpSession session, RedirectAttributes redAttr, 
 			@RequestParam int postingId){
 		
-		if(getPostingData(session, redAttr, postingId)){
+		if(getPostingData(model, session, redAttr, postingId)){
 			return "/play/play_update";
 		} else {
 			return "redirect:/playMain";
@@ -172,10 +171,10 @@ public class IndexController {
 	
 	/** 명소추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
-	public String updatePlace(HttpSession session, RedirectAttributes redAttr, 
+	public String updatePlace(Model model, HttpSession session, RedirectAttributes redAttr, 
 			@RequestParam int postingId){
 		
-		if(getPostingData(session, redAttr, postingId)){
+		if(getPostingData(model, session, redAttr, postingId)){
 			return "/place/place_update";
 		} else {
 			return "redirect:/placeMain";
@@ -231,7 +230,8 @@ public class IndexController {
 	}
 	
 	/** 게시판 글 수정시, 글 정보 가져오기 */
-	private boolean getPostingData(HttpSession session, RedirectAttributes redAttr, int postingId){
+	private boolean getPostingData(Model model, HttpSession session,
+									RedirectAttributes redAttr, int postingId){
 		String userId = identify.getUserId(session);
 		String postingType = getPostingType(session);
 		Posting postingData = postService.postView(postingId, postingType);
@@ -242,7 +242,7 @@ public class IndexController {
 			return false;
 		}
 		
-		session.setAttribute("postingData", postingData);
+		model.addAttribute("postingData", postingData);
 		return true;
 	}
 }
