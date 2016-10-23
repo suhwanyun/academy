@@ -64,7 +64,7 @@ public interface PostingService {
 	 * @param postingData
 	 * @return
 	 */
-	int uploadCancel(Posting postingData);
+	int uploadCancel(Posting postingData, String defaultName);
 	/**
 	 * 게시글 삭제
 	 * @param postingId

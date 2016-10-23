@@ -54,12 +54,6 @@ public class BoardRepo {
 		return session.update(stmt, updateData);
 	}
 	
-	/** 이미지 삭제 */
-	public int deletePhoto(Posting updateData) {
-		String stmt = BOARD_NS + "deletePhoto";
-		return session.update(stmt, updateData);
-	}
-	
 	/** 게시글 번호 확인 */
 	public Integer getPostingId(Posting selectData){
 		String stmt = BOARD_NS + "selectPostingId";

@@ -254,10 +254,12 @@ public class BoardController {
 		// 게시글 수정시
 		if(!isNewPosting && postingId != null && isDeletePhoto != null){
 			postingData.setPostingId(Integer.parseInt(postingId));
+			postingData.setPostingPhoto(isDeletePhoto);
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
+				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+			} else {
 				postingData.setPostingPhoto(isDeletePhoto);
-				postService.uploadCancel(postingData);
 			}
 		} else if(!isNewPosting){
 			throw new SessionNotFoundException();

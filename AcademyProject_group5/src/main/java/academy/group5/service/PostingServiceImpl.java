@@ -137,7 +137,7 @@ public class PostingServiceImpl implements PostingService {
 	 * 업로드된 이미지 삭제
 	 */
 	@Override
-	public int uploadCancel(Posting postingData){
+	public int uploadCancel(Posting postingData, String defaultName){
 		// 파일명
 		String fileName = postingData.getPostingPhoto();		
 
@@ -147,7 +147,8 @@ public class PostingServiceImpl implements PostingService {
 		new File(filePath).delete();
 		new File(previewPath).delete();
 		
-		boardRepo.deletePhoto(postingData);
+		postingData.setPostingPhoto(defaultName);
+		boardRepo.updatePhoto(postingData);
 		
 		return 0;
 	}

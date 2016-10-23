@@ -75,12 +75,6 @@
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
-	<update id="deletePhoto" parameterType="posting">
-		update Posting
-		set posting_photo = null
-		where posting_type = #{postingType} and posting_id = #{postingId}
-	</update>
-	
 	<select id="selectPostingId" parameterType="posting" resultType="int">
 		select posting_id
 		from(select rownum as rnum, sub.*
