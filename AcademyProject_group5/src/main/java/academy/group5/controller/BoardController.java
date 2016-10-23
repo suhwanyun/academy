@@ -172,7 +172,7 @@ public class BoardController {
 	}
 	
 	/** 게시판 글 수정 */
-	@RequestMapping(value="/postingUpdate", method=RequestMethod.POST)
+	@RequestMapping(value="/write/postingUpdate", method=RequestMethod.POST)
 	public String postingUpdate(Model model, HttpSession session, RedirectAttributes redAttr,
 			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto){
 		String postingType = getPostingType(session);
@@ -200,7 +200,7 @@ public class BoardController {
 	}
 	
 	/** 댓글 추가 */
-	@RequestMapping(value="/addComment", method=RequestMethod.POST)
+	@RequestMapping(value="/write/addComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
 				@RequestParam Integer postingId, @RequestParam(required=false) Integer commentParentId, @RequestParam String commentContent){
 		String userId = identify.getUserId(session);		

@@ -143,26 +143,11 @@ public class IndexController {
 	
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
-	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
+	@RequestMapping(value="/write/postingUpdatejsp", method=RequestMethod.GET)
 	public String updateFood(HttpSession session){
 		session.setAttribute("nowUpdating", true);
 		return "/food/food_update";
 	}
-	
-	/** 오락추천 게시판 글 수정 페이지 */
-	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
-	public String updatePlay(HttpSession session){
-		session.setAttribute("nowUpdating", true);
-		return "/play/play_update";
-	}
-	
-	/** 명소추천 게시판 글 수정 페이지 */
-	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
-	public String updatePlace(HttpSession session){
-		session.setAttribute("nowUpdating", true);
-		return "/place/place_update";
-	}
-	
 	
 	/** 전체 강의 목록 표시 페이지 */
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
