@@ -201,7 +201,7 @@ $("#commentBtn").click(function(){
 	   });
 	}else{
 		alert("로그인후 이용하세요.");
-		$(location).attr('href', "/AcedemyProject_group5/loginjsp");
+		$(location).attr('href', "/loginjsp");
 		
 	}
 	}else{alert("1자이상 입력하시오")}
@@ -239,7 +239,7 @@ function sendComment(){
 		   });
 		}else{
 			alert("로그인후 이용하세요.");
-			$(location).attr('href', "/AcedemyProject_group5/loginjsp");
+			$(location).attr('href', "/loginjsp");
 			
 		}
 		}else{alert("1자이상 입력하시오");} 

@@ -39,9 +39,10 @@
 
 					</tr>
 					<tr>
-						<td colspan="2" align="left"><label for="fileInput">사진
+						<td align="left"><label for="fileInput">사진
 								첨부</label> <input id="fileInput" type="file" name="uploadPhoto"
 							accept="image/*" /></td>
+							<td align="left"><button id="imgCancel">이미지 취소</button></td>
 					</tr>
 					<tr>
 						<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>
@@ -54,4 +55,11 @@
 		</div>
 	</div>
 </body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	$("#imgCancel").click(function(event){
+		$("#fileInput").val("");
+		event.preventDefault();
+	});
+</script>
 </html>
