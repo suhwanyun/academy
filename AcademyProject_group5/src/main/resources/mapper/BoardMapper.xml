@@ -64,8 +64,10 @@
 	<update id="updatePosting" parameterType="posting">
 		update Posting 
 		set	posting_title = #{postingTitle},
-			posting_content = #{postingContent},
-			posting_photo = #{postingPhoto}
+			posting_content = #{postingContent}
+			<if test="postingPhoto != null">
+			, posting_photo = #{postingPhoto}
+			</if>
 		where posting_type = #{postingType} and posting_id = #{postingId}
 	</update>
 	
@@ -89,7 +91,7 @@
 	
 	<delete id="deletePosting" parameterType="posting">
 		delete from Posting
-		where posting_id = #{postingId} and posting_type = #{postingType}
+		where user_id = #{userId} and posting_id = #{postingId} and posting_type = #{postingType}
 	</delete>
 	
 	<select id="selectPostingInfo" parameterType="posting" resultType="posting">
@@ -119,6 +121,11 @@
 		(posting_id, posting_type, user_id, <if test='commentParentId != null'>comment_parent_id,</if> comment_time, comment_content)
 		values (#{postingId}, #{postingType}, #{userId},<if test='commentParentId != null'> #{commentParentId},</if> sysdate, #{commentContent})
 	</insert>
+	
+	<delete id="deleteAllComment" parameterType="posting">
+		delete from PostingComment
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</delete>
 	
 	<delete id="deleteComment" parameterType="int">
 		delete from PostingComment

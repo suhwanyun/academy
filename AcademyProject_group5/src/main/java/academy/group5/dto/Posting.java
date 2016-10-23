@@ -46,6 +46,11 @@ public class Posting {
 	private Set<Recommend> recommendSet;*/
 
 	public Posting(Integer postingId, String postingType){
+		this(null, postingId, postingType);
+	}
+	
+	public Posting(String userId, Integer postingId, String postingType){
+		this.userId = userId;
 		this.postingId = postingId;
 		this.postingType = postingType;
 	}

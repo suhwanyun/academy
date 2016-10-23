@@ -36,6 +36,9 @@ public class BoardController {
 	Identify identify = new Identify();
 	
 	private final static String DEFAULT_PHOTO_NAME = "default.png";
+	private final String BOARD_TYPE_FOOD = "food";
+	private final String BOARD_TYPE_PLAY = "play";
+	private final String BOARD_TYPE_PLACE = "place";
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
@@ -160,11 +163,11 @@ public class BoardController {
 		model.addAttribute("commentList", commentList);
 		
 		switch(postingType){
-		case "food":
+		case BOARD_TYPE_FOOD:
 			return "/food/food_info";
-		case "play":
+		case BOARD_TYPE_PLAY:
 			return "/play/play_info";
-		case "place":
+		case BOARD_TYPE_PLACE:
 			return "/place/place_info";
 		default:
 			return "/campus/lecture/lecture_board_info";
@@ -181,22 +184,54 @@ public class BoardController {
 		String failMappingStr;
 		
 		switch(postingType){
-		case "food":
+		case BOARD_TYPE_FOOD:
 			okMappingStr = "redirect:/foodMain";
 			failMappingStr = "/write/foodUpdatejsp";
-		case "play":
+		case BOARD_TYPE_PLAY:
 			okMappingStr = "redirect:/playMain";
 			failMappingStr = "/write/playUpdatejsp";
-		case "place":
+		case BOARD_TYPE_PLACE:
 			okMappingStr = "redirect:/placeMain";
 			failMappingStr = "/write/placeUpdatejsp";
 		default: // 학업 게시판, 미구현
 			okMappingStr = "/index";
 			failMappingStr = "/index";
-		}	
+		}
 		
 		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
 				okMappingStr, failMappingStr, false);	
+	}
+	
+	/** 게시글 삭제 */
+	@RequestMapping(value="/write/postingDelete", method=RequestMethod.GET)
+	public String deletePosting(HttpSession session, RedirectAttributes redAttr,
+			@RequestParam Integer postingId){
+		String userId = identify.getUserId(session);	
+		String postingType = getPostingType(session);
+		Posting postingData = postService.postView(postingId, postingType);
+		
+		// 이미지 삭제
+		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+			postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+		}
+		// 게시글 삭제
+		if(postService.postDelete(userId, postingId, postingType)){
+			redAttr.addAttribute("msg", "삭제되었습니다.");
+		} else {
+			redAttr.addAttribute("msg", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
+		}
+		
+		switch(postingType){
+		case BOARD_TYPE_FOOD:
+			return "redirect:/foodMain";
+		case BOARD_TYPE_PLAY:
+			return "redirect:/playMain";
+		case BOARD_TYPE_PLACE:
+			return "redirect:/placeMain";
+		default: // 학업 게시판, 미구현
+			return "redirect:/main";
+		}
+		
 	}
 	
 	/** 댓글 추가 */
@@ -204,14 +239,13 @@ public class BoardController {
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
 				@RequestParam Integer postingId, @RequestParam(required=false) Integer commentParentId, @RequestParam String commentContent){
 		String userId = identify.getUserId(session);		
-				
 		String postingType = getPostingType(session);
 		
 		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
 														commentParentId, null, commentContent);
 		try{
 			if(!postService.commentWrite(commentData)){
-				model.addAttribute("error", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요");
+				model.addAttribute("error", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
 			}
 		} catch(PersistenceException e){
 			model.addAttribute("error", "이미 삭제된 댓글입니다.");
@@ -254,12 +288,12 @@ public class BoardController {
 		// 게시글 수정시
 		if(!isNewPosting && postingId != null && isDeletePhoto != null){
 			postingData.setPostingId(Integer.parseInt(postingId));
-			postingData.setPostingPhoto(isDeletePhoto);
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
+				postingData.setPostingPhoto(isDeletePhoto);
 				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
 			} else {
-				postingData.setPostingPhoto(isDeletePhoto);
+				postingData.setPostingPhoto(null);
 			}
 		} else if(!isNewPosting){
 			throw new SessionNotFoundException();

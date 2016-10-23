@@ -212,8 +212,10 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public boolean postDelete(Integer postingId, String postingType) {
-		int result = boardRepo.delPosting(new Posting(postingId, postingType));
+	public boolean postDelete(String userId, Integer postingId, String postingType) {
+		Posting postingData = new Posting(userId, postingId, postingType);
+		boardRepo.delAllComment(postingData);
+		int result = boardRepo.delPosting(postingData);
 		
 		if(result == 1){
 			return true;

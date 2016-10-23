@@ -90,6 +90,12 @@ public class BoardRepo {
 		return session.insert(stmt, commentData);
 	}
 
+	/** 모든 댓글 삭제 */
+	public Integer delAllComment(Posting delData){
+		String stmt = BOARD_NS + "deleteAllComment";
+		return session.delete(stmt, delData);
+	}
+	
 	/** 댓글 삭제 */
 	public Integer delComment(int commentId){
 		String stmt = BOARD_NS + "deleteComment";
