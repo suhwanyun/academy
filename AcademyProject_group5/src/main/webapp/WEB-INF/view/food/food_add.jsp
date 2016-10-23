@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<jsp:include page="../../header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 
 		<div class="upmargin">

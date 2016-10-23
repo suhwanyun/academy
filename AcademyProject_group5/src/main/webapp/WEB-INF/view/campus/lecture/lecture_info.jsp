@@ -11,7 +11,7 @@
 <title>강의 정보 페이지</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
 			<div  class="form9 pad">

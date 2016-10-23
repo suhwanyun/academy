@@ -11,7 +11,7 @@
 <title>마일리지</title>
 </head>
 <body>
-<jsp:include page="../../header/header.jsp" />
+<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
 	<h1 class="member">물품 구매</h1>

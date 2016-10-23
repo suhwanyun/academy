@@ -14,7 +14,7 @@
 	href="/css/font-awesome.css" />
 </head>
 <body>
-	<jsp:include page="../view/message.jsp" />
+	<jsp:include page="../message.jsp" />
 	
 	<header id="header" class="hide">
 		<c:choose>

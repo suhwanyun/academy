@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<jsp:include page="../../header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="upmargin">
 		<table>
 			<tr>

@@ -21,7 +21,7 @@
 		</script>
 		<c:remove var="msg" />
 	</c:if>
-	<jsp:include page="../header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 
 	<!-- Main -->
 	<div id="main">
@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../footer/footer.jsp" />
+	<jsp:include page="/WEB-INF/view/footer/footer.jsp" />
 
 </body>
 

@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<jsp:include page="../../header/header.jsp" />
+<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
 		<h1 class="member">명소 게시판 글 내용</h1>

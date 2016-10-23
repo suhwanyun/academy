@@ -19,7 +19,7 @@ function errorFun(e){
 </head>
 
 <body>
-	<jsp:include page="../../header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
 		<h1 class="member">식사 게시글</h1>
@@ -47,8 +47,7 @@ function errorFun(e){
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
 					<tr style="text-align: right;">
-						<td colspan="2"></td >
-						<td><img alt="추천" src="/upload/recommend.png"></td>
+						<td colspan="3"></td >
 						<td><button>추천</button></td>
 					</tr>
 					<c:if test="${postingData.userId eq user.userId}">
@@ -92,7 +91,7 @@ function errorFun(e){
 							</c:when>
 							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
 							<td>
-								<button class='childCommentBtn'>댓글 달기</button>
+								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 			</td>
 							</c:when>
 							<c:otherwise>
@@ -179,7 +178,7 @@ function tableSetting(comment, child){
 		);
 	});
 }
-
+//댓글 입력
 $("#commentBtn").click(function(){
 	if($("#commentInput").val().length>0){
 	if(${!empty user.userId}){	
@@ -207,6 +206,7 @@ $("#commentBtn").click(function(){
 	}
 	}else{alert("1자이상 입력하시오")}
 });
+//댓글의 댓글 입력창
 function recomment(el){
 	$(".childCommentSendBtn").parent().parent().remove();
 	$(".childCommentSendInput").parent().parent().remove();
@@ -215,14 +215,7 @@ function recomment(el){
 		"<td><button class='childCommentSendBtn' onclick='sendComment()'>입력</button></td></tr>")		
 	);
 }
-$(".childCommentBtn").click(function(){
-	$(".childCommentSendBtn").parent().parent().remove();
-	$(".childCommentSendInput").parent().parent().remove();
-	$(this).parent().parent().next().after(
-		$("<tr><td colspan='3'><input class='childCommentSendInput' type='text' maxlength='250'></td>"+
-		"<td><button class='childCommentSendBtn' onclick='sendComment()'>입력</button></td></tr>")		
-	);
-});
+//댓글의 댓글 입력
 function sendComment(){
 	  if($(".childCommentSendInput").val().length>0){
 		if(${!empty user.userId}){	

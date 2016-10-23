@@ -19,7 +19,7 @@ function errorFun(e){
 </head>
 <body>
 	<!-- 테이블 시작 -->
-	<jsp:include page="../../header/header.jsp" />
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div id="wrap">
 		<div class="upmargin">
 			<h1 class="member">식사 게시판</h1>
