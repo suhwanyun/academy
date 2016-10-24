@@ -135,7 +135,7 @@
 	
 	<update id="deleteCommentSetDefault" parameterType="posting_comment">
 		update PostingComment
-		set user_id = '', comment_content = #{commentContent}
+		set user_id = null, comment_content = #{commentContent}
 		where comment_id = #{commentId}
 	</update>
 	

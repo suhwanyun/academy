@@ -152,7 +152,7 @@ CREATE TABLE PostingComment
 	comment_id number NOT NULL,
 	posting_id number NOT NULL,
 	posting_type varchar2(10) NOT NULL,
-	user_id varchar2(10) NOT NULL,
+	user_id varchar2(10),
 	comment_parent_id number,
 	comment_time date NOT NULL,
 	comment_content varchar2(1000) NOT NULL,

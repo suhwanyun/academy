@@ -19,9 +19,9 @@ public class ExceptionController {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 	
 	@ExceptionHandler({PersistenceException.class, DuplicateKeyException.class})
-	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="DBException")
-	public void handlerException(Exception e){
+	public String handlerException(Exception e){
 		logger.trace("\n----Exception 내용 출력----\n{}", e);
+		return "/error/error_page";
 	}
 
 }
