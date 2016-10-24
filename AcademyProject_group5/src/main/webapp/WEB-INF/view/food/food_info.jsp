@@ -86,12 +86,12 @@ function errorFun(e){
 							<td>
 								<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>
 								<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>
-								<c:if test="${list.commentParentId == null }">
+								<c:if test="${list.userId.length()>0 && list.commentParentId == null }">
 								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 				</c:if>
 				 			</td>
 							</c:when>
-							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
+							<c:when test="${list.userId.length()>0&&list.userId!=user.userId && list.commentParentId == null }">
 							<td>
 								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 			</td>
@@ -121,13 +121,14 @@ function errorFun(e){
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 <c:url value="/write/addComment" var="addComment"/>
+<c:url value="/write/updateComment" var="updateComment"/>
 var prevParentId;
 var prevParentUpdateId;
 function tableSetting(parent, child){
 	$.each(parent, function(index, item){
 		$("#commentTable").append(
 				$("<tr id="+item.commentId +">"+
-						"<td colspan='2'>"+item.userId +"</td>"+
+						"<td colspan='2'>"+item.userId+"</td>"+
 						"<td>"+item.commentTime+"</td>"+
 					  "</tr>"
 					)
@@ -141,10 +142,16 @@ function tableSetting(parent, child){
 						  "</td>"
 						)
 					);
+				}else if(item.userId!=null){
+					$("#"+item.commentId).append(
+							$("<td>"+
+								"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
+							  "</td>"
+							  )
+						);
 				}else{
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						  )
 					);
@@ -214,16 +221,18 @@ $("#commentBtn").click(function(){
 	}
 	}else{alert("1자이상 입력하시오")}
 });
-//댓글 수정
+//댓글 수정 수정창 생성
 function commentUpdate(el){
 	$(".commentModifyInput").parent().parent().remove();
 	$(".commentModifyBtn").parent().parent().remove();
+	$("#commentIdFind").remove();
 	var nowParentId = $(el).parent().parent().attr("id");
 	if(nowParentId != prevParentUpdateId){
 		prevParentUpdateId = nowParentId;
 		$(el).parent().parent().next().after(
 				$("<tr><td colspan='3'><input class='commentModifyInput' type='text' maxlength='250'></td>"+
-				"<td><button class='commentModifyBtn' >수정</button></td></tr>")
+						"<input type='hidden' id='commentIdFind' value="+nowParentId+">"+
+				"<td><button class='commentModifyBtn' onclick='commentUpdateRequest(this)'>수정</button></td></tr>")
 			);
 	}else{
 		prevParentUpdateId = null;
@@ -256,8 +265,8 @@ function sendComment(){
 		      url : "${addComment}",
 		      data : {
 		    	  postingId : ${postingData.postingId},
-		    	  commentContent : $(".childCommentSendInput").val(),
-		    	  commentParentId : $(".childCommentSendInput").parent().parent().prev().prev().attr("id")
+		    	  commentContent : $(".commentModifyInput").val(),
+		    	  commentId : $(".childCommentSendInput").parent().parent().prev().prev().attr("id")
 		      },
 		       success : function(result) {
 		    	   $("#commentTable").empty();
@@ -283,6 +292,30 @@ function commentDelete(el){
 	var btn = $(el).parent().parent().attr("id");
 	$(location).attr('href', "/write/deleteComment?postingId=${postingData.postingId}&commentId="+btn);
 }
+//댓글 수정
+function commentUpdateRequest(el){
+	$.ajax({
+	      type : "post",
+	      url : "${updateComment}",
+	      data : {
+	    	  postingId : ${postingData.postingId},
+	    	  commentContent : $(el).val(),
+	    	  commentId : $("#commentIdFind").val()
+	      },
+	       success : function(result) {
+	    	   $("#commentTable").empty();
+	    	   prevParentId = null;
+	   		   prevParentUpdateId = null;
+	    	   tableSetting(result["parent"],result["child"].reverse())	
+	      },
+	      error : function(request, status, error) {
+	         alert("code:" + request.status + "\n" + "message:"
+	               + request.responseText + "\n" + "error:"
+	               + error);
+	      }
+	   });
+}
+
 $("#postingUpdateBtn").click(function(){
 	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
 });
@@ -292,5 +325,6 @@ $("#postingUpdateBtn").click(function(){
 	}else{
 	}
 });
+
 </script>
 </html>
