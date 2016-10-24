@@ -86,12 +86,12 @@ function errorFun(e){
 							<td>
 								<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>
 								<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>
-								<c:if test="${list.commentParentId == null }">
+								<c:if test="${list.userId.length()>0 && list.commentParentId == null }">
 								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 				</c:if>
 				 			</td>
 							</c:when>
-							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
+							<c:when test="${list.userId.length()>0&&list.userId!=user.userId && list.commentParentId == null }">
 							<td>
 								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 			</td>
@@ -127,7 +127,7 @@ function tableSetting(parent, child){
 	$.each(parent, function(index, item){
 		$("#commentTable").append(
 				$("<tr id="+item.commentId +">"+
-						"<td colspan='2'>"+item.userId +"</td>"+
+						"<td colspan='2'>"+item.userId+"</td>"+
 						"<td>"+item.commentTime+"</td>"+
 					  "</tr>"
 					)
@@ -141,10 +141,16 @@ function tableSetting(parent, child){
 						  "</td>"
 						)
 					);
+				}else if(item.userId!=null){
+					$("#"+item.commentId).append(
+							$("<td>"+
+								"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
+							  "</td>"
+							  )
+						);
 				}else{
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						  )
 					);
