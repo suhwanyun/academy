@@ -127,6 +127,18 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</delete>
 	
+	<select id="isChildComment" parameterType="int">
+		select count(*)
+		from PostingComment
+		where comment_id = #{commentId} and comment_parent_id is not null
+	</select>
+	
+	<update id="deleteCommentSetDefault" parameterType="posting_comment">
+		update PostingComment
+		set user_id = null, comment_content = #{commentContent}
+		where comment_id = #{commentId}
+	</update>
+	
 	<delete id="deleteComment" parameterType="int">
 		delete from PostingComment
 		where comment_id = #{commentId}
@@ -135,7 +147,7 @@
 	<update id="updateComment" parameterType="posting_comment">
 		update PostingComment 
 		set comment_content = #{comment_content}
-		where comment_id = #{commentId}
+		where user_id = #{userId} and comment_id = #{commentId}
 	</update>
 
 	<select id="selectRecommend" parameterType="recommend" resultType="int">

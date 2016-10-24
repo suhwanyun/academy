@@ -20,7 +20,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
-import academy.group5.exception.SessionNotFoundException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.BoardRepo;
 
 @Service
@@ -29,6 +29,8 @@ public class PostingServiceImpl implements PostingService {
 
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
+	/** 댓글 삭제시 설정될 텍스트 */
+	private final String DELETE_COMMENT_TEXT = "삭제된 댓글 입니다.";
 	
 	@Autowired
 	BoardRepo boardRepo;
@@ -57,7 +59,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.setPosting(posting);
 		
 		if(result != 1){
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -67,7 +69,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updateposting(posting);
 		
 		if(result != 1){
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -77,7 +79,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updatePhoto(posting);
 		
 		if(result != 1){
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -102,7 +104,7 @@ public class PostingServiceImpl implements PostingService {
 
 		// 비정상적 접근
 		if(postingId == null){
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + "." + fileType;	
@@ -227,7 +229,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 	}
 
@@ -256,18 +258,25 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 	}
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
-		int result = boardRepo.delComment(commentId);
+		int isChild = boardRepo.isChildComment(commentId);
+		int result;
+		
+		if(isChild > 0){
+			result = boardRepo.delCommentSetDefault(new PostingComment(commentId, DELETE_COMMENT_TEXT));
+		} else {
+			result = boardRepo.delComment(commentId);
+		}
 		
 		if(result == 1){
 			return true;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 	}
 
@@ -278,7 +287,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 	}
 
@@ -296,7 +305,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 	}
 }

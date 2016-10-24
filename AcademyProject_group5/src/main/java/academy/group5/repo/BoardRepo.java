@@ -96,6 +96,18 @@ public class BoardRepo {
 		return session.delete(stmt, delData);
 	}
 	
+	/** 자식 댓글 여부 확인 */
+	public int isChildComment(int commentId) {
+		String stmt = BOARD_NS + "isChildComment";
+		return session.selectOne(stmt, commentId);
+	}
+	
+	/** 댓글 삭제(부모가 존재하여 삭제 불가) */
+	public Integer delCommentSetDefault(PostingComment commentData){
+		String stmt = BOARD_NS + "deleteCommentSetDefault";
+		return session.update(stmt, commentData);
+	}
+	
 	/** 댓글 삭제 */
 	public Integer delComment(int commentId){
 		String stmt = BOARD_NS + "deleteComment";

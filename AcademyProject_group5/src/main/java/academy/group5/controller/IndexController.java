@@ -16,7 +16,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
-import academy.group5.exception.SessionNotFoundException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.PostingService;
@@ -228,7 +228,7 @@ public class IndexController {
 		if(postingTypeObj != null){
 			postingType = (String)postingTypeObj;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		
 		return postingType;

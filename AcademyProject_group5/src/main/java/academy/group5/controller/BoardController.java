@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
-import academy.group5.exception.SessionNotFoundException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
@@ -262,16 +262,33 @@ public class BoardController {
 		return commentList;
 	}
 	
-	/** 댓글 삭제 
-	 * 	sendmsg : postingInfo 에 전달하는 메세지
-	 * */
+	/** 댓글 수정 */
+	@RequestMapping(value="/write/updateComment", method=RequestMethod.POST)
+	public @ResponseBody Map<String, List<PostingComment>> updateComment(Model model, HttpSession session,
+				@RequestParam Integer postingId, @RequestParam String commentContent){
+		String userId = identify.getUserId(session);	
+		String postingType = getPostingType(session);
+		
+		PostingComment commentData = new PostingComment(null, postingId, null, userId, 
+														null, null, commentContent);
+		postService.commentModify(commentData);
+
+		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
+		
+		return commentList;
+	}
+	
+	/** 
+	 * 댓글 삭제 
+	 * sendmsg : postingInfo 에 전달하는 메세지
+	 */
 	@RequestMapping(value="/write/deleteComment", method=RequestMethod.GET)
 	public String deleteComment(RedirectAttributes redAttr,
 			@RequestParam Integer postingId, @RequestParam Integer commentId){
+		
 		if(postService.commentDelete(commentId)){
 			redAttr.addFlashAttribute("sendmsg", "삭제되었습니다.");
-		}
-		
+		}	
 		return "redirect:/postingInfo?postingId=" + postingId;
 	}
 	
@@ -293,7 +310,7 @@ public class BoardController {
 		String isDeletePhoto = mrequest.getParameter("deletePhoto");
 		
 		if(isError || postingType == null || postingTitle == null || postingContent == null) {
-			throw new SessionNotFoundException();	
+			throw new WrongRequestException();	
 		} else if(postingTitle.equals("")){
 			model.addAttribute("msg", "제목을 입력해주세요.");
 			isError = true;
@@ -315,7 +332,7 @@ public class BoardController {
 				postingData.setPostingPhoto(null);
 			}
 		} else if(!isNewPosting){
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 
 		if(!isError && ((isNewPosting && postService.postWrite(postingData)) ||
@@ -324,7 +341,6 @@ public class BoardController {
 			// 이미지 업로드 처리
 			if(!uploadPhoto.isEmpty()){
 				int uploadResult = postService.upload(uploadPhoto, postingData);
-				
 				// 이미지 업로드 실패시 처리
 				if(uploadResult == -1){
 					redAttr.addFlashAttribute("msg", "이미지 업로드에 실패하였습니다.");
@@ -349,7 +365,7 @@ public class BoardController {
 		if(postingTypeObj != null){
 			postingType = (String)postingTypeObj;
 		} else {
-			throw new SessionNotFoundException();
+			throw new WrongRequestException();
 		}
 		
 		return postingType;
