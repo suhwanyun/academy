@@ -22,6 +22,11 @@ import academy.group5.service.LoginService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
+/**
+ * 페이지(JSP) 이동 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class IndexController {
 	

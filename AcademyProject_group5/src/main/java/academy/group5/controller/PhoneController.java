@@ -16,6 +16,11 @@ import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
 import academy.group5.util.GCM;
 
+/**
+ * 어플 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class PhoneController {
 	

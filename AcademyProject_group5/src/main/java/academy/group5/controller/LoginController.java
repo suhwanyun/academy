@@ -14,6 +14,11 @@ import academy.group5.dto.UserData;
 import academy.group5.service.LoginService;
 import academy.group5.service.NotificationService;
 
+/**
+ * 계정 관련 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class LoginController {
 	

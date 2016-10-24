@@ -26,6 +26,11 @@ import academy.group5.exception.SessionNotFoundException;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
+/**
+ * 게시판 컨트롤러
+ * @author YSH
+ * 
+ */
 @Controller
 public class BoardController {
 	static Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -214,12 +219,12 @@ public class BoardController {
 		String postingType = getPostingType(session);
 		Posting postingData = postService.postView(postingId, postingType);
 		
-		// 이미지 삭제
-		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
-			postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
-		}
 		// 게시글 삭제
 		if(postService.postDelete(userId, postingId, postingType)){
+			// 이미지 삭제
+			if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+			}
 			redAttr.addAttribute("msg", "삭제되었습니다.");
 		} else {
 			redAttr.addAttribute("msg", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");

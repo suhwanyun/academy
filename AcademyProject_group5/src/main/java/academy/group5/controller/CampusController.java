@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import academy.group5.dto.Lecture;
 import academy.group5.service.LectureService;
 
+/**
+ * 학업 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class CampusController {
 	

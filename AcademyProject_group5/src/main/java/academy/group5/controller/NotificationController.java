@@ -1,7 +1,5 @@
 package academy.group5.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
+/**
+ * 알림(설정) 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class NotificationController {
 	
