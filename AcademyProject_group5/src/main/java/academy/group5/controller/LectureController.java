@@ -117,10 +117,8 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		String userId = identify.getUserId(session);
-		if(lecService.apply(lectureId, lectureClass, userId)){
-			return "신청이 정상적으로 되었습니다.";
-		} else {
-			throw new WrongRequestException();
-		}
+		lecService.apply(lectureId, lectureClass, userId);
+		
+		return "신청이 정상적으로 되었습니다.";
 	}
 }

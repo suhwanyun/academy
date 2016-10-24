@@ -11,6 +11,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.Paging;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.LectureRepo;
 
 @Service
@@ -34,9 +35,8 @@ public class LectureServiceImpl implements LectureService{
 		int result = lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
 		
 		if(result != 1){
-			return false;
-		} 
-			
+			throw new WrongRequestException();
+		} 	
 		return true;	
 	}
 
@@ -46,8 +46,12 @@ public class LectureServiceImpl implements LectureService{
 		data.setLectureId(lectureId);
 		data.setUserId(userId);
 		
-		lecRepo.deleteLecture(data);
-		return false;
+		int result = lecRepo.deleteLecture(data);
+		
+		if(result != 1){
+			throw new WrongRequestException();
+		} 	
+		return true;
 	}
 
 	@Override
