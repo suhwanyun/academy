@@ -216,17 +216,13 @@ public class BoardController {
 	@RequestMapping(value="/write/addComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
 				@RequestParam Integer postingId, @RequestParam(required=false) Integer commentParentId, @RequestParam String commentContent){
+		
 		String userId = identify.getUserId(session);		
 		String postingType = getPostingType(session);
 		
 		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
-														commentParentId, null, commentContent);
-		try{
-			postService.commentWrite(commentData);
-	
-		} catch(PersistenceException e){
-			model.addAttribute("error", "이미 삭제된 댓글입니다.");
-		}
+														commentParentId, null, commentContent);	
+		postService.commentWrite(commentData);	
 		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
 		
@@ -237,13 +233,14 @@ public class BoardController {
 	@RequestMapping(value="/write/updateComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> updateComment(Model model, HttpSession session,
 			@RequestParam Integer commentId, @RequestParam Integer postingId, @RequestParam String commentContent){
+		
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
 		
 		PostingComment commentData = new PostingComment(commentId, null, null, userId, 
 														null, null, commentContent);
 		postService.commentModify(commentData);
-
+		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
 		
 		return commentList;

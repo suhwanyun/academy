@@ -108,7 +108,9 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		String userId = identify.getUserId(session);
-		lecService.apply(lectureId, lectureClass, userId);
+		try {
+			lecService.apply(lectureId, lectureClass, userId);
+		} catch(WrongRequestException e){ return "잘못된 접근입니다."; }
 		
 		return "신청이 정상적으로 되었습니다.";
 	}

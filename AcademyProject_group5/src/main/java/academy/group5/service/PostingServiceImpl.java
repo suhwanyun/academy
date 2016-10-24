@@ -10,8 +10,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +26,6 @@ import academy.group5.repo.BoardRepo;
 @Service
 @Transactional
 public class PostingServiceImpl implements PostingService {
-
-	private static final Logger logger = LoggerFactory.getLogger(PostingServiceImpl.class);
 	
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
@@ -106,10 +102,6 @@ public class PostingServiceImpl implements PostingService {
 		// 게시판 종류
 		String postingType = postingData.getPostingType();
 
-		// 비정상적 접근
-		if(postingId == null){
-			throw new WrongRequestException();
-		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + "." + fileType;	
 		
@@ -144,7 +136,7 @@ public class PostingServiceImpl implements PostingService {
 	 * 업로드된 이미지 삭제
 	 */
 	@Override
-	public int uploadCancel(Posting postingData, String defaultName){
+	public void uploadCancel(Posting postingData, String defaultName){
 		// 파일명
 		String fileName = postingData.getPostingPhoto();		
 
@@ -156,8 +148,6 @@ public class PostingServiceImpl implements PostingService {
 		
 		postingData.setPostingPhoto(defaultName);
 		boardRepo.updatePhoto(postingData);
-		
-		return 0;
 	}
 	
 	// 이미지 최대 픽셀크기
@@ -215,7 +205,12 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Override
 	public Integer getPostingId(Posting posting) {
-		return boardRepo.getPostingId(posting);
+		Integer result = boardRepo.getPostingId(posting);
+		
+		if(result == null){
+			throw new WrongRequestException();
+		}
+		return result;
 	}
 
 	@Override
@@ -242,7 +237,12 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public Posting postView(Integer postingId, String postingType) {
-		return boardRepo.getPostingInfo(new Posting(postingId, postingType));
+		Posting postData = boardRepo.getPostingInfo(new Posting(postingId, postingType));
+		
+		if(postData == null){
+			throw new WrongRequestException();
+		}
+		return postData;
 	}
 
 	@Override

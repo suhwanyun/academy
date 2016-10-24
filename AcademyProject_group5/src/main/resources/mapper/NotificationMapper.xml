@@ -10,9 +10,12 @@
 		where user_id = #{userId}
 	</select>
 	
-	<insert id="insertNotificationSetting" parameterType="notification_setting">
+	<insert id="insertNotificationSetting" parameterType="notification_setting_list">
 		insert into NotificationSetting
-		values (#{notiType}, #{userId}, #{notiOn}, #{notiTime}, #{notiTimeInterval})
+		values
+		<foreach collection="list" item="item" open="(" separator=","  close=")">		
+			#{item.notiType}, #{item.userId}, #{item.notiOn}, #{item.notiTime}, #{item.notiTimeInterval}
+		</foreach>
 	</insert>
 	
 	<update id="updateNotificationSetting" parameterType="notification_setting">
@@ -20,7 +23,7 @@
 		set noti_on = #{notiOn}
 			, noti_time = #{notiTime}
 		<if test="notiTimeInterval != null">
-			, noti_time_interval #{notiTimeInterval}
+			, noti_time_interval = #{notiTimeInterval}
 		</if>
 		where noti_type = #{notiType} and user_id = #{userId}
 	</update>

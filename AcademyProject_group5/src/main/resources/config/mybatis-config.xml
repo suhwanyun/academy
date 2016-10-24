@@ -32,6 +32,7 @@
 		<typeAlias type="academy.group5.dto.etc.LecturePaging" alias="lecture_paging"/>
 		<typeAlias type="academy.group5.dto.etc.Voting" alias="voting"/>
 		<typeAlias type="academy.group5.dto.etc.MostRecommend" alias="most_recommend"/>
+		<typeAlias type="academy.group5.dto.etc.NotificationSettingList" alias="notification_setting_list"/>
 	</typeAliases>
 	
 	<mappers>

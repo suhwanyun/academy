@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import academy.group5.repo.NotificationRepo;
 @Transactional
 public class NotificationServiceImpl implements NotificationService{
 
+	private final int SETTING_QUANTITY = 5;
 	@Autowired
 	NotificationRepo notiRepo;
 	
@@ -28,18 +30,42 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
 	@Override
-	public boolean settingModify(NotificationSettingList settingData) {
-
-		List<NotificationSetting> settingList = settingData.getSettingList();
+	public boolean settingModify(String userId, NotificationSettingList settingData) {
 		
-		for(NotificationSetting setting : settingList) {
-			int result = notiRepo.updateNotificationSetting(setting);
-			
-			if(result != 1){
-				return false;
-			} 
+		List<NotificationSetting> existingSettingList = settingList(userId);
+		List<NotificationSetting> newSettingList = settingData.getSettingList();
+		
+		// 설정값 이상
+		if(existingSettingList.size() != SETTING_QUANTITY ||
+			newSettingList.size() != SETTING_QUANTITY){
+			throw new WrongRequestException();
 		}
 		
+		for(int nSettingIdx = 0; nSettingIdx < SETTING_QUANTITY; nSettingIdx++){	
+			// 기존 설정 데이터
+			NotificationSetting nowSettingData = newSettingList.get(nSettingIdx);
+			
+			for(int eSettingIdx = 0; eSettingIdx < SETTING_QUANTITY; eSettingIdx++){
+				// 새로운 설정 데이터
+				NotificationSetting newSettingData = existingSettingList.get(eSettingIdx);
+				// 해당 설정 값이면(id와 type이 일치)
+				if(nowSettingData.equals(newSettingData)){
+					// 설정이 변경되었으면 업데이트
+					if(nowSettingData != newSettingData){
+						int result = notiRepo.updateNotificationSetting(nowSettingData);
+						// 업데이트 실패
+						if(result != 1){
+							throw new WrongRequestException();
+						} 
+					// 설정이 변경되지 않았으면 루프 탈출	
+					} else {
+						break;
+					}
+				}
+				/** 루프 1회 종료 */
+			}
+			/** 설정 1회 완료 */
+		}
 		return true;
 	}
 
@@ -52,21 +78,23 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public boolean settingSet(String userId) {		
 
-		NotificationSetting[] settingList = {
-				new NotificationSetting("lecture", userId, 1, 0, 10, 7, null),
-				new NotificationSetting("noti", userId, 1, 19, 0, 1, null),
-				new NotificationSetting("place", userId, 1, 9, 10, 7, null),
-				new NotificationSetting("play", userId, 1, 22, 10, 1, null),
-				new NotificationSetting("food", userId, 1, 11, 10, 1, null)
-				};
+		List<NotificationSetting> settingDataList = new ArrayList<>();
 		
-		for(NotificationSetting setting : settingList){
-			int result = notiRepo.setNotificationSetting(setting);
-			
-			if(result != 1){
-				throw new WrongRequestException();
-			}
+		settingDataList.add(new NotificationSetting("lecture", userId, 1, 0, 10, 7));
+		settingDataList.add(new NotificationSetting("noti", userId, 1, 19, 0, 1));
+		settingDataList.add(new NotificationSetting("place", userId, 1, 9, 10, 7));
+		settingDataList.add(new NotificationSetting("play", userId, 1, 22, 10, 1));
+		settingDataList.add(new NotificationSetting("food", userId, 1, 11, 10, 1));
+
+		NotificationSettingList settingList = new NotificationSettingList();
+		settingList.setSettingList(settingDataList);
+
+		int result = notiRepo.setNotificationSetting(settingList);
+		
+		if(result != 5){
+			throw new WrongRequestException();
 		}
+		
 		return true;
 	}
 
