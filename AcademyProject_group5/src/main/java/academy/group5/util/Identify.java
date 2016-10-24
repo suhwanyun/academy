@@ -3,7 +3,7 @@ package academy.group5.util;
 import javax.servlet.http.HttpSession;
 
 import academy.group5.dto.UserData;
-import academy.group5.exception.SessionNotFoundException;
+import academy.group5.exception.WrongRequestException;
 
 public class Identify {
 	
@@ -13,7 +13,7 @@ public class Identify {
 		if(userAttrObj != null){
 			return ((UserData)userAttrObj).getUserId();
 		}else {		
-			throw new SessionNotFoundException();		
+			throw new WrongRequestException();		
 		}
 	}
 }

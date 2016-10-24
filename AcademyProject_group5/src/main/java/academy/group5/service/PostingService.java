@@ -10,6 +10,10 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.etc.MostRecommend;
 
 public interface PostingService {
+	
+	/** 기본 이미지 */
+	public final String DEFAULT_PHOTO_NAME = "default.png";
+	
 	/**
 	 * 게시글 리스트 불러오기
 	 * @param page
@@ -58,13 +62,20 @@ public interface PostingService {
 	 * @return
 	 */
 	int upload(MultipartFile uploadData, Posting postingData);
+	
+	/**
+	 * 이미지 삭제 처리
+	 * @param postingData
+	 * @return
+	 */
+	int uploadCancel(Posting postingData, String defaultName);
 	/**
 	 * 게시글 삭제
 	 * @param postingId
 	 * @param postingType
 	 * @return
 	 */
-	boolean postDelete(Integer postingId, String postingType);
+	boolean postDelete(String userId, Integer postingId, String postingType);
 	/**
 	 * 게시글 보기
 	 * @param postingId

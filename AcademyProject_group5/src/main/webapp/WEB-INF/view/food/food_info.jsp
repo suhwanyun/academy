@@ -46,18 +46,23 @@ function errorFun(e){
 					<tr>
 						<td colspan="4">${postingData.postingContent }</td>
 					</tr>
-					<tr style="text-align: right;">
-						<td colspan="3"></td >
-						<td><button>추천</button></td>
-					</tr>
-					<c:if test="${postingData.userId eq user.userId}">
-					<tr style="text-align: right;">
-						<td colspan="2"></td>
-						<td><button>수정</button></td>
-						<td><button>삭제</button></td>
-					</tr>
-					
-					</c:if>
+					<c:choose>
+						<c:when test="${postingData.userId eq user.userId}">
+							<tr style="text-align: right;">
+								<td colspan="2"></td>
+								<td align="right"><button id="postingUpdateBtn">수정</button></td>
+								<td align="left">
+									<button id="postingDeleteBtn">삭제</button>
+								</td>
+							</tr>
+						</c:when>
+						<c:when test="${postingData.userId ne user.userId}">
+							<tr align="right">
+								<td colspan="3"></td >
+								<td><button id="recommendBtn">추천</button></td>
+							</tr>
+						</c:when>
+					</c:choose>
 					<tr >
 						<td colspan="3"><input id="commentInput" type="text" maxlength="250"></td>
 						<td align="right"><button id="commentBtn">댓글 달기</button></td>
@@ -116,11 +121,11 @@ function errorFun(e){
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-<c:url value="/addComment" var="addComment"/>
+<c:url value="/write/addComment" var="addComment"/>
 
 var tableInit;
-function tableSetting(comment, child){
-	$.each(comment, function(index, item){
+function tableSetting(parent, child){
+	$.each(parent, function(index, item){
 		$("#commentTable").append(
 				$("<tr id="+item.commentId +">"+
 						"<td colspan='2'>"+item.userId +"</td>"+
@@ -128,7 +133,7 @@ function tableSetting(comment, child){
 					  "</tr>"
 					)
 				);
-				if(${!empty user} && item.userId=='${user.userId}'){
+				if( ${!empty user} && item.userId=='${user.userId}'){
 					$("#"+item.commentId).append(
 						$("<td>"+
 							"<button class='commentUpdateBtn'>수정</button>"+
@@ -244,5 +249,15 @@ function sendComment(){
 		}
 		}else{alert("1자이상 입력하시오");} 
 }
+
+$("#postingUpdateBtn").click(function(){
+	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
+});
+	$("#postingDeleteBtn").click(function(){
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		$(location).attr('href', "/write/postingDelete?postingId=${postingData.postingId}");
+	}else{
+	}
+});
 </script>
 </html>

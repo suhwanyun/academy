@@ -5,6 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * 마일리지 관리 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class MileageController {
 	

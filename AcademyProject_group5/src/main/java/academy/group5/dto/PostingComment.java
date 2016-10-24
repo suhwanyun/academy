@@ -1,7 +1,5 @@
 package academy.group5.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,5 +35,15 @@ public class PostingComment {
 
 	/** 자식 댓글 목록. *//*
 	private Set<PostingComment> commentSet;*/
+	
+	/**
+	 * @param commentId
+	 * @param commentContent
+	 */
+	public PostingComment(Integer commentId, String commentContent) {
+		super();
+		this.commentId = commentId;
+		this.commentContent = commentContent;
+	}
 
 }

@@ -20,6 +20,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.BoardRepo;
 
 @Service
@@ -28,6 +29,8 @@ public class PostingServiceImpl implements PostingService {
 
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
+	/** 댓글 삭제시 설정될 텍스트 */
+	private final String DELETE_COMMENT_TEXT = "삭제된 댓글 입니다.";
 	
 	@Autowired
 	BoardRepo boardRepo;
@@ -56,7 +59,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.setPosting(posting);
 		
 		if(result != 1){
-			return false;
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -66,7 +69,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updateposting(posting);
 		
 		if(result != 1){
-			return false;
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -76,7 +79,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updatePhoto(posting);
 		
 		if(result != 1){
-			return false;
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -85,6 +88,9 @@ public class PostingServiceImpl implements PostingService {
 	private static final String PREVIEW_IMG_PATH = "d:/academyImg/preview_";
 	private static final String TMP_PREFIX = "tmp_";
 	
+	/**
+	 * 이미지 업로드
+	 */
 	@Override
 	public int upload(MultipartFile uploadData, Posting postingData){
 		// 원본 파일명
@@ -98,7 +104,7 @@ public class PostingServiceImpl implements PostingService {
 
 		// 비정상적 접근
 		if(postingId == null){
-			return -1;
+			throw new WrongRequestException();
 		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + "." + fileType;	
@@ -126,6 +132,26 @@ public class PostingServiceImpl implements PostingService {
 		if(!photoRegister(postingData)){
 			return -1;
 		}
+		
+		return 0;
+	}
+	
+	/**
+	 * 업로드된 이미지 삭제
+	 */
+	@Override
+	public int uploadCancel(Posting postingData, String defaultName){
+		// 파일명
+		String fileName = postingData.getPostingPhoto();		
+
+		String filePath = IMG_PATH + fileName;
+		String previewPath = PREVIEW_IMG_PATH + fileName;
+		
+		new File(filePath).delete();
+		new File(previewPath).delete();
+		
+		postingData.setPostingPhoto(defaultName);
+		boardRepo.updatePhoto(postingData);
 		
 		return 0;
 	}
@@ -189,13 +215,21 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public boolean postDelete(Integer postingId, String postingType) {
-		int result = boardRepo.delPosting(new Posting(postingId, postingType));
+	public boolean postDelete(String userId, Integer postingId, String postingType) {
+		Posting postingData = new Posting(userId, postingId, postingType);
+		
+		// 이미지 삭제
+		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+			uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+		}
+		
+		boardRepo.delAllComment(postingData);
+		int result = boardRepo.delPosting(postingData);
 		
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new WrongRequestException();
 		}
 	}
 
@@ -224,18 +258,25 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new WrongRequestException();
 		}
 	}
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
-		int result = boardRepo.delComment(commentId);
+		int isChild = boardRepo.isChildComment(commentId);
+		int result;
+		
+		if(isChild > 0){
+			result = boardRepo.delCommentSetDefault(new PostingComment(commentId, DELETE_COMMENT_TEXT));
+		} else {
+			result = boardRepo.delComment(commentId);
+		}
 		
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new WrongRequestException();
 		}
 	}
 
@@ -246,7 +287,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new WrongRequestException();
 		}
 	}
 
@@ -264,7 +305,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new WrongRequestException();
 		}
 	}
 }

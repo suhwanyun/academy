@@ -27,7 +27,7 @@
 					<tr>
 
 						<td><label for="postingTitle">제 목</label></td>
-						<td><input type="text" maxlength="30" name="postingTitle" /></td>
+						<td><input type="text" maxlength="30" name="postingTitle" value="${postingData.postingTitle }"/></td>
 
 					</tr>
 
@@ -35,14 +35,14 @@
 
 						<td><label for="postingContent">내 용</label></td>
 						<td><textarea rows="13" cols="40" maxlength="1300"
-								name="postingContent"></textarea></td>
+								name="postingContent">${postingData.postingContent }</textarea></td>
 
 					</tr>
 					<tr>
 						<td align="left"><label for="fileInput">사진
 								첨부</label> <input id="fileInput" type="file" name="uploadPhoto"
 							accept="image/*" /></td>
-							<td align="left"><button id="imgCancel">이미지 취소</button></td>
+							<td align="left"><button id="imgCancel">선택 취소</button></td>
 					</tr>
 					<tr>
 						<td colspan=2 align="center"><button type="submit" id="save">글쓰기</button>

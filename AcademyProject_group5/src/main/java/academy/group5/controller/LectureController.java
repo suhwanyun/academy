@@ -17,6 +17,11 @@ import academy.group5.dto.LectureTime;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
+/**
+ * 강의 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class LectureController {
 	

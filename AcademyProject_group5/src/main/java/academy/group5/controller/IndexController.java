@@ -9,16 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
+/**
+ * 페이지(JSP) 이동 컨트롤러
+ * @author YSH
+ *
+ */
 @Controller
 public class IndexController {
 	
@@ -122,8 +130,7 @@ public class IndexController {
 	
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
-	public String addFood(){
-		
+	public String addFood(){	
 		return "/food/food_add";
 	}
 	
@@ -143,11 +150,42 @@ public class IndexController {
 	
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
-	@RequestMapping(value="/write/postingUpdatejsp", method=RequestMethod.GET)
-	public String updateFood(HttpSession session){
-		session.setAttribute("nowUpdating", true);
-		return "/food/food_update";
+	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
+	public String updateFood(Model model, HttpSession session, RedirectAttributes redAttr, 
+								@RequestParam int postingId){
+		
+		if(getPostingData(model, session, redAttr, postingId)){
+			return "/food/food_update";
+		} else {
+			return "redirect:/foodMain";
+		}
+		
 	}
+	
+	/** 오락추천 게시판 글 수정 페이지 */
+	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
+	public String updatePlay(Model model, HttpSession session, RedirectAttributes redAttr, 
+			@RequestParam int postingId){
+		
+		if(getPostingData(model, session, redAttr, postingId)){
+			return "/play/play_update";
+		} else {
+			return "redirect:/playMain";
+		}
+	}
+	
+	/** 명소추천 게시판 글 수정 페이지 */
+	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
+	public String updatePlace(Model model, HttpSession session, RedirectAttributes redAttr, 
+			@RequestParam int postingId){
+		
+		if(getPostingData(model, session, redAttr, postingId)){
+			return "/place/place_update";
+		} else {
+			return "redirect:/placeMain";
+		}
+	}
+	
 	
 	/** 전체 강의 목록 표시 페이지 */
 	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
@@ -180,5 +218,36 @@ public class IndexController {
 		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");
 		session.removeAttribute("orderData");
+	}
+	
+	/** 게시판 종류 확인 */
+	private String getPostingType(HttpSession session){
+		Object postingTypeObj = session.getAttribute("postingType");
+		String postingType = null;
+		
+		if(postingTypeObj != null){
+			postingType = (String)postingTypeObj;
+		} else {
+			throw new WrongRequestException();
+		}
+		
+		return postingType;
+	}
+	
+	/** 게시판 글 수정시, 글 정보 가져오기 */
+	private boolean getPostingData(Model model, HttpSession session,
+									RedirectAttributes redAttr, int postingId){
+		String userId = identify.getUserId(session);
+		String postingType = getPostingType(session);
+		Posting postingData = postService.postView(postingId, postingType);
+		
+		// 본인이 작성한 글이 아니면
+		if(!userId.equals(postingData.getUserId())){
+			redAttr.addFlashAttribute("msg", "잘못된 접근입니다.");
+			return false;
+		}
+		
+		model.addAttribute("postingData", postingData);
+		return true;
 	}
 }
