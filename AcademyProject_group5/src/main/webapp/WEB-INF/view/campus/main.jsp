@@ -6,29 +6,37 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/css/main.css" />
-<link rel="stylesheet"
-	href="/css/font-awesome.css" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
 <title>학업페이지</title>
 </head>
 <body>
+	<table class="table">
+		<thead>
+		<tr>
+		<td>
+		<jsp:include page="../header/header.jsp" ></jsp:include>
+		</td>
+		</tr>
+		</thead>
+	</table>
+	
+	
+		<div class="container">
+			<div class="btn-group btn-group-justified">
+  				  <a href="#" onclick="mylectureBtn()" class="btn btn-danger">내 강의목록</a>
+   				 <a href="#" onclick="notilistBtn()" class="btn btn-danger">전체 공지목록</a>
+    				<a href="#" onclick="lecturelistBtn()" class="btn btn-danger">강의 선택</a>
+    				<a href="#" onclick="schedule()" class="btn btn-danger">내 시간표</a>
+ 			</div>
 
-	<jsp:include page="/WEB-INF/view/header/header.jsp" />
-	<div class="upmargin">
-		<table>
-			<tr>
-				<td><input type="button" id="mylectureBtn" class="myButton" value="내 강의목록" /></td>
-				<td><input type="button" id="notilistBtn" class="myButton" value="전체 공지목록" /></td>
-				<td><input type="button" id="lecturelistBtn" class="myButton" value="강의 선택" /></td>
-				<td><input type="button" id="schedule" class="myButton" value="내 시간표" /></td>
-			</tr>
-			<tr>
-				<td colspan="4">
-					<div id="incluedjsp" class="form9 pad"></div>
-				</td>
-			</tr>
-		</table>
-	</div>
+	
+			
+               <div id="incluedjsp" ></div>
+       
+    </div>
+	
+	
 	</body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -36,28 +44,26 @@
 	<c:url value="/lecture/selectedLectureList" var="selectedLectureList"/>
 	<c:url value="/campus/lectureListJsp" var="lectureList"/>
 	<c:url value="/campus/schedule" var="schedule"/>
-	
-	$("#mylectureBtn").click(function() {
-		$.ajax({ 
-			type : "get",
-			url : "${selectedLectureList}",
-			success : function(result) {
-				$("#incluedjsp").html(result);
-			}
-		});
-
+function mylectureBtn(){
+	$.ajax({ 
+		type : "get",
+		url : "${selectedLectureList}",
+		success : function(result) {
+			$("#incluedjsp").html(result);
+		}
 	});
-	$("#notilistBtn").click(function() {
-		$.ajax({
-			type : "get",
-			url : "${notiList}",
-			success : function(result) {
-				$("#incluedjsp").html(result);
-			}
-		});
-
+}
+function notilistBtn(){
+	$.ajax({
+		type : "get",
+		url : "${notiList}",
+		success : function(result) {
+			$("#incluedjsp").html(result);
+		}
 	});
-	$("#lecturelistBtn").click(function() {
+}
+
+function lecturelistBtn(){
 		$.ajax({
 			type : "get",
 			url : "${lectureList}",
@@ -66,8 +72,8 @@
 			}
 		});
 
-	});
-	$("#schedule").click(function() {
+	}
+function schedule(){
 		$.ajax({
 			type : "get",
 			url : "${schedule}",
@@ -76,6 +82,6 @@
 			}
 		});
 
-	});
+	}
 </script>
 </html>

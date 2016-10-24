@@ -8,41 +8,45 @@
 <title>전체 강의 목록</title>
 </head>
 <body>
-	<table>
-		<tr class="tableData">
+<div class="container text-center">
+	<table class="table table-bored">
+		<tr>
 			<td><select id="serchType">
 					<option selected="selected" value="">선택</option>
 					<option value="lecture">강의 이름</option>
 					<option value="professor">교수 이름</option>
 			</select></td>
 			<td><input type="search" id="serachInput" /></td>
-			<td><button id="searchBtn" class="myButton">검색</button></td>
+			<td><button id="searchBtn">검색</button></td>
 
 		</tr>
 	</table>
-	<table class="list_table">
+	<div class="table-responsive">
+	<table class="table">
 		<thead>
+		
 		<tr>
-			<th>강의 이름</th>
-			<th>교수 이름</th>
-			<th>강의 분반</th>
+			<th style="text-align: center;">강의 이름</th>
+			<th style="text-align: center;">교수 이름</th>
+			<th style="text-align: center;">강의 분반</th>
 		</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${lectureList }" var="list">
-			<tr class="tableData">
+			<tr>
 				<td><a href="/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
 				<td>${list.professorName}</td>
 				<td>${list.lectureClass}</td>
 			</tr>
 		</c:forEach>
 		</tbody>
-		<tr id="beforeLectureLocation" class="tableData">
-			<td colspan="2" align="center"><button id="moreBtn" class="myButton">더보기</button></td>
-			<td><button class="myButton">맨 위로</button></td>
+		<tr id="beforeLectureLocation" >
+			<td colspan="2" align="center"><button id="moreBtn">더보기</button></td>
+			<td><button>맨 위로</button></td>
 		</tr>
 	</table>
-
+</div>
+</div>
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
