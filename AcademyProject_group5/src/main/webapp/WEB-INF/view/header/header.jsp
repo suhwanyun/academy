@@ -19,7 +19,7 @@
 		<c:choose>
 			<c:when test="${!empty user }">
 				<div class="inner">
-					<div class="content">
+					<div class="content"> 
 						<h1>MCM</h1>
 						<h2>${user.userName}님어서오세요</h2>
 						<a href="/noti/notiSettingList" class="button"><span>알림</span></a> 
