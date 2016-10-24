@@ -51,7 +51,9 @@ function errorFun(e){
 							<tr style="text-align: right;">
 								<td colspan="2"></td>
 								<td align="right"><button id="postingUpdateBtn">수정</button></td>
-								<td align="left"><button id="postingDeleteBtn">삭제</button></td>
+								<td align="left">
+									<button id="postingDeleteBtn">삭제</button>
+								</td>
 							</tr>
 						</c:when>
 						<c:when test="${postingData.userId ne user.userId}">
@@ -250,6 +252,12 @@ function sendComment(){
 
 $("#postingUpdateBtn").click(function(){
 	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
+});
+	$("#postingDeleteBtn").click(function(){
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		$(location).attr('href', "/write/postingDelete?postingId=${postingData.postingId}");
+	}else{
+	}
 });
 </script>
 </html>

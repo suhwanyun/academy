@@ -225,9 +225,9 @@ public class BoardController {
 			if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
 				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
 			}
-			redAttr.addAttribute("msg", "삭제되었습니다.");
+			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
 		} else {
-			redAttr.addAttribute("msg", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
+			redAttr.addFlashAttribute("msg", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
 		}
 		
 		switch(postingType){
