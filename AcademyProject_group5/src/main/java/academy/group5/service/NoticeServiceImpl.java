@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.etc.LecturePaging;
-import academy.group5.dto.etc.Paging;
+import academy.group5.exception.WrongRequestException;
+import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NoticeRepo;
+import academy.group5.util.GCM;
 
 @Service
 @Transactional
@@ -20,6 +22,9 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	@Autowired
 	NoticeRepo notiRepo;
+	
+	@Autowired
+	GCMRepo gcmRepo;
 	
 	@Override
 	public List<LectureNotice> allLectureNoticeList(String userId, int page) {
@@ -33,17 +38,26 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public LectureNotice lectureNoticeInfo(LectureNotice lecturenotice) {
-		return notiRepo.getLectureNoticeInfo(lecturenotice);
+		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(lecturenotice);
+		
+		if(noticeData == null){
+			throw new WrongRequestException();
+		}
+		return noticeData;
 	}
 
 	@Override
 	public boolean postNotice(LectureNotice lecturenotice) {
 		int result = notiRepo.setLectureNotice(lecturenotice);
-		if(result == 1){
-			return true;
-		} else{
-			return false;
+		if(result != 1){
+			throw new WrongRequestException();
+		} else {
+			// 메세지 PUSH
+			new GCM(lecturenotice.getNoticeTitle(), 
+					lecturenotice.getNoticeContent(),
+					gcmRepo.getAllUser(),
+					lecturenotice.getNoticeType());
 		}
+		return true;
 	}
-
 }

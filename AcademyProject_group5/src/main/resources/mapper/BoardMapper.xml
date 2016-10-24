@@ -146,7 +146,7 @@
 	
 	<update id="updateComment" parameterType="posting_comment">
 		update PostingComment 
-		set comment_content = #{comment_content}
+		set comment_content = #{commentContent}
 		where user_id = #{userId} and comment_id = #{commentId}
 	</update>
 
