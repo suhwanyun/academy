@@ -70,12 +70,6 @@ function errorFun(e){
 					</tbody>
 				</table>
 				<table id="commentTable">
-					<colgroup>
-						<col width="5">
-						<col width="30%">
-						<col width="40%">
-						<col width="30%">
-					</colgroup>
 					<c:forEach items="${commentList }" var="list">
 					
 					<tr id="${list.commentId }" >
@@ -92,6 +86,9 @@ function errorFun(e){
 							<td>
 								<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>
 								<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>
+								<c:if test="${list.commentParentId == null }">
+								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
+				 				</c:if>
 				 			</td>
 							</c:when>
 							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
@@ -106,7 +103,9 @@ function errorFun(e){
 						</c:choose>
 					  </tr>
 					  <c:if test="${list.commentParentId != null }">
+					  <tr>
 					  	<td></td><td colspan='3'>${list.commentContent }</td>
+					 </tr>
 					  </c:if>
 					  <c:if test="${list.commentParentId == null }">
 					  <tr>
@@ -138,6 +137,7 @@ function tableSetting(parent, child){
 						$("<td>"+
 							"<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>"+
 							"<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>"+
+							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						)
 					);
@@ -199,7 +199,7 @@ $("#commentBtn").click(function(){
 	    	   $("#commentInput").val("");
 	    	   prevParentId = null;
 	   		   prevParentUpdateId = null;
-	    	   tableSetting(result["parent"],result["child"])	
+	    	   tableSetting(result["parent"],result["child"].reverse());
 	      },
 	      error : function(request, status, error) {
 	         alert("code:" + request.status + "\n" + "message:"
@@ -263,7 +263,7 @@ function sendComment(){
 		    	   $("#commentTable").empty();
 		    	   prevParentId = null;
 		   		   prevParentUpdateId = null;
-		    	   tableSetting(result["parent"],result["child"])	
+		    	   tableSetting(result["parent"],result["child"].reverse())	
 		      },
 		      error : function(request, status, error) {
 		         alert("code:" + request.status + "\n" + "message:"
