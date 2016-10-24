@@ -96,9 +96,9 @@ public class BoardRepo {
 		return session.delete(stmt, delData);
 	}
 	
-	/** 자식 댓글 여부 확인 */
-	public int isChildComment(int commentId) {
-		String stmt = BOARD_NS + "isChildComment";
+	/** 자식이 있는 부모 댓글인지 확인 */
+	public int isParentComment(int commentId) {
+		String stmt = BOARD_NS + "isParentComment";
 		return session.selectOne(stmt, commentId);
 	}
 	

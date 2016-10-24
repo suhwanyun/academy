@@ -133,39 +133,10 @@ public class BoardController {
 		
 		// 전체 댓글 리스트(부모와 자식으로 분할됨)
 		Map<String, List<PostingComment>> commentDataList = postService.commentList(postingId, postingType);
-		// 부모 댓글 리스트
-		List<PostingComment> parentDataList = commentDataList.get("parent");
-		// 자식 댓글 리스트
-		List<PostingComment> childDataList = commentDataList.get("child");
-	
-		// 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침
-		List<PostingComment> commentList = new ArrayList<>();
-		int childIdx = 0;
+		// Map -> List로 변환
+		List<PostingComment> mergedCommentList = mergeComment(commentDataList.get("parent"), commentDataList.get("child"));
 		
-		for(PostingComment parentData : parentDataList){
-			int parentId = parentData.getCommentId();
-			commentList.add(parentData);
-			logger.trace("parent:{}", parentData);
-			for(; childIdx < childDataList.size();){
-				PostingComment childData = childDataList.get(childIdx);
-				Integer childId = childData.getCommentParentId();
-				logger.trace("child:{}", childData);
-				if(childId == null){
-					childIdx++;
-					continue;
-				}
-				
-				// 현재 댓글이 부모 댓글일 때
-				if(childId == parentId){
-					commentList.add(childData);
-					childIdx++;
-				}
-				else{
-					break;
-				}	
-			}
-		}
-		model.addAttribute("commentList", commentList);
+		model.addAttribute("commentList", mergedCommentList);
 		
 		// 다른 페이지에서 전달 받은 메세지
 		if(sendmsg != null){
@@ -264,7 +235,7 @@ public class BoardController {
 	
 	/** 댓글 수정 */
 	@RequestMapping(value="/write/updateComment", method=RequestMethod.POST)
-	public @ResponseBody Map<String, List<PostingComment>> updateComment(Model model, HttpSession session,
+	public @ResponseBody List<PostingComment> updateComment(Model model, HttpSession session,
 				@RequestParam Integer postingId, @RequestParam String commentContent){
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
@@ -274,8 +245,9 @@ public class BoardController {
 		postService.commentModify(commentData);
 
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
+		List<PostingComment> mergedCommentList = mergeComment(commentList.get("parent"), commentList.get("child"));
 		
-		return commentList;
+		return mergedCommentList;
 	}
 	
 	/** 
@@ -355,6 +327,38 @@ public class BoardController {
 		// 에러가 발생하여 작성화면으로 돌아가기
 		model.addAttribute("postingData", postingData);
 		return failMapping;
+	}
+	
+	/** 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침 */
+	private List<PostingComment> mergeComment(List<PostingComment> parentDataList, List<PostingComment> childDataList){
+		 
+		List<PostingComment> mergedList = new ArrayList<>();
+		int childIdx = 0;
+		
+		for(PostingComment parentData : parentDataList){
+			int parentId = parentData.getCommentId();
+			mergedList.add(parentData);
+			
+			for(; childIdx < childDataList.size();){
+				PostingComment childData = childDataList.get(childIdx);
+				Integer childId = childData.getCommentParentId();
+				
+				if(childId == null){
+					childIdx++;
+					continue;
+				}
+				// 현재 댓글이 부모 댓글일 때
+				if(childId == parentId){
+					mergedList.add(childData);
+					childIdx++;
+				}
+				else{
+					break;
+				}	
+			}
+		}
+		
+		return mergedList;
 	}
 	
 	/** 게시판 종류 확인 */

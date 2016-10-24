@@ -113,7 +113,7 @@
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is not null
-		order by comment_parent_id asc, comment_id desc
+		order by comment_parent_id, comment_id
 	</select>
 	
 	<insert id="insertComment" parameterType="posting_comment">
@@ -127,10 +127,10 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</delete>
 	
-	<select id="isChildComment" parameterType="int" resultType="int">
+	<select id="isParentComment" parameterType="int" resultType="int">
 		select count(*)
 		from PostingComment
-		where comment_id = #{commentId} and comment_parent_id is not null
+		where comment_parent_id = #{commentId}
 	</select>
 	
 	<update id="deleteCommentSetDefault" parameterType="posting_comment">

@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,8 @@ import academy.group5.repo.BoardRepo;
 @Transactional
 public class PostingServiceImpl implements PostingService {
 
+	private static final Logger logger = LoggerFactory.getLogger(PostingServiceImpl.class);
+	
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
 	/** 댓글 삭제시 설정될 텍스트 */
@@ -264,10 +268,10 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
-		int isChild = boardRepo.isChildComment(commentId);
+		int childCount = boardRepo.isParentComment(commentId);
 		int result;
-		
-		if(isChild > 0){
+
+		if(childCount > 0){
 			result = boardRepo.delCommentSetDefault(new PostingComment(commentId, DELETE_COMMENT_TEXT));
 		} else {
 			result = boardRepo.delComment(commentId);
