@@ -225,14 +225,13 @@ $("#commentBtn").click(function(){
 function commentUpdate(el){
 	$(".commentModifyInput").parent().parent().remove();
 	$(".commentModifyBtn").parent().parent().remove();
-	$("#commentIdFind").remove();
 	var nowParentId = $(el).parent().parent().attr("id");
 	if(nowParentId != prevParentUpdateId){
 		prevParentUpdateId = nowParentId;
 		$(el).parent().parent().next().after(
 				$("<tr><td colspan='3'><input class='commentModifyInput' type='text' maxlength='250'></td>"+
 						"<input type='hidden' id='commentIdFind' value="+nowParentId+">"+
-				"<td><button class='commentModifyBtn' onclick='commentUpdateRequest(this)'>수정</button></td></tr>")
+				"<td><button class='commentModifyBtn' onclick='commentUpdateSend(this)' >수정</button></td></tr>")
 			);
 	}else{
 		prevParentUpdateId = null;
@@ -265,8 +264,8 @@ function sendComment(){
 		      url : "${addComment}",
 		      data : {
 		    	  postingId : ${postingData.postingId},
-		    	  commentContent : $(".commentModifyInput").val(),
-		    	  commentId : $(".childCommentSendInput").parent().parent().prev().prev().attr("id")
+		    	  commentContent : $(".childCommentSendInput").val(),
+		    	  commentParentId : $(".childCommentSendInput").parent().parent().prev().prev().attr("id")
 		      },
 		       success : function(result) {
 		    	   $("#commentTable").empty();
@@ -289,17 +288,20 @@ function sendComment(){
 }
 //댓글 삭제
 function commentDelete(el){
-	var btn = $(el).parent().parent().attr("id");
-	$(location).attr('href', "/write/deleteComment?postingId=${postingData.postingId}&commentId="+btn);
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		var btn = $(el).parent().parent().attr("id");
+		$(location).attr('href', "/write/deleteComment?postingId=${postingData.postingId}&commentId="+btn);
+	}
+	
 }
 //댓글 수정
-function commentUpdateRequest(el){
+function commentUpdateSend(el){
 	$.ajax({
 	      type : "post",
 	      url : "${updateComment}",
 	      data : {
 	    	  postingId : ${postingData.postingId},
-	    	  commentContent : $(el).val(),
+	    	  commentContent : $(".commentModifyInput").val(),
 	    	  commentId : $("#commentIdFind").val()
 	      },
 	       success : function(result) {
@@ -315,7 +317,6 @@ function commentUpdateRequest(el){
 	      }
 	   });
 }
-
 $("#postingUpdateBtn").click(function(){
 	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
 });
@@ -325,6 +326,5 @@ $("#postingUpdateBtn").click(function(){
 	}else{
 	}
 });
-
 </script>
 </html>
