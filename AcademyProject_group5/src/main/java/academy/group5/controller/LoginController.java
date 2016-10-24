@@ -42,7 +42,7 @@ public class LoginController {
 		
 		data.setUserMileage(new Integer(0));
 		
-		if(loginService.join(data) && notificationService.settingSet(data.getUserId())){
+		if(loginService.join(data)){
 			model.addAttribute("msg", "회원가입 되었습니다.");
 		} 
 		return "index";
