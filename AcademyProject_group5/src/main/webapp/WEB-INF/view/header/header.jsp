@@ -21,11 +21,11 @@
 					<div class="content">
 						<h1>MCM</h1>
 						<h2>${user.userName}님어서오세요</h2>
-						<a href="/noti/notiSettingList" class="button"><span>알림</span></a> 
-						<a href="/info/myinfo" class="button"><span>내 정보관리</span></a>
-						<a href="#" class="button"><span>${user.userMileage} m</span></a>
-						<a href="/logout" class="button"><span>로그아웃</span></a>
-						<a href="#" class="button"><span>이용하기</span></a>
+						<a href="/noti/notiSettingList" class="button big alt"><span>알림</span></a> 
+						<a href="/info/myinfo" class="button big alt"><span>내 정보관리</span></a>
+						<a href="#" class="button big alt"><span>${user.userMileage} m</span></a>
+						<a href="/logout" class="button big alt"><span>로그아웃</span></a>
+						<a href="#" class="button big alt"><span>이용하기</span></a>
 					</div>
 					<a href="#" class="button hidden"><span>home</span></a>
 				</div>
