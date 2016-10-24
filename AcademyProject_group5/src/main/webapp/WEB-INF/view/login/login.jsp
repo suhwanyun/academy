@@ -7,36 +7,51 @@
 <title>login form </title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="/css/main.css" />
-<link rel="stylesheet"
-	href="/css/font-awesome.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 <jsp:include page="../message.jsp" />
-<form>   <!--  로그인하기전 화면 -->
-<div id="wrap">
-<a href=""><img 
-						class="circular--logo"
-						src="/images/logo.png" alt="" /></a>
-  <h1 class="member">member login</h1>
-  <div class="form10 pad">
+   <!--  로그인하기전 화면 -->
   
+<div class="container" >
 
+<div align="center">
+<a href="#" ><img class="img-circle img-responsive" src="/images/logo.png" alt=""  width="100" /></a>
+</div>
+
+
+ <div class="text-center">
+  <h1>member login</h1>
+</div>
+<form class="form-horizontal">
+	
+     <div class="form-group">
      
-      <label for="user">아이디</label><input type="text" maxlength="10" id="userId">
-      <label for="user">비밀번호</label><input type="password" maxlength="20" id="userPass">
-     <div class="pad">
-     <input type="button"  value="로그인 하기"  id="loginBtn" class="bigbig">
+      <label for="user" class="control-label col-sm-2">아이디</label>
+      <div class="col-sm-10">
+      <input type="text" maxlength="10" id="userId" class="form-control">
+      </div>
      </div>
-     <div class="pad">
-      <input type="button" value="회원가입" id="joinBtn" class="bigbig">
-      <input type="button" value="ID/Pass 찾기" id="searchBtn" class="bigbig">
+     <div class="form-group">
+      <label for="user" class="control-label col-sm-2">비밀번호</label>
+      <div class="col-sm-10">
+      <input type="password" maxlength="20" id="userPass" class="form-control">
+      </div>
+     </div>
+     <div class="container">
+     <input type="button"  value="로그인 하기"  id="loginBtn" class="btn btn-default btn-lg">
+     </div>
+     <div class="container" style="margin-top:1em;">
+      <input type="button" value="회원가입" id="joinBtn" class="btn btn-default btn-lg"> 
+      <input type="button" value="ID/Pass 찾기" id="searchBtn" class="btn btn-default btn-lg" >
     </div>
-   </div>
- </div>
- </form>
+
+</form>
+
+</div>
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
