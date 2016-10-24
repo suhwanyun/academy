@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -95,15 +96,13 @@ public class LectureController {
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
 		
 		if(selectedlecture == null){
-			model.addAttribute("msg", "해당 강의의 정보가 존재하지 않습니다.");
-			return "/index";
+			throw new WrongRequestException();
 		}
 		
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
 		
 		if(selectedLectureTimes.size() == 0){
-			model.addAttribute("msg", "해당 강의시간 정보가 존재하지 않습니다.");
-			return "/index";
+			throw new WrongRequestException();
 		}
 		
 		model.addAttribute("lectureData", selectedlecture);
@@ -118,10 +117,8 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		String userId = identify.getUserId(session);
-		if(lecService.apply(lectureId, lectureClass, userId)){
-			return "신청이 정상적으로 되었습니다.";
-		} else {
-			return "신청에 실패하였습니다.\\n잠시 후 다시 시도해주세요.";
-		}
+		lecService.apply(lectureId, lectureClass, userId);
+		
+		return "신청이 정상적으로 되었습니다.";
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.LoginRepo;
 import academy.group5.util.MyHash;
 
@@ -20,6 +21,9 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	LoginRepo loginRepo;
+	
+	@Autowired
+	NotificationService notificationService;
 
 	/** 로그인 */
 	@Override
@@ -39,16 +43,13 @@ public class LoginServiceImpl implements LoginService {
 		String id = userdata.getUserId();
 		// 아이디 중복 방지
 		if(id == null || id.equals("") || !findUser(userdata.getUserId())){
-			return false;
+			throw new WrongRequestException();
 		}
-		
 		UserData encdata = toHash(userdata);
 		
-		try{
-			loginRepo.setUser(encdata);
-		}catch(org.springframework.dao.DuplicateKeyException e){
-			return false;
-		}
+		loginRepo.setUser(encdata);
+		notificationService.settingSet(userdata.getUserId());
+		
 		return true;
 	}
 
@@ -115,12 +116,22 @@ public class LoginServiceImpl implements LoginService {
 	/** 회원정보 확인 */
 	@Override
 	public UserData getInfo(String id) {
-		return loginRepo.getInfo(id);
+		UserData result = loginRepo.getInfo(id);
+		
+		if(result == null){
+			throw new WrongRequestException();
+		} 	
+		return result;
 	}
 	
 	@Override
 	public String getQuestion(String id){
-		return loginRepo.getQuestion(id);
+		String result = loginRepo.getQuestion(id);
+		
+		if(result == null){
+			throw new WrongRequestException();
+		} 	
+		return result;
 	}
 	
 	/** 암호화 */

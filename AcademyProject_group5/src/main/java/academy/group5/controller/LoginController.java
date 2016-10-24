@@ -24,9 +24,6 @@ public class LoginController {
 	
 	@Autowired
 	LoginService loginService;	
-	
-	@Autowired
-	NotificationService notificationService;
 	 
 	/** 회원가입시 아이디 중복확인 */
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
@@ -45,13 +42,10 @@ public class LoginController {
 		
 		data.setUserMileage(new Integer(0));
 		
-		if(loginService.join(data) && notificationService.settingSet(data.getUserId())){
+		if(loginService.join(data)){
 			model.addAttribute("msg", "회원가입 되었습니다.");
-			return "index";
-		} else {
-			model.addAttribute("msg", "오류가 발생하였습니다.\\n 잠시 후 다시시도해주세요.");
-			return "index";
-		}
+		} 
+		return "index";
 	}
 	
 	/** 로그인 */

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.etc.NotificationSettingList;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
 
@@ -63,7 +64,7 @@ public class NotificationServiceImpl implements NotificationService{
 			int result = notiRepo.setNotificationSetting(setting);
 			
 			if(result != 1){
-				return false;
+				throw new WrongRequestException();
 			}
 		}
 		return true;

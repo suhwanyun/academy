@@ -127,7 +127,7 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</delete>
 	
-	<select id="isChildComment" parameterType="int">
+	<select id="isChildComment" parameterType="int" resultType="int">
 		select count(*)
 		from PostingComment
 		where comment_id = #{commentId} and comment_parent_id is not null
@@ -135,7 +135,7 @@
 	
 	<update id="deleteCommentSetDefault" parameterType="posting_comment">
 		update PostingComment
-		set user_id = null, comment_content = #{commentContent}
+		set user_id = '', comment_content = #{commentContent}
 		where comment_id = #{commentId}
 	</update>
 	
