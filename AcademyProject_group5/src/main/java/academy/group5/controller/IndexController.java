@@ -81,15 +81,10 @@ public class IndexController {
 	@RequestMapping(value="/info/myinfo", method=RequestMethod.GET)
 	public String infoUpdatePage(Model model, HttpSession session){
 		String id = identify.getUserId(session);
-		
 		UserData info = loginService.getInfo(id);
-		if(info != null){
-			model.addAttribute("userData", info);
-			return "/info/myinfo";
-		} else {
-			model.addAttribute("msg", "회원정보를 가져오지 못했습니다.\\n잠시 후 다시 시도해주세요");
-			return "/index";
-		}		
+		
+		model.addAttribute("userData", info);
+		return "/info/myinfo";		
 	}
 	
 	/** 학업 메뉴 메인 페이지 */
@@ -243,8 +238,7 @@ public class IndexController {
 		
 		// 본인이 작성한 글이 아니면
 		if(!userId.equals(postingData.getUserId())){
-			redAttr.addFlashAttribute("msg", "잘못된 접근입니다.");
-			return false;
+			throw new WrongRequestException();
 		}
 		
 		model.addAttribute("postingData", postingData);
