@@ -193,7 +193,7 @@ public class BoardController {
 			@RequestParam Integer postingId){
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
-	
+
 		// 게시글 삭제
 		if(postService.postDelete(userId, postingId, postingType)){
 			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
@@ -235,19 +235,18 @@ public class BoardController {
 	
 	/** 댓글 수정 */
 	@RequestMapping(value="/write/updateComment", method=RequestMethod.POST)
-	public @ResponseBody List<PostingComment> updateComment(Model model, HttpSession session,
-				@RequestParam Integer postingId, @RequestParam String commentContent){
+	public @ResponseBody Map<String, List<PostingComment>> updateComment(Model model, HttpSession session,
+			@RequestParam Integer commentId, @RequestParam Integer postingId, @RequestParam String commentContent){
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
 		
-		PostingComment commentData = new PostingComment(null, postingId, null, userId, 
+		PostingComment commentData = new PostingComment(commentId, null, null, userId, 
 														null, null, commentContent);
 		postService.commentModify(commentData);
 
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
-		List<PostingComment> mergedCommentList = mergeComment(commentList.get("parent"), commentList.get("child"));
 		
-		return mergedCommentList;
+		return commentList;
 	}
 	
 	/** 
