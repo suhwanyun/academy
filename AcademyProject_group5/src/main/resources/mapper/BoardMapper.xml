@@ -113,7 +113,7 @@
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is not null
-		order by comment_parent_id, comment_id
+		order by comment_parent_id asc, comment_id desc
 	</select>
 	
 	<insert id="insertComment" parameterType="posting_comment">
