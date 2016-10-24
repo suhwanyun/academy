@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
+import academy.group5.dto.UserData;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
@@ -260,6 +260,28 @@ public class BoardController {
 		return "redirect:/postingInfo?postingId=" + postingId;
 	}
 	
+	/** 게시글 추천 */
+	@RequestMapping(value="/mileage/recommendPosting", method=RequestMethod.GET)
+	public @ResponseBody String setRecommend(HttpSession session, 
+			@RequestParam("userId") String postingUserId, @RequestParam Integer postingId){
+		
+		String postingType = getPostingType(session);
+		
+		int recommendResult = 0;
+		try{
+			recommendResult = postService.setRecommend(postingId, postingType, postingUserId);
+		} catch(WrongRequestException e){
+			return "잘못된 접근입니다.";
+		}
+		
+		if(recommendResult == 1){
+			return "이미 추천하셨습니다";
+		} 
+		// 리턴값이 -1 (탈퇴한 회원이라 마일리지 상승이 불가능한 경우)이어도 정상처리
+		else {
+			return "추천되었습니다";
+		}
+	}
 	
 	/** 게시판 글 작성 로직 */
 	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,

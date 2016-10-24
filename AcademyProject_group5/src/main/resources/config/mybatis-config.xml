@@ -44,5 +44,6 @@
 		<mapper resource="mapper/TermMapper.xml"/>
 		<mapper resource="mapper/GCMMapper.xml"/>
 		<mapper resource="mapper/PhoneMapper.xml"/>
+		<mapper resource="mapper/MileageMapper.xml"/>
 	</mappers>
 </configuration>

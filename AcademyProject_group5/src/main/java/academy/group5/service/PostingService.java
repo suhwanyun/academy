@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
+import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
 
 public interface PostingService {
@@ -114,8 +115,8 @@ public interface PostingService {
 	 * @param postingId
 	 * @param postingType
 	 * @param userId
-	 * @return
+	 * @return 0:정상 1:이미추천 -1:탈퇴한 회원의 게시글
 	 */
-	boolean setRecommend(Integer postingId, String postingType, String userId);
+	int setRecommend(Integer postingId, String postingType, String postingUserId);
 	
 }
