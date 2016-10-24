@@ -227,7 +227,7 @@ public class BoardController {
 			}
 			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
 		} else {
-			redAttr.addFlashAttribute("msg", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
+			new SessionNotFoundException();
 		}
 		
 		switch(postingType){
