@@ -245,8 +245,18 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public Map<String, List<PostingComment>> commentList(Integer postingId, String postingType) {
 		Map<String, List<PostingComment>> commentMap = new HashMap<>();
-		commentMap.put("parent", boardRepo.getAllParentComment(new Posting(postingId, postingType)));
-		commentMap.put("child", boardRepo.getAllChildComment(new Posting(postingId, postingType)));
+		
+		List<PostingComment> parentList = boardRepo.getAllParentComment(new Posting(postingId, postingType));
+		List<PostingComment> childList = boardRepo.getAllChildComment(new Posting(postingId, postingType));
+		
+		// 삭제된 부모 댓글인 경우 null 을 ''로 변경
+		for(PostingComment parent : parentList){
+			if(parent.getUserId() == null){
+				parent.setUserId("");
+			}
+		}	
+		commentMap.put("parent", parentList);
+		commentMap.put("child", childList);
 		
 		return commentMap;
 	}
