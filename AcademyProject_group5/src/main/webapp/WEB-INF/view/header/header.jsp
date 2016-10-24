@@ -8,25 +8,24 @@
 <title>Radius by TEMPLATED</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="/css/header.css" />
+
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/view/message.jsp" />
+	<jsp:include page="../message.jsp" />
 	
 	<header id="header" class="hide">
 		<c:choose>
 			<c:when test="${!empty user }">
 				<div class="inner">
-					<div class="content"> 
+					<div class="content">
 						<h1>MCM</h1>
 						<h2>${user.userName}님어서오세요</h2>
-						<a href="/noti/notiSettingList" class="button"><span>알림</span></a> 
-						<a href="/info/myinfo" class="button"><span>내 정보관리</span></a>
-						<a href="#" class="button"><span>${user.userMileage} m</span></a>
-						<a href="/logout" class="button"><span>로그아웃</span></a>
-						<a href="#" class="button"><span>이용하기</span></a>
+						<a href="/noti/notiSettingList" class="button big alt"><span>알림</span></a> 
+						<a href="/info/myinfo" class="button big alt"><span>내 정보관리</span></a>
+						<a href="#" class="button big alt"><span>${user.userMileage} m</span></a>
+						<a href="/logout" class="button big alt"><span>로그아웃</span></a>
+						<a href="#" class="button big alt"><span>이용하기</span></a>
 					</div>
 					<a href="#" class="button hidden"><span>home</span></a>
 				</div>
@@ -47,7 +46,7 @@
 		</c:choose>
 	</header>
 </body>
-<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script> 
 <script src="/js/skel.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
