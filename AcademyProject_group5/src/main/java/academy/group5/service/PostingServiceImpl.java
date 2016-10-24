@@ -20,6 +20,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.exception.SessionNotFoundException;
 import academy.group5.repo.BoardRepo;
 
 @Service
@@ -56,7 +57,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.setPosting(posting);
 		
 		if(result != 1){
-			return false;
+			throw new SessionNotFoundException();
 		}
 		return true;
 	}
@@ -66,7 +67,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updateposting(posting);
 		
 		if(result != 1){
-			return false;
+			throw new SessionNotFoundException();
 		}
 		return true;
 	}
@@ -76,7 +77,7 @@ public class PostingServiceImpl implements PostingService {
 		int result = boardRepo.updatePhoto(posting);
 		
 		if(result != 1){
-			return false;
+			throw new SessionNotFoundException();
 		}
 		return true;
 	}
@@ -101,7 +102,7 @@ public class PostingServiceImpl implements PostingService {
 
 		// 비정상적 접근
 		if(postingId == null){
-			return -1;
+			throw new SessionNotFoundException();
 		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + "." + fileType;	
@@ -214,13 +215,19 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public boolean postDelete(String userId, Integer postingId, String postingType) {
 		Posting postingData = new Posting(userId, postingId, postingType);
+		
+		// 이미지 삭제
+		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+			uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+		}
+		
 		boardRepo.delAllComment(postingData);
 		int result = boardRepo.delPosting(postingData);
 		
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new SessionNotFoundException();
 		}
 	}
 
@@ -249,7 +256,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new SessionNotFoundException();
 		}
 	}
 
@@ -260,7 +267,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new SessionNotFoundException();
 		}
 	}
 
@@ -271,7 +278,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new SessionNotFoundException();
 		}
 	}
 
@@ -289,7 +296,7 @@ public class PostingServiceImpl implements PostingService {
 		if(result == 1){
 			return true;
 		} else {
-			return false;
+			throw new SessionNotFoundException();
 		}
 	}
 }

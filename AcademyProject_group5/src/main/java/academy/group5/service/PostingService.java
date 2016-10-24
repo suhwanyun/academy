@@ -10,6 +10,10 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.etc.MostRecommend;
 
 public interface PostingService {
+	
+	/** 기본 이미지 */
+	public final static String DEFAULT_PHOTO_NAME = "default.png";
+	
 	/**
 	 * 게시글 리스트 불러오기
 	 * @param page

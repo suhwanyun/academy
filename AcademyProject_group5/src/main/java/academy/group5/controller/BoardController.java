@@ -40,7 +40,6 @@ public class BoardController {
 	
 	Identify identify = new Identify();
 	
-	private final static String DEFAULT_PHOTO_NAME = "default.png";
 	private final String BOARD_TYPE_FOOD = "food";
 	private final String BOARD_TYPE_PLAY = "play";
 	private final String BOARD_TYPE_PLACE = "place";
@@ -75,7 +74,7 @@ public class BoardController {
 				"redirect:/placeMain", "/place/place_add", true);
 	}
 	
-	
+
 	
 	/** 게시글 목록 표시 */
 	@RequestMapping(value="/postingList", method=RequestMethod.GET)
@@ -125,7 +124,8 @@ public class BoardController {
 
 	/** 게시판 글 내용 */
 	@RequestMapping(value="/postingInfo", method=RequestMethod.GET)
-	public String postingInfo(Model model, HttpSession session, @RequestParam int postingId){
+	public String postingInfo(Model model, HttpSession session, 
+			@RequestParam int postingId, @RequestParam(required=false) String sendmsg){
 		String postingType = getPostingType(session);
 		
 		Posting postingData = postService.postView(postingId, postingType);
@@ -166,6 +166,11 @@ public class BoardController {
 			}
 		}
 		model.addAttribute("commentList", commentList);
+		
+		// 다른 페이지에서 전달 받은 메세지
+		if(sendmsg != null){
+			model.addAttribute("msg", sendmsg);
+		}
 		
 		switch(postingType){
 		case BOARD_TYPE_FOOD:
@@ -217,18 +222,11 @@ public class BoardController {
 			@RequestParam Integer postingId){
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
-		Posting postingData = postService.postView(postingId, postingType);
-		
+	
 		// 게시글 삭제
 		if(postService.postDelete(userId, postingId, postingType)){
-			// 이미지 삭제
-			if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
-				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
-			}
 			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
-		} else {
-			new SessionNotFoundException();
-		}
+		} 
 		
 		switch(postingType){
 		case BOARD_TYPE_FOOD:
@@ -253,9 +251,8 @@ public class BoardController {
 		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
 														commentParentId, null, commentContent);
 		try{
-			if(!postService.commentWrite(commentData)){
-				model.addAttribute("error", "오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
-			}
+			postService.commentWrite(commentData);
+	
 		} catch(PersistenceException e){
 			model.addAttribute("error", "이미 삭제된 댓글입니다.");
 		}
@@ -263,6 +260,19 @@ public class BoardController {
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
 		
 		return commentList;
+	}
+	
+	/** 댓글 삭제 
+	 * 	sendmsg : postingInfo 에 전달하는 메세지
+	 * */
+	@RequestMapping(value="/write/deleteComment", method=RequestMethod.GET)
+	public String deleteComment(RedirectAttributes redAttr,
+			@RequestParam Integer postingId, @RequestParam Integer commentId){
+		if(postService.commentDelete(commentId)){
+			redAttr.addFlashAttribute("sendmsg", "삭제되었습니다.");
+		}
+		
+		return "redirect:/postingInfo?postingId=" + postingId;
 	}
 	
 	
@@ -292,7 +302,7 @@ public class BoardController {
 			isError = true;
 		}
 		
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, DEFAULT_PHOTO_NAME);
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, postService.DEFAULT_PHOTO_NAME);
 		
 		// 게시글 수정시
 		if(!isNewPosting && postingId != null && isDeletePhoto != null){
@@ -300,7 +310,7 @@ public class BoardController {
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
 				postingData.setPostingPhoto(isDeletePhoto);
-				postService.uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+				postService.uploadCancel(postingData, postService.DEFAULT_PHOTO_NAME);
 			} else {
 				postingData.setPostingPhoto(null);
 			}
@@ -324,8 +334,6 @@ public class BoardController {
 			/* 정상 처리 */
 			redAttr.addFlashAttribute("msg", "등록되었습니다.");
 			return okMapping;
-		} else if(!isError){
-			model.addAttribute("msg", "게시글 작성에 실패하였습니다.\\n잠시 후 다시 시도해주세요.");
 		}
 
 		// 에러가 발생하여 작성화면으로 돌아가기
