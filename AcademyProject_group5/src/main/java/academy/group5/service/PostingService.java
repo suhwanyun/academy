@@ -75,7 +75,7 @@ public interface PostingService {
 	 * @param postingType
 	 * @return
 	 */
-	boolean postDelete(String userId, Integer postingId, String postingType);
+	boolean postDelete(String userId, int postingId, String postingType);
 	/**
 	 * 게시글 보기
 	 * @param postingId

@@ -219,16 +219,19 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public boolean postDelete(String userId, Integer postingId, String postingType) {
-		Posting postingData = new Posting(userId, postingId, postingType);
+	public boolean postDelete(String userId, int postingId, String postingType) {
+		Posting deleteData = postView(postingId, postingType);
 		
+		if(!deleteData.getUserId().equals(userId)){
+			throw new WrongRequestException();
+		}
 		// 이미지 삭제
-		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
-			uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+		if(!deleteData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+			uploadCancel(deleteData, DEFAULT_PHOTO_NAME);
 		}
 		
-		boardRepo.delAllComment(postingData);
-		int result = boardRepo.delPosting(postingData);
+		boardRepo.delAllComment(deleteData);
+		int result = boardRepo.delPosting(deleteData);
 		
 		if(result == 1){
 			return true;

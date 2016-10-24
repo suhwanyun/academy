@@ -61,7 +61,12 @@ public class LectureServiceImpl implements LectureService{
 	
 	@Override
 	public Lecture lectureClassInfo(Integer lectureId, Integer lectureClass) {
-		return lecRepo.getLectureByClass(new LectureTime(lectureId, lectureClass));
+		Lecture lectureData = lecRepo.getLectureByClass(new LectureTime(lectureId, lectureClass));
+		
+		if(lectureData == null){
+			throw new WrongRequestException();
+		}
+		return lectureData;
 	}
 	
 	@Override
@@ -69,10 +74,12 @@ public class LectureServiceImpl implements LectureService{
 		
 		List<LectureTime> lectureTImes = lecRepo.getLectureTime(lecture);
 		
+		if(lectureTImes == null || lectureTImes.size() == 0){
+			throw new WrongRequestException();
+		}	
 		for(LectureTime time : lectureTImes){
 			time.setLectureWeek(DAYS[Integer.parseInt(time.getLectureWeek()) - 1]);
-		}
-		
+		}	
 		return lectureTImes;
 	}
 	
@@ -85,16 +92,23 @@ public class LectureServiceImpl implements LectureService{
 	@Override
 	public boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
 		LectureApply data = new LectureApply(lectureId, userId, lectureClass, null, null);
-		LectureApply result = lecRepo.getIsPresident(data);
+		LectureApply result = lecRepo.getIsPresident(data);	
+		// 강의 신청 기록이 없음
+		if(result == null){
+			throw new WrongRequestException();
+		}
 		
 		String president = result.getIsPresident();
 		Date time = result.getRightEndTime();
 		
+		if(president == null){
+			throw new WrongRequestException();
+		}
 		// 처음부터 반장이 아님
-		if(president.equals("N")){
+		else if(president.equals("N")){
 			return false;
 		// (임시)반장
-		} else if(time.compareTo(new Date()) <= 0){
+		} else if(time != null && time.compareTo(new Date()) <= 0){
 			return true;
 		// (임시)반장이었으나 기간이 지남
 		} else{

@@ -61,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
 		int result = loginRepo.updateUser(encdata);
 		
 		if(result != 1){
-			return false;
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -72,7 +72,7 @@ public class LoginServiceImpl implements LoginService {
 		int result = loginRepo.deleteUser(UserId);
 		
 		if(result != 1){
-			return false;
+			throw new WrongRequestException();
 		}
 		return true;
 	}
@@ -129,7 +129,7 @@ public class LoginServiceImpl implements LoginService {
 		String result = loginRepo.getQuestion(id);
 		
 		if(result == null){
-			throw new WrongRequestException();
+			return "";
 		} 	
 		return result;
 	}
