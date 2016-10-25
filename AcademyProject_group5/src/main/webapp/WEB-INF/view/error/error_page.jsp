@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERROR OCCURRED</title>
 <script>
+<%response.setStatus(200);%>
+<c:set value=<%=exception.getMessage()%> var="exceptionMsg"/>
 	<c:choose>
-		<c:when test="${!empty msg}">
-			alert("${msg }");
+		<c:when test="${!empty exceptionMsg}">
+			alert("${exceptionMsg }");
 		</c:when>
 		
 		<c:otherwise>

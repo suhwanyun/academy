@@ -207,11 +207,6 @@ $("#commentBtn").click(function(){
 	    	   prevParentId = null;
 	   		   prevParentUpdateId = null;
 	    	   tableSetting(result["parent"],result["child"].reverse());
-	      },
-	      error : function(request, status, error) {
-	         alert("code:" + request.status + "\n" + "message:"
-	               + request.responseText + "\n" + "error:"
-	               + error);
 	      }
 	   });
 	}else{
@@ -272,11 +267,6 @@ function sendComment(){
 		    	   prevParentId = null;
 		   		   prevParentUpdateId = null;
 		    	   tableSetting(result["parent"],result["child"].reverse())	
-		      },
-		      error : function(request, status, error) {
-		         alert("code:" + request.status + "\n" + "message:"
-		               + request.responseText + "\n" + "error:"
-		               + error);
 		      }
 		   });
 		}else{
@@ -309,11 +299,6 @@ function commentUpdateSend(el){
 	    	   prevParentId = null;
 	   		   prevParentUpdateId = null;
 	    	   tableSetting(result["parent"],result["child"].reverse())	
-	      },
-	      error : function(request, status, error) {
-	         alert("code:" + request.status + "\n" + "message:"
-	               + request.responseText + "\n" + "error:"
-	               + error);
 	      }
 	   });
 }

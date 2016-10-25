@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import academy.group5.exception.WrongRequestException;
+
 /**
  * 예외처리 컨트롤러
  * @author YSH
@@ -14,13 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ExceptionController {
 	
-	@ExceptionHandler({PersistenceException.class, DuplicateKeyException.class})
-	public ModelAndView dbException(Exception e){	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/error/error_page");
-		mav.addObject("msg", e.getMessage());
-
-		return mav;
+	@ExceptionHandler({	PersistenceException.class,
+						DuplicateKeyException.class})
+	public String dbException(Exception e){	
+		return "/error/error_page";
 	}
 
 }
