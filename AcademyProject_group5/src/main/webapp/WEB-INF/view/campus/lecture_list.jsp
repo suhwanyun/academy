@@ -49,7 +49,7 @@
 </div>
 </body>
 
-<script src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 var pageIndex = 1;
 <c:url value="/campus/lectureList" var="nextlectureList"/>

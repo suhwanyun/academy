@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>공지 목록</title>
 </head>
 <body>

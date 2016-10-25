@@ -5,57 +5,55 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-<title>Radius by TEMPLATED</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+   <link rel="stylesheet" href="/css/bootstrap.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<body>
-	<jsp:include page="../message.jsp" />
-	
-	<header id="header" class="hide">
-		<c:choose>
+
+<jsp:include page="../message.jsp" />
+<div class="text-center">
+<button type="button" class="btn btn-danger btn-header">
+          <span class="glyphicon glyphicon-home text-center"></span> 
+        </button>
+ <div id="collapse1" class="collapse jumbotron">
+ <div class="container" >
+ <c:choose>
 			<c:when test="${!empty user }">
-				<div class="inner">
-					<div class="content">
-						<h1>MCM</h1>
-						<h2>${user.userName}님어서오세요</h2>
-						<a href="/noti/notiSettingList" class="button big alt"><span>알림</span></a> 
-						<a href="/info/myinfo" class="button big alt"><span>내 정보관리</span></a>
-						<a href="#" class="button big alt"><span>${user.userMileage} m</span></a>
-						<a href="/logout" class="button big alt"><span>로그아웃</span></a>
-						<a href="#" class="button big alt"><span>이용하기</span></a>
-					</div>
-					<a href="#" class="button hidden"><span>home</span></a>
-				</div>
-			</c:when>
+						<a href="/main"  class="btn-mcm"><span>MCM</span></a>
+						<h3>${user.userName}님어서오세요</h3>
+						<a href="/noti/notiSettingList"  class="btn btn-danger"><span>알림</span></a> 
+						<a href="/info/myinfo" class="btn btn-danger"><span>내 정보관리</span></a><br><br>
+						
+						<a href="#"  class="btn btn-danger"><span>${user.userMileage} m</span></a>
+						<a href="/logout"  class="btn btn-danger"><span>로그아웃</span></a>
+						<a href="#" class="btn btn-danger"><span>이용하기</span></a>
+				
+				</c:when>
 			<c:otherwise>
-				<div class="inner">
-					<div class="content">
-						<h1>MCM</h1>
-						<a href="#" class="button big alt"><span>비회원으로 사용</span></a> <a
+				
+						<a href="/main"  class="btn-mcm"><span>MCM</span></a><br>
+						 <a
 							href="/loginjsp"
-							class="button big alt"><span>로그인</span></a> <a
+							class="btn btn-danger"><span>로그인</span></a> <a
 							href="/joinjsp"
-							class="button big alt"><span>회원가입</span></a>
-					</div>
-					<a href="#" class="button hidden"><span>Home</span></a>
-				</div>
+							class="btn btn-danger"><span>회원가입</span></a><br><br>
+			<a href="#" class="btn btn-danger"><span>비회원으로 사용</span></a>
 			</c:otherwise>
 		</c:choose>
-	</header>
-</body>
-<script src="/js/jquery.min.js"></script> 
-<script src="/js/skel.min.js"></script>
-<script src="/js/util.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript">
-/* 	$("document").ready(function(){
-		alert("준비완료")
-	}); */
-	$("h1").click(function(){
-		$(location).attr('href', "/main");
-	})
+</div>	</div>
+</div>
+ </body>
+<script>
+$(document).ready(function(){
+    $(".btn-header").click(function(){
+        $("#collapse1").collapse('toggle');
+    });
+
+});
+
 </script>
+
 </html>

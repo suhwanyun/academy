@@ -7,12 +7,10 @@
 <title>login form</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+   <link rel="stylesheet" href="/css/bootstrap.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -22,7 +20,7 @@
 	<div class="container">
 
 		<div align="center">
-			<a href="#"><img class="img-circle img-responsive"
+			<a href="/main"><img class="img-circle img-responsive"
 				src="/images/logo.png" alt="" width="100" /></a>
 		</div>
 
@@ -35,16 +33,16 @@
 			<div class="form-group">
 
 				<label for="user" class="control-label col-sm-2">아이디</label>
-				<div class="col-sm-10">
-					<input type="text" maxlength="10" id="userId" class="form-control">
-				</div>
+				
+					<input type="text" maxlength="10" id="userId" class="form-control col-sm-10">
+				
 			</div>
 			<div class="form-group">
 				<label for="user" class="control-label col-sm-2">비밀번호</label>
-				<div class="col-sm-10">
+				
 					<input type="password" maxlength="20" id="userPass"
-						class="form-control">
-				</div>
+						class="form-control col-sm-10">
+				
 			</div>
 			<div class="container">
 				<input type="button" value="로그인 하기" id="loginBtn"

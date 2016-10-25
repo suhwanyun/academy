@@ -4,17 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><title>학업페이지</title>
 </head>
 <body>
 
 		<jsp:include page="/WEB-INF/view/header/header.jsp" ></jsp:include>
 	
-		<div class="container">
+		<div class="container" style="margin-top: 5px;">
 			<div class="btn-group btn-group-justified">
   				  <a href="#" onclick="mylectureBtn()" class="btn btn-danger">내 강의목록</a>
    				 <a href="#" onclick="notilistBtn()" class="btn btn-danger">전체 공지목록</a>
@@ -30,7 +25,7 @@
 	
 	
 	</body>
-<script src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 	<c:url value="/campus/notiList" var="notiList"/>
 	<c:url value="/lecture/selectedLectureList" var="selectedLectureList"/>

@@ -5,12 +5,7 @@
 <html>
 <head>
 <title>My Campus Manager</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="/css/main.css" />
-<link rel="stylesheet"
-	href="/css/font-awesome.css" />
+
 
 </head>
 
@@ -21,44 +16,51 @@
 		</script>
 		<c:remove var="msg" />
 	</c:if>
+	
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 
 	<!-- Main -->
-	<div id="main">
-		<div class="inner">
-			
-			<div>
-			
-			<a href="/campus/campusMain"><img
-					class="circular--square"
-					src="/images/pic01.png" alt=""  style="display: "/></a>
-					<a href="/foodMain"><img
-					class="circular--square" 
-					src="/images/pic02.png" alt="" /></a>
-			
-			</div>
-			
-			<div align="center">
-			<a href="/mileageMain"><img
-					class="circular--square" 
-					src="/images/pic05.png" alt=""
-					 /></a>
-			</div>
 
+ 
+        <div class="container">
+        	
+        <div class="text-center">
+           <a href="/campus/campusMain"><img
+				class="img-circle img-thumbnail" src="/images/pic01.png" alt=""
+				/></a>
+		
+		
+
+            <a href="/foodMain" style="margin-left: 10%;"><img class="img-circle img-thumbnail"
+				src="/images/pic02.png" alt="" /></a> 
 		
 			
-			<div>
-			<a href="/playMain"><img
-					class="circular--square"
-					src="/images/pic03.png" alt="" /></a> 
-			<a href="/placeMain"><img
-					class="circular--square" 
-					src="/images/pic04.png" alt="" /></a>
-			</div>
-		</div>
-	</div>
-	<jsp:include page="/WEB-INF/view/footer/footer.jsp" />
+       
+    </div>
 
+		  <div class="text-center">
+          <a href="/mileageMain" ><img class="img-circle img-thumbnail"
+			src="/images/pic05.png" alt="" /></a>
+				</div>
+       
+      
+        <div class="text-center">
+           <a href="/playMain"><img class="img-circle img-thumbnail"
+			src="/images/pic03.png" alt=""/></a>
+	
+           <a href="/placeMain" style="margin-left: 10%;"><img
+			class="img-circle img-thumbnail" src="/images/pic04.png" alt="" /></a>
+
+        </div>
+    
+	
+
+
+		
+<div class="footer">
+<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
+</div>
+</div>
 </body>
 
 </html>

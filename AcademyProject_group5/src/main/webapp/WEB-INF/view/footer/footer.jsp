@@ -4,38 +4,73 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Insert title here</title>
-<link rel="stylesheet" href="/css/main.css" />
-<link rel="stylesheet"
-	href="/css/font-awesome.css" />
+
 </head>
 <body>
-	<footer id="footer">
-		<a href="#" class="info fa fa-info-circle"><span>about</span></a>
-		<div class="inner">
-			<div class="content">
-				<h3>Welcome to MCM</h3>
-				<p>학업, 식사, 오락, 명소에 대한 게시판 확인 및 작성 추천이 가능한 홈페이지입니다.</p>
-			</div>
-			<div class="copyright">
-				<h3>Follow me</h3>
-				<ul class="icons">
-					<li><a href="/images/per01.png" class="icon fa-twitter"><span
-							class="label">Twitter</span></a></li>
-					<li><a href="/images/per03.png" class="icon fa-facebook"><span
-							class="label">Facebook</span></a></li>
-					<li><a href="/images/per02.png" class="icon fa-instagram"><span
-							class="label">Instagram</span></a></li>
-					<li><a href="/images/per04.png" class="icon fa-dribbble"><span
-							class="label">Dribbble</span></a></li>
-				</ul>
-				&copy; Untitled. Design: <a href="https://templated.co">MCM</a>.
-				Images: <a href="https://unsplash.com/">DHOK</a>.
-			</div>
-		</div>
-	</footer>
 
+
+<!-- Container (Services Section) -->
+
+<jsp:include page="../message.jsp" />
+<div class="text-center">
+
+<button type="button" class="btn btn-info btn-footer">
+          <span class="glyphicon glyphicon-info-sign"></span> 
+        </button>
+      
+</div>
+
+<div id="collapse" class="jumbotron collapse">
+<div class="container text-center">
+  <h2>SERVICES</h2>
+  <h4>What we offer</h4>
+  <br>
+  <div class="row">
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-dashboard"></span>
+      <h4>Alarm</h4>
+      <p>알람</p>
+    </div>
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-education"></span>
+      <h4>Study</h4>
+      <p>학업</p>
+    </div>
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-cutlery"></span>
+      <h4>Food</h4>
+      <p>음식</p>
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-music"></span>
+      <h4>Play</h4>
+      <p>오락</p>
+    </div>
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-plane"></span>
+      <h4>Place</h4>
+      <p>명소</p>
+    </div>
+    <div class="col-xs-4">
+      <span class="glyphicon glyphicon-wrench"></span>
+      <h4 style="color:#303030;">Mileage</h4>
+      <p>마일리지</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 </body>
+<script>
+$(document).ready(function(){
+    $(".btn-info").click(function(){
+        $("#collapse").collapse('toggle');
+    });
 
+});
+
+</script>
 </html>

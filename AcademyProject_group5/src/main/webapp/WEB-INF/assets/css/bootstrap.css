@@ -341,6 +341,11 @@ th {
 }
 .glyphicon-ok:before {
   content: "\e013";
+  color:blue;
+}
+.glyphicon-false:before{
+	content: "\e013";
+	color:red;
 }
 .glyphicon-remove:before {
   content: "\e014";
@@ -1137,6 +1142,11 @@ img {
 }
 .img-circle {
   border-radius: 50%;
+  width:40%;
+  margin-top:10%;
+}
+.imgMar{
+	margin-left:10%;
 }
 hr {
   margin-top: 20px;
@@ -1568,6 +1578,11 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.cMargin{
+	margin-left:5%;
+	margin-right:5%;
+	
 }
 @media (min-width: 768px) {
   .container {
@@ -3336,6 +3351,12 @@ fieldset[disabled] .btn-link:focus {
   line-height: 1.3333333;
   border-radius: 6px;
 }
+.btn-mcm{
+	  padding: 10px 16px;
+  font-size: 30px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 5px 10px;
@@ -4846,7 +4867,7 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding: 30px 15px;
+  padding: 10px;
   margin-bottom: 30px;
   color: inherit;
   background-color: #eee;
@@ -6573,4 +6594,72 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+	input[type="text"].true,
+	input[type="password"].true,
+	input[type="email"].true,
+	input[type="number"].true,
+	select.true,
+	textarea.true {
+		
+		border-color: green;
+	}
+	input[type="text"].false,
+	input[type="password"].false,
+	input[type="email"].false,
+	input[type="number"].false,
+	select.false,
+	textarea.false {
+		border-color: red;
+	}
 
+	input[type="text"].size8,
+	input[type="password"].size8,
+	input[type="email"].size8,
+	input[type="number"].size8,
+	select.size8,
+	textarea.size8,
+	button.size8 {
+		width: 64%;
+	}
+	input[type="text"].size4,
+	input[type="password"].size4,
+	input[type="email"].size4,
+	input[type="number"].size4,
+	select.size4,
+	textarea.size4,
+	button.size4 {
+		width: 33.33333333%;
+	}
+button.size8mar{
+	width: 60%;
+	margin-right:5%;
+}
+.btn-footer{
+
+ size:cover;
+    max-width:20em;
+    min-width:1em;
+	width:15%; 
+	height:inherit;
+	padding:2%;  
+	border-radius:50px 50px 0 0;
+	
+
+}
+.btn-header{
+ size:cover;
+    max-width:20em;
+    min-width:1em;
+	width:15%; 
+	height:inherit;
+	padding:2%; 
+	border-radius:0 0 50px 50px;
+	
+}
+
+ .container .footer {
+	width:100%;
+	bottom:0;
+	left:0;
+	padding-top:22%;
+ }
