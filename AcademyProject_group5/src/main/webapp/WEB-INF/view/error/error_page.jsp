@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isErrorPage="true" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERROR OCCURRED</title>
 <script>
-	<%
-	String exceptionMsg = exception.getMessage();
-	
-	if(exceptionMsg == null){
-	%>
-		alert("잘못된 접근입니다.");
-	<%
-	} else {
-	%>
-		alert("<%=exceptionMsg%>");
-	<%
-	}
-	%>
+	alert("잘못된 접근입니다.");
 </script>
 </head>
 <body>
