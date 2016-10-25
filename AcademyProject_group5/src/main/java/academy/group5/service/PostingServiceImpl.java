@@ -332,11 +332,13 @@ public class PostingServiceImpl implements PostingService {
 		if(already != 0){
 			return false;
 		}
-		// 게시글 추천 설정
-		int result = boardRepo.setRecommend(recommendData);
 
+		// 현재 추천수 + 1
+		int recommendCount = getRecommendsCount(postingId, postingType) + 1;
+		
 		// 추천 실패
-		if(result != 1) {
+		if(boardRepo.setRecommendUser(recommendData) != 1 ||
+				boardRepo.setRecommendPosting(recommendCount) != 1) {
 			throw new WrongRequestException();
 		} 
 		else {

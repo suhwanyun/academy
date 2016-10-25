@@ -138,9 +138,15 @@ public class BoardRepo {
 		return session.selectOne(stmt, recommendData);
 	}
 
-	/** 추천 */
-	public int setRecommend(Recommend recommendData) {
-		String stmt = BOARD_NS + "insertRecommend";
+	/** 추천(회원 기준) */
+	public int setRecommendUser(Recommend recommendData) {
+		String stmt = BOARD_NS + "insertRecommendForUser";
 		return session.insert(stmt, recommendData);
+	}
+	
+	/** 추천(게시글 기준) */
+	public int setRecommendPosting(int recommendCount) {
+		String stmt = BOARD_NS + "insertRecommendForPosting";
+		return session.insert(stmt, recommendCount);
 	}
 }
