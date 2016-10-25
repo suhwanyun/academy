@@ -10,7 +10,7 @@
 	<%
 	String exceptionMsg = exception.getMessage();
 	
-	if(exceptionMsg.equals("")){
+	if(exceptionMsg == null){
 	%>
 		alert("잘못된 접근입니다.");
 	<%
@@ -22,6 +22,8 @@
 	%>
 </script>
 </head>
+<body>
+</body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
