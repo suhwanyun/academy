@@ -11,7 +11,6 @@
 	href="/css/main.css" />
 <link rel="stylesheet"
 	href="/css/font-awesome.css" />
-
 </head>
 
 <body>
