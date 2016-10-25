@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.MileageMapper">
+	
+	<select id="selectMileage" parameterType="String" resultType="int">
+		select user_mileage
+		from UserData
+		where user_id = #{userId}
+	</select>
+	
+	<update id="recommendPosting" parameterType="user_data">
+		update UserData
+		set user_mileage = #{userMileage}
+		where user_id = #{userId}
+	</update>
+	
+</mapper>

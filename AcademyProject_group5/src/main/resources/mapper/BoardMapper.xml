@@ -127,15 +127,21 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</delete>
 	
-	<select id="isChildComment" parameterType="int" resultType="int">
+	<select id="isParentComment" parameterType="int" resultType="int">
 		select count(*)
 		from PostingComment
-		where comment_id = #{commentId} and comment_parent_id is not null
+		where comment_parent_id = #{commentId}
+	</select>
+	
+	<select id="isAliveComment" parameterType="int" resultType="int">
+		select count(*)
+		from PostingComment
+		where user_id is not null and comment_id = #{commentId}
 	</select>
 	
 	<update id="deleteCommentSetDefault" parameterType="posting_comment">
 		update PostingComment
-		set user_id = '', comment_content = #{commentContent}
+		set user_id = null, comment_content = #{commentContent}
 		where comment_id = #{commentId}
 	</update>
 	
@@ -146,10 +152,16 @@
 	
 	<update id="updateComment" parameterType="posting_comment">
 		update PostingComment 
-		set comment_content = #{comment_content}
+		set comment_content = #{commentContent}
 		where user_id = #{userId} and comment_id = #{commentId}
 	</update>
 
+	<select id="selectRecommendsCount" parameterType="recommend" resultType="int">
+		select posting_recommend
+		from Posting
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</select>
+	
 	<select id="selectRecommend" parameterType="recommend" resultType="int">
 		select count(*)
 		from Recommend
@@ -157,8 +169,14 @@
 			 and user_id = #{userId}
 	</select>
 	
-	<insert id="insertRecommend" parameterType="recommend">
+	<insert id="insertRecommendForUser" parameterType="recommend">
 		insert into Recommend 
 		values (#{postingId}, #{postingType}, #{userId})
 	</insert>
+	
+	<update id="insertRecommendForPosting" parameterType="setting_recommend">
+		update Posting set 
+		posting_recommend = #{postingRecommend}
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</update>
 </mapper>

@@ -1,12 +1,12 @@
 package academy.group5.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,39 +133,10 @@ public class BoardController {
 		
 		// 전체 댓글 리스트(부모와 자식으로 분할됨)
 		Map<String, List<PostingComment>> commentDataList = postService.commentList(postingId, postingType);
-		// 부모 댓글 리스트
-		List<PostingComment> parentDataList = commentDataList.get("parent");
-		// 자식 댓글 리스트
-		List<PostingComment> childDataList = commentDataList.get("child");
-	
-		// 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침
-		List<PostingComment> commentList = new ArrayList<>();
-		int childIdx = 0;
+		// Map -> List로 변환
+		List<PostingComment> mergedCommentList = mergeComment(commentDataList.get("parent"), commentDataList.get("child"));
 		
-		for(PostingComment parentData : parentDataList){
-			int parentId = parentData.getCommentId();
-			commentList.add(parentData);
-			logger.trace("parent:{}", parentData);
-			for(; childIdx < childDataList.size();){
-				PostingComment childData = childDataList.get(childIdx);
-				Integer childId = childData.getCommentParentId();
-				logger.trace("child:{}", childData);
-				if(childId == null){
-					childIdx++;
-					continue;
-				}
-				
-				// 현재 댓글이 부모 댓글일 때
-				if(childId == parentId){
-					commentList.add(childData);
-					childIdx++;
-				}
-				else{
-					break;
-				}	
-			}
-		}
-		model.addAttribute("commentList", commentList);
+		model.addAttribute("commentList", mergedCommentList);
 		
 		// 다른 페이지에서 전달 받은 메세지
 		if(sendmsg != null){
@@ -222,7 +193,7 @@ public class BoardController {
 			@RequestParam Integer postingId){
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
-	
+
 		// 게시글 삭제
 		if(postService.postDelete(userId, postingId, postingType)){
 			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
@@ -245,17 +216,13 @@ public class BoardController {
 	@RequestMapping(value="/write/addComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> getCommentList(Model model, HttpSession session,
 				@RequestParam Integer postingId, @RequestParam(required=false) Integer commentParentId, @RequestParam String commentContent){
+		
 		String userId = identify.getUserId(session);		
 		String postingType = getPostingType(session);
 		
 		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
-														commentParentId, null, commentContent);
-		try{
-			postService.commentWrite(commentData);
-	
-		} catch(PersistenceException e){
-			model.addAttribute("error", "이미 삭제된 댓글입니다.");
-		}
+														commentParentId, null, commentContent);		
+		postService.commentWrite(commentData);	
 		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
 		
@@ -265,14 +232,15 @@ public class BoardController {
 	/** 댓글 수정 */
 	@RequestMapping(value="/write/updateComment", method=RequestMethod.POST)
 	public @ResponseBody Map<String, List<PostingComment>> updateComment(Model model, HttpSession session,
-				@RequestParam Integer postingId, @RequestParam String commentContent){
+			@RequestParam Integer commentId, @RequestParam Integer postingId, @RequestParam String commentContent){
+		
 		String userId = identify.getUserId(session);	
 		String postingType = getPostingType(session);
 		
-		PostingComment commentData = new PostingComment(null, postingId, null, userId, 
+		PostingComment commentData = new PostingComment(commentId, null, null, userId, 
 														null, null, commentContent);
 		postService.commentModify(commentData);
-
+		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);
 		
 		return commentList;
@@ -292,6 +260,29 @@ public class BoardController {
 		return "redirect:/postingInfo?postingId=" + postingId;
 	}
 	
+	/** 게시글 추천 */
+	@RequestMapping(value="/mileage/recommendPosting", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> setRecommend(HttpSession session, 
+			@RequestParam String userId, @RequestParam Integer postingId){
+		
+		String postingType = getPostingType(session);		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		boolean recommendResult = false;
+		
+		recommendResult = postService.setRecommend(postingId, postingType, userId);
+		
+		if(!recommendResult){
+			resultMap.put("msg", "이미 추천하셨습니다");
+		} 
+		else {
+			resultMap.put("msg", "추천되었습니다");
+		}
+		
+		resultMap.put("count", postService.getRecommendsCount(postingId, postingType));
+		
+		return resultMap;
+	}
 	
 	/** 게시판 글 작성 로직 */
 	private String addPosting(Model model, HttpSession session, RedirectAttributes redAttr,
@@ -355,6 +346,38 @@ public class BoardController {
 		// 에러가 발생하여 작성화면으로 돌아가기
 		model.addAttribute("postingData", postingData);
 		return failMapping;
+	}
+	
+	/** 전체 댓글 리스트를 하나의 리스트로 정렬하여 합침 */
+	private List<PostingComment> mergeComment(List<PostingComment> parentDataList, List<PostingComment> childDataList){
+		 
+		List<PostingComment> mergedList = new ArrayList<>();
+		int childIdx = 0;
+		
+		for(PostingComment parentData : parentDataList){
+			int parentId = parentData.getCommentId();
+			mergedList.add(parentData);
+			
+			for(; childIdx < childDataList.size();){
+				PostingComment childData = childDataList.get(childIdx);
+				Integer childId = childData.getCommentParentId();
+				
+				if(childId == null){
+					childIdx++;
+					continue;
+				}
+				// 현재 댓글이 부모 댓글일 때
+				if(childId == parentId){
+					mergedList.add(childData);
+					childIdx++;
+				}
+				else{
+					break;
+				}	
+			}
+		}
+		
+		return mergedList;
 	}
 	
 	/** 게시판 종류 확인 */

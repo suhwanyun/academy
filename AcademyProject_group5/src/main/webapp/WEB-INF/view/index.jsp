@@ -6,7 +6,6 @@
 <head>
 <title>My Campus Manager</title>
 
-
 </head>
 
 <body>

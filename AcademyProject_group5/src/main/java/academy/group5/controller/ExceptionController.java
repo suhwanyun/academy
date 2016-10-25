@@ -1,13 +1,12 @@
 package academy.group5.controller;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.http.HttpStatus;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
+import academy.group5.exception.WrongRequestException;
 
 /**
  * 예외처리 컨트롤러
@@ -16,12 +15,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @Controller
 public class ExceptionController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 	
-	@ExceptionHandler({PersistenceException.class, DuplicateKeyException.class})
-	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="DBException")
-	public void handlerException(Exception e){
-		logger.trace("\n----Exception 내용 출력----\n{}", e);
+	@ExceptionHandler(DataAccessException.class)
+	public String dbException(Exception e){	
+		logger.trace("\n\nDataAccessException 정보 :\n{}\n", e);
+		return "/error/error_page";
+	}
+	
+	@ExceptionHandler(WrongRequestException.class)
+	public String logicException(Exception e){	
+		logger.trace("\n\nlogicException 정보 :\n{}\n", e);
+		return "/error/error_page_logic";
 	}
 
 }

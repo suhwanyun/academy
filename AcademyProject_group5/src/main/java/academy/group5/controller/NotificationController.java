@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.etc.NotificationSettingList;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
@@ -33,10 +34,6 @@ public class NotificationController {
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
 		
-		if(id == null || id.equals("")){
-			return "index";
-		}
-		
 		NotificationSettingList settingData = new NotificationSettingList(); 
 		settingData.setSettingList(service.settingList(id));
 		model.addAttribute("settingData", settingData);
@@ -46,14 +43,14 @@ public class NotificationController {
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
-	public @ResponseBody String notiSetting(Model model, @RequestParam NotificationSettingList settingData){
-	
+	public @ResponseBody String notiSetting(HttpSession session, @RequestParam NotificationSettingList settingData){
+		// 로그인된 id 확인
+		String id = identify.getUserId(session);
 		
-		if(service.settingModify(settingData)){
-			return "false";
-		}
-		
-		//service.getNotificationSettingList();
+		try{ 
+			service.settingModify(id, settingData); 
+		} catch(WrongRequestException e){ return "false"; }
+
 		return "true";
 	}
 	

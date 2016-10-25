@@ -11,6 +11,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.SettingRecommend;
 
 @Repository
 public class BoardRepo {
@@ -96,9 +97,15 @@ public class BoardRepo {
 		return session.delete(stmt, delData);
 	}
 	
-	/** 자식 댓글 여부 확인 */
-	public int isChildComment(int commentId) {
-		String stmt = BOARD_NS + "isChildComment";
+	/** 자식이 있는 부모 댓글인지 확인 */
+	public int isParentComment(int commentId) {
+		String stmt = BOARD_NS + "isParentComment";
+		return session.selectOne(stmt, commentId);
+	}
+	
+	/** 실존하는(수정가능한) 댓글인지 확인 */
+	public int isAliveComment(int commentId) {
+		String stmt = BOARD_NS + "isAliveComment";
 		return session.selectOne(stmt, commentId);
 	}
 	
@@ -120,15 +127,27 @@ public class BoardRepo {
 		return session.update(stmt, updateData);
 	}
 	
+	/** 추천 수 확인 */
+	public int getRecommendsCount(Recommend recommendData) {
+		String stmt = BOARD_NS + "selectRecommendsCount";
+		return session.selectOne(stmt, recommendData);
+	}
+	
 	/** 추천 여부 확인 */
 	public int getRecommend(Recommend recommendData) {
 		String stmt = BOARD_NS + "selectRecommend";
 		return session.selectOne(stmt, recommendData);
 	}
 
-	/** 추천 */
-	public int setRecommend(Recommend recommendData) {
-		String stmt = BOARD_NS + "insertRecommend";
+	/** 추천(회원 기준) */
+	public int setRecommendUser(Recommend recommendData) {
+		String stmt = BOARD_NS + "insertRecommendForUser";
 		return session.insert(stmt, recommendData);
+	}
+	
+	/** 추천(게시글 기준) */
+	public int setRecommendPosting(SettingRecommend recommendSettingData) {
+		String stmt = BOARD_NS + "insertRecommendForPosting";
+		return session.insert(stmt, recommendSettingData);
 	}
 }

@@ -21,4 +21,11 @@ public class Recommend {
 	/** 회원 ID. */
 	private String userId;
 
+	/**
+	 * @param postingId
+	 * @param postingType
+	 */
+	public Recommend(Integer postingId, String postingType) {
+		this(postingId, postingType, null);
+	}
 }

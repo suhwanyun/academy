@@ -56,12 +56,13 @@ function errorFun(e){
 								</td>
 							</tr>
 						</c:when>
-						<c:when test="${postingData.userId ne user.userId}">
+						<c:otherwise>
 							<tr align="right">
-								<td colspan="3"></td >
+								<td colspan="2"></td >
+								<td><span id="postingRecommendCount">${postingData.postingRecommend}</span></td>
 								<td><button id="recommendBtn">추천</button></td>
 							</tr>
-						</c:when>
+						</c:otherwise>
 					</c:choose>
 					<tr >
 						<td colspan="3"><input id="commentInput" type="text" maxlength="250"></td>
@@ -70,12 +71,6 @@ function errorFun(e){
 					</tbody>
 				</table>
 				<table id="commentTable">
-					<colgroup>
-						<col width="5">
-						<col width="30%">
-						<col width="40%">
-						<col width="30%">
-					</colgroup>
 					<c:forEach items="${commentList }" var="list">
 					
 					<tr id="${list.commentId }" >
@@ -92,9 +87,12 @@ function errorFun(e){
 							<td>
 								<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>
 								<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>
+								<c:if test="${list.userId.length()>0 && list.commentParentId == null }">
+								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
+				 				</c:if>
 				 			</td>
 							</c:when>
-							<c:when test="${list.userId!=user.userId && list.commentParentId == null }">
+							<c:when test="${list.userId.length()>0&&list.userId!=user.userId && list.commentParentId == null }">
 							<td>
 								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
 				 			</td>
@@ -106,7 +104,9 @@ function errorFun(e){
 						</c:choose>
 					  </tr>
 					  <c:if test="${list.commentParentId != null }">
+					  <tr>
 					  	<td></td><td colspan='3'>${list.commentContent }</td>
+					 </tr>
 					  </c:if>
 					  <c:if test="${list.commentParentId == null }">
 					  <tr>
@@ -122,13 +122,19 @@ function errorFun(e){
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 <c:url value="/write/addComment" var="addComment"/>
+<c:url value="/write/updateComment" var="updateComment"/>
+<c:url value="/mileage/recommendPosting" var="recommend"/>
+
+//댓글 입력창을 위한 변수
 var prevParentId;
+//수정 입력창을 위한 변수
 var prevParentUpdateId;
+//댓글 새로 셋팅하기
 function tableSetting(parent, child){
 	$.each(parent, function(index, item){
 		$("#commentTable").append(
 				$("<tr id="+item.commentId +">"+
-						"<td colspan='2'>"+item.userId +"</td>"+
+						"<td colspan='2'>"+item.userId+"</td>"+
 						"<td>"+item.commentTime+"</td>"+
 					  "</tr>"
 					)
@@ -138,19 +144,28 @@ function tableSetting(parent, child){
 						$("<td>"+
 							"<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>"+
 							"<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>"+
+							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						)
 					);
+				}else if(item.userId.length>0){
+					$("#"+item.commentId).append(
+							$("<td>"+
+								"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
+							  "</td>"
+							  )
+						);
 				}else{
 					$("#"+item.commentId).append(
 						$("<td>"+
-							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						  )
 					);
 				}
 				$("#"+item.commentId).after(
-					$("<tr><td colspan='4'>"+item.commentContent+"</td></tr>")
+					$("<tr>"+
+						"<td colspan='4'>"+item.commentContent+"</td>"+
+					 "</tr>")
 				);
 		});
 	
@@ -164,7 +179,6 @@ function tableSetting(parent, child){
 			  "</tr>"
 			)
 		);
-						
 		if(${!empty user} && item.userId=='${user.userId}'){
 			$("#"+item.commentId).append(
 				$("<td>"+
@@ -199,12 +213,10 @@ $("#commentBtn").click(function(){
 	    	   $("#commentInput").val("");
 	    	   prevParentId = null;
 	   		   prevParentUpdateId = null;
-	    	   tableSetting(result["parent"],result["child"])	
+	    	   tableSetting(result["parent"],result["child"].reverse());
 	      },
-	      error : function(request, status, error) {
-	         alert("code:" + request.status + "\n" + "message:"
-	               + request.responseText + "\n" + "error:"
-	               + error);
+	      error : function(){
+	    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
 	      }
 	   });
 	}else{
@@ -214,7 +226,7 @@ $("#commentBtn").click(function(){
 	}
 	}else{alert("1자이상 입력하시오")}
 });
-//댓글 수정
+//댓글 수정 수정창 생성
 function commentUpdate(el){
 	$(".commentModifyInput").parent().parent().remove();
 	$(".commentModifyBtn").parent().parent().remove();
@@ -223,7 +235,8 @@ function commentUpdate(el){
 		prevParentUpdateId = nowParentId;
 		$(el).parent().parent().next().after(
 				$("<tr><td colspan='3'><input class='commentModifyInput' type='text' maxlength='250'></td>"+
-				"<td><button class='commentModifyBtn' >수정</button></td></tr>")
+						"<input type='hidden' id='commentIdFind' value="+nowParentId+">"+
+				"<td><button class='commentModifyBtn' onclick='commentUpdateSend(this)' >수정</button></td></tr>")
 			);
 	}else{
 		prevParentUpdateId = null;
@@ -263,12 +276,10 @@ function sendComment(){
 		    	   $("#commentTable").empty();
 		    	   prevParentId = null;
 		   		   prevParentUpdateId = null;
-		    	   tableSetting(result["parent"],result["child"])	
+		    	   tableSetting(result["parent"],result["child"].reverse())	
 		      },
-		      error : function(request, status, error) {
-		         alert("code:" + request.status + "\n" + "message:"
-		               + request.responseText + "\n" + "error:"
-		               + error);
+		      error : function(){
+		    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
 		      }
 		   });
 		}else{
@@ -280,13 +291,64 @@ function sendComment(){
 }
 //댓글 삭제
 function commentDelete(el){
-	var btn = $(el).parent().parent().attr("id");
-	$(location).attr('href', "/write/deleteComment?postingId=${postingData.postingId}&commentId="+btn);
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		var btn = $(el).parent().parent().attr("id");
+		$(location).attr('href', "/write/deleteComment?postingId=${postingData.postingId}&commentId="+btn);
+	}
+	
 }
+//댓글 수정
+function commentUpdateSend(el){
+	$.ajax({
+	      type : "post",
+	      url : "${updateComment}",
+	      data : {
+	    	  postingId : ${postingData.postingId},
+	    	  commentContent : $(".commentModifyInput").val(),
+	    	  commentId : $("#commentIdFind").val()
+	      },
+	       success : function(result) {
+	    	   $("#commentTable").empty();
+	    	   prevParentId = null;
+	   		   prevParentUpdateId = null;
+	    	   tableSetting(result["parent"],result["child"].reverse())	
+	      },
+	      error : function(){
+	    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
+	      }
+	   });
+}
+//추천
+$("#recommendBtn").click(function(){
+	if(${!empty user.userId}){
+		
+	$.ajax({
+		type: "post",
+		url : "${recommend}",
+		data: {
+			postingId : ${postingData.postingId},
+			userId: "${user.userId}"
+		},
+		success : function(result){
+			$("#postingRecommendCount").html(result["count"]);
+			alert(result["msg"]);
+		},
+		error : function(request, status, error) {
+			alert("실패 했습니다.\n잠시후 다시 해주세요.");
+		}
+	});
+	}else{
+		if(confirm("로그인이 필요한 기능입니다.\n 로그인 하시겠습니까?")){
+			$(location).attr('href', "/loginjsp");
+		}
+	}
+});
+//글수정 페이지이동
 $("#postingUpdateBtn").click(function(){
 	$(location).attr('href', "/write/foodUpdatejsp?postingId=${postingData.postingId}");
 });
-	$("#postingDeleteBtn").click(function(){
+//글삭제
+$("#postingDeleteBtn").click(function(){
 	if(confirm("정말로 삭제 하시겠습니까?")){
 		$(location).attr('href', "/write/postingDelete?postingId=${postingData.postingId}");
 	}else{

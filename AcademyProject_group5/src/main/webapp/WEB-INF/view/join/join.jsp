@@ -109,6 +109,8 @@
 	</div>
 </body>
 
-<script src="<%=request.getContextPath()%>/js/validationcheck.js"></script>
-<script src="<%=request.getContextPath()%>/js/join.js"></script>
+
+<script src="/js/validationcheck.js"></script>
+<script src="/js/join.js"></script>
+
 </html>

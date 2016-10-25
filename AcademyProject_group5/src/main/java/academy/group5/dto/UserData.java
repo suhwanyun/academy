@@ -63,4 +63,9 @@ public class UserData {
 		this.userPass = userPass;
 		this.phoneId = phoneId;
 	}
+	
+	public UserData(String userId, Integer userMileage){
+		this.userId = userId;
+		this.userMileage = userMileage;
+	}
 }

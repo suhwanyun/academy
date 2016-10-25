@@ -94,16 +94,7 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
-		
-		if(selectedlecture == null){
-			throw new WrongRequestException();
-		}
-		
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
-		
-		if(selectedLectureTimes.size() == 0){
-			throw new WrongRequestException();
-		}
 		
 		model.addAttribute("lectureData", selectedlecture);
 		model.addAttribute("lectureTime", selectedLectureTimes);
@@ -117,7 +108,9 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		String userId = identify.getUserId(session);
-		lecService.apply(lectureId, lectureClass, userId);
+		try {
+			lecService.apply(lectureId, lectureClass, userId);
+		} catch(WrongRequestException e){ return "잘못된 접근입니다."; }
 		
 		return "신청이 정상적으로 되었습니다.";
 	}

@@ -20,20 +20,26 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.SettingRecommend;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.BoardRepo;
+import academy.group5.repo.MileageRepo;
 
 @Service
 @Transactional
 public class PostingServiceImpl implements PostingService {
-
+	
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
+
 	/** 댓글 삭제시 설정될 텍스트 */
 	private final String DELETE_COMMENT_TEXT = "삭제된 댓글 입니다.";
 	
 	@Autowired
 	BoardRepo boardRepo;
+	
+	@Autowired
+	MileageRepo mileageRepo;
 	
 	@Override
 	public List<Posting> postingList(int page, String postingType, String searchData, String searchType, String orderData) {
@@ -102,10 +108,6 @@ public class PostingServiceImpl implements PostingService {
 		// 게시판 종류
 		String postingType = postingData.getPostingType();
 
-		// 비정상적 접근
-		if(postingId == null){
-			throw new WrongRequestException();
-		}
 		// 파일명 : 게시판종류 + 게시글번호 + 확장자
 		String fileName = postingType + "_" + postingId + "." + fileType;	
 		
@@ -140,7 +142,7 @@ public class PostingServiceImpl implements PostingService {
 	 * 업로드된 이미지 삭제
 	 */
 	@Override
-	public int uploadCancel(Posting postingData, String defaultName){
+	public void uploadCancel(Posting postingData, String defaultName){
 		// 파일명
 		String fileName = postingData.getPostingPhoto();		
 
@@ -152,8 +154,6 @@ public class PostingServiceImpl implements PostingService {
 		
 		postingData.setPostingPhoto(defaultName);
 		boardRepo.updatePhoto(postingData);
-		
-		return 0;
 	}
 	
 	// 이미지 최대 픽셀크기
@@ -211,20 +211,28 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Override
 	public Integer getPostingId(Posting posting) {
-		return boardRepo.getPostingId(posting);
+		Integer result = boardRepo.getPostingId(posting);
+		
+		if(result == null){
+			throw new WrongRequestException();
+		}
+		return result;
 	}
 
 	@Override
-	public boolean postDelete(String userId, Integer postingId, String postingType) {
-		Posting postingData = new Posting(userId, postingId, postingType);
+	public boolean postDelete(String userId, int postingId, String postingType) {
+		Posting deleteData = postView(postingId, postingType);
 		
+		if(!deleteData.getUserId().equals(userId)){
+			throw new WrongRequestException();
+		}
 		// 이미지 삭제
-		if(!postingData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
-			uploadCancel(postingData, DEFAULT_PHOTO_NAME);
+		if(!deleteData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+			uploadCancel(deleteData, DEFAULT_PHOTO_NAME);
 		}
 		
-		boardRepo.delAllComment(postingData);
-		int result = boardRepo.delPosting(postingData);
+		boardRepo.delAllComment(deleteData);
+		int result = boardRepo.delPosting(deleteData);
 		
 		if(result == 1){
 			return true;
@@ -235,14 +243,29 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public Posting postView(Integer postingId, String postingType) {
-		return boardRepo.getPostingInfo(new Posting(postingId, postingType));
+		Posting postData = boardRepo.getPostingInfo(new Posting(postingId, postingType));
+		
+		if(postData == null){
+			throw new WrongRequestException();
+		}
+		return postData;
 	}
 
 	@Override
 	public Map<String, List<PostingComment>> commentList(Integer postingId, String postingType) {
 		Map<String, List<PostingComment>> commentMap = new HashMap<>();
-		commentMap.put("parent", boardRepo.getAllParentComment(new Posting(postingId, postingType)));
-		commentMap.put("child", boardRepo.getAllChildComment(new Posting(postingId, postingType)));
+		
+		List<PostingComment> parentList = boardRepo.getAllParentComment(new Posting(postingId, postingType));
+		List<PostingComment> childList = boardRepo.getAllChildComment(new Posting(postingId, postingType));
+		
+		// 삭제된 부모 댓글인 경우 null 을 ''로 변경
+		for(PostingComment parent : parentList){
+			if(parent.getUserId() == null){
+				parent.setUserId("");
+			}
+		}	
+		commentMap.put("parent", parentList);
+		commentMap.put("child", childList);
 		
 		return commentMap;
 	}
@@ -253,6 +276,10 @@ public class PostingServiceImpl implements PostingService {
 		contentStr = contentStr.replaceAll("\n", "<br>");
 		comment.setCommentContent(contentStr);
 		
+		Integer parentId = comment.getCommentParentId();
+		if(parentId != null && boardRepo.isAliveComment(parentId) == 0){
+			throw new WrongRequestException("이미 삭제된 댓글입니다.");		
+		}
 		int result = boardRepo.setComment(comment);
 		
 		if(result == 1){
@@ -264,10 +291,10 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean commentDelete(Integer commentId) {
-		int isChild = boardRepo.isChildComment(commentId);
+		int childCount = boardRepo.isParentComment(commentId);
 		int result;
-		
-		if(isChild > 0){
+
+		if(childCount > 0){
 			result = boardRepo.delCommentSetDefault(new PostingComment(commentId, DELETE_COMMENT_TEXT));
 		} else {
 			result = boardRepo.delComment(commentId);
@@ -292,20 +319,34 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
+	public Integer getRecommendsCount(Integer postingId, String postingType){
+		
+		return boardRepo.getRecommendsCount(new Recommend(postingId, postingType));
+	}
+	
+	@Override
 	public boolean setRecommend(Integer postingId, String postingType, String userId) {
 		Recommend recommendData = new Recommend(postingId, postingType, userId);
+
 		int already = boardRepo.getRecommend(recommendData);
-		
+		// 이미 추천함
 		if(already != 0){
 			return false;
 		}
+
+		// 현재 추천수 + 1
+		int recommendCount = getRecommendsCount(postingId, postingType) + 1;
+		SettingRecommend recommendSettingData =
+				new SettingRecommend(postingId, postingType, recommendCount);
 		
-		int result = boardRepo.setRecommend(recommendData);
-		
-		if(result == 1){
-			return true;
-		} else {
+		// 추천 적용
+		if(boardRepo.setRecommendUser(recommendData) != 1 ||
+				boardRepo.setRecommendPosting(recommendSettingData) != 1) {
+			// 추천 실패
 			throw new WrongRequestException();
+		} 
+		else {
+			return true;
 		}
 	}
 }

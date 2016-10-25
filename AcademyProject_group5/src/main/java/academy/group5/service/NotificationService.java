@@ -17,7 +17,7 @@ public interface NotificationService {
 	 * @param settingList
 	 * @return
 	 */
-	boolean settingModify(NotificationSettingList settingData);
+	boolean settingModify(String userId, NotificationSettingList settingData);
 	
 	/**
 	 * 알림 설정 생성(회원가입시)
