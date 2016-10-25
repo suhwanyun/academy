@@ -56,16 +56,11 @@ function errorFun(e){
 								</td>
 							</tr>
 						</c:when>
-						<c:when test="${!empty user.userId && postingData.userId ne user.userId}">
-							<tr align="right">
-								<td colspan="3"></td >
-								<td><button id="recommendBtn">추천</button></td>
-							</tr>
-						</c:when>
 						<c:otherwise>
 							<tr align="right">
-								<td colspan="3"></td >
-								<td></td>
+								<td colspan="2"></td >
+								<td><span id="postingRecommendCount">${postingData.postingRecommend}</span></td>
+								<td><button id="recommendBtn">추천</button></td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
@@ -325,27 +320,26 @@ function commentUpdateSend(el){
 }
 //추천
 $("#recommendBtn").click(function(){
-	alert("3");	
 	if(${!empty user.userId}){
-		alert("d");
 		
 	$.ajax({
-		type: "get",
+		type: "post",
 		url : "${recommend}",
 		data: {
-			PostingId : ${postingData.postingId},
+			postingId : ${postingData.postingId},
 			userId: "${user.userId}"
 		},
-		success :function(result){
-			alert(result);
+		success : function(result){
+			$("#postingRecommendCount").html(result["count"]);
+			alert(result["msg"]);
 		},
-		error : function(){
-	    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
-	      }
+		error : function(request, status, error) {
+			alert("실패 했습니다.\n잠시후 다시 해주세요.");
+		}
 	});
 	}else{
 		if(confirm("로그인이 필요한 기능입니다.\n 로그인 하시겠습니까?")){
-			$(location).attr('href', "/login");
+			$(location).attr('href', "/loginjsp");
 		}
 	}
 });
