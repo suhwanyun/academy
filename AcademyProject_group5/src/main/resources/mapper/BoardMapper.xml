@@ -157,8 +157,8 @@
 	</update>
 
 	<select id="selectRecommendsCount" parameterType="recommend" resultType="int">
-		select count(*)
-		from Recommend
+		select posting_recommend
+		from Posting
 		where posting_id = #{postingId} and posting_type = #{postingType}
 	</select>
 	
@@ -174,8 +174,9 @@
 		values (#{postingId}, #{postingType}, #{userId})
 	</insert>
 	
-	<update id="insertRecommendForPosting" parameterType="int">
+	<update id="insertRecommendForPosting" parameterType="setting_recommend">
 		update Posting set 
 		posting_recommend = #{postingRecommend}
+		where posting_id = #{postingId} and posting_type = #{postingType}
 	</update>
 </mapper>

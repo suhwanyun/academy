@@ -11,6 +11,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.SettingRecommend;
 
 @Repository
 public class BoardRepo {
@@ -145,8 +146,8 @@ public class BoardRepo {
 	}
 	
 	/** 추천(게시글 기준) */
-	public int setRecommendPosting(int recommendCount) {
+	public int setRecommendPosting(SettingRecommend recommendSettingData) {
 		String stmt = BOARD_NS + "insertRecommendForPosting";
-		return session.insert(stmt, recommendCount);
+		return session.insert(stmt, recommendSettingData);
 	}
 }

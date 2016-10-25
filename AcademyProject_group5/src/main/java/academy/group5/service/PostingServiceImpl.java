@@ -20,6 +20,7 @@ import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.SettingRecommend;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.BoardRepo;
 import academy.group5.repo.MileageRepo;
@@ -335,10 +336,13 @@ public class PostingServiceImpl implements PostingService {
 
 		// 현재 추천수 + 1
 		int recommendCount = getRecommendsCount(postingId, postingType) + 1;
+		SettingRecommend recommendSettingData =
+				new SettingRecommend(postingId, postingType, recommendCount);
 		
-		// 추천 실패
+		// 추천 적용
 		if(boardRepo.setRecommendUser(recommendData) != 1 ||
-				boardRepo.setRecommendPosting(recommendCount) != 1) {
+				boardRepo.setRecommendPosting(recommendSettingData) != 1) {
+			// 추천 실패
 			throw new WrongRequestException();
 		} 
 		else {
