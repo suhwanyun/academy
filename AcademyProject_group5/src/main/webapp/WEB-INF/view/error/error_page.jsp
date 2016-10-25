@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERROR OCCURRED</title>
 <script>
-<%response.setStatus(200);%>
-<c:set value=<%=exception.getMessage()%> var="exceptionMsg"/>
 	<c:choose>
 		<c:when test="${!empty exceptionMsg}">
 			alert("${exceptionMsg }");
