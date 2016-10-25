@@ -14,7 +14,7 @@
 		insert into NotificationSetting
 		values
 		<foreach collection="settingList" item="item" open="(" separator=","  close=")">		
-			#{item.notiType}, #{item.userId}, #{item.notiOn}, stsdate + 1, #{item.notiTimeInterval}, #{notiHour), #{notiMn}
+			#{item.notiType}, #{item.userId}, #{item.notiOn}, stsdate + 1, #{item.notiTimeInterval}, #{item.notiHour), #{item.notiMn}
 		</foreach>
 	</insert>
 	
