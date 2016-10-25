@@ -1,12 +1,12 @@
 package academy.group5.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -261,25 +261,27 @@ public class BoardController {
 	}
 	
 	/** 게시글 추천 */
-	@RequestMapping(value="/mileage/recommendPosting", method=RequestMethod.GET)
-	public @ResponseBody String setRecommend(HttpSession session, 
+	@RequestMapping(value="/mileage/recommendPosting", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> setRecommend(HttpSession session, 
 			@RequestParam String userId, @RequestParam Integer postingId){
 		
-		String postingType = getPostingType(session);
+		String postingType = getPostingType(session);		
+		Map<String, Object> resultMap = new HashMap<>();
 		
 		boolean recommendResult = false;
-		try{
-			recommendResult = postService.setRecommend(postingId, postingType, userId);
-		} catch(WrongRequestException e){
-			return "잘못된 접근입니다.";
-		}
+		
+		recommendResult = postService.setRecommend(postingId, postingType, userId);
 		
 		if(!recommendResult){
-			return "이미 추천하셨습니다";
+			resultMap.put("msg", "이미 추천하셨습니다");
 		} 
 		else {
-			return "추천되었습니다";
+			resultMap.put("msg", "추천되었습니다");
 		}
+		
+		resultMap.put("count", postService.getRecommendsCount(postingId, postingType));
+		
+		return resultMap;
 	}
 	
 	/** 게시판 글 작성 로직 */

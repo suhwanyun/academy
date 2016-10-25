@@ -126,6 +126,12 @@ public class BoardRepo {
 		return session.update(stmt, updateData);
 	}
 	
+	/** 추천 수 확인 */
+	public int getRecommendsCount(Recommend recommendData) {
+		String stmt = BOARD_NS + "selectRecommendsCount";
+		return session.selectOne(stmt, recommendData);
+	}
+	
 	/** 추천 여부 확인 */
 	public int getRecommend(Recommend recommendData) {
 		String stmt = BOARD_NS + "selectRecommend";

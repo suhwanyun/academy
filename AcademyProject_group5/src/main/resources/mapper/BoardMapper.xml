@@ -156,6 +156,12 @@
 		where user_id = #{userId} and comment_id = #{commentId}
 	</update>
 
+	<select id="selectRecommendsCount" parameterType="recommend" resultType="int">
+		select count(*)
+		from Recommend
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</select>
+	
 	<select id="selectRecommend" parameterType="recommend" resultType="int">
 		select count(*)
 		from Recommend

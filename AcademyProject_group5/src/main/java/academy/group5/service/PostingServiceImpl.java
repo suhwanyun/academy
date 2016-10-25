@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
 import academy.group5.dto.Recommend;
-import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Paging;
 import academy.group5.exception.WrongRequestException;
@@ -318,6 +317,12 @@ public class PostingServiceImpl implements PostingService {
 		}
 	}
 
+	@Override
+	public Integer getRecommendsCount(Integer postingId, String postingType){
+		
+		return boardRepo.getRecommendsCount(new Recommend(postingId, postingType));
+	}
+	
 	@Override
 	public boolean setRecommend(Integer postingId, String postingType, String userId) {
 		Recommend recommendData = new Recommend(postingId, postingType, userId);

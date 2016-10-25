@@ -111,6 +111,14 @@ public interface PostingService {
 	boolean commentModify(PostingComment comment);
 	
 	/**
+	 * 게시글 추천수 확인
+	 * @param postingId
+	 * @param postingType
+	 * @return
+	 */
+	Integer getRecommendsCount(Integer postingId, String postingType);
+	
+	/**
 	 * 추천
 	 * @param postingId
 	 * @param postingType
