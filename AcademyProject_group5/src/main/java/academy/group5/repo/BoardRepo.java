@@ -102,6 +102,12 @@ public class BoardRepo {
 		return session.selectOne(stmt, commentId);
 	}
 	
+	/** 실존하는(수정가능한) 댓글인지 확인 */
+	public int isAliveComment(int commentId) {
+		String stmt = BOARD_NS + "isAliveComment";
+		return session.selectOne(stmt, commentId);
+	}
+	
 	/** 댓글 삭제(부모가 존재하여 삭제 불가) */
 	public Integer delCommentSetDefault(PostingComment commentData){
 		String stmt = BOARD_NS + "deleteCommentSetDefault";

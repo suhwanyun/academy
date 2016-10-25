@@ -277,6 +277,10 @@ public class PostingServiceImpl implements PostingService {
 		contentStr = contentStr.replaceAll("\n", "<br>");
 		comment.setCommentContent(contentStr);
 		
+		Integer parentId = comment.getCommentParentId();
+		if(parentId != null && boardRepo.isAliveComment(parentId) == 0){
+			throw new WrongRequestException("이미 삭제된 댓글입니다.");		
+		}
 		int result = boardRepo.setComment(comment);
 		
 		if(result == 1){

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
-import academy.group5.dto.UserData;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
@@ -221,7 +221,7 @@ public class BoardController {
 		String postingType = getPostingType(session);
 		
 		PostingComment commentData = new PostingComment(null, postingId, postingType, userId, 
-														commentParentId, null, commentContent);	
+														commentParentId, null, commentContent);		
 		postService.commentWrite(commentData);	
 		
 		Map<String, List<PostingComment>> commentList = postService.commentList(postingId, postingType);

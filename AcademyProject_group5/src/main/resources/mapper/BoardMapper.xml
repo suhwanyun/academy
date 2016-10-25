@@ -133,6 +133,12 @@
 		where comment_parent_id = #{commentId}
 	</select>
 	
+	<select id="isAliveComment" parameterType="int" resultType="int">
+		select count(*)
+		from PostingComment
+		where user_id is not null and comment_id = #{commentId}
+	</select>
+	
 	<update id="deleteCommentSetDefault" parameterType="posting_comment">
 		update PostingComment
 		set user_id = null, comment_content = #{commentContent}
