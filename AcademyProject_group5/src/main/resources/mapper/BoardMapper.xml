@@ -169,8 +169,13 @@
 			 and user_id = #{userId}
 	</select>
 	
-	<insert id="insertRecommend" parameterType="recommend">
+	<insert id="insertRecommendForUser" parameterType="recommend">
 		insert into Recommend 
 		values (#{postingId}, #{postingType}, #{userId})
 	</insert>
+	
+	<update id="insertRecommendForPosting" parameterType="int">
+		update Posting set 
+		posting_recommend = #{postingRecommend}
+	</update>
 </mapper>
