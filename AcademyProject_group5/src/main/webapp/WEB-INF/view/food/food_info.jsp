@@ -142,7 +142,7 @@ function tableSetting(parent, child){
 						  "</td>"
 						)
 					);
-				}else if(item.userId!=null){
+				}else if(item.userId.length>0){
 					$("#"+item.commentId).append(
 							$("<td>"+
 								"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
