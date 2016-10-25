@@ -207,6 +207,8 @@ $("#commentBtn").click(function(){
 	    	   prevParentId = null;
 	   		   prevParentUpdateId = null;
 	    	   tableSetting(result["parent"],result["child"].reverse());
+	      },error : function(){
+	    	  alert("잘못된 접근입니다.");
 	      }
 	   });
 	}else{
