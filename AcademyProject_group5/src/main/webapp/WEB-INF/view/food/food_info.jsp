@@ -267,7 +267,12 @@ function sendComment(){
 		    	   prevParentId = null;
 		   		   prevParentUpdateId = null;
 		    	   tableSetting(result["parent"],result["child"].reverse())	
-		      }
+		      },
+		      error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:"
+							+ error);
+				}
 		   });
 		}else{
 			alert("로그인후 이용하세요.");
