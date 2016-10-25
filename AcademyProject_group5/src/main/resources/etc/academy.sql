@@ -125,9 +125,11 @@ CREATE TABLE NotificationSetting
 	noti_type varchar2(10) NOT NULL,
 	user_id varchar2(10) NOT NULL,
 	noti_on number NOT NULL,
-	noti_time date NOT NULL,
+	next_noti_time date NOT NULL,
 	-- 하루 단위
 	noti_time_interval number NOT NULL,
+	noti_hour NOT NULL,
+	noti_min NOT NULL,
 	CONSTRAINT NotificationSetting_PK PRIMARY KEY (noti_type, user_id)
 );
 

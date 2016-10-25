@@ -80,11 +80,12 @@ public class NotificationServiceImpl implements NotificationService{
 
 		List<NotificationSetting> settingDataList = new ArrayList<>();
 		
-		settingDataList.add(new NotificationSetting("lecture", userId, 1, 0, 10, 7));
-		settingDataList.add(new NotificationSetting("noti", userId, 1, 19, 0, 1));
-		settingDataList.add(new NotificationSetting("place", userId, 1, 9, 10, 7));
-		settingDataList.add(new NotificationSetting("play", userId, 1, 22, 10, 1));
-		settingDataList.add(new NotificationSetting("food", userId, 1, 11, 10, 1));
+		// 알림 설정 초기화
+		settingDataList.add(new NotificationSetting("lecture", userId, 1, null, 7, 0, 10));
+		settingDataList.add(new NotificationSetting("noti", userId, 1, null, 1, 19, 0));
+		settingDataList.add(new NotificationSetting("place", userId, 1, null, 7, 9, 0));
+		settingDataList.add(new NotificationSetting("play", userId, 1, null, 1, 22, 0));
+		settingDataList.add(new NotificationSetting("food", userId, 1, null, 1, 11, 0));
 
 		NotificationSettingList settingList = new NotificationSettingList();
 		settingList.setSettingList(settingDataList);

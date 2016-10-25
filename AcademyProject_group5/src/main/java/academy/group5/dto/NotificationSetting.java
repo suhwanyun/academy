@@ -1,5 +1,7 @@
 package academy.group5.dto;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,15 +22,18 @@ public class NotificationSetting {
 
 	/** 알림 여부. */
 	private Integer notiOn;
-
-	/** 알림 시간(시). */
-	private Integer notiTimeHour;
 	
-	/** 알림 시간(분). */
-	private Integer notiTimeMin;
-
+	/** 다음 알림 날짜 */
+	private Date nextNotiDate;
+	
 	/** 알림 간격. */
 	private Integer notiTimeInterval;
+	
+	/** 알림 시간(시). */
+	private Integer notiHour;
+	
+	/** 알림 시간(분). */
+	private Integer notiMin;
 
 	/** userId 와 notiType만 일치하면 true */
 	@Override
@@ -53,14 +58,15 @@ public class NotificationSetting {
 		return true;
 	}
 
+	/** 다음 알림 날짜는 무관 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((notiOn == null) ? 0 : notiOn.hashCode());
-		result = prime * result + ((notiTimeHour == null) ? 0 : notiTimeHour.hashCode());
+		result = prime * result + ((notiHour == null) ? 0 : notiHour.hashCode());
 		result = prime * result + ((notiTimeInterval == null) ? 0 : notiTimeInterval.hashCode());
-		result = prime * result + ((notiTimeMin == null) ? 0 : notiTimeMin.hashCode());
+		result = prime * result + ((notiMin == null) ? 0 : notiMin.hashCode());
 		result = prime * result + ((notiType == null) ? 0 : notiType.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;

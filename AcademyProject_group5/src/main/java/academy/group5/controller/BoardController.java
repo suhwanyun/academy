@@ -263,21 +263,20 @@ public class BoardController {
 	/** 게시글 추천 */
 	@RequestMapping(value="/mileage/recommendPosting", method=RequestMethod.GET)
 	public @ResponseBody String setRecommend(HttpSession session, 
-			@RequestParam("userId") String postingUserId, @RequestParam Integer postingId){
+			@RequestParam String userId, @RequestParam Integer postingId){
 		
 		String postingType = getPostingType(session);
 		
-		int recommendResult = 0;
+		boolean recommendResult = false;
 		try{
-			recommendResult = postService.setRecommend(postingId, postingType, postingUserId);
+			recommendResult = postService.setRecommend(postingId, postingType, userId);
 		} catch(WrongRequestException e){
 			return "잘못된 접근입니다.";
 		}
 		
-		if(recommendResult == 1){
+		if(!recommendResult){
 			return "이미 추천하셨습니다";
 		} 
-		// 리턴값이 -1 (탈퇴한 회원이라 마일리지 상승이 불가능한 경우)이어도 정상처리
 		else {
 			return "추천되었습니다";
 		}

@@ -31,8 +31,7 @@ public class PostingServiceImpl implements PostingService {
 	
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
-	/** 추천 한번 당 올라가는 마일리지 */
-	private final int POSTING_RECOMMEND_MILEAGE = 1;
+
 	/** 댓글 삭제시 설정될 텍스트 */
 	private final String DELETE_COMMENT_TEXT = "삭제된 댓글 입니다.";
 	
@@ -319,33 +318,24 @@ public class PostingServiceImpl implements PostingService {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	@Override
-	public int setRecommend(Integer postingId, String postingType, String postingUserId) {
-		Recommend recommendData = new Recommend(postingId, postingType, postingUserId);
+	public boolean setRecommend(Integer postingId, String postingType, String userId) {
+		Recommend recommendData = new Recommend(postingId, postingType, userId);
 
 		int already = boardRepo.getRecommend(recommendData);
 		// 이미 추천함
 		if(already != 0){
-			return 1;
+			return false;
 		}
 		// 게시글 추천 설정
 		int result = boardRepo.setRecommend(recommendData);
-		
-		Integer mileage = mileageRepo.getMileage(postingUserId);
-		UserData postingUserData = new UserData(postingUserId, mileage + POSTING_RECOMMEND_MILEAGE);
+
 		// 추천 실패
 		if(result != 1) {
 			throw new WrongRequestException();
 		} 
-		// 마일리지 증가
-		else if(mileage != null) {
-			mileageRepo.updateMileageByRecommend(postingUserData);
-			return 0;
-		} 
-		// 탈퇴한 회원의 게시글
 		else {
-			return -1;
+			return true;
 		}
 	}
 }

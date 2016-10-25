@@ -117,6 +117,6 @@ public interface PostingService {
 	 * @param userId
 	 * @return 0:정상 1:이미추천 -1:탈퇴한 회원의 게시글
 	 */
-	int setRecommend(Integer postingId, String postingType, String postingUserId);
+	boolean setRecommend(Integer postingId, String postingType, String userId);
 	
 }
