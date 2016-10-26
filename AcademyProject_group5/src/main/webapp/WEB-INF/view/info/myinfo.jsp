@@ -30,8 +30,8 @@
 		<sform:label path="userName">이름</sform:label>
 		<sform:input readonly="true" type="text" path="userName" value="${user.userName}" />
 		<br>
-		<sform:label path="phoneNum">전화번호</sform:label>
-		<sform:input type="text" path="phoneNum" maxlength="11" value="${user.phoneNum}" />
+		<sform:label path="email">이메일</sform:label>
+		<sform:input readonly="true" type="text" path="email" maxlength="11" value="${user.email}" />
 		<br>
 		<sform:label path="passQuestion">비밀번호 질문</sform:label>
 		<sform:textarea path="passQuestion" maxlength="100" value="${user.passQuestion}" />

@@ -33,7 +33,7 @@
 
 			<div class="form-group">
 				<sform:label path="userId">아이디</sform:label>
-				<span id="trueorfalse" class="glyphicon glyphicon-ok"></span>
+				<span id="trueorfalse" class="glyphicon glyphicon-false"></span>
 
 				<div class="row">
 					<div class="col-xs-8">
@@ -72,14 +72,14 @@
 			</div>
 			<div class="form-group">
 				<sform:label path="email">이메일</sform:label>
-				<span id="emailtrueorfalse" class="glyphicon glyphicon-ok"></span>
+				<span id="emailtrueorfalse" class="glyphicon glyphicon-false"></span>
 				<div class="row">
 					<div class="col-xs-8">
-						<sform:input placeholder="email을 입력해주세요" maxlength="30" type="text"
+						<sform:input placeholder="ex)abc@abc.com" maxlength="30" type="text"
 							path="email" class="form-control size8" />
 					</div>
 					<div class="col-xs-4">
-						<sform:button id="emailDuplicationCheckBtn" class="btn active btn-info">이메일 중복 확인</sform:button>
+						<sform:button id="emailDuplicationCheckBtn" class="btn active btn-info">중복 확인</sform:button>
 					</div>
 				</div>
 

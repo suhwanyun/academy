@@ -1,14 +1,14 @@
 var once = true;
 $("#idCheck").click(
 		function() {
-			if (phoneCheck($("#phoneNum").val())
+			if (emailCheck($("#email").val())
 					&& nameCheck($("#userName").val())) {
 				$.ajax({
 					type : "get",
 					url : "findId",
 					data : {
 						userName : $("#userName").val(),
-						phoneNum : $("#phoneNum").val()
+						email : $("#email").val()
 					},
 					success : function(res) {
 						if (res.length > 2) {
@@ -20,13 +20,11 @@ $("#idCheck").click(
 
 					},
 					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error);
+						alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 					}
 				});
 			} else {
-				alert("이름, 전화번호 양식이 틀렸습니다.");
+				alert("이름, 이메일을 확인해 주세요.");
 			}
 
 		});
@@ -43,7 +41,7 @@ $("#passCheck").click(
 						},
 						success : function(res) {
 							if (res.length > 2) {
-								$("#res").val("임시 비밀번호 : [ " + res + " ]");
+								$("#res").val("임시 비밀번호 : [" + res + "]");
 								once = false;
 							} else {
 								alert("아이디나 비밀번호 답을 확인하세요.");
@@ -51,9 +49,7 @@ $("#passCheck").click(
 
 						},
 						error : function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:"
-									+ request.responseText + "\n" + "error:"
-									+ error);
+							alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 						}
 					});
 				} else {
@@ -77,17 +73,13 @@ $("#userId").change(
 
 						} else {
 							$("#passQuestion")
-									.val("조회된 질문이 없습니다. 관리자에게 문의 하세요");
+									.val("");
 						}
 
 					},
 					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error);
+						alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 					}
 				});
-			} else {
-				alert("ID 양식이 틀렸습니다.");
 			}
 		});

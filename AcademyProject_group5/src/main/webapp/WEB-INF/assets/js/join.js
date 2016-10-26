@@ -61,6 +61,7 @@ $("#userName").change(function() {
 });
 $("#email").change(function() {
 	emailDupOk=false;
+	$("#emailtrueorfalse").attr('class', 'glyphicon glyphicon-false');
 	if (emailCheck($("#email").val())) {
 		$("#email").attr('class', 'true form-control size8');
 	} else {
@@ -110,9 +111,7 @@ $("#idDuplicationCheckBtn").click(
 
 					},
 					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error);
+						alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 					}
 				});
 			} else {
@@ -124,7 +123,7 @@ $("#idDuplicationCheckBtn").click(
 $("#emailDuplicationCheckBtn").click(
 		function(event) {
 			event.preventDefault();
-			if (idCheck($("#userId").val())) {
+			if (emailCheck($("#email").val())) {
 				$.ajax({
 					type : "get",
 					url : "findEmail",
@@ -148,9 +147,7 @@ $("#emailDuplicationCheckBtn").click(
 
 					},
 					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error);
+						alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 					}
 				});
 			} else {

@@ -26,10 +26,14 @@
 				<div class="form3 pad">
 
 					<h1 class="member">ID 찾기</h1>
-					<label for="userName">이름</label><input placeholder="한글 2~5자 " type="text" id="userName">
-					<label for="phoneNum">전화번호</label><input placeholder="-없이 입력 "
-						type="text" id="phoneNum"><br> <input type="button"
-						value="확인" id="idCheck" style="margin-left: 45%"><br>
+					<label for="userName">이름</label>
+					<input placeholder="한글 2~5자 " type="text" id="userName">
+					
+					<label for="email">이메일</label>
+					<input type="text" id="email">
+					<br> 
+					<input type="button" value="확인" id="idCheck" style="margin-left: 45%">
+					<br>
 				</div>
 			</div>
 		</div>
@@ -54,6 +58,6 @@
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/js/search_idpw.js"></script>
-<script src="<%=request.getContextPath() %>/js/validationcheck.js"></script>
+<script src="/js/search_idpw.js"></script>
+<script src="/js/validationcheck.js"></script>
 </html>
