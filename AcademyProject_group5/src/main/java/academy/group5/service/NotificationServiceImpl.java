@@ -76,7 +76,6 @@ public class NotificationServiceImpl implements NotificationService{
 	public boolean settingSet(String userId) {		
 
 		List<NotificationSetting> settingDataList = new ArrayList<>();
-		
 		// 알림 설정 초기화
 		settingDataList.add(new NotificationSetting("lecture", userId, 1, 7, 0, 10));
 		settingDataList.add(new NotificationSetting("noti", userId, 1, 1, 19, 0));
