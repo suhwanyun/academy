@@ -108,14 +108,14 @@
 					</div>
 				</div>
 					</c:forEach>
-				<div id="beforeLectureLocation" class="container">
-					<button id="moreBtn"
-							class="btn white size6mar">더보기</button>
-					<button class="btn white bRight">맨 위로</button>
-	
-				</div>
-
-	
+			<table class="table">
+				<tfoot>
+					<tr>
+						<td colspan="3" align="center"><button id="moreBtn" class="btn white">더보기</button></td>
+						<td align="right"><button class="btn white">맨위로</button></td>
+					</tr>
+				</tfoot>
+			</table>
 	<!-- 테이블 종료 -->
 </body>
 
