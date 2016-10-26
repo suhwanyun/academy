@@ -20,40 +20,43 @@
 	<div class="container">
 
 		<div align="center">
-			<a href="/main"><img class="img-circle img-responsive"
-				src="/images/logo.png" alt="" width="100" /></a>
+			<a href="/main"><img class="img-logo"
+				src="/images/logo.png" alt="" /></a>
 		</div>
 
 
 		<div class="text-center">
-			<h1>member login</h1>
+			<h1>Member login</h1>
 		</div>
-		<form class="form-horizontal">
-
+		
+<form class="form-horizontal">
 			<div class="form-group">
 
-				<label for="user" class="control-label col-sm-2">아이디</label>
-				
-					<input type="text" maxlength="10" id="userId" class="form-control col-sm-10">
-				
+				<label for="user" class="control-label col-sm-2">ID:</label>
+			<div class="col-sm-10">
+					<input type="text" maxlength="10" id="userId" class="form-control">
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="user" class="control-label col-sm-2">비밀번호</label>
-				
+				<label for="user" class="control-label col-sm-2">Password:</label>
+			<div class="col-sm-10">
 					<input type="password" maxlength="20" id="userPass"
-						class="form-control col-sm-10">
-				
+						class="form-control">
+			</div>		
 			</div>
-			<div class="container">
+			<div class="form-group">
+				 <div class="col-sm-offset-2 col-sm-10">
 				<input type="button" value="로그인 하기" id="loginBtn"
 					class="btn btn-default btn-lg">
 			</div>
-			<div class="container" style="margin-top: 1em;">
+			</div>
+			<div class="form-group">
+				 <div class="col-sm-offset-2 col-sm-10">
 				<input type="button" value="회원가입" id="joinBtn"
 					class="btn btn-default btn-lg"> <input type="button"
 					value="ID/Pass 찾기" id="searchBtn" class="btn btn-default btn-lg">
 			</div>
-
+</div>
 		</form>
 
 	</div>

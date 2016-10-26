@@ -1144,6 +1144,13 @@ img {
   border-radius: 50%;
   width:40%;
   margin-top:10%;
+ 
+}
+.img-logo{
+	  border-radius: 50%;
+  width:30%;
+  margin-top:10%;
+  margin-bottom:10%;
 }
 .imgMar{
 	margin-left:10%;
@@ -1224,8 +1231,8 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 5%;
+  margin-bottom: 10%;
 }
 h1 small,
 .h1 small,
@@ -3007,6 +3014,8 @@ select[multiple].form-group-lg .form-control {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
+  
+  
 }
 .btn:focus,
 .btn:active:focus,
@@ -6663,4 +6672,10 @@ button.size8mar{
 	bottom:0;
 	left:0;
 	padding-top:22%;
+ }
+ .white{
+ 	color:#606060;
+ 	border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
+  
  }

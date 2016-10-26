@@ -28,8 +28,8 @@
 		</tbody>
 		<tfoot>
 		<tr>
-			<td colspan="3" align="center"><button id="moreBtn" class="myButton">더보기</button></td>
-			<td align="right"><button class="myButton">맨위로</button></td>
+			<td colspan="3" align="center"><button id="moreBtn" class="btn white">더보기</button></td>
+			<td align="right"><button class="btn white">맨위로</button></td>
 		</tr>
 		</tfoot>
 </table>

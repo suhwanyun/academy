@@ -17,7 +17,7 @@
 					<option value="professor">교수 이름</option>
 			</select></td>
 			<td><input type="search" id="serachInput" /></td>
-			<td><button id="searchBtn">검색</button></td>
+			<td><button id="searchBtn" class="btn white">검색</button></td>
 
 		</tr>
 	</table>
@@ -41,8 +41,8 @@
 		</c:forEach>
 		</tbody>
 		<tr id="beforeLectureLocation" >
-			<td colspan="2" align="center"><button id="moreBtn">더보기</button></td>
-			<td><button>맨 위로</button></td>
+			<td colspan="2" align="center"><button id="moreBtn" class="btn white">더보기</button></td>
+			<td><button class="btn white">맨 위로</button></td>
 		</tr>
 	</table>
 </div>

@@ -39,8 +39,8 @@
 							href="/loginjsp"
 							class="btn btn-danger"><span>로그인</span></a> <a
 							href="/joinjsp"
-							class="btn btn-danger"><span>회원가입</span></a><br><br>
-			<a href="#" class="btn btn-danger"><span>비회원으로 사용</span></a>
+							class="btn btn-danger"><span>회원가입</span></a>
+			
 			</c:otherwise>
 		</c:choose>
 </div>	</div>
