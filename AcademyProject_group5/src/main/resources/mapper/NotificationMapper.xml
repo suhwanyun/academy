@@ -14,7 +14,7 @@
 		insert into NotificationSetting
 			(noti_type, user_id, noti_on, next_noti_time, noti_time_interval, noti_hour, noti_min)
 		values
-			(#{notiType}, #{userId}, #{notiOn}, sysdate + 1, #{notiTimeInterval}, #{notiHour), #{notiMn})
+			(#{notiType}, #{userId}, #{notiOn}, sysdate + 1, #{notiTimeInterval}, #{notiHour}, #{notiMn})
 	</insert>
 	
 	<update id="updateNotificationSetting" parameterType="notification_setting">
