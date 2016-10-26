@@ -3356,6 +3356,7 @@ fieldset[disabled] .btn-link:focus {
   font-size: 30px;
   line-height: 1.3333333;
   border-radius: 6px;
+  color:black;
 }
 .btn-sm,
 .btn-group-sm > .btn {
