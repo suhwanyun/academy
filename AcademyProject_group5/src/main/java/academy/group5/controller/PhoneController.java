@@ -61,7 +61,7 @@ public class PhoneController {
 	
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public String test(){
-		new GCM("테스트입니다", "테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다", gcmRepo.getAllUser(), GCM.TYPE_NOTI);
+		new GCM("테스트입니다", "테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다", gcmRepo.getAllUser(), GCM.TYPE_NOTICE);
 		return "index";
 	}
 	

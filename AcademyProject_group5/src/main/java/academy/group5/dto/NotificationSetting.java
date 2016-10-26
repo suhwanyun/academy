@@ -1,6 +1,7 @@
 package academy.group5.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,9 @@ public class NotificationSetting {
 	
 	/** 알림 시간(분). */
 	private Integer notiMin;
+
+	// 알림 목록
+	private List<Notifications> notificationList;
 
 	/** userId 와 notiType만 일치하면 true */
 	@Override
@@ -70,12 +74,5 @@ public class NotificationSetting {
 		result = prime * result + ((notiType == null) ? 0 : notiType.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
-	}
-	
-	
-
-	/** 알림 목록. *//*
-	private Set<Notifications> notificationsSet;*/
-	
-	
+	}	
 }

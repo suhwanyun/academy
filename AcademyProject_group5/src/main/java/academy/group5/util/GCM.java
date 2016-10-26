@@ -2,23 +2,19 @@
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Sender;
 
 public class GCM {
 	
-	public static final String TYPE_NOTI = "noti";
+	public static final String TYPE_NOTICE = "send notice";
+	public static final String TYPE_SETTING = "alarm setting";
 	
-	private final String GCM_TITLE = "MCM";
+	private final String GCM_TITLE = "MCM";	
 	
-	private static final Logger logger = LoggerFactory.getLogger(GCM.class);
-	
-
 	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
 
 		String title = null;

@@ -1,5 +1,6 @@
 package academy.group5.dto.etc;
 
+import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
@@ -16,6 +17,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationSettingList {
-	/** 알림 설정 목록 */
-	private List<NotificationSetting> settingList;
+	
+	/** 알림 종류. */
+	private List<String> notiType;
+
+	/** 회원 ID. */
+	private List<String> userId;
+
+	/** 알림 여부. */
+	private List<Integer> notiOn;
+	
+	/** 다음 알림 날짜 */
+	private List<Date> nextNotiDate;
+	
+	/** 알림 간격. */
+	private List<Integer> notiTimeInterval;
+	
+	/** 알림 시간(시). */
+	private List<Integer> notiHour;
+	
+	/** 알림 시간(분). */
+	private List<Integer> notiMin;
 }
