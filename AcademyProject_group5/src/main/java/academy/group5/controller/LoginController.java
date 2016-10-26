@@ -92,9 +92,9 @@ public class LoginController {
 	
 	/** ID 찾기 */
 	@RequestMapping(value="findId", method=RequestMethod.GET)
-	public @ResponseBody String findId(@RequestParam String userName, @RequestParam Integer phoneNum){
+	public @ResponseBody String findId(@RequestParam String userName, @RequestParam String email){
 		
-		String result = loginService.findId(userName, phoneNum);
+		String result = loginService.findId(userName, email);
 		
 		return result == null ? "" : result;
 

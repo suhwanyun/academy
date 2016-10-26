@@ -2,14 +2,11 @@ package academy.group5.service;
 
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.UserData;
-import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.LoginRepo;
@@ -81,8 +78,8 @@ public class LoginServiceImpl implements LoginService {
 
 	/** 아이디 찾기 */
 	@Override
-	public String findId(String userName, Integer phoneNum) {
-		return loginRepo.getUserId(new UserId(userName, phoneNum));
+	public String findId(String userName, String email) {
+		return loginRepo.getUserId(new UserData(userName, -1, email));
 	}
 	
 	/** 임시 비밀번호 받기 */

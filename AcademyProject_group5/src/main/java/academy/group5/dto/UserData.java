@@ -68,4 +68,10 @@ public class UserData {
 		this.userId = userId;
 		this.userMileage = userMileage;
 	}
+	
+	public UserData(String userName, Integer userMileage, String email){
+		this.userName = userName;
+		this.userMileage = userMileage;
+		this.email = email;
+	}
 }

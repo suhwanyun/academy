@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.UserData;
-import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 
 @Repository
@@ -41,7 +40,7 @@ public class LoginRepo {
 		return session.delete(stmt, data);
 	}
 	
-	public String getUserId(UserId data){
+	public String getUserId(UserData data){
 		String stmt = LOGIN_NS + "selectUserId";
 		return session.selectOne(stmt, data);
 	}
