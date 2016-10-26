@@ -29,7 +29,7 @@
 						
 						<a href="#"  class="btn btn-danger"><span>${user.userMileage} m</span></a>
 						<a href="/logout"  class="btn btn-danger"><span>로그아웃</span></a>
-						<a href="#" class="btn btn-danger"><span>이용하기</span></a>
+					
 				
 				</c:when>
 			<c:otherwise>
