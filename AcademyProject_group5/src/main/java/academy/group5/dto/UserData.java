@@ -69,7 +69,7 @@ public class UserData {
 		this.userMileage = userMileage;
 	}
 	
-	public UserData(String userName, Integer userMileage, String email){
+	public UserData(String userName, int userMileage, String email){
 		this.userName = userName;
 		this.userMileage = userMileage;
 		this.email = email;
