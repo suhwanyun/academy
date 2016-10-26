@@ -36,6 +36,17 @@ public class LoginController {
 		}	
 	}
 	
+	/** 회원가입시 이메일 중복확인 */
+	@RequestMapping(value="/findEmail", method=RequestMethod.GET)
+	public @ResponseBody String findEmail(@RequestParam String email){
+		
+		if(loginService.findEmail(email)){
+			return "true";
+		} else{
+			return "false";
+		}	
+	}
+	
 	/** 회원가입 완료 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(Model model, UserData data){
