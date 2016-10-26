@@ -41,7 +41,7 @@
 							path="userId" class="form-control" />
 					</div>
 					<div class="col-xs-4">
-						<sform:button id="duplicationCheckBtn" class="btn active btn-info">중복 확인</sform:button>
+						<sform:button id="idDuplicationCheckBtn" class="btn active btn-info">중복 확인</sform:button>
 					</div>
 				</div>
 
@@ -71,11 +71,17 @@
 
 			</div>
 			<div class="form-group">
-				<sform:label path="phoneNum">핸드폰 번호</sform:label>
-
-
-				<sform:input placeholder="-없이 입력 " maxlength="11" type="text"
-					path="phoneNum" class="form-control size8" />
+				<sform:label path="email">이메일</sform:label>
+				<span id="emailtrueorfalse" class="glyphicon glyphicon-ok"></span>
+				<div class="row">
+					<div class="col-xs-8">
+						<sform:input placeholder="email을 입력해주세요" maxlength="30" type="text"
+							path="email" class="form-control size8" />
+					</div>
+					<div class="col-xs-4">
+						<sform:button id="emailDuplicationCheckBtn" class="btn active btn-info">이메일 중복 확인</sform:button>
+					</div>
+				</div>
 
 
 			</div>

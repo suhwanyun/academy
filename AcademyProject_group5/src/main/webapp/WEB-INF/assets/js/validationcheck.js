@@ -23,9 +23,9 @@ function nameCheck(x) {
 		return false;
 	}
 }
-function phoneCheck(x) {
-	var PHONE_PATTERN = /^[0-9]{10,11}$/;
-	if (PHONE_PATTERN.test(x)) {
+function emailCheck(x) {
+	var EMAIL_PATTERN = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	if (EMAIL_PATTERN.test(x)) {
 		return true;
 	} else {
 		return false;

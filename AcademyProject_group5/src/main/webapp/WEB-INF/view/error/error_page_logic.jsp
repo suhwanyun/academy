@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERROR OCCURRED</title>
 <script>
-	alert("오류가 발생하였습니다.\\n인터넷 연결을 확인하세요.");
+	alert("오류가 발생하였습니다.\n인터넷 연결을 확인하세요.");
 </script>
 </head>
 <body>
