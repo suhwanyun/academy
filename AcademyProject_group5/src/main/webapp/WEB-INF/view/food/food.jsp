@@ -32,7 +32,7 @@ function errorFun(e){
 						<col width="25%">
 						<col width="25%">
 					</colgroup>
-					<tr  class="tableData">
+					<tr >
 						<td><select id="sort">
 								<option value="time">날짜 정렬</option>
 								<option value="recommend">추천수 정렬</option>
