@@ -11,8 +11,8 @@
 	
 		<div class="container" style="margin-top: 5px;">
 			<div class="btn-group btn-group-justified">
-  				  <a href="#" onclick="mylectureBtn()" class="btn btn-danger">내 강의목록</a>
-   				 <a href="#" onclick="notilistBtn()" class="btn btn-danger">전체 공지목록</a>
+  				  <a href="#" onclick="mylectureBtn()" class="btn btn-danger">내 강의</a>
+   				 <a href="#" onclick="notilistBtn()" class="btn btn-danger">전체 공지</a>
     				<a href="#" onclick="lecturelistBtn()" class="btn btn-danger">강의 선택</a>
     				<a href="#" onclick="schedule()" class="btn btn-danger">내 시간표</a>
  			</div>
