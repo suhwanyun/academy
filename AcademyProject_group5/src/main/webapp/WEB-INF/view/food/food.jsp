@@ -16,20 +16,9 @@
 <body>
 	<!-- 테이블 시작 -->
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
-	<div id="wrap">
-		<div class="upmargin">
-			<h1 class="member">식사 게시판</h1>
-			<div class="form9 pad">
-				<table>
-
-					<colgroup>
-						<col width="30%">
-						<col width="20%">
-						<col width="25%">
-						<col width="25%">
-					</colgroup>
+			<div class="container-fluid">
+				<table class="table-condensed">
 					<tr>
-
 						<td><select id="searchType">
 								<option selected="selected" value="user">작성자</option>
 								<option value="title">제목</option>
@@ -37,77 +26,99 @@
 								<option value="all">제목+내용</option>
 
 						</select></td>
-						<td colspan="2"><input type="search" id="searchInput"></td>
-						<td><input type="button" id="searchBtn" class="myButton"
+						<td><input type="search" id="searchInput"></td>
+						<td><input type="button" id="searchBtn" class="btn white"
 							value="찾기"></td>
 					</tr>
-					<tr>
-
-						<td colspan="3">
+					</table>
+				
+					
 							<input type="radio" name="sortVal" checked="checked" value="time">날짜
 							<input type="radio" name="sortVal" value="recommend">추천
-						</td>
-						<td>
-							<button id="writeBtn" class="myButton">글쓰기</button>
-						</td>
-					</tr>
-				</table>
+					
+							<button id="writeBtn" class="btn white bRight">글쓰기</button>
+					</div>
 
-				<table class="list_table">
-					<colgroup>
-						<col width="20%">
-						<col width="20%">
-						<col width="10%">
-						<col width="50%">
-					</colgroup>
+
+		
+			
 					<c:if test="${!empty mostRecommendData}">
-						<tr class="mostRecommend tableData">
+				<div class="container-fluid">
+					<div class="row">
+					<div class="col-xs-2">	
+						<table>
+							
+						<tr class="mostRecommend table-data">
 
-							<td rowspan="2"><img class="imgBoard"
+							<td><img class="img-rounded "
+								src="/upload/preview_${mostRecommendData.postingPhoto}"
+								 onerror="errorFun(this);"  /></td>
+						</table>
+					</div>
+					<div class="col-xs-10">			
+						<table>
+							<thead>
+								<tr class="mostRecommend table-data">
+									<td><a href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr>
+									<td>${mostRecommendData.userId }</td>
+									<td>${mostRecommendData.postingRecommend }</td>
+									<td>${mostRecommendData.postingTime }</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+					</c:if>
+				
+					<c:forEach items="${postingDataList }" var="list">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-2">	
+						<table>
+							
+						<tr class="mostRecommend table-data">
+
+							<td><img class="img-rounded "
 								src="/upload/preview_${mostRecommendData.postingPhoto}"
 								onerror="errorFun(this);" /></td>
-							<td colspan="3"><a
-								href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
-
-						</tr>
-						<tr class="mostRecommend tableData">
-							<td>${mostRecommendData.userId }</td>
-							<td>${mostRecommendData.postingRecommend }</td>
-							<td>${mostRecommendData.postingTime }</td>
-						</tr>
-					</c:if>
-					<c:forEach items="${postingDataList }" var="list">
-
-						<tr class="tableData">
-
-							<td rowspan="2"><img class="imgBoard"
-								onerror="errorFun(this);"
-								src="/upload/preview_${list.postingPhoto}" /></td>
-							<td colspan="3"><a
-								href="/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
-
-						</tr>
-						<tr class="tableData">
-							<td>${list.userId }</td>
-							<td>${list.postingRecommend }</td>
-							<td>${list.postingTime }</td>
-
-						</tr>
-
+						</table>
+					</div>
+					<div class="col-xs-10">			
+						<table>
+							<thead>
+								<tr class="mostRecommend table-data">
+									<td><a href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>${mostRecommendData.userId }</td>
+									<td>${mostRecommendData.postingRecommend }</td>
+									<td>${mostRecommendData.postingTime }</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
 					</c:forEach>
-					<tr id="beforeLocation">
-						<td colspan="3"><button id="moreBtn" class="myButton">더보기</button></td>
-						<td><button class="myButton">맨 위로</button></td>
-					</tr>
+				<div id="beforeLectureLocation" class="container">
+					<button id="moreBtn"
+							class="btn white size6mar">더보기</button>
+					<button class="btn white bRight">맨 위로</button>
+	
+				</div>
 
-				</table>
-
-			</div>
-		</div>
-	</div>
+	
 	<!-- 테이블 종료 -->
 </body>
-<script src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 	<c:url value="/postingList" var="postingList"/>
 	<c:url value="/postingSearch" var="postingSearch"/>
@@ -119,7 +130,7 @@
 		mostRecommend += "</tr><tr class='mostRecommend tableData'>";
 		mostRecommend += $(".mostRecommend + tr").html();
 		mostRecommend += "</tr>";
-	});
+	}); 
 	var pageIndex = 1;
 	var nowSearching = 0;
 	$("#searchBtn")

@@ -6644,6 +6644,10 @@ button.size8mar{
 	width: 60%;
 	margin-right:5%;
 }
+button.size6mar{
+	width: 40%;
+	margin-left:20%;
+}
 .btn-footer{
 
  size:cover;
@@ -6679,3 +6683,15 @@ button.size8mar{
   background-color:rgb(255,255,255);
   
  }
+.vertical{
+	vertical-align: middle;
+}
+.imgBoard{
+		width:50%;
+		height:auto;
+		vertical-align:middle;
+		float:left;
+	}
+.bRight{
+	float:right;
+}
