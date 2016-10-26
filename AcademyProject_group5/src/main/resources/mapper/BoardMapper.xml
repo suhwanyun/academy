@@ -26,14 +26,11 @@
 				      	  posting_content like '%'||#{searchData}||'%'
 				      </when>
 			      </choose>
-			      <choose>
-				      <when test="orderType == 'recommend'">
-					  order by posting_recommend desc, posting_time desc
-					  </when>
-					  <otherwise>
-					  order by posting_time desc, posting_recommend desc
-					  </otherwise>
-				  </choose>
+			      	  order by 
+				      <if test="orderType == 'recommend'">
+					  posting_recommend desc, 
+					  </if>
+					  posting_time desc				  
 				  ) sub
 			 )
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
@@ -168,6 +165,11 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 			 and user_id = #{userId}
 	</select>
+	
+	<delete id="deleteRecommend" parameterType="posting">
+		delete from Recommend
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</delete>
 	
 	<insert id="insertRecommendForUser" parameterType="recommend">
 		insert into Recommend 

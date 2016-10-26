@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Notifications;
-import academy.group5.dto.etc.NotificationSettingList;
 
 @Repository
 public class NotificationRepo {
@@ -23,7 +22,7 @@ public class NotificationRepo {
 		return session.selectList(stmt, id);
 	}
 	
-	public int setNotificationSetting(NotificationSettingList data) {
+	public int setNotificationSetting(NotificationSetting data) {
 		String stmt = NOTI_NS + "insertNotificationSetting";
 		return session.insert(stmt, data);
 	}

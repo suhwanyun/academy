@@ -138,6 +138,12 @@ public class BoardRepo {
 		String stmt = BOARD_NS + "selectRecommend";
 		return session.selectOne(stmt, recommendData);
 	}
+	
+	/** 추천 기록 삭제 */
+	public Integer delRecommend(Posting delData){
+		String stmt = BOARD_NS + "deleteRecommend";
+		return session.delete(stmt, delData);
+	}
 
 	/** 추천(회원 기준) */
 	public int setRecommendUser(Recommend recommendData) {

@@ -87,15 +87,13 @@ public class NotificationServiceImpl implements NotificationService{
 		settingDataList.add(new NotificationSetting("play", userId, 1, null, 1, 22, 0));
 		settingDataList.add(new NotificationSetting("food", userId, 1, null, 1, 11, 0));
 
-		NotificationSettingList settingList = new NotificationSettingList();
-		settingList.setSettingList(settingDataList);
-
-		int result = notiRepo.setNotificationSetting(settingList);
-		
-		if(result != 5){
-			throw new WrongRequestException();
+		for(NotificationSetting settingData : settingDataList){
+			int result = notiRepo.setNotificationSetting(settingData);
+			
+			if(result != 1){
+				throw new WrongRequestException();
+			}
 		}
-		
 		return true;
 	}
 
