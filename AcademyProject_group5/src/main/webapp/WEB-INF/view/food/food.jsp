@@ -130,7 +130,7 @@
 		mostRecommend += "</tr><tr class='mostRecommend tableData'>";
 		mostRecommend += $(".mostRecommend + tr").html();
 		mostRecommend += "</tr>";
-	});
+	}); 
 	var pageIndex = 1;
 	var nowSearching = 0;
 	$("#searchBtn")
