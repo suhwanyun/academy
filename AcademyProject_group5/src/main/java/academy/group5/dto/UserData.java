@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserData {
 	
+	public final static String DEFAULT_PASS_QUESTION = "내가 태어난 고향은?";
+	
 	/** 회원 ID. */
 	private String userId;
 
