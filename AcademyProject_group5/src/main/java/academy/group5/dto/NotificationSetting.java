@@ -35,9 +35,9 @@ public class NotificationSetting {
 	
 	/** 알림 시간(분). */
 	private Integer notiMin;
-
-	// 알림 목록
-	private List<Notifications> notificationList;
+	
+	// 알림 설정 목록(데이터 전달용)
+	private List<NotificationSetting> NotificationSettingList;
 	
 	public NotificationSetting(String notiType, String userId, Integer notiOn, Integer notiTimeInterval,
 			Integer notiHour, Integer notiMin) {
@@ -86,4 +86,7 @@ public class NotificationSetting {
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
+	
+	/*// 알림 목록
+	private Set<Notifications> notificationSet;*/
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
-import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
@@ -27,20 +26,24 @@ public class NotificationServiceImpl implements NotificationService{
 	
 	@Override
 	public List<NotificationSetting> settingList(String userId) {
-		return notiRepo.getNotificationSettingList(userId);
+		List<NotificationSetting> settingList = notiRepo.getNotificationSettingList(userId);
+		
+		if(settingList.size() < SETTING_QUANTITY){
+			throw new WrongRequestException();
+		}
+		return settingList;
 	}
 
 	@Override
-	public boolean settingModify(String userId, NotificationSettingList settingData) {
+	public boolean settingModify(String userId, NotificationSetting settingData) {
 		
-		List<NotificationSetting> dataList = null;//settingData.getSettingList();
-		
+		List<NotificationSetting> settingList = settingData.getNotificationSettingList();
 		// 설정값 이상
-		if(dataList.size() != SETTING_QUANTITY){
+		if(settingList.size() != SETTING_QUANTITY){
 			throw new WrongRequestException();
 		}
 		
-		for(NotificationSetting data : dataList){	
+		for(NotificationSetting data : settingList){	
 			int result = notiRepo.updateNotificationSetting(data);
 			// 업데이트 실패
 			if(result != 1){
@@ -73,9 +76,9 @@ public class NotificationServiceImpl implements NotificationService{
 		// 알림 설정 초기화
 		settingDataList.add(new NotificationSetting("lecture", userId, 1, 7, 0, 10));
 		settingDataList.add(new NotificationSetting("noti", userId, 1, 1, 19, 0));
-		settingDataList.add(new NotificationSetting("place", userId, 1, 7, 9, 0));
-		settingDataList.add(new NotificationSetting("play", userId, 1, 1, 22, 0));
 		settingDataList.add(new NotificationSetting("food", userId, 1, 1, 11, 0));
+		settingDataList.add(new NotificationSetting("play", userId, 1, 1, 22, 0));
+		settingDataList.add(new NotificationSetting("place", userId, 1, 7, 9, 0));
 
 		for(NotificationSetting settingData : settingDataList){
 			int result = notiRepo.setNotificationSetting(settingData);
