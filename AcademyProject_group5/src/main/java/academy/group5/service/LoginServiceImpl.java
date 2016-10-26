@@ -48,7 +48,8 @@ public class LoginServiceImpl implements LoginService {
 		UserData encdata = toHash(userdata);
 		
 		loginRepo.setUser(encdata);
-		notificationService.settingSet(userdata.getUserId());
+		//notificationService.settingSet(userdata.getUserId());
+		// error!!!!!!!!!!!!!
 		
 		return true;
 	}
