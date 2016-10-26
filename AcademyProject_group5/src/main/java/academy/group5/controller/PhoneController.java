@@ -45,7 +45,7 @@ public class PhoneController {
 		} else {
 			model.addAttribute("msg", "로그인에 실패하였습니다.");
 		}
-		return "index";
+		return "redirect:/main";
 	}
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
