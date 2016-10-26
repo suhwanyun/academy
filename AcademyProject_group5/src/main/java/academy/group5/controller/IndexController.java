@@ -61,11 +61,12 @@ public class IndexController {
 
 		return "/login/login_manager";
 	}
-
+	
 	/** 회원가입 화면 */
 	@RequestMapping(value="/joinjsp", method=RequestMethod.GET)
 	public String joinPage(Model model){
 		UserData data = new UserData();
+		data.setPassQuestion(UserData.DEFAULT_PASS_QUESTION);
 		model.addAttribute("userData", data);
 		return "/join/join";
 	}
