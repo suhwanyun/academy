@@ -27,8 +27,8 @@ public class UserData {
 	/** 핸드폰 ID. */
 	private String phoneId;
 
-	/** 핸드폰 번호. */
-	private String phoneNum;
+	/** 이메일 */
+	private String email;
 
 	/** 비밀번호 질문. */
 	private String passQuestion;
