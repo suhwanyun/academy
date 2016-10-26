@@ -99,9 +99,28 @@ public class BoardController {
 		return postingList;
 	}
 	
-	/** 식사(먹거리)추천 게시판 검색 */
+	/** 게시판 정렬 */
+	@RequestMapping(value="/postingOrder", method=RequestMethod.GET)
+	public @ResponseBody List<Posting> postingOrder(Model model, HttpSession session,
+			@RequestParam String orderData){
+		
+		String postingType = getPostingType(session);
+		
+		session.setAttribute("orderData", orderData);
+
+		Object searchObj = session.getAttribute("searchData");
+		Object typeObj = session.getAttribute("searchType");
+		
+		String searchData = searchObj == null ? null : (String)searchObj;
+		String searchType = typeObj == null ? null : (String)typeObj;
+		
+		return postService.postingList(1, postingType, searchData, searchType, orderData);
+		
+	}
+	
+	/** 게시판 검색 */
 	@RequestMapping(value="/postingSearch", method=RequestMethod.GET)
-	public @ResponseBody List<Posting> setSearchDataForGetlectureList(Model model, HttpSession session,
+	public @ResponseBody List<Posting> postingSearch(Model model, HttpSession session,
 			@RequestParam String searchType, @RequestParam String searchData, 
 			@RequestParam String orderData){
 		
