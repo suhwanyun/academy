@@ -21,7 +21,6 @@
 			<if test="userPass != ''">
 			user_pass = #{userPass},
 			</if>
-			phone_num = #{phoneNum},
 			pass_question = #{passQuestion},
 			pass_answer = #{passAnswer}
 		where user_id = #{userId}
@@ -74,7 +73,7 @@
 	</select>
 	
 	<select id="selectUserInfo" parameterType="String" resultType="user_data">
-		select user_id, user_name, phone_num, pass_question, pass_answer
+		select user_id, user_name, email, pass_question, pass_answer
 		from UserData
 		where user_id = #{userId}
 	</select>
