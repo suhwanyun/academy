@@ -33,7 +33,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public boolean settingModify(String userId, NotificationSettingList settingData) {
 		
-		List<NotificationSetting> dataList = settingData.getSettingList();
+		List<NotificationSetting> dataList = null;//settingData.getSettingList();
 		
 		// 설정값 이상
 		if(dataList.size() != SETTING_QUANTITY){
@@ -70,12 +70,12 @@ public class NotificationServiceImpl implements NotificationService{
 
 		List<NotificationSetting> settingDataList = new ArrayList<>();
 		
-		/*// 알림 설정 초기화
-		settingDataList.add(new NotificationSetting("lecture", userId, 1, null, 7, 0, 10));
-		settingDataList.add(new NotificationSetting("noti", userId, 1, null, 1, 19, 0));
-		settingDataList.add(new NotificationSetting("place", userId, 1, null, 7, 9, 0));
-		settingDataList.add(new NotificationSetting("play", userId, 1, null, 1, 22, 0));
-		settingDataList.add(new NotificationSetting("food", userId, 1, null, 1, 11, 0));*/
+		// 알림 설정 초기화
+		settingDataList.add(new NotificationSetting("lecture", userId, 1, 7, 0, 10));
+		settingDataList.add(new NotificationSetting("noti", userId, 1, 1, 19, 0));
+		settingDataList.add(new NotificationSetting("place", userId, 1, 7, 9, 0));
+		settingDataList.add(new NotificationSetting("play", userId, 1, 1, 22, 0));
+		settingDataList.add(new NotificationSetting("food", userId, 1, 1, 11, 0));
 
 		for(NotificationSetting settingData : settingDataList){
 			int result = notiRepo.setNotificationSetting(settingData);

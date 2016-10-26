@@ -38,6 +38,17 @@ public class NotificationSetting {
 
 	// 알림 목록
 	private List<Notifications> notificationList;
+	
+	public NotificationSetting(String notiType, String userId, Integer notiOn, Integer notiTimeInterval,
+			Integer notiHour, Integer notiMin) {
+		super();
+		this.notiType = notiType;
+		this.userId = userId;
+		this.notiOn = notiOn;
+		this.notiTimeInterval = notiTimeInterval;
+		this.notiHour = notiHour;
+		this.notiMin = notiMin;
+	}	
 
 	/** userId 와 notiType만 일치하면 true */
 	@Override
@@ -74,5 +85,5 @@ public class NotificationSetting {
 		result = prime * result + ((notiType == null) ? 0 : notiType.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
-	}	
+	}
 }
