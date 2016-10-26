@@ -36,9 +36,6 @@ public class NotificationSetting {
 	/** 알림 시간(분). */
 	private Integer notiMin;
 	
-	// 알림 설정 목록(데이터 전달용)
-	private List<NotificationSetting> NotificationSettingList;
-	
 	public NotificationSetting(String notiType, String userId, Integer notiOn, Integer notiTimeInterval,
 			Integer notiHour, Integer notiMin) {
 		super();

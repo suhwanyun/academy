@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
@@ -25,19 +26,22 @@ public class NotificationServiceImpl implements NotificationService{
 	GCMRepo gcmRepo;
 	
 	@Override
-	public List<NotificationSetting> settingList(String userId) {
+	public NotificationSettingList getSettingList(String userId) {
 		List<NotificationSetting> settingList = notiRepo.getNotificationSettingList(userId);
 		
 		if(settingList.size() < SETTING_QUANTITY){
 			throw new WrongRequestException();
 		}
-		return settingList;
+		NotificationSettingList settingDto = new NotificationSettingList();
+		settingDto.setSettingList(settingList);
+		
+		return settingDto;
 	}
 
 	@Override
-	public boolean settingModify(String userId, NotificationSetting settingData) {
+	public boolean settingModify(String userId, NotificationSettingList settingData) {
 		
-		List<NotificationSetting> settingList = settingData.getNotificationSettingList();
+		List<NotificationSetting> settingList = settingData.getSettingList();
 		// 설정값 이상
 		if(settingList.size() != SETTING_QUANTITY){
 			throw new WrongRequestException();

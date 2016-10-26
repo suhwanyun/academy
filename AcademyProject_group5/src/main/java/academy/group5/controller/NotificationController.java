@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
@@ -35,19 +36,13 @@ public class NotificationController {
 	public String notiSettingList(Model model, HttpSession session){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
-		
-		// dto에 데이터 전달
-		List<NotificationSetting> settingList = service.settingList(id);
-		NotificationSetting settingDto = new NotificationSetting();
-		settingDto.setNotificationSettingList(settingList);
-		
-		model.addAttribute("settingData", settingDto);
+		model.addAttribute("settingData", service.getSettingList(id));
 		return "noti/noti";
 	}
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
-	public @ResponseBody String notiSetting(HttpSession session, @RequestParam NotificationSetting settingData){
+	public @ResponseBody String notiSetting(HttpSession session, @RequestParam NotificationSettingList settingData){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
 		
