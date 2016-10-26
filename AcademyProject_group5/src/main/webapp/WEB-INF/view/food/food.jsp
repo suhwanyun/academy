@@ -226,6 +226,7 @@
 		$(location).attr('href', "/write/foodjsp");
 	});
 	$(':radio[name="sortVal"]').change(function(){
+		pageIndex = 1;
 		$.ajax({
 		      type : "GET",
 		      url : "${postingOrder}",
