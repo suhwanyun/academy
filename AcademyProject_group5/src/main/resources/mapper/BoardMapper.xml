@@ -28,10 +28,10 @@
 			      </choose>
 			      <choose>
 				      <when test="orderType == 'recommend'">
-					  order by posting_recommend desc
+					  order by posting_recommend desc posting_time desc
 					  </when>
 					  <otherwise>
-					  order by posting_time desc
+					  order by posting_time desc posting_recommend desc
 					  </otherwise>
 				  </choose>
 				  ) sub
