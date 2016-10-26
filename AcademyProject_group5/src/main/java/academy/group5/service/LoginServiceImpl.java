@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.UserId;
 import academy.group5.dto.etc.UserPass;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.LoginRepo;
@@ -79,7 +80,7 @@ public class LoginServiceImpl implements LoginService {
 	/** 아이디 찾기 */
 	@Override
 	public String findId(String userName, String email) {
-		return loginRepo.getUserId(new UserData(userName, -1, email));
+		return loginRepo.getUserId(new UserId(userName, email));
 	}
 	
 	/** 임시 비밀번호 받기 */
