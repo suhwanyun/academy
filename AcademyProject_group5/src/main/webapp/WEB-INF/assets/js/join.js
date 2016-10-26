@@ -26,43 +26,43 @@ $("#userId").change(function() {
 });
 $("#userPass").change(function() {
 	if (passCheck($("#userPass").val())) {
-		$("#userPass").attr('class', 'true form-control');
+		$("#userPass").attr('class', 'true form-control size8');
 		if ($("#passCheck").val() == $("#userPass").val()) {
-			$("#passCheck").attr('class', 'true form-control');
+			$("#passCheck").attr('class', 'true form-control size8');
 			passSame = true;
 		} else {
-			$("#passCheck").attr('class', 'false form-control');
+			$("#passCheck").attr('class', 'false form-control size8');
 			passSame = false;
 		}
 	} else {
-		$("#userPass").attr('class', 'false form-control');
+		$("#userPass").attr('class', 'false form-control size8');
 	}
 });
 $("#passCheck").change(
 		function() {
 			if (passCheck($("#userPass").val())
 					&& $("#passCheck").val() == $("#userPass").val()) {
-				$("#passCheck").attr('class', 'true form-control');
+				$("#passCheck").attr('class', 'true form-control size8');
 				passSame = true;
 			} else {
-				$("#passCheck").attr('class', 'false form-control');
+				$("#passCheck").attr('class', 'false form-control size8');
 				passSame = false;
 			}
 
 		});
 $("#userName").change(function() {
 	if (nameCheck($("#userName").val())) {
-		$("#userName").attr('class', 'true form-control');
+		$("#userName").attr('class', 'true form-control size8');
 	} else {
-		$("#userName").attr('class', 'false form-control');
+		$("#userName").attr('class', 'false form-control size8');
 	}
 
 });
 $("#phoneNum").change(function() {
 	if (phoneCheck($("#phoneNum").val())) {
-		$("#phoneNum").attr('class', 'true form-control');
+		$("#phoneNum").attr('class', 'true form-control size8');
 	} else {
-		$("#phoneNum").attr('class', 'false form-control');
+		$("#phoneNum").attr('class', 'false form-control size8');
 	}
 
 });
