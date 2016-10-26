@@ -152,8 +152,11 @@ public class PostingServiceImpl implements PostingService {
 		new File(filePath).delete();
 		new File(previewPath).delete();
 		
-		postingData.setPostingPhoto(defaultName);
-		boardRepo.updatePhoto(postingData);
+		// DB에 기본 이미지 설정
+		if(defaultName != null){
+			postingData.setPostingPhoto(defaultName);
+			boardRepo.updatePhoto(postingData);
+		}
 	}
 	
 	// 이미지 최대 픽셀크기
@@ -226,15 +229,16 @@ public class PostingServiceImpl implements PostingService {
 		if(!deleteData.getUserId().equals(userId)){
 			throw new WrongRequestException();
 		}
-		// 이미지 삭제
-		if(!deleteData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
-			uploadCancel(deleteData, DEFAULT_PHOTO_NAME);
-		}
-		
+			
 		boardRepo.delAllComment(deleteData);
+		boardRepo.delRecommend(deleteData);
 		int result = boardRepo.delPosting(deleteData);
 		
 		if(result == 1){
+			// 이미지 삭제
+			if(!deleteData.getPostingPhoto().equals(DEFAULT_PHOTO_NAME)){
+				uploadCancel(deleteData, null);
+			}
 			return true;
 		} else {
 			throw new WrongRequestException();

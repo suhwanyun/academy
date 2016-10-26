@@ -31,10 +31,10 @@ public interface LoginService {
 	/**
 	 * 아이디 찾기
 	 * @param userName
-	 * @param phoneNum
+	 * @param email
 	 * @return
 	 */
-	String findId(String userName, Integer phoneNum);
+	String findId(String userName, String email);
 	
 	/**
 	 * 임시 비밀번호 받기
@@ -50,6 +50,13 @@ public interface LoginService {
 	 * @return
 	 */
 	boolean findUser(String id);
+	
+	/**
+	 * 존재하는 이메일인지 확인
+	 * @param email
+	 * @return
+	 */
+	boolean findEmail(String email);
 	
 	/**
 	 * 회원정보 확인

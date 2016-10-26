@@ -12,8 +12,8 @@
 	
 	<insert id="insertUser" parameterType="user_data">
 		insert into UserData
-		(user_id, user_pass, user_name, user_mileage, phone_num, pass_question, pass_answer)
-		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{phoneNum}, #{passQuestion}, #{passAnswer} )
+		(user_id, user_pass, user_name, user_mileage, email, pass_question, pass_answer)
+		values (#{userId}, #{userPass}, #{userName}, #{userMileage}, #{email}, #{passQuestion}, #{passAnswer} )
 	</insert>
 	
 	<update id="updateUser" parameterType="user_data">
@@ -43,7 +43,7 @@
 		select user_id
 		from UserData
 		where user_name = #{userName} and 
-			  phone_num = #{phoneNum}
+			  email = #{email}
 	</select>
 	
 	<select id="selectPass_needAnswer" parameterType="user_pass" resultType="String">
@@ -65,6 +65,12 @@
 		select count(*)
 		from UserData
 		where user_id = #{userId}
+	</select>
+	
+	<select id="selectEmailCount" parameterType="String" resultType="Integer">
+		select count(*)
+		from UserData
+		where email = #{email}
 	</select>
 	
 	<select id="selectUserInfo" parameterType="String" resultType="user_data">

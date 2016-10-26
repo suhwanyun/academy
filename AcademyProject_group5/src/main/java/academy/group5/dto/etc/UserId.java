@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserId {
-	/** 회원 이름. */
-	private String userName;
+	/** 회원 ID. */
+	private String userId;
 
-	/** 핸드폰 번호. */
-	private Integer phoneNum;
+	/** 이메일 */
+	private String email;
 }

@@ -1,8 +1,9 @@
-var dupOk = false;
+var idDupOk = false;
+var emailDupOk = false;
 var passSame = false;
 $("#joinBtn").click(
 		function(event) {
-			if (passSame && dupOk && idCheck($("#userId").val())
+			if (passSame && emailDupOk &&idDupOk && idCheck($("#userId").val())
 					&& passCheck($("#userPass").val())
 					&& nameCheck($("#userName").val())
 					&& phoneCheck($("#phoneNum").val())
@@ -16,7 +17,7 @@ $("#joinBtn").click(
 		});
 
 $("#userId").change(function() {
-	dupOk = false;
+	idDupOk = false;
 	$("#trueorfalse").attr('class', 'glyphicon glyphicon-false');
 	if (idCheck($("#userId").val())) {
 		$("#userId").attr('class', 'true form-control');
@@ -58,11 +59,12 @@ $("#userName").change(function() {
 	}
 
 });
-$("#phoneNum").change(function() {
-	if (phoneCheck($("#phoneNum").val())) {
-		$("#phoneNum").attr('class', 'true form-control size8');
+$("#email").change(function() {
+	emailDupOk=false;
+	if (emailCheck($("#email").val())) {
+		$("#email").attr('class', 'true form-control size8');
 	} else {
-		$("#phoneNum").attr('class', 'false form-control size8');
+		$("#email").attr('class', 'false form-control size8');
 	}
 
 });
@@ -81,7 +83,7 @@ $("#passAnswer").change(function() {
 	}
 });
 //아이디 중복확인
-$("#duplicationCheckBtn").click(
+$("#idDuplicationCheckBtn").click(
 		function(event) {
 			event.preventDefault();
 			if (idCheck($("#userId").val())) {
@@ -95,13 +97,13 @@ $("#duplicationCheckBtn").click(
 
 						if (res == "true") {
 							alert("사용가능한 ID 입니다.");
-							dupOk = true;
+							idDupOk = true;
 							$("#trueorfalse").attr('class',
 									'glyphicon glyphicon-ok');
 
 						} else {
 							alert("이미 있는 ID 입니다.");
-							dupOk = false;
+							idDupOk = false;
 							$("#trueorfalse").attr('class',
 									'glyphicon glyphicon-false');
 						}
@@ -115,6 +117,44 @@ $("#duplicationCheckBtn").click(
 				});
 			} else {
 				alert("아이디를 확인하세요");
+			}
+
+		});
+//이메일 중복확인
+$("#emailDuplicationCheckBtn").click(
+		function(event) {
+			event.preventDefault();
+			if (idCheck($("#userId").val())) {
+				$.ajax({
+					type : "get",
+					url : "findEmail",
+					data : {
+						email : $("#email").val()
+					},
+					success : function(res) {
+
+						if (res == "true") {
+							alert("사용가능한 email 입니다.");
+							emailDupOk = true;
+							$("#emailtrueorfalse").attr('class',
+									'glyphicon glyphicon-ok');
+
+						} else {
+							alert("이미 있는 email 입니다.");
+							emailDupOk = false;
+							$("#emailtrueorfalse").attr('class',
+									'glyphicon glyphicon-false');
+						}
+
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+				});
+			} else {
+				alert("이메일을 확인하세요");
 			}
 
 		});

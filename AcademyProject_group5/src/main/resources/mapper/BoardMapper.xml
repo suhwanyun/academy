@@ -7,7 +7,7 @@
 	<select id="selectAllPosting" parameterType="paging" resultType="posting">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select posting_id, user_id, to_char(posting_time, 'YY/mm/dd hh24:mi') as posting_time,
+			 from (select posting_id, user_id, to_char(posting_time, 'YY/mm/dd hh24:mi'),
 			 			  posting_hits, posting_recommend, posting_title, posting_photo
 				  from Posting 
 				  where	posting_type = #{postingType}
@@ -26,14 +26,11 @@
 				      	  posting_content like '%'||#{searchData}||'%'
 				      </when>
 			      </choose>
-			      <choose>
-				      <when test="orderType == 'recommend'">
-					  order by posting_recommend desc, posting_time desc
-					  </when>
-					  <otherwise>
-					  order by posting_time desc, posting_recommend desc
-					  </otherwise>
-				  </choose>
+			      	  order by 
+				      <if test="orderType == 'recommend'">
+					  posting_recommend desc, 
+					  </if>
+					  posting_time desc				  
 				  ) sub
 			 )
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
@@ -42,7 +39,7 @@
 	 <select id="selectMostRecommendPosting" parameterType="most_recommend" resultType="posting">
 	 	select *
 	 	from (select rownum as rnum, sub.*
-	 		  from (select posting_id, user_id, to_char(posting_time, 'YY/mm/dd hh24:mi') as posting_time,
+	 		  from (select posting_id, user_id, to_char(posting_time, 'YY/mm/dd hh24:mi'),
 			   		 	   posting_hits, posting_recommend, posting_title, posting_photo
 			 	    from Posting
 			 	    where posting_recommend &gt; 0
@@ -101,7 +98,7 @@
 	</select>
 	
 	<select id="selectAllParentComment" parameterType="posting" resultType="posting_comment">
-		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YY/mm/dd hh24:mi') as comment_time, comment_content
+		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YY/mm/dd hh24:mi'), comment_content
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is null
@@ -109,7 +106,7 @@
 	</select>
 	
 	<select id="selectAllChildComment" parameterType="posting" resultType="posting_comment">
-		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YY/mm/dd hh24:mi') as comment_time, comment_content
+		select comment_id, user_id, comment_parent_id, to_char(comment_time, 'YY/mm/dd hh24:mi'), comment_content
 		from PostingComment
 		where posting_id = #{postingId} and posting_type = #{postingType}
 		  and comment_parent_id is not null
@@ -168,6 +165,11 @@
 		where posting_id = #{postingId} and posting_type = #{postingType}
 			 and user_id = #{userId}
 	</select>
+	
+	<delete id="deleteRecommend" parameterType="posting">
+		delete from Recommend
+		where posting_id = #{postingId} and posting_type = #{postingType}
+	</delete>
 	
 	<insert id="insertRecommendForUser" parameterType="recommend">
 		insert into Recommend 

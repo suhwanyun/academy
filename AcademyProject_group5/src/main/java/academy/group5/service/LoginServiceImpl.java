@@ -2,8 +2,6 @@ package academy.group5.service;
 
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,15 +39,16 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean join(UserData userdata) {
 		String id = userdata.getUserId();
-		// 아이디 중복 방지
-		if(id == null || id.equals("") || !findUser(userdata.getUserId())){
+		// 아이디/이메일 중복 방지
+		if(id == null || id.equals("") ||
+				!findUser(userdata.getUserId()) ||
+				!findEmail(userdata.getEmail()) ){
 			throw new WrongRequestException();
 		}
 		UserData encdata = toHash(userdata);
 		
 		loginRepo.setUser(encdata);
-		//notificationService.settingSet(userdata.getUserId());
-		// error!!!!!!!!!!!!!
+		notificationService.settingSet(userdata.getUserId());
 		
 		return true;
 	}
@@ -80,8 +79,8 @@ public class LoginServiceImpl implements LoginService {
 
 	/** 아이디 찾기 */
 	@Override
-	public String findId(String userName, Integer phoneNum) {
-		return loginRepo.getUserId(new UserId(userName, phoneNum));
+	public String findId(String userName, String email) {
+		return loginRepo.getUserId(new UserId(userName, email));
 	}
 	
 	/** 임시 비밀번호 받기 */
@@ -106,6 +105,18 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean findUser(String id) {
 		int finded = loginRepo.findUser(id);
+		
+		if(finded == 0){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	
+	/** 존재하는 이메일인지 확인 */
+	@Override
+	public boolean findEmail(String email) {
+		int finded = loginRepo.findEmail(email);
 		
 		if(finded == 0){
 			return true;
