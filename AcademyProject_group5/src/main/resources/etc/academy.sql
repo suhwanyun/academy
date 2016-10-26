@@ -318,7 +318,7 @@ ALTER TABLE UserMileage
 /* Comments */
 
 COMMENT ON COLUMN Notifications.noti_content IS '게시판 용';
-COMMENT ON COLUMN NotificationSetting.noti_time_interval IS '하루 단위';
+COMMENT ON COLUMN NotificationSetting.next_noti_time_interval IS '하루 단위';
 COMMENT ON COLUMN Term.term_classify IS '1 또는 2';
 COMMENT ON COLUMN UserData.phone_num IS '분실시 활용';
 
