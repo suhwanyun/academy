@@ -90,7 +90,7 @@
 
 
 				<sform:textarea placeholder="1자 이상 100자 이하 " maxlength="100"
-					path="passQuestion" class="form-control" />
+					path="passQuestion" class="form-control"/>
 
 
 			</div>

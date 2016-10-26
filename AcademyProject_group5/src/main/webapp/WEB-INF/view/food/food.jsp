@@ -35,7 +35,6 @@
 					
 							<input type="radio" name="sortVal" checked="checked" value="time">날짜
 							<input type="radio" name="sortVal" value="recommend">추천
-					
 							<button id="writeBtn" class="btn white bRight">글쓰기</button>
 					</div>
 

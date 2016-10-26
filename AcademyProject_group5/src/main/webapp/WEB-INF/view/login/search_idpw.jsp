@@ -13,11 +13,10 @@
 
 </head>
 
-<form>
 	<!--  로그인하기전 화면 -->
 
 	<div id="wrap">
-		<a href=""><img
+		<a href="/main"><img
 			class="circular--logo"
 			src="/images/logo.png" alt="" /></a>
 
@@ -43,7 +42,7 @@
 					<h1 class="member">Password찾기</h1>
 					<label for="userId">아이디</label><input placeholder="영문/숫자 4~10자" type="text" id="userId"><br>
 					<label for="passQuestion">비밀번호 질문</label>
-					<textarea id="passQuestion" readonly="readonly"> </textarea>
+					<output id="passQuestion"></output>
 					<br> <label for="passAnswer">질문 답</label><input placeholder="1자 이상 20 이하 " type="text"
 						id="passAnswer"><br>
 						<input id ="res" readonly="readonly" type="text" value="임시비밀번호 :"
@@ -54,7 +53,6 @@
 		</div>
 
 	</div>
-</form>
 </body>
 
 <script src="http://code.jquery.com/jquery.js"></script>

@@ -44,7 +44,7 @@ $("#passCheck").click(
 								$("#res").val("임시 비밀번호 : [" + res + "]");
 								once = false;
 							} else {
-								alert("아이디나 비밀번호 답을 확인하세요.");
+								alert("답이 올바르지 않습니다.");
 							}
 
 						},
@@ -52,16 +52,13 @@ $("#passCheck").click(
 							alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 						}
 					});
-				} else {
-					alert("질문 답 양식이 틀렸습니다.");
 				}
 			}
 
 		});
 $("#userId").change(
 		function() {
-			if (idCheck($("#userId").val())) {
-				$.ajax({
+			$.ajax({
 					type : "get",
 					url : "findQuestion",
 					data : {
@@ -69,11 +66,11 @@ $("#userId").change(
 					},
 					success : function(res) {
 						if (res.length > 1) {
-							$("#passQuestion").val(res)
+							$("#passQuestion").html(res)
 
 						} else {
 							$("#passQuestion")
-									.val("");
+									.val("내가 태어난 고향은?");
 						}
 
 					},
@@ -81,5 +78,5 @@ $("#userId").change(
 						alert("요청 실패!\n잠시 후 다시 시도해 주세요");
 					}
 				});
-			}
+			
 		});
