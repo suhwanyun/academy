@@ -61,6 +61,11 @@ public class LoginRepo {
 		return session.selectOne(stmt, id);
 	}
 	
+	public Integer findEmail(String email){
+		String stmt = LOGIN_NS + "selectEmailCount";
+		return session.selectOne(stmt, email);
+	}
+	
 	public UserData getInfo(String id){
 		String stmt = LOGIN_NS + "selectUserInfo";
 		return session.selectOne(stmt, id);

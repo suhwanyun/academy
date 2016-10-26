@@ -67,6 +67,12 @@
 		where user_id = #{userId}
 	</select>
 	
+	<select id="selectEmailCount" parameterType="String" resultType="Integer">
+		select count(*)
+		from UserData
+		where email = #{email}
+	</select>
+	
 	<select id="selectUserInfo" parameterType="String" resultType="user_data">
 		select user_id, user_name, phone_num, pass_question, pass_answer
 		from UserData

@@ -52,6 +52,13 @@ public interface LoginService {
 	boolean findUser(String id);
 	
 	/**
+	 * 존재하는 이메일인지 확인
+	 * @param email
+	 * @return
+	 */
+	boolean findEmail(String email);
+	
+	/**
 	 * 회원정보 확인
 	 * @param id
 	 * @return

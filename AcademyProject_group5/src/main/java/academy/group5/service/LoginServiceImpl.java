@@ -41,8 +41,10 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean join(UserData userdata) {
 		String id = userdata.getUserId();
-		// 아이디 중복 방지
-		if(id == null || id.equals("") || !findUser(userdata.getUserId())){
+		// 아이디/이메일 중복 방지
+		if(id == null || id.equals("") ||
+				!findUser(userdata.getUserId()) ||
+				!findEmail(userdata.getEmail()) ){
 			throw new WrongRequestException();
 		}
 		UserData encdata = toHash(userdata);
@@ -105,6 +107,18 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean findUser(String id) {
 		int finded = loginRepo.findUser(id);
+		
+		if(finded == 0){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	
+	/** 존재하는 이메일인지 확인 */
+	@Override
+	public boolean findEmail(String email) {
+		int finded = loginRepo.findEmail(email);
 		
 		if(finded == 0){
 			return true;
