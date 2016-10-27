@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.UserData;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
-import academy.group5.util.GCM;
 
 /**
  * 어플 컨트롤러
@@ -48,7 +52,7 @@ public class PhoneController {
 		return "redirect:/main";
 	}
 	
-	/** 식사(먹거리)추천 게시판에 글 작성 */
+	/** GCM 등록 */
 	@RequestMapping(value="/registGCM", method=RequestMethod.POST)
 	public @ResponseBody String addFood(@RequestParam String userId, @RequestParam String phoneId){
 		int result = phoneService.setGCMData(userId, phoneId);
@@ -59,11 +63,16 @@ public class PhoneController {
 		return "true";
 	}
 	
-	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public String test(){
-		new GCM("테스트입니다", "테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다 / 테스트 메세지를 출력합니다", gcmRepo.getAllUser(), GCM.TYPE_NOTICE);
-		return "index";
+	/** 알림 설정 데이터 획득 */
+	@RequestMapping(value="/alarmTime", method=RequestMethod.POST)
+	public String notiSettingList(@RequestParam String userId){
+		Gson gson = new Gson();
+		List<NotificationSetting> settingList = phoneService.getNotificationSettingList(userId);
+		
+		if(settingList == null){
+			return "false";
+		}
+		return gson.toJson(settingList);
 	}
-	
 	
 }

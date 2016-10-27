@@ -1,9 +1,12 @@
 package academy.group5.repo;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.UserData;
 
 @Repository
@@ -20,4 +23,9 @@ public class PhoneRepo {
 		return session.update(stmt, userData);
 	}
 	
+	/** 알람 설정 정보 획득 */
+	public List<NotificationSetting> getNotificationSettingList(String id) {
+		String stmt = PHONE_NS + "selectNotificationSettingForPhone";
+		return session.selectList(stmt, id);
+	}
 }
