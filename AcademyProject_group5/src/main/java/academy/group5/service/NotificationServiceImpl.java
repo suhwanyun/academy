@@ -18,7 +18,7 @@ import academy.group5.util.GCM;
 @Transactional
 public class NotificationServiceImpl implements NotificationService{
 
-	private final int SETTING_QUANTITY = 5;
+	private final int SETTING_QUANTITY = 4;
 	@Autowired
 	NotificationRepo notiRepo;
 	
@@ -75,13 +75,16 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public boolean settingSet(String userId) {		
 
+		char allday = 0x7f; // 0111 1111
+		char weekday = 0x7C; // 0111 1100
+		char weekend = 0x03; // 0000 0011
+		
 		List<NotificationSetting> settingDataList = new ArrayList<>();
 		// 알림 설정 초기화
-		settingDataList.add(new NotificationSetting("lecture", userId, 1, 7, 0, 10));
-		settingDataList.add(new NotificationSetting("noti", userId, 1, 1, 19, 0));
-		settingDataList.add(new NotificationSetting("food", userId, 1, 1, 11, 0));
-		settingDataList.add(new NotificationSetting("play", userId, 1, 1, 22, 0));
-		settingDataList.add(new NotificationSetting("place", userId, 1, 7, 9, 0));
+		settingDataList.add(new NotificationSetting("lecture", userId, 1, allday, 0, 10));
+		settingDataList.add(new NotificationSetting("food", userId, 1, weekday, 11, 0));
+		settingDataList.add(new NotificationSetting("play", userId, 1, weekday, 22, 0));
+		settingDataList.add(new NotificationSetting("place", userId, 1, weekend, 9, 0));
 
 		for(NotificationSetting settingData : settingDataList){
 			int result = notiRepo.setNotificationSetting(settingData);
