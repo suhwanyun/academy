@@ -12,18 +12,17 @@
 	
 	<insert id="insertNotificationSetting" parameterType="notification_setting">
 		insert into NotificationSetting
-			(noti_type, user_id, noti_on, next_noti_time, noti_time_interval, noti_hour, noti_min)
+			(noti_type, user_id, noti_on, week_code, noti_hour, noti_min)
 		values
-			(#{notiType}, #{userId}, #{notiOn}, sysdate + 1, #{notiTimeInterval}, #{notiHour}, #{notiMin})
+			(#{notiType}, #{userId}, #{notiOn}, #{weekCode}, #{notiHour}, #{notiMin})
 	</insert>
 	
 	<update id="updateNotificationSetting" parameterType="notification_setting">
 		update NotificationSetting
-		set noti_on = #{notiOn}
-			, noti_time = #{notiTime}
-		<if test="notiTimeInterval != null">
-			, noti_time_interval = #{notiTimeInterval}
-		</if>
+		set noti_on = #{notiOn},
+			week_code = #{weekCode},
+			noti_hour = #{notiHour},
+			noti_min = #{notiMin}
 		where noti_type = #{notiType} and user_id = #{userId}
 	</update>
 	
