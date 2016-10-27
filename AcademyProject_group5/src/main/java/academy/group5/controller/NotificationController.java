@@ -34,6 +34,7 @@ public class NotificationController {
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
 		model.addAttribute("settingData", service.getSettingList(id));
+
 		return "noti/noti";
 	}
 	
