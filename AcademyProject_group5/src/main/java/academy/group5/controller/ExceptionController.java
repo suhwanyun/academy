@@ -20,13 +20,13 @@ public class ExceptionController {
 	
 	@ExceptionHandler(DataAccessException.class)
 	public String dbException(Exception e){	
-		logger.trace("\n\nDataAccessException 정보 :\n{}", e);
+		logger.trace("\n\nDataAccessException 정보 :\n", e);
 		return "/error/error_page";
 	}
 	
 	@ExceptionHandler(WrongRequestException.class)
 	public String logicException(Exception e){	
-		logger.trace("\n\nlogicException 정보 :\n{}", e);
+		logger.trace("\n\nlogicException 정보 :\n", e);
 		return "/error/error_page_logic";
 	}
 

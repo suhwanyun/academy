@@ -39,7 +39,7 @@ public class NotificationController {
 	}
 	
 	/** 알림 설정 */
-	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
+	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.POST)
 	public @ResponseBody String notiSetting(HttpSession session, @RequestParam NotificationSettingList settingData){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
