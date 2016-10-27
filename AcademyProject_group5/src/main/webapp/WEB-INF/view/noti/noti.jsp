@@ -29,12 +29,12 @@
 		<c:forEach items="${settingData.settingList}" var="list" varStatus="status">
 			<table>
 				<tr>
-					<sform:hidden path="list[${status.index }].notiType" value="${list.notiType }"></sform:hidden>
-					<sform:hidden path="list[${status.index }].userId" value="${list.userId }"></sform:hidden>
-					<sform:hidden path="list[${status.index }].weekCode" value="${list.weekCode }"></sform:hidden>
-					<sform:hidden path="list[${status.index }].notiOn" value="${list.notiOn }"></sform:hidden>
-					<sform:hidden path="list[${status.index }].notiHour" value="${list.notiHour }"></sform:hidden>
-					<sform:hidden path="list[${status.index }].notiMin" value="${list.notiMin }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].notiType" value="${list.notiType }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].userId" value="${list.userId }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].weekCode" value="${list.weekCode }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].notiOn" value="${list.notiOn }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].notiHour" value="${list.notiHour }"></sform:hidden>
+					<sform:hidden path="settingList[${status.index }].notiMin" value="${list.notiMin }"></sform:hidden>
 					<c:choose>
 						<c:when test="${list.notiType == 'lecture'}">
 							<td>강의 시간</td>
