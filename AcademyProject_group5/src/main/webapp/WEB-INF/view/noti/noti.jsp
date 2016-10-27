@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,8 +10,8 @@
 <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-	<%-- <jsp:include page="../../header/header.jsp" />
-	<sform:form method="post" action="/notiSetting" modelAttribute="settingList">
+	<jsp:include page="/WEB-INF/view/header/header.jsp" />
+	<sform:form method="post" action="/notiSetting" modelAttribute="settingData">
 		<h1 class="member">알림 설정</h1>
 		<table>
 			<colgroup>
@@ -24,44 +25,50 @@
 				<td><button>전체 끄기</button></td>
 			</tr>
 		</table>
+		<c:forEach items="settingData" var="list">
 		<table>
 			<tr>
-				<td>강의시간</td>
-				<td><sform:input path="" type="text" readonly="readonly" value=""></td>
+				<sform:hidden path="list.notiType"></sform:hidden>
+				<sform:hidden path="list.userId"></sform:hidden>
+				<sform:hidden path="list.nextNotiDate"></sform:hidden>
+				<c:choose>
+       				<c:when test="${list.notiType == 'lecture'}">
+       				<td>강의 시간</td>
+       				
+       				<td></td>
+     				</c:when>
+     				<c:when test="${list.notiType == 'noti'}">
+       				<td>강의 관련</td>
+     				</c:when>
+     				<c:when test="${list.notiType == 'place'}">
+       				<td>명소 알림</td>
+     				</c:when>
+     				<c:when test="${list.notiType == 'play'}">
+       				<td>오락 알림</td>
+     				</c:when>
+     				<c:when test="${list.notiType == 'food'}">
+       				<td>음식 알림</td>
+     				</c:when>
+       		    </c:choose>
+				<c:if test="${list.notiType == 'food'}">
+				<td>${list.notiType }</td>
+				</c:if>
 				<td></td>
 				<td></td>
 				<td></td>
-			</tr>
-			<tr>
-				<td>강의 관련</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>먹거리</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>오락</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>명소</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>
+					<c:if test="${list.notiOn == 1}">
+						<span id="${notiType }+toggleBtn">ON</span>
+					</c:if>
+					<c:if test="${list.notiOn == 0}">
+						<span id="${notiType }+toggleBtn">OFF</span>
+					</c:if>
+				</td>
 			</tr>
 		</table>
+		</c:forEach>
+		
 		<sform:button id="sendSetting" type="submit">설정 저장</sform:button>
-	</sform:form> --%>
+	</sform:form> 
 </body>
 </html>
