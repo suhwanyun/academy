@@ -11,7 +11,7 @@
 	</c:if>
 	<c:if test="${!empty nextJsp}">
 		<script>
-			$(location).attr('href', '/${nextJsp}');
+			$(location).attr('href', '${nextJsp}');
 		</script>
 		<c:remove var="nextJsp" />
 	</c:if>

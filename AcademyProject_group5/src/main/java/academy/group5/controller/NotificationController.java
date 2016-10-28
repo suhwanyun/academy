@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
@@ -40,15 +41,15 @@ public class NotificationController {
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.POST)
-	public @ResponseBody String notiSetting(HttpSession session, NotificationSettingList settingData){
+	public String notiSetting(HttpSession session, RedirectAttributes redAttr,
+			NotificationSettingList settingData){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
-		
-		try{ 
-			service.settingModify(id, settingData); 
-		} catch(WrongRequestException e){ return "false"; }
+		service.settingModify(id, settingData); 
+		redAttr.addFlashAttribute("msg", "설정되었습니다.");
+		redAttr.addFlashAttribute("nextJsp", "/noti/notiSettingjsp.");
 
-		return "true";
+		return "redirect:/message";
 	}
 	
 }

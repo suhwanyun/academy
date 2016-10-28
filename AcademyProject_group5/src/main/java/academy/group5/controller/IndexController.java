@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Lecture;
@@ -46,6 +47,13 @@ public class IndexController {
 	public String mainPage(){
 
 		return "/index";
+	}
+	
+	/** 메세지 표시 화면 */
+	@RequestMapping(value="/message", method=RequestMethod.GET)
+	public String messagePage(){
+		
+		return "message";
 	}
 		
 	/** 로그인 화면 */
