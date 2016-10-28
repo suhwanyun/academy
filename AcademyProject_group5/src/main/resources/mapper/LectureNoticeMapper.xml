@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="academy.repo.NoticeMapper">
+<mapper namespace="academy.repo.LectureNoticeMapper">
 	
 	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="lecture_notice">
 		select notice_time, lecture_id, notice_type, notice_title
