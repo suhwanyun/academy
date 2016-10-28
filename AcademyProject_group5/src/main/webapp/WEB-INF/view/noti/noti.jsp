@@ -9,6 +9,14 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 </script>
+<style type="text/css">
+ .weekBtnOn{
+  background-color: blue;
+ }
+ .weekBtnOff{
+  background-color: gray;
+ }
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
@@ -87,12 +95,9 @@
 						</td>
 					</c:if>
 					<td></td>
-					<td><c:if test="${list.notiOn == 1}">
-							<output>ON</output>
-						</c:if>
-						<c:if test="${list.notiOn == 0}">
-							<output>OFF</output>
-						</c:if></td>
+					<td>
+						<input id="${list.notiType }_toggle" checked data-toggle="toggle" type="checkbox" value="${list.notiOn}">
+					</td>
 				</tr>
 			</table>
 		</c:forEach>
@@ -133,26 +138,93 @@
           <h4 class="modal-title">요일 설정</h4>
         </div>
         <div class="modal-body">
-        <p>요일설정</p>
-        </div>
+        	<input  id="day0" type="hidden" value="">
+        	<button id="day1" value="" onclick="btnToggle(this)">월</button>
+        	<button id="day2" value="" onclick="btnToggle(this)">화</button>
+        	<button id="day3" value="" onclick="btnToggle(this)">수</button>
+        	<button id="day4" value="" onclick="btnToggle(this)">목</button>
+        	<button id="day5" value="" onclick="btnToggle(this)">금</button>
+        	<button id="day6" value="" onclick="btnToggle(this)">토</button>
+        	<button id="day7" value="" onclick="btnToggle(this)">일</button>
+       
+       </div>
         <div class="modal-footer">
-        	<input id="target" type="hidden" value="">
-          <button id="settingBtn" type="button" class="btn btn-default" data-dismiss="modal">설정 완료</button>
+        	<input id="dayTarget" type="hidden" value="">
+          <button id="daySettingBtn" type="button" class="btn btn-default" data-dismiss="modal">설정 완료</button>
         </div>
       </div>
       
     </div>
   </div>
 <script>
-$("document").ready(function(){
-	var a = $("#food_weekCode").val();
-	alert($("#play_weekCode").val());
-	alert($("#place_weekCode").val());
-});
-var hourCheck = true;
+//시간,분 확인을 위한 변수
+var hourCheck = true; 
 var minCheck = true;
+//요일의 바이너리코드를 받을 변수
+var food_WeekCode;
+var play_WeekCode;
+var place_WeekCode;
+
+function daySettingFun(code){
+	var day = new Array(8);
+	for(var i = 0; i<code.length; i++){
+		day[i]=code.charAt(i);
+		$("#day"+i).val(day[i]);
+		if($("#day"+i).val()==1){
+			$("#day"+i).attr("class", "weekBtnOn");
+		}else{
+			$("#day"+i).attr("class", "weekBtnOff");
+		}
+	}
+}
+function btnToggle(el){
+	if($(el).val()=="1"){
+		$(el).val("0");
+		$(el).attr("class", "weekBtnOff");
+	}else{
+		$(el).val("1");
+		$(el).attr("class", "weekBtnOn");
+	}
+	
+}
+function myLpad(string, padLength, padString){
+    var s = string;
+    while(s.length < padLength)
+        s = padString + s;
+    return s;
+}
+ 
+$("#daySettingBtn").click(function(){
+	var send_WeekCode="";
+	
+	for(var i = 0; i<8; i++){
+		send_WeekCode+=$("#day"+i).val();
+	}
+	var temp = String.fromCharCode(parseInt(send_WeekCode,2));
+	$("#"+$("#dayTarget").val()+"_weekCode").val(temp);
+	
+	
+})
+
 $("#food_weekSetting").click(function(){
-	alert("성공");
+	var tempFood_WeekCode = ($("#food_weekCode").val()).charCodeAt(0).toString(2);
+	food_WeekCode = myLpad(tempFood_WeekCode,8,0);
+	daySettingFun(food_WeekCode);
+	$("#dayTarget").val("food");
+	$("#dayModal").modal();
+})
+$("#play_weekSetting").click(function(){
+	var tempPlay_WeekCode = ($("#play_weekCode").val()).charCodeAt(0).toString(2);
+	play_WeekCode = myLpad(tempPlay_WeekCode,8,0);
+	daySettingFun(play_WeekCode);
+	$("#dayTarget").val("play");
+	$("#dayModal").modal();
+})
+$("#place_weekSetting").click(function(){
+	var tempPlace_WeekCode = ($("#place_weekCode").val()).charCodeAt(0).toString(2);
+	place_WeekCode = myLpad(tempPlace_WeekCode,8,0);
+	daySettingFun(place_WeekCode);
+	$("#dayTarget").val("place");
 	$("#dayModal").modal();
 })
 $("#lecture_timeSetting").click(function(){
