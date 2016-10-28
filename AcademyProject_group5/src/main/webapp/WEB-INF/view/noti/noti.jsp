@@ -332,13 +332,13 @@ function allOn(){
 	$("#lecture_notiOn").val("1");
 	$("#food_toggle").bootstrapToggle('on');
 	$("#food_toggle").val("1");
-	$("#food_toggle").val("1");
+	$("#food_notiOn").val("1");
 	$("#play_toggle").bootstrapToggle('on');
 	$("#play_toggle").val("1");
-	$("#play_toggle").val("1");
+	$("#play_notiOn").val("1");
 	$("#place_toggle").bootstrapToggle('on');
 	$("#place_toggle").val("1");
-	$("#place_toggle").val("1");
+	$("#place_notiOn").val("1");
 }
 function allOff(){
 	$("#lecture_toggle").bootstrapToggle('off');
@@ -346,13 +346,13 @@ function allOff(){
 	$("#lecture_notiOn").val("0");
 	$("#food_toggle").bootstrapToggle('off');
 	$("#food_toggle").val("0");
-	$("#food_toggle").val("0");
+	$("#food_notiOn").val("0");
 	$("#play_toggle").bootstrapToggle('off');
 	$("#play_toggle").val("0");
-	$("#play_toggle").val("0");
+	$("#play_notiOn").val("0");
 	$("#place_toggle").bootstrapToggle('off');
 	$("#place_toggle").val("0");
-	$("#place_toggle").val("0");
+	$("#place_notiOn").val("0");
 }
 $("#all_ONBtn").click(function(event){
 	event.preventDefault();
