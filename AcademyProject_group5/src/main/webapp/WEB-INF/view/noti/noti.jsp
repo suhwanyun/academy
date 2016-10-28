@@ -7,8 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-</script>
 <style type="text/css">
  .weekBtnOn{
   background-color: blue;
@@ -17,6 +15,8 @@
   background-color: gray;
  }
 </style>
+  <script src="/js/bootstrap-toggle.min.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
@@ -290,7 +290,12 @@ $("#settingMin").change(function(){
 		alert("0~59사이의 숫자를 입력해주세요");
 	}
 });
-</script>
 
+$("#food_toggle").click(function(){
+	if($("#food_toggle").val()=='1'){
+		alert("성공");
+	}
+})
+</script>
 </body>
 </html>

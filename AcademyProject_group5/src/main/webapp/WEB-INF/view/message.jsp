@@ -15,4 +15,5 @@
 		</script>
 		<c:remove var="nextJsp" />
 	</c:if>
+	<script src="http://code.jquery.com/jquery.js"></script>
 </html>
