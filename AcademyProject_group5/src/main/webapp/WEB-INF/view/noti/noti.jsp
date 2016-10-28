@@ -162,18 +162,21 @@ var minCheck = true;
 var food_WeekCode;
 var play_WeekCode;
 var place_WeekCode;
+//토글버튼 초기화 변수
+var isFirst = true;
 $(document).ready(function(){
 	onoffCheck('#lecture_toggle');
 	onoffCheck('#food_toggle');
 	onoffCheck('#play_toggle');
 	onoffCheck('#place_toggle');
+	isFirst = false;
 });
 //토글버튼 초기 설정
 function onoffCheck(el){
 	if($(el).val()=='1'){
 		$(el).bootstrapToggle('on');
 		$(el).val("1");
-	}else{
+	}else if($(el).val()=='0'){
 		$(el).bootstrapToggle('off');
 		$(el).val("0");
 	}
@@ -191,6 +194,7 @@ function daySettingFun(code){
 		}
 	}
 }
+//요일 토글 버튼
 function btnToggle(el){
 	if($(el).val()=="1"){
 		$(el).val("0");
@@ -318,12 +322,14 @@ $("#place_toggle").change(function(){
 	toggleFun("#place");
 });
 function toggleFun(el){
-	if($(el+"_toggle").val()=='1'){
-		$(el+"_toggle").val("0");
-		$(el+"_notiOn").val("0");
-	}else{
-		$(el+"_toggle").val("1");
-		$(el+"_notiOn").val("1");
+	if(!isFirst){
+		if($(el+"_toggle").val()=='1'){
+			$(el+"_toggle").val("0");
+			$(el+"_notiOn").val("0");
+		}else{
+			$(el+"_toggle").val("1");
+			$(el+"_notiOn").val("1");
+		}
 	}
 }
 function allOn(){
@@ -360,7 +366,7 @@ $("#all_ONBtn").click(function(event){
 });
 $("#all_OFFBtn").click(function(event){
 	event.preventDefault();
-	allOff();
+	allOff(); 
 });
 </script>
 </body>
