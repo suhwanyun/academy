@@ -4,7 +4,7 @@ import java.util.List;
 
 import academy.group5.dto.LectureNotice;
 
-public interface NoticeService {
+public interface LectureNoticeService {
 	/**
 	 * 전체 강의의 공지 가져오기 page=5
 	 * @param userId

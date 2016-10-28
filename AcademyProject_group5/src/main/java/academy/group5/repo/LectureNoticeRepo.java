@@ -10,9 +10,9 @@ import academy.group5.dto.LectureNotice;
 import academy.group5.dto.etc.LecturePaging;
 
 @Repository
-public class NoticeRepo {
+public class LectureNoticeRepo {
 	
-	private final String LOGIN_NS = "academy.repo.NoticeMapper.";
+	private final String LOGIN_NS = "academy.repo.LectureNoticeMapper.";
 	
 	@Autowired
 	SqlSessionTemplate session;

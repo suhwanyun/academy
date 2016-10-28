@@ -39,7 +39,7 @@
 		<mapper resource="mapper/UserDataMapper.xml"/>
 		<mapper resource="mapper/LectureMapper.xml"/>
 		<mapper resource="mapper/BoardMapper.xml"/>
-		<mapper resource="mapper/NoticeMapper.xml"/>
+		<mapper resource="mapper/LectureNoticeMapper.xml"/>
 		<mapper resource="mapper/NotificationMapper.xml"/>
 		<mapper resource="mapper/TermMapper.xml"/>
 		<mapper resource="mapper/GCMMapper.xml"/>
