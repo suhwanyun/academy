@@ -33,7 +33,7 @@ public class PhoneRepo {
 	
 	/** 가장 추천을 많이 받은 글 탐색 */
 	public Posting getMostRecommendPosting(MostRecommend searchData) {
-		String stmt = PHONE_NS + "selectMostRecommendPostingForNoti";
+		String stmt = PHONE_NS + "selectMostRecommendPostingForPhone";
 		return session.selectOne(stmt, searchData);
 	}
 	
