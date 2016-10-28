@@ -15,8 +15,6 @@
   background-color: gray;
  }
 </style>
-<script src="/js/bootstrap-toggle.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
@@ -96,7 +94,7 @@
 					</c:if>
 					<td></td>
 					<td>
-						<input id="${list.notiType }_toggle" checked data-toggle="toggle" type="checkbox" value="${list.notiOn}">
+						<input id="${list.notiType }_toggle" data-toggle="toggle" type="checkbox" value="${list.notiOn}">
 					</td>
 				</tr>
 			</table>
@@ -164,6 +162,18 @@ var minCheck = true;
 var food_WeekCode;
 var play_WeekCode;
 var place_WeekCode;
+$(document).ready(function(){
+	//onoffCheck()
+	
+	
+});
+function onoffCheck(el){
+	if($(el).val()=='1'){
+		$(el).bootstrapToggle('on');
+	}else{
+		$(el).bootstrapToggle('off');
+	}
+}
 
 function daySettingFun(code){
 	var day = new Array(8);
@@ -291,11 +301,9 @@ $("#settingMin").change(function(){
 	}
 });
 
-$("#food_toggle").click(function(){
-	if($("#food_toggle").val()=='1'){
-		alert("성공");
-	}
-})
+$("#lecture_toggle").change(function(){
+	
+});
 </script>
 </body>
 </html>

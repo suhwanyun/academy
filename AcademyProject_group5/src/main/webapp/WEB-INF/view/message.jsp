@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 <html>
-<jsp:include page="/WEB-INF/view/header/header.jsp" />
+
 	<c:if test="${!empty msg}">
 		<script>
 			alert('${msg}');
