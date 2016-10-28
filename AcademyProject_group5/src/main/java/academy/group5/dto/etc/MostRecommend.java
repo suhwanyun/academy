@@ -14,10 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MostRecommend {
 	
-	/** 검색 기간(하루 단위) */
-	private int period;
-
 	/** 게시판 종류. */
 	private String postingType;
 	
+	/** 검색 기간(하루 단위) */
+	private int period;
 }

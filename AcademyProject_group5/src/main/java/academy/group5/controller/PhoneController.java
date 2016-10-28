@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
@@ -75,4 +76,15 @@ public class PhoneController {
 		return gson.toJson(settingList);
 	}
 	
+	/** 알림 출력 데이터 획득 */
+	@RequestMapping(value="/alarmData", method=RequestMethod.POST)
+	public String notiDataList(@RequestParam String postingType){
+		Gson gson = new Gson();
+		Posting notiData = phoneService.getNotificationData(postingType);
+		
+		if(notiData == null){
+			return "false";
+		}
+		return gson.toJson(notiData);
+	}
 }

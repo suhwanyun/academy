@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.MostRecommend;
 import academy.group5.repo.PhoneRepo;
 
 @Service
 @Transactional
 public class PhoneServiceImpl implements PhoneService {
+	
+	/** 추천수 집계 기간 */
+	private final int GATHER_PERIOD_DAY = 1;
+	private final int GATHER_PERIOD_WEEK = 1;
 
 	@Autowired
 	PhoneRepo phoneRepo;
@@ -27,6 +33,23 @@ public class PhoneServiceImpl implements PhoneService {
 	public List<NotificationSetting> getNotificationSettingList(String userId) {
 		
 		return phoneRepo.getNotificationSettingList(userId);
+	}
+
+	@Override
+	public Posting getNotificationData(String postingType) {
+		// 추천수 집계 기간 설정
+		int recommendPeriod = GATHER_PERIOD_DAY; 
+		if(postingType.equals("place")){
+			recommendPeriod = GATHER_PERIOD_WEEK;
+		}
+		
+		Posting postingData = phoneRepo.getMostRecommendPosting(new MostRecommend(postingType, recommendPeriod));
+		// 집계 기간 동안 추천을 받은 게시글이 하나도 없으면 가장 최신글을 검색
+		if(postingData == null){
+			postingData = phoneRepo.getNewestPosting(postingType);
+		}
+		
+		return postingData;
 	}
 
 }

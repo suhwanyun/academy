@@ -15,5 +15,31 @@
 		from NotificationSetting
 		where user_id = #{userId} and noti_on = 1
 	</select>
+	
+	<select id="selectMostRecommendPostingForPhone" parameterType="most_recommend" resultType="posting">
+		select posting_title, RPAD(posting_content, LENGTHB(posting_content)+3, '.')
+	 	from (select rownum as rnum, sub.*
+	 		  from (select posting_title, RPAD(SUBSTR(posting_content, 1, 20) as posting_content
+			 	    from Posting
+			 	    where posting_recommend &gt; 0
+			 	      and posting_time &gt; sysdate - #{period}
+			 	      and posting_type = #{postingType}
+			 	    order by posting_recommend desc
+			 	    ) sub
+			  )
+		where rnum = 1
+	</select>
+	
+	<select id="selectNewestPostingForPhone" parameterType="String" resultType="posting">
+		select posting_title, RPAD(posting_content, LENGTHB(posting_content)+3, '.')
+	 	from (select rownum as rnum, sub.*
+	 		  from (select posting_title, RPAD(SUBSTR(posting_content, 1, 20) as posting_content
+			 	    from Posting
+			 	    where posting_type = #{postingType}
+			 	    order by posting_time desc
+			 	    ) sub
+			  )
+		where rnum = 1
+	</select>
 
 </mapper>
