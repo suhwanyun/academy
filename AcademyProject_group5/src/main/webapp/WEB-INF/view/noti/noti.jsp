@@ -169,11 +169,14 @@ $(document).ready(function(){
 	onoffCheck('#place_toggle');
 	
 });
+//토글버튼 초기 설정
 function onoffCheck(el){
 	if($(el).val()=='1'){
 		$(el).bootstrapToggle('on');
+		$(el).val("1");
 	}else{
 		$(el).bootstrapToggle('off');
+		$(el).val("0");
 	}
 }
 
@@ -304,16 +307,61 @@ $("#settingMin").change(function(){
 });
 
 $("#lecture_toggle").change(function(){
-	
+	toggleFun("#lecture");
 });
 $("#food_toggle").change(function(){
-	
+	toggleFun("#food");
 });
 $("#play_toggle").change(function(){
-	
+	toggleFun("#play");
 });
 $("#place_toggle").change(function(){
-	
+	toggleFun("#place");
+});
+function toggleFun(el){
+	if($(el+"_toggle").val()=='1'){
+		$(el+"_toggle").val("0");
+		$(el+"_notiOn").val("0");
+	}else{
+		$(el+"_toggle").val("1");
+		$(el+"_notiOn").val("1");
+	}
+}
+function allOn(){
+	$("#lecture_toggle").bootstrapToggle('on');
+	$("#lecture_toggle").val("1");
+	$("#lecture_notiOn").val("1");
+	$("#food_toggle").bootstrapToggle('on');
+	$("#food_toggle").val("1");
+	$("#food_toggle").val("1");
+	$("#play_toggle").bootstrapToggle('on');
+	$("#play_toggle").val("1");
+	$("#play_toggle").val("1");
+	$("#place_toggle").bootstrapToggle('on');
+	$("#place_toggle").val("1");
+	$("#place_toggle").val("1");
+}
+function allOff(){
+	$("#lecture_toggle").bootstrapToggle('off');
+	$("#lecture_toggle").val("0");
+	$("#lecture_notiOn").val("0");
+	$("#food_toggle").bootstrapToggle('off');
+	$("#food_toggle").val("0");
+	$("#food_toggle").val("0");
+	$("#play_toggle").bootstrapToggle('off');
+	$("#play_toggle").val("0");
+	$("#play_toggle").val("0");
+	$("#place_toggle").bootstrapToggle('off');
+	$("#place_toggle").val("0");
+	$("#place_toggle").val("0");
+}
+$("#all_ONBtn").click(function(event){
+	event.preventDefault();
+	allOn();
+});
+$("#all_OFFBtn").click(function(event){
+	event.preventDefault();
+	allOff();
 });
 </script>
 </body>
