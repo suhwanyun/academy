@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
@@ -72,9 +73,10 @@ public class PhoneController {
 	@RequestMapping(value="/alarmTime", method=RequestMethod.POST)
 	public @ResponseBody String notiSettingList(@RequestParam String userId){
 		Gson gson = new Gson();
-		List<NotificationSetting> settingList = phoneService.getNotificationSettingList(userId);
-		
-		if(settingList == null){
+		List<NotificationSetting> settingList = null;
+		try{
+			settingList = phoneService.getNotificationSettingList(userId);
+		} catch(WrongRequestException e){
 			return "false";
 		}
 		return gson.toJson(settingList);
@@ -84,9 +86,11 @@ public class PhoneController {
 	@RequestMapping(value="/alarmData", method=RequestMethod.POST)
 	public @ResponseBody String notiDataList(@RequestParam String postingType){
 		Gson gson = new Gson();
-		Posting notiData = phoneService.getNotificationData(postingType);
 		
-		if(notiData == null){
+		Posting notiData = null;
+		try{
+			notiData = phoneService.getNotificationData(postingType);
+		}catch(WrongRequestException e){
 			return "false";
 		}
 		return gson.toJson(notiData);
