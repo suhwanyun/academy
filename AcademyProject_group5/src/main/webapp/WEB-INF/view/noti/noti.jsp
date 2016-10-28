@@ -163,8 +163,10 @@ var food_WeekCode;
 var play_WeekCode;
 var place_WeekCode;
 $(document).ready(function(){
-	//onoffCheck()
-	
+	onoffCheck('#lecture_toggle');
+	onoffCheck('#food_toggle');
+	onoffCheck('#play_toggle');
+	onoffCheck('#place_toggle');
 	
 });
 function onoffCheck(el){
@@ -302,6 +304,15 @@ $("#settingMin").change(function(){
 });
 
 $("#lecture_toggle").change(function(){
+	
+});
+$("#food_toggle").change(function(){
+	
+});
+$("#play_toggle").change(function(){
+	
+});
+$("#place_toggle").change(function(){
 	
 });
 </script>
