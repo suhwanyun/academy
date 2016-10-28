@@ -42,7 +42,7 @@ public class PhoneController {
 	
 	/** 어플 로그인 */
 	@RequestMapping(value="/appLogin", method=RequestMethod.POST)
-	public String login(HttpSession session, RedirectAttributes redAttr,
+	public String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
 		UserData data = loginService.login(userId, userPass);
@@ -50,11 +50,8 @@ public class PhoneController {
 		if(data != null){	
 			session.setAttribute("user", data);	
 		} else {
-			redAttr.addFlashAttribute("msg", "로그인에 실패하였습니다.");
-			redAttr.addFlashAttribute("nextJsp", "/main");
-			return "redirect:/message";
+			model.addAttribute("msg", "로그인에 실패하였습니다.");
 		}
-		
 		return "index";
 	}
 	
