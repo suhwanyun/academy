@@ -67,7 +67,8 @@ public class PhoneController {
 	}
 	
 	/** 알림 설정 데이터 획득 */
-	@RequestMapping(value="/alarmTime", method=RequestMethod.POST)
+	@RequestMapping(value="/alarmTime", method=RequestMethod.POST,
+			produces="text/plain;charset=UTF-8")
 	public @ResponseBody String notiSettingList(@RequestParam String userId){
 		Gson gson = new Gson();
 		List<NotificationSetting> settingList = null;
@@ -80,7 +81,8 @@ public class PhoneController {
 	}
 	
 	/** 알림 출력 데이터 획득 */
-	@RequestMapping(value="/alarmData", method=RequestMethod.POST)
+	@RequestMapping(value="/alarmData", method=RequestMethod.POST, 
+			produces="text/plain;charset=UTF-8")
 	public @ResponseBody String notiDataList(@RequestParam String postingType){
 		Gson gson = new Gson();
 		
