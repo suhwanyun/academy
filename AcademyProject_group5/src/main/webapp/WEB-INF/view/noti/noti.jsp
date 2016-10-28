@@ -15,8 +15,8 @@
   background-color: gray;
  }
 </style>
-  <script src="/js/bootstrap-toggle.min.js"></script>
-  <link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
+<script src="/js/bootstrap-toggle.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />

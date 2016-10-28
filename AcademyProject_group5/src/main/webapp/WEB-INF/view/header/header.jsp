@@ -12,8 +12,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-
-<jsp:include page="../message.jsp" />
 <div class="text-center">
 <button type="button" class="btn btn-danger btn-header">
           <span class="glyphicon glyphicon-home text-center"></span> 
@@ -51,9 +49,6 @@ $(document).ready(function(){
     $(".btn-header").click(function(){
         $("#collapse1").collapse('toggle');
     });
-
 });
-
 </script>
-
 </html>
