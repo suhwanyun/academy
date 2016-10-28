@@ -21,7 +21,9 @@ public class GCM {
 		
 		try {
 			title = java.net.URLEncoder.encode(GCM_TITLE, "UTF-8");
-			msg = java.net.URLEncoder.encode(msg,"UTF-8");
+			if(msg!=null){
+				msg = java.net.URLEncoder.encode(msg,"UTF-8");
+			}
 			if(submsg!=null){
 				submsg = java.net.URLEncoder.encode(submsg, "UTF-8");
 			}
