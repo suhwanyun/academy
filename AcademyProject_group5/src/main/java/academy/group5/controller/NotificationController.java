@@ -47,7 +47,7 @@ public class NotificationController {
 		String id = identify.getUserId(session);
 		service.settingModify(id, settingData); 
 		redAttr.addFlashAttribute("msg", "설정되었습니다.");
-		redAttr.addFlashAttribute("nextJsp", "/noti/notiSettingjsp.");
+		redAttr.addFlashAttribute("nextJsp", "/noti/notiSettingjsp");
 
 		return "redirect:/message";
 	}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -40,7 +41,7 @@ public class PhoneController {
 	
 	/** 어플 로그인 */
 	@RequestMapping(value="/appLogin", method=RequestMethod.POST)
-	public String login(Model model, HttpSession session,
+	public String login(HttpSession session, RedirectAttributes redAttr,
 			@RequestParam String userId, @RequestParam String userPass){
 		
 		UserData data = loginService.login(userId, userPass);
@@ -48,9 +49,12 @@ public class PhoneController {
 		if(data != null){	
 			session.setAttribute("user", data);	
 		} else {
-			model.addAttribute("msg", "로그인에 실패하였습니다.");
+			redAttr.addFlashAttribute("msg", "로그인에 실패하였습니다.");
+			redAttr.addFlashAttribute("nextJsp", "/main");
+			return "redirect:/message";
 		}
-		return "redirect:/main";
+		
+		return "index";
 	}
 	
 	/** GCM 등록 */
