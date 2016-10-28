@@ -167,7 +167,6 @@ $(document).ready(function(){
 	onoffCheck('#food_toggle');
 	onoffCheck('#play_toggle');
 	onoffCheck('#place_toggle');
-	
 });
 //토글버튼 초기 설정
 function onoffCheck(el){
