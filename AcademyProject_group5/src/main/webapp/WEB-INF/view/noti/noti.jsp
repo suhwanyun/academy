@@ -81,13 +81,17 @@
 							<output id="${list.notiType}_time">${list.notiHour }시&nbsp;${list.notiMin }분</output>
 							<img id="${list.notiType }_timeSetting" alt="설정" src="/images/settingImg.PNG">
 						</td>
-						<td><output id="${notiType }_weekSetting">요일 선택</output></td>
+						<td>
+						<output id="${list.notiType }_day">요일 선택</output>
+						<img id="${list.notiType }_weekSetting" alt="설정" src="/images/settingImg.PNG">
+						</td>
 					</c:if>
 					<td></td>
 					<td><c:if test="${list.notiOn == 1}">
-							<span id="${notiType }_onoffBtn">ON</span>
-						</c:if> <c:if test="${list.notiOn == 0}">
-							<span id="${notiType }_onoffBtn">OFF</span>
+							<output>ON</output>
+						</c:if>
+						<c:if test="${list.notiOn == 0}">
+							<output>OFF</output>
 						</c:if></td>
 				</tr>
 			</table>
@@ -95,8 +99,8 @@
 
 		<sform:button id="sendSetting" type="submit">설정 저장</sform:button>
 	</sform:form>
-	<!-- Modal -->
- <div class="modal fade" id="myModal" role="dialog">
+	<!--TimeSetting Modal -->
+ <div class="modal fade" id="timeModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -117,32 +121,63 @@
       
     </div>
   </div>
+  
+  	<!--daySetting Modal -->
+ <div class="modal fade" id="dayModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">요일 설정</h4>
+        </div>
+        <div class="modal-body">
+        <p>요일설정</p>
+        </div>
+        <div class="modal-footer">
+        	<input id="target" type="hidden" value="">
+          <button id="settingBtn" type="button" class="btn btn-default" data-dismiss="modal">설정 완료</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <script>
+$("document").ready(function(){
+	var a = $("#food_weekCode").val();
+	alert($("#play_weekCode").val());
+	alert($("#place_weekCode").val());
+});
 var hourCheck = true;
 var minCheck = true;
+$("#food_weekSetting").click(function(){
+	alert("성공");
+	$("#dayModal").modal();
+})
 $("#lecture_timeSetting").click(function(){
 	$("#settingHour").val($("#lecture_notiHour").val());
 	$("#settingMin").val($("#lecture_notiMin").val());
 	$("#target").val("lecture");
-    $("#myModal").modal();
+    $("#timeModal").modal();
 });
 $("#food_timeSetting").click(function(){
 	$("#settingHour").val($("#food_notiHour").val());
 	$("#settingMin").val($("#food_notiMin").val());
 	$("#target").val("food");
-    $("#myModal").modal();
+    $("#timeModal").modal();
 });
 $("#play_timeSetting").click(function(){
 	$("#settingHour").val($("#play_notiHour").val());
 	$("#settingMin").val($("#play_notiMin").val());
 	$("#target").val("play");
-   $("#myModal").modal();
+   $("#timeModal").modal();
 });
 $("#place_timeSetting").click(function(){
 	$("#settingHour").val($("#place_notiHour").val());
 	$("#settingMin").val($("#place_notiMin").val());
 	$("#target").val("place");
-	$("#myModal").modal();
+	$("#timeModal").modal();
 });
 $("#settingBtn").click(function(event){
 	if(hourCheck && minCheck){
