@@ -199,7 +199,8 @@ public class IndexController {
 	
 	/** 게시판 메인 페이지 초기화 설정 */
 	private void boardMainSetup(HttpSession session, String PostingType){
-		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, PostingType));
+		Posting mostRecommendData = postService.mostRecommend(
+				new MostRecommend(PostingType, MostRecommend.PERIOD_DAY));
 		
 		if(mostRecommendData != null){
 			session.setAttribute("mostRecommendData", mostRecommendData);

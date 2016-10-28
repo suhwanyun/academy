@@ -15,10 +15,6 @@ import academy.group5.repo.PhoneRepo;
 @Service
 @Transactional
 public class PhoneServiceImpl implements PhoneService {
-	
-	/** 추천수 집계 기간 */
-	private final int GATHER_PERIOD_DAY = 1;
-	private final int GATHER_PERIOD_WEEK = 1;
 
 	@Autowired
 	PhoneRepo phoneRepo;
@@ -38,9 +34,9 @@ public class PhoneServiceImpl implements PhoneService {
 	@Override
 	public Posting getNotificationData(String postingType) {
 		// 추천수 집계 기간 설정
-		int recommendPeriod = GATHER_PERIOD_DAY; 
+		int recommendPeriod = MostRecommend.PERIOD_DAY; 
 		if(postingType.equals("place")){
-			recommendPeriod = GATHER_PERIOD_WEEK;
+			recommendPeriod = MostRecommend.PERIOD_WEEK;
 		}
 		
 		Posting postingData = phoneRepo.getMostRecommendPosting(new MostRecommend(postingType, recommendPeriod));
