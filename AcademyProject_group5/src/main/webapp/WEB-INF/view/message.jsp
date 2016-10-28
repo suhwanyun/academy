@@ -12,7 +12,7 @@
 	</c:if>
 	<c:if test="${!empty nextJsp}">
 		<script>
-			location.href = "/${nextJsp}"; 
+			location.href = "${nextJsp}"; 
 		</script>
 		<c:remove var="nextJsp" />
 	</c:if>
