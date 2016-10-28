@@ -27,7 +27,7 @@
 			 	    order by posting_recommend desc
 			 	    ) sub
 			  )
-		where rnum = 1;
+		where rnum = 1
 	</select>
 	
 	<select id="selectNewestPostingForPhone" parameterType="String" resultType="posting">
