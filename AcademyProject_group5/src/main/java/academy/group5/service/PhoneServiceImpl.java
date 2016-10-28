@@ -17,6 +17,9 @@ import academy.group5.repo.PhoneRepo;
 @Transactional
 public class PhoneServiceImpl implements PhoneService {
 
+	/** 메세지 출력 최대 길이 */
+	private final int MAX_MSG_CONTENT_LENGTH = 40;
+	
 	@Autowired
 	PhoneRepo phoneRepo;
 	
@@ -48,6 +51,12 @@ public class PhoneServiceImpl implements PhoneService {
 		if(postingData == null){
 			throw new WrongRequestException();
 		}
+		// 메세지가 최대 길이면 줄임말 표시 추가
+		String postingContent = postingData.getPostingContent();
+		if(postingContent.getBytes().length == MAX_MSG_CONTENT_LENGTH){
+			postingData.setPostingContent(postingContent + "...");
+		}
+		
 		return postingData;
 	}
 
