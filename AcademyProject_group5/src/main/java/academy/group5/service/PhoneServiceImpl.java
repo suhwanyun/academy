@@ -10,6 +10,7 @@ import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.PhoneRepo;
 
 @Service
@@ -44,7 +45,9 @@ public class PhoneServiceImpl implements PhoneService {
 		if(postingData == null){
 			postingData = phoneRepo.getNewestPosting(postingType);
 		}
-		
+		if(postingData == null){
+			throw new WrongRequestException();
+		}
 		return postingData;
 	}
 

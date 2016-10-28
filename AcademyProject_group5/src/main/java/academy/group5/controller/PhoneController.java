@@ -5,13 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -73,7 +73,7 @@ public class PhoneController {
 		List<NotificationSetting> settingList = null;
 		try{
 			settingList = phoneService.getNotificationSettingList(userId);
-		} catch(WrongRequestException e){
+		} catch(DataAccessException e){
 			return "false";
 		}
 		return gson.toJson(settingList);
@@ -87,7 +87,7 @@ public class PhoneController {
 		Posting notiData = null;
 		try{
 			notiData = phoneService.getNotificationData(postingType);
-		}catch(WrongRequestException e){
+		}catch(DataAccessException | WrongRequestException e){
 			return "false";
 		}
 		return gson.toJson(notiData);
