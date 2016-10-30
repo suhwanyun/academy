@@ -1,6 +1,5 @@
 package academy.group5.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,6 @@ import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
-import academy.group5.util.GCM;
 
 /**
  * 어플 컨트롤러
