@@ -1,5 +1,6 @@
 package academy.group5.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
+import academy.group5.util.GCM;
 
 /**
  * 어플 컨트롤러
@@ -63,6 +65,13 @@ public class PhoneController {
 		if(result != 1){
 			return "false";
 		}
+		// 기기가 연결되면 알람 설정 반영
+		List<String> userIdList = new ArrayList<>();
+		userIdList.add(phoneId);
+		
+		new GCM(null, null, userIdList, GCM.TYPE_SETTING);
+		
+		
 		return "true";
 	}
 	
