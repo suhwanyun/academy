@@ -60,18 +60,12 @@ public class PhoneController {
 	/** GCM 등록 */
 	@RequestMapping(value="/registGCM", method=RequestMethod.POST)
 	public @ResponseBody String addFood(@RequestParam String userId, @RequestParam String phoneId){
-		int result = phoneService.setGCMData(userId, phoneId);
+		boolean result = phoneService.setGCMData(userId, phoneId);
 
-		if(result != 1){
-			return "false";
-		}
-		// 기기가 연결되면 알람 설정 반영
-		List<String> userIdList = new ArrayList<>();
-		userIdList.add(phoneId);
-		
-		new GCM(null, null, userIdList, GCM.TYPE_SETTING);
-		
-		return "true";
+		if(result){
+			return "true";
+		}		
+		return "false";
 	}
 	
 	/** 알림 설정 데이터 획득 */

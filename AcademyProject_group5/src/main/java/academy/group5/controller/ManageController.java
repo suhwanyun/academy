@@ -38,56 +38,56 @@ public class ManageController {
 	}
 	
 	/** 강의등록 관리자 메인 페이지 */
-	@RequestMapping(value="/manage/lectureMain", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/lectureMain", method=RequestMethod.GET)
 	public String manageLectureMainPage(){
 	
 		return "/manage/lecture";
 	}
 	
 	/** 강의 등록 페이지 */
-	@RequestMapping(value="/manage/lectureAdd", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/lectureAdd", method=RequestMethod.GET)
 	public String addLecture(){
 		
 		return "manage/lecture_add";
 	}
 	
 	/** 강의 관리 페이지 */
-	@RequestMapping(value="/manage/lectureManage", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/lectureManage", method=RequestMethod.GET)
 	public String manageLecture(){
 		
 		return "manage/lecture_manage";
 	}
 	
 	/** 강의 시간 등록 페이지 */
-	@RequestMapping(value="/manage/lectureTimeAdd", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/lectureTimeAdd", method=RequestMethod.GET)
 	public String addLectureTime(){
 		
 		return "manage/lecture_time_add";
 	}
 	
 	/** 강의 시간 관리 페이지 */
-	@RequestMapping(value="/manage/lectureTimeManage", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/lectureTimeManage", method=RequestMethod.GET)
 	public String manageLectureTime(){
 		
 		return "manage/lecture_time_manage";
 	}
 	
 	/** 마일리지 등록 관리자 메인 페이지 */
-	@RequestMapping(value="/manage/mileageMain", method=RequestMethod.GET)
+	@RequestMapping(value="/mileageManage/mileageMain", method=RequestMethod.GET)
 	public String manageMileageMainPage(){
 	
 		return "/manage/mileage";
 	}
 	
 	/** 마일리지 등록 페이지 */
-	@RequestMapping(value="/manage/mileageAdd", method=RequestMethod.GET)
+	@RequestMapping(value="/mileageManage/mileageAdd", method=RequestMethod.GET)
 	public String addMileage(){
 		
 		return "manage/mileage_add";
 	}
 	
 	/** 마일리지 관리 페이지 */
-	@RequestMapping(value="/manage/mileageManage", method=RequestMethod.GET)
+	@RequestMapping(value="/mileageManage/mileageManage", method=RequestMethod.GET)
 	public String manageMileage(){
 		
 		return "manage/mileage_manage";

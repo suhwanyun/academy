@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.PhoneRepo;
+import academy.group5.util.GCM;
 
 @Service
 @Transactional
@@ -24,9 +26,20 @@ public class PhoneServiceImpl implements PhoneService {
 	PhoneRepo phoneRepo;
 	
 	@Override
-	public int setGCMData(String userId, String phoneId) {
+	public boolean setGCMData(String userId, String phoneId) {
 		
-		return phoneRepo.setGCMData(new UserData(userId, null, phoneId));
+		int result = phoneRepo.setGCMData(new UserData(userId, null, phoneId));
+		
+		if(result != 1){
+			return false;
+		}
+		// 기기가 연결되면 알람 설정 반영
+		List<String> userIdList = new ArrayList<>();
+		userIdList.add(phoneId);
+		
+		new GCM(null, null, userIdList, GCM.TYPE_SETTING);
+		
+		return true;
 	}
 
 	@Override

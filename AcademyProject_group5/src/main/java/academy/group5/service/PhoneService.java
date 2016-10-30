@@ -9,7 +9,7 @@ public interface PhoneService {
 	/**
 	 * GCM 등록
 	 */
-	int setGCMData(String userId, String phoneId);
+	boolean setGCMData(String userId, String phoneId);
 
 	/**
 	 * 알람 설정 정보 획득
