@@ -20,6 +20,7 @@ import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
+import academy.group5.service.ManagerService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
@@ -58,15 +59,25 @@ public class IndexController {
 		
 	/** 로그인 화면 */
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
-	public String loginPage(){
-
+	public String loginPage(HttpSession session){
+		Object loginObj = session.getAttribute("user");
+		if(loginObj != null){
+			return "redirect:/main";
+		}
 		return "/login/login";
 	}
 	
 	/** 관리자 로그인 화면 */
 	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
-	public String managerLoginPage(){
-
+	public String managerLoginPage(HttpSession session){
+		Object loginObj = session.getAttribute("managerType");
+		if(loginObj != null){
+			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
+				return "redirect:/manage/lectureMain";
+			} else {
+				return "redirect:/manage/mileageMain";
+			}
+		}
 		return "/login/login_manager";
 	}
 	
