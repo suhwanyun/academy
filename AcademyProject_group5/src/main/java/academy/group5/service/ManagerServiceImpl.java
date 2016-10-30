@@ -1,6 +1,7 @@
 package academy.group5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,8 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
+import academy.group5.exception.ManagerLoginException;
+import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
 
 @Service
@@ -18,10 +21,23 @@ public class ManagerServiceImpl implements ManagerService {
 	@Autowired
 	TermRepo termRepo;
 	
+	@Autowired
+	ManagerRepo managerRepo;
+	
 	@Override
-	public Manager managerLogin(String managerId, String managerPass) {
-		// TODO Auto-generated method stub
-		return null;
+	public String managerLogin(String managerId, String managerPass) {
+		
+		String managerType = null;
+		try{
+			managerType = managerRepo.getManager(new Manager(managerId, managerPass, null));
+		} catch(DataAccessException e){
+			throw new ManagerLoginException();
+		}
+		if(managerType == null){
+			throw new ManagerLoginException();
+		}
+		
+		return managerType;
 	}
 
 	@Override

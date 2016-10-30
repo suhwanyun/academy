@@ -71,7 +71,6 @@ public class PhoneController {
 		
 		new GCM(null, null, userIdList, GCM.TYPE_SETTING);
 		
-		
 		return "true";
 	}
 	

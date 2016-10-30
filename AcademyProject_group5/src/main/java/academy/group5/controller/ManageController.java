@@ -1,9 +1,15 @@
 package academy.group5.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import academy.group5.service.ManagerService;
 
 /**
  * 관리자 컨트롤러
@@ -12,6 +18,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class ManageController {
+	
+	@Autowired
+	ManagerService service;
+	
+	/** 관리자 로그인 */
+	@RequestMapping(value="/managerLogin", method=RequestMethod.POST)
+	public String login(Model model, HttpSession session,
+			@RequestParam String managerId, @RequestParam String managerPass){
+		
+		String type = service.managerLogin(managerId, managerPass);	
+		if(type == null){	
+			model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요.");
+			return "/managerLoginjsp";
+		}
+		session.setAttribute("managerType", type);
+		
+		if(type.equals(ManagerService.TYPE_LECTURE)){
+			return "redirect:/manage/lectureMain";
+		} else {
+			return "redirect:/manage/mileageMain";
+		}
+	}
 	
 	/** 강의등록 관리자 메인 페이지 */
 	@RequestMapping(value="/manage/lectureMain", method=RequestMethod.GET)

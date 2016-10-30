@@ -64,7 +64,7 @@ public class IndexController {
 	}
 	
 	/** 관리자 로그인 화면 */
-	@RequestMapping(value="/manager_loginjsp", method=RequestMethod.GET)
+	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
 	public String managerLoginPage(){
 
 		return "/login/login_manager";
