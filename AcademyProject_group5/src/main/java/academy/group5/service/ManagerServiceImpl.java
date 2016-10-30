@@ -31,7 +31,7 @@ public class ManagerServiceImpl implements ManagerService {
 		try{
 			managerType = managerRepo.getManager(new Manager(managerId, managerPass, null));
 		} catch(DataAccessException e){
-			throw new ManagerLoginException();
+			throw new ManagerLoginException("인터넷 연결을 확인하세요.");
 		}
 		if(managerType == null){
 			throw new ManagerLoginException("아이디 또는 비밀번호를 확인하세요.");

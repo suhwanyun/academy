@@ -28,10 +28,6 @@ public class ManageController {
 			@RequestParam String managerId, @RequestParam String managerPass){
 		
 		String type = service.managerLogin(managerId, managerPass);	
-		if(type == null){	
-			model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요.");
-			return "/managerLoginjsp";
-		}
 		session.setAttribute("managerType", type);
 		
 		if(type.equals(ManagerService.TYPE_LECTURE)){

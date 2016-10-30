@@ -64,8 +64,12 @@ public class ExceptionController {
 	}
 	
 	@ExceptionHandler(ManagerLoginException.class)
-	public String managerLoginException(Exception e){	
+	public ModelAndView managerLoginException(Exception e){	
 		logger.trace("\n\nException 정보 :\n", e);
-		return "/managerLoginjsp";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/managerLoginjsp");
+		mav.addObject("msg", e.getMessage());
+		return mav;
 	}
 }
