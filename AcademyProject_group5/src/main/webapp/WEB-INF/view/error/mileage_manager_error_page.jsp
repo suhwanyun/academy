@@ -14,9 +14,8 @@
 </body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-<c:set value="${goto}" var="goto"/>
 $(document).ready(function(){
-	$(location).attr('href', goto);
+	$(location).attr('href', "/manage/mileageMain");
 });
 </script>
 </html>

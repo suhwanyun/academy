@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ERROR OCCURRED</title>
 <script>
-	alert("오류가 발생하였습니다.\n인터넷 연결을 확인하세요.");
+	alert("잘못된 접근입니다.");
 </script>
 </head>
 <body>
@@ -15,7 +15,7 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(location).attr('href', "/main");
+	$(location).attr('href', "/manage/lectureMain");
 });
 </script>
 </html>

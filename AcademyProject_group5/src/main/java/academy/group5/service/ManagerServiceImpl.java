@@ -34,7 +34,7 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerLoginException();
 		}
 		if(managerType == null){
-			throw new ManagerLoginException();
+			throw new ManagerLoginException("아이디 또는 비밀번호를 확인하세요.");
 		}
 		
 		return managerType;
