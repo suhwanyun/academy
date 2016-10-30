@@ -68,7 +68,7 @@ public class ExceptionController {
 		logger.trace("\n\nException 정보 :\n", e);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/managerLoginjsp");
+		mav.setViewName("/login/login_manager");
 		mav.addObject("msg", e.getMessage());
 		return mav;
 	}

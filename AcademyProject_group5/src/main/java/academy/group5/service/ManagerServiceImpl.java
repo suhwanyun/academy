@@ -10,9 +10,11 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
+import academy.group5.dto.UserData;
 import academy.group5.exception.ManagerLoginException;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
+import academy.group5.util.MyHash;
 
 @Service
 @Transactional
@@ -28,8 +30,9 @@ public class ManagerServiceImpl implements ManagerService {
 	public String managerLogin(String managerId, String managerPass) {
 		
 		String managerType = null;
+		Manager loginInfo = toHash(new Manager(managerId, managerPass, null));
 		try{
-			managerType = managerRepo.getManager(new Manager(managerId, managerPass, null));
+			managerType = managerRepo.getManager(loginInfo);
 		} catch(DataAccessException e){
 			throw new ManagerLoginException("인터넷 연결을 확인하세요.");
 		}
@@ -104,4 +107,15 @@ public class ManagerServiceImpl implements ManagerService {
 		return false;
 	}
 
+	/** 암호화 */
+	private Manager toHash(Manager data){
+		String oriPass = data.getManagerPass();
+
+		if(oriPass != null && !oriPass.equals("")){
+			String newPass = MyHash.MD5(oriPass);
+			data.setManagerPass(newPass);
+		}
+		
+		return data;
+	}
 }
