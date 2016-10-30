@@ -21,7 +21,8 @@ public class LectureManagerSessionCheckInterceptor extends HandlerInterceptorAda
 		} else if(!typeObj.equals("lecture")){
 			request.setAttribute("msg", "잘못된 접근입니다.");
 		}
-		request.getRequestDispatcher("/managerLoginjsp").forward(request, response);
+		request.setAttribute("nextJsp", "/managerLoginjsp");
+		request.getRequestDispatcher("/message").forward(request, response);
 		
 		return super.preHandle(request, response, handler);
 	}

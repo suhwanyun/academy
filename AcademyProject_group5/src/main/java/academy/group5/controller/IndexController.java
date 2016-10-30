@@ -71,13 +71,13 @@ public class IndexController {
 	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
 	public String managerLoginPage(HttpSession session){
 		Object loginObj = session.getAttribute("managerType");
-		if(loginObj != null){
+		/*if(loginObj != null){
 			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
 				return "redirect:/lectureManage/main";
 			} else {
 				return "redirect:/mileageManage/main";
 			}
-		}
+		}*/
 		return "/login/login_manager";
 	}
 	
