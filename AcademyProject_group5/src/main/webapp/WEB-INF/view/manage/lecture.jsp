@@ -8,6 +8,6 @@
 
 </head>
 <body>
-
+	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 </body>
 </html>

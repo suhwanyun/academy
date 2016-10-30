@@ -3,14 +3,12 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+<link rel="stylesheet" href="/css/bootstrap.css"/>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자 로그인 페이지</title>
-	<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-	<link rel="stylesheet" href="/css/bootstrap.css"/>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="/js/bootstrap.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/message.jsp" />
