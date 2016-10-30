@@ -7,12 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.etc.NotificationSettingList;
-import academy.group5.exception.WrongRequestException;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
@@ -35,7 +32,7 @@ public class NotificationController {
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
 		model.addAttribute("settingData", service.getSettingList(id));
-
+		
 		return "noti/noti";
 	}
 	

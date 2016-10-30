@@ -37,9 +37,11 @@ public class GCM {
 				//.timeToLive(3600) //  대기시간
 				//.delayWhileIdle(false)
 				.addData("title", title)
-				.addData("message", msg)
 				.addData("msgtype", msgtype);
 		
+		if(msg != null){
+			builder.addData("message", msg);
+		}
 		if(submsg != null){
 			builder.addData("submsg", submsg);
 		}
