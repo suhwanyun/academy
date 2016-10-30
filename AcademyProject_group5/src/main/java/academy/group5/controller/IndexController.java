@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Lecture;
@@ -71,13 +70,13 @@ public class IndexController {
 	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
 	public String managerLoginPage(HttpSession session){
 		Object loginObj = session.getAttribute("managerType");
-		/*if(loginObj != null){
+		if(loginObj != null){
 			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
 				return "redirect:/lectureManage/main";
 			} else {
 				return "redirect:/mileageManage/main";
 			}
-		}*/
+		}
 		return "/login/login_manager";
 	}
 	
