@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -39,19 +42,20 @@ public class PhoneController {
 	
 	@Autowired
 	GCMRepo gcmRepo;
-	
+	static Logger logger = LoggerFactory.getLogger(PhoneController.class);
 	/** 어플 로그인 */
 	@RequestMapping(value="/appLogin", method=RequestMethod.POST)
 	public String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
 		UserData data = loginService.login(userId, userPass);
-				
+		logger.trace("!!!!!!!!!data:{}, id:{}, pass:{}", data, userId, userPass);
 		if(data != null){	
 			session.setAttribute("user", data);	
 		} else {
 			model.addAttribute("msg", "로그인에 실패하였습니다.");
 		}
+	
 		return "index";
 	}
 	
