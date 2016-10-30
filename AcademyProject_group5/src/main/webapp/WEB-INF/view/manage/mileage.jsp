@@ -7,6 +7,6 @@
 <title>마일리지 관리자 메인 페이지</title>
 </head>
 <body>
-
+	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 </body>
 </html>
