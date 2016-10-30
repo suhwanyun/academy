@@ -21,7 +21,7 @@ public class MileageManagerSessionCheckInterceptor extends HandlerInterceptorAda
 			request.getRequestDispatcher("/managerLoginjsp").forward(request, response);
 		} else if(!typeObj.equals("mileage")){
 			request.setAttribute("msg", "잘못된 접근입니다.");
-			request.getRequestDispatcher("/manage/mileageMain").forward(request, response);
+			request.getRequestDispatcher("/mileageManage/main").forward(request, response);
 		}
 		return super.preHandle(request, response, handler);
 	}
