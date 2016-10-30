@@ -18,11 +18,11 @@ public class LectureManagerSessionCheckInterceptor extends HandlerInterceptorAda
 		Object typeObj = session.getAttribute("managerType");
 		if(typeObj == null){
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.getRequestDispatcher("/managerLoginjsp").forward(request, response);
 		} else if(!typeObj.equals("lecture")){
 			request.setAttribute("msg", "잘못된 접근입니다.");
-			request.getRequestDispatcher("/lectureManage/main").forward(request, response);
 		}
+		request.getRequestDispatcher("/managerLoginjsp").forward(request, response);
+		
 		return super.preHandle(request, response, handler);
 	}
 }
