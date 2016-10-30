@@ -73,9 +73,9 @@ public class IndexController {
 		Object loginObj = session.getAttribute("managerType");
 		if(loginObj != null){
 			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
-				return "redirect:/manage/lectureMain";
+				return "redirect:/lectureManage/main";
 			} else {
-				return "redirect:/manage/mileageMain";
+				return "redirect:/mileageManage/main";
 			}
 		}
 		return "/login/login_manager";
