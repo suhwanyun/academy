@@ -39,7 +39,7 @@ public class ExceptionController {
 		logger.trace("\n\nException 정보 :\n", e);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/error/error_page_logic");
+		mav.setViewName("/error/error_page_manager");
 		mav.addObject("goto", "/manage/lectureMain");
 		return mav;
 	}
@@ -49,7 +49,7 @@ public class ExceptionController {
 		logger.trace("\n\nException 정보 :\n", e);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/error/error_page_logic");
+		mav.setViewName("/error/error_page_manager");
 		mav.addObject("goto", "/manage/mileageMain");
 		return mav;
 	}
