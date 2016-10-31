@@ -14,7 +14,6 @@
 
 </head>
 <body>
-	<jsp:include page="../message.jsp" />
 	<!--  로그인하기전 화면 -->
 
 	<div class="container-fluid">

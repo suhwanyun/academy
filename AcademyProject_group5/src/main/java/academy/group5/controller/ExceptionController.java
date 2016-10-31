@@ -1,7 +1,5 @@
 package academy.group5.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -9,11 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import academy.group5.exception.LectureManagerException;
-import academy.group5.exception.ManagerLoginException;
-import academy.group5.exception.MileageManagerException;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
-import academy.group5.service.ManagerService;
 
 /**
  * 예외처리 컨트롤러
@@ -26,50 +21,31 @@ public class ExceptionController {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 	
 	@ExceptionHandler(DataAccessException.class)
-	public String dbException(HttpSession session, Exception e){	
+	public ModelAndView dbException(Exception e){	
 		logger.trace("\n\nDataAccessException 정보 :\n", e);
 		
-		Object isManagerObj = session.getAttribute("managerType");
-		
-		if(isManagerObj != null){		
-			switch(isManagerObj.toString()){
-			case ManagerService.TYPE_LECTURE:
-				return "/error/lecture_manager_error_page";
-			default :
-				return "/error/mileage_manager_error_page";
-			}
-		}
-		
-		return "/error/error_page";
+		return getModelAndView("/error/error_page", "오류가 발생하였습니다.\\n잠시 후 다시 시도해주세요.");		
 	}
 	
 	@ExceptionHandler(WrongRequestException.class)
-	public String logicException(Exception e){	
-		logger.trace("\n\nlogicException 정보 :\n", e);
-		return "/error/error_page";
-	}
-
-	@ExceptionHandler(LectureManagerException.class)
-	public String lectureManagerException(Exception e){	
-		logger.trace("\n\nException 정보 :\n", e);
+	public ModelAndView logicException(Exception e){	
 		
-		return "/error/lecture_manager_error_page";
+		return getModelAndView("/error/error_page", e.getMessage());
 	}
 	
-	@ExceptionHandler(MileageManagerException.class)
-	public String mileageManagerException(Exception e){	
-		logger.trace("\n\nException 정보 :\n", e);
+	@ExceptionHandler(PageRedirectException.class)
+	public ModelAndView moveException(Exception e){	
 		
-		return "/error/mileage_manager_error_page";
+		return getModelAndView("/message", e.getMessage());
 	}
 	
-	@ExceptionHandler(ManagerLoginException.class)
-	public ModelAndView managerLoginException(Exception e){	
-		logger.trace("\n\nException 정보 :\n", e);
-		
+	private ModelAndView getModelAndView(String viewName, String msg){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/login/login_manager");
-		mav.addObject("msg", e.getMessage());
+		mav.setViewName(viewName);
+		
+		if(msg != null){
+			mav.addObject("msg", msg);
+		}
 		return mav;
 	}
 }

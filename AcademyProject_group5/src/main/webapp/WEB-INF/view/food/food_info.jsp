@@ -216,7 +216,7 @@ $("#commentBtn").click(function(){
 	    	   tableSetting(result["parent"],result["child"].reverse());
 	      },
 	      error : function(){
-	    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
+	    	  alert("댓글 작성에 실패 하였습니다.\n새로고침 후 다시 해주세요");
 	      }
 	   });
 	}else{
@@ -279,7 +279,7 @@ function sendComment(){
 		    	   tableSetting(result["parent"],result["child"].reverse())	
 		      },
 		      error : function(){
-		    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
+		    	  alert("댓글 작성에 실패 하였습니다.\n새로고침 후 다시 해주세요");
 		      }
 		   });
 		}else{
@@ -314,7 +314,7 @@ function commentUpdateSend(el){
 	    	   tableSetting(result["parent"],result["child"].reverse())	
 	      },
 	      error : function(){
-	    	  alert("실패 하였습니다. 잠시후 다시 해주세요");
+	    	  alert("댓글 수정에 실패 하였습니다.\n새로고침후 다시 해주세요");
 	      }
 	   });
 }
@@ -334,7 +334,7 @@ $("#recommendBtn").click(function(){
 			alert(result["msg"]);
 		},
 		error : function(request, status, error) {
-			alert("실패 했습니다.\n잠시후 다시 해주세요.");
+			alert("오류가 발생 했습니다.\n새로고침 후 다시 해주세요.");
 		}
 	});
 	}else{

@@ -13,7 +13,7 @@
 	<script src="/js/bootstrap-toggle.min.js"></script>
 	<link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
 </head>
-	<jsp:include page="/WEB-INF/view/message.jsp" />
+
 <div class="text-center">
 <button type="button" class="btn btn-danger btn-header">
           <span class="glyphicon glyphicon-home text-center"></span> 

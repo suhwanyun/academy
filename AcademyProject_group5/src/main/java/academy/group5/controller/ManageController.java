@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import academy.group5.exception.PageRedirectException;
 import academy.group5.service.ManagerService;
 
 /**
@@ -26,15 +27,19 @@ public class ManageController {
 	@RequestMapping(value="/managerLogin", method=RequestMethod.POST)
 	public String login(Model model, HttpSession session,
 			@RequestParam String managerId, @RequestParam String managerPass){
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/managerLoginjsp");
 		
 		String type = service.managerLogin(managerId, managerPass);	
 		session.setAttribute("managerType", type);
 		
+		// 호출할 컨트롤러 지정
 		if(type.equals(ManagerService.TYPE_LECTURE)){
-			return "redirect:/lectureManage/main";
+			session.setAttribute("gotoPage", "/lectureManage/main");
 		} else {
-			return "redirect:/mileageManage/main";
+			session.setAttribute("gotoPage", "/mileageManage/main");
 		}
+		throw new PageRedirectException();
 	}
 	
 	/** 강의등록 관리자 메인 페이지 */
@@ -46,12 +51,15 @@ public class ManageController {
 	
 	/** 강의 등록 */
 	@RequestMapping(value="/lectureManage/add", method=RequestMethod.GET)
-	public String addLecture(Model model, @RequestParam String lectureName,
+	public String addLecture(HttpSession session, @RequestParam String lectureName,
 			@RequestParam String professorName, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/addjsp");
+		session.setAttribute("gotoPage", "/lectureManage/main");
 		service.registerLecture(lectureName, professorName, lectureClass);	
-		model.addAttribute("msg", "등록되었습니다.");
-		return "/manage/lecture";
+		
+		throw new PageRedirectException("등록되었습니다.");
 	}
 	
 	/** 강의 관리 페이지 */
