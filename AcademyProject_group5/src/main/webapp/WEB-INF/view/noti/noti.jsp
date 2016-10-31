@@ -64,7 +64,7 @@
                   </c:when>
                   <c:when test="${list.notiType == 'food'}">
                      <td>음식 알림</td>
-                  </c:when>
+                  </c:when> 
                </c:choose>
                <!-- 실행시키면 시간밑에 톱니 모양이 나오는데 시간 옆으로 옮겨주세요. a태그로 메뉴만들기랑 같은 원리로 만들면되요 -->
                <c:if test="${list.notiType == 'lecture'}">
