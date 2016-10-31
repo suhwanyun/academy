@@ -7,11 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/css/bootstrap-theme.css" />
 <link rel="stylesheet" href="/css/bootstrap.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.7/js/bootstrap.min.js"></script>
-
+<script	src="http://code.jquery.com/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
 <title>회원정보 수정</title>
 </head>
 <body>
