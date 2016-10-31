@@ -1,26 +1,27 @@
 var passSame = false;
 $("#userPass").change(function() {
 	if (passCheck($("#userPass").val())) {
-		$("#userPass").attr('class', 'true');
+		$("#userPass").attr('class', 'true form-control');
 		if ($("#passCheck").val() == $("#userPass").val()) {
-			$("#passCheck").attr('class', 'true');
+			$("#passCheck").attr('class', 'true form-control');
 			passSame = true;
 		} else {
-			$("#passCheck").attr('class', 'false');
+			$("#passCheck").attr('class', 'false form-control');
 			passSame = false;
 		}
 	} else {
-		$("#userPass").attr('class', 'false');
+		$("#userPass").attr('class', 'false form-control');
+		$("#passCheck").attr('class', 'false form-control');
 	}
 });
 $("#passCheck").change(
 		function() {
 			if (passCheck($("#userPass").val())
 					&& $("#passCheck").val() == $("#userPass").val()) {
-				$("#passCheck").attr('class', 'true');
+				$("#passCheck").attr('class', 'true form-control');
 				passSame = true;
 			} else {
-				$("#passCheck").attr('class', 'false');
+				$("#passCheck").attr('class', 'false form-control');
 				passSame = false;
 			}
 
@@ -28,24 +29,24 @@ $("#passCheck").change(
 
 $("#phoneNum").change(function() {
 	if (phoneCheck($("#phoneNum").val())) {
-		$("#phoneNum").attr('class', 'true');
+		$("#phoneNum").attr('class', 'true form-control');
 	} else {
-		$("#phoneNum").attr('class', 'false');
+		$("#phoneNum").attr('class', 'false form-control');
 	}
 
 });
 $("#passQuestion").change(function() {
 	if (questionCheck($("#passQuestion").val())) {
-		$("#passQuestion").attr('class', 'true');
+		$("#passQuestion").attr('class', 'true form-control');
 	} else {
-		$("#passQuestion").attr('class', 'false');
+		$("#passQuestion").attr('class', 'false form-control');
 	}
 });
 $("#passAnswer").change(function() {
 	if (anserCheck($("#passAnswer").val())) {
-		$("#passAnswer").attr('class', 'true');
+		$("#passAnswer").attr('class', 'true form-control');
 	} else {
-		$("#passAnswer").attr('class', 'false');
+		$("#passAnswer").attr('class', 'false form-control');
 	}
 });
 $("#infoUpdate").click(

@@ -63,9 +63,9 @@ $("#email").change(function() {
 	emailDupOk=false;
 	$("#emailtrueorfalse").attr('class', 'glyphicon glyphicon-false');
 	if (emailCheck($("#email").val())) {
-		$("#email").attr('class', 'true form-control size8');
+		$("#email").attr('class', 'true form-control size10');
 	} else {
-		$("#email").attr('class', 'false form-control size8');
+		$("#email").attr('class', 'false form-control size10');
 	}
 
 });
