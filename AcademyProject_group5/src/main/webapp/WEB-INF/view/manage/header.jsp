@@ -3,27 +3,28 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<title>관리자 전용 페이지</title>
 <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
 <link rel="stylesheet" href="/css/bootstrap.css"/>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 </head>
 <body>
-		<table>
+<div class="container text-center center">
+		<div class="row">
 
-			<tr>
-				<td>
+			<div class="col-xs-4">
 					<img class="img-logo" src="/images/logo.png" alt="" />
-				</td>
-				<td>
-					<h2>관리자 전용 페이지</h2>
-				</td>
-				<td>
-					<button>로그아웃</button>
-				</td>
-			</tr>
-		</table>
+			</div>
+			<div class="col-xs-6">	
+					<h1>관리자 전용 페이지</h1>
+			</div>
+			<div class="col-xs-2 ">
+				<button class="myButton" >로그아웃</button>
+		</div>
+		</div>		
+	</div>
 </body>
 </html>

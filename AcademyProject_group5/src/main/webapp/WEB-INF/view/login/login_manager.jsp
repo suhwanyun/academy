@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>관리자 로그인 페이지</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/css/bootstrap-theme.css" />
-<link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+<link rel="stylesheet" href="/css/bootstrap.css"/>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>관리자 로그인 페이지</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/message.jsp" />
@@ -18,37 +17,34 @@
 	<div class="container">
 
 		<div align="center">
-			<a href="/main"><img class="img-logo" src="/images/logo.png" alt="" /></a>
+			<img class="img-logo" src="/images/logo.png" alt="" />
 		</div>
 
 
 		<div class="text-center">
 			<h1>Manager login</h1>
 		</div>
+		
+<form method="post" class="form-horizontal" action="/managerLogin">
+			<div class="form-group">
 
-		<form method="post" class="form-horizontal" action="/managerLogin"
-			class="form-horizontal">
-		<div class="form-group">
-
-				<label for="userId" class="control-label col-sm-2">ID:</label>
-				<div class="col-sm-10">
-					<input type="text" maxlength="10" id="userId" class="form-control">
+				<label for="managerId" class="control-label col-sm-2">ID:</label>
+			<div class="col-sm-10">
+					<input type="text" maxlength="10" name="managerId" class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="userPass" class="control-label col-sm-2">Password:</label>
-				<div class="col-sm-10">
-					<input type="password" maxlength="20" id="userPass"
-						class="form-control">
-				</div>
+				<label for="managerPass" class="control-label col-sm-2">Password:</label>
+			<div class="col-sm-10">
+					<input type="password" maxlength="20" name="managerPass" class="form-control">
+			</div>		
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="button" value="로그인 하기" id="loginBtn"
-						class="myButton bRight">
-				</div>
+				 <div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="로그인 하기" id="loginBtn"
+					class="myButton bRight">
 			</div>
-	
+			</div>
 		</form>
 
 	</div>
