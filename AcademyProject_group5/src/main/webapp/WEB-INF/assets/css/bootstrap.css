@@ -164,6 +164,7 @@ input[type="search"] {
      -moz-box-sizing: content-box;
           box-sizing: content-box;
   -webkit-appearance: textfield;
+ 
 }
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
@@ -1595,6 +1596,9 @@ pre code {
 	margin-right:5%;
 	
 }
+.tMargin{
+	margin-top:5%;	
+}
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -2307,6 +2311,12 @@ th {
 .table .table {
   background-color: #fff;
 }
+.table-condensed{
+	  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  margin-top:4px;
+}
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
 .table-condensed > tfoot > tr > th,
@@ -2529,6 +2539,7 @@ input[type="search"] {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+          width:100%;
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -6641,7 +6652,8 @@ button.close {
 	input[type="number"].size4,
 	select.size4,
 	textarea.size4,
-	button.size4 {
+	button.size4
+	 {
 		width: 33.33333333%;
 	}
 button.size8mar{
@@ -6651,6 +6663,10 @@ button.size8mar{
 button.size6mar{
 	width: 40%;
 	margin-left:20%;
+}
+button.size6Smar{
+	width:40%;
+	margin-left:10%;
 }
 .btn-footer{
 
@@ -6797,4 +6813,16 @@ button.size6mar{
   
  
   outline-offset: -2px;
+ }
+ .border {
+  border: 1px solid #ddd;
+}
+  ..border th,
+  .border td {
+    border: 1px solid #ddd !important;
+    border-left:1px solid #ddd !important;
+    border-right:1px solid #ddd !important;
+  }
+ .gray{
+background-color: #eee;
  }

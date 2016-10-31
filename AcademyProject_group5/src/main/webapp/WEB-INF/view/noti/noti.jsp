@@ -138,7 +138,7 @@
        </div>
         <div class="modal-footer">
            <input id="dayTarget" type="hidden" value="">
-          <button id="daySettingBtn" type="button" class="btn btn-default" data-dismiss="modal">설정 완료</button>
+          <button id="daySettingBtn" type="button" class="myButton" data-dismiss="modal">설정 완료</button>
         </div>
       </div>
       

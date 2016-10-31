@@ -8,23 +8,24 @@
 <title>전체 강의 목록</title>
 </head>
 <body>
-	<table class="table-condensed ">
+<div class="container">
+	<table class="table-condensed">
 		<tr>
-			<td><select id="serchType" class="vertical">
+			<td><select id="serchType" >
 					<option selected="selected" value="">선택</option>
 					<option value="lecture">강의 이름</option>
 					<option value="professor">교수 이름</option>
 			</select></td>
-			<td><input type="search" id="serachInput" class="vertical" /></td>
+			<td><input type="search" id="serachInput" /></td>
 			<td>
-				<button id="searchBtn" class="btn white">검색</button>
+				<button id="searchBtn" class="myButton">검색</button>
 			</td>
 		</tr>
 	</table>
 
 	<div class="container text-center">
-		<div class="table-responsive">
-			<table class="table table-bored">
+		
+			<table class="table">
 				<thead>
 
 					<tr>
@@ -43,14 +44,16 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-				<tr id="beforeLectureLocation">
-					<td colspan="2" align="center"><button id="moreBtn"
-							class="btn white">더보기</button></td>
-					<td><button class="btn white">맨 위로</button></td>
-				</tr>
+			
 			</table>
+			   
+         </div>
+         <div style="margin-top:5%;"> 
+               <button id="moreBtn" class="myButton size8mar">더보기</button>
+               <button class="myButton size4">맨 위로</button>
+            </div>
 		</div>
-	</div>
+	
 </body>
 
 

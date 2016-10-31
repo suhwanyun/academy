@@ -14,16 +14,12 @@
 
 
 <!-- 테이블 시작 -->
-<div class="boardcss_list_table">
-	<table class="list_table">
+<div class="container">
+	<table class="table">
 		<caption>공지 목록</caption>
-		<colgroup>
-			<col width="30%" />
-			<col width="50%" />
-			<col width="20%" />
-		</colgroup>
+		
 		<thead>
-			<tr id="gomchi">
+			<tr>
 				<th>공지 종류</th>
 				<th>공지 제목</th>
 				<th>날짜</th>
