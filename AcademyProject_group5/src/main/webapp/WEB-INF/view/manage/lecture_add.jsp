@@ -8,7 +8,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
-	<form action="#" method="post">
+	<form action="/lectureManage/add" method="post">
 	<table>
 		<tr>
 			<th>강의 이름</th>
