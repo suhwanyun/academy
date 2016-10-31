@@ -6755,4 +6755,34 @@ button.size6mar{
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
+}
+.noti_table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  margin-top:4px;
   
+   
+
+
+}
+.noti_table > thead > tr > th,
+.noti_table > tbody > tr > th,
+.noti_table > tfoot > tr > th,
+.noti_table > thead > tr > td,
+.noti_table > tbody > tr > td,
+.noti_table > tfoot > tr > td {
+ 
+  line-height: 2;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+ 
+}
+  .noti_table {
+    border-collapse: collapse !important;
+  }
+  .noti_table td,
+  .noti_table th {
+    background-color: #fff !important;
+   
+  }

@@ -59,7 +59,6 @@
                </colgroup>
                <c:if test="${!empty mostRecommendData}">
                   <tr class="mostRecommend tableData">
-
                      <td rowspan="2"><img class="imgBoard"
                         src="/upload/preview_${mostRecommendData.postingPhoto}"
                         onerror="errorFun(this);" /></td>
