@@ -24,4 +24,9 @@ public class ManagerRepo {
 		String stmt = MANAGER_NS + "insertLecture";
 		return session.insert(stmt, lectureData);
 	}
+	
+	public Lecture getLecture(Lecture lectureData) {
+		String stmt = MANAGER_NS + "selectLecture";
+		return session.selectOne(stmt, lectureData);
+	}
 }

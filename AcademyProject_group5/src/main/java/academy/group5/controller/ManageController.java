@@ -48,8 +48,8 @@ public class ManageController {
 	@RequestMapping(value="/lectureManage/add", method=RequestMethod.GET)
 	public String addLecture(Model model, @RequestParam String lectureName,
 			@RequestParam String professorName, @RequestParam Integer lectureClass){
-		service.registerLecture(lectureName, professorName, lectureClass);
 		
+		service.registerLecture(lectureName, professorName, lectureClass);	
 		model.addAttribute("msg", "등록되었습니다.");
 		return "/manage/lecture";
 	}
