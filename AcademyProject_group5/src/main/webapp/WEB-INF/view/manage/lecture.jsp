@@ -41,7 +41,7 @@
 </body>
 <script type="text/javascript">
 $("#lectureAddBtn").click(function(){
-	$(location).attr('href', "/lectureManage/add");
+	$(location).attr('href', "/lectureManage/addjsp");
 });
 </script>
 </html>
