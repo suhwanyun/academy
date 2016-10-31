@@ -57,7 +57,6 @@
 				<col width="30%">
 				<col width="30%">
 				<col width="15%">
-				
 				<tr>
 					<c:choose>
 						<c:when test="${list.notiType == 'lecture'}">
