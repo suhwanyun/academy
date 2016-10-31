@@ -102,10 +102,10 @@
 					path="passAnswer" class="form-control" />
 
 			</div>
-			<div style="margin-bottom:5%;">
+		
 			<sform:button id="joinBtn" type="submit" class="btn myButton size8mar">가입 하기</sform:button>
 			<sform:button type="reset" class="btn myButton size4">다시 작성</sform:button>
-			</div>
+		
 			
 
 

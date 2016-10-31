@@ -83,9 +83,9 @@
 					</div>
 				</div>
 			</div>
-			<div align="center" style="margin-bottom:5%;">
+			<div align="center">
 			<sform:button id="infoUpdate" type="submit" class="myButton size8">수정 하기</sform:button>
-			</div>
+		</div>
 		</sform:form>
 </div>
 </body>
