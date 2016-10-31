@@ -1,8 +1,5 @@
 package academy.group5.service;
 
-import java.util.List;
-
-import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.etc.NotificationSettingList;
 
 public interface NotificationService {
@@ -11,10 +8,10 @@ public interface NotificationService {
 	 * @param userId
 	 * @return
 	 */
-	List<NotificationSetting> settingList(String userId);
+	NotificationSettingList getSettingList(String userId);
 	/**
 	 * 알람 설정 수정
-	 * @param settingList
+	 * @param settingData
 	 * @return
 	 */
 	boolean settingModify(String userId, NotificationSettingList settingData);

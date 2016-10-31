@@ -202,8 +202,14 @@ public class BoardController {
 			break;
 		}
 		
-		return addPosting(model, session, redAttr, mrequest, uploadPhoto,
-				okMappingStr, failMappingStr, false);	
+		String returnStr =  addPosting(model, session, redAttr, mrequest, uploadPhoto,
+										okMappingStr, failMappingStr, false);	
+		if(returnStr.substring(0, 5).equals("redir")){
+			String realReturnStr = returnStr.substring(9);
+			redAttr.addFlashAttribute("nextJsp", realReturnStr);
+			return "redirect:/message";
+		} 
+		return returnStr;
 	}
 	
 	/** 게시글 삭제 */
@@ -218,16 +224,20 @@ public class BoardController {
 			redAttr.addFlashAttribute("msg", "삭제되었습니다.");
 		} 
 		
+		String nextJspStr = "";
 		switch(postingType){
 		case BOARD_TYPE_FOOD:
-			return "redirect:/foodMain";
+			nextJspStr = "/foodMain";
 		case BOARD_TYPE_PLAY:
-			return "redirect:/playMain";
+			nextJspStr = "/playMain";
 		case BOARD_TYPE_PLACE:
-			return "redirect:/placeMain";
+			nextJspStr = "/placeMain";
 		default: // 학업 게시판, 미구현
-			return "redirect:/main";
+			nextJspStr = "/main";
 		}
+		
+		redAttr.addFlashAttribute("nextJsp", nextJspStr);
+		return "redirect:/message";
 		
 	}
 	

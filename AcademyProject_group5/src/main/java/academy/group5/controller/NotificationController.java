@@ -7,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.etc.NotificationSettingList;
-import academy.group5.exception.WrongRequestException;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
@@ -33,25 +31,22 @@ public class NotificationController {
 	public String notiSettingList(Model model, HttpSession session){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
-		
-		NotificationSettingList settingData = new NotificationSettingList(); 
-		settingData.setSettingList(service.settingList(id));
-		model.addAttribute("settingData", settingData);
+		model.addAttribute("settingData", service.getSettingList(id));
 		
 		return "noti/noti";
 	}
 	
 	/** 알림 설정 */
-	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.GET)
-	public @ResponseBody String notiSetting(HttpSession session, @RequestParam NotificationSettingList settingData){
+	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.POST)
+	public String notiSetting(HttpSession session, RedirectAttributes redAttr,
+			NotificationSettingList settingData){
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
-		
-		try{ 
-			service.settingModify(id, settingData); 
-		} catch(WrongRequestException e){ return "false"; }
+		service.settingModify(id, settingData); 
+		redAttr.addFlashAttribute("msg", "설정되었습니다.");
+		redAttr.addFlashAttribute("nextJsp", "/noti/notiSettingjsp");
 
-		return "true";
+		return "redirect:/message";
 	}
 	
 }

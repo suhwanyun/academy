@@ -8,14 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 알림 설정에 사용되는 데이터 모음
- * @author YSH
- *
+ * 알림 설정에 사용되는 데이터 모듈
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationSettingList {
-	/** 알림 설정 목록 */
+	
+	// 알림 설정 목록(데이터 전달용)
 	private List<NotificationSetting> settingList;
 }

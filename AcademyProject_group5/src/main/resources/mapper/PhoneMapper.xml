@@ -9,5 +9,37 @@
 		set phone_id = #{phoneId}
 		where user_id = #{userId}
 	</update>
+	
+	<select id="selectNotificationSettingForPhone" parameterType="String" resultType="notification_setting">
+		select noti_type, week_code, noti_hour, noti_min
+		from NotificationSetting
+		where user_id = #{userId} and noti_on = 1
+	</select>
+	
+	<select id="selectMostRecommendPostingForPhone" parameterType="most_recommend" resultType="posting">
+		select posting_title, posting_content
+	 	from (select rownum as rnum, sub.*
+	 		  from (select posting_title, SUBSTR(posting_content, 1, 20) as posting_content
+			 	    from Posting
+			 	    where posting_recommend > 0
+			 	      and posting_time > sysdate - 1
+			 	      and posting_type = 'food'
+			 	    order by posting_recommend desc
+			 	    ) sub
+			  )
+		where rnum = 1
+	</select>
+	
+	<select id="selectNewestPostingForPhone" parameterType="String" resultType="posting">
+		select posting_title, posting_content
+	 	from (select rownum as rnum, sub.*
+	 		  from (select posting_title, SUBSTR(posting_content, 1, 20) as posting_content
+			 	    from Posting
+			 	    where posting_type = #{postingType}
+			 	    order by posting_time desc
+			 	    ) sub
+			  )
+		where rnum = 1
+	</select>
 
 </mapper>

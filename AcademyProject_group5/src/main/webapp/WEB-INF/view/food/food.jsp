@@ -14,12 +14,19 @@
 <body>
    <!-- 테이블 시작 -->
    <jsp:include page="/WEB-INF/view/header/header.jsp" />
-   	<div class="text-center">
-         <h1>식사 게시판</h1>
-         </div>
-         <div class="container-fluid">
-            <table class="table-condensed">
+
+      <div class="upmargin">
+            <table>
+
+               <colgroup>
+                  <col width="30%">
+                  <col width="20%">
+                  <col width="25%">
+                  <col width="25%">
+               </colgroup>
                <tr>
+
+
                   <td><select id="searchType">
                         <option selected="selected" value="user">작성자</option>
                         <option value="title">제목</option>
@@ -27,27 +34,30 @@
                         <option value="all">제목+내용</option>
 
                   </select></td>
-                  <td><input type="search" id="searchInput"></td>
-                  <td><input type="button" id="searchBtn" class="btn white"
+                  <td colspan="2"><input type="search" id="searchInput"></td>
+                  <td><input type="button" id="searchBtn" class="myButton"
                      value="찾기"></td>
                </tr>
-               </table>
-            
-               
+               <tr>
+
+                  <td colspan="3">
                      <input type="radio" name="sortVal" checked="checked" value="time">날짜
                      <input type="radio" name="sortVal" value="recommend">추천
-                     <button id="writeBtn" class="btn white bRight">글쓰기</button>
-               </div>
-<div class="container text-center">
-       <div class="table-responsive">  
+                  </td>
+                  <td>
+                     <button id="writeBtn" class="myButton">글쓰기</button>
+                  </td>
+               </tr>
+            </table>
+
             <table class="list_table">
-          		<colgroup>
-          			<col width="30%">
-          			<col width="70%">
-          		</colgroup>
-          		  <tbody>
+               <colgroup>
+                  <col width="20%">
+                  <col width="20%">
+                  <col width="10%">
+                  <col width="50%">
+               </colgroup>
                <c:if test="${!empty mostRecommendData}">
-             
                   <tr class="mostRecommend tableData">
 
                      <td rowspan="2"><img class="imgBoard"
@@ -62,11 +72,9 @@
                      <td>${mostRecommendData.postingRecommend }</td>
                      <td>${mostRecommendData.postingTime }</td>
                   </tr>
-                   
                </c:if>
-            
                <c:forEach items="${postingDataList }" var="list">
-				
+
                   <tr class="tableData">
 
                      <td rowspan="2"><img class="imgBoard"
@@ -82,18 +90,15 @@
                      <td>${list.postingTime }</td>
 
                   </tr>
-				
-               </c:forEach>    
-               </tbody>
+
+               </c:forEach>
                <tr id="beforeLocation">
                   <td colspan="3"><button id="moreBtn" class="myButton">더보기</button></td>
                   <td><button class="myButton">맨 위로</button></td>
                </tr>
-                  </table>
-</div>
+            </table>
          </div>
-    
-   
+>>>>>>> branch 'master' of https://github.com/suhwanyun/academy.git
    <!-- 테이블 종료 -->
 </body>
 

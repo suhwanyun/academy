@@ -12,12 +12,13 @@ import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.NotificationRepo;
+import academy.group5.util.GCM;
 
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService{
 
-	private final int SETTING_QUANTITY = 5;
+	private final int SETTING_QUANTITY = 4;
 	@Autowired
 	NotificationRepo notiRepo;
 	
@@ -25,46 +26,42 @@ public class NotificationServiceImpl implements NotificationService{
 	GCMRepo gcmRepo;
 	
 	@Override
-	public List<NotificationSetting> settingList(String userId) {
-		return notiRepo.getNotificationSettingList(userId);
+	public NotificationSettingList getSettingList(String userId) {
+		List<NotificationSetting> settingList = notiRepo.getNotificationSettingList(userId);
+		
+		if(settingList.size() < SETTING_QUANTITY){
+			throw new WrongRequestException();
+		}
+		NotificationSettingList settingDto = new NotificationSettingList();
+		settingDto.setSettingList(settingList);
+		
+		return settingDto;
 	}
 
 	@Override
 	public boolean settingModify(String userId, NotificationSettingList settingData) {
 		
-		List<NotificationSetting> existingSettingList = settingList(userId);
-		List<NotificationSetting> newSettingList = settingData.getSettingList();
-		
+		List<NotificationSetting> settingList = settingData.getSettingList();
 		// 설정값 이상
-		if(existingSettingList.size() != SETTING_QUANTITY ||
-			newSettingList.size() != SETTING_QUANTITY){
+		if(settingList.size() != SETTING_QUANTITY){
 			throw new WrongRequestException();
 		}
 		
-		for(int nSettingIdx = 0; nSettingIdx < SETTING_QUANTITY; nSettingIdx++){	
-			// 기존 설정 데이터
-			NotificationSetting nowSettingData = newSettingList.get(nSettingIdx);
+		for(NotificationSetting data : settingList){	
+			int result = notiRepo.updateNotificationSetting(data);
+			// 업데이트 실패
+			if(result != 1){
+				throw new WrongRequestException();
+			} 
+		}
+		
+		// 기기가 연동된 회원이면 설정 반영
+		String phoneId = gcmRepo.getOneUser(userId);
+		if(phoneId != null){
+			List<String> userIdList = new ArrayList<>();
+			userIdList.add(phoneId);
 			
-			for(int eSettingIdx = 0; eSettingIdx < SETTING_QUANTITY; eSettingIdx++){
-				// 새로운 설정 데이터
-				NotificationSetting newSettingData = existingSettingList.get(eSettingIdx);
-				// 해당 설정 값이면(id와 type이 일치)
-				if(nowSettingData.equals(newSettingData)){
-					// 설정이 변경되었으면 업데이트
-					if(nowSettingData != newSettingData){
-						int result = notiRepo.updateNotificationSetting(nowSettingData);
-						// 업데이트 실패
-						if(result != 1){
-							throw new WrongRequestException();
-						} 
-					// 설정이 변경되지 않았으면 루프 탈출	
-					} else {
-						break;
-					}
-				}
-				/** 루프 1회 종료 */
-			}
-			/** 설정 1회 완료 */
+			new GCM(null, null, userIdList, GCM.TYPE_SETTING);
 		}
 		return true;
 	}
@@ -78,14 +75,16 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public boolean settingSet(String userId) {		
 
-		List<NotificationSetting> settingDataList = new ArrayList<>();
+		char allday = 0x7f; // 0111 1111
+		char weekday = 0x7C; // 0111 1100
+		char weekend = 0x03; // 0000 0011
 		
+		List<NotificationSetting> settingDataList = new ArrayList<>();
 		// 알림 설정 초기화
-		settingDataList.add(new NotificationSetting("lecture", userId, 1, null, 7, 0, 10));
-		settingDataList.add(new NotificationSetting("noti", userId, 1, null, 1, 19, 0));
-		settingDataList.add(new NotificationSetting("place", userId, 1, null, 7, 9, 0));
-		settingDataList.add(new NotificationSetting("play", userId, 1, null, 1, 22, 0));
-		settingDataList.add(new NotificationSetting("food", userId, 1, null, 1, 11, 0));
+		settingDataList.add(new NotificationSetting("lecture", userId, 1, allday, 0, 10));
+		settingDataList.add(new NotificationSetting("food", userId, 1, weekday, 11, 0));
+		settingDataList.add(new NotificationSetting("play", userId, 1, weekday, 22, 0));
+		settingDataList.add(new NotificationSetting("place", userId, 1, weekend, 9, 0));
 
 		for(NotificationSetting settingData : settingDataList){
 			int result = notiRepo.setNotificationSetting(settingData);

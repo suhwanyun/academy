@@ -5,15 +5,15 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-   <link rel="stylesheet" href="/css/bootstrap.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+	<link rel="stylesheet" href="/css/bootstrap.css"/>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/bootstrap-toggle.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
 </head>
-
-<jsp:include page="../message.jsp" />
+	<jsp:include page="/WEB-INF/view/message.jsp" />
 <div class="text-center">
 <button type="button" class="btn btn-danger btn-header">
           <span class="glyphicon glyphicon-home text-center"></span> 
@@ -24,7 +24,7 @@
 			<c:when test="${!empty user }">
 						<a href="/main"  class="btn-mcm"><span>MCM</span></a>
 						<h3>${user.userName}님어서오세요</h3>
-						<a href="/noti/notiSettingList"  class="btn btn-danger"><span>알림</span></a> 
+						<a href="/noti/notiSettingjsp"  class="btn btn-danger"><span>알림</span></a> 
 						<a href="/info/myinfo" class="btn btn-danger"><span>내 정보관리</span></a><br><br>
 						
 						<a href="#"  class="btn btn-danger"><span>${user.userMileage} m</span></a>
@@ -51,9 +51,6 @@ $(document).ready(function(){
     $(".btn-header").click(function(){
         $("#collapse1").collapse('toggle');
     });
-
 });
-
 </script>
-
 </html>

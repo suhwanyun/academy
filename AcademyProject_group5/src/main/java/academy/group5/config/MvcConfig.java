@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import academy.group5.interceptor.LectureManagerSessionCheckInterceptor;
+import academy.group5.interceptor.MileageManagerSessionCheckInterceptor;
 import academy.group5.interceptor.SessionCheckInterceptor;
 
 // Spring@MVC에 대한 빈들을 설정
@@ -36,8 +38,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 			.addPathPatterns("/write/**")
 			.addPathPatterns("/mileage/**")
 			.addPathPatterns("/noti/**")
-			.addPathPatterns("/info/**")
-			.addPathPatterns("/manage/**");
+			.addPathPatterns("/info/**");
+		
+		registry.addInterceptor(new LectureManagerSessionCheckInterceptor())
+		.addPathPatterns("/lectureManage/**");
+		
+		registry.addInterceptor(new MileageManagerSessionCheckInterceptor())
+		.addPathPatterns("/mileageManage/**");
 		
 		super.addInterceptors(registry);
 	}

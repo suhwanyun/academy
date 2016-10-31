@@ -32,7 +32,6 @@
 		<typeAlias type="academy.group5.dto.etc.LecturePaging" alias="lecture_paging"/>
 		<typeAlias type="academy.group5.dto.etc.Voting" alias="voting"/>
 		<typeAlias type="academy.group5.dto.etc.MostRecommend" alias="most_recommend"/>
-		<typeAlias type="academy.group5.dto.etc.NotificationSettingList" alias="notification_setting_list"/>
 		<typeAlias type="academy.group5.dto.etc.SettingRecommend" alias="setting_recommend"/>
 	</typeAliases>
 	
@@ -40,11 +39,12 @@
 		<mapper resource="mapper/UserDataMapper.xml"/>
 		<mapper resource="mapper/LectureMapper.xml"/>
 		<mapper resource="mapper/BoardMapper.xml"/>
-		<mapper resource="mapper/NoticeMapper.xml"/>
+		<mapper resource="mapper/LectureNoticeMapper.xml"/>
 		<mapper resource="mapper/NotificationMapper.xml"/>
 		<mapper resource="mapper/TermMapper.xml"/>
 		<mapper resource="mapper/GCMMapper.xml"/>
 		<mapper resource="mapper/PhoneMapper.xml"/>
 		<mapper resource="mapper/MileageMapper.xml"/>
+		<mapper resource="mapper/ManagerMapper.xml"/>
 	</mappers>
 </configuration>

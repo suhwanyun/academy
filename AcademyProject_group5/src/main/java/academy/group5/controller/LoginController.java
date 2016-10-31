@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.UserData;
 import academy.group5.service.LoginService;
@@ -49,13 +50,16 @@ public class LoginController {
 	
 	/** 회원가입 완료 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(Model model, UserData data){
+	public String join(RedirectAttributes redAttr, UserData data){
 		
 		data.setUserMileage(new Integer(0));
 		
 		if(loginService.join(data)){
-			model.addAttribute("msg", "회원가입 되었습니다.");
+			redAttr.addFlashAttribute("msg", "회원가입 되었습니다.");
+			redAttr.addFlashAttribute("nextJsp", "/main");
+			return "redirect:/message";
 		} 
+		
 		return "index";
 	}
 	
@@ -83,9 +87,11 @@ public class LoginController {
 	
 	/** 회원정보 수정 */
 	@RequestMapping(value="/info/update", method=RequestMethod.POST)
-	public String infoUpdate(Model model, UserData data){
+	public String infoUpdate(RedirectAttributes redAttr, UserData data){
 		if(loginService.update(data)){
-			model.addAttribute("msg", "회원정보가 수정되었습니다.");
+			redAttr.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
+			redAttr.addFlashAttribute("nextJsp", "/main");
+			return "redirect:/message";
 		}
 		return "index";
 	}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academy.repo.LectureNoticeMapper">
+	
+	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="lecture_notice">
+		select notice_time, lecture_id, notice_type, notice_title
+		from (select rownum as rnum, sub.*
+			  from (select *
+			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)
+			 	 					   join LectureApply using (lecture_id)
+			 	 	where user_id = #{userId}
+					order by notice_time) sub)
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	<select id="selectLectureNotice" parameterType="lecture_paging" resultType="lecture_notice">
+		select notice_time, notice_type, notice_title
+		from (select rownum as rnum, sub.*
+			  from (select *
+			 	 	from LectureNotice 
+			 	 	where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+					order by notice_time) sub)
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	<select id="selectLectureNoticeInfo" parameterType="lecture_notice" resultType="lecture_notice">
+		select *
+		from LectureNotice
+		where notice_time = #{noticeTime}
+			and lecture_id = #{lectureId}
+			and lecture_class = #{lectureClass}
+	</select>
+	
+	<insert id="insertLectureNotice" parameterType="lecture_notice">
+		insert into
+		LectureNotice
+		values (sysdate, #{lectureId}, #{lectureClass},
+			#{noticeType}, #{noticeTitle}, #{noticeContent})
+	</insert>
+	
+</mapper>

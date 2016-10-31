@@ -7,13 +7,16 @@ import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 
 public interface ManagerService {
+	
+	public final String TYPE_LECTURE = "lecture";
+	public final String TYPE_MILEAGE = "mileage";
 	/**
 	 * 로그인
 	 * @param managerId
 	 * @param managerPass
 	 * @return
 	 */
-	Manager managerLogin(String managerId, String managerPass);
+	String managerLogin(String managerId, String managerPass);
 	/**
 	 * 학기등록
 	 * @param term

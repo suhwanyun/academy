@@ -19,6 +19,7 @@ import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
+import academy.group5.service.ManagerService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
 
@@ -47,18 +48,35 @@ public class IndexController {
 
 		return "/index";
 	}
+	
+	/** 메세지 표시 화면 */
+	@RequestMapping(value="/message", method=RequestMethod.GET)
+	public String messagePage(){
+		
+		return "message";
+	}
 		
 	/** 로그인 화면 */
 	@RequestMapping(value="/loginjsp", method=RequestMethod.GET)
-	public String loginPage(){
-
+	public String loginPage(HttpSession session){
+		Object loginObj = session.getAttribute("user");
+		if(loginObj != null){
+			return "redirect:/main";
+		}
 		return "/login/login";
 	}
 	
 	/** 관리자 로그인 화면 */
-	@RequestMapping(value="/manager_loginjsp", method=RequestMethod.GET)
-	public String managerLoginPage(){
-
+	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
+	public String managerLoginPage(HttpSession session){
+		Object loginObj = session.getAttribute("managerType");
+		if(loginObj != null){
+			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
+				return "redirect:/lectureManage/main";
+			} else {
+				return "redirect:/mileageManage/main";
+			}
+		}
 		return "/login/login_manager";
 	}
 	
@@ -199,7 +217,8 @@ public class IndexController {
 	
 	/** 게시판 메인 페이지 초기화 설정 */
 	private void boardMainSetup(HttpSession session, String PostingType){
-		Posting mostRecommendData = postService.mostRecommend(new MostRecommend(1, PostingType));
+		Posting mostRecommendData = postService.mostRecommend(
+				new MostRecommend(PostingType, MostRecommend.PERIOD_DAY));
 		
 		if(mostRecommendData != null){
 			session.setAttribute("mostRecommendData", mostRecommendData);
