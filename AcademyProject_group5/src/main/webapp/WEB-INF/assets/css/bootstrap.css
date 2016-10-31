@@ -1151,9 +1151,9 @@ img {
 }
 .img-logo{
 	  border-radius: 50%;
-  width:30%;
-  margin-top:10%;
-  margin-bottom:10%;
+  width:25%;
+  margin-top:5%;
+  margin-bottom:5%;
 }
 .imgMar{
 	margin-left:10%;
@@ -1235,7 +1235,7 @@ h2,
 h3,
 .h3 {
   margin-top: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 h1 small,
 .h1 small,

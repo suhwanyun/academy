@@ -4,16 +4,13 @@
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/css/main.css" />
-<link rel="stylesheet"
-	href="/css/font-awesome.css" />
+
 <title>회원정보 수정</title>
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/view/header/header.jsp" />
+<div class="container">
 			<h1 class="member">내 정보 수정</h1>
 	<sform:form method="post" action="update" modelAttribute="userData">
 		<sform:label path="userId">아이디</sform:label>
@@ -40,6 +37,7 @@
 		<sform:button id="infoUpdate" type="submit">수정 하기</sform:button>
 
 	</sform:form>
+	</div>
 </body>
 <script src="/js/validationcheck.js"></script>
 <script src="/js/myinfo.js"></script>

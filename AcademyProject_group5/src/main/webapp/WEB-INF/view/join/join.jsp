@@ -20,11 +20,11 @@
 
 	<div class="container cMargin">
 
-		<div align="center">
-			<a href="/main"><img class="img-circle img-responsive"
-				src="/images/logo.png" alt="" width="100" /></a>
-		</div>
-		<div class="text-center">
+		<div align="center" class="text-center">
+			<a href="/main"><img class="img-logo"
+				src="/images/logo.png" alt=""/></a>
+		
+		
 			<h1>회원가입</h1>
 
 		</div>
@@ -41,7 +41,7 @@
 							path="userId" class="form-control" />
 					</div>
 					<div class="col-xs-4">
-						<sform:button id="idDuplicationCheckBtn" class="btn active btn-info">중복 확인</sform:button>
+						<sform:button id="idDuplicationCheckBtn" class="myButton">중복 확인</sform:button>
 					</div>
 				</div>
 
@@ -76,10 +76,10 @@
 				<div class="row">
 					<div class="col-xs-8">
 						<sform:input placeholder="ex)abc@abc.com" maxlength="30" type="text"
-							path="email" class="form-control size8" />
+							path="email" class="form-control" />
 					</div>
 					<div class="col-xs-4">
-						<sform:button id="emailDuplicationCheckBtn" class="btn active btn-info">중복 확인</sform:button>
+						<sform:button id="emailDuplicationCheckBtn" class="myButton">중복 확인</sform:button>
 					</div>
 				</div>
 
@@ -102,10 +102,11 @@
 					path="passAnswer" class="form-control" />
 
 			</div>
-
-			<sform:button id="joinBtn" type="submit" class="btn active btn-info size8mar">가입 하기</sform:button>
-			<sform:button type="reset" class="btn active btn-info size4">다시 작성</sform:button>
-
+			<div style="margin-bottom:5%;">
+			<sform:button id="joinBtn" type="submit" class="btn myButton size8mar">가입 하기</sform:button>
+			<sform:button type="reset" class="btn myButton size4">다시 작성</sform:button>
+			</div>
+			
 
 
 

@@ -18,25 +18,16 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
-	<br>
-	<br>
-	<br>
-	<!--형 여기 br대신 top 마진 div넣어주시고 주석지워 주세요  -->
+	
+	<div class="container text-center">
+
 	<sform:form method="post" action="/noti/notiSetting"
 		modelAttribute="settingData">
 		<!-- 전체 켜기, 전체 끄기 버튼을 갖는 테이블 -->
-		<table class="table table-bored">
-			<colgroup>
-				<col width="50%">
-				<col width="25%">
-				<col width="25%">
-			</colgroup>
-			<tr>
-				<td></td>
-				<td><button id="all_ONBtn">전체 켜기</button></td>
-				<td><button id="all_OFFBtn">전체 끄기</button></td>
-			</tr>
-		</table>
+		<div class="container bRight" style="margin-top:5%; margin-bottom:5%;">
+				<button id="all_ONBtn" class="myButton">전체 켜기</button>
+				<button id="all_OFFBtn" class="myButton">전체 끄기</button>
+		</div>
 		<!-- 4개의 알림설정 리스트 테이블 -->
 		<c:forEach items="${settingData.settingList}" var="list"
 			varStatus="status">
@@ -52,12 +43,10 @@
 						value="${list.notiHour }"></sform:hidden>
 					<sform:hidden id="${list.notiType }_notiMin" path="settingList[${status.index }].notiMin"
 						value="${list.notiMin }"></sform:hidden>
-			<table class="table table-bored">
-				<col width="25%">
-				<col width="30%">
-				<col width="30%">
-				<col width="15%">
-				
+			<div class="container">
+			<table class="table">
+		
+				<tbody>
 				<tr>
 					<c:choose>
 						<c:when test="${list.notiType == 'lecture'}">
@@ -94,14 +83,18 @@
 					</c:if>
 					<td></td>
 					<td>
-						<input id="${list.notiType }_toggle" data-toggle="toggle" type="checkbox" value="${list.notiOn}">
+						<input id="${list.notiType }_toggle" data-toggle="toggle" type="checkbox" value="${list.notiOn}" >
 					</td>
 				</tr>
+				</tbody>
 			</table>
+			</div>
 		</c:forEach>
-
-		<sform:button id="sendSetting" type="submit">설정 저장</sform:button>
+	<div style="margin-bottom:5%;">
+		<sform:button id="sendSetting" type="submit" class="myButton">설정 저장</sform:button>
+	</div>
 	</sform:form>
+	</div>
 	<!--TimeSetting Modal -->
  <div class="modal fade" id="timeModal" role="dialog">
     <div class="modal-dialog">

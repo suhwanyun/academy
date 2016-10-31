@@ -98,7 +98,7 @@
                </tr>
             </table>
          </div>
->>>>>>> branch 'master' of https://github.com/suhwanyun/academy.git
+
    <!-- 테이블 종료 -->
 </body>
 

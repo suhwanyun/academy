@@ -12,11 +12,7 @@
 </head>
 <body>
 		<table>
-		<colgroup>
-			<col width="20%">
-			<col width="60%">
-			<col width="20%">
-		</colgroup>
+
 			<tr>
 				<td>
 					<img class="img-logo" src="/images/logo.png" alt="" />
