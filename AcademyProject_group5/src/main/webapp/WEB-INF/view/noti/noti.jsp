@@ -8,12 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
- .weekBtnOn{
-  background-color: blue;
- }
- .weekBtnOff{
-  background-color: gray;
- }
+
 </style>
 </head>
 <body>
@@ -108,8 +103,8 @@
           <h4 class="modal-title">시간 설정</h4>
         </div>
         <div class="modal-body">
-          <input id="settingHour" type="number" min="0" max="23" value="">
-          <input id="settingMin" type="number" min="0" max="59" value="">
+          <input id="settingHour" type="number" min="0" max="23" value="">시
+          <input id="settingMin" type="number" min="0" max="59" value="">분
         </div>
         <div class="modal-footer">
            <input id="target" type="hidden" value="">
@@ -128,17 +123,17 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">요일 설정</h4>
+          <h4 class="modal-title text-center">요일 설정</h4>
         </div>
-        <div class="modal-body">
-           <input  id="day0" type="hidden" value="">
-           <button id="day1" value="" onclick="btnToggle(this)">월</button>
-           <button id="day2" value="" onclick="btnToggle(this)">화</button>
-           <button id="day3" value="" onclick="btnToggle(this)">수</button>
-           <button id="day4" value="" onclick="btnToggle(this)">목</button>
-           <button id="day5" value="" onclick="btnToggle(this)">금</button>
-           <button id="day6" value="" onclick="btnToggle(this)">토</button>
-           <button id="day7" value="" onclick="btnToggle(this)">일</button>
+        <div class="modal-body" align="center">
+           <input  id="day0" type="hidden" value="" >
+           <button id="day1" value="" onclick="btnToggle(this)" class="myButton">월</button>
+           <button id="day2" value="" onclick="btnToggle(this)" class="myButton">화</button>
+           <button id="day3" value="" onclick="btnToggle(this)" class="myButton">수</button>
+           <button id="day4" value="" onclick="btnToggle(this)" class="myButton">목</button>
+           <button id="day5" value="" onclick="btnToggle(this)" class="myButton">금</button>
+           <button id="day6" value="" onclick="btnToggle(this)" class="myButton">토</button>
+           <button id="day7" value="" onclick="btnToggle(this)"class="myButton">일</button>
        
        </div>
         <div class="modal-footer">

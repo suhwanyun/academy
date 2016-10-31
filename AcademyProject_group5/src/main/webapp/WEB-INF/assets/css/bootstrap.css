@@ -6787,3 +6787,14 @@ button.size6mar{
     background-color: #fff !important;
    
   }
+   .weekBtnOn{
+ 
+   color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+ }
+ .weekBtnOff{
+  
+ 
+  outline-offset: -2px;
+ }
