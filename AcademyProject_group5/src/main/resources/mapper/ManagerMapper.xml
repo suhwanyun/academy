@@ -10,4 +10,15 @@
 		where manager_id = #{managerId} and manager_pass = #{managerPass}
 	</select>
 	
+	<insert id="insertLecture" parameterType="lecture">
+		insert into Lecture
+		(lecture_class, lecture_name, professor_name)
+		values (#{lectureClass}, #{lectureName}, #{professorName})
+	</insert>
+	
+	<select id="selectLecture" parameterType="lecture" resultType="lecture">
+		select *
+		from Lecture
+		where lecture_name = #{lectureName} and lecture_class = #{lectureClass}
+	</select>
 </mapper>

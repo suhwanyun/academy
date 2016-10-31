@@ -235,6 +235,16 @@ public class IndexController {
 		session.removeAttribute("orderData");
 	}
 	
+	/**--------------관리자-------------- */
+	
+	/** 강의 등록 페이지 */
+	@RequestMapping(value="/lectureManage/addjsp", method=RequestMethod.GET)
+	public String addLecturePage(){
+		return "manage/lecture_add";
+	}
+	
+	/**--------------------------------- */
+	
 	/** 게시판 종류 확인 */
 	private String getPostingType(HttpSession session){
 		Object postingTypeObj = session.getAttribute("postingType");

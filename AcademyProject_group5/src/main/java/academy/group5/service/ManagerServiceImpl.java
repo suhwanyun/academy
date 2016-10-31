@@ -10,8 +10,8 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
-import academy.group5.dto.UserData;
 import academy.group5.exception.ManagerLoginException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
 import academy.group5.util.MyHash;
@@ -54,9 +54,20 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLecture(Lecture lecture) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean registerLecture(String lectureName, String professorName, Integer lectureClass) {
+		
+		Lecture lectureData = new Lecture(null, lectureClass, lectureName, professorName);
+		
+		Lecture isAlready = managerRepo.getLecture(lectureData);
+		if(isAlready != null){
+			throw new WrongRequestException();
+		}
+		
+		int result = managerRepo.setLecture(lectureData);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override

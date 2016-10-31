@@ -28,7 +28,7 @@ public interface ManagerService {
 	 * @param lecture
 	 * @return
 	 */
-	boolean registerLecture(Lecture lecture);
+	boolean registerLecture(String lectureName, String professorName, Integer lectureClass);
 	/**
 	 * 강의 시간 등록
 	 * @param lecturetime
