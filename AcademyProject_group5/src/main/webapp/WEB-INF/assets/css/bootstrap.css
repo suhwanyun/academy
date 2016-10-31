@@ -119,6 +119,9 @@ textarea {
   font: inherit;
   color: inherit;
 }
+textarea{
+	resize:none;
+}
 button {
   overflow: visible;
 }
@@ -6687,7 +6690,7 @@ button.size6mar{
 	vertical-align: middle;
 }
 .imgBoard{
-		width:50%;
+		width:100%;
 		height:auto;
 		vertical-align:middle;
 		float:left;
@@ -6695,3 +6698,61 @@ button.size6mar{
 .bRight{
 	float:right;
 }
+.myButton{
+	  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  color:#606060;
+ border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
+}
+.list_table { width: 100%; columns: 0em; 
+ border: 1px solid #ddd;
+ cellpadding:"0"; 
+ cellspacing:"0";
+}
+
+.list_table_array{
+	width:100%;
+	
+}
+.list_table td{
+	
+	padding:0.5em 0.5em;
+	
+	vertical-align: middle;
+}
+  .list_table {
+    border-collapse: collapse !important;
+  }
+  .list_table td,
+  .list_table th {
+    background-color: #fff !important;
+   
+  }
+.list_table > thead > tr > th,
+.list_table > tbody > tr > th,
+.list_table > tfoot > tr > th,
+.list_table > thead > tr > td,
+.list_table > tbody > tr > td,
+.list_table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  

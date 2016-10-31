@@ -1,122 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>식사게시판</title>
 <script type="text/javascript">
-	function errorFun(e) {
-		e.src = "/upload/notFoundImg.png";
-	}
+   function errorFun(e) {
+      e.src = "/upload/notFoundImg.png";
+   }
 </script>
 </head>
 <body>
-	<!-- 테이블 시작 -->
-	<jsp:include page="/WEB-INF/view/header/header.jsp" />
-			<div class="container-fluid">
-				<table class="table-condensed">
-					<tr>
-						<td><select id="searchType">
-								<option selected="selected" value="user">작성자</option>
-								<option value="title">제목</option>
-								<option value="content">내용</option>
-								<option value="all">제목+내용</option>
+   <!-- 테이블 시작 -->
+   <jsp:include page="/WEB-INF/view/header/header.jsp" />
+   	<div class="text-center">
+         <h1>식사 게시판</h1>
+         </div>
+         <div class="container-fluid">
+            <table class="table-condensed">
+               <tr>
+                  <td><select id="searchType">
+                        <option selected="selected" value="user">작성자</option>
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
+                        <option value="all">제목+내용</option>
 
-						</select></td>
-						<td><input type="search" id="searchInput"></td>
-						<td><input type="button" id="searchBtn" class="btn white"
-							value="찾기"></td>
-					</tr>
-					</table>
+                  </select></td>
+                  <td><input type="search" id="searchInput"></td>
+                  <td><input type="button" id="searchBtn" class="btn white"
+                     value="찾기"></td>
+               </tr>
+               </table>
+            
+               
+                     <input type="radio" name="sortVal" checked="checked" value="time">날짜
+                     <input type="radio" name="sortVal" value="recommend">추천
+                     <button id="writeBtn" class="btn white bRight">글쓰기</button>
+               </div>
+<div class="container text-center">
+       <div class="table-responsive">  
+            <table class="list_table">
+          		<colgroup>
+          			<col width="30%">
+          			<col width="70%">
+          		</colgroup>
+          		  <tbody>
+               <c:if test="${!empty mostRecommendData}">
+             
+                  <tr class="mostRecommend tableData">
+
+                     <td rowspan="2"><img class="imgBoard"
+                        src="/upload/preview_${mostRecommendData.postingPhoto}"
+                        onerror="errorFun(this);" /></td>
+                     <td colspan="3"><a
+                        href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
+
+                  </tr>
+                  <tr class="mostRecommend tableData">
+                     <td>${mostRecommendData.userId }</td>
+                     <td>${mostRecommendData.postingRecommend }</td>
+                     <td>${mostRecommendData.postingTime }</td>
+                  </tr>
+                   
+               </c:if>
+            
+               <c:forEach items="${postingDataList }" var="list">
 				
-					
-							<input type="radio" name="sortVal" checked="checked" value="time">날짜
-							<input type="radio" name="sortVal" value="recommend">추천
-					
-							<button id="writeBtn" class="btn white bRight">글쓰기</button>
-					</div>
+                  <tr class="tableData">
 
+                     <td rowspan="2"><img class="imgBoard"
+                        onerror="errorFun(this);"
+                        src="/upload/preview_${list.postingPhoto}" /></td>
+                     <td colspan="3"><a
+                        href="/postingInfo?postingId=${list.postingId}">${list.postingTitle }</a></td>
 
-		
-			
-					<c:if test="${!empty mostRecommendData}">
-				<div class="container-fluid">
-					<div class="row">
-					<div class="col-xs-2">	
-						<table>
-							
-						<tr class="mostRecommend table-data">
+                  </tr>
+                  <tr class="tableData">
+                     <td>${list.userId }</td>
+                     <td>${list.postingRecommend }</td>
+                     <td>${list.postingTime }</td>
 
-							<td><img class="img-rounded "
-								src="/upload/preview_${mostRecommendData.postingPhoto}"
-								 onerror="errorFun(this);"  /></td>
-						</table>
-					</div>
-					<div class="col-xs-10">			
-						<table>
-							<thead>
-								<tr class="mostRecommend table-data">
-									<td><a href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
-								</tr>
-							</thead>
-							
-							<tbody>
-								<tr>
-									<td>${mostRecommendData.userId }</td>
-									<td>${mostRecommendData.postingRecommend }</td>
-									<td>${mostRecommendData.postingTime }</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>
-					</div>
-				</div>
-					</c:if>
+                  </tr>
 				
-					<c:forEach items="${postingDataList }" var="list">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-2">	
-						<table>
-							
-						<tr class="mostRecommend table-data">
-
-							<td><img class="img-rounded "
-								src="/upload/preview_${mostRecommendData.postingPhoto}"
-								onerror="errorFun(this);" /></td>
-						</table>
-					</div>
-					<div class="col-xs-10">			
-						<table>
-							<thead>
-								<tr class="mostRecommend table-data">
-									<td><a href="/postingInfo?postingId=${mostRecommendData.postingId}">${mostRecommendData.postingTitle }</a></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>${mostRecommendData.userId }</td>
-									<td>${mostRecommendData.postingRecommend }</td>
-									<td>${mostRecommendData.postingTime }</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>
-					</div>
-				</div>
-					</c:forEach>
-			<table class="table">
-				<tfoot>
-					<tr>
-						<td colspan="3" align="center"><button id="moreBtn" class="btn white">더보기</button></td>
-						<td align="right"><button class="btn white">맨위로</button></td>
-					</tr>
-				</tfoot>
-			</table>
-	<!-- 테이블 종료 -->
+               </c:forEach>    
+               </tbody>
+               <tr id="beforeLocation">
+                  <td colspan="3"><button id="moreBtn" class="myButton">더보기</button></td>
+                  <td><button class="myButton">맨 위로</button></td>
+               </tr>
+                  </table>
+</div>
+         </div>
+    
+   
+   <!-- 테이블 종료 -->
 </body>
 
 <script type="text/javascript">
