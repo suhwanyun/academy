@@ -44,32 +44,33 @@ public class ManageController {
 		return "/manage/lecture";
 	}
 	
-	/** 강의 등록 페이지 */
+	/** 강의 등록 */
 	@RequestMapping(value="/lectureManage/add", method=RequestMethod.GET)
-	public String addLecture(){
+	public String addLecture(@RequestParam String lectureName,
+			@RequestParam String professorName, @RequestParam Integer lectureClass){
 		
-		return "manage/lecture_add";
+		return "/manage/lecture";
 	}
 	
 	/** 강의 관리 페이지 */
 	@RequestMapping(value="/lectureManage/manage", method=RequestMethod.GET)
 	public String manageLecture(){
 		
-		return "manage/lecture_manage";
+		return "/manage/lecture_manage";
 	}
 	
 	/** 강의 시간 등록 페이지 */
 	@RequestMapping(value="/lectureManage/timeAdd", method=RequestMethod.GET)
 	public String addLectureTime(){
 		
-		return "manage/lecture_time_add";
+		return "/manage/lecture_time_add";
 	}
 	
 	/** 강의 시간 관리 페이지 */
 	@RequestMapping(value="/lectureManage/timeManage", method=RequestMethod.GET)
 	public String manageLectureTime(){
 		
-		return "manage/lecture_time_manage";
+		return "/manage/lecture_time_manage";
 	}
 	
 	/** 마일리지 등록 관리자 메인 페이지 */
@@ -83,13 +84,13 @@ public class ManageController {
 	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
 	public String addMileage(){
 		
-		return "manage/mileage_add";
+		return "/manage/mileage_add";
 	}
 	
 	/** 마일리지 관리 페이지 */
 	@RequestMapping(value="/mileageManage/manage", method=RequestMethod.GET)
 	public String manageMileage(){
 		
-		return "manage/mileage_manage";
+		return "/manage/mileage_manage";
 	}
 }
