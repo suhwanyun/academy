@@ -6855,5 +6855,7 @@ background-color: #eee;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-
- 
+.containerM{
+	width:1200px;
+	height:800px;
+}

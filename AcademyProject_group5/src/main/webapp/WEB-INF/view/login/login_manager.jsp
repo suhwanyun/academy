@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<div class="container" >
+	<div class="containerM">
 
 		<div align="center">
 			<a href="/main"><img class="img-logoS" src="/images/logo.png"
