@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
+import academy.group5.dto.etc.Paging;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
@@ -23,6 +26,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	ManagerRepo managerRepo;
+	
+	/** 한 페이지에 표시되는 강의의 수 */
+	private final int LECTURE_MAX_PAGE = 10;
 	
 	@Override
 	public String managerLogin(String managerId, String managerPass) {
@@ -69,6 +75,11 @@ public class ManagerServiceImpl implements ManagerService {
 	public boolean registerLecturetime(LectureTime lecturetime) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public List<Lecture> getAllLectureList(int page){
+		return managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
 	}
 
 	@Override

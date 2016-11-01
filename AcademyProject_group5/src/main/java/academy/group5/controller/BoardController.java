@@ -342,7 +342,11 @@ public class BoardController {
 				}
 			}
 			/* 정상 처리 */
-			throw new PageRedirectException("등록되었습니다.");
+			if(isNewPosting){
+				throw new PageRedirectException("등록되었습니다.");
+			} else {
+				throw new PageRedirectException("수정되었습니다.");
+			}
 		}
 		
 		return "index";

@@ -1,8 +1,9 @@
 package academy.group5.service;
 
+import java.util.List;
+
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 
@@ -23,6 +24,7 @@ public interface ManagerService {
 	 * @return
 	 */
 	boolean registerTerm(Term term);
+	
 	/**
 	 * 강의등록
 	 * @param lecture
@@ -35,6 +37,13 @@ public interface ManagerService {
 	 * @return
 	 */
 	boolean registerLecturetime(LectureTime lecturetime);
+	
+	/**
+	 * 강의 리스트 불러오기
+	 * @return
+	 */
+	List<Lecture> getAllLectureList(int page); 
+	
 	/**
 	 * 강의 내용 수정
 	 * @param lecture

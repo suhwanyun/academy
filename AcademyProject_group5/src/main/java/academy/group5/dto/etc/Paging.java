@@ -25,6 +25,10 @@ public class Paging {
 	private String orderType;
 	private String orderData;
 	
+	public Paging(int page, int size){
+		this(page, size, null);
+	}
+	
 	public Paging(int page, int size, String postingType){
 		this(page, size, postingType, null, null, null);
 	}

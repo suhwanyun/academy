@@ -42,13 +42,6 @@ public class ManageController {
 		throw new PageRedirectException();
 	}
 	
-	/** 강의등록 관리자 메인 페이지 */
-	@RequestMapping(value="/lectureManage/main", method=RequestMethod.GET)
-	public String manageLectureMainPage(){
-	
-		return "/manage/lecture";
-	}
-	
 	/** 강의 등록 */
 	@RequestMapping(value="/lectureManage/add", method=RequestMethod.POST)
 	public String addLecture(HttpSession session, @RequestParam String lectureName,
