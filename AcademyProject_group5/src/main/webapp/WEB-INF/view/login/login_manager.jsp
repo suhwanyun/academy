@@ -29,17 +29,15 @@
 			<div style="margin-left:12%;">
 				<label for="managerId" class="control-label">ID:</label>
 				
-					<input type="text" maxlength="10" id="managerId" class="form-fix">
+					<input type="text" maxlength="10" id="managerId" name="managerId" class="form-fix">
 			</div>
 			
 			<div style="margin-left:12%;">
 				<label for="ManagerPass" class="control-label ">Password:</label>
 				
-					<input type="password" maxlength="20" id="ManagerPass"
+					<input type="password" maxlength="20" name="ManagerPass" id="ManagerPass"
 						class="form-fix">
 			</div>
-			
-			
 			<div style="margin-left:82%; margin-top:5%;"> 
 					<input type="submit" value="로그인 하기" id="loginBtn"
 						class="myButton">
@@ -47,8 +45,5 @@
 		</form>
 
 	</div>
-</body>
-
-
 </body>
 </html>
