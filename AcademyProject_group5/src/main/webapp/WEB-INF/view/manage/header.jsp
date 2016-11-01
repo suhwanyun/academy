@@ -11,6 +11,7 @@
 <script src="/js/bootstrap.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/view/message.jsp" />
 		<table>
 
 			<tr>
