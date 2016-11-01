@@ -15,7 +15,7 @@
 	<div class="container" >
 
 		<div align="center">
-			<a href="/main"><img class="img-logoS" src="/images/logo.png"
+			<a href="/managerLoginjsp"><img class="img-logoS" src="/images/logo.png"
 				alt="" /></a>
 		</div>
 
