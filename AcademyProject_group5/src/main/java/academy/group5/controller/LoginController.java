@@ -14,6 +14,8 @@ import academy.group5.dto.UserData;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LoginService;
+import academy.group5.service.PhoneService;
+import academy.group5.util.Identify;
 
 /**
  * 계정 관련 컨트롤러
@@ -25,6 +27,9 @@ public class LoginController {
 	
 	@Autowired
 	LoginService loginService;	
+	
+	@Autowired
+	PhoneService phoneService;
 	 
 	/** 회원가입시 아이디 중복확인 */
 	@RequestMapping(value="/findUser", method=RequestMethod.GET)
@@ -81,7 +86,19 @@ public class LoginController {
 	/** 로그 아웃 */
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
+		
+		// 핸드폰에서 로그아웃 선택시 어플 로그인 데이터 삭제
+		Object isPhone = session.getAttribute("isPhone");	
+		if(isPhone != null && isPhone.equals("true")){
+			
+			Object userAttrObj = session.getAttribute("user");
+			if(userAttrObj != null){
+				String userId = ((UserData)userAttrObj).getUserId();
+				phoneService.removeGCMData(userId);
+			}		
+		}
 		session.removeAttribute("user");
+		
 		return "index";
 	}
 	

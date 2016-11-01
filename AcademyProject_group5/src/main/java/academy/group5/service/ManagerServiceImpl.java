@@ -57,7 +57,7 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public boolean registerLecture(String lectureName, String professorName, Integer lectureClass) {
 		
-		Lecture lectureData = new Lecture(null, lectureClass, lectureName, professorName);
+		Lecture lectureData = new Lecture(lectureClass, lectureName, professorName);
 		
 		Lecture isAlready = managerRepo.getLecture(lectureData);
 		if(isAlready != null){
@@ -79,7 +79,13 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Override
 	public List<Lecture> getAllLectureList(int page){
-		return managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
+		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
+		
+		for(Lecture lectureData : lectureList){
+			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
+			lectureData.setLecturetimeList(timeData);
+		}
+		return lectureList;
 	}
 
 	@Override
