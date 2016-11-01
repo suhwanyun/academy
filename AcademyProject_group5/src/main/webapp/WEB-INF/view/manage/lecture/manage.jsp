@@ -16,14 +16,11 @@
     <th>강의 분반</th>
   </tr>
   <tr>
-    <td><input type="number" id="lectureId" value="${lectureData.lectureId }"></td>
+    <td><input type="number" id="lectureId" readonly="readonly" value="${lectureData.lectureId }"></td>
     <td><input type="text" id="lectureName" value="${lectureData.lectureName }"></td>
     <td><input type="text" id="professorName" value="${lectureData.professorName }"></td>
     <td>
-    	<select id="lectureClass">
-    		<option value="1">1반</option>
-    		<option value="2">2반</option>
-    		<option value="3">3반</option>
+    	<select id="lectureClass" >
     	</select>
     	</td>
   </tr>
@@ -34,7 +31,7 @@
 </body>
 <script type="text/javascript">
  $("document").ready(function(){
-	 $("#lectureClass").val("${lectureData.lectureClass }");
+	 $("#lectureClass").append("<option value='${lectureData.lectureClass}'>${lectureData.lectureClass}반</option>");
  });
  $("#cancelBtn").click(function(){
 	 $(location).attr('href', "/lectureManage/main");
