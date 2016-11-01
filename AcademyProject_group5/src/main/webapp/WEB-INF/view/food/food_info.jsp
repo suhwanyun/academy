@@ -5,11 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/css/main.css" />
-<link rel="stylesheet"
-	href="asset/css/font-awesome.css" />
+
 <title>식사 게시판 글 내용</title>
 <script type="text/javascript">
 function errorFun(e){
@@ -20,18 +16,13 @@ function errorFun(e){
 
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
-	<div id="wrap">
-		<div class="upmargin">
-		<h1 class="member">식사 게시글</h1>
-			<div class="form9 pad">
+	<div class="container">
+		<div class="text-center">
+		<h1>식사 게시글</h1>
+		
 			
-				<table class="list_table">
-					<colgroup>
-						<col width="20%">
-						<col width="50%">
-						<col width="15%">
-						<col width="15%">
-					</colgroup>
+				<table class="table">
+					
 					<thead>
 					<tr>
 						<th colspan="4">${postingData.postingTitle }</th>
@@ -50,9 +41,9 @@ function errorFun(e){
 						<c:when test="${postingData.userId eq user.userId}">
 							<tr style="text-align: right;">
 								<td colspan="2"></td>
-								<td align="right"><button id="postingUpdateBtn">수정</button></td>
+								<td align="right"><button id="postingUpdateBtn" class="bRight myButton">수정</button></td>
 								<td align="left">
-									<button id="postingDeleteBtn">삭제</button>
+									<button id="postingDeleteBtn" class="myButton bRight">삭제</button>
 								</td>
 							</tr>
 						</c:when>
@@ -60,17 +51,17 @@ function errorFun(e){
 							<tr align="right">
 								<td colspan="2"></td >
 								<td><span id="postingRecommendCount">${postingData.postingRecommend}</span></td>
-								<td><button id="recommendBtn">추천</button></td>
+								<td><button id="recommendBtn" class="myButton">추천</button></td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 					<tr >
 						<td colspan="3"><input id="commentInput" type="text" maxlength="250"></td>
-						<td align="right"><button id="commentBtn">댓글 달기</button></td>
+						<td align="right"><button id="commentBtn" class="myButton">댓글 달기</button></td>
 					</tr>
 					</tbody>
 				</table>
-				<table id="commentTable">
+				<table id="commentTable" class="table">
 					<c:forEach items="${commentList }" var="list">
 					
 					<tr id="${list.commentId }" >
@@ -88,13 +79,13 @@ function errorFun(e){
 								<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>
 								<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>
 								<c:if test="${list.userId.length()>0 && list.commentParentId == null }">
-								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
+								<button class='childCommentBtn myButton' onclick="recomment(this)">댓글 달기</button>
 				 				</c:if>
 				 			</td>
 							</c:when>
 							<c:when test="${list.userId.length()>0&&list.userId!=user.userId && list.commentParentId == null }">
 							<td>
-								<button class='childCommentBtn' onclick="recomment(this)">댓글 달기</button>
+								<button class='childCommentBtn myButton' onclick="recomment(this)">댓글 달기</button>
 				 			</td>
 							</c:when>
 							<c:otherwise>
@@ -116,10 +107,10 @@ function errorFun(e){
 					  </c:forEach>
 				</table>
 			</div>
-		</div>
-	</div>
+		</div>	
+	
 </body>
-<script src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 <c:url value="/write/addComment" var="addComment"/>
 <c:url value="/write/updateComment" var="updateComment"/>
@@ -144,14 +135,14 @@ function tableSetting(parent, child){
 						$("<td>"+
 							"<img src='/images/updateImg.PNG' onclick='commentUpdate(this)'/>"+
 							"<img src='/images/deleteImg.PNG' onclick='commentDelete(this)'/>"+
-							"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
+							"<button class='childCommentBtn myButton' onclick='recomment(this)'>댓글달기</button>"+
 						  "</td>"
 						)
 					);
 				}else if(item.userId.length>0){
 					$("#"+item.commentId).append(
 							$("<td>"+
-								"<button class='childCommentBtn' onclick='recomment(this)'>댓글달기</button>"+
+								"<button class='childCommentBtn myButton' onclick='recomment(this)'>댓글달기</button>"+
 							  "</td>"
 							  )
 						);
