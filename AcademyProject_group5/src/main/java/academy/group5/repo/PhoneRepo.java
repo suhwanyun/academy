@@ -25,6 +25,13 @@ public class PhoneRepo {
 		return session.update(stmt, userData);
 	}
 	
+	/** GCM 등록 해지 */
+	public int resetGCMData(String userId) {
+		String stmt = PHONE_NS + "gcmReset";
+		return session.update(stmt, userId);
+	}
+	
+	
 	/** 알람 설정 정보 획득 */
 	public List<NotificationSetting> getNotificationSettingList(String id) {
 		String stmt = PHONE_NS + "selectNotificationSettingForPhone";

@@ -23,6 +23,7 @@ import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
+import academy.group5.util.Identify;
 
 /**
  * 어플 컨트롤러

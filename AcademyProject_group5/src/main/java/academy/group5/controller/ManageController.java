@@ -50,7 +50,7 @@ public class ManageController {
 	}
 	
 	/** 강의 등록 */
-	@RequestMapping(value="/lectureManage/add", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/add", method=RequestMethod.POST)
 	public String addLecture(HttpSession session, @RequestParam String lectureName,
 			@RequestParam String professorName, @RequestParam Integer lectureClass){
 		

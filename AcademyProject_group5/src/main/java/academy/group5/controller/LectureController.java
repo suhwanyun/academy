@@ -52,13 +52,6 @@ public class LectureController {
 		return "/campus/lecture/lecture_board";
 	}
 	
-	/** 학생이 선택한 강의의 게시판 글 내용 확인 *//*
-	@RequestMapping(value="/lecture/lectureBoardInfo", method=RequestMethod.GET)
-	public String lectureBoardInfo(){
-		
-		return "/campus/lecture/lecture_board_info";
-	}*/
-	
 	/** 학생이 선택한 강의의 게시판에 글 작성 */
 	@RequestMapping(value="/lecture/lectureBoardAdd", method=RequestMethod.GET)
 	public String lectureBoardAdd(){
