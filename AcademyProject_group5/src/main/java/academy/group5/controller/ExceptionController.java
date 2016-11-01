@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -21,9 +23,9 @@ public class ExceptionController {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 	
 	@ExceptionHandler(DataAccessException.class)
-	public ModelAndView dbException(Exception e){	
+	public ModelAndView dbException(HttpSession session, Exception e){	
 		logger.trace("\n\nDataAccessException 정보 :\n", e);
-		
+		session.removeAttribute("errorGotoPage");
 		return getModelAndView("/error/error_page", "오류가 발생하였습니다.\\n잠시 후 다시 시도해주세요.");		
 	}
 	
