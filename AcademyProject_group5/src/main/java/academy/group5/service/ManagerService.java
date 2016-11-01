@@ -45,6 +45,14 @@ public interface ManagerService {
 	List<Lecture> getAllLectureList(int page); 
 	
 	/**
+	 * 강의 정보 불러오기
+	 * @param lectureId
+	 * @param lectureClass
+	 * @return
+	 */
+	Lecture getLecture(int lectureId, int lectureClass);
+	
+	/**
 	 * 강의 내용 수정
 	 * @param lecture
 	 * @return

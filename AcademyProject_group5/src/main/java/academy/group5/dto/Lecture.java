@@ -29,11 +29,12 @@ public class Lecture {
 	/** 강의시간 목록 */
 	private List<LectureTime> lecturetimeList;
 
-	/**
-	 * @param lectureClass
-	 * @param lectureName
-	 * @param professorName
-	 */
+	public Lecture(Integer lectureId, Integer lectureClass) {
+		super();
+		this.lectureId = lectureId;
+		this.lectureClass = lectureClass;
+	}
+	
 	public Lecture(Integer lectureClass, String lectureName, String professorName) {
 		super();
 		this.lectureClass = lectureClass;
