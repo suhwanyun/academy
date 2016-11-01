@@ -15,7 +15,7 @@
 			<c:forEach items="${lectureList }" var="list" >
 			
 			<tr>
-				<td><a href="#">${list.lectureId }</a></td>
+				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureId }</a></td>
 				<td>${list.lectureName }</td>
 				<td>${list.professorName }</td>
 				<td>${list.lectureClass }반</td>
@@ -37,6 +37,9 @@
 								</c:choose>
 							</li>
 						</c:forEach>
+						<li>
+							<a href="/lectureManage/timeAdd?lectureId=${list.lectureId }&lectureClass=${list.lectureClass}" >+</a>
+						</li>
 					</ul>
 				</td>
 			</tr>
