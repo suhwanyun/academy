@@ -45,6 +45,7 @@ template {
 }
 a {
   background-color: transparent;
+  font-weight: bold;
 }
 a:active,
 a:hover {
@@ -3014,7 +3015,7 @@ select[multiple].form-group-lg .form-control {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.42857143;
   text-align: center;
   white-space: nowrap;
@@ -3377,10 +3378,12 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-mcm{
 	  padding: 10px 16px;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.3333333;
   border-radius: 6px;
   color:black;
+
+  
 }
 .btn-sm,
 .btn-group-sm > .btn {
@@ -4903,7 +4906,7 @@ a.badge:focus {
 }
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 21px;
+  font-size: 15px;
   font-weight: 200;
 }
 .jumbotron > hr {

@@ -15,6 +15,8 @@
 </head>
 
 <div class="text-center">
+
+
 	<button type="button" class="btn btn-danger btn-header">
 		<span class="glyphicon glyphicon-home text-center"></span>
 	</button>
@@ -35,18 +37,22 @@
 					<a href="/logout" class="btn btn-danger"><span>로그아웃</span></a>
 
 
+
 				</c:when>
-				<c:otherwise>
 
-					<a href="/main" class="btn-mcm"><span>MCM</span></a>
-					<br>
-					<a href="/loginjsp" class="btn btn-danger"><span>로그인</span></a>
-					<a href="/joinjsp" class="btn btn-danger"><span>회원가입</span></a>
+			<c:otherwise>
+				
+						<a href="/main"  class="btn-mcm" ><span>My Campus Manager</span></a><br><br>
+						 <a
+							href="/loginjsp"
+							class="btn btn-danger"><span>로그인</span></a> <a
+							href="/joinjsp"
+							class="btn btn-danger"><span>회원가입</span></a>
+			
+			</c:otherwise>
+		</c:choose>
+</div>	</div>
 
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
 </div>
 </body>
 <script>
