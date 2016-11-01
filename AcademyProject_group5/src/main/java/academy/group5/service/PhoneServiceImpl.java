@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +29,12 @@ public class PhoneServiceImpl implements PhoneService {
 	@Override
 	public boolean setGCMData(String userId, String phoneId) {
 		
-		int result = phoneRepo.setGCMData(new UserData(userId, null, phoneId));
-		
+		int result = -1;
+		try {
+			result = phoneRepo.setGCMData(new UserData(userId, null, phoneId));
+		}catch(DataAccessException e){
+			return false;
+		}
 		if(result != 1){
 			return false;
 		}

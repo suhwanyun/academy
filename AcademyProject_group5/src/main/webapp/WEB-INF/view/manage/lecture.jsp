@@ -3,13 +3,13 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>강의 관리자 메인화면</title>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
-	<div>
+	<div class="container">
 		<button id="lectureAddBtn">강의 등록</button>
 		<table>
 			<tr>

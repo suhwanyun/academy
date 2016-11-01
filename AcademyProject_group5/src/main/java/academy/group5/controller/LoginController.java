@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.UserData;
+import academy.group5.exception.PageRedirectException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LoginService;
-import academy.group5.service.NotificationService;
 
 /**
  * 계정 관련 컨트롤러
@@ -34,7 +34,7 @@ public class LoginController {
 			return "true";
 		} else{
 			return "false";
-		}	
+		}				
 	}
 	
 	/** 회원가입시 이메일 중복확인 */
@@ -50,17 +50,17 @@ public class LoginController {
 	
 	/** 회원가입 완료 */
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(RedirectAttributes redAttr, UserData data){
+	public String join(HttpSession session, UserData data){
 		
 		data.setUserMileage(new Integer(0));
 		
-		if(loginService.join(data)){
-			redAttr.addFlashAttribute("msg", "회원가입 되었습니다.");
-			redAttr.addFlashAttribute("nextJsp", "/main");
-			return "redirect:/message";
-		} 
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+		session.setAttribute("gotoPage", "/main");
 		
-		return "index";
+		loginService.join(data);
+				
+		throw new PageRedirectException("회원가입 되었습니다.");
 	}
 	
 	/** 로그인 */
@@ -68,14 +68,14 @@ public class LoginController {
 	public @ResponseBody String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
-		UserData data = loginService.login(userId, userPass);
-				
-		if(data != null){	
+		try{
+			UserData data = loginService.login(userId, userPass);
 			session.setAttribute("user", data);
-			return "true";
-		} else{
+		}catch(WrongRequestException e){
 			return "false";
 		}
+		
+		return "true";
 	}
 	
 	/** 로그 아웃 */
@@ -87,13 +87,15 @@ public class LoginController {
 	
 	/** 회원정보 수정 */
 	@RequestMapping(value="/info/update", method=RequestMethod.POST)
-	public String infoUpdate(RedirectAttributes redAttr, UserData data){
-		if(loginService.update(data)){
-			redAttr.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
-			redAttr.addFlashAttribute("nextJsp", "/main");
-			return "redirect:/message";
-		}
-		return "index";
+	public String infoUpdate(HttpSession session, UserData data){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/noti/notiSettingjsp");
+		session.setAttribute("gotoPage", "/main");
+				
+		loginService.update(data);
+		
+		throw new PageRedirectException("회원정보가 수정되었습니다.");
 	}
 	
 	/** ID 찾기 */

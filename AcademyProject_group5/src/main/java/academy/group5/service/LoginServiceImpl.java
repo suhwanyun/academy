@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
 		String encPass = loginRepo.getEncPass(userId);
 		
 		if(data == null || !encPass.equals(MyHash.MD5(userPass))){
-			return null;
+			throw new WrongRequestException("아이디와 패스워드를 확인하세요");
 		}
 		return data;
 	}
@@ -91,8 +92,12 @@ public class LoginServiceImpl implements LoginService {
 			
 			UserData encdata = toHash(new UserData(userId, tmpPass));
 		
-			int result = loginRepo.updatePass(encdata);
-			
+			int result = -1;
+			try{
+				result = loginRepo.updatePass(encdata);
+			} catch(DataAccessException e){
+				return "";
+			}
 			if(result == 1){
 				// 생성된 임시 비밀번호
 				return tmpPass;
@@ -104,8 +109,13 @@ public class LoginServiceImpl implements LoginService {
 	/** 존재하는 아이디인지 확인 */
 	@Override
 	public boolean findUser(String id) {
-		int finded = loginRepo.findUser(id);
 		
+		int finded = -1;
+		try{
+			finded = loginRepo.findUser(id);
+		}  catch(DataAccessException e) {
+			return false;
+		}
 		if(finded == 0){
 			return true;
 		} else{
@@ -116,7 +126,13 @@ public class LoginServiceImpl implements LoginService {
 	/** 존재하는 이메일인지 확인 */
 	@Override
 	public boolean findEmail(String email) {
-		int finded = loginRepo.findEmail(email);
+		
+		int finded = -1;
+		try{
+			finded = loginRepo.findEmail(email);
+		}  catch(DataAccessException e) {
+			return false;
+		}
 		
 		if(finded == 0){
 			return true;

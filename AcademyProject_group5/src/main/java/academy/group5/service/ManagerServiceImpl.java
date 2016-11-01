@@ -1,7 +1,6 @@
 package academy.group5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,7 +9,6 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
-import academy.group5.exception.ManagerLoginException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
@@ -31,13 +29,10 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		String managerType = null;
 		Manager loginInfo = toHash(new Manager(managerId, managerPass, null));
-		try{
-			managerType = managerRepo.getManager(loginInfo);
-		} catch(DataAccessException e){
-			throw new ManagerLoginException("인터넷 연결을 확인하세요.");
-		}
+		
+		managerType = managerRepo.getManager(loginInfo);
 		if(managerType == null){
-			throw new ManagerLoginException("아이디 또는 비밀번호를 확인하세요.");
+			throw new WrongRequestException("아이디 또는 비밀번호를 확인하세요.");
 		}
 		
 		return managerType;
@@ -60,7 +55,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		Lecture isAlready = managerRepo.getLecture(lectureData);
 		if(isAlready != null){
-			throw new WrongRequestException();
+			throw new WrongRequestException("이미 등록된 강의입니다.");
 		}
 		
 		int result = managerRepo.setLecture(lectureData);

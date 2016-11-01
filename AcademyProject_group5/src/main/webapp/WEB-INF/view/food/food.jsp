@@ -15,18 +15,10 @@
    <!-- 테이블 시작 -->
    <jsp:include page="/WEB-INF/view/header/header.jsp" />
 
-      <div class="upmargin">
-            <table>
-
-               <colgroup>
-                  <col width="30%">
-                  <col width="20%">
-                  <col width="25%">
-                  <col width="25%">
-               </colgroup>
+      <div class="container">
+            <table class="table-condensed">
+           
                <tr>
-
-
                   <td><select id="searchType">
                         <option selected="selected" value="user">작성자</option>
                         <option value="title">제목</option>
@@ -34,10 +26,11 @@
                         <option value="all">제목+내용</option>
 
                   </select></td>
-                  <td colspan="2"><input type="search" id="searchInput"></td>
-                  <td><input type="button" id="searchBtn" class="myButton"
+                  <td colspan="2"><input type="search" id="searchInput" ></td>
+                  <td class="text-center"><input type="button" id="searchBtn" class="bRight myButton"
                      value="찾기"></td>
                </tr>
+               
                <tr>
 
                   <td colspan="3">
@@ -45,11 +38,13 @@
                      <input type="radio" name="sortVal" value="recommend">추천
                   </td>
                   <td>
-                     <button id="writeBtn" class="myButton">글쓰기</button>
+                     <button id="writeBtn" class="myButton bRight">글쓰기</button>
                   </td>
                </tr>
+              
             </table>
-
+		</div>
+		<div class="container text-center">
             <table class="list_table">
                <colgroup>
                   <col width="20%">
@@ -91,11 +86,11 @@
                   </tr>
 
                </c:forEach>
-               <tr id="beforeLocation">
-                  <td colspan="3"><button id="moreBtn" class="myButton">더보기</button></td>
-                  <td><button class="myButton">맨 위로</button></td>
-               </tr>
-            </table>
+               </table>
+              <div style="margin-top:5%;"> 
+               <button id="moreBtn" class="myButton size8mar">더보기</button>
+               <button class="myButton size4">맨 위로</button>
+            </div>
          </div>
 
    <!-- 테이블 종료 -->

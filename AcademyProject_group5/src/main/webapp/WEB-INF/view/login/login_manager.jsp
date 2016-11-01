@@ -11,7 +11,6 @@
 <title>관리자 로그인 페이지</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/view/message.jsp" />
 	<!--  로그인하기전 화면 -->
 
 	<div class="container">
@@ -42,7 +41,7 @@
 			<div class="form-group">
 				 <div class="col-sm-offset-2 col-sm-10">
 				<input type="submit" value="로그인 하기" id="loginBtn"
-					class="btn btn-default btn-lg">
+					class="myButton bRight">
 			</div>
 			</div>
 		</form>

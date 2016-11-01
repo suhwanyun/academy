@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.etc.NotificationSettingList;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.service.NotificationService;
 import academy.group5.util.Identify;
 
@@ -38,15 +39,18 @@ public class NotificationController {
 	
 	/** 알림 설정 */
 	@RequestMapping(value="/noti/notiSetting", method=RequestMethod.POST)
-	public String notiSetting(HttpSession session, RedirectAttributes redAttr,
+	public String notiSetting(HttpSession session,
 			NotificationSettingList settingData){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/noti/notiSettingjsp");
+		session.setAttribute("gotoPage", "/noti/notiSettingjsp");
+		
 		// 로그인된 id 확인
 		String id = identify.getUserId(session);
 		service.settingModify(id, settingData); 
-		redAttr.addFlashAttribute("msg", "설정되었습니다.");
-		redAttr.addFlashAttribute("nextJsp", "/noti/notiSettingjsp");
 
-		return "redirect:/message";
+		throw new PageRedirectException("설정되었습니다.");
 	}
 	
 }

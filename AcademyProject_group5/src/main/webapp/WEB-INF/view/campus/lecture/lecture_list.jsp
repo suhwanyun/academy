@@ -8,8 +8,8 @@
 <title>내 강의 목록</title>
 </head>
 <body>
-<div class="container-fluid ">
-<table class="table table-bored">
+<div class="container">
+<table class="table">
 <thead>
   <tr>
     <th  class="text-center">강의 명</th>
@@ -26,13 +26,13 @@
 			<td></td>
 		</tr>
 		</tbody>
-		<tfoot>
-		<tr>
-			<td colspan="3" align="center"><button id="moreBtn" class="btn white">더보기</button></td>
-			<td align="right"><button class="btn white">맨위로</button></td>
-		</tr>
-		</tfoot>
+	
 </table>
+   <div style="margin-top:5%;"> 
+               <button id="moreBtn" class="myButton size8mar">더보기</button>
+               <button class="myButton size4">맨 위로</button>
+            </div>
+         </div>
 </div>
 </body>
 </html>
