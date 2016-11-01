@@ -94,8 +94,6 @@ public class ManagerServiceImpl implements ManagerService {
 		if(lectureData == null){
 			throw new WrongRequestException();
 		}
-		List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
-		lectureData.setLecturetimeList(timeData);
 		
 		return lectureData;
 	}
