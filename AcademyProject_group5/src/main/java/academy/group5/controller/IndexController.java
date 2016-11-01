@@ -45,8 +45,10 @@ public class IndexController {
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String mainPage(){
-
+	public String mainPage(HttpSession session){
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+		session.setAttribute("gotoPage", "/main");
 		return "/index";
 	}
 	
