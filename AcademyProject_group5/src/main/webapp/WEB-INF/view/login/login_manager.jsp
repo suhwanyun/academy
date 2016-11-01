@@ -35,7 +35,7 @@
 			<div style="margin-left:12%;">
 				<label for="ManagerPass" class="control-label ">Password:</label>
 				
-					<input type="password" maxlength="20" name="ManagerPass" id="ManagerPass"
+					<input type="password" maxlength="20" name="managerPass" id="managerPass"
 						class="form-fix">
 			</div>
 			<div style="margin-left:82%; margin-top:5%;"> 

@@ -15,7 +15,7 @@
 			<c:forEach items="${lectureList }" var="list" >
 			
 			<tr>
-				<td>${list.lectureId }</td>
+				<td><a href="#">${list.lectureId }</a></td>
 				<td>${list.lectureName }</td>
 				<td>${list.professorName }</td>
 				<td>${list.lectureClass }반</td>
