@@ -143,12 +143,15 @@ public class IndexController {
 	
 	/** 강의등록 관리자 메인 페이지 */
 	@RequestMapping(value="/lectureManage/main", method=RequestMethod.GET)
-	public String manageLectureMainPage(Model model){
+	public String manageLectureMainPage(HttpSession session, Model model){
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/managerLoginjsp");
+				
 		List<Lecture> lectureList = manageService.getAllLectureList(1);
 		if(lectureList.size() != 0) {
 			model.addAttribute("lectureList", lectureList);
 		}
-		return "/manage/lecture";
+		return "/manage/lecture/lecture";
 	}
 	
 	/** -----------------------게시판 페이지 연결----------------------- */
@@ -304,7 +307,7 @@ public class IndexController {
 		
 		session.setAttribute("isManage", "true");
 		
-		Object loginObj = session.getAttribute("managerType");
+		/*Object loginObj = session.getAttribute("managerType");
 		if(loginObj != null){
 			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
 				session.setAttribute("gotoPage", "/lectureManage/main");
@@ -313,7 +316,7 @@ public class IndexController {
 			}
 			
 			throw new PageRedirectException();
-		}
+		}*/
 		return "/login/login_manager";
 	}
 	
