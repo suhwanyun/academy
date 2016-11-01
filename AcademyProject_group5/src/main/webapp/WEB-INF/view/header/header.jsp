@@ -5,33 +5,41 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/css/bootstrap-theme.css"/>
-	<link rel="stylesheet" href="/css/bootstrap.css"/>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="/js/bootstrap.js"></script>
-	<script src="/js/bootstrap-toggle.min.js"></script>
-	<link rel="stylesheet" href="/css/bootstrap-toggle.min.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap-theme.css" />
+<link rel="stylesheet" href="/css/bootstrap.css" />
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-toggle.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-toggle.min.css" />
 </head>
-	<jsp:include page="/WEB-INF/view/message.jsp" />
+
 <div class="text-center">
-<button type="button" class="btn btn-danger btn-header">
-          <span class="glyphicon glyphicon-home text-center"></span> 
-        </button>
- <div id="collapse1" class="collapse jumbotron">
- <div class="container" >
- <c:choose>
-			<c:when test="${!empty user }">
-						<a href="/main"  class="btn-mcm"><span>MCM</span></a>
-						<p>${user.userName}님 안녕하세요</p>
-						<a href="/noti/notiSettingjsp"  class="btn btn-danger"><span>알림</span></a> 
-						<a href="/info/myinfo" class="btn btn-danger"><span>내 정보관리</span></a><br><br>
-						
-						<a href="#"  class="btn btn-danger"><span>${user.userMileage} m</span></a>
-						<a href="/logout"  class="btn btn-danger"><span>로그아웃</span></a>
-					
-				
+
+
+	<button type="button" class="btn btn-danger btn-header">
+		<span class="glyphicon glyphicon-home text-center"></span>
+	</button>
+	<div id="collapse1" class="collapse jumbotron">
+		<div class="container">
+			<c:choose>
+				<c:when test="${!empty user }">
+					<a href="/main" class="btn-mcm"><span>MCM</span></a>
+					<h3>${user.userName}님어서오세요</h3>
+					<a href="/noti/notiSettingjsp" class="btn btn-danger"><span>알림</span></a>
+					<a href="/info/myinfo" class="btn btn-danger"><span>내
+							정보관리</span></a>
+					<br>
+					<br>
+
+					<a href="#" class="btn btn-danger"><span>${user.userMileage}
+							m</span></a>
+					<a href="/logout" class="btn btn-danger"><span>로그아웃</span></a>
+
+
+
 				</c:when>
+
 			<c:otherwise>
 				
 						<a href="/main"  class="btn-mcm" ><span>My Campus Manager</span></a><br><br>
@@ -44,13 +52,22 @@
 			</c:otherwise>
 		</c:choose>
 </div>	</div>
+
 </div>
- </body>
+</body>
 <script>
 $(document).ready(function(){
-    $(".btn-header").click(function(){
-        $("#collapse1").collapse('toggle');
-    });
+	<%
+	 String browser = request.getHeader("User-Agent");
+	 if (browser.indexOf("Android") > 0) {                                        // 안드로이드로 접속했다면 결과값 true
+	 	session.setAttribute("isPhone", "true");
+	 }else{
+		 session.setAttribute("isPhone", "false");
+	 }
+	%>
+});
+$(".btn-header").click(function(){
+    $("#collapse1").collapse('toggle');
 });
 </script>
 </html>

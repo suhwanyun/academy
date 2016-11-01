@@ -10,6 +10,13 @@ public interface PhoneService {
 	 * GCM 등록
 	 */
 	boolean setGCMData(String userId, String phoneId);
+	
+	/**
+	 * GCM 등록 해지
+	 * @param userId
+	 * @return
+	 */
+	boolean removeGCMData(String userId);
 
 	/**
 	 * 알람 설정 정보 획득

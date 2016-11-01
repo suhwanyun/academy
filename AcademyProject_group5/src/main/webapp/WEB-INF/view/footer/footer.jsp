@@ -11,7 +11,6 @@
 
 <!-- Container (Services Section) -->
 
-<jsp:include page="../message.jsp" />
 <div class="text-center">
 
 <button type="button" class="btn btn-footer" style="background: #ccc;">

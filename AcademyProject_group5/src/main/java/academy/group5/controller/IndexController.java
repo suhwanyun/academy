@@ -16,6 +16,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
@@ -40,12 +41,17 @@ public class IndexController {
 	@Autowired
 	PostingService postService;
 	
+	@Autowired
+	ManagerService manageService;
+	
 	Identify identify = new Identify();
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String mainPage(){
-
+	public String mainPage(HttpSession session){
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+		session.setAttribute("gotoPage", "/main");
 		return "/index";
 	}
 	
@@ -61,23 +67,11 @@ public class IndexController {
 	public String loginPage(HttpSession session){
 		Object loginObj = session.getAttribute("user");
 		if(loginObj != null){
-			return "redirect:/main";
-		}
-		return "/login/login";
-	}
-	
-	/** 관리자 로그인 화면 */
-	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
-	public String managerLoginPage(HttpSession session){
-		Object loginObj = session.getAttribute("managerType");
-		if(loginObj != null){
-			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
-				return "redirect:/lectureManage/main";
-			} else {
-				return "redirect:/mileageManage/main";
-			}
-		}
-		return "/login/login_manager";
+			session.setAttribute("gotoPage", "/main");
+			throw new PageRedirectException();
+		} 
+		
+		return "login/login";
 	}
 	
 	/** 회원가입 화면 */
@@ -99,12 +93,18 @@ public class IndexController {
 	/** 회원정보 수정화면 */
 	@RequestMapping(value="/info/myinfo", method=RequestMethod.GET)
 	public String infoUpdatePage(Model model, HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+				
 		String id = identify.getUserId(session);
 		UserData info = loginService.getInfo(id);
 		
 		model.addAttribute("userData", info);
 		return "/info/myinfo";		
 	}
+	
+	/** -----------------------메뉴 메인 페이지----------------------- */
 	
 	/** 학업 메뉴 메인 페이지 */
 	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
@@ -141,63 +141,77 @@ public class IndexController {
 		return "/mileage/mileage";
 	}
 	
+	/** 강의등록 관리자 메인 페이지 */
+	@RequestMapping(value="/lectureManage/main", method=RequestMethod.GET)
+	public String manageLectureMainPage(Model model){
+		List<Lecture> lectureList = manageService.getAllLectureList(1);
+		if(lectureList.size() != 0) {
+			model.addAttribute("lectureList", lectureList);
+		}
+		return "/manage/lecture";
+	}
+	
+	/** -----------------------게시판 페이지 연결----------------------- */
 	
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
-	public String addFood(){	
+	public String addFood(HttpSession session, Model model){	
+		setPrevPostingData(session, model, null);
 		return "/food/food_add";
 	}
 	
 	/** 오락추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/playjsp", method=RequestMethod.GET)
-	public String addPlay(){
-
+	public String addPlay(HttpSession session, Model model){
+		setPrevPostingData(session, model, null);
 		return "/play/play_add";
 	}
 	
 	/** 명소추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/placejsp", method=RequestMethod.GET)
-	public String addPlace(){
-
+	public String addPlace(HttpSession session, Model model){
+		setPrevPostingData(session, model, null);
 		return "/place/place_add";
 	}
 	
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
-	public String updateFood(Model model, HttpSession session, RedirectAttributes redAttr, 
+	public String updateFood(Model model, HttpSession session,
 								@RequestParam int postingId){
 		
-		if(getPostingData(model, session, redAttr, postingId)){
-			return "/food/food_update";
-		} else {
-			return "redirect:/foodMain";
-		}
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/foodMain");
+
+		getPostingData(model, session, postingId);
 		
+		return "/food/food_update";	
 	}
 	
 	/** 오락추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
-	public String updatePlay(Model model, HttpSession session, RedirectAttributes redAttr, 
+	public String updatePlay(Model model, HttpSession session,
 			@RequestParam int postingId){
 		
-		if(getPostingData(model, session, redAttr, postingId)){
-			return "/play/play_update";
-		} else {
-			return "redirect:/playMain";
-		}
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/playMain");
+		
+		getPostingData(model, session, postingId);
+		
+		return "/play/play_update";	
 	}
 	
 	/** 명소추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
-	public String updatePlace(Model model, HttpSession session, RedirectAttributes redAttr, 
+	public String updatePlace(Model model, HttpSession session, 
 			@RequestParam int postingId){
 		
-		if(getPostingData(model, session, redAttr, postingId)){
-			return "/place/place_update";
-		} else {
-			return "redirect:/placeMain";
-		}
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/placeMain");
+
+		getPostingData(model, session, postingId);
+		
+		return "/place/place_update";
 	}
 	
 	
@@ -235,16 +249,6 @@ public class IndexController {
 		session.removeAttribute("orderData");
 	}
 	
-	/**--------------관리자-------------- */
-	
-	/** 강의 등록 페이지 */
-	@RequestMapping(value="/lectureManage/addjsp", method=RequestMethod.GET)
-	public String addLecturePage(){
-		return "manage/lecture_add";
-	}
-	
-	/**--------------------------------- */
-	
 	/** 게시판 종류 확인 */
 	private String getPostingType(HttpSession session){
 		Object postingTypeObj = session.getAttribute("postingType");
@@ -260,8 +264,7 @@ public class IndexController {
 	}
 	
 	/** 게시판 글 수정시, 글 정보 가져오기 */
-	private boolean getPostingData(Model model, HttpSession session,
-									RedirectAttributes redAttr, int postingId){
+	private boolean getPostingData(Model model, HttpSession session, int postingId){
 		String userId = identify.getUserId(session);
 		String postingType = getPostingType(session);
 		Posting postingData = postService.postView(postingId, postingType);
@@ -271,7 +274,52 @@ public class IndexController {
 			throw new WrongRequestException();
 		}
 		
+		setPrevPostingData(session, model, postingData);	
 		model.addAttribute("postingData", postingData);
 		return true;
+	}
+	
+	/** 게시글 작성시, 백업 데이터가 존재할 경우 DB 데이터보다 우선 설정 */
+	private void setPrevPostingData(HttpSession session, Model model, Posting originalData){
+		Object prevPostingObj = session.getAttribute("postingData");
+		Posting prevPostingData = prevPostingObj != null ? (Posting)prevPostingObj : null;
+		
+		if(prevPostingData != null){
+			session.removeAttribute("postingData");
+			
+			if(originalData != null){
+				originalData.setPostingTitle(prevPostingData.getPostingTitle());
+				originalData.setPostingContent(prevPostingData.getPostingContent());
+			} else {
+				model.addAttribute("postingData", prevPostingData);
+			}
+		}
+	}
+	
+	/**-----------------------관리자----------------------- */
+	
+	/** 관리자 로그인 화면 */
+	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
+	public String managerLoginPage(HttpSession session){
+		
+		session.setAttribute("isManage", "true");
+		
+		Object loginObj = session.getAttribute("managerType");
+		if(loginObj != null){
+			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
+				session.setAttribute("gotoPage", "/lectureManage/main");
+			} else {
+				session.setAttribute("gotoPage", "/mileageManage/main");
+			}
+			
+			throw new PageRedirectException();
+		}
+		return "/login/login_manager";
+	}
+	
+	/** 강의 등록 페이지 */
+	@RequestMapping(value="/lectureManage/addjsp", method=RequestMethod.GET)
+	public String addLecturePage(){
+		return "manage/lecture_add";
 	}
 }

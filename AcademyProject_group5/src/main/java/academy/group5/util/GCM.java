@@ -12,6 +12,7 @@ public class GCM {
 	
 	public static final String TYPE_NOTICE = "send notice";
 	public static final String TYPE_SETTING = "alarm setting";
+	public static final String TYPE_RESET = "setting reset";
 	
 	private final String GCM_TITLE = "MCM";	
 	

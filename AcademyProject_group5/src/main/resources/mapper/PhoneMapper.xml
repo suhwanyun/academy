@@ -10,6 +10,12 @@
 		where user_id = #{userId}
 	</update>
 	
+	<update id="gcmReset" parameterType="String">
+		update UserData
+		set phone_id = null
+		where user_id = #{userId}
+	</update>
+	
 	<select id="selectNotificationSettingForPhone" parameterType="String" resultType="notification_setting">
 		select noti_type, week_code, noti_hour, noti_min
 		from NotificationSetting

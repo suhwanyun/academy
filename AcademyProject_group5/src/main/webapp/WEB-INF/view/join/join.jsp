@@ -80,36 +80,17 @@
 						<sform:button id="emailDuplicationCheckBtn" class="myButton">중복 확인</sform:button>
 					</div>
 				</div>
-
-
 			</div>
 			<div class="form-group">
 				<sform:label path="passQuestion">비밀번호 질문</sform:label>
-
-
-				<sform:textarea placeholder="1자 이상 100자 이하 " maxlength="100"
-					path="passQuestion" class="form-control"/>
-
-
+				<sform:textarea placeholder="1자 이상 100자 이하 " maxlength="100" path="passQuestion" class="form-control"/>
 			</div>
 			<div class="form-group">
 				<sform:label path="passAnswer">질문 답</sform:label>
-
-
-				<sform:input placeholder="1자 이상 20자 이하 " maxlength="20" type="text"
-					path="passAnswer" class="form-control" />
-
+				<sform:input placeholder="1자 이상 20자 이하 " maxlength="20" type="text" path="passAnswer" class="form-control"/>
 			</div>
-		
 			<sform:button id="joinBtn" type="submit" class="btn myButton size8mar">가입 하기</sform:button>
 			<sform:button type="reset" class="btn myButton size4">다시 작성</sform:button>
-		
-			
-
-
-
- 
-
 		</sform:form>
 	</div>
 </body>

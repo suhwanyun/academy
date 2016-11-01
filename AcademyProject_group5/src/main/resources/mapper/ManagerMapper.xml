@@ -16,6 +16,21 @@
 		values (#{lectureClass}, #{lectureName}, #{professorName})
 	</insert>
 	
+	<select id="selectAllLecture" parameterType="paging" resultType="lecture">
+		select *
+		from (select rownum as rnum, sub.*
+			 from (select *
+				  from Lecture 
+				  order by lecture_id) sub)
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	<select id="selectAllLectureTime" parameterType="lecture" resultType="lecture_time">
+		select *
+		from LectureTime
+		where lecture_name = #{lectureName} and lecture_class = #{lectureClass}
+	</select>
+	
 	<select id="selectLecture" parameterType="lecture" resultType="lecture">
 		select *
 		from Lecture

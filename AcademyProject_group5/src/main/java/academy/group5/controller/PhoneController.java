@@ -18,10 +18,12 @@ import com.google.gson.Gson;
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
+import academy.group5.util.Identify;
 
 /**
  * 어플 컨트롤러
@@ -45,26 +47,25 @@ public class PhoneController {
 	public String login(Model model, HttpSession session,
 			@RequestParam String userId, @RequestParam String userPass){
 		
-		UserData data = loginService.login(userId, userPass);
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/loginjsp");
 		
-		if(data != null){	
-			session.setAttribute("user", data);	
-		} else {
-			model.addAttribute("msg", "로그인에 실패하였습니다.");
-		}
-	
+		UserData data = loginService.login(userId, userPass);		
+		session.setAttribute("user", data);	
+
 		return "index";
 	}
 	
 	/** GCM 등록 */
 	@RequestMapping(value="/registGCM", method=RequestMethod.POST)
 	public @ResponseBody String addFood(@RequestParam String userId, @RequestParam String phoneId){
-		boolean result = phoneService.setGCMData(userId, phoneId);
-
-		if(result){
+				
+		if(phoneService.setGCMData(userId, phoneId)){
 			return "true";
-		}		
-		return "false";
+		} else {
+			return "false";
+		}
+		
 	}
 	
 	/** 알림 설정 데이터 획득 */

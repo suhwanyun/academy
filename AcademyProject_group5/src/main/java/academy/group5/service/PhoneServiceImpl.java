@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.repo.GCMRepo;
 import academy.group5.repo.PhoneRepo;
 import academy.group5.util.GCM;
 
@@ -25,11 +27,18 @@ public class PhoneServiceImpl implements PhoneService {
 	@Autowired
 	PhoneRepo phoneRepo;
 	
+	@Autowired
+	GCMRepo gcmRepo;
+	
 	@Override
 	public boolean setGCMData(String userId, String phoneId) {
 		
-		int result = phoneRepo.setGCMData(new UserData(userId, null, phoneId));
-		
+		int result = -1;
+		try {
+			result = phoneRepo.setGCMData(new UserData(userId, null, phoneId));
+		}catch(DataAccessException e){
+			return false;
+		}
 		if(result != 1){
 			return false;
 		}
@@ -39,6 +48,27 @@ public class PhoneServiceImpl implements PhoneService {
 		
 		new GCM(null, null, userIdList, GCM.TYPE_SETTING);
 		
+		return true;
+	}
+	
+	@Override
+	public boolean removeGCMData(String userId){
+		
+		String phoneId = gcmRepo.getOneUser(userId);
+		List<String> userIdList = new ArrayList<>();
+		userIdList.add(phoneId);
+		
+		new GCM(null, null, userIdList, GCM.TYPE_RESET);
+		
+		int result = -1;
+		try {
+			result = phoneRepo.resetGCMData(userId);
+		}catch(DataAccessException e){
+			return false;
+		}
+		if(result != 1){
+			return false;
+		}
 		return true;
 	}
 
