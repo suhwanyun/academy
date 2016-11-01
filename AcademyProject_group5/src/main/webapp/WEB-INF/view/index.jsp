@@ -48,9 +48,10 @@
 			class="img-circle img-thumbnail" src="/images/pic04.png" alt="" /></a>
 
         </div>
+
+</div>
 <div class="footer">
 <jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
-</div>
 </div>
 </body>
 

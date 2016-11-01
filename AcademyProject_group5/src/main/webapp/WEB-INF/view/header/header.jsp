@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="/css/bootstrap-toggle.min.css" />
 </head>
 
-<div class="text-center">
+ <div class="text-center">
 
 
 	<button type="button" class="btn btn-danger btn-header">
-		<span class="glyphicon glyphicon-home text-center"></span>
+		<span class="glyphicon glyphicon-home text-center" ></span>
 	</button>
 	<div id="collapse1" class="collapse jumbotron">
 		<div class="container">
@@ -53,7 +53,7 @@
 		</c:choose>
 </div>	</div>
 
-</div>
+</div> 
 </body>
 <script>
 $(document).ready(function(){
@@ -66,8 +66,8 @@ $(document).ready(function(){
 	 }
 	%>
 });
-$(".btn-header").click(function(){
+ $(".btn-header").click(function(){
     $("#collapse1").collapse('toggle');
-});
+}); 
 </script>
 </html>
