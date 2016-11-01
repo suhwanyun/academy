@@ -32,7 +32,7 @@ public class ManageController {
 		
 		String type = service.managerLogin(managerId, managerPass);	
 		session.setAttribute("managerType", type);
-		
+
 		// 호출할 컨트롤러 지정
 		if(type.equals(ManagerService.TYPE_LECTURE)){
 			session.setAttribute("gotoPage", "/lectureManage/main");
