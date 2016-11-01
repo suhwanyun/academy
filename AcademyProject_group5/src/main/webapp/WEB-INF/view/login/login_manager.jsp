@@ -24,7 +24,7 @@
 			<h1>Manager Login</h1>
 		</div>
 
-		<form method="post" class="form-horizontal" action="/managerLogin">
+		<form method="post" action="/managerLogin" class="form-horizontal">
 			
 			<div style="margin-left:12%;">
 				<label for="managerId" class="control-label">ID:</label>
@@ -39,8 +39,7 @@
 						class="form-fix">
 			</div>
 			<div style="margin-left:82%; margin-top:5%;"> 
-					<input type="submit" value="로그인 하기" id="loginBtn"
-						class="myButton">
+				<input type="submit" value="로그인 하기" id="loginBtn" class="myButton">
 			</div>
 		</form>
 
