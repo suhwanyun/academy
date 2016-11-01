@@ -322,4 +322,18 @@ public class IndexController {
 	public String addLecturePage(){
 		return "manage/lecture_add";
 	}
+	
+	/** 강의 관리 페이지 */
+	@RequestMapping(value="/lectureManage/managejsp", method=RequestMethod.GET)
+	public String manageLecture(HttpSession session, Model model,
+			@RequestParam int lectureId, @RequestParam int lectureClass){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+				
+		Lecture lectureData = manageService.getLecture(lectureId, lectureClass);
+		model.addAttribute("lectureData", lectureData);
+		return "/manage/lecture/manage";
+	}
+	
 }

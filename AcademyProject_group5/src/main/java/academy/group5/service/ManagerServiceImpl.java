@@ -87,6 +87,18 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return lectureList;
 	}
+	
+	@Override
+	public Lecture getLecture(int lectureId, int lectureClass){
+		Lecture lectureData = managerRepo.getLecture(new Lecture(lectureId, lectureClass));
+		if(lectureData == null){
+			throw new WrongRequestException();
+		}
+		List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
+		lectureData.setLecturetimeList(timeData);
+		
+		return lectureData;
+	}
 
 	@Override
 	public boolean updateLecture(Lecture lecture) {
