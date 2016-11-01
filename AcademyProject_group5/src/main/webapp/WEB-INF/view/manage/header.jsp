@@ -23,7 +23,7 @@
 					<h1>관리자 전용 페이지</h1>
 			</div>
 			<div class="col-xs-2 ">
-				<button class="myButton" >로그아웃</button>
+				<button id="logoutBtn" class="myButton" >로그아웃</button>
 		</div>
 		</div>		
 	</div>
