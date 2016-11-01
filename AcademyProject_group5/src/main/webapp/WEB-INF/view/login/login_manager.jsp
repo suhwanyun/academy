@@ -37,7 +37,7 @@
 				
 					<input type="password" maxlength="20" id="ManagerPass"
 						class="form-fix">
-			</div>	
+			</div>
 			
 			
 			<div style="margin-left:82%; margin-top:5%;"> 
