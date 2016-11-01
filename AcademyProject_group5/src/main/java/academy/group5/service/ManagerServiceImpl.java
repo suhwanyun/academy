@@ -55,9 +55,9 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLecture(String lectureName, String professorName, Integer lectureClass) {
+	public boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass) {
 		
-		Lecture lectureData = new Lecture(lectureClass, lectureName, professorName);
+		Lecture lectureData = new Lecture(lectureId, lectureClass, lectureName, professorName);
 		
 		Lecture isAlready = managerRepo.getLecture(lectureData);
 		if(isAlready != null){

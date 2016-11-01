@@ -18,6 +18,7 @@ END;
 
 CREATE OR REPLACE TRIGGER TRI_lecture_no BEFORE INSERT ON Lecture
 for each row
+when (new.lecture_id is null)
 BEGIN
   select SEQ_lecture_no.nextval
     into :new.lecture_id

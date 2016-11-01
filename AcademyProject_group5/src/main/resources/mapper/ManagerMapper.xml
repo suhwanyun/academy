@@ -12,8 +12,8 @@
 	
 	<insert id="insertLecture" parameterType="lecture">
 		insert into Lecture
-		(lecture_class, lecture_name, professor_name)
-		values (#{lectureClass}, #{lectureName}, #{professorName})
+		(lecture_id, lecture_class, lecture_name, professor_name)
+		values (#{lectureId}, #{lectureClass}, #{lectureName}, #{professorName})
 	</insert>
 	
 	<select id="selectAllLecture" parameterType="paging" resultType="lecture">

@@ -30,7 +30,7 @@ public interface ManagerService {
 	 * @param lecture
 	 * @return
 	 */
-	boolean registerLecture(String lectureName, String professorName, Integer lectureClass);
+	boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass);
 	/**
 	 * 강의 시간 등록
 	 * @param lecturetime

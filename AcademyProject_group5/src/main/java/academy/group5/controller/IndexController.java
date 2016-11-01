@@ -151,6 +151,8 @@ public class IndexController {
 		if(lectureList.size() != 0) {
 			model.addAttribute("lectureList", lectureList);
 		}
+		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		return "/manage/lecture/lecture";
 	}
 	
@@ -326,7 +328,7 @@ public class IndexController {
 	/** 강의 등록 페이지 */
 	@RequestMapping(value="/lectureManage/addjsp", method=RequestMethod.GET)
 	public String addLecturePage(){
-		return "manage/lecture_add";
+		return "manage/lecture/lecture_add";
 	}
 	
 	/** 강의 관리 페이지 */
