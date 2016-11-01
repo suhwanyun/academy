@@ -55,13 +55,6 @@ public class ManageController {
 		throw new PageRedirectException("등록되었습니다.");
 	}
 	
-	/** 강의 시간 등록 페이지 */
-	@RequestMapping(value="/lectureManage/timeAdd", method=RequestMethod.GET)
-	public String addLectureTime(){
-		
-		return "/manage/lecture_time_add";
-	}
-	
 	/** 강의 시간 관리 페이지 */
 	@RequestMapping(value="/lectureManage/timeManage", method=RequestMethod.GET)
 	public String manageLectureTime(){
