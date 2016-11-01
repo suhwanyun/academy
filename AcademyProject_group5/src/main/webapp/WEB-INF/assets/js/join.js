@@ -6,7 +6,7 @@ $("#joinBtn").click(
 			if (passSame && emailDupOk &&idDupOk && idCheck($("#userId").val())
 					&& passCheck($("#userPass").val())
 					&& nameCheck($("#userName").val())
-					&& phoneCheck($("#phoneNum").val())
+					&& emailCheck($("email").val())
 					&& questionCheck($("#passQuestion").val())
 					&& anserCheck($("#passAnswer").val()) == true) {
 			} else {
