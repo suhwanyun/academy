@@ -8,7 +8,7 @@
 <title>전체 강의 목록</title>
 </head>
 <body>
-<div class="container">
+<div class="container text-center">
 	<table class="table-condensed">
 		<tr>
 			<td><select id="serchType" >
@@ -23,7 +23,7 @@
 		</tr>
 	</table>
 
-	<div class="container text-center">
+	
 		
 			<table class="table">
 				<thead>
@@ -47,13 +47,13 @@
 			
 			</table>
 			   
-         </div>
+       
          <div style="margin-top:5%;"> 
                <button id="moreBtn" class="myButton size8mar">더보기</button>
                <button class="myButton size4">맨 위로</button>
             </div>
-		</div>
-	
+		
+	  </div>
 </body>
 
 

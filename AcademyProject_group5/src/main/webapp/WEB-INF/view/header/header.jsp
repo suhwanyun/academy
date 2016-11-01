@@ -23,7 +23,7 @@
  <c:choose>
 			<c:when test="${!empty user }">
 						<a href="/main"  class="btn-mcm"><span>MCM</span></a>
-						<h3>${user.userName}님어서오세요</h3>
+						<p>${user.userName}님 안녕하세요</p>
 						<a href="/noti/notiSettingjsp"  class="btn btn-danger"><span>알림</span></a> 
 						<a href="/info/myinfo" class="btn btn-danger"><span>내 정보관리</span></a><br><br>
 						
@@ -34,7 +34,7 @@
 				</c:when>
 			<c:otherwise>
 				
-						<a href="/main"  class="btn-mcm"><span>MCM</span></a><br>
+						<a href="/main"  class="btn-mcm" ><span>My Campus Manager</span></a><br><br>
 						 <a
 							href="/loginjsp"
 							class="btn btn-danger"><span>로그인</span></a> <a

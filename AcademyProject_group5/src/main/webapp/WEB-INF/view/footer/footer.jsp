@@ -14,7 +14,7 @@
 <jsp:include page="../message.jsp" />
 <div class="text-center">
 
-<button type="button" class="btn btn-info btn-footer">
+<button type="button" class="btn btn-footer" style="background: #ccc;">
           <span class="glyphicon glyphicon-info-sign"></span> 
         </button>
       
@@ -62,11 +62,11 @@
   </div>
 </div>
 </div>
-</div>
+
 </body>
 <script>
 $(document).ready(function(){
-    $(".btn-info").click(function(){
+    $(".btn-footer").click(function(){
         $("#collapse").collapse('toggle');
     });
 
