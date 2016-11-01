@@ -375,6 +375,7 @@ th {
 }
 .glyphicon-home:before {
   content: "\e021";
+  
 }
 .glyphicon-file:before {
   content: "\e022";
@@ -6687,7 +6688,7 @@ button.size6Smar{
 	width:15%; 
 	height:inherit;
 	padding:2%;  
-	border-radius:50px 50px 0 0;
+	border-radius:100% 100% 0 0;
 	
 
 }
@@ -6697,16 +6698,16 @@ button.size6Smar{
     min-width:1em;
 	width:15%; 
 	height:inherit;
-	padding:2%; 
-	border-radius:0 0 50px 50px;
+	padding:2%;  
+	border-radius:0 0 100% 100%;
 	
 }
 
- .container .footer {
+ .footer {
 	width:100%;
-	bottom:0;
+	margin-top:20%;
 	left:0;
-	padding-top:22%;
+	
  }
  .white{
  	color:#606060;
