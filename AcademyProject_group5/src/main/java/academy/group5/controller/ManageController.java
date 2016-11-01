@@ -44,13 +44,13 @@ public class ManageController {
 	
 	/** 강의 등록 */
 	@RequestMapping(value="/lectureManage/add", method=RequestMethod.POST)
-	public String addLecture(HttpSession session, @RequestParam String lectureName,
+	public String addLecture(HttpSession session, @RequestParam Integer lectureId, @RequestParam String lectureName,
 			@RequestParam String professorName, @RequestParam Integer lectureClass){
 		
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/addjsp");
 		session.setAttribute("gotoPage", "/lectureManage/main");
-		service.registerLecture(lectureName, professorName, lectureClass);	
+		service.registerLecture(lectureId, lectureName, professorName, lectureClass);	
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}

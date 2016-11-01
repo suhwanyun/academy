@@ -30,13 +30,12 @@ public class Lecture {
 	private List<LectureTime> lecturetimeList;
 
 	public Lecture(Integer lectureId, Integer lectureClass) {
-		super();
-		this.lectureId = lectureId;
-		this.lectureClass = lectureClass;
+		this(lectureId, lectureClass, null, null);
 	}
 	
-	public Lecture(Integer lectureClass, String lectureName, String professorName) {
+	public Lecture(Integer lectureId, Integer lectureClass, String lectureName, String professorName) {
 		super();
+		this.lectureId = lectureId;
 		this.lectureClass = lectureClass;
 		this.lectureName = lectureName;
 		this.professorName = professorName;
