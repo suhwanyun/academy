@@ -36,4 +36,15 @@
 		from Lecture
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</select>
+	
+	<update id="updateLecture" parameterType="lecture">
+		update Lecture
+		set lecture_name = #{lectureName}, professor_name = #{professorName}
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</update>
+	
+	<delete id="deleteLecture" parameterType="lecture">
+		delete from Lecture
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</delete>
 </mapper>

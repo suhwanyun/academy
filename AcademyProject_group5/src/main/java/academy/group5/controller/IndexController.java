@@ -344,4 +344,11 @@ public class IndexController {
 		return "/manage/lecture/manage";
 	}
 	
+	/** 강의 시간 등록 페이지 */
+	@RequestMapping(value="/lectureManage/timeAddjsp", method=RequestMethod.GET)
+	public String addLectureTime(HttpSession session,
+			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+		
+		return "/manage/lecture/lecture_time_add";
+	}
 }

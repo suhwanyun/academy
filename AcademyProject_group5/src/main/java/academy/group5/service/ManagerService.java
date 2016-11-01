@@ -69,7 +69,7 @@ public interface ManagerService {
 	 * @param lectureId
 	 * @return
 	 */
-	boolean deleteLecture(Integer lectureId);
+	boolean deleteLecture(Lecture lectureId);
 	/**
 	 * 강의 시간삭제
 	 * @param lectureId

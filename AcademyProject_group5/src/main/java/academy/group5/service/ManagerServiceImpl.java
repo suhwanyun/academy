@@ -100,8 +100,11 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public boolean updateLecture(Lecture lecture) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = managerRepo.updateLecture(lecture);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override
@@ -111,9 +114,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean deleteLecture(Integer lectureId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteLecture(Lecture lecture) {
+		int result = managerRepo.deleteLecture(lecture);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override

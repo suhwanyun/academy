@@ -43,4 +43,14 @@ public class ManagerRepo {
 		String stmt = MANAGER_NS + "selectLecture";
 		return session.selectOne(stmt, lectureData);
 	}
+	
+	public int updateLecture(Lecture lectureData) {
+		String stmt = MANAGER_NS + "updateLecture";
+		return session.update(stmt, lectureData);
+	}
+	
+	public int deleteLecture(Lecture lectureData) {
+		String stmt = MANAGER_NS + "updateLecture";
+		return session.delete(stmt, lectureData);
+	}
 }
