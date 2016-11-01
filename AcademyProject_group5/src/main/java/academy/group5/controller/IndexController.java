@@ -328,7 +328,7 @@ public class IndexController {
 	/** 강의 등록 페이지 */
 	@RequestMapping(value="/lectureManage/addjsp", method=RequestMethod.GET)
 	public String addLecturePage(){
-		return "manage/lecture_add";
+		return "manage/lecture/lecture_add";
 	}
 	
 	/** 강의 관리 페이지 */
