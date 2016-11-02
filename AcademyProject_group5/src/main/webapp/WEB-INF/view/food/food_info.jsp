@@ -41,7 +41,7 @@ function errorFun(e){
 						<c:when test="${postingData.userId eq user.userId}">
 							<tr style="text-align: right;">
 								<td colspan="2"></td>
-								<td align="right"><button id="postingUpdateBtn" class="bRight myButton">수정</button></td>
+								<td align="right"><button id="postingUpdateBtn" class="bRight myButton" style="margin-right:-30%;">수정</button></td>
 								<td align="left">
 									<button id="postingDeleteBtn" class="myButton bRight">삭제</button>
 								</td>

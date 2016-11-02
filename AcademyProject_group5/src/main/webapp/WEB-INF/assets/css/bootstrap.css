@@ -2299,6 +2299,9 @@ th {
   border-top: 1px solid #ddd;
   
 }
+.tableL > tbody > tr > td{
+	font-size: 80%;
+}
 .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;

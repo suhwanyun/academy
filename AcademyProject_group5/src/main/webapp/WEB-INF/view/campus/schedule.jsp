@@ -3,12 +3,14 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
+<script>
 
+</script>
 <title>시간표</title>
 </head>
 <body>
-<div class="container-fluid">
-	<table class="table table-bordered" >
+
+	<table class="table table-bordered text-center tableL" >
 	<thead>
   <tr>
    	<th class="col-xs-2 text-center">&nbsp;</th>
@@ -22,11 +24,11 @@
   <tbody>
    <tr>
         <th class="text-center">1교시<br>09:00~<br>09:50</th>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td>창의적<br>8공<br>717</td>
+        <td>창의적<br>8공<br>717</td>
+        <td>창의적<br>8공<br>717</td>
+        <td>창의적<br>8공<br>717</td>
+        <td>창의적<br>8공<br>717</td>
         
     </tr>
    <tr>
@@ -103,6 +105,6 @@
     </tr>
     </tbody>
 </table>
-</div>
+
 </body>
 </html>
