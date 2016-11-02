@@ -34,11 +34,6 @@ public class ManagerRepo {
 		return session.selectList(stmt, pagingData);
 	}
 	
-	public List<LectureTime> getAllLectureTime(Lecture lectureData) {
-		String stmt = MANAGER_NS + "selectAllLectureTime";
-		return session.selectList(stmt, lectureData);
-	}
-	
 	public Lecture getLecture(Lecture lectureData) {
 		String stmt = MANAGER_NS + "selectLecture";
 		return session.selectOne(stmt, lectureData);
@@ -52,5 +47,30 @@ public class ManagerRepo {
 	public int deleteLecture(Lecture lectureData) {
 		String stmt = MANAGER_NS + "updateLecture";
 		return session.delete(stmt, lectureData);
+	}
+	
+	public List<LectureTime> getAllLectureTime(Lecture lectureData) {
+		String stmt = MANAGER_NS + "selectAllLectureTime";
+		return session.selectList(stmt, lectureData);
+	}
+	
+	public int insertLectureTime(LectureTime timeData) {
+		String stmt = MANAGER_NS + "insertLectureTime";
+		return session.insert(stmt, timeData);
+	}
+	
+	public int updateLectureTime(LectureTime timeData) {
+		String stmt = MANAGER_NS + "updateLectureTime";
+		return session.update(stmt, timeData);
+	}
+	
+	public int deleteAllLectureTime(Lecture lectureData) {
+		String stmt = MANAGER_NS + "deleteAllLectureTime";
+		return session.delete(stmt, lectureData);
+	}
+	
+	public int deleteLectureTime(Integer timeId) {
+		String stmt = MANAGER_NS + "deleteLectureTime";
+		return session.delete(stmt, timeId);
 	}
 }

@@ -25,11 +25,9 @@ DROP TABLE UserData CASCADE CONSTRAINTS;
 
 CREATE TABLE CancelLecture
 (
-	lecture_id number NOT NULL,
-	lecture_class number NOT NULL,
-	lecture_start number NOT NULL,
 	cancel_date date NOT NULL,
-	CONSTRAINT Cancel_PK PRIMARY KEY (lecture_id, lecture_class, lecture_start, cancel_date)
+	lecture_time_id number NOT NULL,
+	CONSTRAINT CancelLecture_PK PRIMARY KEY (cancel_date, lecture_time_id)
 );
 
 
@@ -68,6 +66,7 @@ CREATE TABLE LectureNotice
 
 CREATE TABLE LectureTime
 (
+	lecture_time_id number NOT NULL,
 	lecture_id number NOT NULL,
 	lecture_class number NOT NULL,
 	lecture_start number NOT NULL,
@@ -75,7 +74,7 @@ CREATE TABLE LectureTime
 	lecture_place varchar2(50) NOT NULL,
 	lecture_week number NOT NULL,
 	is_temp_date date,
-	CONSTRAINT LectureTime_PK PRIMARY KEY (lecture_id, lecture_class, lecture_start)
+	PRIMARY KEY (lecture_time_id)
 );
 
 
@@ -228,9 +227,9 @@ ALTER TABLE LectureTime
 
 
 ALTER TABLE CancelLecture
-	ADD CONSTRAINT "CancelLecture FK ref Lecture"
-	FOREIGN KEY (lecture_id, lecture_class, lecture_start)
-	REFERENCES LectureTime (lecture_id, lecture_class, lecture_start)
+  ADD CONSTRAINT "LectureTime FK ref LectureTime"
+	FOREIGN KEY (lecture_time_id)
+	REFERENCES LectureTime (lecture_time_id)
 ;
 
 

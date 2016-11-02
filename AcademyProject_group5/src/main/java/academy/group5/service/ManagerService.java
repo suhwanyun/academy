@@ -57,7 +57,7 @@ public interface ManagerService {
 	 * @param lecture
 	 * @return
 	 */
-	boolean updateLecture(Lecture lecture);
+	boolean updateLecture(Integer lectureId, Integer lectureClass, String lectureName, String professorName);
 	/**
 	 * 강의 시간 내용 수정
 	 * @param lecturetime
@@ -69,14 +69,13 @@ public interface ManagerService {
 	 * @param lectureId
 	 * @return
 	 */
-	boolean deleteLecture(Lecture lectureId);
+	boolean deleteLecture(Integer lectureId, Integer lectureClass);
 	/**
 	 * 강의 시간삭제
-	 * @param lectureId
-	 * @param lectureStart
 	 * @return
 	 */
-	boolean deleteLecturetime(Integer lectureId, Integer lectureStart);
+	void deleteAllLecturetime(Lecture lectureData);
+	boolean deleteLecturetime(Integer lectureTimeId);
 	/**
 	 * 상품 등록
 	 * @param mileageProduct
