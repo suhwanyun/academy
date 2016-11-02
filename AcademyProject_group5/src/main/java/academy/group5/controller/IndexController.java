@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureTime;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
@@ -346,9 +346,13 @@ public class IndexController {
 	
 	/** 강의 시간 등록 페이지 */
 	@RequestMapping(value="/lectureManage/timeAddjsp", method=RequestMethod.GET)
-	public String addLectureTime(HttpSession session,
+	public String addLectureTime(HttpSession session, Model model,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		LectureTime timeData = new LectureTime(lectureId, lectureClass);
+		model.addAttribute("timeData", timeData);
 		return "/manage/lecture/lecture_time_add";
 	}
 	
