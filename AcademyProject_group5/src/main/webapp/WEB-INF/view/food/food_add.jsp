@@ -63,7 +63,7 @@
 </form>
 </div>
 </body>
-<script src="http://code.jquery.com/jquery.js"></script>
+
 <script type="text/javascript">
 	$("#imgCancel").click(function(event) {
 		$("#fileInput").val("");

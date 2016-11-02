@@ -86,11 +86,13 @@
                   </tr>
 
                </c:forEach>
-               </table>
-              <div style="margin-top:5%;"> 
-               <button id="moreBtn" class="myButton size8mar">더보기</button>
-               <button class="myButton size4">맨 위로</button>
-            </div>
+              
+             <tr id="beforeLocation">
+             
+               <td><button id="moreBtn" class="myButton">더보기</button></td>
+               <td><button class="myButton">맨 위로</button></td>
+            </tr>
+             </table>
          </div>
 
    <!-- 테이블 종료 -->
