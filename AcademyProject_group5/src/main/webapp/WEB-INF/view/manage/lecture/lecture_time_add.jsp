@@ -16,8 +16,6 @@
 			<th>종료 교시</th>
 			<th>장소</th>
 			<th>강의 요일</th>
-			<th>임시 등록 날짜</th>
-			<th></th>
 		</tr>
 		<tr>
 			<td>
@@ -41,7 +39,6 @@
 					<option value="7">토</option>
 				</select>
 			</td>
-			<td><sform:input path="isTempDate" readonly="true" value="${timeData.isTempDate }"/></td>
 <!--날짜 수정 여부<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
 			<td><input type="button" id="dateCancel" value="선택 취소"></td> -->
 		</tr>
@@ -78,7 +75,7 @@ $("#cancelBtn").click(function(){
 });
 $("#selWeek").change(function(){
 	$("#lectureWeek").val($("#selWeek").val());
-})
+});
 $("#registBtn").click(function(event){
 	if(lectureStartEndCheck($("#lectureStart").val(),$("#lectureEnd").val())&&
 			lecutrePlaceCheck($("#lecturePlace").val())&&
@@ -89,7 +86,7 @@ $("#registBtn").click(function(event){
 		alert("입력 값을 다시 한 번 확인해 주세요")
 		event.preventDefault();
 	}
-})
+});
 function lectureStartEndCheck(s, e){
 	var NUM_PATTERN = /^[0-9]{1}$/;	
 	if(NUM_PATTERN.test(s)&&NUM_PATTERN.test(e)){
