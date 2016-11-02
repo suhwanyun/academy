@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div class="text-center">
+<div class="container-fix  text-right">
 	<table class="table">
 		<colgroup>
 			<col width="33%">
@@ -23,9 +23,9 @@
 			<col width="33%">
 		</colgroup>
 		<tr>
-			<td><img class="img-logo" src="/images/logo.png" alt="" /></td>
+			<td class="text-center"><img class="img-logo" src="/images/logo.png" alt="" /></td>
 			
-			<td><h1 style="font-size:50px;">관리자 전용 페이지</h1></td>
+			<td><h1>관리자 전용 페이지</h1></td>
 			
 			<td><button id="logoutBtn" class="myButtonBig" >로그아웃</button></td>
 		</tr>

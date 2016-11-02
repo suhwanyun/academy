@@ -2558,9 +2558,9 @@ input[type="checkbox"] {
   margin-top: 1px \9;
   line-height: normal;
 }
-input[type="file"] {
+/* input[type="file"] {
   display: block;
-}
+} */
 input[type="range"] {
   display: block;
   width: 100%;
@@ -6633,7 +6633,10 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
+input[type="text"]{
+	
+	width:100%;
+}
 	input[type="text"].true,
 	input[type="password"].true,
 	input[type="email"].true,
@@ -6782,10 +6785,11 @@ button.size6Smar{
  cellspacing:"0";
 }
 
-.list_table_array{
+.list_table_array {
 	width:100%;
 	
 }
+
 .list_table td{
 	
 	padding:0.5em 0.5em;
@@ -6929,3 +6933,18 @@ background-color: #eee;
 .sizeInput{
 	width:96%;
 }
+ .container-fix {
+    width: 1700px;
+    
+    position: fixed;
+  }
+.upMargin{
+	margin-top:200px;
+}
+.text-right{
+	float:right;
+}
+.container-fix{
+  font-size:30px;
+}
+
