@@ -42,12 +42,6 @@ public class PhoneController {
 	@Autowired
 	GCMRepo gcmRepo;
 	
-	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public String test(HttpSession session){
-		Object obj = session.getAttribute("user");
-		throw new WrongRequestException("userObj:" + obj);
-	}
-	
 	/** 어플 로그인 */
 	@RequestMapping(value="/appLogin", method=RequestMethod.POST)
 	public String login(Model model, HttpSession session,
