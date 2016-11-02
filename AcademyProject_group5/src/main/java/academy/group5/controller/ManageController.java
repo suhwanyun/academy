@@ -100,9 +100,7 @@ public class ManageController {
 	/** 강의 삭제 */
 	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.POST)
 	public String dropLecture(HttpSession session, Model model,
-			@RequestParam int lectureId, @RequestParam int lectureClass,
-			@RequestParam(required=false) String lectureName,
-			@RequestParam(required=false) String professorName){
+			@RequestParam int lectureId, @RequestParam int lectureClass){
 		
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/main");
