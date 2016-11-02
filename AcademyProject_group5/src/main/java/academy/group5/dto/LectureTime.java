@@ -33,7 +33,7 @@ public class LectureTime {
 	private String lecturePlace;
 
 	/** 강의 요일. */
-	private String lectureWeek;
+	private Integer lectureWeek;
 
 	/** 임시 등록 날짜. */
 	private Date isTempDate;
