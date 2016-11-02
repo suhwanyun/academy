@@ -136,20 +136,20 @@ public class ManageController {
 	@RequestMapping(value="/mileageManage/main", method=RequestMethod.GET)
 	public String manageMileageMainPage(){
 	
-		return "/manage/mileage";
+		return "/manage/mileage/mileage";
 	}
 	
 	/** 마일리지 등록 페이지 */
 	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
 	public String addMileage(){
 		
-		return "/manage/mileage_add";
+		return "/manage/mileage/mileage_add";
 	}
 	
 	/** 마일리지 관리 페이지 */
 	@RequestMapping(value="/mileageManage/manage", method=RequestMethod.GET)
 	public String manageMileage(){
 		
-		return "/manage/mileage_manage";
+		return "/manage/mileage/manage";
 	}
 }
