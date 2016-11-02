@@ -33,10 +33,10 @@ public interface ManagerService {
 	boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass);
 	/**
 	 * 강의 시간 등록
-	 * @param lecturetime
+	 * @param LectureTime
 	 * @return
 	 */
-	boolean registerLecturetime(LectureTime lecturetime);
+	boolean registerLectureTime(LectureTime lecturetime);
 	
 	/**
 	 * 강의 리스트 불러오기
@@ -63,7 +63,7 @@ public interface ManagerService {
 	 * @param lecturetime
 	 * @return
 	 */
-	boolean updateLecturetime(LectureTime lecturetime);
+	boolean updateLectureTime(LectureTime lecturetime);
 	/**
 	 * 강의삭제(강의에 시간까지 같이 삭제)
 	 * @param lectureId
@@ -74,8 +74,8 @@ public interface ManagerService {
 	 * 강의 시간삭제
 	 * @return
 	 */
-	void deleteAllLecturetime(Lecture lectureData);
-	boolean deleteLecturetime(Integer lectureTimeId);
+	void deleteAllLectureTime(Lecture lectureData);
+	boolean deleteLectureTime(Integer lectureTimeId);
 	/**
 	 * 상품 등록
 	 * @param mileageProduct

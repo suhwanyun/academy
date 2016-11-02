@@ -72,7 +72,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLecturetime(LectureTime lecturetime) {
+	public boolean registerLectureTime(LectureTime lecturetime) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -83,7 +83,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		for(Lecture lectureData : lectureList){
 			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
-			lectureData.setLecturetimeList(timeData);
+			lectureData.setLectureTimeList(timeData);
 		}
 		return lectureList;
 	}
@@ -108,7 +108,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean updateLecturetime(LectureTime lecturetime) {
+	public boolean updateLectureTime(LectureTime lecturetime) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -117,7 +117,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public boolean deleteLecture(Integer lectureId, Integer lectureClass) {
 		Lecture lectureData = new Lecture(lectureId, lectureClass);
 		// 강의 시간 삭제
-		deleteAllLecturetime(lectureData);
+		deleteAllLectureTime(lectureData);
 		// 강의 삭제
 		int result = managerRepo.deleteLecture(lectureData);
 		if(result != 1){
@@ -127,12 +127,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public void deleteAllLecturetime(Lecture lectureData) {
+	public void deleteAllLectureTime(Lecture lectureData) {
 		managerRepo.deleteAllLectureTime(lectureData);
 	}
 	
 	@Override
-	public boolean deleteLecturetime(Integer lectureTimeId){
+	public boolean deleteLectureTime(Integer lectureTimeId){
 		int result = managerRepo.deleteLectureTime(lectureTimeId);
 		if(result != 1){
 			throw new WrongRequestException();

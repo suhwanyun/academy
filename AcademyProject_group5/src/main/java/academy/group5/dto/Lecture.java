@@ -27,7 +27,7 @@ public class Lecture {
 	private String professorName;
 	
 	/** 강의시간 목록 */
-	private List<LectureTime> lecturetimeList;
+	private List<LectureTime> lectureTimeList;
 
 	public Lecture(Integer lectureId, Integer lectureClass) {
 		this(lectureId, lectureClass, null, null);

@@ -63,7 +63,7 @@ public class ManageController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp");
 		session.setAttribute("gotoPage", "/lectureManage/main");
-		service.registerLecturetime(timeData);
+		service.registerLectureTime(timeData);
 
 		throw new PageRedirectException("등록되었습니다.");
 	}
@@ -94,7 +94,7 @@ public class ManageController {
 			session.setAttribute("errorGotoPage", "/lectureManage/timeManagejsp?lectureTimeId="+lectureTimeId);
 		}
 		session.setAttribute("gotoPage", "/lectureManage/main");	
-		service.updateLecturetime(timeData);
+		service.updateLectureTime(timeData);
 		
 		throw new PageRedirectException("수정되었습니다.");
 	}
@@ -108,6 +108,18 @@ public class ManageController {
 		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		session.setAttribute("gotoPage", "/lectureManage/main");	
 		service.deleteLecture(lectureId, lectureClass);
+		
+		throw new PageRedirectException("삭제되었습니다.");
+	}
+	
+	/** 강의 시간 삭제 */
+	@RequestMapping(value="/lectureManage/timeDrop", method=RequestMethod.POST)
+	public String dropLectureTime(HttpSession session, @RequestParam int lectureTimeId){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		session.setAttribute("gotoPage", "/lectureManage/main");	
+		service.deleteLectureTime(lectureTimeId);
 		
 		throw new PageRedirectException("삭제되었습니다.");
 	}
