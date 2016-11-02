@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
+import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
 
 /**
@@ -60,8 +61,14 @@ public class ManageController {
 	@RequestMapping(value="/lectureManage/timeAdd", method=RequestMethod.POST)
 	public String addLectureTime(HttpSession session, LectureTime timeData){
 		
+		Integer lectureId = timeData.getLectureId();
+		Integer LectureClass = timeData.getLectureClass();
 		// 에러 발생시 / 처리 완료시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp");
+		if(lectureId == null || LectureClass == null){
+			session.setAttribute("errorGotoPage", "/lectureManage/main");
+			throw new WrongRequestException();
+		}
+		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp?lectureId="+lectureId+"&lectureClass="+LectureClass);
 		session.setAttribute("gotoPage", "/lectureManage/main");
 		service.registerLectureTime(timeData);
 
@@ -90,6 +97,7 @@ public class ManageController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		if(lectureTimeId == null){
 			session.setAttribute("errorGotoPage", "/lectureManage/main");
+			throw new WrongRequestException();
 		}else {
 			session.setAttribute("errorGotoPage", "/lectureManage/timeManagejsp?lectureTimeId="+lectureTimeId);
 		}
