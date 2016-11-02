@@ -12,20 +12,22 @@
 
 </head>
 <body>
-
-<div class="container text-center center">
-		<div class="row">
-
-			<div class="col-xs-4">
-					<img class="img-logo" src="/images/logo.png" alt="" />
-			</div>
-			<div class="col-xs-6">	
-					<h1>관리자 전용 페이지</h1>
-			</div>
-			<div class="col-xs-2 ">
-				<button id="logoutBtn" class="myButton" >로그아웃</button>
-		</div>
-		</div>		
+<div class="text-center">
+	<table class="table">
+		<colgroup>
+			<col width="33%">
+			<col width="33%">
+			<col width="33%">
+		</colgroup>
+		<tr>
+			<td><img class="img-logo" src="/images/logo.png" alt="" /></td>
+			
+			<td><h1 style="font-size:50px;">관리자 전용 페이지</h1></td>
+			
+			<td><button id="logoutBtn" class="myButtonBig" >로그아웃</button></td>
+		</tr>
+		
+	</table>	
 	</div>
 </body>
 </html>
