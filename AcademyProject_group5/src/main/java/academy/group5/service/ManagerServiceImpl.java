@@ -99,8 +99,8 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean updateLecture(Lecture lecture) {
-		int result = managerRepo.updateLecture(lecture);
+	public boolean updateLecture(Integer lectureId, Integer lectureClass, String lectureName, String professorName){
+		int result = managerRepo.updateLecture(new Lecture(lectureId, lectureClass, lectureName, professorName));
 		if(result != 1){
 			throw new WrongRequestException();
 		}
@@ -114,8 +114,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean deleteLecture(Lecture lecture) {
-		int result = managerRepo.deleteLecture(lecture);
+	public boolean deleteLecture(Integer lectureId, Integer lectureClass) {
+		Lecture lectureData = new Lecture(lectureId, lectureClass);
+		// 강의 시간 삭제
+		deleteAllLecturetime(lectureData);
+		// 강의 삭제
+		int result = managerRepo.deleteLecture(lectureData);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
@@ -123,8 +127,16 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean deleteLecturetime(Integer lectureId, Integer lectureStart) {
-		// TODO Auto-generated method stub
+	public void deleteAllLecturetime(Lecture lectureData) {
+		managerRepo.deleteAllLectureTime(lectureData);
+	}
+	
+	@Override
+	public boolean deleteLecturetime(Integer lectureTimeId){
+		int result = managerRepo.deleteLectureTime(lectureTimeId);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
 		return false;
 	}
 

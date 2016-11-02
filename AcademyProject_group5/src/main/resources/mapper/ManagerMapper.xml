@@ -25,12 +25,6 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<select id="selectAllLectureTime" parameterType="lecture" resultType="lecture_time">
-		select *
-		from LectureTime
-		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
-	</select>
-	
 	<select id="selectLecture" parameterType="lecture" resultType="lecture">
 		select *
 		from Lecture
@@ -46,5 +40,37 @@
 	<delete id="deleteLecture" parameterType="lecture">
 		delete from Lecture
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</delete>
+	
+	<select id="selectAllLectureTime" parameterType="lecture" resultType="lecture_time">
+		select *
+		from LectureTime
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</select>
+	
+	<insert id="insertLectureTime" parameterType="lecture_time">
+		insert into LectureTime
+		(lecture_id, lecture_class, lecture_start, lecture_end, lecture_place, lecture_week)
+		values (#{lectureId}, #{lectureClass}, #{lectureStart}, #{lectureEnd},
+				#{lecturePlace}, #{lectureWeek})
+	</insert>
+	
+	<update id="updateLectureTime" parameterType="lecture_time">
+		update LectureTime
+		set lecture_start = #{lectureStart},
+			lecture_end = #{lectureEnd},
+			lecture_place = #{lecturePlace},
+			lecture_week = #{lectureWeek}	
+		where lecture_time_id = #{lectureTimeId}
+	</update>
+	
+	<delete id="deleteAllLectureTime" parameterType="lecture">
+		delete from LectureTime
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</delete>
+	
+	<delete id="deleteLectureTime" parameterType="int">
+		delete from LectureTime
+		where lecture_time_id = #{lectureTimeId}
 	</delete>
 </mapper>

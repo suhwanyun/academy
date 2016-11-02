@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LectureTime {
 
+	/** 강의 시간 ID */
+	private Integer lectureTimeId;
+	
 	/** 강의 ID. */
 	private Integer lectureId;
 

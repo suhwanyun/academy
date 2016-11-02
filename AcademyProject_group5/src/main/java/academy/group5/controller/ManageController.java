@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.service.ManagerService;
 
@@ -55,11 +57,43 @@ public class ManageController {
 		throw new PageRedirectException("등록되었습니다.");
 	}
 	
-	/** 강의 시간 관리 페이지 */
-	@RequestMapping(value="/lectureManage/timeManage", method=RequestMethod.GET)
-	public String manageLectureTime(){
+	/** 강의 시간 등록 */
+	@RequestMapping(value="/lectureManage/timeAdd", method=RequestMethod.POST)
+	public String addLectureTime(HttpSession session, LectureTime lectureTime){
 		
-		return "/manage/lecture_time_manage";
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp");
+		session.setAttribute("gotoPage", "/lectureManage/main");
+		service.registerLecturetime(lectureTime);
+
+		throw new PageRedirectException("등록되었습니다.");
+	}
+	
+	/** 강의 관리 */
+	@RequestMapping(value="/lectureManage/manage", method=RequestMethod.POST)
+	public String manageLecture(HttpSession session,
+			@RequestParam int lectureId, @RequestParam int lectureClass,
+			@RequestParam String lectureName, @RequestParam String professorName){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/managejsp?lectureId="+lectureId+"&lectureClass="+lectureClass);
+		session.setAttribute("gotoPage", "/lectureManage/main");	
+		service.updateLecture(lectureId, lectureClass, lectureName, professorName);
+		
+		throw new PageRedirectException("수정되었습니다.");
+	}
+	
+	/** 강의 삭제 */
+	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.POST)
+	public String dropLecture(HttpSession session, Model model,
+			@RequestParam int lectureId, @RequestParam int lectureClass){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		session.setAttribute("gotoPage", "/lectureManage/main");	
+		service.deleteLecture(lectureId, lectureClass);
+		
+		throw new PageRedirectException("삭제되었습니다.");
 	}
 	
 	/** 마일리지 등록 관리자 메인 페이지 */

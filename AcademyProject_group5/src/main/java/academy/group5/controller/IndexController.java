@@ -351,4 +351,12 @@ public class IndexController {
 		
 		return "/manage/lecture/lecture_time_add";
 	}
+	
+	/** 강의 시간 관리 페이지 */
+	@RequestMapping(value="/lectureManage/timeManagejsp", method=RequestMethod.GET)
+	public String manageLectureTime(HttpSession session, Model model,
+			@RequestParam int lectureTimeId){
+		
+		return "/manage/lecture/lecture_time_manage";
+	}
 }

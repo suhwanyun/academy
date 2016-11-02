@@ -6,6 +6,7 @@ CREATE SEQUENCE SEQ_posting_game_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_place_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_posting_lecture_no INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_comment_no INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE SEQ_lecture_time_no INCREMENT BY 1 START WITH 1;
 
 CREATE OR REPLACE TRIGGER TRI_noti_no BEFORE INSERT ON Notifications
 for each row
@@ -65,7 +66,7 @@ BEGIN
 END;
 /
 
-create or replace TRIGGER TRI_posting_lecture_no BEFORE INSERT ON Posting
+CREATE OR REPLACE TRIGGER TRI_posting_lecture_no BEFORE INSERT ON Posting
 for each row
 when (LPAD(new.posting_type, 4) = 'lect')
 BEGIN
@@ -84,5 +85,12 @@ BEGIN
 END;
 /
 
-
+CREATE OR REPLACE TRIGGER TRI_lecture_time_no BEFORE INSERT ON LectureTime
+for each row
+BEGIN
+  select SEQ_lecture_time_no.nextval
+    into :new.lecture_time_id
+    from dual; 
+END;
+/
 
