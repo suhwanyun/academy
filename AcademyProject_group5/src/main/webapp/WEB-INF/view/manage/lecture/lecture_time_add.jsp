@@ -22,8 +22,8 @@
 		<tr>
 			<td>
 				<sform:input readonly="readonly" path="lectureId" value="${timeData.lectureId }"/>
-				<sform:hidden path="lectureClass" value="${timeData.lectureId }"/>
-				<sform:hidden path="lectureTimeId" value="0"/>
+				<sform:hidden path="lectureClass" value="${timeData.lectureClass }"/>
+				<sform:hidden path="lectureTimeId" value="${timeData.lectureTimeId  }"/>
 				<sform:hidden path="lectureWeek" value="0"/>
 			</td>
 			<td><sform:input type="number" path="lectureStart" value=""/></td>
