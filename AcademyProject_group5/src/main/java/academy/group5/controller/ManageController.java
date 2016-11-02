@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.service.ManagerService;
@@ -59,12 +58,12 @@ public class ManageController {
 	
 	/** 강의 시간 등록 */
 	@RequestMapping(value="/lectureManage/timeAdd", method=RequestMethod.POST)
-	public String addLectureTime(HttpSession session, LectureTime lectureTime){
+	public String addLectureTime(HttpSession session, LectureTime timeData){
 		
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp");
 		session.setAttribute("gotoPage", "/lectureManage/main");
-		service.registerLecturetime(lectureTime);
+		service.registerLecturetime(timeData);
 
 		throw new PageRedirectException("등록되었습니다.");
 	}
@@ -85,14 +84,17 @@ public class ManageController {
 	
 	/** 강의 시간 관리 */
 	@RequestMapping(value="/lectureManage/timeManage", method=RequestMethod.POST)
-	public String manageLectureTime(HttpSession session,
-			@RequestParam int lectureId, @RequestParam int lectureClass,
-			@RequestParam String lectureName, @RequestParam String professorName){
+	public String manageLectureTime(HttpSession session, LectureTime timeData){
 		
+		Integer lectureTimeId = timeData.getLectureTimeId();
 		// 에러 발생시 / 처리 완료시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/managejsp?lectureId="+lectureId+"&lectureClass="+lectureClass);
+		if(lectureTimeId == null){
+			session.setAttribute("errorGotoPage", "/lectureManage/main");
+		}else {
+			session.setAttribute("errorGotoPage", "/lectureManage/timeManagejsp?lectureTimeId="+lectureTimeId);
+		}
 		session.setAttribute("gotoPage", "/lectureManage/main");	
-		service.updateLecture(lectureId, lectureClass, lectureName, professorName);
+		service.updateLecturetime(timeData);
 		
 		throw new PageRedirectException("수정되었습니다.");
 	}

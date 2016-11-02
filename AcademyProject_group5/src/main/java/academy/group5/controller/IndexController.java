@@ -349,8 +349,6 @@ public class IndexController {
 	public String addLectureTime(HttpSession session, Model model,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		LectureTime timeData = new LectureTime(lectureId, lectureClass);
 		model.addAttribute("timeData", timeData);
 		return "/manage/lecture/lecture_time_add";
