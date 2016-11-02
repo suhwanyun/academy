@@ -8,6 +8,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/manage/header.jsp" />
+<form action="/lectureManage/manage" method="post">
 <table>
   <tr>
     <th>강의 ID</th>
@@ -25,9 +26,12 @@
     	</td>
   </tr>
 </table>
-<button>수정</button>
-<button>삭제</button>
+<button type="submit">수정</button>
+<button id="deleteBtn" >삭제</button>
 <button id="cancelBtn">취소</button>
+</form>
+
+
 </body>
 <script type="text/javascript">
  $("document").ready(function(){
