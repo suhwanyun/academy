@@ -16,15 +16,12 @@
 			<th>종료 교시</th>
 			<th>장소</th>
 			<th>강의 요일</th>
-			<th>임시 등록 날짜</th>
-			<th></th>
 		</tr>
 		<tr>
 			<td>
 				<sform:input readonly="readonly" path="lectureId" value="${timeData.lectureId }"/>
-				<sform:hidden path="lectureClass" value="${timeData.lectureId }"/>
-				<sform:hidden path="lectureTimeId" value="0"/>
-				<sform:hidden path="isTempDate" value=""/>
+				<sform:hidden path="lectureClass" value="${timeData.lectureClass }"/>
+				<sform:hidden path="lectureTimeId" value="${timeData.lectureTimeId  }"/>
 				<sform:hidden path="lectureWeek" value="0"/>
 			</td>
 			<td><sform:input type="number" path="lectureStart" value=""/></td>
@@ -42,8 +39,8 @@
 					<option value="7">토</option>
 				</select>
 			</td>
-			<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
-			<td><input type="button" id="dateCancel" value="선택 취소"></td>
+<!--날짜 수정 여부<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
+			<td><input type="button" id="dateCancel" value="선택 취소"></td> -->
 		</tr>
 	</table>
 	<input type="submit" id="registBtn" value="등록">
@@ -52,7 +49,8 @@
 </body>
 <script type="text/javascript">
 $("document").ready(function(){
-	$('#wrtDtReg').datepicker({
+	//날짜 수정 데이트픽커
+	/* $('#wrtDtReg').datepicker({
 		format: "yyyy-mm-dd",
 		startView: 1,
 		todayBtn:"linked",
@@ -62,21 +60,22 @@ $("document").ready(function(){
 		forceParse: false,
 		autoclose: true,
 		todayHighlight: true
-		});
+		}); */
 });
-$("#cancelBtn").click(function(){
-	$(location).attr('href', "/lectureManage/main");
-});
+/*날짜 선택 관련 이벤트
 $("#dateCancel").click(function(){
 	$("#wrtDtReg").val("");
 	$("#isTempDate").val($("#wrtDtReg").val());
 });
 $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
+}); */
+$("#cancelBtn").click(function(){
+	$(location).attr('href', "/lectureManage/main");
 });
 $("#selWeek").change(function(){
 	$("#lectureWeek").val($("#selWeek").val());
-})
+});
 $("#registBtn").click(function(event){
 	if(lectureStartEndCheck($("#lectureStart").val(),$("#lectureEnd").val())&&
 			lecutrePlaceCheck($("#lecturePlace").val())&&
@@ -87,7 +86,7 @@ $("#registBtn").click(function(event){
 		alert("입력 값을 다시 한 번 확인해 주세요")
 		event.preventDefault();
 	}
-})
+});
 function lectureStartEndCheck(s, e){
 	var NUM_PATTERN = /^[0-9]{1}$/;	
 	if(NUM_PATTERN.test(s)&&NUM_PATTERN.test(e)){

@@ -64,10 +64,11 @@ $(document).ready(function(){
 	 }else{
 		 session.setAttribute("isPhone", "false");
 	 }
+	 //로그인 정보 날라가는 문제.
+	/*  if(request.getAttribute("user")!=null){
+		 session.setAttribute("user", request.getAttribute("user"));
+	 } */
 	%>
-	if(${!empty user}){
-		session.setAttribute("user", ${user});
-	}
 });
  $(".btn-header").click(function(){
     $("#collapse1").collapse('toggle');
