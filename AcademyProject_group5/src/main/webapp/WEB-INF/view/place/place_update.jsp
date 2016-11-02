@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>식사 추가 게시판</title>
+<title>명소 추가 게시판</title>
 
 </head>
 <body>
