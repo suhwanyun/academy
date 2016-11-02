@@ -65,6 +65,9 @@ $(document).ready(function(){
 		 session.setAttribute("isPhone", "false");
 	 }
 	%>
+	if(${!empty user}){
+		session.setAttribute("user", ${user});
+	}
 });
  $(".btn-header").click(function(){
     $("#collapse1").collapse('toggle');

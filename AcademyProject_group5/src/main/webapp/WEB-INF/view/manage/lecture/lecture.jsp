@@ -21,7 +21,7 @@
 				<td>${list.lectureClass }반</td>
 				<td>
 					<ul>
-						<c:forEach items="${list.lecturetimeList }" var="timeList" >
+						<c:forEach items="${list.lectureTimeList }" var="timeList" >
 							<li>
 								<span>${timeList.lectureStart }교시</span>
 								<span>${timeList.lectureEnd }교시</span>
@@ -38,7 +38,7 @@
 							</li>
 						</c:forEach>
 						<li>
-							<a href="/lectureManage/timeAdd?lectureId=${list.lectureId }&lectureClass=${list.lectureClass}" >+</a>
+							<a href="/lectureManage/timeAddjsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass}" >+</a>
 						</li>
 					</ul>
 				</td>
