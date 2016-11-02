@@ -20,7 +20,6 @@ public class LectureServiceImpl implements LectureService{
 	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
-	private final String [] DAYS = {"월", "화", "수", "목", "금", "토", "일"};
 
 	@Autowired
 	LectureRepo lecRepo;
@@ -78,7 +77,7 @@ public class LectureServiceImpl implements LectureService{
 			throw new WrongRequestException();
 		}	
 		for(LectureTime time : lectureTImes){
-			time.setLectureWeek(DAYS[Integer.parseInt(time.getLectureWeek()) - 1]);
+			time.setLectureWeek(time.getLectureWeek());
 		}	
 		return lectureTImes;
 	}
