@@ -45,7 +45,7 @@ public class ManagerRepo {
 	}
 	
 	public int deleteLecture(Lecture lectureData) {
-		String stmt = MANAGER_NS + "updateLecture";
+		String stmt = MANAGER_NS + "deleteLecture";
 		return session.delete(stmt, lectureData);
 	}
 	

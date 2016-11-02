@@ -83,6 +83,20 @@ public class ManageController {
 		throw new PageRedirectException("수정되었습니다.");
 	}
 	
+	/** 강의 시간 관리 */
+	@RequestMapping(value="/lectureManage/timeManage", method=RequestMethod.POST)
+	public String manageLectureTime(HttpSession session,
+			@RequestParam int lectureId, @RequestParam int lectureClass,
+			@RequestParam String lectureName, @RequestParam String professorName){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/managejsp?lectureId="+lectureId+"&lectureClass="+lectureClass);
+		session.setAttribute("gotoPage", "/lectureManage/main");	
+		service.updateLecture(lectureId, lectureClass, lectureName, professorName);
+		
+		throw new PageRedirectException("수정되었습니다.");
+	}
+	
 	/** 강의 삭제 */
 	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.POST)
 	public String dropLecture(HttpSession session, Model model,

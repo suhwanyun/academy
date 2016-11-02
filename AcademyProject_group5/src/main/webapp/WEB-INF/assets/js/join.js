@@ -6,12 +6,12 @@ $("#joinBtn").click(
 			if (passSame && emailDupOk &&idDupOk && idCheck($("#userId").val())
 					&& passCheck($("#userPass").val())
 					&& nameCheck($("#userName").val())
-					&& emailCheck($("email").val())
+					&& emailCheck($("#email").val())
 					&& questionCheck($("#passQuestion").val())
 					&& anserCheck($("#passAnswer").val()) == true) {
 			} else {
 				event.preventDefault();
-				alert("가입 실패");
+				alert("다시 한 번 확인해 주세요");
 			}
 
 		});

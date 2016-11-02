@@ -8,6 +8,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/view/manage/header.jsp" />
+<form name="myForm" method="post">
 <table>
   <tr>
     <th>강의 ID</th>
@@ -16,18 +17,21 @@
     <th>강의 분반</th>
   </tr>
   <tr>
-    <td><input type="number" id="lectureId" readonly="readonly" value="${lectureData.lectureId }"></td>
-    <td><input type="text" id="lectureName" value="${lectureData.lectureName }"></td>
-    <td><input type="text" id="professorName" value="${lectureData.professorName }"></td>
+    <td><input type="number" name="lectureId" id="lectureId" readonly="readonly" value="${lectureData.lectureId }"></td>
+    <td><input type="text" name="lectureName" id="lectureName" value="${lectureData.lectureName }"></td>
+    <td><input type="text" name="professorName" id="professorName" value="${lectureData.professorName }"></td>
     <td>
-    	<select id="lectureClass" >
+    	<select name="lectureClass" id="lectureClass" >
     	</select>
     	</td>
   </tr>
 </table>
-<button>수정</button>
-<button>삭제</button>
-<button id="cancelBtn">취소</button>
+</form>
+<input type="button" onclick="submitFun(1)" value="수정"/>
+<input type="button" onclick="submitFun(2)" value="삭제"/>
+<input type="button" id="cancelBtn" value="취소"/>
+
+
 </body>
 <script type="text/javascript">
  $("document").ready(function(){
@@ -36,5 +40,14 @@
  $("#cancelBtn").click(function(){
 	 $(location).attr('href', "/lectureManage/main");
  });
+ function submitFun(index){
+	 if(index==1){
+		 document.myForm.action='/lectureManage/manage';
+	 }
+	 if(index==2){
+		 document.myForm.action='/lectureManage/drop';
+	 }
+	 document.myForm.submit();
+ }
 </script>
 </html>
