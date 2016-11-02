@@ -89,8 +89,8 @@
               
              <tr id="beforeLocation">
              
-               <td><button id="moreBtn" class="myButton">더보기</button></td>
-               <td><button class="myButton">맨 위로</button></td>
+               <td colspan=4><button id="moreBtn" class="myButton">더보기</button>
+               <button class="myButton">맨 위로</button></td>
             </tr>
              </table>
          </div>

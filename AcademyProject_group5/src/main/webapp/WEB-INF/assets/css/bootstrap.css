@@ -6899,3 +6899,7 @@ background-color: #eee;
  border:solid 1px #b7b7b7;
   background-color:rgb(255,255,255);
 }
+#moreBtn{
+  width:60%;
+  margin-right:10%;
+}
