@@ -65,15 +65,16 @@ $("document").ready(function(){
 		todayHighlight: true
 		}); */
 });
-$("#cancelBtn").click(function(){
-	$(location).attr('href', "/lectureManage/main");
-});
+/*날짜 선택 관련 이벤트
 $("#dateCancel").click(function(){
 	$("#wrtDtReg").val("");
 	$("#isTempDate").val($("#wrtDtReg").val());
 });
 $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
+}); */
+$("#cancelBtn").click(function(){
+	$(location).attr('href', "/lectureManage/main");
 });
 $("#selWeek").change(function(){
 	$("#lectureWeek").val($("#selWeek").val());
