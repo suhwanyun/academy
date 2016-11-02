@@ -64,10 +64,10 @@ $(document).ready(function(){
 	 }else{
 		 session.setAttribute("isPhone", "false");
 	 }
-	 
-	 if(request.getAttribute("user")!=null){
+	 //로그인 정보 날라가는 문제.
+	/*  if(request.getAttribute("user")!=null){
 		 session.setAttribute("user", request.getAttribute("user"));
-	 }
+	 } */
 	%>
 });
  $(".btn-header").click(function(){

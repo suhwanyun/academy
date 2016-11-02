@@ -24,7 +24,6 @@
 				<sform:input readonly="readonly" path="lectureId" value="${timeData.lectureId }"/>
 				<sform:hidden path="lectureClass" value="${timeData.lectureId }"/>
 				<sform:hidden path="lectureTimeId" value="0"/>
-				<sform:hidden path="isTempDate" value=""/>
 				<sform:hidden path="lectureWeek" value="0"/>
 			</td>
 			<td><sform:input type="number" path="lectureStart" value=""/></td>
@@ -42,8 +41,9 @@
 					<option value="7">토</option>
 				</select>
 			</td>
-			<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
-			<td><input type="button" id="dateCancel" value="선택 취소"></td>
+			<td><sform:input path="isTempDate" readonly="true" value="${timeData.isTempDate }"/></td>
+<!--날짜 수정 여부<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
+			<td><input type="button" id="dateCancel" value="선택 취소"></td> -->
 		</tr>
 	</table>
 	<input type="submit" id="registBtn" value="등록">
@@ -52,7 +52,8 @@
 </body>
 <script type="text/javascript">
 $("document").ready(function(){
-	$('#wrtDtReg').datepicker({
+	//날짜 수정 데이트픽커
+	/* $('#wrtDtReg').datepicker({
 		format: "yyyy-mm-dd",
 		startView: 1,
 		todayBtn:"linked",
@@ -62,7 +63,7 @@ $("document").ready(function(){
 		forceParse: false,
 		autoclose: true,
 		todayHighlight: true
-		});
+		}); */
 });
 $("#cancelBtn").click(function(){
 	$(location).attr('href', "/lectureManage/main");
