@@ -213,7 +213,7 @@
 								});
 					});
 	$("#writeBtn").click(function() {
-		$(location).attr('href', "/write/foodjsp");
+		$(location).attr('href', "/write/placejsp");
 	});
 	$(':radio[name="sortVal"]').change(function(){
 		pageIndex = 1;

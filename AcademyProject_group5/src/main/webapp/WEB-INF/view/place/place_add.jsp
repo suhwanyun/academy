@@ -14,7 +14,7 @@
 			<h1>명소 글쓰기</h1>
 		</div>
 
-		<form method="post" action="food" enctype="multipart/form-data"
+		<form method="post" action="place" enctype="multipart/form-data"
 			class="form-horizontal">
 			<div class="form-group">
 				<div class="row">
