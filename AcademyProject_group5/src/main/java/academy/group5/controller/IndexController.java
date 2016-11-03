@@ -52,6 +52,8 @@ public class IndexController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/main");
 		session.setAttribute("gotoPage", "/main");
+		
+		session.removeAttribute("isManage");
 		return "/index";
 	}
 	

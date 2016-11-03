@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.UserData;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
@@ -48,6 +49,14 @@ public class ManageController {
 			session.setAttribute("gotoPage", "/mileageManage/main");
 		}
 		throw new PageRedirectException();
+	}
+	
+	/** 로그 아웃 */
+	@RequestMapping(value="managerLogout", method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		
+		session.removeAttribute("managerType");
+		return "/login/login_manager";
 	}
 	
 	/** 강의 등록 관리자 메인화면 강의 목록 검색 */
