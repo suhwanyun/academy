@@ -151,7 +151,7 @@ public class IndexController {
 		if(lectureList.size() != 0) {
 			model.addAttribute("lectureList", lectureList);
 		}
-		model.addAttribute("pageCount", manageService.getAllLectureCount());
+		model.addAttribute("pageCount", manageService.getMaxLectureListPage());
 		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
 		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		return "/manage/lecture/lecture";

@@ -40,12 +40,10 @@ public class AutoServiceImpl implements AutoService {
 	// 스케줄러 동작 여부 플래그
 	private boolean nowVoteScheduling;
 	private boolean nowTermScheduling;
-	private boolean nowRecommendMileageScheduling;
 	
 	public AutoServiceImpl(){
 		nowVoteScheduling = false;
 		nowTermScheduling = false;
-		nowRecommendMileageScheduling = false;
 	}
 	
 	@PostConstruct
@@ -137,12 +135,6 @@ public class AutoServiceImpl implements AutoService {
 	//@PostConstruct
 	public void startRecommendMileageScheduler() {
 		
-		/*// 이미 스케줄러가 동작한 경우 취소
-		if(nowRecommendMileageScheduling){
-			return;
-		}
-		nowRecommendMileageScheduling = true;
-		
 		Calendar calInst = Calendar.getInstance();
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
@@ -164,7 +156,7 @@ public class AutoServiceImpl implements AutoService {
 				List<String> userList = gcmRepo.getAllUser();
 				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
 			}
-		}, nextTermDate);*/
+		}, nextTermDate);
 	}
 	
 	/** 이미 지난 날짜인지 확인 */

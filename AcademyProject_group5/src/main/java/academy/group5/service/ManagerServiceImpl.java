@@ -96,8 +96,10 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public int getAllLectureCount(){
-		return managerRepo.getAllLectureCount();
+	public int getMaxLectureListPage(){
+		int result = managerRepo.getAllLectureCount();
+		result /= LECTURE_MAX_PAGE;
+		return ++result;
 	}
 	
 	@Override
