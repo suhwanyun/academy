@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="int">
-		select count(*)
+		select lecture_class, lecture_start, lecture_end
 		from LectureTime
 		where lecture_start &lt; #{lectureEnd}
 		  and lecture_end &gt; #{lectureStart}

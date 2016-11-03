@@ -54,9 +54,9 @@ public class ManagerRepo {
 		return session.selectList(stmt, lectureData);
 	}
 	
-	public int isAlreadyLectureTime(LectureTime timeData) {
+	public List<LectureTime> getAlreadyLectureTime(LectureTime timeData) {
 		String stmt = MANAGER_NS + "selectAlreadyLectureTime";
-		return session.selectOne(stmt, timeData);
+		return session.selectList(stmt, timeData);
 	}
 	
 	public LectureTime getLectureTime(int lecturetimeId) {

@@ -73,10 +73,9 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public boolean registerLectureTime(LectureTime lectureTime) {
-		int alreadyRegistCount = managerRepo.isAlreadyLectureTime(lectureTime);
-		if(alreadyRegistCount != 0){
-			throw new WrongRequestException("강의시간이 중복됩니다.");
-		}
+		// 중복 확인
+		List<LectureTime> alreadyRegistList = managerRepo.getAlreadyLectureTime(lectureTime);
+		isAlreadyRectureTimeErrorOccurred(alreadyRegistList);
 		
 		int result = managerRepo.insertLectureTime(lectureTime);
 		if(result != 1){
@@ -127,10 +126,10 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public boolean updateLectureTime(LectureTime lectureTime) {
-		int alreadyRegistCount = managerRepo.isAlreadyLectureTime(lectureTime);
-		if(alreadyRegistCount != 0){
-			throw new WrongRequestException("강의시간이 중복됩니다.");
-		}
+		// 중복 확인
+		List<LectureTime> alreadyRegistList = managerRepo.getAlreadyLectureTime(lectureTime);
+		isAlreadyRectureTimeErrorOccurred(alreadyRegistList);
+		
 		int result = managerRepo.updateLectureTime(lectureTime);
 		if(result != 1){
 			throw new WrongRequestException();
@@ -163,6 +162,21 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new WrongRequestException();
 		}
 		return false;
+	}
+	
+	/** 강의 시간 중복 여부 확인 로직 */
+	private void isAlreadyRectureTimeErrorOccurred(List<LectureTime> alreadyRegistList){
+		if(alreadyRegistList.size() == 0){
+			return;
+		}
+		String outputStr = "강의시간이 중복됩니다.";
+		for(LectureTime alreadyData : alreadyRegistList){
+			outputStr += "\n" + alreadyData.getLectureClass() + "분반(";
+			outputStr += alreadyData.getLectureStart() + "교시~";
+			outputStr += alreadyData.getLectureEnd() + "교시)";
+		}
+		
+		throw new WrongRequestException(outputStr);
 	}
 	
 	/** ----------------------------마일리지---------------------------- */
