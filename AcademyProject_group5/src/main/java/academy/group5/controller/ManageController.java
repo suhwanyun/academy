@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
@@ -42,6 +46,14 @@ public class ManageController {
 			session.setAttribute("gotoPage", "/mileageManage/main");
 		}
 		throw new PageRedirectException();
+	}
+	
+	/** 강의 목록 페이징 */
+	@RequestMapping(value="/lectureManage/page", method=RequestMethod.GET)
+	public @ResponseBody List<Lecture> manageLectureMainPage(Model model, @RequestParam Integer page){
+				
+		List<Lecture> lectureList = service.getAllLectureList(page);
+		return lectureList;
 	}
 	
 	/** 강의 등록 */

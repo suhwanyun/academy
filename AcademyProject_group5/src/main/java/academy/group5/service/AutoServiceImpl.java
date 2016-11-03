@@ -136,6 +136,7 @@ public class AutoServiceImpl implements AutoService {
 	public void startRecommendMileageScheduler() {
 		
 		/*Calendar calInst = Calendar.getInstance();
+		calInst.set(Calendar.HOUR_OF_DAY, 0);
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
