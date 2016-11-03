@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ import academy.group5.util.Identify;
 @Controller
 public class PhoneController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(PhoneController.class);
+	
+	
 	@Autowired
 	LoginService loginService;
 	
@@ -53,8 +58,15 @@ public class PhoneController {
 		UserData data = loginService.login(userId, userPass);		
 		session.setAttribute("user", data);	
 		session.setAttribute("isPhone", "true");
+		logger.trace("server:",session.getId());
 		
 		return "index";
+	}
+	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public String test(HttpSession session){
+		
+		throw new WrongRequestException("server:" + session.getId());
 	}
 	
 	/** GCM 등록 */
