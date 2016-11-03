@@ -126,8 +126,12 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean updateLectureTime(LectureTime lecturetime) {
-		int result = managerRepo.updateLectureTime(lecturetime);
+	public boolean updateLectureTime(LectureTime lectureTime) {
+		int alreadyRegistCount = managerRepo.isAlreadyLectureTime(lectureTime);
+		if(alreadyRegistCount != 0){
+			throw new WrongRequestException("강의시간이 중복됩니다.");
+		}
+		int result = managerRepo.updateLectureTime(lectureTime);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
@@ -160,6 +164,8 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return false;
 	}
+	
+	/** ----------------------------마일리지---------------------------- */
 
 	@Override
 	public boolean registerProduct(MileageProduct mileageProduct) {
@@ -178,6 +184,8 @@ public class ManagerServiceImpl implements ManagerService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	/** ----------------------------기타 로직---------------------------- */
 
 	/** 암호화 */
 	private Manager toHash(Manager data){
