@@ -53,6 +53,13 @@ public interface ManagerService {
 	Lecture getLecture(int lectureId, int lectureClass);
 	
 	/**
+	 * 강의 시간 불러오기(하나)
+	 * @param lectureTImeId
+	 * @return
+	 */
+	public LectureTime getLectureTime(int lectureTImeId);
+	
+	/**
 	 * 강의 내용 수정
 	 * @param lecture
 	 * @return

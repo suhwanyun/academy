@@ -312,16 +312,6 @@ public class IndexController {
 		// 매니저 접속임을 명시
 		session.setAttribute("isManage", "true");
 		
-		/*Object loginObj = session.getAttribute("managerType");
-		if(loginObj != null){
-			if(loginObj.equals(ManagerService.TYPE_LECTURE)){
-				session.setAttribute("gotoPage", "/lectureManage/main");
-			} else {
-				session.setAttribute("gotoPage", "/mileageManage/main");
-			}
-			
-			throw new PageRedirectException();
-		}*/
 		return "/login/login_manager";
 	}
 	
@@ -335,9 +325,6 @@ public class IndexController {
 	@RequestMapping(value="/lectureManage/managejsp", method=RequestMethod.GET)
 	public String manageLecture(HttpSession session, Model model,
 			@RequestParam int lectureId, @RequestParam int lectureClass){
-		
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/main");
 				
 		Lecture lectureData = manageService.getLecture(lectureId, lectureClass);
 		model.addAttribute("lectureData", lectureData);
@@ -359,6 +346,8 @@ public class IndexController {
 	public String manageLectureTime(HttpSession session, Model model,
 			@RequestParam int lectureTimeId){
 		
+		LectureTime timeData = manageService.getLectureTime(lectureTimeId);
+		model.addAttribute("timeData", timeData);
 		return "/manage/lecture/lecture_time_manage";
 	}
 }

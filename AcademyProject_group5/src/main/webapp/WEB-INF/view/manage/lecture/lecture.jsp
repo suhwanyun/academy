@@ -22,17 +22,35 @@
 				<td>
 					<ul>
 						<c:forEach items="${list.lectureTimeList }" var="timeList" >
-							<li>
-								<span>${timeList.lectureStart }교시</span>
+							<li><a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
+								<span>${timeList.lectureStart }교시</span></a>
+								<span>~</span>
 								<span>${timeList.lectureEnd }교시</span>
 								<span>${timeList.lecturePlace }</span>
-								<span>${timeList.lectureWeek }</span>
 								<c:choose>
-									<c:when test="${!empty timeList.isTempDate }">
-										<span>${timeList.isTempDate }</span>
+									<c:when test="${timeList.lectureWeek == 1} ">
+										<span>일요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 2 }">
+										<span>월요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 3 }">
+										<span>화요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 4 }">
+										<span>수요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 5 }">
+										<span>목요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 6 }">
+										<span>금요일</span>
+									</c:when>
+									<c:when test="${timeList.lectureWeek == 7 }">
+										<span>토요일</span>
 									</c:when>
 									<c:otherwise>
-										<span>-</span>
+										<span>error</span>
 									</c:otherwise>
 								</c:choose>
 							</li>

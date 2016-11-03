@@ -72,9 +72,16 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLectureTime(LectureTime lecturetime) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean registerLectureTime(LectureTime lectureTime) {
+		// 중복 확인
+		List<LectureTime> alreadyRegistList = managerRepo.getAlreadyLectureTime(lectureTime);
+		isAlreadyRectureTimeErrorOccurred(alreadyRegistList);
+		
+		int result = managerRepo.insertLectureTime(lectureTime);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 	
 	@Override
@@ -97,6 +104,16 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return lectureData;
 	}
+	
+	@Override
+	public LectureTime getLectureTime(int lectureTImeId){
+		LectureTime lectureTimeData = managerRepo.getLectureTime(lectureTImeId);
+		if(lectureTimeData == null){
+			throw new WrongRequestException();
+		}
+		
+		return lectureTimeData;
+	}
 
 	@Override
 	public boolean updateLecture(Integer lectureId, Integer lectureClass, String lectureName, String professorName){
@@ -108,9 +125,16 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean updateLectureTime(LectureTime lecturetime) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateLectureTime(LectureTime lectureTime) {
+		// 중복 확인
+		List<LectureTime> alreadyRegistList = managerRepo.getAlreadyLectureTime(lectureTime);
+		isAlreadyRectureTimeErrorOccurred(alreadyRegistList);
+		
+		int result = managerRepo.updateLectureTime(lectureTime);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override
@@ -139,6 +163,23 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return false;
 	}
+	
+	/** 강의 시간 중복 여부 확인 로직 */
+	private void isAlreadyRectureTimeErrorOccurred(List<LectureTime> alreadyRegistList){
+		if(alreadyRegistList.size() == 0){
+			return;
+		}
+		String outputStr = "강의시간이 중복됩니다.";
+		for(LectureTime alreadyData : alreadyRegistList){
+			outputStr += "\n" + alreadyData.getLectureClass() + "분반(";
+			outputStr += alreadyData.getLectureStart() + "교시~";
+			outputStr += alreadyData.getLectureEnd() + "교시)";
+		}
+		
+		throw new WrongRequestException(outputStr);
+	}
+	
+	/** ----------------------------마일리지---------------------------- */
 
 	@Override
 	public boolean registerProduct(MileageProduct mileageProduct) {
@@ -157,6 +198,8 @@ public class ManagerServiceImpl implements ManagerService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	/** ----------------------------기타 로직---------------------------- */
 
 	/** 암호화 */
 	private Manager toHash(Manager data){
