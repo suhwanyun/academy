@@ -25,6 +25,11 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
+	<select id="selectAllLectureCount" resultType="int">
+		select count(*)
+		from Lecture
+	</select>
+	
 	<select id="selectLecture" parameterType="lecture" resultType="lecture">
 		select *
 		from Lecture

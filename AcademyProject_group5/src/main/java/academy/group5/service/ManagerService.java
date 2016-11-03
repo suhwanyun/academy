@@ -45,6 +45,12 @@ public interface ManagerService {
 	List<Lecture> getAllLectureList(int page); 
 	
 	/**
+	 * 전체 강의 갯수 확인
+	 * @return
+	 */
+	public int getAllLectureCount();
+	
+	/**
 	 * 강의 정보 불러오기
 	 * @param lectureId
 	 * @param lectureClass

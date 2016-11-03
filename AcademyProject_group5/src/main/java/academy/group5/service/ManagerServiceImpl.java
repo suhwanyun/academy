@@ -96,6 +96,11 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
+	public int getAllLectureCount(){
+		return managerRepo.getAllLectureCount();
+	}
+	
+	@Override
 	public Lecture getLecture(int lectureId, int lectureClass){
 		Lecture lectureData = managerRepo.getLecture(new Lecture(lectureId, lectureClass));
 		if(lectureData == null){
