@@ -72,8 +72,13 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLectureTime(LectureTime lecturetime) {
-		int result = managerRepo.insertLectureTime(lecturetime);
+	public boolean registerLectureTime(LectureTime lectureTime) {
+		int alreadyRegistCount = managerRepo.isAlreadyLectureTime(lectureTime);
+		if(alreadyRegistCount != 0){
+			throw new WrongRequestException("강의시간이 중복됩니다.");
+		}
+		
+		int result = managerRepo.insertLectureTime(lectureTime);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
