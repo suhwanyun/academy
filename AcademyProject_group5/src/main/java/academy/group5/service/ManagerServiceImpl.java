@@ -73,8 +73,11 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public boolean registerLectureTime(LectureTime lecturetime) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = managerRepo.updateLectureTime(lecturetime);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 	
 	@Override
