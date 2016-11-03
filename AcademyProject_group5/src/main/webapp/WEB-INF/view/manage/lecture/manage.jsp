@@ -42,10 +42,19 @@
  });
  function submitFun(index){
 	 if(index==1){
-		 document.myForm.action='/lectureManage/manage';
+			 if(confirm("정말로 수정 하시겠습니까?")){
+			 document.myForm.action='/lectureManage/manage';
+		 }else{
+			 preventDefault();
+		 }
 	 }
 	 if(index==2){
-		 document.myForm.action='/lectureManage/drop';
+		 if(confirm("정말로 삭제 하시겠습니까?")){
+			 document.myForm.action='/lectureManage/drop';
+		 }else{
+			 preventDefault();
+		 }
+		 
 	 }
 	 document.myForm.submit();
  }
