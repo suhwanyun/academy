@@ -56,20 +56,6 @@
 </div> 
 </body>
 <script>
-$(document).ready(function(){
-	<%
-	 String browser = request.getHeader("User-Agent");
-	 if (browser.indexOf("Android") > 0) {                                        // 안드로이드로 접속했다면 결과값 true
-	 	session.setAttribute("isPhone", "true");
-	 }else{
-		 session.setAttribute("isPhone", "false");
-	 }
-	 //로그인 정보 날라가는 문제.
-	/*  if(request.getAttribute("user")!=null){
-		 session.setAttribute("user", request.getAttribute("user"));
-	 } */
-	%>
-});
  $(".btn-header").click(function(){
     $("#collapse1").collapse('toggle');
 }); 
