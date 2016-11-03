@@ -11,7 +11,7 @@
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<div class="container">
 		<button id="lectureAddBtn">강의 등록</button>
-		<table>
+		<table id="lectureDataTable" >
 			<c:forEach items="${lectureList }" var="list" >
 			
 			<tr>
@@ -64,10 +64,56 @@
 			</c:forEach>
 		</table>
 	</div>
+	
+		<div>
+		<input type="button" id="prevPage" value="이전">
+			<%for(int i = 1; i<(int)request.getAttribute("pageCount"); i++){
+				%><a onclick="movepage(<%=i %>)">[<%=i %>]</a><%
+			}%>
+		<input type="button" id="nextPage" value="다음">
+		<input type="button" id="lastPage" value="끝 페이지">
+		</div>
 </body>
 <script type="text/javascript">
+<c:url value="/lectureManage/page" var="page"/>
+//페이징을 위한 번수
+var nowPage = 1;
+
 $("#lectureAddBtn").click(function(){
 	$(location).attr('href', "/lectureManage/addjsp");
 });
+function movepage(index){
+	nowPage = index;
+	requesetPageFun();
+}
+$("#nextPage").click(function(){
+	if(nowPage<${pageCount}){
+		nowPage++;
+	}else{
+		nowPage=${pageCount};
+	}
+	requesetPageFun();
+});
+$("#prevPage").click(function(){
+	if(nowPage>1){
+		nowPage--;
+	}else{
+		nowPage=1;
+	}
+	requesetPageFun();
+});
+function requesetPageFun(){
+	$.ajax({
+	      type : "get",
+	      url : "${page}",
+	      data : {
+	    	  page : nowPage
+	      },
+	       success : function(result) {
+	    	   $("#lectureDataTable").remove();
+	    	   makeTable(result);
+	      }
+	   });
+}
 </script>
 </html>
