@@ -51,8 +51,8 @@
 	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="lecture_time">
 		select lecture_class, lecture_start, lecture_end
 		from LectureTime
-		where lecture_start &lt; #{lectureEnd}
-		  and lecture_end &gt; #{lectureStart}
+		where lecture_start &lt;= #{lectureEnd}
+		  and lecture_end &gt;= #{lectureStart}
 		  and lecture_week = #{lectureWeek}
 		  and lecture_id = #{lectureId}
 	</select>
