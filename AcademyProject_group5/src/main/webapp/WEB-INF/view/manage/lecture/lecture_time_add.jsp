@@ -47,6 +47,7 @@
 	<input type="button" id="cancelBtn" value="취소">
 </sform:form>
 </body>
+<script src="/js/manageVaildation.js"></script>
 <script type="text/javascript">
 $("document").ready(function(){
 	//날짜 수정 데이트픽커
@@ -87,33 +88,6 @@ $("#registBtn").click(function(event){
 		event.preventDefault();
 	}
 });
-function lectureStartEndCheck(s, e){
-	var NUM_PATTERN = /^[0-9]{1}$/;	
-	if(NUM_PATTERN.test(s)&&NUM_PATTERN.test(e)){
-		if(s<e){
-			return true;
-		}
-		return false;
-	}else{
-		return false;
-	}
-}
-function lecutrePlaceCheck(x){
-	if (x.length > 0 && x.length <= 15) {
-		return true;
-	} else {
-		return false;
-	}
-}
-function weekCheck(x){
-	var NUM_PATTERN = /^[1-7]{1}$/;	
-	if(NUM_PATTERN.test(x)){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 </script>
 
 </html>
