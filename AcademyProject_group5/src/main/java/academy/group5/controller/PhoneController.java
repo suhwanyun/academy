@@ -58,7 +58,7 @@ public class PhoneController {
 		UserData data = loginService.login(userId, userPass);		
 		session.setAttribute("user", data);	
 		session.setAttribute("isPhone", "true");
-		logger.trace("server:",session.getId());
+		logger.trace("server:{}",session.getId());
 		
 		return "index";
 	}
