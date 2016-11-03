@@ -32,6 +32,7 @@
 		<button type="button" id="cancelBtn">취소</button>
 	</form>
 </body>
+<script src="/js/manageVaildation.js"></script>
 <script type="text/javascript">
 
 $("#cancelBtn").click(function(event){
@@ -45,37 +46,11 @@ $("#registerLectureBtn").click(function(event){
 	){
 		
 	}else{
-		event.preventDefault();
 		alert("입력 값이 올바르지 않습니다.");
-		alert("1"+lectureIdCheck($("lectureId").val()));
-		alert("2"+lectureIdCheck($("lectureName").val()));
-		alert("3"+lectureIdCheck($("professorName").val()));
+		event.preventDefault();
+		
 	}
 	
 });
-function lectureIdCheck(x){
-	var lectureId_PATTERN= /^[0-9]{1,15}$/;
-	if (lectureId_PATTERN.test(x)) {
-		return true;
-	} else {
-		return false;
-	}
-}
-function lectureNameCheck(x){
-	if (x.length>0 && x.length <=30) {
-		return true;
-	} else {
-		return false;
-	}
-}
-function professorNameCheck(x){
-	var ko_NAME_PATTERN = /^[가-힣]{2,5}$/;
-	var en_NAME_PATTERN = /^[a-zA-Z]{1,15}$/;
-	if (ko_NAME_PATTERN.test(x) || en_NAME_PATTERN.test(x)) {
-		return true;
-	} else {
-		return false;
-	}
-}
 </script>
 </html>

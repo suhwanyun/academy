@@ -37,12 +37,15 @@ public class AutoServiceImpl implements AutoService {
 	@Autowired
 	GCMRepo gcmRepo;
 	
+	// 스케줄러 동작 여부 플래그
 	private boolean nowVoteScheduling;
 	private boolean nowTermScheduling;
+	private boolean nowRecommendMileageScheduling;
 	
 	public AutoServiceImpl(){
 		nowVoteScheduling = false;
 		nowTermScheduling = false;
+		nowRecommendMileageScheduling = false;
 	}
 	
 	@PostConstruct
@@ -129,6 +132,39 @@ public class AutoServiceImpl implements AutoService {
 				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
 			}
 		}, nextTermDate);
+	}
+	
+	//@PostConstruct
+	public void startRecommendMileageScheduler() {
+		
+		/*// 이미 스케줄러가 동작한 경우 취소
+		if(nowRecommendMileageScheduling){
+			return;
+		}
+		nowRecommendMileageScheduling = true;
+		
+		Calendar calInst = Calendar.getInstance();
+		
+		scheduler.taskScheduler().schedule(new Runnable() {
+			public void run() {
+				// DB 데이터 삭제
+				termRepo.deleteAllLectureRecommend();
+				termRepo.deleteAllLectureComment();
+				termRepo.deleteAllLecturePosting();
+				
+				termRepo.deleteAllLectureApply();
+				termRepo.deleteAllLectureNotice();
+				termRepo.deleteAllCancelLecture();
+				termRepo.deleteAllLectureTime();
+				termRepo.deleteAllLecture();
+				
+				nowTermScheduling = false;
+				
+				// 전체 공지
+				List<String> userList = gcmRepo.getAllUser();
+				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
+			}
+		}, nextTermDate);*/
 	}
 	
 	/** 이미 지난 날짜인지 확인 */

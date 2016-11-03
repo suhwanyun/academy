@@ -48,7 +48,7 @@
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</select>
 	
-	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="int">
+	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="lecture_time">
 		select lecture_class, lecture_start, lecture_end
 		from LectureTime
 		where lecture_start &lt; #{lectureEnd}
