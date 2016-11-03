@@ -52,8 +52,9 @@ public class PhoneController {
 		
 		UserData data = loginService.login(userId, userPass);		
 		session.setAttribute("user", data);	
-
-		return "phone_index";
+		session.setAttribute("isPhone", "true");
+		
+		return "index";
 	}
 	
 	/** GCM 등록 */
