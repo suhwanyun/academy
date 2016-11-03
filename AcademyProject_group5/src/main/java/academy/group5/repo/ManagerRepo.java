@@ -54,6 +54,11 @@ public class ManagerRepo {
 		return session.selectList(stmt, lectureData);
 	}
 	
+	public LectureTime getLectureTime(int lecturetimeId) {
+		String stmt = MANAGER_NS + "selectLectureTime";
+		return session.selectOne(stmt, lecturetimeId);
+	}
+	
 	public int insertLectureTime(LectureTime timeData) {
 		String stmt = MANAGER_NS + "insertLectureTime";
 		return session.insert(stmt, timeData);

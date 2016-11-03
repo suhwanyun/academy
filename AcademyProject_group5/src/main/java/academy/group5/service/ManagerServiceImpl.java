@@ -100,6 +100,16 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return lectureData;
 	}
+	
+	@Override
+	public LectureTime getLectureTime(int lectureTImeId){
+		LectureTime lectureTimeData = managerRepo.getLectureTime(lectureTImeId);
+		if(lectureTimeData == null){
+			throw new WrongRequestException();
+		}
+		
+		return lectureTimeData;
+	}
 
 	@Override
 	public boolean updateLecture(Integer lectureId, Integer lectureClass, String lectureName, String professorName){

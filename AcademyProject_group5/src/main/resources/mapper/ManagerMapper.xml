@@ -48,6 +48,19 @@
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</select>
 	
+	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="int">
+		select count(*)
+		from LectureTime
+		where lecture_start &lt; #{lectureEnd}
+		  and lecture_end &gt; #{lectureStart}
+	</select>
+	
+	<select id="selectLectureTime" parameterType="int" resultType="lecture_time">
+		select *
+		from LectureTime
+		where lecture_time_id = #{lectureTimeId}
+	</select>
+	
 	<insert id="insertLectureTime" parameterType="lecture_time">
 		insert into LectureTime
 		(lecture_id, lecture_class, lecture_start, lecture_end, lecture_place, lecture_week)
