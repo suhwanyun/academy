@@ -25,6 +25,10 @@ public class Paging {
 	private String orderType;
 	private String orderData;
 	
+	public Paging(String searchData, String searchDataType){
+		this.searchData = searchData;
+		this.searchDataType = searchDataType;
+	}
 	public Paging(int page, int size){
 		this(page, size, null);
 	}

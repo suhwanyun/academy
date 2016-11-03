@@ -39,16 +39,31 @@ public interface ManagerService {
 	boolean registerLectureTime(LectureTime lecturetime);
 	
 	/**
-	 * 강의 리스트 불러오기
+	 * 전체 강의 리스트 불러오기
 	 * @return
 	 */
-	List<Lecture> getAllLectureList(int page); 
+	List<Lecture> getAllLectureList(); 
+	/**
+	 * 검색된 강의 리스트 불러오기
+	 * @param page
+	 * @param searchType
+	 * @param searchData
+	 * @return
+	 */
+	List<Lecture> getAllLectureListBySearch(int page, String searchType, String searchData);
 	
 	/**
 	 * 전체 강의 페이지 수 확인
 	 * @return
 	 */
-	public int getMaxLectureListPage();
+	int getMaxLectureListPage();
+	/**
+	 * 검색된 강의 페이지 수 확인
+	 * @param searchType
+	 * @param searchData
+	 * @return
+	 */
+	int getMaxLectureListPageBySearch(String searchType, String searchData);
 	
 	/**
 	 * 강의 정보 불러오기

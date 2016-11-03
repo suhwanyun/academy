@@ -48,11 +48,51 @@ public class ManageController {
 		throw new PageRedirectException();
 	}
 	
-	/** 강의 목록 페이징 */
-	@RequestMapping(value="/lectureManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<Lecture> manageLectureMainPage(Model model, @RequestParam Integer page){
+	/** 강의 등록 관리자 메인화면 강의 목록 검색 */
+	@RequestMapping(value="/lectureManage/search", method=RequestMethod.GET)
+	public String manageLectureMainSearch(HttpSession session, Model model,
+			@RequestParam String searchType, @RequestParam String searchData){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
 				
-		List<Lecture> lectureList = service.getAllLectureList(page);
+		List<Lecture> lectureList = null;
+		int pageCount = 1;
+		// 검색 데이터가 없으면 기존 검색 데이터 삭제 후 전체 강의 목록 조회
+		if(searchType.equals("") || searchData.equals("")){
+			session.removeAttribute("searchType");
+			session.removeAttribute("searchData");
+			lectureList = service.getAllLectureList();
+			pageCount = service.getMaxLectureListPage();
+		} 
+		// 검색 데이터를 저장 후 DB 조회
+		else {
+			session.setAttribute("searchType", searchType);
+			session.setAttribute("searchData", searchData);
+			lectureList = service.getAllLectureListBySearch(1, searchType, searchData);
+			pageCount = service.getMaxLectureListPageBySearch(searchType, searchData);
+		}
+		
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("pageCount", pageCount);
+		
+		return "/manage/lecture/lecture";
+	}
+	
+	/** 강의 등록 관리자 메인화면 페이징 */
+	@RequestMapping(value="/lectureManage/page", method=RequestMethod.GET)
+	public @ResponseBody List<Lecture> manageLectureMainPaging(HttpSession session, @RequestParam Integer page){
+				
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		// 저장된 검색 데이터
+		Object typeObj = session.getAttribute("searchType");
+		Object dataObj = session.getAttribute("searchData");
+		
+		String searchType = typeObj == null ? null : (String)typeObj;
+		String searchData = dataObj == null ? null : (String)dataObj;
+				
+		List<Lecture> lectureList = service.getAllLectureListBySearch(page, searchType, searchData);
 		return lectureList;
 	}
 	

@@ -21,13 +21,36 @@
 		from (select rownum as rnum, sub.*
 			 from (select *
 				  from Lecture 
+				  <choose>
+					  <when test="searchData != null and searchDataType == 'lectureId'">
+				      where lecture_id like '%'||#{searchData}||'%' 
+				      </when>
+				      <when test="searchData != null and searchDataType == 'lectureName'">
+				      where lecture_name like '%'||#{searchData}||'%' 
+				      </when>
+				      <when test="searchData != null and searchDataType == 'professorName'">
+				      where professor_name like '%'||#{searchData}||'%' 
+				      </when>
+			      </choose>
 				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<select id="selectAllLectureCount" resultType="int">
+	<select id="selectLectureListCount" parameterType="paging" resultType="int">
 		select count(*)
-		from Lecture
+		from Lecture 
+		<choose>
+			<when test="searchData != null and searchDataType == 'lectureId'">
+		    where lecture_id like '%'||#{searchData}||'%' 
+		    </when>
+		    <when test="searchData != null and searchDataType == 'lectureName'">
+		    where lecture_name like '%'||#{searchData}||'%' 
+		    </when>
+		    <when test="searchData != null and searchDataType == 'professorName'">
+		    where professor_name like '%'||#{searchData}||'%' 
+		    </when>
+		</choose>
+				  
 	</select>
 	
 	<select id="selectLecture" parameterType="lecture" resultType="lecture">

@@ -146,11 +146,13 @@ public class IndexController {
 	public String manageLectureMainPage(HttpSession session, Model model){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
-				
-		List<Lecture> lectureList = manageService.getAllLectureList(1);
-		if(lectureList.size() != 0) {
-			model.addAttribute("lectureList", lectureList);
-		}
+		// 기존 검색 기록 초기화
+		session.removeAttribute("searchData");
+		session.removeAttribute("searchType");
+		
+		List<Lecture> lectureList = manageService.getAllLectureList();
+		
+		model.addAttribute("lectureList", lectureList);	
 		model.addAttribute("pageCount", manageService.getMaxLectureListPage());
 		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
 		session.setAttribute("errorGotoPage", "/lectureManage/main");

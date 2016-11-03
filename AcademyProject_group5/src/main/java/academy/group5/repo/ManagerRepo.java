@@ -34,9 +34,9 @@ public class ManagerRepo {
 		return session.selectList(stmt, pagingData);
 	}
 	
-	public int getAllLectureCount() {
-		String stmt = MANAGER_NS + "selectAllLectureCount";
-		return session.selectOne(stmt);
+	public int getLectureListCount(Paging pagingData) {
+		String stmt = MANAGER_NS + "selectLectureListCount";
+		return session.selectOne(stmt, pagingData);
 	}
 	
 	public Lecture getLecture(Lecture lectureData) {

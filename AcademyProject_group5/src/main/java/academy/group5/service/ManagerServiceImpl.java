@@ -85,8 +85,19 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public List<Lecture> getAllLectureList(int page){
-		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
+	public List<Lecture> getAllLectureList(){
+		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(1, LECTURE_MAX_PAGE));
+		
+		for(Lecture lectureData : lectureList){
+			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
+			lectureData.setLectureTimeList(timeData);
+		}
+		return lectureList;
+	}
+	
+	@Override
+	public List<Lecture> getAllLectureListBySearch(int page, String searchData, String searchType){
+		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE, searchData, searchType));
 		
 		for(Lecture lectureData : lectureList){
 			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
@@ -97,7 +108,14 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Override
 	public int getMaxLectureListPage(){
-		int result = managerRepo.getAllLectureCount();
+		int result = managerRepo.getLectureListCount(new Paging());
+		result /= LECTURE_MAX_PAGE;
+		return ++result;
+	}
+	
+	@Override
+	public int getMaxLectureListPageBySearch(String searchData, String searchType){
+		int result = managerRepo.getLectureListCount(new Paging(searchData, searchType));
 		result /= LECTURE_MAX_PAGE;
 		return ++result;
 	}
