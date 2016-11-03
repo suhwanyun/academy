@@ -134,30 +134,19 @@ public class AutoServiceImpl implements AutoService {
 	
 	//@PostConstruct
 	public void startRecommendMileageScheduler() {
-		
-		/*Calendar calInst = Calendar.getInstance();
+		// 다음날 0시로 설정
+		Calendar calInst = Calendar.getInstance();
+		calInst.add(Calendar.DAY_OF_MONTH, 1);
 		calInst.set(Calendar.HOUR_OF_DAY, 0);
+		calInst.set(Calendar.MINUTE, 0);
+		calInst.set(Calendar.SECOND, 0);
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
-				// DB 데이터 삭제
-				termRepo.deleteAllLectureRecommend();
-				termRepo.deleteAllLectureComment();
-				termRepo.deleteAllLecturePosting();
 				
-				termRepo.deleteAllLectureApply();
-				termRepo.deleteAllLectureNotice();
-				termRepo.deleteAllCancelLecture();
-				termRepo.deleteAllLectureTime();
-				termRepo.deleteAllLecture();
 				
-				nowTermScheduling = false;
-				
-				// 전체 공지
-				List<String> userList = gcmRepo.getAllUser();
-				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
 			}
-		}, nextTermDate);*/
+		}, calInst.getTime());
 	}
 	
 	/** 이미 지난 날짜인지 확인 */
