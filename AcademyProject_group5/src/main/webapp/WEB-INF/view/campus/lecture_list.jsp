@@ -26,33 +26,25 @@
 	
 		
 			<table class="table">
-				<thead>
 
 					<tr>
-						<th style="text-align: center;">강의 이름</th>
-						<th style="text-align: center;">교수 이름</th>
-						<th style="text-align: center;">강의 분반</th>
+						<th>강의 이름</th>
+						<th>교수 이름</th>
+						<th>강의 분반</th>
 					</tr>
-				</thead>
-				<tbody>
 					<c:forEach items="${lectureList }" var="list">
-						<tr>
+						<tr class = 'tableData'>
 							<td><a
 								href="/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
 							<td>${list.professorName}</td>
 							<td>${list.lectureClass}</td>
 						</tr>
 					</c:forEach>
-				</tbody>
-			
+				<tr id="beforeLectureLocation">
+					<td colspan="2" ><button id="moreBtn" class="myButton">더보기</button></td>
+               		<td><button class="myButton">맨 위로</button></td>
+				</tr>
 			</table>
-			   
-       
-         <div style="margin-top:5%;"> 
-               <button id="moreBtn" class="myButton size8mar">더보기</button>
-               <button class="myButton size4">맨 위로</button>
-            </div>
-		
 	  </div>
 </body>
 
@@ -73,7 +65,7 @@
 										searchData : $("#serachInput").val()
 									},
 									success : function(result) {
-										$(".tableData").remove();
+										$(".tableData").empty();
 										pageIndex = 1;
 										if (result.length == 0) {
 											alert("검색 결과가 없습니다.");
