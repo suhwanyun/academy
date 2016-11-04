@@ -27,7 +27,7 @@
 			<c:forEach items="${lectureTime }" var="list">
 				<table class="table table-bordered">
 					<tr>
-						<td>시작/종료 시간</td>
+						<th class="gray">시작/종료 시간</th>
 						<td colspan="3">
 						${list.lectureStart }교시
 							&nbsp;&nbsp;&nbsp;&nbsp; ~
@@ -35,9 +35,9 @@
 							${list.lectureEnd }교시</td>
 					</tr>
 					<tr>
-						<td>강의 장소</td>
+						<th class="gray">강의 장소</th>
 						<td>${list.lecturePlace }</td>
-						<td>강의 요일 </td>
+						<th class="gray">강의 요일 </th>
 						<td>
 						<c:choose>
 						<c:when test="${list.lectureWeek == 1}">
