@@ -14,24 +14,22 @@ public class LectureManagerSessionCheckInterceptor extends HandlerInterceptorAda
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		boolean isError = false;
 		
 		Object typeObj = session.getAttribute("managerType");
 		if(typeObj == null){
-			isError = true;
-			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-		} else if(!typeObj.equals("lecture")){
-			isError = true;
-			request.setAttribute("msg", "잘못된 접근입니다.");
-		} else if(session.getAttribute("user") != null){
+			request.setAttribute("gotoPage", "/managerLoginjsp");
+			throw new PageRedirectException("로그인이 필요한 서비스입니다.");
+		} 
+		else if(!typeObj.equals("lecture")){
+			session.removeAttribute("isManage");
+			session.removeAttribute("managerType");
+			request.setAttribute("gotoPage", "/managerLoginjsp");
+			throw new PageRedirectException("잘못된 접근입니다.");
+		} 
+		else if(session.getAttribute("user") != null){
 			session.removeAttribute("user");
 			session.setAttribute("gotoPage", "/lectureManage/main");
 			throw new PageRedirectException("관리자 로그인이 감지되어 일반 회원 로그인을 해지합니다.");
-		}
-		
-		if(isError){
-			request.setAttribute("nextJsp", "/managerLoginjsp");
-			request.getRequestDispatcher("/message").forward(request, response);
 		}
 		return super.preHandle(request, response, handler);
 	}

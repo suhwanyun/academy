@@ -22,11 +22,11 @@
 	
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<c:choose>
-		<c:when test="${!empty errorGotoPage}">
+		<c:when test="${!empty errorGotoPage}">	
 			<script type="text/javascript">
-				<c:remove var="errorGotoPage" />
-				$(location).attr('href', "${errorGotoPage}");
+				location.href = "${errorGotoPage}";
 			</script>
+			<c:remove var="errorGotoPage" />
 		</c:when>
 		<c:when test="${!empty isManage}">
 			<script type="text/javascript">
