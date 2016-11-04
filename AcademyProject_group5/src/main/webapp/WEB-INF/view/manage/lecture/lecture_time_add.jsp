@@ -9,7 +9,8 @@
 <body>
 <jsp:include page="/WEB-INF/view/manage/header.jsp" />
 <sform:form modelAttribute="timeData" action="/lectureManage/timeAdd" method="post">
-	<table>
+	<div class="containerM center text-center Lmargin">
+	<table class="table bigFont">
 		<tr>
 			<th>강의 ID</th>
 			<th>시작 교시</th>
@@ -43,8 +44,11 @@
 			<td><input type="button" id="dateCancel" value="선택 취소"></td> -->
 		</tr>
 	</table>
-	<input type="submit" id="registBtn" value="등록">
-	<input type="button" id="cancelBtn" value="취소">
+	<div class="bRight">
+	<input type="submit" id="registBtn" value="등록" class="myButtonBig">
+	<input type="button" id="cancelBtn" value="취소" class="myButtonBig">
+	</div>
+	</div>
 </sform:form>
 </body>
 <script src="/js/manageVaildation.js"></script>

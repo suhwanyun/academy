@@ -26,17 +26,17 @@
   <br>
   <div class="row">
     <div class="col-xs-4">
-      <span class="glyphicon glyphicon-dashboard"></span>
+      <a href="/noti/notiSettingjsp"><span class="glyphicon glyphicon-dashboard"></span></a>
       <h4>Alarm</h4>
       <p>알람</p>
     </div>
     <div class="col-xs-4">
-      <span class="glyphicon glyphicon-education"></span>
+        <a href="/campus/campusMain"><span class="glyphicon glyphicon-education"></span></a>
       <h4>Study</h4>
       <p>학업</p>
     </div>
-    <div class="col-xs-4">
-      <span class="glyphicon glyphicon-cutlery"></span>
+     <div class="col-xs-4">
+      <a href="/foodMain"><span class="glyphicon glyphicon-cutlery"></span></a>
       <h4>Food</h4>
       <p>음식</p>
     </div>
@@ -44,18 +44,18 @@
   <br><br>
   <div class="row">
     <div class="col-xs-4">
-      <span class="glyphicon glyphicon-music"></span>
+        <a href="/playMain"><span class="glyphicon glyphicon-music"></span></a>
       <h4>Play</h4>
       <p>오락</p>
     </div>
     <div class="col-xs-4">
-      <span class="glyphicon glyphicon-plane"></span>
+      <a href="/placeMain"><span class="glyphicon glyphicon-plane"></span></a>
       <h4>Place</h4>
       <p>명소</p>
     </div>
     <div class="col-xs-4">
-      <span class="glyphicon glyphicon-wrench"></span>
-      <h4 style="color:#303030;">Mileage</h4>
+       <a href="/mileageMain"><span class="glyphicon glyphicon-wrench"></span></a>
+       <h4 style="color:#303030;">Mileage</h4>
       <p>마일리지</p>
     </div>
   </div>

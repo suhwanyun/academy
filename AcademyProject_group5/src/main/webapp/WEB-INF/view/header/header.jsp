@@ -32,7 +32,7 @@
 					<br>
 					<br>
 
-					<a href="#" class="btn btn-danger"><span>${user.userMileage}
+					<a href="/mileage/confirm" class="btn btn-danger"><span>${user.userMileage}
 							m</span></a>
 					<a href="/logout" class="btn btn-danger"><span>로그아웃</span></a>
 

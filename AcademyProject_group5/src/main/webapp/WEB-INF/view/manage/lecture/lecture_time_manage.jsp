@@ -42,9 +42,9 @@
 			</tr>
 		</table>
 	</sform:form>
-	<input type="button" onclick="submitFun(1)" value="수정">
-	<input type="button" onclick="submitFun(2)" value="삭제">
-	<input type="button" id="cancelBtn" value="취소">
+	<input type="button" onclick="submitFun(1)" value="수정" class="myButtonBig">
+	<input type="button" onclick="submitFun(2)" value="삭제" class="myButtonBig">
+	<input type="button" id="cancelBtn" value="취소" class="myButtonBig">
 </body>
 <script src="/js/manageVaildation.js"></script>
 <script type="text/javascript">

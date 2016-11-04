@@ -6633,10 +6633,12 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-input[type="text"]{
+input[type="text"],
+input[type="password"]{
 	
 	width:100%;
 }
+
 	input[type="text"].true,
 	input[type="password"].true,
 	input[type="email"].true,
@@ -6889,6 +6891,7 @@ background-color: #eee;
 .containerM{
 	width:1200px;
 	height:800px;
+	
 }
 .imgBoard{
   display: inline-block;
@@ -6936,7 +6939,7 @@ background-color: #eee;
  .container-fix {
     width: 1700px;
     
-    position: fixed;
+   
   }
 .upMargin{
 	margin-top:200px;
@@ -6947,4 +6950,12 @@ background-color: #eee;
 .container-fix{
   font-size:30px;
 }
-
+.bigFont{
+	font-size:30px;
+}
+ .Lmargin{
+ margin-left:350px;
+}
+.btn-red{
+	color:red;
+}

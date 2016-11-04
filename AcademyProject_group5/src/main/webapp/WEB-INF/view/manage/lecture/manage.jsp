@@ -7,9 +7,11 @@
 <title>강의 수정 페이지</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
+
+	<jsp:include page="/WEB-INF/view/manage/header.jsp" /><br>
+		<div class="container">
 	<form name="myForm" method="post">
-		<table>
+		<table class="table table-bordered bigFont">
 			<tr>
 				<th>강의 ID</th>
 				<th>강의 이름</th>
@@ -28,11 +30,12 @@
 			</tr>
 		</table>
 	</form>
-	<input type="button" onclick="submitFun(1)" value="수정" />
-	<input type="button" onclick="submitFun(2)" value="삭제" />
-	<input type="button" id="cancelBtn" value="취소" />
-
-
+	<div class="bRight bigFont">
+	<input type="button" onclick="submitFun(1)" value="수정"  class="myButtonBig"/>
+	<input type="button" onclick="submitFun(2)" value="삭제" class="myButtonBig"/>
+	<input type="button" id="cancelBtn" value="취소" class="myButtonBig"/>
+</div>
+</div>
 </body>
 <script src="/js/manageVaildation.js"></script>
 <script type="text/javascript">

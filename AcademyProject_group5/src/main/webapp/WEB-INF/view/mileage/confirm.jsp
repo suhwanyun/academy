@@ -36,10 +36,11 @@
           <h4 class="modal-title">상품 사용</h4>
         </div>
         <div class="modal-body">
-          <p>점원에게 보여주세요</p>
+          <p>점원에게 보여주세요</p><br>
+          <p>사용하시겠습니까?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="use">사용</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>	
         </div>
       </div>
@@ -50,4 +51,14 @@
 	</div>
 
 </body>
+<script>
+	$("#use").click(function(){
+		if(confirm("사용하시겠습니까?")==true){
+			//승일아 이미지 삭제 해야함
+		}
+		
+		
+	});
+
+</script>
 </html>
