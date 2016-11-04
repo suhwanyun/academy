@@ -33,7 +33,7 @@ public interface ManagerService {
 	boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass);
 	/**
 	 * 강의 시간 등록
-	 * @param LectureTime
+	 * @param UserLectureTime
 	 * @return
 	 */
 	boolean registerLectureTime(LectureTime lecturetime);
