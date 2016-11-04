@@ -19,7 +19,6 @@
 			      </choose>
 				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
-		  and (select count(*) from LectureTime where lecture_id = sub.lecture_id) &gt; 0
 	</select>
 	
 	<insert id="insertLectureAllpy" parameterType="lecture_apply">
