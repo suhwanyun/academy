@@ -30,8 +30,9 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public boolean apply(Integer lectureId, Integer lectureClass, String userId) {
-		int result = lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
+	public boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresident) {
+		
+		int result = lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, isPresident, null));
 		
 		if(result != 1){
 			throw new WrongRequestException();

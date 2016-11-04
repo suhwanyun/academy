@@ -18,7 +18,7 @@ public interface LectureService {
 	 * @param userId
 	 * @return
 	 */
-	boolean apply(Integer lectureId,Integer lectureClass, String userId);
+	boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresidentStr);
 	/**
 	 * 강의 삭제
 	 * @param lectureId
