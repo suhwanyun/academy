@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,15 +48,29 @@ public class CampusController {
 		return "/campus/noti_info";
 	}
 	
-	/** 전체 강의 목록 표시(더보기) */
+	/** 전체 강의 목록 표시 */
 	@RequestMapping(value="/campus/lectureList", method=RequestMethod.GET)
-	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
-				@RequestParam(required=false) String page){
+	public String allLectureList(Model model, HttpSession session){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		// 현재 열림 탭 저장
 		session.setAttribute("nowTab", "lectureList");
+		
+		session.removeAttribute("searchType");
+		session.removeAttribute("searchData");
+		
+		List<Lecture> lecList = lecService.allLectureList(1, null, null);
+		if(lecList.size() != 0){
+			model.addAttribute("lectureList", lecList);
+		}
+		return "/campus/lecture_list";
+	}
+	
+	/** 전체 강의 목록 표시(더보기) */
+	@RequestMapping(value="/campus/lectureListMore", method=RequestMethod.GET)
+	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
+				@RequestParam(required=false) String page){
 		
 		Object dataObj = session.getAttribute("searchData");
 		Object typeObj = session.getAttribute("searchType");

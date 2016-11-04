@@ -222,22 +222,7 @@ public class IndexController {
 		getPostingData(model, session, postingId);
 		
 		return "/place/place_update";
-	}
-	
-	
-	/** 전체 강의 목록 표시 페이지 */
-	@RequestMapping(value="/campus/lectureListJsp", method=RequestMethod.GET)
-	public String allLectureList(Model model, HttpSession session){
-		session.removeAttribute("searchType");
-		session.removeAttribute("searchData");
-		
-		List<Lecture> lecList = lecService.allLectureList(1, null, null);
-		if(lecList.size() != 0){
-			model.addAttribute("lectureList", lecList);
-		}
-		return "/campus/lecture_list";
-	}
-	
+	}	
 	
 	/** 게시판 메인 페이지 초기화 설정 */
 	private void boardMainSetup(HttpSession session, String PostingType){
