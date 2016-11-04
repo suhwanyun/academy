@@ -24,7 +24,7 @@
 						<c:forEach items="${list.lectureTimeList }" var="timeList" >
 							<li>
 								<c:choose>
-									<c:when test="${timeList.lectureWeek == 1} ">
+									<c:when test="${timeList.lectureWeek == 1}">
 										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
 											<span>일요일</span>
 										</a>
