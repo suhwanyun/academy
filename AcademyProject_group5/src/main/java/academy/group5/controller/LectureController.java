@@ -87,14 +87,19 @@ public class LectureController {
 	  
 	/** 학생이 선택한 강의의 정보를 확인하거나 신청 취소 */
 	@RequestMapping(value="/lecture/lectureInfo", method=RequestMethod.GET)
-	public String lectureInfo(Model model,
+	public String lectureInfo(Model model, HttpSession session,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
 		
 		model.addAttribute("lectureData", selectedlecture);
 		model.addAttribute("lectureTime", selectedLectureTimes);
+		
+		// 현재 열림 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
 		
 		return "/campus/lecture/lecture_info";
 	}
@@ -107,8 +112,6 @@ public class LectureController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lecture/lectureInfo?lectureId="+lectureId+"&lectureClass="+lectureClass);
 		session.setAttribute("gotoPage", "/campus/campusMain");
-		// 현재 열림 탭 저장
-		session.setAttribute("nowTab", "selectedLectureList");
 				
 		String userId = identify.getUserId(session);
 		lecService.apply(lectureId, userId, lectureClass, isPresident);
