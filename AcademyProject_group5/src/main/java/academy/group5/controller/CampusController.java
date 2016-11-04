@@ -36,8 +36,8 @@ public class CampusController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		// 현재 열림 탭 저장
-		session.setAttribute("nowTab", "notification");
+		/*// 현재 열림 탭 저장
+		model.addAttribute("nowTab", "notification");*/
 		return "/campus/noti_list";
 	}
 	
@@ -54,9 +54,10 @@ public class CampusController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		// 현재 열림 탭 저장
-		session.setAttribute("nowTab", "lectureList");
 		
+		/*// 현재 열림 탭 저장
+		model.addAttribute("nowTab", "lectureList");*/
+	
 		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");
 		
@@ -105,8 +106,6 @@ public class CampusController {
 	public String schedule(HttpSession session){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		// 현재 열림 탭 저장(default)
-		session.removeAttribute("nowTab");
 		
 		return "/campus/schedule";
 	}

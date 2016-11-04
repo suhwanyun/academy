@@ -112,6 +112,7 @@ public class IndexController {
 	public String campusMainPage(HttpSession session){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/main");
+		
 		return "/campus/main";
 	}
 	

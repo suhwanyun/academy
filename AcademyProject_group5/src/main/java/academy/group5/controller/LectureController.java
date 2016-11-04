@@ -38,8 +38,6 @@ public class LectureController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		// 현재 열림 탭 저장
-		session.setAttribute("nowTab", "selectedLectureList");
 		
 		return "/campus/lecture/lecture_list";
 	}
@@ -109,6 +107,8 @@ public class LectureController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lecture/lectureInfo?lectureId="+lectureId+"&lectureClass="+lectureClass);
 		session.setAttribute("gotoPage", "/campus/campusMain");
+		// 현재 열림 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
 				
 		String userId = identify.getUserId(session);
 		lecService.apply(lectureId, userId, lectureClass, isPresident);
