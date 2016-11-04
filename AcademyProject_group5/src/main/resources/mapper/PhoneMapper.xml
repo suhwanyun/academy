@@ -29,7 +29,7 @@
 			 	    from Posting
 			 	    where posting_recommend > 0
 			 	      and posting_time > sysdate - 1
-			 	      and posting_type = 'food'
+			 	      and posting_type = #{postingType}
 			 	    order by posting_recommend desc
 			 	    ) sub
 			  )
