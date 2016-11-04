@@ -102,12 +102,12 @@ public class LectureController {
 			@RequestParam Integer lectureClass, @RequestParam String isPresident){
 		
 		// 에러 발생시 / 처리 완료시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lecture/lectureInfo?lectureId="+lectureId+"lectureClass="+lectureClass);
+		session.setAttribute("errorGotoPage", "/lecture/lectureInfo?lectureId="+lectureId+"&lectureClass="+lectureClass);
 		session.setAttribute("gotoPage", "/campus/campusMain");
 				
 		String userId = identify.getUserId(session);
 		lecService.apply(lectureId, userId, lectureClass, isPresident);
 				
-		throw new PageRedirectException("정상 신청되었습니다.");
+		throw new PageRedirectException("신청되었습니다.");
 	}
 }
