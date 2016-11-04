@@ -11,20 +11,19 @@
 <body>
 
 	<table class="table table-bordered text-center tableL" >
-	<thead>
   <tr>
-   	<th class="col-xs-2 text-center">&nbsp;</th>
+   	<th class="col-xs-2 text-center"></th>
     <th class="col-xs-2 text-center">Mon</th>
     <th class="col-xs-2 text-center">Tue</th>
     <th class="col-xs-2 text-center">Wed</th>
     <th class="col-xs-2 text-center">Thu</th>
     <th class="col-xs-2 text-center">Fri</th>
   </tr>
-  </thead>
-  <tbody>
    <tr>
         <th class="text-center">1교시<br>09:00~<br>09:50</th>
-        <td>창의적<br>8공<br>717</td>
+        <td>
+        	<p>창의적</p><p>8공717</p>
+        </td>
         <td>창의적<br>8공<br>717</td>
         <td>창의적<br>8공<br>717</td>
         <td>창의적<br>8공<br>717</td>
@@ -103,7 +102,6 @@
         <td>&nbsp;</td>
   
     </tr>
-    </tbody>
 </table>
 
 </body>

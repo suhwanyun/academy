@@ -28,9 +28,9 @@
 			</tbody>
 
 		</table>
-		<div style="margin-top: 5%;">
-			<button id="moreBtn" class="myButton size8mar">더보기</button>
-			<button class="myButton size4">맨 위로</button>
+		<div>
+			<button id="moreBtn">더보기</button>
+			<button>맨 위로</button>
 		</div>
 	</div>
 </body>
