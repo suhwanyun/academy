@@ -7,8 +7,8 @@
 	<select id="selectAllLecture" parameterType="paging" resultType="lecture">
 		select *
 		from (select rownum as rnum, sub.*
-			 from (select *
-				  from Lecture 
+			 from (select lecture_id, lecture_class, lecture_name, professor_name
+				  from Lecture join LectureTime using (lecture_id)
 				  <choose>
 				  <when test="searchData != null and searchDataType == 'lecture'">
 			      where	lecture_name like '%'||#{searchData}||'%' 
@@ -19,6 +19,7 @@
 			      </choose>
 				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+		  and (select count(*) from LectureTime where lecture_id = sub.lecture_id) &gt; 0
 	</select>
 	
 	<insert id="insertLectureAllpy" parameterType="lecture_apply">
