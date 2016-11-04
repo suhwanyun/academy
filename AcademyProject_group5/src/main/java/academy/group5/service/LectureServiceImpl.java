@@ -62,7 +62,8 @@ public class LectureServiceImpl implements LectureService{
 			throw new WrongRequestException("다음 강의들과 시간표가 중복됩니다." + errorStr);
 		}
 		
-		int result = lecRepo.setLectureApply(new LectureApply(lectureId, userId, lectureClass, isPresident, null));
+		String isPresidentStr = isPresident.equals("true") ? "Y" : "N";
+		int result = lecRepo.setLectureApply(new LectureApply(lectureId, userId, lectureClass, isPresidentStr, null));
 		
 		if(result != 1){
 			throw new WrongRequestException();
