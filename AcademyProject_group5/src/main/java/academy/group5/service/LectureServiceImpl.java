@@ -11,6 +11,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.LectureRepo;
 
@@ -29,9 +30,39 @@ public class LectureServiceImpl implements LectureService{
 		return lecRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE, searchData, searchType));
 	}
 
+	private String[] weekList = {"일", "월", "화", "수", "목", "금", "토"};
 	@Override
-	public boolean apply(Integer lectureId, Integer lectureClass, String userId) {
-		int result = lecRepo.setLecture(new LectureApply(lectureId, userId, lectureClass, "N", null));
+	public boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresident) {
+		// 현재 신청하려는 강의의 강의 시간 리스트
+		List<LectureTime> selectedLectureTimeList = lecRepo.getLectureTime(new Lecture(lectureId, lectureClass));
+		
+		if(selectedLectureTimeList.size() == 0){
+			throw new WrongRequestException();
+		}
+		
+		String errorStr = "";
+		for(LectureTime selectedLectureTime : selectedLectureTimeList){
+			UserLectureTime userLectureTimeData = new UserLectureTime(
+					userId, 
+					selectedLectureTime.getLectureStart(), 
+					selectedLectureTime.getLectureEnd(), 
+					selectedLectureTime.getLectureWeek());
+			// 이미 신청한 강의들의 강의시간 중 겹치는 시간 리스트
+			List<UserLectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTime(userLectureTimeData);
+			
+			for(UserLectureTime alreadyLectureTime : alreadyLectureTimeList) {
+				errorStr += "\n" + alreadyLectureTime.getLectureName() + " ";
+				errorStr += alreadyLectureTime.getLectureClass() + "분반(";
+				errorStr += weekList[alreadyLectureTime.getLectureWeek()-1] + "요일 ";
+				errorStr += alreadyLectureTime.getLectureStart() + "교시~";
+				errorStr += alreadyLectureTime.getLectureEnd() + "교시)";
+			}
+		}
+		if(!errorStr.equals("")){
+			throw new WrongRequestException("다음 강의들과 시간표가 중복됩니다." + errorStr);
+		}
+		
+		int result = lecRepo.setLectureApply(new LectureApply(lectureId, userId, lectureClass, isPresident, null));
 		
 		if(result != 1){
 			throw new WrongRequestException();
@@ -40,12 +71,12 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public boolean delete(Integer lectureId, String userId) {
+	public boolean cancelApply(Integer lectureId, String userId) {
 		LectureApply data = new LectureApply();
 		data.setLectureId(lectureId);
 		data.setUserId(userId);
 		
-		int result = lecRepo.deleteLecture(data);
+		int result = lecRepo.deleteLectureApply(data);
 		
 		if(result != 1){
 			throw new WrongRequestException();

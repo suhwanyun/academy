@@ -85,14 +85,39 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public List<Lecture> getAllLectureList(int page){
-		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE));
+	public List<Lecture> getAllLectureList(){
+		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(1, LECTURE_MAX_PAGE));
 		
 		for(Lecture lectureData : lectureList){
 			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
 			lectureData.setLectureTimeList(timeData);
 		}
 		return lectureList;
+	}
+	
+	@Override
+	public List<Lecture> getAllLectureListBySearch(int page, String searchData, String searchType){
+		List<Lecture> lectureList = managerRepo.getAllLecture(new Paging(page, LECTURE_MAX_PAGE, searchData, searchType));
+		
+		for(Lecture lectureData : lectureList){
+			List<LectureTime> timeData = managerRepo.getAllLectureTime(lectureData);
+			lectureData.setLectureTimeList(timeData);
+		}
+		return lectureList;
+	}
+	
+	@Override
+	public int getMaxLectureListPage(){
+		int result = managerRepo.getLectureListCount(new Paging());
+		result /= LECTURE_MAX_PAGE;
+		return ++result;
+	}
+	
+	@Override
+	public int getMaxLectureListPageBySearch(String searchData, String searchType){
+		int result = managerRepo.getLectureListCount(new Paging(searchData, searchType));
+		result /= LECTURE_MAX_PAGE;
+		return ++result;
 	}
 	
 	@Override
@@ -164,19 +189,21 @@ public class ManagerServiceImpl implements ManagerService {
 		return false;
 	}
 	
+	private String[] weekList = {"일", "월", "화", "수", "목", "금", "토"};
 	/** 강의 시간 중복 여부 확인 로직 */
 	private void isAlreadyRectureTimeErrorOccurred(List<LectureTime> alreadyRegistList){
 		if(alreadyRegistList.size() == 0){
 			return;
 		}
-		String outputStr = "강의시간이 중복됩니다.";
+		String errorStr = "강의시간이 중복됩니다.";
 		for(LectureTime alreadyData : alreadyRegistList){
-			outputStr += "\n" + alreadyData.getLectureClass() + "분반(";
-			outputStr += alreadyData.getLectureStart() + "교시~";
-			outputStr += alreadyData.getLectureEnd() + "교시)";
+			errorStr += weekList[alreadyData.getLectureWeek()-1] + "요일 ";
+			errorStr += "\n" + alreadyData.getLectureClass() + "분반(";
+			errorStr += alreadyData.getLectureStart() + "교시~";
+			errorStr += alreadyData.getLectureEnd() + "교시)";
 		}
 		
-		throw new WrongRequestException(outputStr);
+		throw new WrongRequestException(errorStr);
 	}
 	
 	/** ----------------------------마일리지---------------------------- */

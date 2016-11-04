@@ -10,6 +10,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.Paging;
+import academy.group5.dto.etc.UserLectureTime;
 
 @Repository
 public class LectureRepo {
@@ -24,12 +25,12 @@ public class LectureRepo {
 		return session.selectList(stmt, data);
 	}
 	
-	public int setLecture(LectureApply data){
+	public int setLectureApply(LectureApply data){
 		String stmt = LECTURE_NS + "insertLectureAllpy";
 		return session.insert(stmt, data);
 	}
 	
-	public int deleteLecture(LectureApply data){
+	public int deleteLectureApply(LectureApply data){
 		String stmt = LECTURE_NS + "deleteLectureApply";
 		return session.delete(stmt, data);
 	}
@@ -52,6 +53,11 @@ public class LectureRepo {
 	public List<LectureTime> getLectureTime(Lecture data){
 		String stmt = LECTURE_NS + "selectLectureTimeByLecture";
 		return session.selectList(stmt, data);
+	}
+	
+	public List<UserLectureTime> getAlreadyLectureTime(UserLectureTime userTimeData) {
+		String stmt = LECTURE_NS + "selectAlreadyLectureTime";
+		return session.selectList(stmt, userTimeData);
 	}
 	
 	public LectureApply getIsPresident(LectureApply data){

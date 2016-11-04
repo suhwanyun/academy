@@ -2550,7 +2550,6 @@ input[type="search"] {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-          width:100%;
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -6936,6 +6935,7 @@ background-color: #eee;
 .sizeInput{
 	width:96%;
 }
+
  .container-fix {
     width: 1700px;
     
@@ -6959,3 +6959,8 @@ background-color: #eee;
 .btn-red{
 	color:red;
 }
+
+#commentInput{
+	width: 80%
+	}
+

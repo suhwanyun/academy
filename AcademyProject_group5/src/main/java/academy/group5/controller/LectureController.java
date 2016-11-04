@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
@@ -96,15 +97,17 @@ public class LectureController {
 	}
 	
 	/** 강의 신청 */
-	@RequestMapping(value="/lecture/lectureApply", method=RequestMethod.GET)
-	public @ResponseBody String lectureApplying(HttpSession session,
-			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+	@RequestMapping(value="/lecture/lectureApply", method=RequestMethod.POST)
+	public String applyNewLecture(HttpSession session, @RequestParam Integer lectureId,
+			@RequestParam Integer lectureClass, @RequestParam String isPresident){
 		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lecture/lectureInfo?lectureId="+lectureId+"&lectureClass="+lectureClass);
+		session.setAttribute("gotoPage", "/campus/campusMain");
+				
 		String userId = identify.getUserId(session);
-		try {
-			lecService.apply(lectureId, lectureClass, userId);
-		} catch(WrongRequestException e){ return "잘못된 접근입니다."; }
-		
-		return "신청이 정상적으로 되었습니다.";
+		lecService.apply(lectureId, userId, lectureClass, isPresident);
+				
+		throw new PageRedirectException("신청되었습니다.");
 	}
 }

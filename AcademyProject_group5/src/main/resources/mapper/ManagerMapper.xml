@@ -21,8 +21,36 @@
 		from (select rownum as rnum, sub.*
 			 from (select *
 				  from Lecture 
+				  <choose>
+					  <when test="searchData != null and searchDataType == 'lectureId'">
+				      where lecture_id like '%'||#{searchData}||'%' 
+				      </when>
+				      <when test="searchData != null and searchDataType == 'lectureName'">
+				      where lecture_name like '%'||#{searchData}||'%' 
+				      </when>
+				      <when test="searchData != null and searchDataType == 'professorName'">
+				      where professor_name like '%'||#{searchData}||'%' 
+				      </when>
+			      </choose>
 				  order by lecture_id) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
+	</select>
+	
+	<select id="selectLectureListCount" parameterType="paging" resultType="int">
+		select count(*)
+		from Lecture 
+		<choose>
+			<when test="searchData != null and searchDataType == 'lectureId'">
+		    where lecture_id like '%'||#{searchData}||'%' 
+		    </when>
+		    <when test="searchData != null and searchDataType == 'lectureName'">
+		    where lecture_name like '%'||#{searchData}||'%' 
+		    </when>
+		    <when test="searchData != null and searchDataType == 'professorName'">
+		    where professor_name like '%'||#{searchData}||'%' 
+		    </when>
+		</choose>
+				  
 	</select>
 	
 	<select id="selectLecture" parameterType="lecture" resultType="lecture">
@@ -49,7 +77,7 @@
 	</select>
 	
 	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="lecture_time">
-		select lecture_class, lecture_start, lecture_end
+		select lecture_class, lecture_week, lecture_start, lecture_end
 		from LectureTime
 		where lecture_start &lt;= #{lectureEnd}
 		  and lecture_end &gt;= #{lectureStart}

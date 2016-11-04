@@ -24,6 +24,7 @@
 	<c:choose>
 		<c:when test="${!empty errorGotoPage}">
 			<script type="text/javascript">
+				<c:remove var="errorGotoPage" />
 				$(location).attr('href', "${errorGotoPage}");
 			</script>
 		</c:when>

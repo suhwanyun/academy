@@ -28,7 +28,7 @@ import academy.group5.repo.MileageRepo;
 @Service
 @Transactional
 public class PostingServiceImpl implements PostingService {
-	
+
 	/** 한 페이지에 표시되는 게시글의 수 */
 	private final int POSTING_MAX_PAGE = 10;
 
@@ -161,7 +161,7 @@ public class PostingServiceImpl implements PostingService {
 	
 	// 이미지 최대 픽셀크기
 	private static final int MAX_IMG_SIZE = 1280;
-	/** 이미지 저장 및 리사이징 */
+/** 이미지 저장 및 리사이징 */
 	private void imageResize(String orgFilePath, String targetFilePath, String imageType) throws IOException{
 
 		BufferedImage originalImage = ImageIO.read(new File(orgFilePath));
@@ -171,12 +171,12 @@ public class PostingServiceImpl implements PostingService {
 		
 		double sizeRate;
 		
-		if(imgWidth > MAX_IMG_SIZE){
+		if(imgWidth > imgHeight && imgWidth > MAX_IMG_SIZE){
 			sizeRate = imgWidth / imgHeight;
 			
 			imgWidth = MAX_IMG_SIZE;
 			imgHeight = (int) (MAX_IMG_SIZE / sizeRate);
-		} else if(imgHeight > MAX_IMG_SIZE){
+		} else if(imgWidth < imgHeight && imgHeight > MAX_IMG_SIZE){
 			sizeRate = imgHeight / imgWidth;
 			
 			imgHeight = MAX_IMG_SIZE;

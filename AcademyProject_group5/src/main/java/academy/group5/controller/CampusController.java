@@ -6,14 +6,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.service.LectureService;
+import academy.group5.util.Identify;
 
 /**
  * 학업 컨트롤러
@@ -25,6 +26,8 @@ public class CampusController {
 	
 	@Autowired
 	LectureService lecService;
+	
+	Identify identify = new Identify();
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
@@ -57,7 +60,7 @@ public class CampusController {
 	
 	/** 전체 강의 목록 중 검색 */
 	@RequestMapping(value="/campus/lectureListSearch", method=RequestMethod.GET)
-	public @ResponseBody List<Lecture> setSearchDataForGetlectureList(Model model, HttpSession session,
+	public @ResponseBody List<Lecture> setSearchDataForGetlectureList(HttpSession session,
 			@RequestParam String searchType, @RequestParam String searchData){
 		
 		if(searchType.equals("") || searchData.equals("")){

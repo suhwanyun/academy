@@ -1,15 +1,22 @@
 package academy.group5.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.UserData;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
@@ -21,7 +28,7 @@ import academy.group5.service.ManagerService;
  */
 @Controller
 public class ManageController {
-	
+	static Logger logger = LoggerFactory.getLogger(ManageController.class);
 	@Autowired
 	ManagerService service;
 	
@@ -42,6 +49,62 @@ public class ManageController {
 			session.setAttribute("gotoPage", "/mileageManage/main");
 		}
 		throw new PageRedirectException();
+	}
+	
+	/** 로그 아웃 */
+	@RequestMapping(value="managerLogout", method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		
+		session.removeAttribute("managerType");
+		return "/login/login_manager";
+	}
+	
+	/** 강의 등록 관리자 메인화면 강의 목록 검색 */
+	@RequestMapping(value="/lectureManage/search", method=RequestMethod.GET)
+	public String manageLectureMainSearch(HttpSession session, Model model,
+			@RequestParam String searchType, @RequestParam String searchData){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		logger.trace("searchType:{}, searchData:{}",searchType,searchData);
+		List<Lecture> lectureList = null;
+		int pageCount = 1;
+		// 검색 데이터가 없으면 기존 검색 데이터 삭제 후 전체 강의 목록 조회
+		if(searchType.equals("") || searchData.equals("")){
+			session.removeAttribute("searchType");
+			session.removeAttribute("searchData");
+			lectureList = service.getAllLectureList();
+			pageCount = service.getMaxLectureListPage();
+		} 
+		// 검색 데이터를 저장 후 DB 조회
+		else {
+			session.setAttribute("searchType", searchType);
+			session.setAttribute("searchData", searchData);
+			lectureList = service.getAllLectureListBySearch(1, searchData, searchType);
+			pageCount = service.getMaxLectureListPageBySearch(searchData, searchType);
+		}
+		
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("pageCount", pageCount);
+		
+		return "/manage/lecture/lecture";
+	}
+	
+	/** 강의 등록 관리자 메인화면 페이징 */
+	@RequestMapping(value="/lectureManage/page", method=RequestMethod.GET)
+	public @ResponseBody List<Lecture> manageLectureMainPaging(HttpSession session, @RequestParam Integer page){
+				
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		// 저장된 검색 데이터
+		Object typeObj = session.getAttribute("searchType");
+		Object dataObj = session.getAttribute("searchData");
+		
+		String searchType = typeObj == null ? null : (String)typeObj;
+		String searchData = dataObj == null ? null : (String)dataObj;
+				
+		List<Lecture> lectureList = service.getAllLectureListBySearch(page, searchType, searchData);
+		return lectureList;
 	}
 	
 	/** 강의 등록 */
