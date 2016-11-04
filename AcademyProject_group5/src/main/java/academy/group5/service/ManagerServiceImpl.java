@@ -197,8 +197,8 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		String errorStr = "강의시간이 중복됩니다.";
 		for(LectureTime alreadyData : alreadyRegistList){
-			errorStr += weekList[alreadyData.getLectureWeek()-1] + "요일 ";
-			errorStr += "\\n" + alreadyData.getLectureClass() + "분반(";
+			errorStr += "\\n" + weekList[alreadyData.getLectureWeek()-1] + "요일 ";
+			errorStr += alreadyData.getLectureClass() + "분반(";
 			errorStr += alreadyData.getLectureStart() + "교시~";
 			errorStr += alreadyData.getLectureEnd() + "교시)";
 		}
