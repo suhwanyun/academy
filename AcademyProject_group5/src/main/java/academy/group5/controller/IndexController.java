@@ -53,7 +53,6 @@ public class IndexController {
 		session.setAttribute("errorGotoPage", "/main");
 		session.setAttribute("gotoPage", "/main");
 		
-		session.removeAttribute("isManage");
 		return "/index";
 	}
 	

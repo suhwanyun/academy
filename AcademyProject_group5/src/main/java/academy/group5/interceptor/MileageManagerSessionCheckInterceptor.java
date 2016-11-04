@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import academy.group5.exception.PageRedirectException;
+
 public class MileageManagerSessionCheckInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override
@@ -21,6 +23,10 @@ public class MileageManagerSessionCheckInterceptor extends HandlerInterceptorAda
 		} else if(!typeObj.equals("mileage")){
 			isError = true;
 			request.setAttribute("msg", "잘못된 접근입니다.");
+		} else if(session.getAttribute("user") != null){
+			session.removeAttribute("user");
+			session.setAttribute("gotoPage", "/mileageManage/main");
+			throw new PageRedirectException("관리자 로그인이 감지되어 일반 회원 로그인을 해지합니다.");
 		}
 
 		if(isError){

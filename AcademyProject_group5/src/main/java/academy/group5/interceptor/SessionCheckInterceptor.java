@@ -21,6 +21,12 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter{
 			session.setAttribute("gotoPage", "/loginjsp");
 			throw new PageRedirectException("로그인이 필요한 서비스입니다.");
 		}
+		else if(session.getAttribute("isManage") != null || session.getAttribute("managerType") != null){
+			session.removeAttribute("isManage");
+			session.removeAttribute("managerType");
+			session.setAttribute("gotoPage", "/main");
+			throw new PageRedirectException("일반 회원의 DB접근이 감지되어 관리자 로그인을 해지합니다.");
+		}
 		return super.preHandle(request, response, handler);
 	}
 }
