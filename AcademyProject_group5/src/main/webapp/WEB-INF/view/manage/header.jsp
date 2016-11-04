@@ -33,4 +33,9 @@
 	</table>	
 	</div>
 </body>
+<script type="text/javascript">
+$("#logoutBtn").click(function(){
+	$(location).attr('href', "/managerLogout");
+});
+</script>
 </html>

@@ -19,16 +19,10 @@ function errorFun(e){
 	<div class="container">
 		<div class="text-center">
 		<h1>식사 게시글</h1>
-		
-			
 				<table class="table">
-					
-					<thead>
 					<tr>
 						<th colspan="4">${postingData.postingTitle }</th>
 					</tr>
-					</thead>
-					<tbody>
 					<c:if test="${postingData.postingPhoto ne 'default.png'}">
 						<tr>
 							<td colspan="4"><img class="imgBoard" src="/upload/${postingData.postingPhoto}"  onerror="errorFun(this)"/></td>
@@ -39,7 +33,7 @@ function errorFun(e){
 					</tr>
 					<c:choose>
 						<c:when test="${postingData.userId eq user.userId}">
-							<tr style="text-align: right;">
+							<tr align="right">
 								<td colspan="2"></td>
 								<td align="right"><button id="postingUpdateBtn" class="bRight myButton" style="margin-right:-30%;">수정</button></td>
 								<td align="left">
@@ -59,7 +53,6 @@ function errorFun(e){
 						<td colspan="3"><input id="commentInput" type="text" maxlength="250"></td>
 						<td align="right"><button id="commentBtn" class="myButton">댓글 달기</button></td>
 					</tr>
-					</tbody>
 				</table>
 				<table id="commentTable" class="table">
 					<c:forEach items="${commentList }" var="list">
