@@ -8,7 +8,7 @@
 		select *
 		from (select rownum as rnum, sub.*
 			 from (select lecture_id, lecture_class, lecture_name, professor_name
-				  from Lecture join LectureTime using (lecture_id)
+				  from Lecture join LectureTime using (lecture_id, lecture_class)
 				  <choose>
 				  <when test="searchData != null and searchDataType == 'lecture'">
 			      where	lecture_name like '%'||#{searchData}||'%' 
