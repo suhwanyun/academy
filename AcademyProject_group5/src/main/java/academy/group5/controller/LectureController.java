@@ -34,7 +34,12 @@ public class LectureController {
 	
 	/** 학생이 선택한 강의 목록 표시 */
 	@RequestMapping(value="/lecture/selectedLectureList", method=RequestMethod.GET)
-	public String selectedLectureList(){
+	public String selectedLectureList(HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		// 현재 열림 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
 		
 		return "/campus/lecture/lecture_list";
 	}

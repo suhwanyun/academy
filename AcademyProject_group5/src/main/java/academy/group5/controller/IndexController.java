@@ -109,8 +109,9 @@ public class IndexController {
 	
 	/** 학업 메뉴 메인 페이지 */
 	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
-	public String campusMainPage(){
-		
+	public String campusMainPage(HttpSession session){
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
 		return "/campus/main";
 	}
 	

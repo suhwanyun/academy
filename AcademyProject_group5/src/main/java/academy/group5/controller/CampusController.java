@@ -31,8 +31,12 @@ public class CampusController {
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
-	public String userNotiList(){
+	public String userNotiList(HttpSession session){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		// 현재 열림 탭 저장
+		session.setAttribute("nowTab", "notification");
 		return "/campus/noti_list";
 	}
 	
@@ -47,6 +51,11 @@ public class CampusController {
 	@RequestMapping(value="/campus/lectureList", method=RequestMethod.GET)
 	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
 				@RequestParam(required=false) String page){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		// 현재 열림 탭 저장
+		session.setAttribute("nowTab", "lectureList");
 		
 		Object dataObj = session.getAttribute("searchData");
 		Object typeObj = session.getAttribute("searchType");
@@ -78,7 +87,11 @@ public class CampusController {
 	
 	/** 선택한 강의들의 시간표 */
 	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
-	public String schedule(){
+	public String schedule(HttpSession session){
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		// 현재 열림 탭 저장(default)
+		session.removeAttribute("nowTab");
 		
 		return "/campus/schedule";
 	}
