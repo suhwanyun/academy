@@ -2,8 +2,6 @@ package academy.group5.service;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,9 +26,6 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	ManagerRepo managerRepo;
-	
-	private static final Logger logger = LoggerFactory.getLogger(ManagerServiceImpl.class);
-	
 	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
@@ -203,11 +198,11 @@ public class ManagerServiceImpl implements ManagerService {
 		String errorStr = "강의시간이 중복됩니다.";
 		for(LectureTime alreadyData : alreadyRegistList){
 			errorStr += weekList[alreadyData.getLectureWeek()-1] + "요일 ";
-			errorStr += "\n" + alreadyData.getLectureClass() + "분반(";
+			errorStr += "\\n" + alreadyData.getLectureClass() + "분반(";
 			errorStr += alreadyData.getLectureStart() + "교시~";
 			errorStr += alreadyData.getLectureEnd() + "교시)";
 		}
-		logger.trace("시간중복에러:{}", errorStr);
+	
 		throw new WrongRequestException(errorStr);
 	}
 	
