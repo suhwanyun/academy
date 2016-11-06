@@ -95,7 +95,6 @@ public class AutoServiceImpl implements AutoService {
 						presidentIdList.add(presidentId);
 					}
 					
-					
 				}
 				nowVoteScheduling = false;
 				
