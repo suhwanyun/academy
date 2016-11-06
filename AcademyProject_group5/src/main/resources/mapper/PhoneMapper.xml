@@ -25,7 +25,7 @@
 	<select id="selectMostRecommendPostingForPhone" parameterType="most_recommend" resultType="posting">
 		select posting_title, posting_content
 	 	from (select rownum as rnum, sub.*
-	 		  from (select posting_title, SUBSTR(posting_content, 1, 20) as posting_content
+	 		  from (select SUBSTR(posting_title, 1, 20) as posting_title, SUBSTR(posting_content, 1, 20) as posting_content
 			 	    from Posting
 			 	    where posting_recommend > 0
 			 	      and posting_time > sysdate - 1
@@ -39,7 +39,7 @@
 	<select id="selectNewestPostingForPhone" parameterType="String" resultType="posting">
 		select posting_title, posting_content
 	 	from (select rownum as rnum, sub.*
-	 		  from (select posting_title, SUBSTR(posting_content, 1, 20) as posting_content
+	 		  from (select SUBSTR(posting_title, 1, 20) as posting_title, SUBSTR(posting_content, 1, 20) as posting_content
 			 	    from Posting
 			 	    where posting_type = #{postingType}
 			 	    order by posting_time desc

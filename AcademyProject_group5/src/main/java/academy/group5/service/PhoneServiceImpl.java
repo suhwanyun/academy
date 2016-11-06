@@ -22,7 +22,7 @@ import academy.group5.util.GCM;
 public class PhoneServiceImpl implements PhoneService {
 
 	/** 메세지 출력 최대 길이 */
-	private final int MAX_MSG_CONTENT_LENGTH = 40;
+	private final int MAX_MSG_CONTENT_LENGTH = 20;
 	
 	@Autowired
 	PhoneRepo phoneRepo;
@@ -96,7 +96,7 @@ public class PhoneServiceImpl implements PhoneService {
 		}
 		// 메세지가 최대 길이면 줄임말 표시 추가
 		String postingContent = postingData.getPostingContent();
-		if(postingContent.getBytes().length == MAX_MSG_CONTENT_LENGTH){
+		if(postingContent.length() >= MAX_MSG_CONTENT_LENGTH){
 			postingData.setPostingContent(postingContent + "...");
 		}
 		
