@@ -41,10 +41,6 @@ public class BoardController {
 	
 	Identify identify = new Identify();
 	
-	private final String BOARD_TYPE_FOOD = "food";
-	private final String BOARD_TYPE_PLAY = "play";
-	private final String BOARD_TYPE_PLACE = "place";
-	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
 	public String addFood(Model model, HttpSession session,
@@ -159,11 +155,11 @@ public class BoardController {
 		model.addAttribute("commentList", mergedCommentList);
 		
 		switch(postingType){
-		case BOARD_TYPE_FOOD:
+		case Posting.TYPE_FOOD:
 			return "/food/food_info";
-		case BOARD_TYPE_PLAY:
+		case Posting.TYPE_PLAY:
 			return "/play/play_info";
-		case BOARD_TYPE_PLACE:
+		case Posting.TYPE_PLACE:
 			return "/place/place_info";
 		default:
 			return "/campus/lecture/lecture_board_info";
@@ -180,14 +176,14 @@ public class BoardController {
 		String postingId = mrequest.getParameter("postingId");
 		// 사용자 입력 오류시 복구할 페이지 설정
 		switch(postingType){
-		case BOARD_TYPE_FOOD:	
+		case Posting.TYPE_FOOD:	
 			failMappingStr = "/write/foodUpdatejsp?postingId=" + postingId;
 			break;
-		case BOARD_TYPE_PLAY:
+		case Posting.TYPE_PLAY:
 			// 사용자 입력 오류시 복구할 페이지
 			failMappingStr = "/write/playUpdatejsp?postingId=" + postingId;
 			break;
-		case BOARD_TYPE_PLACE:
+		case Posting.TYPE_PLACE:
 			// 사용자 입력 오류시 복구할 페이지
 			failMappingStr = "/write/placeUpdatejsp?postingId=" + postingId;
 			break;
@@ -408,15 +404,15 @@ public class BoardController {
 		String postingType = getPostingType(session);
 		
 		switch(postingType){
-		case BOARD_TYPE_FOOD:
+		case Posting.TYPE_FOOD:
 			session.setAttribute("errorGotoPage", "/foodMain");
 			session.setAttribute("gotoPage", "/foodMain");
 			break;
-		case BOARD_TYPE_PLAY:
+		case Posting.TYPE_PLAY:
 			session.setAttribute("errorGotoPage", "/playMain");
 			session.setAttribute("gotoPage", "/playMain");
 			break;
-		case BOARD_TYPE_PLACE:
+		case Posting.TYPE_PLACE:
 			session.setAttribute("errorGotoPage", "/placeMain");
 			session.setAttribute("gotoPage", "/placeMain");
 			break;

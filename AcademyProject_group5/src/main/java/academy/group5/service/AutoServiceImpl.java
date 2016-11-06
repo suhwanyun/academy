@@ -9,15 +9,19 @@ import java.util.Random;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.criteria.Join;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import academy.group5.dto.Mileage;
+import academy.group5.dto.Posting;
+import academy.group5.dto.UserData;
+import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.Voting;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.LectureRepo;
+import academy.group5.repo.MileageRepo;
 import academy.group5.repo.TermRepo;
 import academy.group5.scheduler.MyScheduler;
 import academy.group5.util.GCM;
@@ -34,6 +38,9 @@ public class AutoServiceImpl implements AutoService {
 	
 	@Autowired
 	LectureRepo lectureRepo;
+	
+	@Autowired
+	MileageRepo mileageRepo;
 	
 	@Autowired
 	GCMRepo gcmRepo;
@@ -94,7 +101,7 @@ public class AutoServiceImpl implements AutoService {
 				
 				// 축하 메세지 전송
 				List<String> sendData = new ArrayList<>(presidentIdList);
-				new GCM("축하합니다! 반장에 선출되셨습니다!", "자세한 정보는 내 강의목록에서 확인해주세요", sendData, GCM.TYPE_NOTICE);
+				new GCM("축하합니다! 반장에 선출되셨습니다!", "자세한 정보는 내 강의목록에서 확인해주세요.", sendData, GCM.TYPE_NOTICE);
 				
 			}
 		}, nextTermDate);
@@ -133,7 +140,10 @@ public class AutoServiceImpl implements AutoService {
 		}, nextTermDate);
 	}
 	
-	//@PostConstruct
+	/**
+	 * 추천수 많은 게시물 작성자 마일리지 획득
+	 */
+	@PostConstruct
 	public void startRecommendMileageScheduler() {
 		// 다음날 0시로 설정
 		Calendar calInst = Calendar.getInstance();
@@ -144,7 +154,44 @@ public class AutoServiceImpl implements AutoService {
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
+				// 게시판 검색 조건 설정
+				List<MostRecommend> mostRecommendSettingList = new ArrayList<>();
+				mostRecommendSettingList.add(new MostRecommend(Posting.TYPE_FOOD, MostRecommend.PERIOD_DAY));
+				mostRecommendSettingList.add(new MostRecommend(Posting.TYPE_PLAY, MostRecommend.PERIOD_DAY));
+				mostRecommendSettingList.add(new MostRecommend(Posting.TYPE_PLACE, MostRecommend.PERIOD_WEEK));
 				
+				// 축하 메세지를 전달 받을 회원의 핸드폰 ID 목록
+				Set<String> phoneIdList = new HashSet<>();
+				
+				for(MostRecommend mostRecommendSetting : mostRecommendSettingList) {
+					UserData targetUserData = new UserData();
+					// 게시판별 추천수가 가장많은 게시글 작성자 확인
+					String userId = mileageRepo.getMostRecommendPostingUserId(mostRecommendSetting);
+					if(userId == null){
+						continue;
+					}
+					targetUserData.setUserId(userId);
+					// 게시글 작성자의 마일리지 확인
+					Integer userMileage = mileageRepo.getMileage(userId);
+					if(userMileage == null){
+						continue;
+					} else if(mostRecommendSetting.getPeriod() == MostRecommend.PERIOD_WEEK){
+						targetUserData.setUserMileage(userMileage + Mileage.MILEAGE_MOST_RECOMMEND_WEEK);
+					} else {
+						targetUserData.setUserMileage(userMileage + Mileage.MILEAGE_MOST_RECOMMEND_DAY);
+					}
+					// 마일리지 추가
+					int result = mileageRepo.setMileage(targetUserData);
+					// 추하 메세지 전달 준비
+					String phoneId = gcmRepo.getOneUser(userId);
+					if(result != 0 && phoneId != null){
+						phoneIdList.add(phoneId);
+					}
+					
+				}
+				
+				// 축하 메세지 송신
+				new GCM("축하합니다!", "오늘의 최고 게시글에 뽑히셨습니다!", phoneIdList, GCM.TYPE_MILEAGE);
 				
 			}
 		}, calInst.getTime());

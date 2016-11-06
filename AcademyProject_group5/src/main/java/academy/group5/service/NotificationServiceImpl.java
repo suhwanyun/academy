@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
+import academy.group5.dto.Posting;
 import academy.group5.dto.etc.NotificationSettingList;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
@@ -81,10 +82,10 @@ public class NotificationServiceImpl implements NotificationService{
 		
 		List<NotificationSetting> settingDataList = new ArrayList<>();
 		// 알림 설정 초기화
-		settingDataList.add(new NotificationSetting("lecture", userId, 1, allday, 0, 10));
-		settingDataList.add(new NotificationSetting("food", userId, 1, weekday, 11, 0));
-		settingDataList.add(new NotificationSetting("play", userId, 1, weekday, 22, 0));
-		settingDataList.add(new NotificationSetting("place", userId, 1, weekend, 9, 0));
+		settingDataList.add(new NotificationSetting(Posting.TYPE_LECTURE, userId, 1, allday, 0, 10));
+		settingDataList.add(new NotificationSetting(Posting.TYPE_FOOD, userId, 1, weekday, 11, 0));
+		settingDataList.add(new NotificationSetting(Posting.TYPE_PLAY, userId, 1, weekday, 22, 0));
+		settingDataList.add(new NotificationSetting(Posting.TYPE_PLACE, userId, 1, weekend, 9, 0));
 
 		for(NotificationSetting settingData : settingDataList){
 			int result = notiRepo.setNotificationSetting(settingData);

@@ -36,7 +36,7 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	 <select id="selectMostRecommendPosting" parameterType="most_recommend" resultType="posting">
+	<select id="selectMostRecommendPosting" parameterType="most_recommend" resultType="posting">
 	 	select posting_id, user_id, to_char(posting_time, 'YY/mm/dd hh24:mi') as posting_time,
 			   posting_hits, posting_recommend, posting_title, posting_photo
 	 	from (select rownum as rnum, sub.*

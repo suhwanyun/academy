@@ -119,21 +119,21 @@ public class IndexController {
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
 	public String foodMainPage(HttpSession session){
-		boardMainSetup(session, "food");
+		boardMainSetup(session, "food", MostRecommend.PERIOD_DAY);
 		return "/food/food";
 	}
 	
 	/** 오락 추천 게시판 페이지 */
 	@RequestMapping(value="/playMain", method=RequestMethod.GET)
 	public String playMainPage(HttpSession session){
-		boardMainSetup(session, "play");
+		boardMainSetup(session, "play", MostRecommend.PERIOD_DAY);
 		return "/play/play";
 	}
 	
 	/** 명소 추천 게시판 페이지 */
 	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
 	public String placeMainPage(HttpSession session){
-		boardMainSetup(session, "place");
+		boardMainSetup(session, "place", MostRecommend.PERIOD_WEEK);
 		return "/place/place";
 	}
 	
@@ -226,9 +226,9 @@ public class IndexController {
 	}	
 	
 	/** 게시판 메인 페이지 초기화 설정 */
-	private void boardMainSetup(HttpSession session, String PostingType){
+	private void boardMainSetup(HttpSession session, String PostingType, int recommendPeriod){
 		Posting mostRecommendData = postService.mostRecommend(
-				new MostRecommend(PostingType, MostRecommend.PERIOD_DAY));
+				new MostRecommend(PostingType, recommendPeriod));
 		
 		if(mostRecommendData != null){
 			session.setAttribute("mostRecommendData", mostRecommendData);
