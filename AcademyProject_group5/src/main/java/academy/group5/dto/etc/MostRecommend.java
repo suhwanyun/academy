@@ -16,7 +16,7 @@ public class MostRecommend {
 	
 	/** 검색 기간 리스트 */
 	public final static int PERIOD_DAY = 1;
-	public final static int PERIOD_WEEK = 1;
+	public final static int PERIOD_WEEK = 7;
 	
 	/** 게시판 종류. */
 	private String postingType;

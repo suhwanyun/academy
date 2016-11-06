@@ -191,7 +191,7 @@ public class AutoServiceImpl implements AutoService {
 				}
 				
 				// 축하 메세지 송신
-				new GCM("축하합니다!", "오늘의 최고 게시글에 뽑히셨습니다!", phoneIdList, GCM.TYPE_MILEAGE);
+				new GCM("축하합니다!", "오늘의 최고 게시글에 뽑히셨습니다!", phoneIdList, GCM.TYPE_NO_SOUND);
 				// 반복
 				startTermScheduler();
 			}

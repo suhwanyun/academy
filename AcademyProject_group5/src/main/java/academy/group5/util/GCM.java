@@ -12,7 +12,7 @@ import com.google.android.gcm.server.Sender;
 public class GCM {
 	
 	public static final String TYPE_NOTICE = "send notice";
-	public static final String TYPE_MILEAGE = "send mileage notice";
+	public static final String TYPE_NO_SOUND = "no sound";
 	public static final String TYPE_SETTING = "alarm setting";
 	public static final String TYPE_RESET = "setting reset";
 	
