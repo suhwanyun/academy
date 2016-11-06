@@ -136,8 +136,6 @@ public class AutoServiceImpl implements AutoService {
 				// 전체 공지
 				List<String> userList = gcmRepo.getAllUser();
 				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
-				// 반복
-				startTermScheduler();
 			}
 		}, nextTermDate);
 	}
@@ -194,7 +192,8 @@ public class AutoServiceImpl implements AutoService {
 				
 				// 축하 메세지 송신
 				new GCM("축하합니다!", "오늘의 최고 게시글에 뽑히셨습니다!", phoneIdList, GCM.TYPE_MILEAGE);
-				
+				// 반복
+				startTermScheduler();
 			}
 		}, calInst.getTime());
 	}
