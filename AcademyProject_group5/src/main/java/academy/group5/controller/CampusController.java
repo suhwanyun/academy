@@ -36,8 +36,7 @@ public class CampusController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		/*// 현재 열림 탭 저장
-		model.addAttribute("nowTab", "notification");*/
+		
 		return "/campus/noti_list";
 	}
 	
@@ -99,6 +98,16 @@ public class CampusController {
 			
 			return lecService.allLectureList(1, searchData, searchType);
 		}
+	}
+	
+	/** 학생이 선택한 강의 목록 표시 */
+	@RequestMapping(value="/campus/selectedLectureList", method=RequestMethod.GET)
+	public String selectedLectureList(HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		return "/campus/lecture/lecture_list";
 	}
 	
 	/** 선택한 강의들의 시간표 */
