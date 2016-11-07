@@ -50,6 +50,18 @@ public interface PostingService {
 	 * @return
 	 */
 	Integer getPostingId(Posting posting);
+	
+	/**
+	 * 엔터키를 html태그로 변환 
+	 * @param posting
+	 */
+	void replaceToBr(Posting posting);
+	/**
+	 * html태그를 엔터키로 변환
+	 * @param posting
+	 */
+	void replaceFromBr(Posting posting);
+	
 	/**
 	 * 작성한 글에 이미지 등록
 	 * @param posting

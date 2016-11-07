@@ -264,7 +264,7 @@ public class IndexController {
 		String userId = identify.getUserId(session);
 		String postingType = getPostingType(session);
 		Posting postingData = postService.postView(postingId, postingType);
-		
+		postService.replaceFromBr(postingData);
 		// 본인이 작성한 글이 아니면
 		if(!userId.equals(postingData.getUserId())){
 			throw new WrongRequestException();
