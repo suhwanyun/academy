@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
-import academy.group5.exception.PageRedirectException;
+import academy.group5.dto.LectureTime;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -103,9 +103,11 @@ public class CampusController {
 	
 	/** 선택한 강의들의 시간표 */
 	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
-	public String schedule(HttpSession session){
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/campus/campusMain");
+	public String schedule(HttpSession session, Model model){
+		
+		String userId = identify.getUserId(session);
+		List<LectureTime> timetableData = lecService.timetable(userId);
+		model.addAttribute("timetable", timetableData);
 		
 		return "/campus/schedule";
 	}
