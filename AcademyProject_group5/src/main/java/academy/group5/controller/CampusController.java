@@ -114,6 +114,9 @@ public class CampusController {
 	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
 	public String schedule(HttpSession session, Model model){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+				
 		String userId = identify.getUserId(session);
 		List<LectureTime> timetableData = lecService.timetable(userId);
 		model.addAttribute("timetable", timetableData);
