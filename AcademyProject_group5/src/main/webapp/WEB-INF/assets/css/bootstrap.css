@@ -1088,6 +1088,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1427,6 +1428,9 @@ ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
+}
+ul{
+	list-style:none;
 }
 ul ul,
 ol ul,
@@ -6951,7 +6955,7 @@ background-color: #eee;
   font-size:30px;
 }
 .bigFont{
-	font-size:30px;
+	font-size:50px;
 }
  .Lmargin{
  margin-left:350px;
@@ -6963,4 +6967,67 @@ background-color: #eee;
 #commentInput{
 	width: 80%
 	}
-
+	
+#lectureAddBtn{
+	float:right;
+}
+#lectureDataTable{
+	width: 1400px;
+  
+  margin-bottom: 20px;
+  margin-top:100px;
+ margin-left:100px;
+ font-size:30px;
+	
+}
+#lectureAddBtn{
+	  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  color:#606060;
+ border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
+  
+  
+}
+#searchDiv{
+	font-size:20px;
+}
+#searchBtn{
+	display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  color:#606060;
+ border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
+}

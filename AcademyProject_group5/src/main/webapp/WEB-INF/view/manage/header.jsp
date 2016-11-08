@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container-fix  text-center" style="margin-left:100px;">
-	<table class="table bigFont">
+	<table class="table">
 		<colgroup>
 			<col width="33%">
 			<col width="33%">
@@ -26,7 +26,7 @@
 			<td class="text-center">
 			<a href="/managerLoginjsp"><img class="img-logo" src="/images/logo.png" alt="" />
 			</a></td>
-			<td><h1>관리자 전용 페이지</h1></td>
+			<td><h1 class="bigFont">관리자 전용 페이지</h1></td>
 			
 			<td><button id="logoutBtn" class="myButtonBig" >로그아웃</button></td>
 		</tr>
