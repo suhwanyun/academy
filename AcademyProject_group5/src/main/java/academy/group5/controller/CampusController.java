@@ -102,10 +102,14 @@ public class CampusController {
 	
 	/** 학생이 선택한 강의 목록 표시 */
 	@RequestMapping(value="/campus/selectedLectureList", method=RequestMethod.GET)
-	public String selectedLectureList(HttpSession session){
+	public String selectedLectureList(HttpSession session, Model model){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		String userId = identify.getUserId(session);
+		List<Lecture> lectureData = lecService.userLectureList(userId);
+		model.addAttribute("lectureList", lectureData);
 		
 		return "/campus/lecture/lecture_list";
 	}
