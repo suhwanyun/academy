@@ -33,7 +33,7 @@ public interface LectureService {
 	 * @param userId
 	 * @return
 	 */
-	List<Lecture> userLectureList(String userId);
+	List<UserLectureTime> userLectureList(String userId);
 	
 	/**
 	 * 강의 정보(분반 별)

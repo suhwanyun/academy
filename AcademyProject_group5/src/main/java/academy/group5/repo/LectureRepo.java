@@ -35,7 +35,7 @@ public class LectureRepo {
 		return session.delete(stmt, data);
 	}
 	
-	public List<Lecture> getUserLecture(String id) {
+	public List<UserLectureTime> getUserLecture(String id) {
 		String stmt = LECTURE_NS + "selectLectureByUser";
 		return session.selectList(stmt, id);
 	}

@@ -152,7 +152,7 @@ public class CampusController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		
 		String userId = identify.getUserId(session);
-		List<Lecture> lectureData = lecService.userLectureList(userId);
+		List<UserLectureTime> lectureData = lecService.userLectureList(userId);
 		model.addAttribute("lectureList", lectureData);
 		
 		return "/campus/lecture/lecture_list";

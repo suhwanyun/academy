@@ -33,10 +33,11 @@
 			and lecture_id = #{lectureId}
 	</delete>
 	
-	<select id="selectLectureByUser" parameterType="String" resultType="lecture">
-		select lecture_id, user_id, lecture_class, is_president, right_end_time
-		from Lecture join LectureApply using (lecture_id, lecture_class)
-		where user_id = #{userId}
+	<select id="selectLectureByUser" parameterType="String" resultType="user_lecture_time">
+		select lecture_start, lecture_end, lecture_week, lecture_id, lecture_name, lecture_class, lecture_place, is_president
+		from LectureTime join LectureApply using (lecture_id, lecture_class)
+						 join Lecture using (lecture_id, lecture_class)
+		where user_id = #{userId} and right_end_time is null
 	</select>
 	
 	<select id="selectLectureByClass" parameterType="lecture_time" resultType="lecture">

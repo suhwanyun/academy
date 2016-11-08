@@ -87,7 +87,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public List<Lecture> userLectureList(String userId) {
+	public List<UserLectureTime> userLectureList(String userId) {
 		return lecRepo.getUserLecture(userId);
 	}
 	

@@ -29,11 +29,17 @@ public class UserLectureTime {
 	/** 강의 이름 */
 	private String lectureName;
 	
+	/** 강의 ID */
+	private Integer lectureId;
+	
 	/** 강의 분반 */
 	private Integer lectureClass;
 	
 	/** 강의 장소 */
 	private String lecturePlace;
+	
+	/** 반장 권한 여부. */
+	private String isPresident;
 	
 	public UserLectureTime(String userId, Integer lectureStart, Integer lectureEnd, Integer lectureWeek) {
 		super();
