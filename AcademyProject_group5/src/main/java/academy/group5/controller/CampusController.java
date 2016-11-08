@@ -1,5 +1,6 @@
 package academy.group5.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,15 @@ public class CampusController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		
 		String userId = identify.getUserId(session);
-		List<LectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, 1);
+		// 기존 페이지 더보기 여부 확인
+		Object pageObj = session.getAttribute("page");
+		Integer prevPageRecord = pageObj == null ? 1 : (Integer)pageObj;
+		
+		// 기존에 더보기 했던 페이지 복구
+		List<LectureNotice> noticeList = new ArrayList<>();
+		for(int pageIdx = 1; pageIdx <= prevPageRecord; pageIdx++){
+			noticeList.addAll(lecNotiService.allLectureNoticeList(userId, pageIdx));
+		}
 		model.addAttribute("noticeList", noticeList);
 		
 		return "/campus/noti_list";
@@ -52,10 +61,16 @@ public class CampusController {
 	
 	/** 기존 알림 목록 표시(더보기) */
 	@RequestMapping(value="/campus/notiListMore", method=RequestMethod.GET)
-	public @ResponseBody List<LectureNotice> getUserNotiList(HttpSession session, Model model,
-			@RequestParam int page){
+	public @ResponseBody List<LectureNotice> getUserNotiList(HttpSession session, Model model){
 		
 		String userId = identify.getUserId(session);
+		Object pageObj = session.getAttribute("page");
+		Integer page = 2;
+		if(pageObj != null){
+			page = (Integer)pageObj + 1;
+		}
+		session.setAttribute("page", page);
+		
 		List<LectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, page);
 		model.addAttribute("noticeList", noticeList);
 		
@@ -64,11 +79,14 @@ public class CampusController {
 	
 	/** 선택한 알림의 자세한 내용 표시 */
 	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.POST)
-	public String userNotiInfo(HttpSession session, @RequestParam Date noticeTime,
+	public String userNotiInfo(HttpSession session, Model model, @RequestParam Date noticeTime,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/notiList");
+				
 		LectureNotice noticeData = lecNotiService.lectureNoticeInfo(noticeTime, lectureId, lectureClass);
-		
+		model.addAttribute("lectureNotice", noticeData);
 		
 		return "/campus/noti_info";
 	}
