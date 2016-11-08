@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.LectureNoticeMapper">
 	
-	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="lecture_notice">
+	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="user_lecture_notice">
 		select to_char(notice_time, 'YY/mm/dd hh24:mi:ss') as notice_time, lecture_id, lecture_class, lecture_name, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
