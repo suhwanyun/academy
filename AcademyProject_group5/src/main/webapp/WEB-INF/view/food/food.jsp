@@ -90,7 +90,10 @@
              <tr id="beforeLocation">
              
                <td colspan=4><button id="moreBtn" class="myButton foodBtn">더보기</button>
-               <button class="myButton">맨 위로</button></td>
+               	<span id="moveToStartBtn">
+               		<img src="/images/arrow.PNG" alt="화살표이미지"/>
+               	</span>
+               </td>
             </tr>
              </table>
          </div>
@@ -248,5 +251,9 @@
 					}
 		   });
 	});
+//맨위로 버튼
+$("#moveToStartBtn").click(function(){
+	$("html, body").animate({scrollTop: 0}, 1000);
+ });
 </script>
 </html>

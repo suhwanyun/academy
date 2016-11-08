@@ -6931,3 +6931,15 @@ background-color: #eee;
 #commentInput{
 	width: 80%
 	}
+#moveToStartBtn{
+	position: fixed;
+	width: auto;
+	height: auto;;
+	right: 5%;
+	bottom: 5%;
+	display: none;
+}
+.postingTitle{
+	font-size: 15px;
+	background-color: #fff;
+}

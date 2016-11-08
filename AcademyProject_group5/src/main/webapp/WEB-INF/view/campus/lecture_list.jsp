@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 	var pageIndex = 1;
-	<c:url value="/campus/lectureList" var="nextlectureList"/>
+	<c:url value="/campus/lectureListMore" var="nextlectureList"/>
 	<c:url value="/campus/lectureListSearch" var="lectureListSearch"/>
 	$("#searchBtn")
 			.click(

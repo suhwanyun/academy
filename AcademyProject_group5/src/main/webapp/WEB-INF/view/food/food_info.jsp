@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>식사 게시판 글 내용</title>
+<title>내용 자세히 보기</title>
 <script type="text/javascript">
 function errorFun(e){
 	e.src="/upload/notFoundImg.png";
@@ -18,10 +18,10 @@ function errorFun(e){
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container">
 		<div class="text-center">
-		<h1>식사 게시글</h1>
+		<img width="100%" alt="음식 게시판" src="/images/foodPosting.png">
 				<table class="table">
 					<tr>
-						<th colspan="4">${postingData.postingTitle }</th>
+						<th class="postingTitle" colspan="4">${postingData.postingTitle }</th>
 					</tr>
 					<c:if test="${postingData.postingPhoto ne 'default.png'}">
 						<tr>

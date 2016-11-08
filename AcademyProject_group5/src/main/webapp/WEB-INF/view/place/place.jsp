@@ -248,5 +248,9 @@
 					}
 		   });
 	});
+//맨위로 버튼
+$("#moveToStartBtn").click(function(){
+	$("html, body").animate({scrollTop: 0}, 1000);
+ });
 </script>
 </html>

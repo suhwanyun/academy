@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/css/bootstrap.css" />
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
+<script src="/js/remoteBtn.js"></script>
 <script src="/js/bootstrap-toggle.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-toggle.min.css" />
 </head>
