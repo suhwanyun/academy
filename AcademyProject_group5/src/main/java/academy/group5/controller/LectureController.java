@@ -32,16 +32,6 @@ public class LectureController {
 	
 	Identify identify = new Identify();
 	
-	/** 학생이 선택한 강의 목록 표시 */
-	@RequestMapping(value="/lecture/selectedLectureList", method=RequestMethod.GET)
-	public String selectedLectureList(HttpSession session){
-		
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		
-		return "/campus/lecture/lecture_list";
-	}
-	
 	/** 학생이 선택한 강의의 메인 페이지 */
 	@RequestMapping(value="/lecture/lectureMain", method=RequestMethod.GET)
 	public String lectureMainPage(){

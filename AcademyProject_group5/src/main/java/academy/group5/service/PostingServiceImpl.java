@@ -58,9 +58,7 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postWrite(Posting posting) {
-		String contentStr = posting.getPostingContent();
-		contentStr = contentStr.replaceAll("\n", "<br>");
-		posting.setPostingContent(contentStr);
+		replaceToBr(posting);
 		
 		int result = boardRepo.setPosting(posting);
 		
@@ -72,12 +70,30 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public boolean postModify(Posting posting) {
+		replaceToBr(posting);
+		
 		int result = boardRepo.updateposting(posting);
 		
 		if(result != 1){
 			throw new WrongRequestException();
 		}
 		return true;
+	}
+	
+	/** 엔터키를 html태그로 변환 */
+	@Override
+	public void replaceToBr(Posting posting){
+		String contentStr = posting.getPostingContent();
+		contentStr = contentStr.replaceAll("\n", "<br>");
+		posting.setPostingContent(contentStr);
+	}
+	
+	/** html태그를 엔터키로 변환 */
+	@Override
+	public void replaceFromBr(Posting posting){
+		String contentStr = posting.getPostingContent();
+		contentStr = contentStr.replaceAll("<br>", "\n");
+		posting.setPostingContent(contentStr);
 	}
 	
 	@Override
