@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -88,7 +89,18 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public List<UserLectureTime> userLectureList(String userId) {
-		return lecRepo.getUserLecture(userId);
+		// 다음날 0시 기준
+		Date nextMidnight = getNextMidnight();
+		List<UserLectureTime> lectureTimeList = lecRepo.getUserLecture(userId);
+		
+		for(UserLectureTime timeData : lectureTimeList){
+			// 임시 반장 기간 확인
+			if(timeData.getIsPresident().equals("Y")
+					&& timeData.getRightEndTime().before(nextMidnight)){
+				timeData.setIsPresident("N");
+			}
+		}
+		return lectureTimeList;
 	}
 	
 	@Override
@@ -146,6 +158,16 @@ public class LectureServiceImpl implements LectureService{
 		} else{
 			return false;
 		}
+	}
+	
+	private Date getNextMidnight(){
+		Calendar calInst = Calendar.getInstance();
+		calInst.add(Calendar.DAY_OF_MONTH, 1);
+		calInst.set(Calendar.HOUR_OF_DAY, 0);
+		calInst.set(Calendar.MINUTE, 0);
+		calInst.set(Calendar.SECOND, 0);
+		
+		return calInst.getTime();
 	}
 
 }

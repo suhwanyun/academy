@@ -1,5 +1,7 @@
 package academy.group5.dto.etc;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,9 @@ public class UserLectureTime {
 	
 	/** 반장 권한 여부. */
 	private String isPresident;
+	
+	/** 권한종료 날짜. */
+	private Date rightEndTime;
 	
 	public UserLectureTime(String userId, Integer lectureStart, Integer lectureEnd, Integer lectureWeek) {
 		super();
