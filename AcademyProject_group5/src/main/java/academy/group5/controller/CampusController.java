@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -28,14 +30,21 @@ public class CampusController {
 	@Autowired
 	LectureService lecService;
 	
+	@Autowired
+	LectureNoticeService lecNotiService;
+	
 	Identify identify = new Identify();
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
-	public String userNotiList(HttpSession session){
+	public String userNotiList(HttpSession session, Model model){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		String userId = identify.getUserId(session);
+		List<LectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, 1);
+		model.addAttribute("noticeList", noticeList);
 		
 		return "/campus/noti_list";
 	}
