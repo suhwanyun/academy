@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<div class="containerM">
+	<div class="container bigFont">
 
 		<div align="center">
 			<a href="/managerLoginjsp"><img class="img-logoS" src="/images/logo.png"
@@ -39,7 +39,7 @@
 						class="form-fix">
 			</div>
 			<div style="margin-left:82%; margin-top:5%;"> 
-				<input type="submit" value="로그인 하기" id="loginBtn" class="myButton">
+				<input type="submit" value="로그인 하기" id="loginBtn" class="myButtonBig">
 			</div>
 		</form>
 

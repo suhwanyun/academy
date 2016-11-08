@@ -10,10 +10,11 @@
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<div class="container">
+
 		<button id="lectureAddBtn">강의 등록</button>
 		<table id="lectureDataTable" >
+
 			<c:forEach items="${lectureList }" var="list" >
-			
 			<tr>
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureId }</a></td>
 				<td>${list.lectureName }</td>
@@ -75,6 +76,7 @@
 					</ul>
 				</td>
 			</tr>
+	
 			</c:forEach>
 		</table>
 	</div>

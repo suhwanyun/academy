@@ -15,7 +15,8 @@
    <!-- 테이블 시작 -->
    <jsp:include page="/WEB-INF/view/header/header.jsp" />
 
-      <div class="container">
+     <div class="container text-center">
+      	<h1>오락 게시판</h1>
             <table class="table-condensed">
            
                <tr>

@@ -8,7 +8,8 @@
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<form action="/lectureManage/add" method="post">
-	<table>
+	<div class="containerM center text-center Lmargin">
+	<table class="table bigFont">
 		<tr>
 			<th>강의 ID</th>
 			<th>강의 이름</th>
@@ -28,8 +29,9 @@
 			</td>
 		</tr>
 	</table>
-		<button type="submit" id="registerLectureBtn">등록</button>
-		<button type="button" id="cancelBtn">취소</button>
+		<button type="submit" id="registerLectureBtn" class="myButtonBig">등록</button>
+		<button type="button" id="cancelBtn" class="myButtonBig">취소</button>
+		</div>
 	</form>
 </body>
 <script src="/js/manageVaildation.js"></script>

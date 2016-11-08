@@ -1088,6 +1088,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1427,6 +1428,9 @@ ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
+}
+ul{
+	list-style:none;
 }
 ul ul,
 ol ul,
@@ -2557,9 +2561,9 @@ input[type="checkbox"] {
   margin-top: 1px \9;
   line-height: normal;
 }
-input[type="file"] {
+/* input[type="file"] {
   display: block;
-}
+} */
 input[type="range"] {
   display: block;
   width: 100%;
@@ -6632,6 +6636,11 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+input[type="text"],
+input[type="password"]{
+	
+	width:100%;
+}
 
 	input[type="text"].true,
 	input[type="password"].true,
@@ -6781,10 +6790,11 @@ button.size6Smar{
  cellspacing:"0";
 }
 
-.list_table_array{
+.list_table_array {
 	width:100%;
 	
 }
+
 .list_table td{
 	
 	padding:0.5em 0.5em;
@@ -6884,6 +6894,7 @@ background-color: #eee;
 .containerM{
 	width:1200px;
 	height:800px;
+	
 }
 .imgBoard{
   display: inline-block;
@@ -6928,6 +6939,31 @@ background-color: #eee;
 .sizeInput{
 	width:96%;
 }
+
+ .container-fix {
+    width: 1700px;
+    
+   
+  }
+.upMargin{
+	margin-top:200px;
+}
+.text-right{
+	float:right;
+}
+.container-fix{
+  font-size:30px;
+}
+.bigFont{
+	font-size:50px;
+}
+ .Lmargin{
+ margin-left:350px;
+}
+.btn-red{
+	color:red;
+}
+
 #commentInput{
 	width: 80%
 	}
@@ -6942,4 +6978,67 @@ background-color: #eee;
 .postingTitle{
 	font-size: 15px;
 	background-color: #fff;
+	
+#lectureAddBtn{
+	float:right;
+}
+#lectureDataTable{
+	width: 1400px;
+  
+  margin-bottom: 20px;
+  margin-top:100px;
+ margin-left:100px;
+ font-size:30px;
+	
+}
+#lectureAddBtn{
+	  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  color:#606060;
+ border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
+  
+  
+}
+#searchDiv{
+	font-size:20px;
+}
+#searchBtn{
+	display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  color:#606060;
+ border:solid 1px #b7b7b7;
+  background-color:rgb(255,255,255);
 }
