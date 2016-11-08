@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.etc.LecturePaging;
+import academy.group5.dto.etc.UserLectureNotice;
 
 @Repository
 public class LectureNoticeRepo {
@@ -17,7 +18,7 @@ public class LectureNoticeRepo {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public List<LectureNotice> getAllLectureNoticeList(LecturePaging data) {
+	public List<UserLectureNotice> getAllLectureNoticeList(LecturePaging data) {
 		String stmt = LOGIN_NS + "selectAllLectureNoticeByUser";
 		return session.selectList(stmt, data);
 	}

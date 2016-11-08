@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.etc.LecturePaging;
+import academy.group5.dto.etc.UserLectureNotice;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.LectureNoticeRepo;
@@ -28,7 +29,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	GCMRepo gcmRepo;
 	
 	@Override
-	public List<LectureNotice> allLectureNoticeList(String userId, int page) {
+	public List<UserLectureNotice> allLectureNoticeList(String userId, int page) {
 		return notiRepo.getAllLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, userId));
 	}
 

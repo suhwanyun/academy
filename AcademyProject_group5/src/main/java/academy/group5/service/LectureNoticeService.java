@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.LectureNotice;
+import academy.group5.dto.etc.UserLectureNotice;
 
 public interface LectureNoticeService {
 	/**
@@ -12,7 +13,7 @@ public interface LectureNoticeService {
 	 * @param page
 	 * @return
 	 */
-	List<LectureNotice> allLectureNoticeList(String userId, int page);
+	List<UserLectureNotice> allLectureNoticeList(String userId, int page);
 	/**
 	 * 특정 강의의 전체 공지 가져오기 page=5
 	 * @param lectureId

@@ -5,7 +5,7 @@
 <mapper namespace="academy.repo.LectureNoticeMapper">
 	
 	<select id="selectAllLectureNoticeByUser" parameterType="lecture_paging" resultType="lecture_notice">
-		select notice_time, lecture_id, notice_type, notice_title
+		select to_char(notice_time, 'YY/mm/dd hh24:mi:ss') as notice_time, lecture_id, lecture_class, lecture_name, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)

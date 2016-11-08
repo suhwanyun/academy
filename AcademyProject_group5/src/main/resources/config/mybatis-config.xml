@@ -34,6 +34,7 @@
 		<typeAlias type="academy.group5.dto.etc.MostRecommend" alias="most_recommend"/>
 		<typeAlias type="academy.group5.dto.etc.SettingRecommend" alias="setting_recommend"/>
 		<typeAlias type="academy.group5.dto.etc.UserLectureTime" alias="user_lecture_time"/>
+		<typeAlias type="academy.group5.dto.etc.UserLectureNotice" alias="user_lecture_notice"/>
 	</typeAliases>
 	
 	<mappers>

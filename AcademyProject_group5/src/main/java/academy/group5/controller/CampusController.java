@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
+import academy.group5.dto.etc.UserLectureNotice;
 import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
@@ -50,7 +51,7 @@ public class CampusController {
 		Integer prevPageRecord = pageObj == null ? 1 : (Integer)pageObj;
 		
 		// 기존에 더보기 했던 페이지 복구
-		List<LectureNotice> noticeList = new ArrayList<>();
+		List<UserLectureNotice> noticeList = new ArrayList<>();
 		for(int pageIdx = 1; pageIdx <= prevPageRecord; pageIdx++){
 			noticeList.addAll(lecNotiService.allLectureNoticeList(userId, pageIdx));
 		}
@@ -61,7 +62,7 @@ public class CampusController {
 	
 	/** 기존 알림 목록 표시(더보기) */
 	@RequestMapping(value="/campus/notiListMore", method=RequestMethod.GET)
-	public @ResponseBody List<LectureNotice> getUserNotiList(HttpSession session, Model model){
+	public @ResponseBody List<UserLectureNotice> getUserNotiList(HttpSession session, Model model){
 		
 		String userId = identify.getUserId(session);
 		Object pageObj = session.getAttribute("page");
@@ -71,7 +72,7 @@ public class CampusController {
 		}
 		session.setAttribute("page", page);
 		
-		List<LectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, page);
+		List<UserLectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, page);
 		model.addAttribute("noticeList", noticeList);
 		
 		return noticeList;
