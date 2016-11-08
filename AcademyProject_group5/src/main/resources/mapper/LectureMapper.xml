@@ -21,7 +21,7 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
-	<insert id="insertLectureAllpy" parameterType="lecture_apply">
+	<insert id="insertLectureApply" parameterType="lecture_apply">
 		insert into LectureApply
 		(lecture_id, user_id, lecture_class, is_president)
 		values (#{lectureId}, #{userId}, #{lectureClass}, #{isPresident})

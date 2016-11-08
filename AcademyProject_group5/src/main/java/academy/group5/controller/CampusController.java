@@ -154,7 +154,6 @@ public class CampusController {
 		String userId = identify.getUserId(session);
 		List<UserLectureTime> lectureData = lecService.userLectureList(userId);
 		model.addAttribute("lectureList", lectureData);
-		
 		return "/campus/lecture/lecture_list";
 	}
 	

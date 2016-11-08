@@ -19,7 +19,6 @@ import academy.group5.repo.LectureRepo;
 @Service
 @Transactional
 public class LectureServiceImpl implements LectureService{
-	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
 
@@ -94,9 +93,12 @@ public class LectureServiceImpl implements LectureService{
 		List<UserLectureTime> lectureTimeList = lecRepo.getUserLecture(userId);
 		
 		for(UserLectureTime timeData : lectureTimeList){
+			Date rightEnd = timeData.getRightEndTime();
 			// 임시 반장 기간 확인
-			if(timeData.getIsPresident().equals("Y")
-					&& timeData.getRightEndTime().before(nextMidnight)){
+			if(rightEnd != null
+					&& rightEnd.before(nextMidnight)){
+				timeData.setIsPresident("Y");
+			} else if(rightEnd != null){
 				timeData.setIsPresident("N");
 			}
 		}

@@ -26,7 +26,7 @@ public class LectureRepo {
 	}
 	
 	public int setLectureApply(LectureApply data){
-		String stmt = LECTURE_NS + "insertLectureAllpy";
+		String stmt = LECTURE_NS + "insertLectureApply";
 		return session.insert(stmt, data);
 	}
 	
