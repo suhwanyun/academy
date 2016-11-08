@@ -37,7 +37,7 @@ public class CampusController {
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
-	public String userNotiList(HttpSession session, Model model){
+	public String addUserNotiList(HttpSession session, Model model){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
@@ -47,6 +47,18 @@ public class CampusController {
 		model.addAttribute("noticeList", noticeList);
 		
 		return "/campus/noti_list";
+	}
+	
+	/** 기존 알림 목록 표시(더보기) */
+	@RequestMapping(value="/campus/notiListMore", method=RequestMethod.GET)
+	public @ResponseBody List<LectureNotice> getUserNotiList(HttpSession session, Model model,
+			@RequestParam int page){
+		
+		String userId = identify.getUserId(session);
+		List<LectureNotice> noticeList = lecNotiService.allLectureNoticeList(userId, page);
+		model.addAttribute("noticeList", noticeList);
+		
+		return noticeList;
 	}
 	
 	/** 선택한 알림의 자세한 내용 표시 */
