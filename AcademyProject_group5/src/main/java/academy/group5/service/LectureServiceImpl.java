@@ -117,7 +117,7 @@ public class LectureServiceImpl implements LectureService{
 	
 
 	@Override
-	public List<LectureTime> timetable(String userId) {
+	public List<UserLectureTime> timetable(String userId) {
 		return lecRepo.getUserTimetable(userId);
 	}
 

@@ -32,6 +32,9 @@ public class UserLectureTime {
 	/** 강의 분반 */
 	private Integer lectureClass;
 	
+	/** 강의 장소 */
+	private String lecturePlace;
+	
 	public UserLectureTime(String userId, Integer lectureStart, Integer lectureEnd, Integer lectureWeek) {
 		super();
 		this.userId = userId;

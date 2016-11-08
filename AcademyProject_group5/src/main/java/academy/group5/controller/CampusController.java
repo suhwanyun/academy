@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
-import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
@@ -29,9 +27,6 @@ import academy.group5.util.Identify;
  */
 @Controller
 public class CampusController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(CampusController.class);
-	
 	
 	@Autowired
 	LectureService lecService;
@@ -153,9 +148,8 @@ public class CampusController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 				
 		String userId = identify.getUserId(session);
-		List<LectureTime> timetableData = lecService.timetable(userId);
+		List<UserLectureTime> timetableData = lecService.timetable(userId);
 		model.addAttribute("timetable", timetableData);
-		logger.trace("timetable:{}", timetableData);
 		
 		return "/campus/schedule";
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.UserLectureTime;
 
 public interface LectureService {
 	/**
@@ -53,7 +54,7 @@ public interface LectureService {
 	 * 시간표
 	 * @return
 	 */
-	List<LectureTime> timetable(String userId);
+	List<UserLectureTime> timetable(String userId);
 	/**
 	 * 해당 강의의 반장여부를 반환
 	 * @param lectureId

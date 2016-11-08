@@ -45,7 +45,7 @@ public class LectureRepo {
 		return session.selectOne(stmt, data);
 	}
 	
-	public List<LectureTime> getUserTimetable(String id){
+	public List<UserLectureTime> getUserTimetable(String id){
 		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);
 	}
