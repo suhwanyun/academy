@@ -29,4 +29,12 @@ public class NotificationSetting {
 	
 	/** 알림 시간(분). */
 	private Integer notiMin;
+
+	public NotificationSetting(String notiType, String userId) {
+		super();
+		this.notiType = notiType;
+		this.userId = userId;
+	}
+	
+	
 }

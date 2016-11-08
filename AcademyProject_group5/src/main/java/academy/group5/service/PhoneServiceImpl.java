@@ -22,7 +22,7 @@ import academy.group5.util.GCM;
 public class PhoneServiceImpl implements PhoneService {
 
 	/** 메세지 출력 최대 길이 */
-	private final int MAX_MSG_CONTENT_LENGTH = 40;
+	private final int MAX_MSG_CONTENT_LENGTH = 20;
 	
 	@Autowired
 	PhoneRepo phoneRepo;
@@ -82,7 +82,7 @@ public class PhoneServiceImpl implements PhoneService {
 	public Posting getNotificationData(String postingType) {
 		// 추천수 집계 기간 설정
 		int recommendPeriod = MostRecommend.PERIOD_DAY; 
-		if(postingType.equals("place")){
+		if(postingType.equals(Posting.TYPE_PLACE)){
 			recommendPeriod = MostRecommend.PERIOD_WEEK;
 		}
 		
@@ -95,8 +95,12 @@ public class PhoneServiceImpl implements PhoneService {
 			throw new WrongRequestException();
 		}
 		// 메세지가 최대 길이면 줄임말 표시 추가
+		String postingTitle = postingData.getPostingTitle();
+		if(postingTitle.length() >= MAX_MSG_CONTENT_LENGTH){
+			postingData.setPostingTitle(postingTitle + "...");
+		}
 		String postingContent = postingData.getPostingContent();
-		if(postingContent.getBytes().length == MAX_MSG_CONTENT_LENGTH){
+		if(postingContent.length() >= MAX_MSG_CONTENT_LENGTH){
 			postingData.setPostingContent(postingContent + "...");
 		}
 		

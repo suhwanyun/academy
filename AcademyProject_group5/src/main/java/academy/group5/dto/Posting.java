@@ -11,6 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Posting {
+	
+	/** 게시판 종류 */
+	public final static String TYPE_FOOD = "food";
+	public final static String TYPE_PLAY = "play";
+	public final static String TYPE_PLACE = "place";
+	public final static String TYPE_LECTURE = "lecture";
 
 	/** 게시글 ID. */
 	private Integer postingId;

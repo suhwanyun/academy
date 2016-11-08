@@ -6,13 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
-import academy.group5.exception.PageRedirectException;
+import academy.group5.dto.LectureTime;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -31,7 +32,10 @@ public class CampusController {
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
-	public String userNotiList(){
+	public String userNotiList(HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		
 		return "/campus/noti_list";
 	}
@@ -43,8 +47,28 @@ public class CampusController {
 		return "/campus/noti_info";
 	}
 	
-	/** 전체 강의 목록 표시(더보기) */
+	/** 전체 강의 목록 표시 */
 	@RequestMapping(value="/campus/lectureList", method=RequestMethod.GET)
+	public String allLectureList(Model model, HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		/*// 현재 열림 탭 저장
+		model.addAttribute("nowTab", "lectureList");*/
+	
+		session.removeAttribute("searchType");
+		session.removeAttribute("searchData");
+		
+		List<Lecture> lecList = lecService.allLectureList(1, null, null);
+		if(lecList.size() != 0){
+			model.addAttribute("lectureList", lecList);
+		}
+		return "/campus/lecture_list";
+	}
+	
+	/** 전체 강의 목록 표시(더보기) */
+	@RequestMapping(value="/campus/lectureListMore", method=RequestMethod.GET)
 	public @ResponseBody List<Lecture> getlectureList(HttpSession session,
 				@RequestParam(required=false) String page){
 		
@@ -76,9 +100,26 @@ public class CampusController {
 		}
 	}
 	
+	/** 학생이 선택한 강의 목록 표시 */
+	@RequestMapping(value="/campus/selectedLectureList", method=RequestMethod.GET)
+	public String selectedLectureList(HttpSession session){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		return "/campus/lecture/lecture_list";
+	}
+	
 	/** 선택한 강의들의 시간표 */
 	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
-	public String schedule(){
+	public String schedule(HttpSession session, Model model){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+				
+		String userId = identify.getUserId(session);
+		List<LectureTime> timetableData = lecService.timetable(userId);
+		model.addAttribute("timetable", timetableData);
 		
 		return "/campus/schedule";
 	}

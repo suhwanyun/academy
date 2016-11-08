@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Sender;
@@ -11,10 +12,15 @@ import com.google.android.gcm.server.Sender;
 public class GCM {
 	
 	public static final String TYPE_NOTICE = "send notice";
+	public static final String TYPE_NO_SOUND = "no sound";
 	public static final String TYPE_SETTING = "alarm setting";
 	public static final String TYPE_RESET = "setting reset";
 	
 	private final String GCM_TITLE = "MCM";	
+	
+	public GCM(String msg, String submsg, Set<String> userIdSet, String msgtype) {
+		this(msg, submsg, new ArrayList<>(userIdSet), msgtype);
+	}
 	
 	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
 

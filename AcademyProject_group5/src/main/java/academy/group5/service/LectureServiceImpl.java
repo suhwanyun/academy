@@ -33,6 +33,7 @@ public class LectureServiceImpl implements LectureService{
 	private String[] weekList = {"일", "월", "화", "수", "목", "금", "토"};
 	@Override
 	public boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresident) {
+
 		// 현재 신청하려는 강의의 강의 시간 리스트
 		List<LectureTime> selectedLectureTimeList = lecRepo.getLectureTime(new Lecture(lectureId, lectureClass));
 		
@@ -51,7 +52,7 @@ public class LectureServiceImpl implements LectureService{
 			List<UserLectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTime(userLectureTimeData);
 			
 			for(UserLectureTime alreadyLectureTime : alreadyLectureTimeList) {
-				errorStr += "\n" + alreadyLectureTime.getLectureName() + " ";
+				errorStr += "\\n" + alreadyLectureTime.getLectureName() + " ";
 				errorStr += alreadyLectureTime.getLectureClass() + "분반(";
 				errorStr += weekList[alreadyLectureTime.getLectureWeek()-1] + "요일 ";
 				errorStr += alreadyLectureTime.getLectureStart() + "교시~";
@@ -59,10 +60,11 @@ public class LectureServiceImpl implements LectureService{
 			}
 		}
 		if(!errorStr.equals("")){
-			throw new WrongRequestException("다음 강의들과 시간표가 중복됩니다." + errorStr);
+			throw new WrongRequestException("다음 강의와 시간표가 중복됩니다." + errorStr);
 		}
 		
-		int result = lecRepo.setLectureApply(new LectureApply(lectureId, userId, lectureClass, isPresident, null));
+		String isPresidentStr = isPresident.equals("true") ? "Y" : "N";
+		int result = lecRepo.setLectureApply(new LectureApply(lectureId, userId, lectureClass, isPresidentStr, null));
 		
 		if(result != 1){
 			throw new WrongRequestException();

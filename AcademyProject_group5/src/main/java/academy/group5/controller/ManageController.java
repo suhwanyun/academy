@@ -198,7 +198,7 @@ public class ManageController {
 	/** 마일리지 등록 관리자 메인 페이지 */
 	@RequestMapping(value="/mileageManage/main", method=RequestMethod.GET)
 	public String manageMileageMainPage(){
-	
+		
 		return "/manage/mileage/mileage";
 	}
 	

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.MostRecommend;
 
 @Repository
 public class MileageRepo {
@@ -20,9 +21,15 @@ public class MileageRepo {
 		return session.selectOne(stmt, userId);
 	}
 	
-	/** 게시글 추천받아 마일리지 회득 */
-	public int updateMileageByRecommend(UserData userData) {
-		String stmt = MILEAGE_NS + "recommendPosting";
+	/** 마일리지 설정 */
+	public int setMileage(UserData userData) {
+		String stmt = MILEAGE_NS + "updateMileage";
 		return session.update(stmt, userData);
+	}
+	
+	/** 최고 추천수 게시글 작성자 확인 */
+	public String getMostRecommendPostingUserId(MostRecommend recommendData) {
+		String stmt = MILEAGE_NS + "selectMostRecommendPosting";
+		return session.selectOne(stmt, recommendData);
 	}
 }

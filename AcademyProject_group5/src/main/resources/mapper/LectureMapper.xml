@@ -48,7 +48,10 @@
 	<select id="selectLectureTimeByUser" parameterType="String" resultType="lecture_time">
 		select lecture_id, lecture_class, lecture_start, lecture_end, lecture_place, lecture_week
 		from LectureTime join LectureApply using (lecture_id, lecture_class)
-		where user_id = #{user_id} and (is_temp_date &gt; sysdate or is_temp_date is null)
+						 join CancelLecture using (lecture_time_id)
+		where user_id = #{user_id} 
+		  and (is_temp_date &gt; sysdate or is_temp_date is null)
+		  and (cancel_date &lt; sysdate or cancel_date is null)
 	</select>
 	
 	<select id="selectLectureTimeByLecture" parameterType="lecture" resultType="lecture_time">

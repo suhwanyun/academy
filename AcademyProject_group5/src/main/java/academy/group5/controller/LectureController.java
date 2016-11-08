@@ -32,13 +32,6 @@ public class LectureController {
 	
 	Identify identify = new Identify();
 	
-	/** 학생이 선택한 강의 목록 표시 */
-	@RequestMapping(value="/lecture/selectedLectureList", method=RequestMethod.GET)
-	public String selectedLectureList(){
-		
-		return "/campus/lecture/lecture_list";
-	}
-	
 	/** 학생이 선택한 강의의 메인 페이지 */
 	@RequestMapping(value="/lecture/lectureMain", method=RequestMethod.GET)
 	public String lectureMainPage(){
@@ -84,14 +77,19 @@ public class LectureController {
 	  
 	/** 학생이 선택한 강의의 정보를 확인하거나 신청 취소 */
 	@RequestMapping(value="/lecture/lectureInfo", method=RequestMethod.GET)
-	public String lectureInfo(Model model,
+	public String lectureInfo(Model model, HttpSession session,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
 		
 		model.addAttribute("lectureData", selectedlecture);
 		model.addAttribute("lectureTime", selectedLectureTimes);
+		
+		// 현재 열린 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
 		
 		return "/campus/lecture/lecture_info";
 	}
