@@ -34,7 +34,7 @@
 	</delete>
 	
 	<select id="selectLectureByUser" parameterType="String" resultType="lecture">
-		select lecture_id, user_id, lecture_class, isPresident, right_end_time
+		select lecture_id, user_id, lecture_class, is_president, right_end_time
 		from Lecture join LectureApply using (lecture_id, lecture_class)
 		where user_id = #{userId}
 	</select>
