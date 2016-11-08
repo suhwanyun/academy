@@ -140,17 +140,23 @@ public class CampusController {
 		return "/campus/lecture/lecture_list";
 	}
 	
-	/** 선택한 강의들의 시간표 */
-	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
-	public String schedule(HttpSession session, Model model){
+	/** 선택한 강의들의 시간표 출력 페이지 */
+	@RequestMapping(value="/campus/schedulejsp", method=RequestMethod.GET)
+	public String schedulePage(HttpSession session, Model model){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		return "/campus/schedule";
+	}
+	
+	/** 선택한 강의들의 시간표 데이터 */
+	@RequestMapping(value="/campus/schedule", method=RequestMethod.GET)
+	public @ResponseBody List<UserLectureTime> scheduleData(HttpSession session, Model model){
 				
 		String userId = identify.getUserId(session);
 		List<UserLectureTime> timetableData = lecService.timetable(userId);
-		model.addAttribute("timetable", timetableData);
 		
-		return "/campus/schedule";
+		return timetableData;
 	}
 }
