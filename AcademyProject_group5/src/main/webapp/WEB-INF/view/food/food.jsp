@@ -120,8 +120,7 @@
 			.click(
 					function() {
 						pageIndex = 1;
-						$
-								.ajax({
+						$.ajax({
 									type : "get",
 									url : "${postingSearch}",
 									data : {
