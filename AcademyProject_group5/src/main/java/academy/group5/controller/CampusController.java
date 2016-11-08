@@ -80,7 +80,7 @@ public class CampusController {
 	
 	/** 선택한 알림의 자세한 내용 표시 */
 	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.POST)
-	public String userNotiInfo(HttpSession session, Model model, @RequestParam Date noticeTime,
+	public String userNotiInfo(HttpSession session, Model model, @RequestParam String noticeTime,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		// 에러 발생시 이동할 페이지

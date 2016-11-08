@@ -39,7 +39,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	}
 
 	@Override
-	public LectureNotice lectureNoticeInfo(Date noticeTime, Integer lectureId, Integer lectureClass) {
+	public LectureNotice lectureNoticeInfo(String noticeTime, Integer lectureId, Integer lectureClass) {
 		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(new LectureNotice(noticeTime, lectureId, lectureClass));
 		
 		if(noticeData == null){
