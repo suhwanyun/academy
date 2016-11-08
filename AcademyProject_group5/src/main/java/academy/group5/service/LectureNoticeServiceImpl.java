@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	}
 
 	@Override
-	public LectureNotice lectureNoticeInfo(LectureNotice lecturenotice) {
-		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(lecturenotice);
+	public LectureNotice lectureNoticeInfo(Date noticeTime, Integer lectureId, Integer lectureClass) {
+		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(new LectureNotice(noticeTime, lectureId, lectureClass));
 		
 		if(noticeData == null){
 			throw new WrongRequestException();

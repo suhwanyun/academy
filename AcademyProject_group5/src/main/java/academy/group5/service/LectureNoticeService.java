@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.LectureNotice;
@@ -24,7 +25,7 @@ public interface LectureNoticeService {
 	 * @param notice
 	 * @return
 	 */
-	LectureNotice lectureNoticeInfo(LectureNotice lecturenotice);
+	LectureNotice lectureNoticeInfo(Date noticeTime, Integer lectureId, Integer lectureClass);
 	/**
 	 * 강의 공지 작성
 	 * @param lecturenotice

@@ -1,9 +1,12 @@
 package academy.group5.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,9 @@ import academy.group5.util.Identify;
  */
 @Controller
 public class CampusController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CampusController.class);
+	
 	
 	@Autowired
 	LectureService lecService;
@@ -62,8 +68,12 @@ public class CampusController {
 	}
 	
 	/** 선택한 알림의 자세한 내용 표시 */
-	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.GET)
-	public String userNotiInfo(){
+	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.POST)
+	public String userNotiInfo(HttpSession session, @RequestParam Date noticeTime,
+			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+		
+		LectureNotice noticeData = lecNotiService.lectureNoticeInfo(noticeTime, lectureId, lectureClass);
+		
 		
 		return "/campus/noti_info";
 	}
@@ -145,6 +155,7 @@ public class CampusController {
 		String userId = identify.getUserId(session);
 		List<LectureTime> timetableData = lecService.timetable(userId);
 		model.addAttribute("timetable", timetableData);
+		logger.trace("timetable:{}", timetableData);
 		
 		return "/campus/schedule";
 	}
