@@ -1,7 +1,5 @@
 package academy.group5.dto.etc;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserLectureNotice {
 
 	/** 공지 시간. */
-	private Date noticeTime;
+	private String noticeTime;
 	
 	/** 강의 ID */
 	private Integer lectureId;

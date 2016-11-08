@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class LectureNotice {
 
 	/** 공지 시간. */
-	private Date noticeTime;
+	private String noticeTime;
 
 	/** 강의 ID. */
 	private Integer lectureId;
