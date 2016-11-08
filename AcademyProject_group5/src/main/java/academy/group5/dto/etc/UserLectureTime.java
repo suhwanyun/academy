@@ -31,6 +31,9 @@ public class UserLectureTime {
 	/** 강의 이름 */
 	private String lectureName;
 	
+	/** 교수 이름. */
+	private String professorName;
+	
 	/** 강의 ID */
 	private Integer lectureId;
 	
