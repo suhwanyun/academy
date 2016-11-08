@@ -29,7 +29,7 @@
 <script type="text/javascript">
 	<c:url value="/campus/notiList" var="notiList"/>
 	<c:url value="/campus/selectedLectureList" var="selectedLectureList"/>
-	<c:url value="/campus/lectureListJsp" var="lectureList"/>
+	<c:url value="/campus/lectureList" var="lectureList"/>
 	<c:url value="/campus/schedule" var="schedule"/>
 $("document").ready(function(){
 	var nowTab = "${nowTab}";
