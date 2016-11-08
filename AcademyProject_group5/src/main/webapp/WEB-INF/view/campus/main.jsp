@@ -55,6 +55,9 @@ function mylectureBtn(){
 		url : "${selectedLectureList}",
 		success : function(result) {
 			$("#incluedjsp").html(result);
+		},
+		error : function(){
+			alert("요청을 실패 하였습니다.");
 		}
 	});
 }
@@ -64,6 +67,9 @@ function notilistBtn(){
 		url : "${notiList}",
 		success : function(result) {
 			$("#incluedjsp").html(result);
+		},
+		error : function(){
+			alert("요청을 실패 하였습니다.");
 		}
 	});
 }
@@ -74,6 +80,9 @@ function lecturelistBtn(){
 			url : "${lectureList}",
 			success : function(result) {
 				$("#incluedjsp").html(result);
+			},
+			error : function(){
+				alert("요청을 실패 하였습니다.");
 			}
 		});
 
@@ -84,6 +93,9 @@ function schedule(){
 			url : "${schedule}",
 			success : function(result) {
 				$("#incluedjsp").html(result);
+			},
+			error : function(){
+				alert("요청을 실패 하였습니다.");
 			}
 		});
 
