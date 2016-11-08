@@ -56,6 +56,4 @@ public class UserLectureTime {
 		this.lectureEnd = lectureEnd;
 		this.lectureWeek = lectureWeek;
 	}
-	
-	
 }

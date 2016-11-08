@@ -12,6 +12,7 @@ import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.PhoneRepo;
@@ -105,6 +106,12 @@ public class PhoneServiceImpl implements PhoneService {
 		}
 		
 		return postingData;
+	}
+	
+	@Override
+	public List<UserLectureTime> getLectureTimeList(String userId){
+		
+		return phoneRepo.getLectureTimeList(userId);
 	}
 
 }

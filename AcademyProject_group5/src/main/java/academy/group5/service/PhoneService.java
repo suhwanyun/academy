@@ -4,6 +4,7 @@ import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
+import academy.group5.dto.etc.UserLectureTime;
 
 public interface PhoneService {
 	/**
@@ -31,4 +32,11 @@ public interface PhoneService {
 	 * @return
 	 */
 	Posting getNotificationData(String postingType);
+	
+	/**
+	 * 강의 시간 정보 획득
+	 * @param userId
+	 * @return
+	 */
+	List<UserLectureTime> getLectureTimeList(String userId);
 }

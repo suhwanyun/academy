@@ -54,13 +54,14 @@ CREATE TABLE LectureApply
 
 CREATE TABLE LectureNotice
 (
+	lecture_notice_id number NOT NULL,
 	notice_time date NOT NULL,
 	lecture_id number NOT NULL,
 	lecture_class number NOT NULL,
 	notice_type varchar2(10) NOT NULL,
 	notice_title varchar2(100) NOT NULL,
 	notice_content varchar2(2000),
-	CONSTRAINT LectureNotice_PK PRIMARY KEY (notice_time, lecture_id, lecture_class)
+	PRIMARY KEY (lecture_notice_id)
 );
 
 

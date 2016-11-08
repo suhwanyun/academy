@@ -47,5 +47,12 @@
 			  )
 		where rnum = 1
 	</select>
+	
+	<select id="selectLectureTimeForPhone" parameterType="String" resultType="user_lecture_time">
+		select lecture_name, professor_name, lecture_week, lecture_start, lecture_place
+		from LectureTime join Lecture using (lecture_id, lecture_class)
+						 join LectureApply using (lecture_id, lecture_class)
+		where user_id = #{userId}
+	</select>
 
 </mapper>

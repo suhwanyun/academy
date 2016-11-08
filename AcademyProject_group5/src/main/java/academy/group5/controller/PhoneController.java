@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
+import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
@@ -90,5 +91,20 @@ public class PhoneController {
 			return "false";
 		}
 		return gson.toJson(notiData);
+	}
+	
+	/** 강의 알림 데이터 획득 */
+	@RequestMapping(value="/lectureData", method=RequestMethod.POST, 
+			produces="text/plain;charset=UTF-8")
+	public @ResponseBody String lectureDataList(@RequestParam String userId){
+		Gson gson = new Gson();
+		
+		List<UserLectureTime> lectureData = null;
+		try{
+			lectureData = phoneService.getLectureTimeList(userId);
+		}catch(DataAccessException e){
+			return "false";
+		}
+		return gson.toJson(lectureData);
 	}
 }
