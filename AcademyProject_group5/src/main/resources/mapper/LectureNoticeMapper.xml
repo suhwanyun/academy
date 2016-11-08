@@ -9,7 +9,7 @@
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)
-			 	 					   join LectureApply using (lecture_id)
+			 	 					   join LectureApply using (lecture_id, lecture_class)
 			 	 	where user_id = #{userId}
 					order by notice_time) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
