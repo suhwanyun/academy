@@ -41,7 +41,7 @@
 		where user_id = #{userId}
 	</select>
 	
-	<select id="selectLectureByClass" parameterType="lecture_time" resultType="lecture">
+	<select id="selectLectureByClass" parameterType="lecture" resultType="lecture">
 		select *
 		from Lecture
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}

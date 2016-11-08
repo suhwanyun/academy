@@ -40,7 +40,7 @@ public class LectureRepo {
 		return session.selectList(stmt, id);
 	}
 	
-	public Lecture getLectureByClass(LectureTime data) {
+	public Lecture getLectureByClass(Lecture data) {
 		String stmt = LECTURE_NS + "selectLectureByClass";
 		return session.selectOne(stmt, data);
 	}

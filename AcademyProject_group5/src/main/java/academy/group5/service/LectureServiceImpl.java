@@ -34,8 +34,15 @@ public class LectureServiceImpl implements LectureService{
 	@Override
 	public boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresident) {
 
+		Lecture newLectureData = new Lecture(lectureId, lectureClass);
+		Lecture oldLectureData = lecRepo.getLectureByClass(newLectureData);
+		
+		if(oldLectureData != null){
+			throw new WrongRequestException("이미 신청한 강의입니다.");
+		}
+		
 		// 현재 신청하려는 강의의 강의 시간 리스트
-		List<LectureTime> selectedLectureTimeList = lecRepo.getLectureTime(new Lecture(lectureId, lectureClass));
+		List<LectureTime> selectedLectureTimeList = lecRepo.getLectureTime(newLectureData);
 		
 		if(selectedLectureTimeList.size() == 0){
 			throw new WrongRequestException();
@@ -107,7 +114,7 @@ public class LectureServiceImpl implements LectureService{
 	
 	@Override
 	public Lecture lectureClassInfo(Integer lectureId, Integer lectureClass) {
-		Lecture lectureData = lecRepo.getLectureByClass(new LectureTime(lectureId, lectureClass));
+		Lecture lectureData = lecRepo.getLectureByClass(new Lecture(lectureId, lectureClass));
 		
 		if(lectureData == null){
 			throw new WrongRequestException();
