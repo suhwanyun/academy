@@ -23,7 +23,7 @@
 			<c:forEach items="${noticeList }" var="list">
 				<tr align="center">
 					<td>${list.lectureName }</td>
-					<td><a href="/campus/noti_info?lectureNoticeId=${list.lectureNoticeId }">${list.noticeTitle }</a></td>
+					<td><a href="/campus/notiInfo?lectureNoticeId=${list.lectureNoticeId }">${list.noticeTitle }</a></td>
 					<td>${list.noticeTime }</td>
 				</tr>
 			</c:forEach>
@@ -52,7 +52,7 @@
 	 $(listData).each(function(index, item){
 		 html += "<tr align='center'>"+
 				 	 "<td>"+item.lectureName+"</td>"+
-					 "<td><a href='/campus/noti_info?lectureNoticeId="+item.lectureNoticeId+"'>"+item.noticeTitle+"</a></td>"+
+					 "<td><a href='/campus/notiInfo?lectureNoticeId="+item.lectureNoticeId+"'>"+item.noticeTitle+"</a></td>"+
 					 "<td>"+item.noticeTime+"</td>"+
 				 "</tr>";
 	 });
