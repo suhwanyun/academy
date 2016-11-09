@@ -79,7 +79,7 @@ public class CampusController {
 	}
 	
 	/** 선택한 알림의 자세한 내용 표시 */
-	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.POST)
+	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.GET)
 	public String userNotiInfo(HttpSession session, Model model, @RequestParam Integer lectureNoticeId){
 		
 		// 에러 발생시 이동할 페이지

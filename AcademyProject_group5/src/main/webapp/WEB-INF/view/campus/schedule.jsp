@@ -168,7 +168,7 @@ function timeTable(tableList){
 		startClass = item.lectureStart;
 		endClass = item.lectureEnd;
 		for(var i = startClass; i <= endClass; i++){
-			$("#class_"+i+" td:eq("+(day == 0 ? 7 : day)+")").html(item.lectureName+"<br>"+item.lecturePlace);
+			$("#class_"+i+" td:eq("+(day == 0 ? 7 : day)+")").html(item.lectureName+"("+item.lectureClass+")"+"<br>"+item.lecturePlace);
 		}
 	});
 }
