@@ -89,7 +89,7 @@ public class LectureController {
 		model.addAttribute("lectureTime", selectedLectureTimes);
 		
 		// 현재 열린 탭 저장
-		session.setAttribute("nowTab", "selectedLectureList");
+		session.setAttribute("nowTab", "lectureList");
 		
 		return "/campus/lecture/lecture_info";
 	}
