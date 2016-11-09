@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import academy.group5.dto.Posting;
 import academy.group5.dto.PostingComment;
@@ -43,7 +42,7 @@ public class BoardController {
 	
 	/** 식사(먹거리)추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/food", method=RequestMethod.POST)
-	public String addFood(Model model, HttpSession session,
+	public String addFoodPosting(Model model, HttpSession session,
 			MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
@@ -53,7 +52,7 @@ public class BoardController {
 	
 	/** 오락추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/play", method=RequestMethod.POST)
-	public String addPlay(Model model, HttpSession session,
+	public String addPlayPosting(Model model, HttpSession session,
 			MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
@@ -63,7 +62,7 @@ public class BoardController {
 	
 	/** 명소추천 게시판에 글 작성 */
 	@RequestMapping(value="/write/place", method=RequestMethod.POST)
-	public String addPlace(Model model, HttpSession session,
+	public String addPlacePosting(Model model, HttpSession session,
 			MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 				
@@ -71,6 +70,15 @@ public class BoardController {
 				"/write/placejsp", true);
 	}
 	
+	/** 강의 게시판에 글 작성 */
+	@RequestMapping(value="/write/lecture", method=RequestMethod.POST)
+	public String addLecturePosting(Model model, HttpSession session,
+			MultipartHttpServletRequest mrequest,
+			@RequestParam(required=false) MultipartFile uploadPhoto){
+				
+		return addPosting(model, session, mrequest, uploadPhoto,
+				"/write/lecturejsp", true);
+	}
 
 	
 	/** 게시글 목록 표시 */
@@ -298,7 +306,7 @@ public class BoardController {
 		String postingId = mrequest.getParameter("postingId");
 		String isDeletePhoto = mrequest.getParameter("deletePhoto");
 		
-		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, postService.DEFAULT_PHOTO_NAME);
+		Posting postingData = new Posting(postingType, userId, postingTitle, postingContent, PostingService.DEFAULT_PHOTO_NAME);
 		
 		if(postingType == null || postingTitle == null || postingContent == null) {
 			throw new WrongRequestException();	
@@ -318,7 +326,7 @@ public class BoardController {
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
 				postingData.setPostingPhoto(isDeletePhoto);
-				postService.uploadCancel(postingData, postService.DEFAULT_PHOTO_NAME);
+				postService.uploadCancel(postingData, PostingService.DEFAULT_PHOTO_NAME);
 			} else {
 				postingData.setPostingPhoto(null);
 			}

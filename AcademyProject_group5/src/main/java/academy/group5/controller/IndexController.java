@@ -187,29 +187,36 @@ public class IndexController {
 	
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)
-	public String addFood(HttpSession session, Model model){	
+	public String addFoodPostingPage(HttpSession session, Model model){	
 		setPrevPostingData(session, model, null);
 		return "/food/food_add";
 	}
 	
 	/** 오락추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/playjsp", method=RequestMethod.GET)
-	public String addPlay(HttpSession session, Model model){
+	public String addPlayPostingPage(HttpSession session, Model model){
 		setPrevPostingData(session, model, null);
 		return "/play/play_add";
 	}
 	
 	/** 명소추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/placejsp", method=RequestMethod.GET)
-	public String addPlace(HttpSession session, Model model){
+	public String addPlacePostingPage(HttpSession session, Model model){
 		setPrevPostingData(session, model, null);
 		return "/place/place_add";
+	}
+	
+	/** 강의 게시판 글 작성 페이지 */
+	@RequestMapping(value="/write/lecturejsp", method=RequestMethod.GET)
+	public String addLecturePostingPage(HttpSession session, Model model){
+		setPrevPostingData(session, model, null);
+		return "/campus/lecture/lecture_add";
 	}
 	
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
-	public String updateFood(Model model, HttpSession session,
+	public String updateFoodPostingPage(Model model, HttpSession session,
 								@RequestParam int postingId){
 		
 		// 에러 발생시 이동할 페이지
@@ -222,7 +229,7 @@ public class IndexController {
 	
 	/** 오락추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/playUpdatejsp", method=RequestMethod.GET)
-	public String updatePlay(Model model, HttpSession session,
+	public String updatePlayPostingPage(Model model, HttpSession session,
 			@RequestParam int postingId){
 		
 		// 에러 발생시 이동할 페이지
@@ -235,7 +242,7 @@ public class IndexController {
 	
 	/** 명소추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/placeUpdatejsp", method=RequestMethod.GET)
-	public String updatePlace(Model model, HttpSession session, 
+	public String updatePlacePostingPage(Model model, HttpSession session, 
 			@RequestParam int postingId){
 		
 		// 에러 발생시 이동할 페이지
@@ -244,6 +251,19 @@ public class IndexController {
 		getPostingData(model, session, postingId);
 		
 		return "/place/place_update";
+	}	
+	
+	/** 강의 게시판 글 수정 페이지 */
+	@RequestMapping(value="/write/lectureUpdatejsp", method=RequestMethod.GET)
+	public String updateLecturePostingPage(Model model, HttpSession session, 
+			@RequestParam int postingId){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lecture/lectureMain");
+
+		getPostingData(model, session, postingId);
+		
+		return "/campus/lecture/lecture_update";
 	}	
 	
 	/** 게시판 메인 페이지 초기화 설정 */
@@ -288,7 +308,7 @@ public class IndexController {
 		String userId = identify.getUserId(session);
 		String postingType = getPostingType(session);
 		Posting postingData = postService.postView(postingId, postingType);
-		postService.replaceFromBr(postingData);
+		postService.replaceFromBr(postingData); 
 		// 본인이 작성한 글이 아니면
 		if(!userId.equals(postingData.getUserId())){
 			throw new WrongRequestException();
