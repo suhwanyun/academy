@@ -25,6 +25,11 @@ public class LectureRepo {
 		return session.selectList(stmt, data);
 	}
 	
+	public int isLectureApplied(LectureApply data){
+		String stmt = LECTURE_NS + "selectIsLectureApply";
+		return session.selectOne(stmt, data);
+	}
+	
 	public int setLectureApply(LectureApply data){
 		String stmt = LECTURE_NS + "insertLectureApply";
 		return session.insert(stmt, data);

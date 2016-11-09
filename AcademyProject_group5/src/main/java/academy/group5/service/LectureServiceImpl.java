@@ -35,9 +35,9 @@ public class LectureServiceImpl implements LectureService{
 	public boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresident) {
 
 		Lecture newLectureData = new Lecture(lectureId, lectureClass);
-		Lecture oldLectureData = lecRepo.getLectureByClass(newLectureData);
+		int alreadyApplied = lecRepo.isLectureApplied(new LectureApply(lectureId, userId, lectureClass));
 		
-		if(oldLectureData != null){
+		if(alreadyApplied != 0){
 			throw new WrongRequestException("이미 신청한 강의입니다.");
 		}
 		

@@ -21,6 +21,14 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
+	<select id="selectIsLectureApply" parameterType="lecture_apply" resultType="int">
+		select count(*)
+		from LectureApply
+		where lecture_id = #{lectureId}
+		  and lecture_class = #{lectureClass}
+		  and user_id = #{userId}
+	</select>
+	
 	<insert id="insertLectureApply" parameterType="lecture_apply">
 		insert into LectureApply
 		(lecture_id, user_id, lecture_class, is_president)
