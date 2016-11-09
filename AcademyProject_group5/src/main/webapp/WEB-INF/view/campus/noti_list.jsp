@@ -41,7 +41,11 @@
 		type: "get",
 		url: "${notiListMore}",
 		success : function(result){
-			$("#dataTable").append(dataSetting(result));
+			if(result.length>0){
+				$("#dataTable").append(dataSetting(result));
+			}else {
+				alert("더 이상 목록이 없습니다.");
+			}
 		}, error : function(result){
 			alert("요청에 실패 하였습니다.");
 		}
