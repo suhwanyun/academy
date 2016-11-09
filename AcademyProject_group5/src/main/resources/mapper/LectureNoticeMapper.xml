@@ -33,7 +33,7 @@
 	
 	<insert id="insertLectureNotice" parameterType="lecture_notice">
 		insert into
-		LectureNotice
+		LectureNotice (notice_time, lecture_id, lecture_class, notice_type, notice_title, notice_content)
 		values (sysdate, #{lectureId}, #{lectureClass},
 			#{noticeType}, #{noticeTitle}, #{noticeContent})
 	</insert>

@@ -1,6 +1,5 @@
 package academy.group5.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +29,19 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	@Override
 	public List<UserLectureNotice> allLectureNoticeList(String userId, int page) {
-		return notiRepo.getAllLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, userId));
+		List<UserLectureNotice> noticeList = notiRepo.getAllLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, userId));
+		
+		for(UserLectureNotice noticeData : noticeList){
+			String timeStr = noticeData.getNoticeTime();
+			noticeData.setNoticeTime(timeStr.replaceAll(" ", "<br>"));
+		}
+		
+		return noticeList;
 	}
 
 	@Override
 	public List<LectureNotice> lectureNoticeList(Integer lectureId, Integer lectureClass, int page) {
+	
 		return notiRepo.getLectureNoticeList(new LecturePaging(page, NOTICE_MAX_PAGE, lectureId, lectureClass));
 	}
 
