@@ -66,14 +66,11 @@
 				} else {
 					preventDefault();
 				}
-
 			}
 			document.myForm.submit();
-
 		} else {
 			alert("입력 값이 올바르지 않습니다.");
 			preventDefault();
-
 		}
 	}
 </script>

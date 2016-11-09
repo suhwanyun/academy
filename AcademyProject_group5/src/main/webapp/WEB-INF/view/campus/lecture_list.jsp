@@ -33,9 +33,8 @@
 						<th>강의 분반</th>
 					</tr>
 					<c:forEach items="${lectureList }" var="list">
-						<tr class = 'tableData'>
-							<td><a
-								href="/lecture/lectureInfo?lectureId=${list.lectureId}&lectureClass=${list.lectureClass}">${list.lectureName}</a></td>
+						<tr class = 'tableData' onclick = "movePage(${list.lectureId}, ${list.lectureClass})">
+							<td>${list.lectureName}</td>
 							<td>${list.professorName}</td>
 							<td>${list.lectureClass}</td>
 						</tr>
@@ -50,104 +49,66 @@
 
 
 <script type="text/javascript">
-	var pageIndex = 1;
-	<c:url value="/campus/lectureListMore" var="nextlectureList"/>
-	<c:url value="/campus/lectureListSearch" var="lectureListSearch"/>
-	$("#searchBtn")
-			.click(
-					function() {
-						$
-								.ajax({
-									type : "get",
-									url : "${lectureListSearch}",
-									data : {
-										searchType : $("#serchType").val(),
-										searchData : $("#serachInput").val()
-									},
-									success : function(result) {
-										$(".tableData").empty();
-										pageIndex = 1;
-										if (result.length == 0) {
-											alert("검색 결과가 없습니다.");
-										} else {
-											$(result)
-													.each(
-															function(index,
-																	item) {
-																$(
-																		"#beforeLectureLocation")
-																		.before(
-																				$("<tr class = 'tableData'><td>"
-																						+ "<a href="
-																						+ "/lecture/lectureInfo?lectureId="
-																						+ item.lectureId
-																						+ "&lectureClass="
-																						+ item.lectureClass
-																						+ ">"
-																						+ item.lectureName
-																						+ "</a></td>"
-																						+ "<td>"
-																						+ item.professorName
-																						+ "</td>"
-																						+ "<td>"
-																						+ item.lectureClass
-																						+ "</td></tr>"));
-															});
-										}
-									}
+function movePage(el, el2){
+	$(location).attr("href", "/lecture/lectureInfo?lectureId="+el+"&lectureClass="+el2);
+}
+var pageIndex = 1;
+<c:url value="/campus/lectureListMore" var="nextlectureList"/>
+<c:url value="/campus/lectureListSearch" var="lectureListSearch"/>
+function dataSetting(list){
+$(list).each(function(index,item) {
+				$(
+					"#beforeLectureLocation").before(
+						$("<tr class = 'tableData' onclick='movePage("+item.lectureId+","+item.lectureClass+")'><td>"
+							+ item.lectureName
+							+ "</td>"
+							+ "<td>"
+							+ item.professorName
+							+ "</td>"
+							+ "<td>"
+							+ item.lectureClass
+							+ "</td></tr>"));
+			});
+}
+$("#searchBtn").click(function(){
+						$.ajax({
+							type : "get",
+							url : "${lectureListSearch}",
+							data : {
+								searchType : $("#serchType").val(),
+								searchData : $("#serachInput").val()
+							},
+							success : function(result){
+								$(".tableData").empty();
+								pageIndex = 1;
+								if (result.length == 0) {
+									alert("검색 결과가 없습니다.");
+								} else {
+									dataSetting(result);
+								}
+							}
 
-								});
+						});
 					});
-	$("#moreBtn")
-			.click(
-					function() {
-
+$("#moreBtn").click(function(){
 						pageIndex++;
-
-						$
-								.ajax({
-									type : "get",
-									url : "${nextlectureList}",
-									data : {
-										page : pageIndex
-									},
-									success : function(result) {
-										var itemCount = 0;
-										$(result)
-												.each(
-														function(index, item) {
-															itemCount++;
-															$(
-																	"#beforeLectureLocation")
-																	.before(
-																			$("<tr class = 'tableData'><td>"
-																					+ "<a href="
-																					+ "/lecture/lectureInfo?lectureId="
-																					+ item.lectureId
-																					+ "&lectureClass="
-																					+ item.lectureClass
-																					+ ">"
-																					+ item.lectureName
-																					+ "</a></td>"
-																					+ "<td>"
-																					+ item.professorName
-																					+ "</td>"
-																					+ "<td>"
-																					+ item.lectureClass
-																					+ "</td></tr>"));
-														});
-
-										if (itemCount == 0) {
-											alert("더 이상 목록이 없습니다.");
-										}
-									},
-									error : function(request, status, error) {
-										alert("code:" + request.status + "\n"
-												+ "message:"
-												+ request.responseText + "\n"
-												+ "error:" + error);
-									}
-								});
+						$.ajax({
+							type : "get",
+							url : "${nextlectureList}",
+							data : {
+								page : pageIndex
+							},
+							success : function(result) {
+								if (result.length < 1) {
+									alert("더 이상 목록이 없습니다.");
+								}else{
+									dataSetting(result);
+								}
+							},
+							error : function() {
+								alert("요청에 실패 하였습니다.");
+							}
+						});
 					});
 </script>
 </html>
