@@ -23,7 +23,7 @@ public class Paging {
 	private String searchData;
 	private String searchDataType;
 	private String orderType;
-	private String orderData;
+	private boolean isAsc;
 	
 	public Paging(String searchData, String searchDataType){
 		this.searchData = searchData;
@@ -42,11 +42,16 @@ public class Paging {
 	}
 
 	public Paging(int page, int size, String postingType, String searchData, String searchDataType, String orderType){
+		this(page, size, null, searchData, searchDataType, orderType, true);
+	}
+	
+	public Paging(int page, int size, String postingType, String searchData, String searchDataType, String orderType, boolean isAsc){
 		this.startIdx = (page - 1) * size + 1;
 		this.endIdx = page * size;
 		this.postingType = postingType;
 		this.searchData = searchData;
 		this.searchDataType = searchDataType;
 		this.orderType = orderType;
+		this.isAsc = isAsc;
 	}
 }

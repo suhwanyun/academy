@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="academy.repo.ManagerMapper">
 	
+	<!-- 강의 관리자 -->
+	
 	<select id="selectManager" parameterType="manager" resultType="String">
 		select manager_type
 		from Manager
@@ -116,4 +118,95 @@
 		delete from LectureTime
 		where lecture_time_id = #{lectureTimeId}
 	</delete>
+	
+	<!-- 마일리지 관리자 -->
+	
+	<select id="selectAllMileage" parameterType="paging" resultType="mileage">
+		select *
+		from(select rownum as rnum, sub.*
+			 from (select *
+			 	  from Mileage
+			 	  order by
+			 	  <choose>
+				 	  <when test="orderType == 'mileValue'">
+					   	 mile_value
+					  </when>
+					  <otherwise>
+					  	 mile_name
+					  </otherwise>
+				  </choose>
+			 	  <if test="isAsc == false">
+			 	 	 desc
+		 	 	  </if>
+		 	 	  ) sub
+		 	 )
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx} 		
+	</select> 
+	
+	<select id="selectMileage" parameterType="String" resultType="mileage">
+		select *
+		from Mileage
+		where mile_name = #{mileName}
+	</select> 
+	
+	<insert id="insertMileage" parameterType="mileage">
+		insert into Mileage
+		values (#{mileName}, #{mileValue})
+	</insert>
+	
+	<delete id="deleteMileage" parameterType="String">
+		delete from Mileage
+		where mile_name = #{mileName}
+	</delete>
+	
+	<select id="selectAllMileageProduct" parameterType="paging" resultType="mileage_product">
+		select *
+		from(select rownum as rnum, sub.*
+			 from (select product_id, product_name, product_cost
+				  from MileageProduct
+			 	  order by
+			 	  <choose>
+				 	  <when test="orderType == 'productCost'">
+					   	 product_cost
+					  </when>
+					  <otherwise>
+					  	 product_name
+					  </otherwise>
+				  </choose>
+			 	  <if test="isAsc == false">
+			 	 	 desc
+		 	 	  </if>
+				  ) sub
+			 )
+		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx} 
+	</select>
+	
+	<select id="selectMileageProduct" parameterType="int" resultType="mileage_product">
+		select *
+		from MileageProduct
+		where product_id = #{productId}
+	</select>
+	
+	<insert id="insertMileageProduct" parameterType="mileage_product">
+		insert into MileageProduct
+		(product_name, product_cost, product_content, product_imgfile)
+		values (#{productName}, #{productCost}, #{productContent}, #{productImgfile})
+	</insert>
+	
+	<update id="updateMileageProduct" parameterType="mileage_product">
+		update MileageProduct
+		set product_name = #{productName},
+			product_cost = #{productCost},
+			product_content = #{productContent}
+			<if test="productImgfile != null">
+			, product_imgfile = #{productImgfile}
+			</if>
+		where product_id = #{productId}
+	</update>
+	
+	<delete id="deleteMileageProduct" parameterType="int">
+		delete from MileageProduct
+		where product_id = #{productId}
+	</delete>
+	
 </mapper>

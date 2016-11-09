@@ -37,21 +37,6 @@ public class PhoneController {
 	@Autowired
 	GCMRepo gcmRepo;
 	
-	/** 어플 로그인 *//*
-	@RequestMapping(value="/appLogin", method=RequestMethod.POST)
-	public String login(Model model, HttpSession session,
-			@RequestParam String userId, @RequestParam String userPass){
-			
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/loginjsp");
-		
-		UserData data = loginService.login(userId, userPass);		
-		session.setAttribute("user", data);	
-		session.setAttribute("isPhone", "true");
-		
-		return "index";
-	}*/
-	
 	/** GCM 등록 */
 	@RequestMapping(value="/registGCM", method=RequestMethod.POST)
 	public @ResponseBody String addFood(@RequestParam String userId, @RequestParam String phoneId){

@@ -101,7 +101,6 @@ CREATE TABLE MileageProduct
 	product_id number NOT NULL,
 	product_name varchar2(20) NOT NULL,
 	product_cost number NOT NULL,
-	product_remain number NOT NULL,
 	product_content varchar2(1000),
 	product_imgfile varchar2(50),
 	PRIMARY KEY (product_id)

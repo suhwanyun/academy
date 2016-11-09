@@ -21,9 +21,6 @@ public class MileageProduct {
 	/** 상품 가격. */
 	private Integer productCost;
 
-	/** 남은 수량. */
-	private Integer productRemain;
-
 	/** 상품 내용. */
 	private String productContent;
 

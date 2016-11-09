@@ -104,6 +104,8 @@ public interface ManagerService {
 	 */
 	void deleteAllLectureTime(Lecture lectureData);
 	boolean deleteLectureTime(Integer lectureTimeId);
+	
+	/*List<MileageProduct> getAllProduct(int page);*/
 	/**
 	 * 상품 등록
 	 * @param mileageProduct

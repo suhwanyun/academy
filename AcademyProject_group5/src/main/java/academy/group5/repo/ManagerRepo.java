@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
+import academy.group5.dto.Mileage;
+import academy.group5.dto.MileageProduct;
 import academy.group5.dto.etc.Paging;
 
 @Repository
@@ -18,6 +20,8 @@ public class ManagerRepo {
 	
 	@Autowired
 	SqlSessionTemplate session;
+	
+	/** ---------------------------강의등록 관리자--------------------------- */
 	
 	public String getManager(Manager managerData) {
 		String stmt = MANAGER_NS + "selectManager";
@@ -87,5 +91,52 @@ public class ManagerRepo {
 	public int deleteLectureTime(Integer timeId) {
 		String stmt = MANAGER_NS + "deleteLectureTime";
 		return session.delete(stmt, timeId);
+	}
+	
+	/** ---------------------------마일리지 관리자--------------------------- */
+	
+	public List<Mileage> getAllMileage(Paging pageData) {
+		String stmt = MANAGER_NS + "selectAllMileage";
+		return session.selectList(stmt, pageData);
+	}
+	
+	public Mileage getMileage(String mileName) {
+		String stmt = MANAGER_NS + "selectMileage";
+		return session.selectOne(stmt, mileName);
+	}
+	
+	public int setMileage(Mileage mileData) {
+		String stmt = MANAGER_NS + "insertMileage";
+		return session.insert(stmt, mileData);
+	}
+	
+	public int delMileage(String mileName) {
+		String stmt = MANAGER_NS + "deleteMileage";
+		return session.delete(stmt, mileName);
+	}
+	
+	public List<MileageProduct> getAllMileageProduct(Paging pageData) {
+		String stmt = MANAGER_NS + "selectAllMileageProduct";
+		return session.selectList(stmt, pageData);
+	}
+	
+	public MileageProduct getMileageProduct(int productId) {
+		String stmt = MANAGER_NS + "selectMileageProduct";
+		return session.selectOne(stmt, productId);
+	}
+	
+	public int setMileageProduct(MileageProduct prodData) {
+		String stmt = MANAGER_NS + "insertMileageProduct";
+		return session.insert(stmt, prodData);
+	}
+	
+	public int updateMileageProduct(MileageProduct prodData) {
+		String stmt = MANAGER_NS + "updateMileageProduct";
+		return session.update(stmt, prodData);
+	}
+	
+	public int delMileageProduct(int productId) {
+		String stmt = MANAGER_NS + "deleteMileageProduct";
+		return session.delete(stmt, productId);
 	}
 }
