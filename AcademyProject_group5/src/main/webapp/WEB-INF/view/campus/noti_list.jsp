@@ -21,9 +21,9 @@
 				<th>날 짜</th>
 			</tr>
 			<c:forEach items="${noticeList }" var="list">
-				<tr align="center">
+				<tr align="center" onclick="movePage(${list.lectureNoticeId })">
 					<td>${list.lectureName }</td>
-					<td><a href="/campus/notiInfo?lectureNoticeId=${list.lectureNoticeId }">${list.noticeTitle }</a></td>
+					<td>${list.noticeTitle }</td>
 					<td>${list.noticeTime }</td>
 				</tr>
 			</c:forEach>
@@ -54,13 +54,16 @@
  function dataSetting(listData){
 	 var html = "";
 	 $(listData).each(function(index, item){
-		 html += "<tr align='center'>"+
+		 html += "<tr align='center' onclick='movePage("+item.lectureNoticeId+")'>"+
 				 	 "<td>"+item.lectureName+"</td>"+
-					 "<td><a href='/campus/notiInfo?lectureNoticeId="+item.lectureNoticeId+"'>"+item.noticeTitle+"</a></td>"+
+					 "<td>"+item.noticeTitle+"</td>"+
 					 "<td>"+item.noticeTime+"</td>"+
 				 "</tr>";
 	 });
 	 return html;
+ }
+ function movePage(el){
+	 $(location).attr("href", "/campus/notiInfo?lectureNoticeId="+el);
  }
 </script>
 </html>

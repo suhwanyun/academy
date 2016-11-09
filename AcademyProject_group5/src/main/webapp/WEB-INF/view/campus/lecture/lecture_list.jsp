@@ -19,9 +19,8 @@
 				<th>반장 여부</th>
 			</tr>
 			<c:forEach items="${lectureList }" var="list">
-				<tr align="center">
-					<td><a href="#"> ${list.lectureName }&nbsp;${list.lectureClass }반
-					</a></td>
+				<tr align="center" onclick="movePage(this)">
+					<td>${list.lectureName }&nbsp;${list.lectureClass }반</td>
 					<td>${list.professorName }</td>
 					<td>${list.lecturePlace }</td>
 					<td><c:choose>
@@ -56,4 +55,10 @@
 		</table>
 	</div>
 </body>
+<script type="text/javascript">
+function movePage(el){
+	alert("Ef");
+	$(location).attr("href", "#");
+}
+</script>
 </html>
