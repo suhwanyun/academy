@@ -39,8 +39,8 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	}
 
 	@Override
-	public LectureNotice lectureNoticeInfo(String noticeTime, Integer lectureId, Integer lectureClass) {
-		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(new LectureNotice(noticeTime, lectureId, lectureClass));
+	public LectureNotice lectureNoticeInfo(Integer lectureNoticeId) {
+		LectureNotice noticeData = notiRepo.getLectureNoticeInfo(lectureNoticeId);
 		
 		if(noticeData == null){
 			throw new WrongRequestException();

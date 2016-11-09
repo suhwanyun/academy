@@ -80,13 +80,12 @@ public class CampusController {
 	
 	/** 선택한 알림의 자세한 내용 표시 */
 	@RequestMapping(value="/campus/notiInfo", method=RequestMethod.POST)
-	public String userNotiInfo(HttpSession session, Model model, @RequestParam String noticeTime,
-			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+	public String userNotiInfo(HttpSession session, Model model, @RequestParam Integer lectureNoticeId){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/notiList");
 				
-		LectureNotice noticeData = lecNotiService.lectureNoticeInfo(noticeTime, lectureId, lectureClass);
+		LectureNotice noticeData = lecNotiService.lectureNoticeInfo(lectureNoticeId);
 		model.addAttribute("lectureNotice", noticeData);
 		
 		return "/campus/noti_info";

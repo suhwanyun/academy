@@ -26,7 +26,7 @@ public interface LectureNoticeService {
 	 * @param notice
 	 * @return
 	 */
-	LectureNotice lectureNoticeInfo(String noticeTime, Integer lectureId, Integer lectureClass);
+	LectureNotice lectureNoticeInfo(Integer lectureNoticeId);
 	/**
 	 * 강의 공지 작성
 	 * @param lecturenotice

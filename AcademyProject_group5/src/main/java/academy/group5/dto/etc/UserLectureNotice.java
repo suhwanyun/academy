@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserLectureNotice {
 
+	/** 공지 ID. */
+	private Integer lectureNoticeId;
+	
 	/** 공지 시간. */
 	private String noticeTime;
 	

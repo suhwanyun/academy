@@ -1,7 +1,5 @@
 package academy.group5.dto;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LectureNotice {
 
+	/** 공지 ID. */
+	private Integer lectureNoticeId;
+	
 	/** 공지 시간. */
 	private String noticeTime;
 
@@ -31,13 +32,4 @@ public class LectureNotice {
 
 	/** 공지 내용. */
 	private String noticeContent;
-
-	public LectureNotice(String noticeTime, Integer lectureId, Integer lectureClass) {
-		super();
-		this.noticeTime = noticeTime;
-		this.lectureId = lectureId;
-		this.lectureClass = lectureClass;
-	}
-	
-	
 }

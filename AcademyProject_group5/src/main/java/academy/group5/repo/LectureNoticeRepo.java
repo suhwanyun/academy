@@ -28,9 +28,9 @@ public class LectureNoticeRepo {
 		return session.selectList(stmt, data);
 	}
 	
-	public LectureNotice getLectureNoticeInfo(LectureNotice data) {
+	public LectureNotice getLectureNoticeInfo(Integer lectureNoticeId) {
 		String stmt = LOGIN_NS + "selectLectureNoticeInfo";
-		return session.selectOne(stmt, data);
+		return session.selectOne(stmt, lectureNoticeId);
 	}
 	
 	public int setLectureNotice(LectureNotice data){
