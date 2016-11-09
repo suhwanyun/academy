@@ -144,6 +144,15 @@ public class IndexController {
 	public String lectureMainPage(HttpSession session,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		// 현재 열린 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
+				
+		String userId = identify.getUserId(session);
+		if(!lecService.isAppliedLecture(lectureId, userId, lectureClass)){
+			throw new WrongRequestException("신청하지 않은 강의의 정보는 확인하실 수 없습니다.");
+		}
 		String postingType = Posting.TYPE_LECTURE + "_" + lectureId + "_" + lectureClass;
 		boardMainSetup(session, postingType, null);
 		return "/campus/lecture/lecture_main";

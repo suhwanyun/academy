@@ -21,6 +21,14 @@ public interface LectureService {
 	 */
 	boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresidentStr);
 	/**
+	 * 신청이 되어있는 강의인지 확인
+	 * @param lectureId
+	 * @param userId
+	 * @param lectureClass
+	 * @return
+	 */
+	boolean isAppliedLecture(Integer lectureId, String userId, Integer lectureClass);
+	/**
 	 * 강의 신청 취소
 	 * @param lectureId
 	 * @param lectureClass

@@ -74,7 +74,7 @@ public class LectureController {
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
 		
