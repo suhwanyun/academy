@@ -121,28 +121,38 @@ public class IndexController {
 	/** 먹거리(식사) 추천 게시판 페이지 */
 	@RequestMapping(value="/foodMain", method=RequestMethod.GET)
 	public String foodMainPage(HttpSession session){
-		boardMainSetup(session, "food", MostRecommend.PERIOD_DAY);
+		boardMainSetup(session, Posting.TYPE_FOOD, MostRecommend.PERIOD_DAY);
 		return "/food/food";
 	}
 	
 	/** 오락 추천 게시판 페이지 */
 	@RequestMapping(value="/playMain", method=RequestMethod.GET)
 	public String playMainPage(HttpSession session){
-		boardMainSetup(session, "play", MostRecommend.PERIOD_DAY);
+		boardMainSetup(session, Posting.TYPE_PLAY, MostRecommend.PERIOD_DAY);
 		return "/play/play";
 	}
 	
 	/** 명소 추천 게시판 페이지 */
 	@RequestMapping(value="/placeMain", method=RequestMethod.GET)
 	public String placeMainPage(HttpSession session){
-		boardMainSetup(session, "place", MostRecommend.PERIOD_WEEK);
+		boardMainSetup(session, Posting.TYPE_PLACE, MostRecommend.PERIOD_WEEK);
 		return "/place/place";
+	}
+	
+	/** 학생이 선택한 강의의 메인 페이지 */
+	@RequestMapping(value="/lecture/lectureMain", method=RequestMethod.GET)
+	public String lectureMainPage(HttpSession session,
+			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
+		
+		String postingType = Posting.TYPE_LECTURE + "_" + lectureId + "_" + lectureClass;
+		boardMainSetup(session, postingType, null);
+		return "/campus/lecture/lecture_main";
 	}
 	
 	/** 마일리지 페이지 */
 	@RequestMapping(value="/mileageMain", method=RequestMethod.GET)
 	public String mileageMainPage(){
-	
+		
 		return "/mileage/mileage";
 	}
 	
@@ -228,14 +238,17 @@ public class IndexController {
 	}	
 	
 	/** 게시판 메인 페이지 초기화 설정 */
-	private void boardMainSetup(HttpSession session, String PostingType, int recommendPeriod){
-		Posting mostRecommendData = postService.mostRecommend(
-				new MostRecommend(PostingType, recommendPeriod));
+	private void boardMainSetup(HttpSession session, String PostingType, Integer recommendPeriod){
 		
-		if(mostRecommendData != null){
-			session.setAttribute("mostRecommendData", mostRecommendData);
-		} else {
-			session.removeAttribute("mostRecommendData");
+		session.removeAttribute("mostRecommendData");	
+		// 제일 추천을 많이 받은 게시글은 따로 전달(강의 게시판 제외)
+		if(recommendPeriod != null){
+			Posting mostRecommendData = postService.mostRecommend(
+					new MostRecommend(PostingType, recommendPeriod));
+			
+			if(mostRecommendData != null){
+				session.setAttribute("mostRecommendData", mostRecommendData);
+			}
 		}
 		
 		List<Posting> postingList = postService.postingList(1, PostingType);

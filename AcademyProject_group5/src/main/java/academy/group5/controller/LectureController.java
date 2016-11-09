@@ -32,13 +32,6 @@ public class LectureController {
 	
 	Identify identify = new Identify();
 	
-	/** 학생이 선택한 강의의 메인 페이지 */
-	@RequestMapping(value="/lecture/lectureMain", method=RequestMethod.GET)
-	public String lectureMainPage(){
-		
-		return "/campus/lecture/lecture_main";
-	}
-	
 	/** 학생이 선택한 강의의 게시판 페이지 */
 	@RequestMapping(value="/lecture/lectureBoard", method=RequestMethod.GET)
 	public String lectureBoard(){
