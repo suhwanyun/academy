@@ -11,7 +11,7 @@
 			 	 	from LectureNotice join Lecture using (lecture_id, lecture_class)
 			 	 					   join LectureApply using (lecture_id, lecture_class)
 			 	 	where user_id = #{userId}
-					order by notice_time) sub)
+					order by notice_time desc) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
@@ -21,7 +21,7 @@
 			  from (select *
 			 	 	from LectureNotice 
 			 	 	where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
-					order by notice_time) sub)
+					order by notice_time desc) sub)
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx}
 	</select>
 	
