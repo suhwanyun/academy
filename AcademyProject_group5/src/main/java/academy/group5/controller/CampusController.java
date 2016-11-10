@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +37,6 @@ public class CampusController {
 	LectureNoticeService lecNotiService;
 	
 	Identify identify = new Identify();
-	
-	private static final Logger logger = LoggerFactory.getLogger(CampusController.class);
-	
 	
 	/** 기존 알림 목록 표시 */
 	@RequestMapping(value="/campus/notiList", method=RequestMethod.GET)
@@ -160,7 +155,7 @@ public class CampusController {
 		
 		String userId = identify.getUserId(session);
 		List<UserLectureTime> lectureData = lecService.userLectureList(userId);
-		logger.trace("lectureData:{}", lectureData);
+		
 		model.addAttribute("lectureList", lectureData);
 		return "/campus/lecture/lecture_list";
 	}

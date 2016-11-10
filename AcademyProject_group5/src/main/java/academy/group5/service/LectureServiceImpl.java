@@ -26,7 +26,9 @@ public class LectureServiceImpl implements LectureService{
 
 	@Autowired
 	LectureRepo lecRepo;
+	
 	private static final Logger logger = LoggerFactory.getLogger(LectureServiceImpl.class);
+	
 	
 	@Override
 	public List<Lecture> allLectureList(int page, String searchData, String searchType) {
@@ -106,7 +108,7 @@ public class LectureServiceImpl implements LectureService{
 		List<UserLectureTime> lectureTimeList = lecRepo.getUserLecture(userId);
 
 		for(UserLectureTime timeData : lectureTimeList){
-			logger.trace("lectureId:{}, userId:{}, lectureClass:{}", timeData.getLectureId(), userId, timeData.getLectureClass());
+			
 			if(getIsPresident(timeData.getLectureId(), userId, timeData.getLectureClass())){
 				timeData.setIsPresident("Y");
 			} else {
@@ -157,7 +159,8 @@ public class LectureServiceImpl implements LectureService{
 		
 		String president = result.getIsPresident();
 		Date time = result.getRightEndTime();
-		
+		logger.trace("isPresident:{}, RightEndTime:{}", president, time);
+		logger.trace("compare:{}", time.compareTo(getNextMidnight()));
 		if(president == null){
 			throw new WrongRequestException();
 		}
