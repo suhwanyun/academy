@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.ManagerService;
@@ -37,6 +39,9 @@ public class IndexController {
 	
 	@Autowired
 	LectureService lecService;
+	
+	@Autowired
+	LectureNoticeService lecNotiService;
 	
 	@Autowired
 	PostingService postService;
@@ -141,7 +146,7 @@ public class IndexController {
 	
 	/** 학생이 선택한 강의의 메인 페이지 */
 	@RequestMapping(value="/lecture/lectureMain", method=RequestMethod.GET)
-	public String lectureMainPage(HttpSession session,
+	public String lectureMainPage(HttpSession session, Model model,
 			@RequestParam Integer lectureId, @RequestParam Integer lectureClass){
 		
 		// 에러 발생시 이동할 페이지
@@ -154,7 +159,14 @@ public class IndexController {
 			throw new WrongRequestException("신청하지 않은 강의의 정보는 확인하실 수 없습니다.");
 		}
 		String postingType = Posting.TYPE_LECTURE + "_" + lectureId + "_" + lectureClass;
+		// 게시판 초기화
 		boardMainSetup(session, postingType, null);
+		// 공지 목록
+		List<LectureNotice> noticeList = lecNotiService.lectureNoticeList(lectureId, lectureClass, 1);
+		if(noticeList.size() != 0){
+			model.addAttribute("noticeList", noticeList);
+		}
+		
 		return "/campus/lecture/lecture_main";
 	}
 	

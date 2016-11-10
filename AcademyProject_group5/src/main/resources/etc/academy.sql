@@ -133,7 +133,7 @@ CREATE TABLE NotificationSetting
 CREATE TABLE Posting
 (
 	posting_id number NOT NULL,
-	posting_type varchar2(10) NOT NULL,
+	posting_type varchar2(50) NOT NULL,
 	user_id varchar2(10) NOT NULL,
 	posting_time date NOT NULL,
 	posting_hits number NOT NULL,
