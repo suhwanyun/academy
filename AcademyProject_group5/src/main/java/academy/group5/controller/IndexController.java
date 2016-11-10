@@ -267,22 +267,21 @@ public class IndexController {
 	}	
 	
 	/** 게시판 메인 페이지 초기화 설정 */
-	private void boardMainSetup(HttpSession session, String PostingType, Integer recommendPeriod){
-		
+	private void boardMainSetup(HttpSession session, String postingType, Integer recommendPeriod){
 		session.removeAttribute("mostRecommendData");	
 		// 제일 추천을 많이 받은 게시글은 따로 전달(강의 게시판 제외)
 		if(recommendPeriod != null){
 			Posting mostRecommendData = postService.mostRecommend(
-					new MostRecommend(PostingType, recommendPeriod));
+					new MostRecommend(postingType, recommendPeriod));
 			
 			if(mostRecommendData != null){
 				session.setAttribute("mostRecommendData", mostRecommendData);
 			}
 		}
 		
-		List<Posting> postingList = postService.postingList(1, PostingType);
+		List<Posting> postingList = postService.postingList(1, postingType);
 		session.setAttribute("postingDataList", postingList);
-		session.setAttribute("postingType", PostingType);
+		session.setAttribute("postingType", postingType);
 		
 		session.removeAttribute("searchType");
 		session.removeAttribute("searchData");

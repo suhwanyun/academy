@@ -29,6 +29,10 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
+	/** 한 페이지에 표시되는 마일리지 상품의 수 */
+	private final int MILEAGE_PRODUCT_MAX_PAGE = 10;
+	/** 한 페이지에 표시되는 마일리지의 수 */
+	private final int MILEAGE_MAX_PAGE = 10;
 	
 	@Override
 	public String managerLogin(String managerId, String managerPass) {
@@ -206,16 +210,30 @@ public class ManagerServiceImpl implements ManagerService {
 		throw new WrongRequestException(errorStr);
 	}
 	
-	/** ----------------------------마일리지---------------------------- */
+	// ----------------------------마일리지---------------------------- */
 
 	@Override
-	public boolean registerProduct(MileageProduct mileageProduct) {
-		// TODO Auto-generated method stub
+	public List<MileageProduct> getAllProduct(int page, String orderType, boolean isAsc) {
+		return managerRepo.getAllMileageProduct(new Paging(page, MILEAGE_PRODUCT_MAX_PAGE, null, null, null, orderType, isAsc));
+	}
+	
+	@Override
+	public MileageProduct getProduct(int productId) {
+		MileageProduct productData = managerRepo.getMileageProduct(productId);
+		if(productData == null) {
+			throw new WrongRequestException();
+		}
+		return productData;
+	}
+	@Override
+	public boolean registerProduct(String productName, int productCost, String productContent, String productImgfile) {
+		int result = managerRepo.setMileageProduct(
+				new MileageProduct(productName, productCost, productContent));
 		return false;
 	}
 
 	@Override
-	public boolean updateProduct(MileageProduct mileageProduct) {
+	public boolean updateProduct(int productId, String productName, int productCost, String productContent, String productImgfile) {
 		// TODO Auto-generated method stub
 		return false;
 	}

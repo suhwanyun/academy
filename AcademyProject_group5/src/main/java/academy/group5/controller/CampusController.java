@@ -84,6 +84,8 @@ public class CampusController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/notiList");
+		// 현재 열린 탭 저장
+		model.addAttribute("nowTab", "notification");
 				
 		LectureNotice noticeData = lecNotiService.lectureNoticeInfo(lectureNoticeId);
 		model.addAttribute("lectureNotice", noticeData);

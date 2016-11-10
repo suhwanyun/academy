@@ -42,7 +42,7 @@ public class Paging {
 	}
 
 	public Paging(int page, int size, String postingType, String searchData, String searchDataType, String orderType){
-		this(page, size, null, searchData, searchDataType, orderType, true);
+		this(page, size, postingType, searchData, searchDataType, orderType, true);
 	}
 	
 	public Paging(int page, int size, String postingType, String searchData, String searchDataType, String orderType, boolean isAsc){

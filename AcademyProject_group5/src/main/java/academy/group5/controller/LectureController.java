@@ -32,21 +32,6 @@ public class LectureController {
 	
 	Identify identify = new Identify();
 	
-	/** 학생이 선택한 강의의 게시판 페이지 */
-	@RequestMapping(value="/lecture/lectureBoard", method=RequestMethod.GET)
-	public String lectureBoard(){
-		
-		return "/campus/lecture/lecture_board";
-	}
-	
-	/** 학생이 선택한 강의의 게시판에 글 작성 */
-	@RequestMapping(value="/lecture/lectureBoardAdd", method=RequestMethod.GET)
-	public String lectureBoardAdd(){
-		
-		return "/campus/lecture/lecture_board_add";
-	}
-	
-	
 	/** 학생이 선택한 강의의 공지사항 목록 */
 	@RequestMapping(value="/lecture/lectureNotiList", method=RequestMethod.GET)
 	public String lectureNotiList(){

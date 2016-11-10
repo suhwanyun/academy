@@ -104,20 +104,30 @@ public interface ManagerService {
 	 */
 	void deleteAllLectureTime(Lecture lectureData);
 	boolean deleteLectureTime(Integer lectureTimeId);
-	
-	/*List<MileageProduct> getAllProduct(int page);*/
+	/**
+	 * 마일리지 물품 리스트 확인
+	 * @param page
+	 * @return
+	 */
+	List<MileageProduct> getAllProduct(int page, String orderType, boolean isAsc);
+	/**
+	 * 마일리지 물품 정보 확인
+	 * @param productId
+	 * @return
+	 */
+	MileageProduct getProduct(int productId);
 	/**
 	 * 상품 등록
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean registerProduct(MileageProduct mileageProduct);
+	boolean registerProduct(String productName, int productCost, String productContent, String productImgfile);
 	/**
 	 * 상품 수정
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean updateProduct(MileageProduct mileageProduct);
+	boolean updateProduct(int productId, String productName, int productCost, String productContent, String productImgfile);
 	/**
 	 * 상품 삭제
 	 * @param productId
