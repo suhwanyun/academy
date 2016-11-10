@@ -228,8 +228,12 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public boolean registerProduct(String productName, int productCost, String productContent, String productImgfile) {
 		int result = managerRepo.setMileageProduct(
-				new MileageProduct(productName, productCost, productContent));
-		return false;
+				new MileageProduct(productName, productCost, productContent, 
+						productImgfile == null ? PostingService.DEFAULT_PHOTO_NAME : productImgfile));
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override

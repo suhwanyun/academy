@@ -193,12 +193,6 @@
 		values (#{productName}, #{productCost}, #{productContent}, #{productImgfile})
 	</insert>
 	
-	<!-- <update id="updatePhoto" parameterType="mileage_product">
-		update MileageProduct
-		set product_imgfile = #{productImgfile}
-		where (select )
-	</update> -->
-	
 	<update id="updateMileageProduct" parameterType="mileage_product">
 		update MileageProduct
 		set product_name = #{productName},

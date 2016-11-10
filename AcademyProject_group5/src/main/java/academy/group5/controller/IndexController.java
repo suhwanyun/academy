@@ -210,7 +210,7 @@ public class IndexController {
 	@RequestMapping(value="/write/lecturejsp", method=RequestMethod.GET)
 	public String addLecturePostingPage(HttpSession session, Model model){
 		setPrevPostingData(session, model, null);
-		return "/campus/lecture/lecture_add";
+		return "/campus/lecture/lecture_board_add";
 	}
 	
 	

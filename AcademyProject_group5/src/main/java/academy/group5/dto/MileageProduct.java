@@ -30,11 +30,12 @@ public class MileageProduct {
 	/** 보유 마일리지 상품 목록. *//*
 	private Set<Usermileage> usermileageSet;*/
 	
-	public MileageProduct(String productName, Integer productCost, String productContent) {
+	public MileageProduct(String productName, Integer productCost, String productContent, String productImgfile) {
 		super();
 		this.productName = productName;
 		this.productCost = productCost;
 		this.productContent = productContent;
+		this.productImgfile = productImgfile;
 	}
 
 }
