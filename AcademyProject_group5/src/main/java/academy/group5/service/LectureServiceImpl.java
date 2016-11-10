@@ -164,15 +164,15 @@ public class LectureServiceImpl implements LectureService{
 		if(president == null){
 			throw new WrongRequestException();
 		}
-		// 처음부터 반장이 아님
-		else if(president.equals("N")){
-			return false;
-		// (임시)반장
-		} else if(time != null && time.compareTo(getNextMidnight()) <= 0){
+		// 처음부터 반장이 아니거나, 임시 반장이었으나 기간이 지남	
+		else if(president.equals("N") ||
+				(president.equals("Y") && time != null && 
+				 time.compareTo(getNextMidnight()) > 0)){
+			return false;	
+		}
+		// 반장
+		else{
 			return true;
-		// (임시)반장이었으나 기간이 지남
-		} else{
-			return false;
 		}
 	}
 	
