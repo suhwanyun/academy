@@ -32,6 +32,6 @@ public interface LectureNoticeService {
 	 * @param lecturenotice
 	 * @return
 	 */
-	boolean postNotice(LectureNotice lecturenotice);
+	boolean postNotice(LectureNotice lecturenotice, Date noticeDay, Date noticeTime);
 	
 }

@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,11 @@ public class GCM {
 		this(msg, submsg, new ArrayList<>(userIdSet), msgtype);
 	}
 	
-	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
+	public GCM(String msg, String submsg, List<String> userIdList, String msgtype){
+		this(msg, submsg, userIdList, msgtype, null);
+	}
+	
+	public GCM(String msg, String submsg, List<String> userIdList, String msgtype, Calendar targetCal) {
 
 		String title = null;
 		
@@ -52,7 +57,9 @@ public class GCM {
 		if(submsg != null){
 			builder.addData("submsg", submsg);
 		}
-		
+		if(targetCal != null){
+			builder.addData("targetCal", targetCal.toString());
+		}
 		Message message = builder.build();
 		
 		try {

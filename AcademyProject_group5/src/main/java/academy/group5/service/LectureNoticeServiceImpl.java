@@ -1,11 +1,14 @@
 package academy.group5.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.etc.LecturePaging;
 import academy.group5.dto.etc.UserLectureNotice;
@@ -55,20 +58,32 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		return noticeData;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean postNotice(LectureNotice lectureNotice) {
+	public boolean postNotice(LectureNotice lectureNotice, Date noticeDay, Date noticeTime) {
 		int result = notiRepo.setLectureNotice(lectureNotice);
 		if(result != 1){
 			throw new WrongRequestException();
-		} else {
-			
-			
-			// 메세지 PUSH
-			new GCM(lectureNotice.getNoticeTitle(), 
-					lectureNotice.getNoticeContent(),
-					gcmRepo.getAllUser(),
-					GCM.TYPE_NOTICE);
+		} 
+		Integer lectureId = lectureNotice.getLectureId();
+		Integer lectureClass = lectureNotice.getLectureClass();
+		List<String> userIdList = gcmRepo.getLectureApplyUser(new Lecture(lectureId, lectureClass));
+		Calendar noticeDate = null;
+		// 특정 시간에 띄울 알림인 경우
+		if(noticeDay != null && noticeTime != null) {
+			noticeDate = Calendar.getInstance();
+			noticeDate.setTime(noticeDay);
+			noticeDate.set(Calendar.HOUR_OF_DAY, noticeTime.getHours());
+			noticeDate.set(Calendar.MINUTE, noticeTime.getMinutes());
+			noticeDate.set(Calendar.SECOND, noticeTime.getSeconds());
 		}
+		// 메세지 PUSH
+		new GCM(lectureNotice.getNoticeTitle(), 
+				lectureNotice.getNoticeContent(),
+				userIdList,
+				GCM.TYPE_NOTICE,
+				noticeDate);
+		
 		return true;
 	}
 }

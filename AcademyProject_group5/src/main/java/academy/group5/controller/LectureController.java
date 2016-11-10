@@ -1,5 +1,6 @@
 package academy.group5.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -37,9 +38,11 @@ public class LectureController {
 	Identify identify = new Identify();
 	
 	/** 학생이 선택한 강의의 알림 등록 */
-	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.GET)
+	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.POST)
 	public String lectureNotiAdd(HttpSession session, @RequestParam String noticeType,
-			@RequestParam String noticeTitle, @RequestParam String noticeContent){
+			@RequestParam String noticeTitle, @RequestParam String noticeContent,
+			@RequestParam(required=false) Date noticeDay,
+			@RequestParam(required=false) Date noticeTime){
 		
 		Object idObj = session.getAttribute("lectureId");
 		Object classObj = session.getAttribute("lectureClass");
@@ -53,7 +56,8 @@ public class LectureController {
 		}
 		// 알림 등록
 		notiService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
-				noticeType, noticeTitle, noticeContent));
+				noticeType, noticeTitle, noticeContent),
+				noticeDay, noticeTime);
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}
