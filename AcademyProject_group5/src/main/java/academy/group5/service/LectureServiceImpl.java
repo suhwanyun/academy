@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ public class LectureServiceImpl implements LectureService{
 
 	@Autowired
 	LectureRepo lecRepo;
+	private static final Logger logger = LoggerFactory.getLogger(LectureServiceImpl.class);
 	
 	@Override
 	public List<Lecture> allLectureList(int page, String searchData, String searchType) {
@@ -103,6 +106,7 @@ public class LectureServiceImpl implements LectureService{
 		List<UserLectureTime> lectureTimeList = lecRepo.getUserLecture(userId);
 
 		for(UserLectureTime timeData : lectureTimeList){
+			logger.trace("lectureId:{}, userId:{}, lectureClass:{}", timeData.getLectureId(), userId, timeData.getLectureClass());
 			if(getIsPresident(timeData.getLectureId(), userId, timeData.getLectureClass())){
 				timeData.setIsPresident("Y");
 			} else {
