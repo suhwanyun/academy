@@ -230,7 +230,24 @@ public class IndexController {
 	
 	/** 강의 알림 등록 페이지 */
 	@RequestMapping(value="/write/lectureNotiAddjsp", method=RequestMethod.GET)
-	public String lectureNotiAddPage(){
+	public String lectureNotiAddPage(HttpSession session){
+		
+		Object idObj = session.getAttribute("lectureId");
+		Object classObj = session.getAttribute("lectureClass");
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		if(idObj != null && classObj != null){
+			session.setAttribute("errorGotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+		} else {
+			session.setAttribute("errorGotoPage", "/campus/campusMain");
+			throw new WrongRequestException();
+		}
+		
+		String userId = identify.getUserId(session);
+		
+		if(!lecService.getIsPresident((Integer)idObj, userId, (Integer)classObj)){
+			throw new WrongRequestException("반장만 등록할 수 있습니다.");
+		}
 		
 		return "/campus/lecture/lecture_noti_add";
 	}
