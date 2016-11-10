@@ -188,16 +188,13 @@ public class BoardController {
 			failMappingStr = "/write/foodUpdatejsp?postingId=" + postingId;
 			break;
 		case Posting.TYPE_PLAY:
-			// 사용자 입력 오류시 복구할 페이지
 			failMappingStr = "/write/playUpdatejsp?postingId=" + postingId;
 			break;
 		case Posting.TYPE_PLACE:
-			// 사용자 입력 오류시 복구할 페이지
 			failMappingStr = "/write/placeUpdatejsp?postingId=" + postingId;
 			break;
-		default: // 학업 게시판, 미구현
-			// 사용자 입력 오류시 복구할 페이지
-			failMappingStr = "/index";
+		default:
+			failMappingStr = "/write/lectureUpdatejsp?postingId=" + postingId;
 			break;
 		}
 		
@@ -424,9 +421,9 @@ public class BoardController {
 			session.setAttribute("errorGotoPage", "/placeMain");
 			session.setAttribute("gotoPage", "/placeMain");
 			break;
-		default: // 학업 게시판, 미구현
-			session.setAttribute("errorGotoPage", "/main");
-			session.setAttribute("gotoPage", "/main");
+		default:
+			session.setAttribute("errorGotoPage", "/lecture/lectureMain");
+			session.setAttribute("gotoPage", "/lecture/lectureMain");
 			break;
 		}
 		
