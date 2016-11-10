@@ -149,7 +149,7 @@ CREATE TABLE PostingComment
 (
 	comment_id number NOT NULL,
 	posting_id number NOT NULL,
-	posting_type varchar2(10) NOT NULL,
+	posting_type varchar2(50) NOT NULL,
 	user_id varchar2(10),
 	comment_parent_id number,
 	comment_time date NOT NULL,
@@ -161,7 +161,7 @@ CREATE TABLE PostingComment
 CREATE TABLE Recommend
 (
 	posting_id number NOT NULL,
-	posting_type varchar2(10) NOT NULL,
+	posting_type varchar2(50) NOT NULL,
 	user_id varchar2(10) NOT NULL,
 	CONSTRAINT Recommend_PK PRIMARY KEY (posting_id, posting_type, user_id)
 );
