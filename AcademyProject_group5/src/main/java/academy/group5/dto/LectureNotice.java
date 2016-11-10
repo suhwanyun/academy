@@ -32,4 +32,16 @@ public class LectureNotice {
 
 	/** 공지 내용. */
 	private String noticeContent;
+
+	public LectureNotice(Integer lectureId, Integer lectureClass, String noticeType, String noticeTitle,
+			String noticeContent) {
+		super();
+		this.lectureId = lectureId;
+		this.lectureClass = lectureClass;
+		this.noticeType = noticeType;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+	}
+	
+	
 }

@@ -10,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -30,16 +31,29 @@ public class LectureController {
 	@Autowired
 	LectureService lecService;
 	
+	@Autowired
+	LectureNoticeService notiService;
+	
 	Identify identify = new Identify();
 	
 	/** 학생이 선택한 강의의 알림 등록 */
 	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.GET)
-	public String lectureNotiAdd(HttpSession session){
-		// 에러 발생시 / 처리 완료시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		session.setAttribute("gotoPage", "/campus/campusMain");
+	public String lectureNotiAdd(HttpSession session, @RequestParam String noticeType,
+			@RequestParam String noticeTitle, @RequestParam String noticeContent){
 		
-		// 알림 등록 로직 필요
+		Object idObj = session.getAttribute("lectureId");
+		Object classObj = session.getAttribute("lectureClass");
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		if(idObj != null && classObj != null){
+			session.setAttribute("errorGotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+			session.setAttribute("gotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+		} else {
+			session.setAttribute("errorGotoPage", "/campus/campusMain");
+			throw new WrongRequestException();
+		}
+		// 알림 등록
+		notiService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
+				noticeType, noticeTitle, noticeContent));
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}

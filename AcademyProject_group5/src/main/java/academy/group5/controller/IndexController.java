@@ -153,6 +153,9 @@ public class IndexController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		// 현재 열린 탭 저장
 		session.setAttribute("nowTab", "selectedLectureList");
+		// 현재 선택된 강의 정보 저장
+		session.setAttribute("lectureId", lectureId);
+		session.setAttribute("lectureClass", lectureClass);
 				
 		String userId = identify.getUserId(session);
 		if(!lecService.isAppliedLecture(lectureId, userId, lectureClass)){
@@ -277,9 +280,14 @@ public class IndexController {
 	public String updateLecturePostingPage(Model model, HttpSession session, 
 			@RequestParam int postingId){
 		
+		Object idObj = session.getAttribute("lectureId");
+		Object classObj = session.getAttribute("lectureClass");
 		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lecture/lectureMain");
-
+		if(idObj != null && classObj != null){
+			session.setAttribute("errorGotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+		} else {
+			session.setAttribute("errorGotoPage", "/campus/campusMain");
+		}
 		getPostingData(model, session, postingId);
 		
 		return "/campus/lecture/lecture_update";

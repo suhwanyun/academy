@@ -56,16 +56,18 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	}
 
 	@Override
-	public boolean postNotice(LectureNotice lecturenotice) {
-		int result = notiRepo.setLectureNotice(lecturenotice);
+	public boolean postNotice(LectureNotice lectureNotice) {
+		int result = notiRepo.setLectureNotice(lectureNotice);
 		if(result != 1){
 			throw new WrongRequestException();
 		} else {
+			
+			
 			// 메세지 PUSH
-			new GCM(lecturenotice.getNoticeTitle(), 
-					lecturenotice.getNoticeContent(),
+			new GCM(lectureNotice.getNoticeTitle(), 
+					lectureNotice.getNoticeContent(),
 					gcmRepo.getAllUser(),
-					lecturenotice.getNoticeType());
+					GCM.TYPE_NOTICE);
 		}
 		return true;
 	}
