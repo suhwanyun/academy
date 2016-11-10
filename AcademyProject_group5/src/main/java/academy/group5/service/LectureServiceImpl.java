@@ -156,11 +156,9 @@ public class LectureServiceImpl implements LectureService{
 		if(result == null){
 			throw new WrongRequestException();
 		}
-		
 		String president = result.getIsPresident();
 		Date time = result.getRightEndTime();
-		logger.trace("isPresident:{}, RightEndTime:{}", president, time);
-		logger.trace("compare:{}", time.compareTo(getNextMidnight()));
+		
 		if(president == null){
 			throw new WrongRequestException();
 		}
