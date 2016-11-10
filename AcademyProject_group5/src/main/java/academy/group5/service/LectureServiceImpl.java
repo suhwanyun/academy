@@ -100,17 +100,12 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public List<UserLectureTime> userLectureList(String userId) {
-		// 다음날 0시 기준
-		Date nextMidnight = getNextMidnight();
 		List<UserLectureTime> lectureTimeList = lecRepo.getUserLecture(userId);
-		
+
 		for(UserLectureTime timeData : lectureTimeList){
-			Date rightEnd = timeData.getRightEndTime();
-			// 임시 반장 기간 확인
-			if(rightEnd != null
-					&& rightEnd.before(nextMidnight)){
+			if(getIsPresident(timeData.getLectureId(), userId, timeData.getLectureClass())){
 				timeData.setIsPresident("Y");
-			} else if(rightEnd != null){
+			} else {
 				timeData.setIsPresident("N");
 			}
 		}
@@ -166,7 +161,7 @@ public class LectureServiceImpl implements LectureService{
 		else if(president.equals("N")){
 			return false;
 		// (임시)반장
-		} else if(time != null && time.compareTo(new Date()) <= 0){
+		} else if(time != null && time.compareTo(getNextMidnight()) <= 0){
 			return true;
 		// (임시)반장이었으나 기간이 지남
 		} else{
