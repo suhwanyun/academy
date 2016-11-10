@@ -11,9 +11,9 @@
 	<div class="container">
 		<table id="dataTable" class="table">
 			<colgroup>
-				<col width="30">
-				<col width="40">
-				<col width="30">
+				<col width="40%">
+				<col width="40%">
+				<col width="20%">
 			</colgroup>
 			<tr>
 				<th>강의 이름</th>
@@ -21,11 +21,11 @@
 				<th>날 짜</th>
 			</tr>
 			<c:forEach items="${noticeList }" var="list">
-				<tr align="center" onclick="movePage(${list.lectureNoticeId })">
-					<td>${list.lectureName }</td>
-					<td>${list.noticeTitle }</td>
-					<td>${list.noticeTime }</td>
-				</tr>
+			<tr align="center" onclick="movePage(${list.lectureNoticeId })">
+				<td>${list.lectureName }</td>
+				<td>${list.noticeTitle }</td>
+				<td>${list.noticeTime }</td>
+			</tr>
 			</c:forEach>
 		</table>
 		<div align="center">

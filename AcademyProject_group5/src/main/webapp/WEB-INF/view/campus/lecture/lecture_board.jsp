@@ -7,10 +7,8 @@
 
 <body>
 
-<div class="container text-center">
-      	<h1>식사 게시판</h1>
-            <table class="table-condensed">
-           
+		<div class="container text-center">
+			<table class="table-condensed">
                <tr>
                   <td><select id="searchType">
                         <option selected="selected" value="user">작성자</option>
@@ -19,16 +17,16 @@
                         <option value="all">제목+내용</option>
 
                   </select></td>
-                  <td colspan="2"><input type="search" id="searchInput" ></td>
-                  <td class="text-center"><input type="button" id="searchBtn" class="bRight myButton"
-                     value="찾기"></td>
+                  <td><input type="search" id="searchInput" ></td>
+                  <td>
+					<input type="button" id="searchBtn" class="bRight myButton"
+                     value="찾기">
+				  </td>
                </tr>
-               
-               <tr>
-
-                  <td colspan="3">
-                     <input type="radio" name="sortVal" checked="checked" value="time">날짜
-                     <input type="radio" name="sortVal" value="recommend">추천
+               <tr >
+               	  <td>
+                  </td>
+                  <td>
                   </td>
                   <td>
                      <button id="writeBtn" class="myButton bRight">글쓰기</button>
@@ -36,8 +34,6 @@
                </tr>
               
             </table>
-		</div>
-		<div class="container text-center">
             <table class="list_table">
                <colgroup>
                   <col width="20%">
@@ -54,6 +50,7 @@
                   </tr>
                   <tr class="tableData" onclick="movePage(${list.postingId})">
                      <td>${list.userId }</td>
+                     <td></td>
                      <td>${list.postingTime }</td>
                   </tr>
                </c:forEach>
@@ -68,4 +65,84 @@
          </div>
 
 </body>
+<c:url value="/postingList" var="postingList"/>
+<c:url value="/postingSearch" var="postingSearch"/>
+<c:url value="/postingOrder" var="postingOrder"/>
+<script type="text/javascript">
+var pageIndex = 1;
+var nowSearching = 0;
+function dataSetting(list){
+	$(list).each(function (index, item){
+		$("#beforeLocation").before(
+			$("<tr class='tableData' onclick='movePage("+item.postingId+")'><td rowspan='2'><img class='imgBoard' onerror='errorFun(this);'"
+					+ "src=/upload/preview_"
+					+ item.postingPhoto
+					+ "/></td><td colspan='3'>"
+					+ item.postingTitle
+					+ "</td></tr><tr class='tableData' onclick='movePage("+item.postingId+")'><td>"
+					+ item.userId
+					+ "</td><td>"
+					+ ""
+					+ "</td><td>"
+					+ item.postingTime
+					+ "</td></tr>")
+					);
+	});
+}
+$("#searchBtn").click(function(){
+						pageIndex = 1;
+						$.ajax({
+							type : "get",
+							url : "${postingSearch}",
+							data : {
+									searchType : $("#searchType").val(),
+									searchData : $("#searchInput").val(),
+									orderData : ""
+									},
+									success : function(result) {
+										$(".tableData").remove();
+										nowSearching = $("#searchInput").val().length;
+																		
+										if (result.length == 0) {
+											alert("검색 결과가 없습니다.");
+										} else {
+											dataSetting(result);
+										}
+									}, error : function(){
+										alert("요청에 실패 하였습니다.");
+									}
+								});
+					});
+
+$("#moreBtn").click(function() {
+					pageIndex++;
+						$.ajax({
+								type : "get",
+								url : "${postingList}",
+								data : {
+										page : pageIndex
+										},
+								success : function(result) {
+									dataSetting(result);
+									if (result.length < 1) {
+											alert("더 이상 목록이 없습니다.");
+										}
+									},
+									error : function() {
+										alert("요청에 실패 하였습니다.");
+									}
+								});
+					});
+	$("#writeBtn").click(function() {
+		$(location).attr('href', "/write/lecturejsp");
+	});
+//맨위로 버튼
+$("#moveToStartBtn").click(function(){
+	$("html, body").animate({scrollTop: 0}, 1000);
+ });
+//페이지 이동 함수
+function movePage(el){
+	$(location).attr("href", "/postingInfo?postingId="+el);
+}
+</script>
 </html>

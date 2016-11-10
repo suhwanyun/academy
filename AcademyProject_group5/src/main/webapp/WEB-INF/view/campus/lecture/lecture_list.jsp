@@ -9,20 +9,31 @@
 <title>내 강의 목록</title>
 </head>
 <body>
-	<div class="container">
-		<table class="table">
+	<div  style="width: 500px;">
+		<table class="table table-bordered">
 			<tr>
 				<th>강의 명</th>
 				<th>담당 교수</th>
 				<th>강의 장소</th>
 				<th>강의 시간</th>
-				<th>반장 여부</th>
+				<th></th>
 			</tr>
-			<c:forEach items="${lectureList }" var="list">
+			<c:forEach items="${lectureList }" var="list"  varStatus="index">
 				<tr align="center" onclick="movePage(this, ${list.lectureId}, ${list.lectureClass })">
-					<td>${list.lectureName }&nbsp;${list.lectureClass }반</td>
-					<td>${list.professorName }</td>
-					<td>${list.lecturePlace }</td>
+					<c:choose>
+						<c:when test="${list.lectureId == lectureList[index.index +1].lectureId}">
+							<td rowspan="2">${list.lectureName }&nbsp;(${list.lectureClass })</td>
+							<td rowspan="2">${list.professorName }</td>
+							<td rowspan="2">${list.lecturePlace }</td>
+						</c:when>
+						<c:when test="${list.lectureId == lectureList[index.index -1].lectureId}">
+						</c:when>
+						<c:otherwise>
+							<td>${list.lectureName }&nbsp;(${list.lectureClass })</td>
+							<td>${list.professorName }</td>
+							<td>${list.lecturePlace }</td>
+						</c:otherwise>
+					</c:choose>
 					<td><c:choose>
 							<c:when test="${list.lectureWeek == 1}">
 									일요일
@@ -49,15 +60,25 @@
 									error
 								</c:otherwise>
 						</c:choose> &nbsp;${list.lectureStart }교시~${list.lectureEnd }교시</td>
-					<td>${list.isPresident }</td>
+					<c:if test="${list.isPresident =='Y'}">
+						<td><button class="myButton writeNoticeBtn">공지 쓰기</button></td>
+					</c:if>
+					
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 </body>
 <script type="text/javascript">
+$("document").ready(function(){
+	console.log("${lectureList }");
+})
 function movePage(el,id,Lclass){
 	$(location).attr("href", "/lecture/lectureMain?lectureId="+id+"&lectureClass="+Lclass);
 }
+$(".writeNoticeBtn").click(function(event){
+	event.stopPropagation();
+	$(location).attr("href","/write/lectureNotiAddjsp")
+});
 </script>
 </html>

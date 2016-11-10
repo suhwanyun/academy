@@ -9,7 +9,7 @@
 
 	<jsp:include page="/WEB-INF/view/header/header.jsp"></jsp:include>
 
-	<div class="container" style="margin-top: 5px;">
+	<div class="container">
 		<div class="btn-group btn-group-justified">
 			<a href="#" onclick="mylectureBtn()" class="btn btn-danger">내 강의</a>
 			<a href="#" onclick="notilistBtn()" class="btn btn-danger">전체 공지</a>
@@ -19,9 +19,8 @@
 
 
 
-		<div id="incluedjsp" style="overflow: scroll; width: 100%;"></div>
+		<div id="incluedjsp" style="overflow: scroll; width: 100%; height: 100%"></div>
 	</div>
-	<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
 </body>
 
 <script type="text/javascript">

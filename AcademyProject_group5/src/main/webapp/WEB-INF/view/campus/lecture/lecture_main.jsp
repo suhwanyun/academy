@@ -9,11 +9,11 @@
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container">
-		<div id="incluedjsp" style="overflow: scroll; width: 100%;">
+		<div id="incluedjsp">
 			<jsp:include page="/WEB-INF/view/campus/lecture/lecture_noti_list.jsp" />
+			<hr>
 			<jsp:include page="/WEB-INF/view/campus/lecture/lecture_board.jsp" />
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/view/footer/footer.jsp" />
 </body>
 </html>
