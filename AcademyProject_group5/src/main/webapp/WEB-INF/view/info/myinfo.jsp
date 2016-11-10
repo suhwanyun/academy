@@ -85,6 +85,7 @@
 		</div>
 		</sform:form>
 </div>
+<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
 </body>
 <script src="/js/validationcheck.js"></script>
 <script src="/js/myinfo.js"></script>

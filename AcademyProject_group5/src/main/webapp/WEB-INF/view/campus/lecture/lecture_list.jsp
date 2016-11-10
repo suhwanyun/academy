@@ -19,7 +19,7 @@
 				<th>반장 여부</th>
 			</tr>
 			<c:forEach items="${lectureList }" var="list">
-				<tr align="center" onclick="movePage(this)">
+				<tr align="center" onclick="movePage(this, ${list.lectureId}, ${list.lectureClass })">
 					<td>${list.lectureName }&nbsp;${list.lectureClass }반</td>
 					<td>${list.professorName }</td>
 					<td>${list.lecturePlace }</td>
@@ -56,9 +56,8 @@
 	</div>
 </body>
 <script type="text/javascript">
-function movePage(el){
-	alert("Ef");
-	$(location).attr("href", "#");
+function movePage(el,id,Lclass){
+	$(location).attr("href", "/lecture/lectureMain?lectureId="+id+"&lectureClass="+Lclass);
 }
 </script>
 </html>

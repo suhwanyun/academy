@@ -21,6 +21,7 @@
 
 		<div id="incluedjsp" style="overflow: scroll; width: 100%;"></div>
 	</div>
+	<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
 </body>
 
 <script type="text/javascript">

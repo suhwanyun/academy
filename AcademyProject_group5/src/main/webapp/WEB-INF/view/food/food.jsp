@@ -89,7 +89,7 @@
             </tr>
              </table>
          </div>
-
+	<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
    <!-- 테이블 종료 -->
 </body>
 <c:url value="/postingList" var="postingList"/>

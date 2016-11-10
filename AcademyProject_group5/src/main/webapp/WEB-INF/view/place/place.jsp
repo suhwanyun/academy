@@ -96,7 +96,7 @@
 
    <!-- 테이블 종료 -->
 </body>
-
+<jsp:include page="/WEB-INF/view/footer/footer.jsp" /> 
 <script type="text/javascript">
 <c:url value="/postingList" var="postingList"/>
 <c:url value="/postingSearch" var="postingSearch"/>
