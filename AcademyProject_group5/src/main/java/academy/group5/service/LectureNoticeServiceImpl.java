@@ -71,11 +71,18 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		Calendar noticeDate = null;
 		// 특정 시간에 띄울 알림인 경우
 		if(noticeDay != null && noticeTime != null) {
+			
 			noticeDate = Calendar.getInstance();
 			noticeDate.setTime(noticeDay);
 			noticeDate.set(Calendar.HOUR_OF_DAY, noticeTime.getHours());
 			noticeDate.set(Calendar.MINUTE, noticeTime.getMinutes());
 			noticeDate.set(Calendar.SECOND, noticeTime.getSeconds());
+			
+			// 시간이 과거로 설정된 경우
+			Calendar today = Calendar.getInstance();
+			if(noticeDate.before(today)){
+				throw new WrongRequestException("알림 시간이 잘못 설정되었습니다.");
+			}
 		}
 		// 메세지 PUSH
 		new GCM(lectureNotice.getNoticeTitle(), 
