@@ -115,7 +115,7 @@ public class ManageController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/addjsp");
 		session.setAttribute("gotoPage", "/lectureManage/main");
-		service.registerLecture(lectureId, lectureName, professorName, lectureClass);	
+		service.registLecture(lectureId, lectureName, professorName, lectureClass);	
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}
@@ -133,7 +133,7 @@ public class ManageController {
 		}
 		session.setAttribute("errorGotoPage", "/lectureManage/timeAddjsp?lectureId="+lectureId+"&lectureClass="+LectureClass);
 		session.setAttribute("gotoPage", "/lectureManage/main");
-		service.registerLectureTime(timeData);
+		service.registLectureTime(timeData);
 
 		throw new PageRedirectException("등록되었습니다.");
 	}

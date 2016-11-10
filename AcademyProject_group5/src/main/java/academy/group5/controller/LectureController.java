@@ -32,25 +32,16 @@ public class LectureController {
 	
 	Identify identify = new Identify();
 	
-	/** 학생이 선택한 강의의 공지사항 목록 */
-	@RequestMapping(value="/lecture/lectureNotiList", method=RequestMethod.GET)
-	public String lectureNotiList(){
-		
-		return "/campus/lecture/lecture_noti_list";
-	}
-	
-	/** 학생이 선택한 강의의 공지사항 중 선택한 공지의 정보 */
-	@RequestMapping(value="/lecture/lectureNotiInfo", method=RequestMethod.GET)
-	public String lectureNotiInfo(){
-		
-		return "/campus/lecture/lecture_noti_info";
-	}
-	
 	/** 학생이 선택한 강의의 알림 등록 */
 	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.GET)
-	public String lectureNotiAdd(){
+	public String lectureNotiAdd(HttpSession session){
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		session.setAttribute("gotoPage", "/campus/campusMain");
 		
-		return "/campus/lecture/lecture_noti_add";
+		// 알림 등록 로직 필요
+		
+		throw new PageRedirectException("등록되었습니다.");
 	}
 	  
 	/** 학생이 선택한 강의의 정보를 확인하거나 신청 취소 */

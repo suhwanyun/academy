@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
+import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 import academy.group5.dto.etc.Paging;
@@ -49,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerTerm(Term term) {
+	public boolean registTerm(Term term) {
 		if(termRepo.getTermByTerm(term) == null && termRepo.getTermByDate(term).size() == 0){		
 			termRepo.setTerm(term);
 			return true;
@@ -59,7 +60,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass) {
+	public boolean registLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass) {
 		
 		Lecture lectureData = new Lecture(lectureId, lectureClass, lectureName, professorName);
 		
@@ -76,7 +77,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registerLectureTime(LectureTime lectureTime) {
+	public boolean registLectureTime(LectureTime lectureTime) {
 		// 중복 확인
 		List<LectureTime> alreadyRegistList = managerRepo.getAlreadyLectureTime(lectureTime);
 		isAlreadyRectureTimeErrorOccurred(alreadyRegistList);
@@ -212,6 +213,32 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	// ----------------------------마일리지---------------------------- */
 
+	public List<Mileage> getAllMileage(int page, String orderType, boolean isAsc) {
+		return managerRepo.getAllMileage(new Paging(page, MILEAGE_MAX_PAGE, null, null, null, orderType, isAsc));
+	}
+	
+	@Override
+	public boolean registMileage(String mileName, int mileValue) {
+		if(managerRepo.getMileage(mileName) != null){
+			throw new WrongRequestException("이미 등록된 이름입니다.");
+		}
+		int result = managerRepo.setMileage(new Mileage(mileName, mileValue));
+		
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteMileage(String mileName) {
+		int result = managerRepo.delMileage(mileName);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
+	}
+	
 	@Override
 	public List<MileageProduct> getAllProduct(int page, String orderType, boolean isAsc) {
 		return managerRepo.getAllMileageProduct(new Paging(page, MILEAGE_PRODUCT_MAX_PAGE, null, null, null, orderType, isAsc));
@@ -225,6 +252,7 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return productData;
 	}
+	
 	@Override
 	public boolean registerProduct(String productName, int productCost, String productContent, String productImgfile) {
 		productContent = productContent.replaceAll("\n", "<br>");

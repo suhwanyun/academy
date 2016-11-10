@@ -4,6 +4,7 @@ import java.util.List;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 
@@ -23,20 +24,20 @@ public interface ManagerService {
 	 * @param term
 	 * @return
 	 */
-	boolean registerTerm(Term term);
+	boolean registTerm(Term term);
 	
 	/**
 	 * 강의등록
 	 * @param lecture
 	 * @return
 	 */
-	boolean registerLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass);
+	boolean registLecture(Integer lectureId, String lectureName, String professorName, Integer lectureClass);
 	/**
 	 * 강의 시간 등록
 	 * @param UserLectureTime
 	 * @return
 	 */
-	boolean registerLectureTime(LectureTime lecturetime);
+	boolean registLectureTime(LectureTime lecturetime);
 	
 	/**
 	 * 전체 강의 리스트 불러오기
@@ -104,6 +105,28 @@ public interface ManagerService {
 	 */
 	void deleteAllLectureTime(Lecture lectureData);
 	boolean deleteLectureTime(Integer lectureTimeId);
+	
+	/**
+	 * 마일리지 리스트 확인
+	 * @param page
+	 * @param orderType
+	 * @param isAsc 정렬방향(default: 오름차순 / false: 내림차순)
+	 * @return
+	 */
+	List<Mileage> getAllMileage(int page, String orderType, boolean isAsc);
+	/**
+	 * 마일리지 설정
+	 * @param mileName
+	 * @param mileValue
+	 * @return
+	 */
+	boolean registMileage(String mileName, int mileValue);
+	/**
+	 * 마일리지 제거
+	 * @param mileName
+	 * @return
+	 */
+	boolean deleteMileage(String mileName);
 	/**
 	 * 마일리지 물품 리스트 확인
 	 * @param page

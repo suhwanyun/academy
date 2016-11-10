@@ -225,6 +225,13 @@ public class IndexController {
 		return "/campus/lecture/lecture_board_add";
 	}
 	
+	/** 강의 알림 등록 페이지 */
+	@RequestMapping(value="/write/lectureNotiAddjsp", method=RequestMethod.GET)
+	public String lectureNotiAddPage(){
+		
+		return "/campus/lecture/lecture_noti_add";
+	}
+	
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)
