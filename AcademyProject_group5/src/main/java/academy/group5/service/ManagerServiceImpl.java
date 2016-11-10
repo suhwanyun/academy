@@ -227,6 +227,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	@Override
 	public boolean registerProduct(String productName, int productCost, String productContent, String productImgfile) {
+		productContent = productContent.replaceAll("\n", "<br>");
 		int result = managerRepo.setMileageProduct(
 				new MileageProduct(productName, productCost, productContent, 
 						productImgfile == null ? PostingService.DEFAULT_PHOTO_NAME : productImgfile));
@@ -238,17 +239,25 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public boolean updateProduct(int productId, String productName, int productCost, String productContent, String productImgfile) {
-		// TODO Auto-generated method stub
-		return false;
+		productContent = productContent.replaceAll("\n", "<br>");
+		int result = managerRepo.updateMileageProduct(
+				new MileageProduct(productName, productCost, productContent, productImgfile));
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override
 	public boolean deleteProduct(Integer productId) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = managerRepo.delMileageProduct(productId);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 	
-	/** ----------------------------기타 로직---------------------------- */
+	// ----------------------------기타 로직---------------------------- */
 
 	/** 암호화 */
 	private Manager toHash(Manager data){

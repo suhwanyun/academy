@@ -110,7 +110,7 @@ public class IndexController {
 		return "/info/myinfo";		
 	}
 	
-	/** -----------------------메뉴 메인 페이지----------------------- */
+	// -----------------------메뉴 메인 페이지----------------------- */
 	
 	/** 학업 메뉴 메인 페이지 */
 	@RequestMapping(value="/campus/campusMain", method=RequestMethod.GET)
@@ -195,7 +195,7 @@ public class IndexController {
 		return "/manage/lecture/lecture";
 	}
 	
-	/** -----------------------게시판 페이지 연결----------------------- */
+	// -----------------------게시판 페이지 연결----------------------- */
 	
 	/** 식사(먹거리)추천 게시판 글 작성 페이지 */
 	@RequestMapping(value="/write/foodjsp", method=RequestMethod.GET)

@@ -21,7 +21,7 @@ public class ManagerRepo {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	/** ---------------------------강의등록 관리자--------------------------- */
+	// ---------------------------강의등록 관리자--------------------------- */
 	
 	public String getManager(Manager managerData) {
 		String stmt = MANAGER_NS + "selectManager";
@@ -93,7 +93,7 @@ public class ManagerRepo {
 		return session.delete(stmt, timeId);
 	}
 	
-	/** ---------------------------마일리지 관리자--------------------------- */
+	// ---------------------------마일리지 관리자--------------------------- */
 	
 	public List<Mileage> getAllMileage(Paging pageData) {
 		String stmt = MANAGER_NS + "selectAllMileage";
