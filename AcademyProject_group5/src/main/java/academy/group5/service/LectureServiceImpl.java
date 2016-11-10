@@ -174,6 +174,7 @@ public class LectureServiceImpl implements LectureService{
 		}
 	}
 	
+	/** 내일 0시 Date 리턴 함수 */
 	private Date getNextMidnight(){
 		Calendar calInst = Calendar.getInstance();
 		calInst.add(Calendar.DAY_OF_MONTH, 1);
