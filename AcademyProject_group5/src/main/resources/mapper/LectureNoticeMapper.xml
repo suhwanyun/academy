@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="selectLectureNotice" parameterType="lecture_paging" resultType="lecture_notice">
-		select notice_time, notice_type, notice_title
+		select lecture_notice_id, notice_time, notice_type, notice_title
 		from (select rownum as rnum, sub.*
 			  from (select *
 			 	 	from LectureNotice 
