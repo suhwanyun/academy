@@ -304,27 +304,6 @@ public class LectureServiceImpl implements LectureService{
 		
 		return nextTimeList;
 	}
-	// 강의 시간 계산 기준
-	// 1교시 = 9시 = 8 + 1
-	private final int FIRST_CLASS_CRITERIA = 8; 
-	
-	/** 돌아오는 다음 강의 날짜 계산 */
-	private Date getNextLectureDate(int lectureWeek, int startTime){
-		
-		
-		Calendar lectureCal = Calendar.getInstance();
-		lectureCal.set(Calendar.DAY_OF_WEEK, lectureWeek);
-		lectureCal.set(Calendar.HOUR_OF_DAY, startTime + FIRST_CLASS_CRITERIA);
-		lectureCal.set(Calendar.MINUTE, 0);
-		lectureCal.set(Calendar.SECOND, 0);
-		
-		// 이미 지났으면 다음주로 설정
-		if(lectureCal.before(Calendar.getInstance())){
-			lectureCal.add(Calendar.DAY_OF_MONTH, 7);
-		}
-		
-		return lectureCal.getTime();
-	}
 
 	@Override
 	public List<String> getLectureTimeStrList(List<LectureTime> lectureTimeList) {
@@ -341,5 +320,26 @@ public class LectureServiceImpl implements LectureService{
 			selectStrList.add(str);
 		}
 		return selectStrList;
+	}
+	
+	// 강의 시간 계산 기준
+	// 1교시 = 9시 = 8 + 1
+	private final int FIRST_CLASS_CRITERIA = 8; 
+	
+	/** 돌아오는 다음 강의 날짜 계산 */
+	private Date getNextLectureDate(int lectureWeek, int startTime){
+		
+		Calendar lectureCal = Calendar.getInstance();
+		lectureCal.set(Calendar.DAY_OF_WEEK, lectureWeek);
+		lectureCal.set(Calendar.HOUR_OF_DAY, startTime + FIRST_CLASS_CRITERIA);
+		lectureCal.set(Calendar.MINUTE, 0);
+		lectureCal.set(Calendar.SECOND, 0);
+		
+		// 이미 지났으면 다음주로 설정
+		if(lectureCal.before(Calendar.getInstance())){
+			lectureCal.add(Calendar.DAY_OF_MONTH, 7);
+		}
+		
+		return lectureCal.getTime();
 	}
 }
