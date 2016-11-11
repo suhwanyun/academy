@@ -32,9 +32,6 @@ public class LectureController {
 	@Autowired
 	LectureService lecService;
 	
-	@Autowired
-	LectureNoticeService notiService;
-	
 	Identify identify = new Identify();
 	
 	/** 학생이 선택한 강의의 알림 등록 */
@@ -62,7 +59,7 @@ public class LectureController {
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
 		// 알림 등록
-		notiService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
+		lecService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
 				noticeType, noticeTitle, noticeContent),
 				noticeDay, noticeTime);
 		

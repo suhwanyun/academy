@@ -94,4 +94,9 @@
 		from Lecture
 	</select>
 	
+	<insert id="insertLectureCancel" parameterType="cencel_lecture">
+		insert into CancelLecture
+		values(#{cancelDate}, #{lectureTimeId})
+	</insert>
+	
 </mapper>

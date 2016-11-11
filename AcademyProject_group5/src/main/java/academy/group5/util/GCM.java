@@ -23,11 +23,7 @@ public class GCM {
 		this(msg, submsg, new ArrayList<>(userIdSet), msgtype);
 	}
 	
-	public GCM(String msg, String submsg, List<String> userIdList, String msgtype){
-		this(msg, submsg, userIdList, msgtype, null);
-	}
-	
-	public GCM(String msg, String submsg, List<String> userIdList, String msgtype, Calendar targetCal) {
+	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
 
 		String title = null;
 		
@@ -57,9 +53,7 @@ public class GCM {
 		if(submsg != null){
 			builder.addData("submsg", submsg);
 		}
-		if(targetCal != null){
-			builder.addData("targetCal", targetCal.toString());
-		}
+
 		Message message = builder.build();
 		
 		try {

@@ -17,6 +17,7 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureNoticeService;
@@ -230,7 +231,7 @@ public class IndexController {
 	
 	/** 강의 알림 등록 페이지 */
 	@RequestMapping(value="/write/lectureNotiAddjsp", method=RequestMethod.GET)
-	public String lectureNotiAddPage(HttpSession session){
+	public String lectureNotiAddPage(HttpSession session, Model model){
 		
 		Object idObj = session.getAttribute("lectureId");
 		Object classObj = session.getAttribute("lectureClass");
@@ -242,12 +243,18 @@ public class IndexController {
 			session.setAttribute("errorGotoPage", "/campus/campusMain");
 			throw new WrongRequestException();
 		}
+		Integer lectureId = (Integer)idObj;
+		Integer lectureClass = (Integer)classObj;
 		
 		String userId = identify.getUserId(session);
 		
-		if(!lecService.getIsPresident((Integer)idObj, userId, (Integer)classObj)){
+		if(!lecService.getIsPresident(lectureId, userId, lectureClass)){
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
+		
+		List<NextLectureTime> nextLectureTimeList = lecService.getNextLectureTime(lectureId, lectureClass);
+		// 다음 강의 시간 목록
+		model.addAttribute("nextLectureTime", nextLectureTimeList);
 		
 		return "/campus/lecture/lecture_noti_add";
 	}

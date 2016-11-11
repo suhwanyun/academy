@@ -9,11 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import academy.group5.dto.Term;
 import academy.group5.dto.etc.Voting;
+import academy.group5.util.MyDate;
 
 @Repository
 public class TermRepo {
 	
 	private final String TERM_NS = "academy.repo.TermMapper.";
+	
+	MyDate mydate = new MyDate();
 	
 	@Autowired
 	SqlSessionTemplate session;
@@ -40,12 +43,14 @@ public class TermRepo {
 	
 	public Date getNextTermStartDate() {
 		String stmt = TERM_NS + "selectAfterTermStartingDate";
-		return session.selectOne(stmt);
+		Date date = session.selectOne(stmt);
+		return mydate.getStartDate(date);
 	}
 	
 	public Date getTermEndDate() {
 		String stmt = TERM_NS + "selectTermEndDate";
-		return session.selectOne(stmt);
+		Date date = session.selectOne(stmt);
+		return mydate.getEndDate(date);
 	}
 	
 	/** 반장투표 인원수 확인 */

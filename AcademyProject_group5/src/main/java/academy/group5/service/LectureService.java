@@ -1,9 +1,12 @@
 package academy.group5.service;
 
+import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.dto.etc.UserLectureTime;
 
 public interface LectureService {
@@ -71,6 +74,17 @@ public interface LectureService {
 	 * @return
 	 */
 	boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass);
-	
-
+	/**
+	 * 강의 공지 작성
+	 * @param lecturenotice
+	 * @return
+	 */
+	boolean postNotice(LectureNotice lecturenotice, Date noticeDay, Date noticeTime);
+	/**
+	 * 다음 강의 날짜 확인
+	 * @param lectureId
+	 * @param lectureClas
+	 * @return
+	 */
+	List<NextLectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass);
 }

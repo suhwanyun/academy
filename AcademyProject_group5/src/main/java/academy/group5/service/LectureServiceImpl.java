@@ -1,22 +1,29 @@
 package academy.group5.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import academy.group5.dto.CancelLecture;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
+import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.dto.etc.Paging;
 import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.repo.GCMRepo;
+import academy.group5.repo.LectureNoticeRepo;
 import academy.group5.repo.LectureRepo;
+import academy.group5.repo.TermRepo;
+import academy.group5.util.GCM;
+import academy.group5.util.MyDate;
 
 @Service
 @Transactional
@@ -27,8 +34,16 @@ public class LectureServiceImpl implements LectureService{
 	@Autowired
 	LectureRepo lecRepo;
 	
-	private static final Logger logger = LoggerFactory.getLogger(LectureServiceImpl.class);
+	@Autowired
+	LectureNoticeRepo notiRepo;
 	
+	@Autowired
+	TermRepo termRepo;
+	
+	@Autowired
+	GCMRepo gcmRepo;
+	
+	MyDate dateUtil = new MyDate();
 	
 	@Override
 	public List<Lecture> allLectureList(int page, String searchData, String searchType) {
@@ -165,7 +180,7 @@ public class LectureServiceImpl implements LectureService{
 		// 처음부터 반장이 아니거나, 임시 반장이었으나 기간이 지남	
 		else if(president.equals("N") ||
 				(president.equals("Y") && time != null && 
-				 time.compareTo(getNextMidnight()) > 0)){
+				 time.compareTo(dateUtil.getTodayEnd()) > 0)){
 			return false;	
 		}
 		// 반장
@@ -174,15 +189,91 @@ public class LectureServiceImpl implements LectureService{
 		}
 	}
 	
-	/** 내일 0시 Date 리턴 함수 */
-	private Date getNextMidnight(){
-		Calendar calInst = Calendar.getInstance();
-		calInst.add(Calendar.DAY_OF_MONTH, 1);
-		calInst.set(Calendar.HOUR_OF_DAY, 0);
-		calInst.set(Calendar.MINUTE, 0);
-		calInst.set(Calendar.SECOND, 0);
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean postNotice(LectureNotice lectureNotice, Date noticeDay, Date noticeTime) {
 		
-		return calInst.getTime();
+		Integer lectureId = lectureNotice.getLectureId();
+		Integer lectureClass = lectureNotice.getLectureClass();
+		// 강의 시간이 변경된 경우
+		if(noticeDay != null && noticeTime != null) {
+			
+			Calendar noticeDate = Calendar.getInstance();
+			noticeDate.setTime(noticeDay);
+			noticeDate.set(Calendar.HOUR_OF_DAY, noticeTime.getHours());
+			noticeDate.set(Calendar.MINUTE, noticeTime.getMinutes());
+			noticeDate.set(Calendar.SECOND, noticeTime.getSeconds());
+			
+			// 시간이 과거로 설정된 경우
+			Calendar today = Calendar.getInstance();
+			if(noticeDate.before(today)){
+				throw new WrongRequestException("강의 시간이 잘못 설정되었습니다.");
+			}
+			// 기존 강의 시간을 휴강 처리
+			lecRepo.setLectureCancel(new CancelLecture());
+		}
+				
+		int result = notiRepo.setLectureNotice(lectureNotice);
+		if(result != 1){
+			throw new WrongRequestException();
+		} 
+		
+		List<String> userIdList = gcmRepo.getLectureApplyUser(new Lecture(lectureId, lectureClass));
+	
+		// 메세지 PUSH
+		new GCM(lectureNotice.getNoticeTitle(), 
+				lectureNotice.getNoticeContent(),
+				userIdList,
+				GCM.TYPE_NOTICE);
+		
+		return true;
 	}
-
+	
+	@Override
+	public List<NextLectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass) {
+		List<LectureTime> timeList = lecRepo.getLectureTime(new Lecture(lectureId, lectureClass));
+		List<NextLectureTime> nextTimeList = new ArrayList<>();
+		
+		Date termEnd = termRepo.getTermEndDate();
+		if(termEnd == null){
+			throw new WrongRequestException();
+		}
+		
+		for(LectureTime timeData : timeList) {
+			// 다음 강의 시간
+			Date nextLectureTime = 
+					getNextLectureDate(timeData.getLectureWeek(), timeData.getLectureStart());
+			// 다음 강의 시간이 종강 이후이면
+			if(nextLectureTime.after(termEnd)){
+				continue;
+			}
+			// 다음 강의 시간 저장
+			nextTimeList.add(
+					new NextLectureTime(
+							timeData.getLectureTimeId(),
+							nextLectureTime,
+							timeData.getLectureStart(),
+							timeData.getLectureEnd()));
+		}
+		
+		return nextTimeList;
+	}
+	
+	/** 돌아오는 다음 강의 날짜 계산 */
+	private Date getNextLectureDate(int lectureWeek, int startTime){
+		final int FIRST_CLASS_CRITERIA = 8; // 1교시 = 9시 = 8 + 1
+		
+		Calendar lectureCal = Calendar.getInstance();
+		lectureCal.set(Calendar.DAY_OF_WEEK, lectureWeek);
+		lectureCal.set(Calendar.HOUR_OF_DAY, startTime + FIRST_CLASS_CRITERIA);
+		lectureCal.set(Calendar.MINUTE, 0);
+		lectureCal.set(Calendar.SECOND, 0);
+		
+		// 이미 지났으면 다음주로 설정
+		if(lectureCal.before(Calendar.getInstance())){
+			lectureCal.add(Calendar.DAY_OF_MONTH, 7);
+		}
+		
+		return lectureCal.getTime();
+	}
 }

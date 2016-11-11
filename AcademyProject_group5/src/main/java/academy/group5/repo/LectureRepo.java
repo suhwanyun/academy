@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import academy.group5.dto.CancelLecture;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureTime;
@@ -73,5 +74,10 @@ public class LectureRepo {
 	public List<Integer> getAllLectureId(){
 		String stmt = LECTURE_NS + "selectLectureIdList";
 		return session.selectList(stmt);
+	}
+	
+	public int setLectureCancel(CancelLecture cancelData){
+		String stmt = LECTURE_NS + "insertLectureCancel";
+		return session.insert(stmt, cancelData);
 	}
 }
