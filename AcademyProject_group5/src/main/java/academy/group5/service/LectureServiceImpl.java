@@ -14,9 +14,9 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.dto.etc.Paging;
 import academy.group5.dto.etc.UserLectureTime;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.LectureNoticeRepo;
@@ -189,28 +189,78 @@ public class LectureServiceImpl implements LectureService{
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
-	public boolean postNotice(LectureNotice lectureNotice, Date noticeDay, Date noticeTime) {
+	public boolean postNotice(LectureNotice lectureNotice, LectureTime tempLectureData) {
 		
 		Integer lectureId = lectureNotice.getLectureId();
 		Integer lectureClass = lectureNotice.getLectureClass();
 		// 강의 시간이 변경된 경우
-		if(noticeDay != null && noticeTime != null) {
-			
-			Calendar noticeDate = Calendar.getInstance();
-			noticeDate.setTime(noticeDay);
-			noticeDate.set(Calendar.HOUR_OF_DAY, noticeTime.getHours());
-			noticeDate.set(Calendar.MINUTE, noticeTime.getMinutes());
-			noticeDate.set(Calendar.SECOND, noticeTime.getSeconds());
-			
-			// 시간이 과거로 설정된 경우
-			Calendar today = Calendar.getInstance();
-			if(noticeDate.before(today)){
-				throw new WrongRequestException("강의 시간이 잘못 설정되었습니다.");
+		if(lectureNotice.getNoticeType().equals("changeDate") 
+				&& tempLectureData != null) {
+			// 기존 강의 정보
+			LectureTime existingLectureData = lecRepo.getLectureTimeById(tempLectureData.getLectureTimeId());
+			if(existingLectureData == null){
+				throw new WrongRequestException();
 			}
-			// 기존 강의 시간을 휴강 처리
-			lecRepo.setLectureCancel(new CancelLecture());
+			// 휴강처리 될 기존 강의 시간
+			Date cancelLectureTime = getNextLectureDate(existingLectureData.getLectureWeek(), existingLectureData.getLectureStart());
+			// 임시 강의 시간
+			Date tempLectureTime = 
+					getNextLectureDate(tempLectureData.getLectureWeek(), tempLectureData.getLectureStart());
+			tempLectureData.setIsTempDate(tempLectureTime);
+			if(cancelLectureTime.compareTo(tempLectureTime) == 0
+					&& tempLectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
+				throw new PageRedirectException("기존 강의와 동일합니다.");
+			}
+			
+			// 휴강 처리
+			int result = lecRepo.setLectureCancel(new CancelLecture(cancelLectureTime, tempLectureData.getLectureTimeId()));
+			if(result != 1){
+				throw new WrongRequestException();
+			} 
+			// 임시 강의 시간 등록
+			result = lecRepo.setTempLectureTime(tempLectureData);
+			if(result != 1){
+				throw new WrongRequestException();
+			} 
+			
+			String lectureName = lecRepo.getLectureName(lectureId);
+			
+			// 메세지 설정
+			String noticeTitle = lectureName + "의";
+			String noticeContent = "";
+			boolean isTimeChanged = false;
+			if(cancelLectureTime.compareTo(tempLectureTime) != 0){
+				noticeTitle += " 시간";
+				
+				noticeContent = weekList[existingLectureData.getLectureWeek()] + "요일 ";
+				noticeContent += existingLectureData.getLectureStart() + "교시~";
+				noticeContent += existingLectureData.getLectureEnd() + "교시";
+				
+				noticeContent += " -> " + weekList[tempLectureData.getLectureWeek()] + "요일 ";
+				noticeContent += tempLectureData.getLectureStart() + "교시~";
+				noticeContent += tempLectureData.getLectureEnd() + "교시";
+				
+				isTimeChanged = true;
+			}
+			if(!tempLectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
+				if(isTimeChanged) {
+					noticeTitle += "과 장소가";
+					noticeContent += " / ";
+				} else {
+					noticeTitle += " 장소가";
+				}
+				
+				noticeContent += existingLectureData.getLecturePlace() + " -> ";
+				noticeContent += tempLectureData.getLecturePlace();
+			}
+			else {
+				noticeTitle += "이";
+			}
+			noticeTitle += " 변경되었습니다.";
+			
+			lectureNotice.setNoticeTitle(noticeTitle);
+			lectureNotice.setNoticeContent(noticeContent);
 		}
 				
 		int result = notiRepo.setLectureNotice(lectureNotice);
@@ -230,9 +280,9 @@ public class LectureServiceImpl implements LectureService{
 	}
 	
 	@Override
-	public List<NextLectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass) {
+	public List<LectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass) {
 		List<LectureTime> timeList = lecRepo.getLectureTime(new Lecture(lectureId, lectureClass));
-		List<NextLectureTime> nextTimeList = new ArrayList<>();
+		List<LectureTime> nextTimeList = new ArrayList<>();
 		
 		Date termEnd = termRepo.getTermEndDate();
 		if(termEnd == null){
@@ -248,20 +298,19 @@ public class LectureServiceImpl implements LectureService{
 				continue;
 			}
 			// 다음 강의 시간 저장
-			nextTimeList.add(
-					new NextLectureTime(
-							timeData.getLectureTimeId(),
-							nextLectureTime,
-							timeData.getLectureStart(),
-							timeData.getLectureEnd()));
+			timeData.setIsTempDate(nextLectureTime);
+			nextTimeList.add(timeData);
 		}
 		
 		return nextTimeList;
 	}
+	// 강의 시간 계산 기준
+	// 1교시 = 9시 = 8 + 1
+	private final int FIRST_CLASS_CRITERIA = 8; 
 	
 	/** 돌아오는 다음 강의 날짜 계산 */
 	private Date getNextLectureDate(int lectureWeek, int startTime){
-		final int FIRST_CLASS_CRITERIA = 8; // 1교시 = 9시 = 8 + 1
+		
 		
 		Calendar lectureCal = Calendar.getInstance();
 		lectureCal.set(Calendar.DAY_OF_WEEK, lectureWeek);
@@ -275,5 +324,22 @@ public class LectureServiceImpl implements LectureService{
 		}
 		
 		return lectureCal.getTime();
+	}
+
+	@Override
+	public List<String> getLectureTimeStrList(List<LectureTime> lectureTimeList) {
+		List<String> selectStrList = new ArrayList<>();
+		Calendar cal = Calendar.getInstance();
+		for(LectureTime timeData : lectureTimeList){
+			cal.setTime(timeData.getIsTempDate());
+			String str = "";
+			str += cal.get(Calendar.MONTH) + "월";
+			str += cal.get(Calendar.DAY_OF_MONTH) + "일 ";
+			str += weekList[cal.get(Calendar.DAY_OF_WEEK) - 1] + "요일 ";
+			str += timeData.getLectureStart() + "교시~";
+			str += timeData.getLectureEnd() + "교시";
+			selectStrList.add(str);
+		}
+		return selectStrList;
 	}
 }

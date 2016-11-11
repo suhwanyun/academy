@@ -66,6 +66,16 @@ public class LectureRepo {
 		return session.selectList(stmt, userTimeData);
 	}
 	
+	public LectureTime getLectureTimeById(int lectureTimeId) {
+		String stmt = LECTURE_NS + "selectLectureTimeById";
+		return session.selectOne(stmt, lectureTimeId);
+	}
+	
+	public String getLectureName(int lectureId) {
+		String stmt = LECTURE_NS + "selectLectureTimeById";
+		return session.selectOne(stmt, lectureId);
+	}
+	
 	public LectureApply getIsPresident(LectureApply data){
 		String stmt = LECTURE_NS + "selectIsPresident";
 		return session.selectOne(stmt, data);
@@ -79,5 +89,20 @@ public class LectureRepo {
 	public int setLectureCancel(CancelLecture cancelData){
 		String stmt = LECTURE_NS + "insertLectureCancel";
 		return session.insert(stmt, cancelData);
+	}
+	
+	public int setTempLectureTime(LectureTime timeData){
+		String stmt = LECTURE_NS + "insertTempLectureTime";
+		return session.insert(stmt, timeData);
+	}
+	
+	public CancelLecture getLectureCancel(int lectureTimeId){
+		String stmt = LECTURE_NS + "selectLectureCancel";
+		return session.selectOne(stmt, lectureTimeId);
+	}
+	
+	public int delLectureCancel(CancelLecture cancelData){
+		String stmt = LECTURE_NS + "deleteLectureCancel";
+		return session.delete(stmt, cancelData);
 	}
 }

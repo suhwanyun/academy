@@ -1,12 +1,11 @@
 package academy.group5.service;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.dto.etc.UserLectureTime;
 
 public interface LectureService {
@@ -79,12 +78,18 @@ public interface LectureService {
 	 * @param lecturenotice
 	 * @return
 	 */
-	boolean postNotice(LectureNotice lecturenotice, Date noticeDay, Date noticeTime);
+	boolean postNotice(LectureNotice lecturenotice, LectureTime lectureTime);
 	/**
 	 * 다음 강의 날짜 확인
 	 * @param lectureId
 	 * @param lectureClas
 	 * @return
 	 */
-	List<NextLectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass);
+	List<LectureTime> getNextLectureTime(Integer lectureId, Integer lectureClass);
+	/**
+	 * 강의 시간을 텍스트로 변환
+	 * @param lectureTimeList
+	 * @return
+	 */
+	List<String> getLectureTimeStrList(List<LectureTime> lectureTimeList);
 }

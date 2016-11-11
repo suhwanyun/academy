@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,6 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.MostRecommend;
-import academy.group5.dto.etc.NextLectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureNoticeService;
@@ -252,10 +253,12 @@ public class IndexController {
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
 		
-		List<NextLectureTime> nextLectureTimeList = lecService.getNextLectureTime(lectureId, lectureClass);
+		List<LectureTime> nextLectureTimeList = lecService.getNextLectureTime(lectureId, lectureClass);
 		// 다음 강의 시간 목록
 		model.addAttribute("nextLectureTime", nextLectureTimeList);
-		
+		// 다음 강의 시간 select text목록
+		model.addAttribute("nextLectureTimeText", lecService.getLectureTimeStrList(nextLectureTimeList));
+				
 		return "/campus/lecture/lecture_noti_add";
 	}
 	

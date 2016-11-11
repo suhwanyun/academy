@@ -38,8 +38,7 @@ public class LectureController {
 	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.POST)
 	public String lectureNotiAdd(HttpSession session, @RequestParam String noticeType,
 			@RequestParam String noticeTitle, @RequestParam String noticeContent,
-			@RequestParam(required=false) Date noticeDay,
-			@RequestParam(required=false) Date noticeTime){
+			@RequestParam(required=false) LectureTime lectureTime){
 		
 		Object idObj = session.getAttribute("lectureId");
 		Object classObj = session.getAttribute("lectureClass");
@@ -61,7 +60,7 @@ public class LectureController {
 		// 알림 등록
 		lecService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
 				noticeType, noticeTitle, noticeContent),
-				noticeDay, noticeTime);
+				lectureTime);
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}

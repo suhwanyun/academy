@@ -9,12 +9,13 @@
 		from (select rownum as rnum, sub.*
 			 from (select distinct lecture_id, lecture_class, lecture_name, professor_name
 				  from Lecture join LectureTime using (lecture_id, lecture_class)
+				  where is_temp_date is null
 				  <choose>
 				  <when test="searchData != null and searchDataType == 'lecture'">
-			      where	lecture_name like '%'||#{searchData}||'%' 
+			      and lecture_name like '%'||#{searchData}||'%' 
 			      </when>
 			      <when test="searchData != null and searchDataType == 'professor'">
-			      where	professor_name like '%'||#{searchData}||'%' 
+			      and professor_name like '%'||#{searchData}||'%' 
 			      </when>
 			      </choose>
 				  order by lecture_id) sub)
@@ -46,7 +47,7 @@
 			   professor_name, lecture_class, lecture_place, is_president
 		from LectureTime join LectureApply using (lecture_id, lecture_class)
 						 join Lecture using (lecture_id, lecture_class)
-		where user_id = #{userId}
+		where user_id = #{userId} and is_temp_date is null
 	</select>
 	
 	<select id="selectLectureByClass" parameterType="lecture" resultType="lecture">
@@ -69,6 +70,7 @@
 		select *
 		from LectureTime
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+		  and is_temp_date is null
 	</select>
 	
 	<select id="selectAlreadyLectureTime" parameterType="user_lecture_time" resultType="user_lecture_time">
@@ -79,6 +81,19 @@
 		  and lecture_end &gt;= #{lectureStart}
 		  and lecture_week = #{lectureWeek}
 		  and user_id = #{userId}
+		  and is_temp_date is null
+	</select>
+	
+	<select id="selectLectureTimeById" parameterType="int" resultType="lecture_time">
+		select *
+		from LectureTime
+		where lecture_time_id = #{lectureTimeId}
+	</select>
+	
+	<select id="selectLectureName" parameterType="int">
+		select lecture_name
+		from Lecture
+		where lecture_id = #{lectureId}
 	</select>
 	
 	<select id="selectIsPresident" parameterType="lecture_apply" resultType="lecture_apply">
@@ -94,9 +109,29 @@
 		from Lecture
 	</select>
 	
+	<insert id="insertTempLectureTime" parameterType="lecture_time">
+		insert into LectureTime
+		(lecture_id, lecture_class, lecture_start, lecture_end, lecture_place, lecture_week, is_temp_date)
+		values (#{lectureId}, #{lectureClass}, #{lectureStart}, #{lectureEnd},
+				#{lecturePlace}, #{lectureWeek}, #{isTempDate})
+	</insert>
+	
 	<insert id="insertLectureCancel" parameterType="cencel_lecture">
 		insert into CancelLecture
 		values(#{cancelDate}, #{lectureTimeId})
 	</insert>
+	
+	<select id="selectLectureCancel" parameterType="int" resultType="cancel_lecture">
+		select *
+		from CancelLecture
+		where lecture_time_id = #{lectureTimeId}
+		  and cancel_date &gt; sysdate
+	</select>
+	
+	<delete id="deleteLectureCancel" parameterType="cancel_lecture">
+		delete from CancelLecture
+		where lecture_time_id = #{lectureTimeId}
+		  and cancel_date = #{cancelDate}
+	</delete>
 	
 </mapper>

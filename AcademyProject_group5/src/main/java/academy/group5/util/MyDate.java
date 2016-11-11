@@ -3,6 +3,8 @@ package academy.group5.util;
 import java.util.Calendar;
 import java.util.Date;
 
+import academy.group5.dto.LectureTime;
+
 public class MyDate {
 	/** 해당 날짜의 23시 59분 59초로 설정 */
 	public Date getEndDate(Calendar cal){
@@ -35,7 +37,7 @@ public class MyDate {
 	}
 	
 	/** 오늘 0시 0분 0초 */
-	public Date getToday(){
+	public Date getTodayStart(){
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
