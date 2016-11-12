@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,7 +10,7 @@
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container cMargin">
-		<sform:form method="post" action="/lecture/lectureNotiAdd" modelAttribute="nextLectureTime">
+		<form method="post" action="/lecture/lectureNotiAdd">
 			<table class="table">
 				<tr id="targetTR">
 					<td><select id="noticeType" name="noticeType">
@@ -20,13 +19,6 @@
 							<option value="report">과제 공지</option>
 					</select></td>
 				</tr>
-				<!-- <tr class='dateTR' hidden="hidden">
-					<td><input width="60%" class="form-control input-sm"
-						type="text" id="wrtDtReg" readonly="readonly"> <input
-						type="button" id="dateCancel" value="선택 취소"> <input
-						type="date" hidden="hidden" id="isTempDate" name="noticeDay">
-					</td></tr>
-					 -->
 				<tr>
 					<td><input type="text" maxlength="30" id="noticeTitle"
 						name="noticeTitle"></td>
@@ -42,42 +34,11 @@
 						id="cancel" value="취소"></td>
 				</tr>
 			</table>
-		</sform:form>
+		</form>
 	</div>
 
 </body>
-<script src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
-/* $("document").ready(function(){
-	$('#wrtDtReg').datepicker({
-		format: "yyyy-mm-dd",
-		startView: 1,
-		todayBtn:"linked",
-		language: "kr",
-		orientation: "top auto",
-		keyboardNavigation: false,
-		forceParse: false,
-		autoclose: true,
-		todayHighlight: true
-		}); 
-}); */
-/* $("#dateCancel").click(function(){
-	$("#wrtDtReg").val("");
-	$("#isTempDate").val($("#wrtDtReg").val());
-});
-$("#wrtDtReg").change(function(){
-	$("#isTempDate").val($("#wrtDtReg").val());
-}); 
-$("#noticeType").change(function(){
-	$("#wrtDtReg").val("");
-	$("#isTempDate").val("");
-	if($("#noticeType").val()!='notice'){
-		$(".dateTR").removeAttr("hidden");
-	}else{
-		$(".dateTR").attr("hidden", "hidden");
-	}
-}); */
 $("#submitBtn").click(function(event){
 	if($("#noticeTitle").val()==""||$("#noticeContent").val()==""){
 		event.preventDefault();
@@ -90,5 +51,4 @@ $("#submitBtn").click(function(event){
 	}
 })
 </script>
-
 </html>

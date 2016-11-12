@@ -24,7 +24,7 @@ function professorNameCheck(x){
 	}
 }
 function lectureStartEndCheck(s, e){
-	var NUM_PATTERN = /^[0-9]{1}$/;	
+	var NUM_PATTERN = /^[1-9]{1}$/;	
 	if(NUM_PATTERN.test(s)&&NUM_PATTERN.test(e)){
 		if(s<=e){
 			return true;

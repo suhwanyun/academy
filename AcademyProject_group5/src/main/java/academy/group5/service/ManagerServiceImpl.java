@@ -103,7 +103,6 @@ public class ManagerServiceImpl implements ManagerService {
 		if(result != 1){
 			throw new WrongRequestException();
 		}
-		throw new PageRedirectException("학기가 설정되었습니다");
 	}
 
 	@Override
