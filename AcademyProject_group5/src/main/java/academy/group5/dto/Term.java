@@ -13,13 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Term {
-
-	/** 년도. */
-	private Integer termYear;
-
-	/** 학기 구분. */
-	private Integer termClassify;
-
+	
 	/** 학기시작 날짜. */
 	private Date termStart;
 

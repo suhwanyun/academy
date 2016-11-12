@@ -169,12 +169,9 @@ CREATE TABLE Recommend
 
 CREATE TABLE Term
 (
-	term_year number NOT NULL,
-	-- 1 또는 2
-	term_classify number NOT NULL,
 	term_start date NOT NULL,
 	term_end date NOT NULL,
-	CONSTRAINT term_PK PRIMARY KEY (term_year, term_classify)
+	PRIMARY KEY (term_start)
 );
 
 

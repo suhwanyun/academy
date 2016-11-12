@@ -62,12 +62,12 @@ public class ManageController {
 	
 	/** 학기 추가*/
 	@RequestMapping(value="/lectureManage/termSetting", method=RequestMethod.POST)
-	public String termSetting(HttpSession session, @RequestParam Integer termClassify,
+	public String termSetting(HttpSession session,
 			@RequestParam Date termStart, @RequestParam Date termEnd){		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/termSettingjsp");
 				
-		service.registTerm(termClassify, termStart, termEnd);
+		service.registTerm(termStart, termEnd);
 		return "/manage/term_setting";
 	}
 	

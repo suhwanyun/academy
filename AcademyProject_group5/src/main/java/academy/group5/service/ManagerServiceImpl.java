@@ -71,20 +71,18 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registTerm(Integer termClassify, Date termStart, Date termEnd) {
+	public boolean registTerm(Date termStart, Date termEnd) {
 		Calendar cal = Calendar.getInstance();
 		
-		if(termClassify == null || termStart == null || termEnd == null){
+		if(termStart == null || termEnd == null){
 			throw new WrongRequestException();
 		} else if(termStart.before(cal.getTime()) || termEnd.before(cal.getTime())){
 			throw new WrongRequestException("현재 시간보다 이후로 설정해주세요");
 		} else if(termEnd.before(termStart)){
 			throw new WrongRequestException("학기 종료시간이 시작시간보다 앞설 수 없습니다.");
 		}
-		cal.setTime(termStart);
-		int termYear = cal.get(Calendar.YEAR);
 		
-		Term term = new Term(termYear, termClassify, termStart, termEnd);
+		Term term = new Term(termStart, termEnd);
 		
 		if(termRepo.getTermByTerm(term) == null && termRepo.getTermByDate(term).size() == 0){		
 			termRepo.setTerm(term);
