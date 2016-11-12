@@ -186,6 +186,11 @@ public class IndexController {
 	@RequestMapping(value="/lectureManage/main", method=RequestMethod.GET)
 	public String manageLectureMainPage(HttpSession session, Model model){
 		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/termSettingjsp");
+		
+		
+		
+		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
 		// 기존 검색 기록 초기화
 		session.removeAttribute("searchData");
@@ -390,6 +395,13 @@ public class IndexController {
 	}
 	
 	/**-----------------------관리자----------------------- */
+	
+	/** 학기 추가 페이지*/
+	@RequestMapping(value="/termSettingjsp", method=RequestMethod.GET)
+	public String termSettingPage(HttpSession session){		
+		
+		return "/manage/term_setting";
+	}
 	
 	/** 관리자 로그인 화면 */
 	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)

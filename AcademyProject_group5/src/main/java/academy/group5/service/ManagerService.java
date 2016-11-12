@@ -12,6 +12,12 @@ public interface ManagerService {
 	
 	public final String TYPE_LECTURE = "lecture";
 	public final String TYPE_MILEAGE = "mileage";
+	
+	/**
+	 * 학기 설정 여부 확인
+	 * @return
+	 */
+	boolean isTermSetted();
 	/**
 	 * 로그인
 	 * @param managerId

@@ -52,11 +52,18 @@ public class ManageController {
 	}
 	
 	/** 로그 아웃 */
-	@RequestMapping(value="managerLogout", method=RequestMethod.GET)
+	@RequestMapping(value="/managerLogout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		
 		session.removeAttribute("managerType");
 		return "/login/login_manager";
+	}
+	
+	/** 학기 추가*/
+	@RequestMapping(value="/termSetting", method=RequestMethod.GET)
+	public String termSetting(HttpSession session){		
+		
+		return "/manage/term_setting";
 	}
 	
 	/** 강의 등록 관리자 메인화면 강의 목록 검색 */

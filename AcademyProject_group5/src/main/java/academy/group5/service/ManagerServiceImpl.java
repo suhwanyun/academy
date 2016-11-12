@@ -36,6 +36,15 @@ public class ManagerServiceImpl implements ManagerService {
 	private final int MILEAGE_MAX_PAGE = 10;
 	
 	@Override
+	public boolean isTermSetted(){
+		if(termRepo.getNextTermStartDate() != null)
+			return true;
+		else {
+			throw new WrongRequestException("다음 학기가 설정되지 않았습니다");
+		}
+	}
+	
+	@Override
 	public String managerLogin(String managerId, String managerPass) {
 		
 		String managerType = null;
