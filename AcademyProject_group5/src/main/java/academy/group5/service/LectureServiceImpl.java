@@ -201,8 +201,10 @@ public class LectureServiceImpl implements LectureService{
 		} 
 		
 		// 강의 시간이 변경된 경우
-		if(noticeData.getNoticeType().equals("changeDate") 
-				&& lectureData != null) {
+		if(noticeData.getNoticeType().equals("changeDate")) {
+			if(lectureData == null){
+				throw new WrongRequestException();
+			}
 			// 기존 강의 정보
 			LectureTime existingLectureData = lecRepo.getLectureTimeById(lectureData.getLectureTimeId());
 			if(existingLectureData == null){
