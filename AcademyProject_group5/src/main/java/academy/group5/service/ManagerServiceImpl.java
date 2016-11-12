@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +39,21 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Override
 	public boolean isTermSetted(){
-		if(termRepo.getNextTermStartDate() != null)
+		if(termRepo.getNextTermStartDate() != null
+				&& termRepo.getTodayTerm() != null){
 			return true;
-		else {
-			throw new WrongRequestException("다음 학기가 설정되지 않았습니다");
 		}
+		throw new WrongRequestException("강의 등록을 위해, 다음 학기를 등록해주세요");
+		
+	}
+	
+	@Override
+	public boolean isNotTermSetted(){
+		if(termRepo.getNextTermStartDate() != null
+				&& termRepo.getTodayTerm() != null){
+			throw new WrongRequestException("이미 학기가 등록되어있습니다.");
+		}
+		return true;
 	}
 	
 	@Override
@@ -59,13 +71,27 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registTerm(Term term) {
+	public boolean registTerm(Integer termClassify, Date termStart, Date termEnd) {
+		Calendar cal = Calendar.getInstance();
+		
+		if(termClassify == null || termStart == null || termEnd == null){
+			throw new WrongRequestException();
+		} else if(termStart.before(cal.getTime()) || termEnd.before(cal.getTime())){
+			throw new WrongRequestException("현재 시간보다 이후로 설정해주세요");
+		} else if(termEnd.before(termStart)){
+			throw new WrongRequestException("학기 종료시간이 시작시간보다 앞설 수 없습니다.");
+		}
+		cal.setTime(termStart);
+		int termYear = cal.get(Calendar.YEAR);
+		
+		Term term = new Term(termYear, termClassify, termStart, termEnd);
+		
 		if(termRepo.getTermByTerm(term) == null && termRepo.getTermByDate(term).size() == 0){		
 			termRepo.setTerm(term);
 			return true;
 		} 
 			
-		return false;	
+		throw new WrongRequestException("이미 등록된 학기정보와 중복됩니다.");	
 	}
 
 	@Override

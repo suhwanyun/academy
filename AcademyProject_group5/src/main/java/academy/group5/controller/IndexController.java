@@ -187,8 +187,8 @@ public class IndexController {
 	public String manageLectureMainPage(HttpSession session, Model model){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/termSettingjsp");
-		
-		
+		// 학기 설정 여부 확인
+		manageService.isTermSetted();
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
@@ -397,9 +397,13 @@ public class IndexController {
 	/**-----------------------관리자----------------------- */
 	
 	/** 학기 추가 페이지*/
-	@RequestMapping(value="/termSettingjsp", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/termSettingjsp", method=RequestMethod.GET)
 	public String termSettingPage(HttpSession session){		
-		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+				
+		// 학기 설정이 되어있으면 에러발생
+		manageService.isNotTermSetted();
 		return "/manage/term_setting";
 	}
 	

@@ -1,6 +1,5 @@
 package academy.group5.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,6 @@ import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
-import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 

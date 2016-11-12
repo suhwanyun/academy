@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.Lecture;
@@ -19,6 +20,11 @@ public interface ManagerService {
 	 */
 	boolean isTermSetted();
 	/**
+	 * 학기 설정이 되어있을 때 에러발생
+	 * @return
+	 */
+	boolean isNotTermSetted();
+	/**
 	 * 로그인
 	 * @param managerId
 	 * @param managerPass
@@ -30,7 +36,7 @@ public interface ManagerService {
 	 * @param term
 	 * @return
 	 */
-	boolean registTerm(Term term);
+	boolean registTerm(Integer termClassify, Date termStart, Date termEnd);
 	
 	/**
 	 * 강의등록
