@@ -60,7 +60,7 @@
 								</c:otherwise>
 						</c:choose> &nbsp;${list.lectureStart }교시~${list.lectureEnd }교시
 						<c:if test="${list.isPresident =='Y'}">
-							<button class="myButton changeLuctureBtn" onclick="movePage2(${list.lectureTimeId})">시간/장소 변경</button>
+							<button class="myButton lectureChangeBtn" value="${list.lectureTimeId}">시간/장소 변경</button>
 						</c:if>
 						</td>
 				</tr>
@@ -72,8 +72,9 @@
 function movePage(el,id,Lclass){
 	$(location).attr("href", "/lecture/lectureMain?lectureId="+id+"&lectureClass="+Lclass);
 }
-function movePage2(id){
-	$(location).attr("href","/write/lectureTimeNotiAddjsp?lectureTimeId="+id);
-}
+$(".lectureChangeBtn").click(function(event){
+	event.stopPropagation();
+	$(location).attr("href","/write/lectureTimeNotiAddjsp?lectureTimeId="+$(".lectureChangeBtn").val());
+})
 </script>
 </html>

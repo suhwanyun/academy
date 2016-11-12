@@ -54,9 +54,13 @@ function mylectureBtn(){
 		success : function(result) {
 			$("#incluedjsp").html(result);
 		},
-		error : function(){
+		/* error : function(){
 			alert("요청을 실패 하였습니다.");
-		}
+		} */
+		error:function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+
 	});
 }
 function notilistBtn(){

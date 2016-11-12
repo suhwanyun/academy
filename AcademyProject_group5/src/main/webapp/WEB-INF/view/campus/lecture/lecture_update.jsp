@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/css/datepicker3.css"/>
 <title>강의 정보 알림등록</title>
 </head>
 <body><jsp:include page="/WEB-INF/view/header/header.jsp" />
@@ -13,9 +14,9 @@
 			<table class="table">
 				<tr id="targetTR">
 					<td><sform:select path="noticeType">
-							<option value="changeDate" selected="selected">강의 시간/장소 임시변경</option>
-							<option value="cancelDate">휴강</option>
+							<option value="cancelDate" selected="selected">휴강</option>
 							<option value="addDate">보강</option>
+							<option value="changeDate" >강의 시간/장소 임시변경</option>
 						</sform:select>
 					</td>
 				</tr>
@@ -27,8 +28,8 @@
 				<tr class='dateTR' hidden="hidden">
 					<td>
 						<sform:input type="text" path="lecturePlace" value="${lectureTimeSetting.lecturePlace }"></sform:input>
-					</td>
-					<sform:select path="lectureStart">
+						<span>시작 교시</span>
+						<sform:select path="lectureStart">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
 							<option value="3">3교시</option>
@@ -39,6 +40,7 @@
 							<option value="8">8교시</option>
 							<option value="9">9교시</option>
 					</sform:select>
+					<span>종료 교시</span>
 					<sform:select path="lectureEnd">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
@@ -50,6 +52,7 @@
 							<option value="8">8교시</option>
 							<option value="9">9교시</option>
 					</sform:select>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -91,7 +94,7 @@ $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
 }); 
 $("#noticeType").change(function(){
-	if($("#noticeType").val()=='notice'){
+	if($("#noticeType").val()=='changeDate'){
 		$("#lectureStart option:eq(${lectureTimeSetting.lectureStart - 1})").prop("selected", true);
 		$("#lectureEnd option:eq(${lectureTimeSetting.lectureEnd - 1})").prop("selected", true);
 		$(".dateTR").removeAttr("hidden");
