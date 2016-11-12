@@ -130,6 +130,7 @@ public class AutoServiceImpl implements AutoService {
 				termRepo.deleteAllCancelLecture();
 				termRepo.deleteAllLectureTime();
 				termRepo.deleteAllLecture();
+				termRepo.deleteTerm();
 				
 				nowTermScheduling = false;
 				

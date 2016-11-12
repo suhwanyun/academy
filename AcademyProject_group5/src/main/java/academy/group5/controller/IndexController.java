@@ -162,6 +162,10 @@ public class IndexController {
 		String userId = identify.getUserId(session);
 		if(!lecService.isAppliedLecture(lectureId, userId, lectureClass)){
 			throw new WrongRequestException("신청하지 않은 강의의 정보는 확인하실 수 없습니다.");
+		}else if(lecService.getIsPresident(lectureId, userId, lectureId)){
+			session.setAttribute("isPresident", "Y");
+		} else {
+			session.setAttribute("isPresident", "N");
 		}
 		String postingType = Posting.TYPE_LECTURE + "_" + lectureId + "_" + lectureClass;
 		// 게시판 초기화
@@ -261,12 +265,15 @@ public class IndexController {
 		List<LectureTime> nextLectureTimeList = lecService.getNextLectureTime(lectureId, lectureClass);
 		// 다음 강의 시간 목록
 		model.addAttribute("nextLectureTime", nextLectureTimeList);
-		// 다음 강의 시간 select text목록
-		model.addAttribute("nextLectureTimeText", lecService.getLectureTimeStrList(nextLectureTimeList));
+		
 				
 		return "/campus/lecture/lecture_noti_add";
 	}
 	
+	@RequestMapping(value="/write/lectureUpdatejsp", method=RequestMethod.GET)
+	public String lectureUpdatePage(HttpSession session, Model model){
+		return "/campus/lecture/lecture_update";
+	}
 	
 	/** 식사(먹거리)추천 게시판 글 수정 페이지 */
 	@RequestMapping(value="/write/foodUpdatejsp", method=RequestMethod.GET)

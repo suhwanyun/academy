@@ -21,21 +21,16 @@ public class TermRepo {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public Term getTermByTerm(Term data) {
-		String stmt = TERM_NS + "selectTermByTerm";
-		return session.selectOne(stmt, data);
+	public int isTermSetted() {
+		String stmt = TERM_NS + "selectTermCount";
+		return session.selectOne(stmt);
 	}
 	
 	public Term getTodayTerm() {
 		String stmt = TERM_NS + "selectTodayTerm";
 		return session.selectOne(stmt);
 	}
-	
-	public List<Term> getTermByDate(Term data) {
-		String stmt = TERM_NS + "selectTermByDate";
-		return session.selectList(stmt, data);
-	}
-	
+
 	public int setTerm(Term data) {
 		String stmt = TERM_NS + "insertTerm";
 		return session.insert(stmt, data);
@@ -116,6 +111,12 @@ public class TermRepo {
 	/** 강의 테이블 제거 */
 	public int deleteAllLecture(){
 		String stmt = TERM_NS + "deleteAllLecture";
+		return session.delete(stmt);
+	}
+	
+	/** 학기 테이블 제거 */
+	public int deleteTerm(){
+		String stmt = TERM_NS + "deleteTerm";
 		return session.delete(stmt);
 	}
 }

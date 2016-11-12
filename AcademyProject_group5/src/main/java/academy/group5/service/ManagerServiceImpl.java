@@ -84,12 +84,12 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		Term term = new Term(termStart, termEnd);
 		
-		if(termRepo.getTermByTerm(term) == null && termRepo.getTermByDate(term).size() == 0){		
-			termRepo.setTerm(term);
-			return true;
-		} 
-			
-		throw new WrongRequestException("이미 등록된 학기정보와 중복됩니다.");	
+		termRepo.deleteTerm();		
+		int result = termRepo.setTerm(term);
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
 	}
 
 	@Override
