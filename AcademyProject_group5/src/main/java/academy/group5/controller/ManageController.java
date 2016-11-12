@@ -67,7 +67,7 @@ public class ManageController {
 	public String termSetting(HttpSession session,
 			@RequestParam String termStart, @RequestParam String termEnd){		
 		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/termSettingjsp");
+		session.setAttribute("errorGotoPage", "/lectureManage/termSettingjsp");
 		
 		service.registTerm(termStart, termEnd);
 		return "/manage/term_setting";
