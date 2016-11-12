@@ -190,15 +190,21 @@ public class LectureServiceImpl implements LectureService{
 	}
 	
 	@Override
-	public boolean postNotice(LectureNotice lectureNotice, LectureTime tempLectureData) {
+	public boolean postNotice(LectureNotice noticeData, LectureTime lectureData) {
 		
-		Integer lectureId = lectureNotice.getLectureId();
-		Integer lectureClass = lectureNotice.getLectureClass();
+		Integer lectureId = noticeData.getLectureId();
+		Integer lectureClass = noticeData.getLectureClass();
+		
+		int result = notiRepo.setLectureNotice(noticeData);
+		if(result != 1){
+			throw new WrongRequestException();
+		} 
+		
 		// 강의 시간이 변경된 경우
-		if(lectureNotice.getNoticeType().equals("changeDate") 
-				&& tempLectureData != null) {
+		if(noticeData.getNoticeType().equals("changeDate") 
+				&& lectureData != null) {
 			// 기존 강의 정보
-			LectureTime existingLectureData = lecRepo.getLectureTimeById(tempLectureData.getLectureTimeId());
+			LectureTime existingLectureData = lecRepo.getLectureTimeById(lectureData.getLectureTimeId());
 			if(existingLectureData == null){
 				throw new WrongRequestException();
 			}
@@ -206,20 +212,20 @@ public class LectureServiceImpl implements LectureService{
 			Date cancelLectureTime = getNextLectureDate(existingLectureData.getLectureWeek(), existingLectureData.getLectureStart());
 			// 임시 강의 시간
 			Date tempLectureTime = 
-					getNextLectureDate(tempLectureData.getLectureWeek(), tempLectureData.getLectureStart());
-			tempLectureData.setIsTempDate(tempLectureTime);
+					getNextLectureDate(lectureData.getLectureWeek(), lectureData.getLectureStart());
+			lectureData.setIsTempDate(tempLectureTime);
 			if(cancelLectureTime.compareTo(tempLectureTime) == 0
-					&& tempLectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
+					&& lectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
 				throw new PageRedirectException("기존 강의와 동일합니다.");
 			}
 			
 			// 휴강 처리
-			int result = lecRepo.setLectureCancel(new CancelLecture(cancelLectureTime, tempLectureData.getLectureTimeId()));
+			result = lecRepo.setLectureCancel(new CancelLecture(cancelLectureTime, lectureData.getLectureTimeId()));
 			if(result != 1){
 				throw new WrongRequestException();
 			} 
 			// 임시 강의 시간 등록
-			result = lecRepo.setTempLectureTime(tempLectureData);
+			result = lecRepo.setTempLectureTime(lectureData);
 			if(result != 1){
 				throw new WrongRequestException();
 			} 
@@ -237,13 +243,13 @@ public class LectureServiceImpl implements LectureService{
 				noticeContent += existingLectureData.getLectureStart() + "교시~";
 				noticeContent += existingLectureData.getLectureEnd() + "교시";
 				
-				noticeContent += " -> " + weekList[tempLectureData.getLectureWeek()] + "요일 ";
-				noticeContent += tempLectureData.getLectureStart() + "교시~";
-				noticeContent += tempLectureData.getLectureEnd() + "교시";
+				noticeContent += " -> " + weekList[lectureData.getLectureWeek()] + "요일 ";
+				noticeContent += lectureData.getLectureStart() + "교시~";
+				noticeContent += lectureData.getLectureEnd() + "교시";
 				
 				isTimeChanged = true;
 			}
-			if(!tempLectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
+			if(!lectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
 				if(isTimeChanged) {
 					noticeTitle += "과 장소가";
 					noticeContent += " / ";
@@ -252,27 +258,44 @@ public class LectureServiceImpl implements LectureService{
 				}
 				
 				noticeContent += existingLectureData.getLecturePlace() + " -> ";
-				noticeContent += tempLectureData.getLecturePlace();
+				noticeContent += lectureData.getLecturePlace();
 			}
 			else {
 				noticeTitle += "이";
 			}
 			noticeTitle += " 변경되었습니다.";
 			
-			lectureNotice.setNoticeTitle(noticeTitle);
-			lectureNotice.setNoticeContent(noticeContent);
+			noticeData.setNoticeTitle(noticeTitle);
+			noticeData.setNoticeContent(noticeContent);
 		}
-				
-		int result = notiRepo.setLectureNotice(lectureNotice);
-		if(result != 1){
-			throw new WrongRequestException();
-		} 
+		// 휴강된 경우
+		else if(noticeData.getNoticeType().equals("cancelDate") 
+				&& lectureData != null) {
+			
+			// 휴강처리 될 강의 시간
+			Date cancelLectureTime = getNextLectureDate(lectureData.getLectureWeek(), lectureData.getLectureStart());
+			// 휴강 처리
+			result = lecRepo.setLectureCancel(new CancelLecture(cancelLectureTime, lectureData.getLectureTimeId()));
+			if(result != 1){
+				throw new WrongRequestException();
+			} 
+
+			String lectureName = lecRepo.getLectureName(lectureId);	
+			// 메세지 설정
+			String noticeTitle = lectureName + "이(가) 휴강처리 되었습니다. (";
+			noticeTitle += weekList[lectureData.getLectureWeek()] + "요일 ";
+			noticeTitle += lectureData.getLectureStart() + "교시~";
+			noticeTitle += lectureData.getLectureEnd() + "교시)";
+	
+			noticeData.setNoticeTitle(noticeTitle);
+
+		}
 		
 		List<String> userIdList = gcmRepo.getLectureApplyUser(new Lecture(lectureId, lectureClass));
 	
 		// 메세지 PUSH
-		new GCM(lectureNotice.getNoticeTitle(), 
-				lectureNotice.getNoticeContent(),
+		new GCM(noticeData.getNoticeTitle(), 
+				noticeData.getNoticeContent(),
 				userIdList,
 				GCM.TYPE_NOTICE);
 		
