@@ -15,12 +15,12 @@
 <body>
 		<div
 			style="text-align: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto auto; width: 300px; height: 300px;">
-			<form action="lectureManage/termSetting" method="post">
+			<form action="/lectureManage/termSetting" method="post">
 				<span>시작 날짜</span> <input type="date" hidden="hidden" id="termStart"
-					name="termStart"> <input type="text" id="startDate"
+					name="termStart"> <input type="text" id="startDate" style="text-align: center;"
 					readonly="readonly"> <br><br><span>종료 날짜</span> <input type="date"
 					hidden="hidden" id="termEnd" name="termEnd"> <input
-					type="text" id="endDate" readonly="readonly">
+					type="text" style="text-align: center;" id="endDate" readonly="readonly">
 					<br><br>
 				<button type="submit" id="termSettingBtn">설정</button>
 			</form>

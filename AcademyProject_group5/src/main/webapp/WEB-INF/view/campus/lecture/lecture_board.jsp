@@ -148,7 +148,7 @@ function movePage(el){
 	$(location).attr("href", "/postingInfo?postingId="+el);
 }
 //
-$(".writeNoticeBtn").click(function(event){
+$("#writeNoticeBtn").click(function(event){
 	event.stopPropagation();
 	$(location).attr("href","/write/lectureNotiAddjsp")
 });

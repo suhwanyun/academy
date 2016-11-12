@@ -71,7 +71,8 @@ public class ManageController {
 		session.setAttribute("gotoPage", "/lectureManage/main");
 		
 		service.registTerm(termStart, termEnd);
-		return "/manage/term_setting";
+		
+		throw new PageRedirectException("학기가 설정되었습니다");
 	}
 	
 	/** 강의 등록 관리자 메인화면 강의 목록 검색 */
