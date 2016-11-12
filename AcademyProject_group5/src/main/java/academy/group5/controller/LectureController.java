@@ -17,6 +17,7 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.util.Identify;
 
@@ -30,6 +31,9 @@ public class LectureController {
 	
 	@Autowired
 	LectureService lecService;
+	
+	@Autowired
+	LectureNoticeService lecNotiService;
 	
 	Identify identify = new Identify();
 	
@@ -56,8 +60,8 @@ public class LectureController {
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
 		// 알림 등록
-		lecService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
-				noticeType, noticeTitle, noticeContent));
+		lecNotiService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
+				noticeType, noticeTitle, noticeContent), true);
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}
@@ -77,7 +81,7 @@ public class LectureController {
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
 		// 알림 등록
-		lecService.postNotice(lectureTimeSetting);
+		lecNotiService.postNotice(lectureTimeSetting);
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}

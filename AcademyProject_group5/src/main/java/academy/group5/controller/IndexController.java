@@ -1,7 +1,5 @@
 package academy.group5.controller;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -261,13 +259,7 @@ public class IndexController {
 		
 		if(!lecService.getIsPresident(lectureId, userId, lectureClass)){
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
-		}
-		
-		List<LectureTime> nextLectureTimeList = lecService.getNextLectureTime(lectureId, lectureClass);
-		// 다음 강의 시간 목록
-		model.addAttribute("nextLectureTime", nextLectureTimeList);
-		
-				
+		}		
 		return "/campus/lecture/lecture_noti_add";
 	}
 	
@@ -280,8 +272,18 @@ public class IndexController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		
 		LectureTime timeData = lecService.getLectureTimeById(lectureTimeId);
+		String userId = identify.getUserId(session);
+		int lectureId = timeData.getLectureId();
+		int lectureClass = timeData.getLectureClass();
 		
+		if(!lecService.getIsPresident(lectureId, userId, lectureClass)){
+			throw new WrongRequestException("반장만 등록할 수 있습니다.");
+		}
+		// 변경될 강의의 정보
 		model.addAttribute("lectureTimeSetting", new LectureNoticeSetTime(timeData));
+		// 변경될 강의의 다음 강의 시간 텍스트(출력용)
+		model.addAttribute("targetTimeStr", lecService.getLectureTimeStr(timeData));
+		
 		return "/campus/lecture/lecture_update";
 	}
 	

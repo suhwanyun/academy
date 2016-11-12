@@ -1,5 +1,6 @@
 package academy.group5.dto;
 
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,5 +44,13 @@ public class LectureNotice {
 		this.noticeContent = noticeContent;
 	}
 	
+	public LectureNotice(LectureNoticeSetTime lectureData) {
+		super();
+		this.lectureId = lectureData.getLectureId();
+		this.lectureClass = lectureData.getLectureClass();
+		this.noticeType = lectureData.getNoticeType();
+		this.noticeTitle = lectureData.getNoticeTitle();
+		this.noticeContent = lectureData.getNoticeContent();
+	}
 	
 }

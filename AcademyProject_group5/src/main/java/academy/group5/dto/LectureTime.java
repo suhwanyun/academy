@@ -1,7 +1,9 @@
 package academy.group5.dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,5 +47,20 @@ public class LectureTime {
 		super();
 		this.lectureId = lectureId;
 		this.lectureClass = lectureClass;
+	}
+	
+	public LectureTime(LectureNoticeSetTime timeData) {
+		super();
+		this.lectureTimeId = timeData.getLectureTimeId();
+		this.lectureId = timeData.getLectureId();
+		this.lectureClass = timeData.getLectureClass();
+		this.lectureStart = timeData.getLectureStart();
+		this.lectureEnd = timeData.getLectureEnd();
+		this.lecturePlace = timeData.getLecturePlace();
+		this.isTempDate = timeData.getIsTempDate();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(timeData.getIsTempDate());
+		this.lectureWeek = cal.get(Calendar.DAY_OF_WEEK);
 	}
 }

@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.LectureNotice;
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.UserLectureNotice;
 
 public interface LectureNoticeService {
@@ -26,4 +27,14 @@ public interface LectureNoticeService {
 	 * @return
 	 */
 	LectureNotice lectureNoticeInfo(Integer lectureNoticeId);
+	/**
+	 * 강의 공지 작성(일반 공지)
+	 * @return
+	 */
+	boolean postNotice(LectureNotice lecturenotice, boolean sendGCM);
+	/**
+	 * 강의 공지 작성(강의 정보 수정)
+	 * @return
+	 */
+	boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime);
 }
