@@ -8,10 +8,16 @@ import academy.group5.dto.LectureTime;
 public class MyDate {
 	/** 해당 날짜의 23시 59분 59초로 설정 */
 	public Date getEndDate(Calendar cal){
+		if(cal == null){
+			return null;
+		}
 		return getEndDate(cal.getTime());
 	}
 	/** 해당 날짜의 23시 59분 59초로 설정 */
 	public Date getEndDate(Date date){
+		if(date == null){
+			return null;
+		}
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.set(Calendar.HOUR_OF_DAY, 23);
@@ -23,10 +29,16 @@ public class MyDate {
 	
 	/** 해당 날짜의 23시 59분 59초로 설정 */
 	public Date getStartDate(Calendar cal){
+		if(cal == null){
+			return null;
+		}
 		return getStartDate(cal.getTime());
 	}
 	/** 해당 날짜의 0시 0분 0초로 설정 */
 	public Date getStartDate(Date date){
+		if(date == null){
+			return null;
+		}
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.set(Calendar.HOUR_OF_DAY, 0);
