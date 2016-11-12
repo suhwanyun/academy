@@ -43,7 +43,7 @@
 	</delete>
 	
 	<select id="selectLectureByUser" parameterType="String" resultType="user_lecture_time">
-		select lecture_start, lecture_end, lecture_week, lecture_id, lecture_name,
+		select lecture_time_id, lecture_start, lecture_end, lecture_week, lecture_id, lecture_name,
 			   professor_name, lecture_class, lecture_place, is_president
 		from LectureTime join LectureApply using (lecture_id, lecture_class)
 						 join Lecture using (lecture_id, lecture_class)

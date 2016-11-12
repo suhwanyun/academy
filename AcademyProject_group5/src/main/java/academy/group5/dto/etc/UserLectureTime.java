@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 회원 강의시간 중복 확인에 사용되는 데이터 모음
+ * 회원 강의시간 중복 확인 / 강의 목록 출력에 사용되는 데이터 모음
  * @author YSH
  *
  */
@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserLectureTime {
 
+	/** 강의 시간 ID */
+	private Integer lectureTimeId;
+	
 	/** 회원 ID */
 	private String userId;
 
