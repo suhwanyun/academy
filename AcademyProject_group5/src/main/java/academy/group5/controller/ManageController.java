@@ -66,8 +66,9 @@ public class ManageController {
 	@RequestMapping(value="/lectureManage/termSetting", method=RequestMethod.POST)
 	public String termSetting(HttpSession session,
 			@RequestParam String termStart, @RequestParam String termEnd){		
-		// 에러 발생시 이동할 페이지
+		// 에러 발생시 / 작업 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/termSettingjsp");
+		session.setAttribute("gotoPage", "/lectureManage/main");
 		
 		service.registTerm(termStart, termEnd);
 		return "/manage/term_setting";

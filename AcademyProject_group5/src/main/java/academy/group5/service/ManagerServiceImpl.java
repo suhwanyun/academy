@@ -17,6 +17,7 @@ import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 import academy.group5.dto.etc.Paging;
+import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
@@ -73,7 +74,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registTerm(String termStartStr, String termEndStr) {
+	public void registTerm(String termStartStr, String termEndStr) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		// String -> Date 변환
 		Date termStart = null;
@@ -102,7 +103,7 @@ public class ManagerServiceImpl implements ManagerService {
 		if(result != 1){
 			throw new WrongRequestException();
 		}
-		return true;
+		throw new PageRedirectException("학기가 설정되었습니다");
 	}
 
 	@Override

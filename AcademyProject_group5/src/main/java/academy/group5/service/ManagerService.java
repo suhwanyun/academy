@@ -1,13 +1,11 @@
 package academy.group5.service;
 
-import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
-import academy.group5.dto.Term;
 
 public interface ManagerService {
 	
@@ -36,7 +34,7 @@ public interface ManagerService {
 	 * @param term
 	 * @return
 	 */
-	boolean registTerm(String termStart, String termEnd);
+	void registTerm(String termStart, String termEnd);
 	
 	/**
 	 * 강의등록
