@@ -14,6 +14,7 @@ import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.Paging;
 import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.PageRedirectException;
@@ -190,11 +191,30 @@ public class LectureServiceImpl implements LectureService{
 	}
 	
 	@Override
-	public boolean postNotice(LectureNotice noticeData, LectureTime lectureData) {
+	public boolean postNotice(LectureNotice noticeData) {
 		
 		Integer lectureId = noticeData.getLectureId();
 		Integer lectureClass = noticeData.getLectureClass();
 		
+		int result = notiRepo.setLectureNotice(noticeData);
+		if(result != 1){
+			throw new WrongRequestException();
+		} 
+		
+		List<String> userIdList = gcmRepo.getLectureApplyUser(new Lecture(lectureId, lectureClass));
+	
+		// 메세지 PUSH
+		new GCM(noticeData.getNoticeTitle(), 
+				noticeData.getNoticeContent(),
+				userIdList,
+				GCM.TYPE_NOTICE);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
+		/*
 		int result = notiRepo.setLectureNotice(noticeData);
 		if(result != 1){
 			throw new WrongRequestException();
@@ -300,7 +320,7 @@ public class LectureServiceImpl implements LectureService{
 				noticeData.getNoticeContent(),
 				userIdList,
 				GCM.TYPE_NOTICE);
-		
+		*/
 		return true;
 	}
 	
@@ -345,6 +365,15 @@ public class LectureServiceImpl implements LectureService{
 			selectStrList.add(str);
 		}
 		return selectStrList;
+	}
+	
+	@Override
+	public LectureTime getLectureTimeById(int lectureTimeId){
+		LectureTime timeData = lecRepo.getLectureTimeById(lectureTimeId);
+		if(timeData == null){
+			throw new WrongRequestException();
+		}
+		return timeData;
 	}
 	
 	// 강의 시간 계산 기준

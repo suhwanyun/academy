@@ -1,11 +1,11 @@
 package academy.group5.service;
 
 import java.util.List;
-import java.util.Map;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.UserLectureTime;
 
 public interface LectureService {
@@ -78,7 +78,8 @@ public interface LectureService {
 	 * @param lecturenotice
 	 * @return
 	 */
-	boolean postNotice(LectureNotice lecturenotice, LectureTime lectureTime);
+	boolean postNotice(LectureNotice lecturenotice);
+	boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime);
 	/**
 	 * 다음 강의 날짜 확인
 	 * @param lectureId
@@ -92,4 +93,10 @@ public interface LectureService {
 	 * @return
 	 */
 	List<String> getLectureTimeStrList(List<LectureTime> lectureTimeList);
+	/**
+	 * ID로 강의시간 정보 확인
+	 * @param lectureTimeId
+	 * @return
+	 */
+	LectureTime getLectureTimeById(int lectureTimeId);
 }

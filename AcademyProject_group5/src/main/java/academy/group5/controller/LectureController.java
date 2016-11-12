@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LectureService;
@@ -35,8 +36,7 @@ public class LectureController {
 	/** 학생이 선택한 강의의 알림 등록 */
 	@RequestMapping(value="/lecture/lectureNotiAdd", method=RequestMethod.POST)
 	public String lectureNotiAdd(HttpSession session, @RequestParam String noticeType,
-			@RequestParam String noticeTitle, @RequestParam String noticeContent,
-			@RequestParam(required=false) LectureTime lectureTime){
+			@RequestParam String noticeTitle, @RequestParam String noticeContent){
 		
 		Object idObj = session.getAttribute("lectureId");
 		Object classObj = session.getAttribute("lectureClass");
@@ -57,8 +57,27 @@ public class LectureController {
 		}
 		// 알림 등록
 		lecService.postNotice(new LectureNotice((Integer)idObj, (Integer)classObj,
-				noticeType, noticeTitle, noticeContent),
-				lectureTime);
+				noticeType, noticeTitle, noticeContent));
+		
+		throw new PageRedirectException("등록되었습니다.");
+	}
+	
+	/** 강의의 시간 변경(일시적인) */
+	@RequestMapping(value="/lecture/lectureNotiTimeAdd", method=RequestMethod.POST)
+	public String lectureTimeNotiAdd(HttpSession session,
+			@RequestParam LectureNoticeSetTime lectureTimeSetting){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		String userId = identify.getUserId(session);
+		
+		if(!lecService.getIsPresident(lectureTimeSetting.getLectureId(),
+				userId, lectureTimeSetting.getLectureClass())){
+			throw new WrongRequestException("반장만 등록할 수 있습니다.");
+		}
+		// 알림 등록
+		lecService.postNotice(lectureTimeSetting);
 		
 		throw new PageRedirectException("등록되었습니다.");
 	}
