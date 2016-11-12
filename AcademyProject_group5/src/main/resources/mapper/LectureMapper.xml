@@ -116,7 +116,7 @@
 				#{lecturePlace}, #{lectureWeek}, #{isTempDate})
 	</insert>
 	
-	<insert id="insertLectureCancel" parameterType="cencel_lecture">
+	<insert id="insertLectureCancel" parameterType="cancel_lecture">
 		insert into CancelLecture
 		values(#{cancelDate}, #{lectureTimeId})
 	</insert>
