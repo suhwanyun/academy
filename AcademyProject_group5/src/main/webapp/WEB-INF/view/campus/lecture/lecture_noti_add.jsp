@@ -17,8 +17,8 @@
 					<td >
 						<select id="noticeType" name="noticeType">
 							<option value="notice">일반공지</option>
-							<option value="test">시험</option>
-							<option value="report">과제</option>
+							<option value="cancelDate">휴강</option>
+							<option value="addDate">보강</option>
 							<option value="changeDate">강의변경</option>
 						</select>
 					</td>
@@ -76,7 +76,7 @@ $("#wrtDtReg").change(function(){
 $("#noticeType").change(function(){
 	$("#wrtDtReg").val("");
 	$("#isTempDate").val("");
-	if($("#noticeType").val()=='changeDate'){
+	if($("#noticeType").val()!='notice'){
 		$(".dateTR").removeAttr("hidden");
 	}else{
 		$(".dateTR").attr("hidden", "hidden");
