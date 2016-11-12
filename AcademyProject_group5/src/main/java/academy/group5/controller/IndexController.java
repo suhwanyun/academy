@@ -270,7 +270,7 @@ public class IndexController {
 		return "/campus/lecture/lecture_noti_add";
 	}
 	
-	@RequestMapping(value="/write/lectureUpdatejsp", method=RequestMethod.GET)
+	@RequestMapping(value="/write/lectureTimeUpdatejsp", method=RequestMethod.GET)
 	public String lectureUpdatePage(HttpSession session, Model model){
 		return "/campus/lecture/lecture_update";
 	}
