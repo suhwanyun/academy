@@ -165,7 +165,7 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
-		LectureApply data = new LectureApply(lectureId, userId, lectureClass, null, null);
+		LectureApply data = new LectureApply(lectureId, userId, lectureClass);
 		LectureApply result = lecRepo.getIsPresident(data);	
 		// 강의 신청 기록이 없음
 		if(result == null){

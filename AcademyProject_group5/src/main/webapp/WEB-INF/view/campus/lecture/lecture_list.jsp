@@ -74,7 +74,7 @@ function movePage(el,id,Lclass){
 }
 $(".changeLuctureBtn").click(function(event){
 	event.stopPropagation();
-	$(location).attr("href","/write/lectureUpdateAddjsp")
+	$(location).attr("href","/write/lectureTimeNotiAddjsp")
 });
 </script>
 </html>

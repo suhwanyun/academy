@@ -162,7 +162,7 @@ public class IndexController {
 		String userId = identify.getUserId(session);
 		if(!lecService.isAppliedLecture(lectureId, userId, lectureClass)){
 			throw new WrongRequestException("신청하지 않은 강의의 정보는 확인하실 수 없습니다.");
-		}else if(lecService.getIsPresident(lectureId, userId, lectureId)){
+		}else if(lecService.getIsPresident(lectureId, userId, lectureClass)){
 			session.setAttribute("isPresident", "Y");
 		} else {
 			session.setAttribute("isPresident", "N");
