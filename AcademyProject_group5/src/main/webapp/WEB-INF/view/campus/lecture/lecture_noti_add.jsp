@@ -19,20 +19,12 @@
 							<option value="notice">일반공지</option>
 							<option value="test">시험</option>
 							<option value="report">과제</option>
-							<option value="changeDate">시간변경</option>
+							<option value="changeDate">강의변경</option>
 						</select>
 					</td>
 				</tr>
 				<tr class='dateTR' hidden="hidden">
-					<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
-					<td>
-						<input type="button" id="dateCancel" value="선택 취소">
-						<input type="date" hidden="hidden" id="isTempDate" name="noticeDay">
-					</td>
-				<tr>
-				<tr class='dateTR' hidden="hidden">
-					<td><input class="form-control input-sm" type="text" id="wrtDtReg"readonly="readonly"></td>
-					<td>
+					<td><input width="60%" class="form-control input-sm" type="text" id="wrtDtReg" readonly="readonly">
 						<input type="button" id="dateCancel" value="선택 취소">
 						<input type="date" hidden="hidden" id="isTempDate" name="noticeDay">
 					</td>
@@ -82,6 +74,8 @@ $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
 }); 
 $("#noticeType").change(function(){
+	$("#wrtDtReg").val("");
+	$("#isTempDate").val("");
 	if($("#noticeType").val()=='changeDate'){
 		$(".dateTR").removeAttr("hidden");
 	}else{
