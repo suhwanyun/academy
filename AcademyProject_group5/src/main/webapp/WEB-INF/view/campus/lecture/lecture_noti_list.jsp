@@ -13,7 +13,19 @@
 		<table class="list_table">
 			<c:forEach items="${noticeList }" var="list">
 				<tr onclick="movePage2(${list.lectureNoticeId })">
-					<td>${list.lectureNoticeId }</td>
+					<td>
+					<c:choose>
+						<c:when test="${list.noticeType == 'notice'}">
+							일반 공지
+						</c:when>
+						<c:when test="${list.noticeType == 'test'}">
+							시험 공지
+						</c:when>
+						<c:when test="${list.noticeType == 'report'}">
+							과제 공지
+						</c:when>
+					</c:choose>
+					</td>
 					<td>${list.noticeTitle }</td>
 					<td>${list.noticeTime }</td>
 				</tr>

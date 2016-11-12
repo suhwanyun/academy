@@ -40,7 +40,7 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public boolean isTermSetted(){
 		if(termRepo.getNextTermStartDate() != null
-				&& termRepo.getTodayTerm() != null){
+				|| termRepo.getTodayTerm() != null){
 			return true;
 		}
 		throw new WrongRequestException("강의 등록을 위해, 다음 학기를 등록해주세요");
@@ -50,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public boolean isNotTermSetted(){
 		if(termRepo.getNextTermStartDate() != null
-				&& termRepo.getTodayTerm() != null){
+				|| termRepo.getTodayTerm() != null){
 			throw new WrongRequestException("이미 학기가 등록되어있습니다.");
 		}
 		return true;

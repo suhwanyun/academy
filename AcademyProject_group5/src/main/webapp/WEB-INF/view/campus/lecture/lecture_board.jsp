@@ -29,6 +29,9 @@
                   <td>
                   </td>
                   <td>
+                  	<c:if test="${isPresident == 'Y' }">
+                  	 <button id="writeNoticeBtn" class="myButton">공지 쓰기</button>
+                    </c:if>
                      <button id="writeBtn" class="myButton bRight">글쓰기</button>
                   </td>
                </tr>
@@ -144,5 +147,10 @@ $("#moveToStartBtn").click(function(){
 function movePage(el){
 	$(location).attr("href", "/postingInfo?postingId="+el);
 }
+//
+$(".writeNoticeBtn").click(function(event){
+	event.stopPropagation();
+	$(location).attr("href","/write/lectureNotiAddjsp")
+});
 </script>
 </html>
