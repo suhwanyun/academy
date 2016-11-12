@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.UserData;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
@@ -60,13 +61,14 @@ public class ManageController {
 		return "/login/login_manager";
 	}
 	
-	/** 학기 추가*/
+	/** 학기 추가
+	 * @throws ParseException */
 	@RequestMapping(value="/lectureManage/termSetting", method=RequestMethod.POST)
 	public String termSetting(HttpSession session,
-			@RequestParam Date termStart, @RequestParam Date termEnd){		
+			@RequestParam String termStart, @RequestParam String termEnd){		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/termSettingjsp");
-				
+		
 		service.registTerm(termStart, termEnd);
 		return "/manage/term_setting";
 	}

@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +73,18 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean registTerm(Date termStart, Date termEnd) {
+	public boolean registTerm(String termStartStr, String termEndStr) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		// String -> Date 변환
+		Date termStart = null;
+		Date termEnd = null;
+		try {
+			termStart = format.parse(termStartStr);
+			termEnd = format.parse(termEndStr);
+		} catch (ParseException e) {
+			throw new WrongRequestException();
+		}
+		
 		Calendar cal = Calendar.getInstance();
 		
 		if(termStart == null || termEnd == null){
