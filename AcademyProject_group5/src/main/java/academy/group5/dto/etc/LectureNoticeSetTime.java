@@ -2,6 +2,7 @@ package academy.group5.dto.etc;
 
 import java.util.Date;
 
+import academy.group5.dto.LectureTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,4 +47,13 @@ public class LectureNoticeSetTime {
 
 	/** 공지 내용. */
 	private String noticeContent;
+	
+	public LectureNoticeSetTime(LectureTime timeData){
+		this.lectureTimeId = timeData.getLectureTimeId();
+		this.lectureId = timeData.getLectureId();
+		this.lectureClass = timeData.getLectureClass();
+		this.lectureStart = timeData.getLectureStart();
+		this.lectureEnd = timeData.getLectureEnd();
+		this.lecturePlace = timeData.getLecturePlace();
+	}
 }

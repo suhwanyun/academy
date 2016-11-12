@@ -18,6 +18,7 @@ import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
@@ -270,8 +271,17 @@ public class IndexController {
 		return "/campus/lecture/lecture_noti_add";
 	}
 	
+	/** 강의 시간 변경 페이지(일시적인) */
 	@RequestMapping(value="/write/lectureTimeNotiAddjsp", method=RequestMethod.GET)
-	public String lectureUpdatePage(HttpSession session, Model model){
+	public String lectureUpdatePage(HttpSession session, Model model,
+			@RequestParam Integer lectureTimeId){
+	
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		
+		LectureTime timeData = lecService.getLectureTimeById(lectureTimeId);
+		
+		model.addAttribute("lectureTimeSetting", new LectureNoticeSetTime(timeData));
 		return "/campus/lecture/lecture_update";
 	}
 	
