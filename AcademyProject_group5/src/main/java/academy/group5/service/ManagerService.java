@@ -36,7 +36,7 @@ public interface ManagerService {
 	 * @param term
 	 * @return
 	 */
-	boolean registTerm(Integer termClassify, Date termStart, Date termEnd);
+	boolean registTerm(Date termStart, Date termEnd);
 	
 	/**
 	 * 강의등록
