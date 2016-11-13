@@ -19,6 +19,7 @@ import academy.group5.repo.GCMRepo;
 import academy.group5.repo.LectureNoticeRepo;
 import academy.group5.repo.LectureRepo;
 import academy.group5.repo.TermRepo;
+import academy.group5.util.GCM;
 import academy.group5.util.MyDate;
 
 @Service
@@ -88,6 +89,13 @@ public class LectureServiceImpl implements LectureService{
 		if(result != 1){
 			throw new WrongRequestException();
 		} 	
+		// 알람 설정
+		String phoneId = gcmRepo.getOneUser(userId);
+		if(phoneId != null){
+			List<String> userIdList = new ArrayList<>();
+			userIdList.add(phoneId);
+			new GCM(null, null, userIdList, GCM.TYPE_SETTING);
+		}
 		return true;	
 	}
 	
@@ -122,7 +130,7 @@ public class LectureServiceImpl implements LectureService{
 
 		for(UserLectureTime timeData : lectureTimeList){
 			
-			if(getIsPresident(timeData.getLectureId(), userId, timeData.getLectureClass())){
+			if(isTermStarted() && getIsPresident(timeData.getLectureId(), userId, timeData.getLectureClass())){
 				timeData.setIsPresident("Y");
 			} else {
 				timeData.setIsPresident("N");
