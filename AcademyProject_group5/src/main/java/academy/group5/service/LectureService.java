@@ -121,4 +121,11 @@ public interface LectureService {
 	 * @return
 	 */
 	Date getNextLectureDate(int lectureWeek, int startTime);
+	/**
+	 * 강의 이름 확인
+	 * @param lectureId
+	 * @param lectureClass
+	 * @return
+	 */
+	public String getLectureName(int lectureId, int lectureClass);
 }

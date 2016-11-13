@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lecture_Main</title>
+<title>${lectureName }</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />

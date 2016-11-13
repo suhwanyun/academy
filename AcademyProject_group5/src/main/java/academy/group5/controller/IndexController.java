@@ -125,6 +125,7 @@ public class IndexController {
 		session.removeAttribute("lectureId");
 		session.removeAttribute("lectureClass");
 		session.removeAttribute("isPresident");
+		session.removeAttribute("lectureName");
 		
 		return "/campus/main";
 	}
@@ -162,6 +163,7 @@ public class IndexController {
 		// 현재 선택된 강의 정보 저장
 		session.setAttribute("lectureId", lectureId);
 		session.setAttribute("lectureClass", lectureClass);
+		session.setAttribute("lectureName", lecService.getLectureName(lectureId, lectureClass));
 				
 		String userId = identify.getUserId(session);
 		if(!lecService.isAppliedLecture(lectureId, userId, lectureClass)){

@@ -234,7 +234,7 @@ public class LectureServiceImpl implements LectureService{
 		if(lecWeek == null || lecStart == null){
 			throw new WrongRequestException();
 		}
-		String lectureName = lecRepo.getLectureName(new Lecture(timeData.getLectureId(), timeData.getLectureClass()));
+		String lectureName = getLectureName(timeData.getLectureId(), timeData.getLectureClass());
 		if(lectureName == null){
 			throw new WrongRequestException();
 		}
@@ -278,5 +278,14 @@ public class LectureServiceImpl implements LectureService{
 		}
 		
 		return lectureCal.getTime();
+	}
+	
+	@Override
+	public String getLectureName(int lectureId, int lectureClass){
+		String lecName = lecRepo.getLectureName(new Lecture(lectureId, lectureClass));
+		if(lecName == null){
+			throw new WrongRequestException();
+		}
+		return lecName;
 	}
 }
