@@ -67,7 +67,7 @@ public class LectureController {
 	}
 	
 	/** 강의의 시간 변경(일시적인) */
-	@RequestMapping(value="/lecture/lectureNotiTimeAdd", method=RequestMethod.POST)
+	@RequestMapping(value="/lecture/lectureTimeNotiAdd", method=RequestMethod.POST)
 	public String lectureTimeNotiAdd(HttpSession session,
 			@RequestParam LectureNoticeSetTime lectureTimeSetting){
 		

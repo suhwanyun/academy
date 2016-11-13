@@ -21,7 +21,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input width="60%" class="form-control input-sm" type="text" id="wrtDtReg" readonly="readonly"> 
+					<td>
+						<span>날짜 설정</span>
+						<input width="60%" class="form-control input-sm" type="text" id="wrtDtReg" readonly="readonly"> 
 						<sform:input type="date" hidden="hidden" path="isTempDate" name="noticeDay"></sform:input>
 					</td>
 				</tr>
