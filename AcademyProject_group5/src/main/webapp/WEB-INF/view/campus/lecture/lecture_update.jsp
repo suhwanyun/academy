@@ -114,6 +114,8 @@ $("document").ready(function(){
 		autoclose: true,
 		todayHighlight: true
 		}); 
+	$("#lectureStart option:eq(${lectureTimeSetting.lectureStart - 1})").prop("selected", true);
+	$("#lectureEnd option:eq(${lectureTimeSetting.lectureEnd - 1})").prop("selected", true);
 });
 $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
