@@ -34,11 +34,9 @@
 
 <c:choose>
 <c:when test="${!empty lectureId}">
-	<c:set var="lectureId" value="${lectureId}"/>
-	<c:set var="lectureClass" value="${lectureClass}"/>
 	<script type="text/javascript">
 	$("#moveToList").click(function(){
-		$(location).attr("href", "/lecture/lectureMain?lectureId="+lectureId+"&lectureClass="+lectureClass);
+		$(location).attr("href", "/lecture/lectureMain?lectureId="+${lectureId}+"&lectureClass="+${lectureClass});
 	});
 	</script>
 </c:when>
