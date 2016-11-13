@@ -17,9 +17,9 @@
 				<tr id="targetTR" align="right">
 					<td colspan="4">
 						<sform:select path="noticeType" style="direction:rtl;">
-							<option value="cancelDate" selected="selected">휴강</option>
+							<option value="cancelDate">휴강</option>
 							<option value="addDate">보강</option>
-							<option value="changeDate">강의 시간/장소 임시변경</option>
+							<option value="changeDate" selected="selected">강의 시간/장소 임시변경</option>
 						</sform:select> <br>
 					<span class='dateTR' hidden="hidden">${targetTimeStr}</span></td>
 				</tr>
@@ -32,8 +32,11 @@
 					</td>
 				</tr>
 				<tr class='dateTR' hidden="hidden">
-					<td><span>시작</span></td>
-					<td><sform:select path="lectureStart">
+					<td>
+						<span>시작</span>
+					</td>
+					<td>
+						<sform:select path="lectureStart">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
 							<option value="3">3교시</option>
@@ -45,8 +48,11 @@
 							<option value="9">9교시</option>
 						</sform:select>
 					</td>
-					<td><span>종료</span></td>
-					<td><sform:select path="lectureEnd">
+					<td align="right">
+						<span>종료</span>
+					</td>
+					<td align="right">
+						<sform:select path="lectureEnd">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
 							<option value="3">3교시</option>
@@ -70,12 +76,12 @@
 			<table class="table">
 				<tr>
 					<td colspan="4">
-					<sform:input type="text" maxlength="30" path="noticeTitle" placeholder="공지 제목을 입력하세요"></sform:input>
+					<sform:input type="text" maxlength="30" path="noticeTitle" placeholder=" 공지 제목을 입력하세요"></sform:input>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="4"><sform:textarea rows="13" cols="40" maxlength="1300"
-							path="noticeContent" class="form-control" placeholder="공지 제목을 입력하세요"></sform:textarea> <!-- 히든 sform태그 -->
+							path="noticeContent" class="form-control" placeholder="공지 내용을 입력하세요"></sform:textarea> <!-- 히든 sform태그 -->
 						<sform:input type="number" hidden="hidden" path="lectureTimeId"
 							value="${lectureTimeSetting.lectureTimeId }"></sform:input> <sform:input
 							type="number" hidden="hidden" path="lectureId"
