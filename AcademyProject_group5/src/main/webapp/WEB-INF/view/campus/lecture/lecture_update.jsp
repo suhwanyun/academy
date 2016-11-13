@@ -14,8 +14,9 @@
 		<sform:form method="get" action="/lecture/lectureTimeNotiAdd"
 			modelAttribute="lectureTimeSetting">
 			<table class="table">
-				<tr id="targetTR">
-					<td colspan="2"><sform:select path="noticeType">
+				<tr id="targetTR" align="right">
+					<td colspan="4">
+						<sform:select path="noticeType" style="direction:rtl;">
 							<option value="cancelDate" selected="selected">휴강</option>
 							<option value="addDate">보강</option>
 							<option value="changeDate">강의 시간/장소 임시변경</option>
@@ -24,14 +25,15 @@
 				</tr>
 				<tr>
 					<td><span>날짜</span></td>
-					<td><input width="30%"
+					<td colspan="3"><input width="30%"
 						class="form-control input-sm" type="text" id="wrtDtReg"
 						readonly="readonly"> <sform:input type="date"
 							hidden="hidden" path="isTempDate" name="noticeDay"></sform:input>
 					</td>
 				</tr>
 				<tr class='dateTR' hidden="hidden">
-					<td colspan="2"><span>시작</span> <sform:select path="lectureStart">
+					<td><span>시작</span></td>
+					<td><sform:select path="lectureStart">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
 							<option value="3">3교시</option>
@@ -41,7 +43,10 @@
 							<option value="7">7교시</option>
 							<option value="8">8교시</option>
 							<option value="9">9교시</option>
-						</sform:select> <span>종료</span> <sform:select path="lectureEnd">
+						</sform:select>
+					</td>
+					<td><span>종료</span></td>
+					<td><sform:select path="lectureEnd">
 							<option value="1">1교시</option>
 							<option value="2">2교시</option>
 							<option value="3">3교시</option>
@@ -56,22 +61,21 @@
 				</tr>
 				<tr class='dateTR' hidden="hidden">
 					<td><span>장소</span></td>
-					<td><sform:input type="text"
+					<td colspan="3"><sform:input type="text"
 							path="lecturePlace" value="${lectureTimeSetting.lecturePlace }"></sform:input>
 					</td>
 				</tr>
 			</table>
-			
-			<br>
 			<!-- 공지 내용 -->
 			<table class="table">
 				<tr>
-					<td colspan="2"><sform:input type="text" maxlength="30" path="noticeTitle"></sform:input>
+					<td colspan="4">
+					<sform:input type="text" maxlength="30" path="noticeTitle" placeholder="공지 제목을 입력하세요"></sform:input>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><sform:textarea rows="13" cols="40" maxlength="1300"
-							path="noticeContent" class="form-control"></sform:textarea> <!-- 히든 sform태그 -->
+					<td colspan="4"><sform:textarea rows="13" cols="40" maxlength="1300"
+							path="noticeContent" class="form-control" placeholder="공지 제목을 입력하세요"></sform:textarea> <!-- 히든 sform태그 -->
 						<sform:input type="number" hidden="hidden" path="lectureTimeId"
 							value="${lectureTimeSetting.lectureTimeId }"></sform:input> <sform:input
 							type="number" hidden="hidden" path="lectureId"
@@ -80,7 +84,7 @@
 							value="${lectureTimeSetting.lectureClass }"></sform:input></td>
 				</tr>
 				<tr align="right">
-					<td colspan="2"><input type="submit" class="myButton" id="submitBtn"
+					<td colspan="4"><input type="submit" class="myButton" id="submitBtn"
 						value="등록"> <input type="button" class="myButton"
 						id="cancel" value="취소"></td>
 				</tr>
