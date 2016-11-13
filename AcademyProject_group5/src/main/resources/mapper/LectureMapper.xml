@@ -96,7 +96,7 @@
 		where lecture_time_id = #{lectureTimeId}
 	</select>
 	
-	<select id="selectLectureName" parameterType="int">
+	<select id="selectLectureName" parameterType="int" resultType="String">
 		select lecture_name
 		from Lecture
 		where lecture_id = #{lectureId}
