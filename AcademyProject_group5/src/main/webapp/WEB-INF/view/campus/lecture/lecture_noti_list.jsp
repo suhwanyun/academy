@@ -24,6 +24,15 @@
 						<c:when test="${list.noticeType == 'report'}">
 							과제 공지
 						</c:when>
+						<c:when test="${list.noticeType == 'cancelDate'}">
+							휴강 공지
+						</c:when>
+						<c:when test="${list.noticeType == 'addDate'}">
+							보강 공지
+						</c:when>
+						<c:when test="${list.noticeType == 'changeDate'}">
+							강의 변경
+						</c:when>
 					</c:choose>
 					</td>
 					<td>${list.noticeTitle }</td>

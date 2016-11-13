@@ -26,7 +26,7 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<logger name="org.springframework" level="warn"/>
+	<logger name="org.springframework" level="DEBUG"/>
 	<!-- root 로거 기본 설정 -->
 	<root level="TRACE">
 		<appender-ref ref="STDOUT" />

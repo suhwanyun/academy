@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 		<div class="container cMargin">
 		<h1 style="text-align: center;">내 정보 수정</h1>
-		<sform:form method="post" action="update" modelAttribute="userData"
+		<sform:form method="post" action="/info/update" modelAttribute="userData"
 			class="form-horizontal">
 			<div class="form-group">
 				<sform:label path="userId">아이디</sform:label>

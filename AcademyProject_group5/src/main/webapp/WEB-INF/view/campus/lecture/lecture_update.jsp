@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sform" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +11,7 @@
 </head>
 <body><jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container cMargin">
-		<sform:form method="post" action="/lecture/lectureTimeNotiAdd" modelAttribute="lectureTimeSetting">
+		<sform:form method="get" action="/lecture/lectureTimeNotiAdd" modelAttribute="lectureTimeSetting">
 			<table class="table">
 				<tr id="targetTR">
 					<td><sform:select path="noticeType">
@@ -18,6 +19,7 @@
 							<option value="addDate">보강</option>
 							<option value="changeDate" >강의 시간/장소 임시변경</option>
 						</sform:select>
+						<br><span class='dateTR' hidden="hidden">${targetTimeStr}</span>
 					</td>
 				</tr>
 				<tr>
@@ -29,6 +31,7 @@
 				</tr>
 				<tr class='dateTR' hidden="hidden">
 					<td>
+						<span>장소</span>
 						<sform:input type="text" path="lecturePlace" value="${lectureTimeSetting.lecturePlace }"></sform:input>
 						<span>시작 교시</span>
 						<sform:select path="lectureStart">
@@ -64,6 +67,10 @@
 				<tr>
 					<td>
 						<sform:textarea rows="13" cols="40" maxlength="1300" path="noticeContent" class="form-control"></sform:textarea>
+						<!-- 히든 sform태그 -->
+						<sform:input type="number" hidden="hidden" path="lectureTimeId" value="${lectureTimeSetting.lectureTimeId }"></sform:input>
+						<sform:input type="number" hidden="hidden" path="lectureId" value="${lectureTimeSetting.lectureId }"></sform:input>
+						<sform:input type="number" hidden="hidden" path="lectureClass" value="${lectureTimeSetting.lectureClass }"></sform:input>
 					</td>
 				</tr>
 				<tr align="right">

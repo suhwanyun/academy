@@ -2,6 +2,8 @@ package academy.group5.dto.etc;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import academy.group5.dto.LectureTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +36,7 @@ public class LectureNoticeSetTime {
 	private String lecturePlace;
 	
 	/** 설정된 날짜. */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date isTempDate;
 	
 	/** 공지 종류. */

@@ -67,9 +67,9 @@ public class LectureController {
 	}
 	
 	/** 강의의 시간 변경(일시적인) */
-	@RequestMapping(value="/lecture/lectureTimeNotiAdd", method=RequestMethod.POST)
+	@RequestMapping(value="/lecture/lectureTimeNotiAdd", method=RequestMethod.GET)
 	public String lectureTimeNotiAdd(HttpSession session,
-			@RequestParam LectureNoticeSetTime lectureTimeSetting){
+			LectureNoticeSetTime lectureTimeSetting){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");

@@ -23,16 +23,15 @@
 						<c:when test="${list.lectureId == lectureList[index.index +1].lectureId}">
 							<td rowspan="2">${list.lectureName }&nbsp;(${list.lectureClass })</td>
 							<td rowspan="2">${list.professorName }</td>
-							<td rowspan="2">${list.lecturePlace }</td>
 						</c:when>
 						<c:when test="${list.lectureId == lectureList[index.index -1].lectureId}">
 						</c:when>
 						<c:otherwise>
 							<td>${list.lectureName }&nbsp;(${list.lectureClass })</td>
 							<td>${list.professorName }</td>
-							<td>${list.lecturePlace }</td>
 						</c:otherwise>
 					</c:choose>
+					<td>${list.lecturePlace }</td>
 					<td><c:choose>
 							<c:when test="${list.lectureWeek == 1}">
 									일요일
@@ -60,7 +59,7 @@
 								</c:otherwise>
 						</c:choose> &nbsp;${list.lectureStart }교시~${list.lectureEnd }교시
 						<c:if test="${list.isPresident =='Y'}">
-							<button class="myButton lectureChangeBtn" value="${list.lectureTimeId}">시간/장소 변경</button>
+							<button class="myButton lectureChangeBtn" onclick="movePage2(this)" value="${list.lectureTimeId}">시간/장소 변경</button>
 						</c:if>
 						</td>
 				</tr>
@@ -69,12 +68,16 @@
 	</div>
 </body>
 <script type="text/javascript">
+var targetVal;
 function movePage(el,id,Lclass){
 	$(location).attr("href", "/lecture/lectureMain?lectureId="+id+"&lectureClass="+Lclass);
 }
+function movePage2(el){
+	targetVal=$(el).val();
+}
 $(".lectureChangeBtn").click(function(event){
 	event.stopPropagation();
-	$(location).attr("href","/write/lectureTimeNotiAddjsp?lectureTimeId="+$(".lectureChangeBtn").val());
+	$(location).attr("href","/write/lectureTimeNotiAddjsp?lectureTimeId="+targetVal);
 })
 </script>
 </html>
