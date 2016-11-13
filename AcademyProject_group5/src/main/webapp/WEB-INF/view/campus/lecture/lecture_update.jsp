@@ -121,7 +121,8 @@ $("#wrtDtReg").change(function(){
 	$("#isTempDate").val($("#wrtDtReg").val());
 }); 
 $("#noticeType").change(function(){
-	if($("#noticeType").val()=='changeDate'){
+	if($("#noticeType").val()=='changeDate'
+			|| $("#noticeType").val()=='addDate'){
 		$("#lectureStart option:eq(${lectureTimeSetting.lectureStart - 1})").prop("selected", true);
 		$("#lectureEnd option:eq(${lectureTimeSetting.lectureEnd - 1})").prop("selected", true);
 		$(".dateTR").removeAttr("hidden");

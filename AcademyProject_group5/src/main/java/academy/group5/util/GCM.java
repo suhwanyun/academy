@@ -21,15 +21,22 @@ public class GCM {
 	private final String GCM_TITLE = "MCM";	
 	
 	public GCM(String msg, String submsg, Set<String> userIdSet, String msgtype) {
-		this(msg, submsg, new ArrayList<>(userIdSet), msgtype);
+		this(null, msg, submsg, new ArrayList<>(userIdSet), msgtype);
 	}
 	
-	public GCM(String msg, String submsg, List<String> userIdList, String msgtype) {
-
-		String title = null;
+	public GCM(String title, String msg, String submsg, Set<String> userIdSet, String msgtype) {
+		this(title, msg, submsg, new ArrayList<>(userIdSet), msgtype);
+	}
+	
+	public GCM(String msg, String submsg, List<String> userIdList, String msgtype){
+		this(null, msg, submsg, userIdList, msgtype);
+	}
+	
+	public GCM(String title, String msg, String submsg, List<String> userIdList, String msgtype) {
 		
 		try {
-			title = java.net.URLEncoder.encode(GCM_TITLE, "UTF-8");
+			title = title == null ? GCM_TITLE : java.net.URLEncoder.encode(title, "UTF-8");
+			
 			if(msg!=null){
 				msg = java.net.URLEncoder.encode(msg,"UTF-8");
 			}
