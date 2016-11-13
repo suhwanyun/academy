@@ -62,7 +62,7 @@
 				</tr>
 			</table>
 			
-			<hr>
+			<br>
 			<!-- 공지 내용 -->
 			<table class="table">
 				<tr>
