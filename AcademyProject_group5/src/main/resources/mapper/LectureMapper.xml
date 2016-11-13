@@ -96,10 +96,11 @@
 		where lecture_time_id = #{lectureTimeId}
 	</select>
 	
-	<select id="selectLectureName" parameterType="int" resultType="String">
+	<select id="selectLectureName" parameterType="lecture" resultType="String">
 		select lecture_name
 		from Lecture
 		where lecture_id = #{lectureId}
+		  and lecture_class = #{lectureClass}
 	</select>
 	
 	<select id="selectIsPresident" parameterType="lecture_apply" resultType="lecture_apply">

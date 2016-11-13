@@ -76,9 +76,9 @@ public class LectureRepo {
 		return session.selectOne(stmt, lectureTimeId);
 	}
 	
-	public String getLectureName(int lectureId) {
+	public String getLectureName(Lecture lectureData) {
 		String stmt = LECTURE_NS + "selectLectureName";
-		return session.selectOne(stmt, lectureId);
+		return session.selectOne(stmt, lectureData);
 	}
 	
 	public LectureApply getIsPresident(LectureApply data){

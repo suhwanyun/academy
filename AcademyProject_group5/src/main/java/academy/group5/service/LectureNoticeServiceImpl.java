@@ -88,6 +88,8 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
 		LectureTime lectureData = new LectureTime(lectureNoticeAndTime);	
+		// 강의 이름
+		String lectureName = lecRepo.getLectureName(new Lecture(lectureData.getLectureId(), lectureData.getLectureClass()));
 		
 		// 기존 강의 정보
 		LectureTime existingLectureData = lecRepo.getLectureTimeById(lectureData.getLectureTimeId());
@@ -128,7 +130,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				throw new WrongRequestException();
 			} 
 			
-			String lectureName = lecRepo.getLectureName(lectureData.getLectureId());
+			
 			// 메세지 설정
 			String noticeTitle = lectureName + "의";
 			String noticeContent = "";
@@ -178,9 +180,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			result = lecRepo.setLectureCancel(new CancelLecture(newLectureTime, lectureData.getLectureTimeId()));
 			if(result != 1){
 				throw new WrongRequestException();
-			} 
-
-			String lectureName = lecRepo.getLectureName(lectureData.getLectureId());	
+			} 	
 			// 메세지 설정
 			String noticeTitle = lectureName + "이(가) 휴강처리 되었습니다. (";
 			noticeTitle += LectureService.weekList[lectureData.getLectureWeek()] + "요일 ";
