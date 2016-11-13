@@ -76,7 +76,7 @@
 			<table class="table">
 				<tr>
 					<td colspan="4">
-					<sform:input type="text" maxlength="30" path="noticeTitle" placeholder=" 공지 제목을 입력하세요"></sform:input>
+					<sform:input type="text" maxlength="30" path="noticeTitle" placeholder="   공지 제목을 입력하세요"></sform:input>
 					</td>
 				</tr>
 				<tr>
