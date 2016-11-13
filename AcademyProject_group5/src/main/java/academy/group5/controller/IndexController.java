@@ -277,8 +277,12 @@ public class IndexController {
 	
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
-		
+		// 현재 열린 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
+	
 		LectureTime timeData = lecService.getLectureTimeById(lectureTimeId);
+		session.setAttribute("lectureName", lecService.getLectureName(timeData.getLectureId(), timeData.getLectureClass()));
+		
 		String userId = identify.getUserId(session);
 		int lectureId = timeData.getLectureId();
 		int lectureClass = timeData.getLectureClass();

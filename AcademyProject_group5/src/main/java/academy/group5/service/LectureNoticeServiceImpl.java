@@ -198,7 +198,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		new GCM(noticeData.getNoticeTitle(), 
 				noticeData.getNoticeContent(),
 				userIdList,
-				GCM.TYPE_NOTICE);
+				GCM.TYPE_SETTING_NOTICE);
 		
 		return true;
 	}

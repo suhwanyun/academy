@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/css/datepicker3.css"/>
-<title>강의 정보 알림등록</title>
+<title>${lectureName } 알림등록</title>
 </head>
 <body><jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container cMargin">

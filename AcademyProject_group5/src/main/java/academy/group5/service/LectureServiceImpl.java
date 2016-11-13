@@ -234,16 +234,12 @@ public class LectureServiceImpl implements LectureService{
 		if(lecWeek == null || lecStart == null){
 			throw new WrongRequestException();
 		}
-		String lectureName = getLectureName(timeData.getLectureId(), timeData.getLectureClass());
-		if(lectureName == null){
-			throw new WrongRequestException();
-		}
 		
 		Calendar calInst = Calendar.getInstance();
 		Date lectureDate = getNextLectureDate(lecWeek, lecStart);
 		calInst.setTime(lectureDate);
 		
-		String lectureTimeStr = lectureName + " ";
+		String lectureTimeStr = "";
 		lectureTimeStr += (calInst.get(Calendar.MONTH) + 1) + "월";
 		lectureTimeStr += calInst.get(Calendar.DAY_OF_MONTH) + "일 ";
 		lectureTimeStr += weekList[calInst.get(Calendar.DAY_OF_WEEK) - 1] + "요일 ";
