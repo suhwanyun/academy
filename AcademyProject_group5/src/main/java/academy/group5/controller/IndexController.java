@@ -120,8 +120,11 @@ public class IndexController {
 	public String campusMainPage(HttpSession session){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/main");
-		// 이전에 더보기를 했던 정보 삭제
+		// 이전에 더보기를 하거나, 강의 정보를 확인했을 때 설정했던 정보 삭제
 		session.removeAttribute("page");
+		session.removeAttribute("lectureId");
+		session.removeAttribute("lectureClass");
+		session.removeAttribute("isPresident");
 		
 		return "/campus/main";
 	}

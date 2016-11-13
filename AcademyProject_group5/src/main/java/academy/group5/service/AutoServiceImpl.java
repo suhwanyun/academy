@@ -102,8 +102,6 @@ public class AutoServiceImpl implements AutoService {
 				// 축하 메세지 전송
 				List<String> sendData = new ArrayList<>(presidentIdList);
 				new GCM("축하합니다! 반장에 선출되셨습니다!", "자세한 정보는 내 강의목록에서 확인해주세요.", sendData, GCM.TYPE_NOTICE);
-				// 반복
-				startVoteScheduler();
 			}
 		}, nextTermDate);
 	}
@@ -113,35 +111,42 @@ public class AutoServiceImpl implements AutoService {
 		// 종강일
 		Date nextTermDate = getScheduleTime(termRepo.getTermEndDate());
 		
-		// 다음 학기 종강일이 없거나 이미 스케줄러가 동작한 경우 취소
-		if(nextTermDate == null || nowTermScheduling){
+		// 이미 스케줄러가 동작한 경우
+		if(nowTermScheduling){
+			return;
+		}
+		// 학기 종강일이 없음(DB삭제)
+		else if(nextTermDate == null){
+			deleteData();
 			return;
 		}
 		nowTermScheduling = true;
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
-			public void run() {
-				// DB 데이터 삭제
-				termRepo.deleteAllLectureRecommend();
-				termRepo.deleteAllLectureComment();
-				termRepo.deleteAllLecturePosting();
-				
-				termRepo.deleteAllLectureApply();
-				termRepo.deleteAllLectureNotice();
-				termRepo.deleteAllCancelLecture();
-				termRepo.deleteAllLectureTime();
-				termRepo.deleteAllLecture();
-				termRepo.deleteTerm();
-				
+			public void run() {	
+				// DB삭제
+				deleteData();
 				nowTermScheduling = false;
 				
 				// 전체 공지
 				List<String> userList = gcmRepo.getAllUser();
 				new GCM("수고하셨습니다.", "학기가 종료되어 강의 데이터가 초기화 되었습니다.", userList, GCM.TYPE_NOTICE);
-				// 반복
-				startTermScheduler();
 			}
 		}, nextTermDate);
+	}
+	
+	/** DB데이터 삭제 */
+	private void deleteData(){
+		termRepo.deleteAllLectureRecommend();
+		termRepo.deleteAllLectureComment();
+		termRepo.deleteAllLecturePosting();
+		
+		termRepo.deleteAllLectureApply();
+		termRepo.deleteAllLectureNotice();
+		termRepo.deleteAllCancelLecture();
+		termRepo.deleteAllLectureTime();
+		termRepo.deleteAllLecture();
+		termRepo.deleteTerm();
 	}
 	
 	/**

@@ -31,11 +31,24 @@
 	
 	</div>
 </body>
-<script type="text/javascript">
-<c:set var="lectureId" value="${lectureId}"/>
-<c:set var="lectureClass" value="${lectureClass}"/>
-$("#moveToList").click(function(){
-	$(location).attr("href", "/lecture/lectureMain?lectureId="+lectureId+"&lectureClass="+lectureClass);
-});
-</script>
+
+<c:choose>
+<c:when test="${!empty lectureId}">
+	<c:set var="lectureId" value="${lectureId}"/>
+	<c:set var="lectureClass" value="${lectureClass}"/>
+	<script type="text/javascript">
+	$("#moveToList").click(function(){
+		$(location).attr("href", "/lecture/lectureMain?lectureId="+lectureId+"&lectureClass="+lectureClass);
+	});
+	</script>
+</c:when>
+<c:otherwise>
+	<script type="text/javascript">
+	$("#moveToList").click(function(){
+		$(location).attr("href", "/campus/campusMain");
+	});
+	</script>
+</c:otherwise>
+</c:choose>
+
 </html>

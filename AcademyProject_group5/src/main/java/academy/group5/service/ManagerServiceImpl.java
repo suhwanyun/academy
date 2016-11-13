@@ -33,6 +33,9 @@ public class ManagerServiceImpl implements ManagerService {
 	@Autowired
 	ManagerRepo managerRepo;
 	
+	@Autowired
+	AutoService autoService;
+	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
 	/** 한 페이지에 표시되는 마일리지 상품의 수 */
@@ -103,6 +106,10 @@ public class ManagerServiceImpl implements ManagerService {
 		if(result != 1){
 			throw new WrongRequestException();
 		}
+		// 반장 선거 스케줄러 시작
+		autoService.startVoteScheduler();
+		// 학기 종료 스케줄러 시작
+		autoService.startTermScheduler();
 	}
 
 	@Override
