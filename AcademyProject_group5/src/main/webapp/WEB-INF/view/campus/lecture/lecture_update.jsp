@@ -21,7 +21,7 @@
 							<option value="addDate">보강</option>
 							<option value="changeDate" selected="selected">강의 시간/장소 임시변경</option>
 						</sform:select> <br>
-					<span class='dateTR' hidden="hidden">${targetTimeStr}</span></td>
+					<span class='dateTR'>${targetTimeStr}</span></td>
 				</tr>
 				<tr>
 					<td><span>날짜</span></td>
@@ -31,7 +31,7 @@
 							hidden="hidden" path="isTempDate" name="noticeDay"></sform:input>
 					</td>
 				</tr>
-				<tr class='dateTR' hidden="hidden">
+				<tr class='dateTR'>
 					<td>
 						<span>시작</span>
 					</td>
@@ -65,7 +65,7 @@
 						</sform:select>
 					</td>
 				</tr>
-				<tr class='dateTR' hidden="hidden">
+				<tr class='dateTR'>
 					<td><span>장소</span></td>
 					<td colspan="3"><sform:input type="text"
 							path="lecturePlace" value="${lectureTimeSetting.lecturePlace }"></sform:input>
