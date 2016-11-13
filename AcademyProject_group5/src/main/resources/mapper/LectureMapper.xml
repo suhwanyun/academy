@@ -110,8 +110,8 @@
 			and user_id = #{userId}
 	</select>
 	
-	<select id="selectLectureIdList" resultType="int">
-		select lecture_id
+	<select id="selectLectureIdList" resultType="lecture">
+		select lecture_id, lecture_class
 		from Lecture
 	</select>
 	

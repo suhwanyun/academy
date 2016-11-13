@@ -10,11 +10,12 @@
 		where phone_id is not null
 	</select>
 	
-	<select id="president" parameterType="int" resultType="String">
+	<select id="president" parameterType="lecture" resultType="String">
 		select phone_id
 		from UserData join LectureApply using (user_id)
 		where phone_id is not null and
 			  lecture_id = #{lectureId} and 
+			  lecture_class = #{lectureClass} and
 			  is_president = 'Y'
 	</select>
 	

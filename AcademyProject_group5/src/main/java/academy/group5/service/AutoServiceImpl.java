@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import academy.group5.dto.Lecture;
 import academy.group5.dto.Mileage;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
@@ -69,16 +70,16 @@ public class AutoServiceImpl implements AutoService {
 			public void run() {
 				// 반장들의 핸드폰 ID 정보가 담길 리스트(중복 금지)
 				Set<String> presidentIdList = new HashSet<>();
-				// 전체 강의ID 리스트
-				List<Integer> lectureIdList = lectureRepo.getAllLectureId();
+				// 전체 강의 리스트
+				List<Lecture> lectureList = lectureRepo.getAllLecture();
 				
-				for(Integer lectureId : lectureIdList){
+				for(Lecture lectureData : lectureList){
 					// 이 강의의 반장이 되기를 원하는 학생 수
-					int voterCount = termRepo.getVoterCount(lectureId);
+					int voterCount = termRepo.getVoterCount(lectureData);
 					
 					// 반장을 신청한 사람이 없을 경우 강제로 전체 인원 중 선출
 					if(voterCount == 0){
-						voterCount = termRepo.updateCoercionVoter(lectureId);
+						voterCount = termRepo.updateCoercionVoter(lectureData);
 					}
 					// 아예 강의를 신청한 인원이 없음
 					if(voterCount == 0){
@@ -87,10 +88,10 @@ public class AutoServiceImpl implements AutoService {
 					Random random = new Random();
 					int votingResult = random.nextInt(voterCount) + 1;
 					// 반장 선출 결과를 DB에 저장
-					termRepo.updateVoting(new Voting(lectureId, votingResult));
+					termRepo.updateVoting(new Voting(lectureData, votingResult));
 					
 					// 선출된 반장의 핸드폰ID정보 리스트화
-					String presidentId = gcmRepo.getPresident(lectureId);
+					String presidentId = gcmRepo.getPresident(lectureData);
 					if(presidentId != null){
 						presidentIdList.add(presidentId);
 					}

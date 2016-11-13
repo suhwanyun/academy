@@ -23,9 +23,9 @@ public class GCMRepo {
 	}
 	
 	/** 반장 */
-	public String getPresident(int lectureId) {
+	public String getPresident(Lecture lectureData) {
 		String stmt = GCM_NS + "president";
-		return session.selectOne(stmt, lectureId);
+		return session.selectOne(stmt, lectureData);
 	}
 	
 	/** 해당 강의를 듣는 모든 학생 */

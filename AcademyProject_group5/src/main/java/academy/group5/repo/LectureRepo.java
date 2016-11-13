@@ -86,7 +86,7 @@ public class LectureRepo {
 		return session.selectOne(stmt, data);
 	}
 	
-	public List<Integer> getAllLectureId(){
+	public List<Lecture> getAllLecture(){
 		String stmt = LECTURE_NS + "selectLectureIdList";
 		return session.selectList(stmt);
 	}
