@@ -6758,29 +6758,7 @@ button.size6Smar{
  border:solid 1px #b7b7b7;
   background-color:rgb(255,255,255);
 }
-.myButtonBig{
-	  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border-radius: 4px;
-  color:#606060;
- border:solid 1px #b7b7b7;
-  background-color:rgb(255,255,255);
-}
+
 .list_table { width: 100%; columns: 0em; 
  border: 1px solid #ddd;
  cellpadding:"0"; 
@@ -6947,7 +6925,7 @@ background-color: #eee;
   font-size:30px;
 }
 .bigFont{
-	font-size:50px;
+	font-size:30px;
 }
  .Lmargin{
  margin-left:350px;
@@ -7011,26 +6989,4 @@ background-color: #eee;
 #searchDiv{
 	font-size:20px;
 }
-#searchBtn{
-	display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border-radius: 4px;
-  color:#606060;
- border:solid 1px #b7b7b7;
-  background-color:rgb(255,255,255);
-}
+

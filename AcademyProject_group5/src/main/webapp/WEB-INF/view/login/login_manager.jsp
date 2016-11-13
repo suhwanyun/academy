@@ -39,7 +39,7 @@
 						class="form-fix">
 			</div>
 			<div style="margin-left:82%; margin-top:5%;"> 
-				<input type="submit" value="로그인 하기" id="loginBtn" class="myButtonBig">
+				<input type="submit" value="로그인 하기" id="loginBtn" class="myButton">
 			</div>
 		</form>
 
