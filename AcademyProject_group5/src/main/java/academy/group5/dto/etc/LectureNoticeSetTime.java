@@ -17,6 +17,12 @@ public class LectureNoticeSetTime {
 
 	/** 강의 시간 ID */
 	private Integer lectureTimeId;
+	
+	/** 강의 ID. */
+	private Integer lectureId;
+
+	/** 강의 분반. */
+	private Integer lectureClass;
 
 	/** 강의 시작시간. */
 	private Integer lectureStart;
@@ -41,6 +47,8 @@ public class LectureNoticeSetTime {
 	
 	public LectureNoticeSetTime(LectureTime timeData){
 		this.lectureTimeId = timeData.getLectureTimeId();
+		this.lectureId = timeData.getLectureId();
+		this.lectureClass = timeData.getLectureClass();
 		this.lectureStart = timeData.getLectureStart();
 		this.lectureEnd = timeData.getLectureEnd();
 		this.lecturePlace = timeData.getLecturePlace();

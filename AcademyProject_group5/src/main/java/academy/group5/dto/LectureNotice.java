@@ -46,6 +46,8 @@ public class LectureNotice {
 	
 	public LectureNotice(LectureNoticeSetTime lectureData) {
 		super();
+		this.lectureId = lectureData.getLectureId();
+		this.lectureClass = lectureData.getLectureClass();
 		this.noticeType = lectureData.getNoticeType();
 		this.noticeTitle = lectureData.getNoticeTitle();
 		this.noticeContent = lectureData.getNoticeContent();

@@ -52,6 +52,8 @@ public class LectureTime {
 	public LectureTime(LectureNoticeSetTime timeData) {
 		super();
 		this.lectureTimeId = timeData.getLectureTimeId();
+		this.lectureId = timeData.getLectureId();
+		this.lectureClass = timeData.getLectureClass();
 		this.lectureStart = timeData.getLectureStart();
 		this.lectureEnd = timeData.getLectureEnd();
 		this.lecturePlace = timeData.getLecturePlace();
