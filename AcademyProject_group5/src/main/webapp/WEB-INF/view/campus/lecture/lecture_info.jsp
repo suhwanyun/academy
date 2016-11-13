@@ -85,7 +85,7 @@
 	$(document).ready(function(){
 		$("#PresidentCheckBox").attr("type", "hidden");
 	});
-	</if>
+	</c:if>
 	$("#cancelBtn").click(function(event) {
 		event.preventDefault();
 		$(location).attr('href', "/campus/campusMain");
