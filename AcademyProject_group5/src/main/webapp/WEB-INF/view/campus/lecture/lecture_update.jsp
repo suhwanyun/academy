@@ -19,7 +19,7 @@
 						<sform:select path="noticeType" style="direction:rtl;">
 							<option value="cancelDate">휴강</option>
 							<option value="addDate">보강</option>
-							<option value="changeDate" selected="selected">강의 시간/장소 임시변경</option>
+							<option value="changeDate" selected="selected">시간/장소 임시변경</option>
 						</sform:select> <br>
 					<span class='dateTR'>${targetTimeStr}</span></td>
 				</tr>
