@@ -226,7 +226,7 @@ public class LectureServiceImpl implements LectureService{
 		calInst.setTime(lectureDate);
 		
 		String lectureTimeStr = "";
-		lectureTimeStr += calInst.get(Calendar.MONTH) + "월";
+		lectureTimeStr += (calInst.get(Calendar.MONTH) + 1) + "월";
 		lectureTimeStr += calInst.get(Calendar.DAY_OF_MONTH) + "일 ";
 		lectureTimeStr += weekList[calInst.get(Calendar.DAY_OF_WEEK) - 1] + "요일 ";
 		lectureTimeStr += timeData.getLectureStart() + "교시~";
