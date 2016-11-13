@@ -422,8 +422,15 @@ public class BoardController {
 			session.setAttribute("gotoPage", "/placeMain");
 			break;
 		default:
-			session.setAttribute("errorGotoPage", "/lecture/lectureMain");
-			session.setAttribute("gotoPage", "/lecture/lectureMain");
+			Object idObj = session.getAttribute("lectureId");
+			Object classObj = session.getAttribute("lectureClass");
+			if(idObj != null && classObj != null){
+				session.setAttribute("errorGotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+				session.setAttribute("gotoPage", "/lecture/lectureMain?lectureId="+idObj+"&lectureClass="+classObj);
+			} else {
+				session.setAttribute("errorGotoPage", "/campus/campusMain");
+				session.setAttribute("gotoPage", "/campus/campusMain");
+			}
 			break;
 		}
 		
