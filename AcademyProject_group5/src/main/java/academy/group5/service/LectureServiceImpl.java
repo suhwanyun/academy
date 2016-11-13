@@ -9,21 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import academy.group5.dto.CancelLecture;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureApply;
-import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.Paging;
 import academy.group5.dto.etc.UserLectureTime;
-import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.LectureNoticeRepo;
 import academy.group5.repo.LectureRepo;
 import academy.group5.repo.TermRepo;
-import academy.group5.util.GCM;
 import academy.group5.util.MyDate;
 
 @Service
@@ -165,12 +160,25 @@ public class LectureServiceImpl implements LectureService{
 	public boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass) {
 		LectureApply data = new LectureApply(lectureId, userId, lectureClass);
 		LectureApply result = lecRepo.getIsPresident(data);	
+
+		return isPresidentLogic(result);
+	}
+	@Override
+	public boolean getIsPresident(Integer lectureTimeId, String userId){
+		Lecture lectureData = lecRepo.getLectureByTimeId(lectureTimeId);
+		LectureApply result = lecRepo.getIsPresident(new LectureApply(lectureData, userId));	
+		
+		return isPresidentLogic(result);
+	}
+	
+	/** 반장여부 확인 로직 */
+	private boolean isPresidentLogic(LectureApply applyData){
 		// 강의 신청 기록이 없음
-		if(result == null){
+		if(applyData == null){
 			throw new WrongRequestException();
 		}
-		String president = result.getIsPresident();
-		Date time = result.getRightEndTime();
+		String president = applyData.getIsPresident();
+		Date time = applyData.getRightEndTime();
 		
 		if(president == null){
 			throw new WrongRequestException();

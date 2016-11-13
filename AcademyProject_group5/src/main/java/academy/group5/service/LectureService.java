@@ -84,6 +84,13 @@ public interface LectureService {
 	 */
 	boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass);
 	/**
+	 * 해당 강의의 반장여부를 반환
+	 * @param lectureTimeId
+	 * @param userId
+	 * @return
+	 */
+	boolean getIsPresident(Integer lectureTimeId, String userId);
+	/**
 	 * 다음 강의 날짜 확인
 	 * @param lectureId
 	 * @param lectureClas

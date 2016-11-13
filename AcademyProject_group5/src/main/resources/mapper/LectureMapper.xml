@@ -56,6 +56,12 @@
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</select>
 	
+	<select id="selectLectureByTimeId" parameterType="int" resultType="lecture">
+		select lecture_id, lecture_class
+		from Lecture join LectureTime using (lecture_id, lecture_class)
+		where lecture_time_id = #{lectureTimeId}
+	</select>
+	
 	<select id="selectLectureTimeByUser" parameterType="String" resultType="user_lecture_time">
 		select lecture_start, lecture_end, lecture_week, lecture_name, lecture_class, lecture_place
 		from LectureTime join LectureApply using (lecture_id, lecture_class)

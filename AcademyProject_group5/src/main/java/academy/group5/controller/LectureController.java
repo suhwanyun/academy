@@ -76,8 +76,7 @@ public class LectureController {
 		
 		String userId = identify.getUserId(session);
 		
-		if(!lecService.getIsPresident(lectureTimeSetting.getLectureId(),
-				userId, lectureTimeSetting.getLectureClass())){
+		if(!lecService.getIsPresident(lectureTimeSetting.getLectureTimeId(), userId)){
 			throw new WrongRequestException("반장만 등록할 수 있습니다.");
 		}
 		// 알림 등록

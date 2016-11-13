@@ -51,6 +51,11 @@ public class LectureRepo {
 		return session.selectOne(stmt, data);
 	}
 	
+	public Lecture getLectureByTimeId(int lectureTimeId) {
+		String stmt = LECTURE_NS + "selectLectureByTimeId";
+		return session.selectOne(stmt, lectureTimeId);
+	}
+	
 	public List<UserLectureTime> getUserTimetable(String id){
 		String stmt = LECTURE_NS + "selectLectureTimeByUser";
 		return session.selectList(stmt, id);

@@ -35,4 +35,11 @@ public class LectureApply {
 		this.userId = userId;
 		this.lectureClass = lectureClass;
 	}
+	
+	public LectureApply(Lecture lectureData, String userId) {
+		super();
+		this.lectureId = lectureData.getLectureId();
+		this.userId = userId;
+		this.lectureClass = lectureData.getLectureClass();
+	}
 }
