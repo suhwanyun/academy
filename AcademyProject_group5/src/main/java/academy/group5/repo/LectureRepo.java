@@ -77,7 +77,7 @@ public class LectureRepo {
 	}
 	
 	public String getLectureName(int lectureId) {
-		String stmt = LECTURE_NS + "selectLectureTimeById";
+		String stmt = LECTURE_NS + "selectLectureName";
 		return session.selectOne(stmt, lectureId);
 	}
 	
