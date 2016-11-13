@@ -94,9 +94,11 @@ public class LectureController {
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		Lecture selectedlecture = lecService.lectureClassInfo(lectureId, lectureClass);
 		List<LectureTime> selectedLectureTimes = lecService.lectureTimeInfo(selectedlecture);
-		
+		// 강의 정보
 		model.addAttribute("lectureData", selectedlecture);
 		model.addAttribute("lectureTime", selectedLectureTimes);
+		// 학기 시작 여부
+		model.addAttribute("isTermStarted", lecService.isTermStarted());
 		
 		// 현재 열린 탭 저장
 		session.setAttribute("nowTab", "lectureList");

@@ -92,6 +92,11 @@ public class LectureServiceImpl implements LectureService{
 	}
 	
 	@Override
+	public boolean isTermStarted(){
+		return termRepo.getTodayTerm() != null;	
+	}
+	
+	@Override
 	public boolean isAppliedLecture(Integer lectureId, String userId, Integer lectureClass){
 		int alreadyApplied = lecRepo.isLectureApplied(new LectureApply(lectureId, userId, lectureClass));
 		return alreadyApplied != 0;

@@ -33,6 +33,11 @@ public interface LectureService {
 	 */
 	boolean apply(Integer lectureId, String userId, Integer lectureClass, String isPresidentStr);
 	/**
+	 * 학기가 시작되었는지 확인
+	 * @return
+	 */
+	public boolean isTermStarted();
+	/**
 	 * 신청이 되어있는 강의인지 확인
 	 * @param lectureId
 	 * @param userId

@@ -67,8 +67,8 @@
 				</table>
 			</c:forEach>
 			<div>
-				<input type="checkbox" id="PresidentCheckBox"> <label
-					for="PresidentCheckBox">반장신청</label>
+				<input type="checkbox" id="PresidentCheckBox"> 
+				<label for="PresidentCheckBox">반장신청</label>
 				<button type="submit" id="applyBtn" class="myButton">신청</button>
 				<button id="cancelBtn" class="myButton">취소</button>
 			</div>
@@ -81,6 +81,11 @@
 	</div>
 </body>
 <script type="text/javascript">
+	<c:if test="${isTermStarted == true}">
+	$(document).ready(function(){
+		$("#PresidentCheckBox").attr("type", "hidden");
+	});
+	</if>
 	$("#cancelBtn").click(function(event) {
 		event.preventDefault();
 		$(location).attr('href', "/campus/campusMain");
