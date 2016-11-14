@@ -211,7 +211,7 @@ public class ManageController {
 	
 	// ---------------------------------마일리지 등록 관리자--------------------------------- */
 	
-	/** 강의 등록 관리자 메인화면 페이징 */
+	/** 마일리지 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
 	public @ResponseBody List<MileageProduct> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
 				
@@ -219,17 +219,48 @@ public class ManageController {
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
 		// 저장된 정렬 데이터
 		// 마일리지 순 정렬 : orderType = 'productCost'
-		// 내림차순 정렬 : isAsc = 'false'
+		// 내림차순 정렬 : isDesc = 'true'
 		Object typeObj = session.getAttribute("orderType");
-		Object ascObj = session.getAttribute("isAsc");
+		Object descObj = session.getAttribute("isDesc");
 		
 		String searchType = typeObj == null ? null : (String)typeObj;
-		boolean isAsc = ascObj == null ? true : false;
+		boolean isAsc = descObj == null ? true : false;
 				
 		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);
 		return productList;
 	}
 	
+	
+	/** 마일리지 관리자 메인화면 마일리지 물품 목록 정렬 */
+	@RequestMapping(value="/mileageManage/search", method=RequestMethod.GET)
+	public String manageMileageMainSearch(HttpSession session, Model model,
+			@RequestParam String searchType, @RequestParam String searchData){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		
+		List<Lecture> lectureList = null;
+		int pageCount = 1;
+		// 검색 데이터가 없으면 기존 검색 데이터 삭제 후 전체 강의 목록 조회
+		if(searchType.equals("") || searchData.equals("")){
+			session.removeAttribute("searchType");
+			session.removeAttribute("searchData");
+			lectureList = service.getAllLectureList();
+			pageCount = service.getMaxLectureListPage();
+		} 
+		// 검색 데이터를 저장 후 DB 조회
+		else {
+			session.setAttribute("searchType", searchType);
+			session.setAttribute("searchData", searchData);
+			lectureList = service.getAllLectureListBySearch(1, searchData, searchType);
+			pageCount = service.getMaxLectureListPageBySearch(searchData, searchType);
+		}
+		
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("pageCount", pageCount);
+		
+		return "/manage/lecture/lecture";
+	}
 	/** 마일리지 등록 페이지 */
 	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
 	public String addMileage(){
