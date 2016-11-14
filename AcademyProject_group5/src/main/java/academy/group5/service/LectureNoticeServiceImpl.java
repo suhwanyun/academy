@@ -111,7 +111,9 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		postNotice(noticeData, false);
 		// DB result 담을 변수
 		int result;	
-		
+		// 알람 내용
+		String noticeTitle = "";
+		String noticeContent = "";
 		// 강의 시간이 변경된 경우
 		if(noticeData.getNoticeType().equals("changeDate")) {
 		
@@ -130,21 +132,15 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				throw new WrongRequestException();
 			} 
 			
-			
 			// 메세지 설정
-			String noticeTitle = lectureName + "의";
-			String noticeContent = "";
+			noticeTitle = "강의의";
 			boolean isTimeChanged = false;
 			if(existingLectureTime.compareTo(newLectureTime) != 0){
 				noticeTitle += " 시간";
 				
-				noticeContent = LectureService.weekList[existingLectureData.getLectureWeek()] + "요일 ";
-				noticeContent += existingLectureData.getLectureStart() + "교시~";
-				noticeContent += existingLectureData.getLectureEnd() + "교시";
-				
-				noticeContent += " -> " + LectureService.weekList[lectureData.getLectureWeek()] + "요일 ";
-				noticeContent += lectureData.getLectureStart() + "교시~";
-				noticeContent += lectureData.getLectureEnd() + "교시";
+				noticeContent = setNoticeContentByClass(noticeContent, existingLectureData);
+				noticeContent += " -> ";
+				noticeContent = setNoticeContentByClass(noticeContent, lectureData);
 				
 				isTimeChanged = true;
 			}
@@ -155,17 +151,14 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				} else {
 					noticeTitle += " 장소가";
 				}
-				
-				noticeContent += existingLectureData.getLecturePlace() + " -> ";
+				noticeContent += existingLectureData.getLecturePlace();
+				noticeContent += " -> ";
 				noticeContent += lectureData.getLecturePlace();
 			}
 			else {
 				noticeTitle += "이";
 			}
 			noticeTitle += " 변경되었습니다.";
-			
-			noticeData.setNoticeTitle(noticeTitle);
-			noticeData.setNoticeContent(noticeContent);
 		}
 		// 휴강된 경우
 		else if(noticeData.getNoticeType().equals("cancelDate")) {
@@ -176,26 +169,43 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			if(newLectureCal.get(Calendar.DAY_OF_WEEK) != existingLectureWeek){
 				throw new WrongRequestException("강의가 없는 날짜입니다.\\n" + LectureService.weekList[existingLectureWeek-1] + "요일을 선택해주세요.");
 			}
+			// 기존 강의의 시작시간으로 설정(날짜는 유지)
+			newLectureCal.set(Calendar.HOUR_OF_DAY, existingLectureData.getLectureStart() + LectureService.FIRST_CLASS_CRITERIA);
+			newLectureTime = newLectureCal.getTime();
 			// 휴강 처리
 			result = lecRepo.setLectureCancel(new CancelLecture(newLectureTime, lectureData.getLectureTimeId()));
 			if(result != 1){
 				throw new WrongRequestException();
 			} 	
 			// 메세지 설정
-			String noticeTitle = lectureName + "이(가) 휴강처리 되었습니다. (";
-			noticeTitle += LectureService.weekList[lectureData.getLectureWeek()] + "요일 ";
-			noticeTitle += lectureData.getLectureStart() + "교시~";
-			noticeTitle += lectureData.getLectureEnd() + "교시)";
-	
-			noticeData.setNoticeTitle(noticeTitle);
-
+			noticeTitle = "강의가 휴강처리 되었습니다.";
+			noticeContent = setNoticeContentByClass("", lectureData);
 		}
+		// 보강인 경우
+		else if(noticeData.getNoticeType().equals("addDate")) {
+		
+			if(existingLectureTime.compareTo(newLectureTime) == 0){
+				throw new PageRedirectException("기존 강의와 동일합니다.");
+			}
+			// 임시 강의 시간 등록
+			result = lecRepo.setTempLectureTime(lectureData);
+			if(result != 1){
+				throw new WrongRequestException();
+			} 
+			// 메세지 설정
+			noticeTitle = "보강이 등록 되었습니다.";
+			noticeContent = setNoticeContentByClass("", lectureData);
+		}
+		
+		noticeData.setNoticeTitle(noticeTitle);
+		noticeData.setNoticeContent(noticeContent);
 		
 		List<String> userIdList = gcmRepo.getLectureApplyUser(
 				new Lecture(lectureData.getLectureId(), lectureData.getLectureClass()));
 	
 		// 메세지 PUSH
-		new GCM(noticeData.getNoticeTitle(), 
+		new GCM(lectureName,
+				noticeData.getNoticeTitle(), 
 				noticeData.getNoticeContent(),
 				userIdList,
 				GCM.TYPE_SETTING_NOTICE);
@@ -203,15 +213,26 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		return true;
 	}
 	
+	/** 알림 내용에 강의 시간을 추가 */
+	@Override
+	public String setNoticeContentByClass(String contentData, LectureTime timaData){
+		contentData = LectureService.weekList[timaData.getLectureWeek()] + "요일 ";
+		contentData += timaData.getLectureStart() + "교시~";
+		contentData += timaData.getLectureEnd() + "교시";
+		return contentData;
+	}
+	
 	/** 공지내용을 알림으로 푸쉬 */
 	private void sendGCM(LectureNotice noticeData){
 		Integer lectureId = noticeData.getLectureId();
 		Integer lectureClass = noticeData.getLectureClass();
+		String lectureName = lecRepo.getLectureName(new Lecture(lectureId, lectureClass));
 		
 		List<String> userIdList = gcmRepo.getLectureApplyUser(new Lecture(lectureId, lectureClass));
 	
 		// 메세지 PUSH
-		new GCM(noticeData.getNoticeTitle(), 
+		new GCM(lectureName,
+				noticeData.getNoticeTitle(), 
 				noticeData.getNoticeContent(),
 				userIdList,
 				GCM.TYPE_NOTICE);

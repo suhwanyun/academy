@@ -114,6 +114,16 @@
 		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
 	</delete>
 	
+	<delete id="deleteAllLectureApply" parameterType="lecture">
+		delete from LectureApply
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</delete>
+	
+	<delete id="deleteAllLectureNotice" parameterType="lecture">
+		delete from LectureNotice
+		where lecture_id = #{lectureId} and lecture_class = #{lectureClass}
+	</delete>
+	
 	<delete id="deleteLectureTime" parameterType="int">
 		delete from LectureTime
 		where lecture_time_id = #{lectureTimeId}
