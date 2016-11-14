@@ -10,7 +10,7 @@
 	<form action="/lectureManage/add" method="post">
 	<div class="center text-center">
 	<table class="table">
-		<tr>
+		<tr> 
 			<th>강의 ID</th>
 			<th>강의 이름</th>
 			<th>교수 이름</th>
