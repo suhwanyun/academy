@@ -1,14 +1,10 @@
 package academy.group5.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +26,7 @@ import academy.group5.service.ManagerService;
  */
 @Controller
 public class ManageController {
-	static Logger logger = LoggerFactory.getLogger(ManageController.class);
+	
 	@Autowired
 	ManagerService service;
 	
@@ -82,7 +78,7 @@ public class ManageController {
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/lectureManage/main");
-		logger.trace("searchType:{}, searchData:{}",searchType,searchData);
+		
 		List<Lecture> lectureList = null;
 		int pageCount = 1;
 		// 검색 데이터가 없으면 기존 검색 데이터 삭제 후 전체 강의 목록 조회
@@ -187,7 +183,7 @@ public class ManageController {
 	}
 	
 	/** 강의 삭제 */
-	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.POST)
+	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.GET)
 	public String dropLecture(HttpSession session, Model model,
 			@RequestParam int lectureId, @RequestParam int lectureClass){
 		
