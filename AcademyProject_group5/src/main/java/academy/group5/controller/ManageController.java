@@ -183,7 +183,7 @@ public class ManageController {
 	}
 	
 	/** 강의 삭제 */
-	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.GET)
+	@RequestMapping(value="/lectureManage/drop", method=RequestMethod.POST)
 	public String dropLecture(HttpSession session, Model model,
 			@RequestParam int lectureId, @RequestParam int lectureClass){
 		
@@ -205,6 +205,27 @@ public class ManageController {
 		service.deleteLectureTime(lectureTimeId);
 		
 		throw new PageRedirectException("삭제되었습니다.");
+	}
+	
+	// ---------------------------------마일리지 등록 관리자--------------------------------- */
+	
+	/** 강의 등록 관리자 메인화면 페이징 */
+	@RequestMapping(value="/lectureManage/page", method=RequestMethod.GET)
+	public @ResponseBody List<Lecture> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
+				
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/mileageManage/main");
+		// 저장된 정렬 데이터
+		// 마일리지 순 정렬 : orderType = 'mileValue'
+		// 내림차순 정렬 : isAsc = 'false')
+		Object typeObj = session.getAttribute("orderType");
+		Object dataObj = session.getAttribute("isAsc");
+		
+		String searchType = typeObj == null ? null : (String)typeObj;
+		String searchData = dataObj == null ? null : (String)dataObj;
+				
+		List<Lecture> lectureList = service.getAllLectureListBySearch(page, searchType, searchData);
+		return lectureList;
 	}
 	
 	/** 마일리지 등록 페이지 */

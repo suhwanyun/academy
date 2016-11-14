@@ -122,7 +122,7 @@ public class LectureController {
 	}
 	
 	/** 강의 신청 취소 */
-	@RequestMapping(value="/lecture/lectureApplyCancel", method=RequestMethod.POST)
+	@RequestMapping(value="/lecture/lectureApplyCancel", method=RequestMethod.GET)
 	public String applyLectureCancel(HttpSession session, @RequestParam Integer lectureId){
 		
 		// 에러 발생시 / 처리 완료시 이동할 페이지
