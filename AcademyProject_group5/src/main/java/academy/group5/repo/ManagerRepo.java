@@ -88,6 +88,16 @@ public class ManagerRepo {
 		return session.delete(stmt, lectureData);
 	}
 	
+	public int deleteAllLectureApply(Lecture lectureData) {
+		String stmt = MANAGER_NS + "deleteAllLectureApply";
+		return session.delete(stmt, lectureData);
+	}
+	
+	public int deleteAllLectureNotice(Lecture lectureData) {
+		String stmt = MANAGER_NS + "deleteAllLectureNotice";
+		return session.delete(stmt, lectureData);
+	}
+	
 	public int deleteLectureTime(Integer timeId) {
 		String stmt = MANAGER_NS + "deleteLectureTime";
 		return session.delete(stmt, timeId);

@@ -17,10 +17,12 @@ import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 import academy.group5.dto.etc.Paging;
-import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.repo.GCMRepo;
+import academy.group5.repo.LectureRepo;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
+import academy.group5.util.GCM;
 import academy.group5.util.MyHash;
 
 @Service
@@ -34,7 +36,16 @@ public class ManagerServiceImpl implements ManagerService {
 	ManagerRepo managerRepo;
 	
 	@Autowired
+	LectureRepo lecRepo;
+	
+	@Autowired
+	GCMRepo gcmRepo;
+	
+	@Autowired
 	AutoService autoService;
+	
+	@Autowired
+	LectureNoticeService lecNoticeService;
 	
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
@@ -217,33 +228,88 @@ public class ManagerServiceImpl implements ManagerService {
 		if(result != 1){
 			throw new WrongRequestException();
 		}
+		
+		// 알람 내용
+		String noticeTitle = "강의시간이 영구적으로 변경되었습니다.";
+		String noticeContent = lecNoticeService.setNoticeContentByClass("", lectureTime);
+		
+		Lecture lectureData = lecRepo.getLectureByTimeId(lectureTime.getLectureTimeId());
+		if(lectureData == null){
+			throw new WrongRequestException();
+		}
+		String lectureName = lecRepo.getLectureName(lectureData);
+		// 알람을 받을 핸드폰 정보들
+		List<String> userIdList = gcmRepo.getLectureApplyUser(lectureData);
+		// 메세지 PUSH
+		new GCM(lectureName,
+				noticeTitle, 
+				noticeContent,
+				userIdList,
+				GCM.TYPE_SETTING_NOTICE);
 		return true;
 	}
 
 	@Override
 	public boolean deleteLecture(Integer lectureId, Integer lectureClass) {
 		Lecture lectureData = new Lecture(lectureId, lectureClass);
+		
+		// 삭제 전 정보 획득(알람에 사용)
+		String lectureName = lecRepo.getLectureName(lectureData);
+		String noticeTitle = "강의가 폐강처리 되었습니다.";
+		
+		// 알람을 받을 핸드폰 정보들
+		List<String> userIdList = gcmRepo.getLectureApplyUser(lectureData);
+		
+		// 강의 신청 목록 삭제
+		managerRepo.deleteAllLectureApply(lectureData);
+		// 강의 공지 목록 삭제
+		managerRepo.deleteAllLectureNotice(lectureData);
 		// 강의 시간 삭제
-		deleteAllLectureTime(lectureData);
+		managerRepo.deleteAllLectureTime(lectureData);
+		
 		// 강의 삭제
 		int result = managerRepo.deleteLecture(lectureData);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
+		
+		// 메세지 PUSH
+		new GCM(lectureName + " " + lectureData.getLectureClass() + "분반",
+				noticeTitle, 
+				"",
+				userIdList,
+				GCM.TYPE_SETTING_NOTICE);
+		
 		return true;
-	}
-
-	@Override
-	public void deleteAllLectureTime(Lecture lectureData) {
-		managerRepo.deleteAllLectureTime(lectureData);
 	}
 	
 	@Override
 	public boolean deleteLectureTime(Integer lectureTimeId){
+		// 삭제 전 정보 획득(알람에 사용)
+		Lecture lectureData = lecRepo.getLectureByTimeId(lectureTimeId);
+		if(lectureData == null){
+			throw new WrongRequestException();
+		}
+		LectureTime timeData = lecRepo.getLectureTimeById(lectureTimeId);
+		String lectureName = lecRepo.getLectureName(lectureData);
+		
+		// 알람 내용
+		String noticeTitle = "강의 시간이 삭제처리 되었습니다.";
+		String noticeContent = lecNoticeService.setNoticeContentByClass("", timeData);
+		
 		int result = managerRepo.deleteLectureTime(lectureTimeId);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
+			
+		// 알람을 받을 핸드폰 정보들
+		List<String> userIdList = gcmRepo.getLectureApplyUser(lectureData);
+		// 메세지 PUSH
+		new GCM(lectureName + " " + lectureData.getLectureClass() + "분반",
+				noticeTitle, 
+				noticeContent,
+				userIdList,
+				GCM.TYPE_SETTING_NOTICE);
 		return false;
 	}
 	

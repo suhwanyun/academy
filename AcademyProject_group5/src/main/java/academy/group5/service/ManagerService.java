@@ -113,7 +113,6 @@ public interface ManagerService {
 	 * 강의 시간삭제
 	 * @return
 	 */
-	void deleteAllLectureTime(Lecture lectureData);
 	boolean deleteLectureTime(Integer lectureTimeId);
 	
 	/**

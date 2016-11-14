@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.LectureNotice;
+import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.UserLectureNotice;
 
@@ -37,4 +38,12 @@ public interface LectureNoticeService {
 	 * @return
 	 */
 	boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime);
+	
+	/**
+	 *  알림 내용에 강의 시간을 추가
+	 * @param contentData
+	 * @param timaData
+	 * @return
+	 */
+	public String setNoticeContentByClass(String contentData, LectureTime timaData);
 }

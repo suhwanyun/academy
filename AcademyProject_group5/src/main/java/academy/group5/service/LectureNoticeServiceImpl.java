@@ -214,7 +214,8 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	}
 	
 	/** 알림 내용에 강의 시간을 추가 */
-	private String setNoticeContentByClass(String contentData, LectureTime timaData){
+	@Override
+	public String setNoticeContentByClass(String contentData, LectureTime timaData){
 		contentData = LectureService.weekList[timaData.getLectureWeek()] + "요일 ";
 		contentData += timaData.getLectureStart() + "교시~";
 		contentData += timaData.getLectureEnd() + "교시";

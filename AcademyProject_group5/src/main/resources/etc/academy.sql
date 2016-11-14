@@ -227,6 +227,7 @@ ALTER TABLE CancelLecture
   ADD CONSTRAINT "LectureTime FK ref LectureTime"
 	FOREIGN KEY (lecture_time_id)
 	REFERENCES LectureTime (lecture_time_id)
+	ON CASCADE
 ;
 
 
