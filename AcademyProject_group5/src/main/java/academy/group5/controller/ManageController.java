@@ -17,11 +17,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
+import academy.group5.service.PostingService;
 
 /**
  * 관리자 컨트롤러
@@ -266,32 +266,81 @@ public class ManageController {
 	public String addProduct(HttpSession session, MultipartHttpServletRequest mrequest,
 			@RequestParam(required=false) MultipartFile uploadPhoto){
 		
-		// 에러 발생시 / 처리 완료시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/mileageManage/addjsp");
+		return addProduct(session, mrequest, uploadPhoto,
+				"/mileageManage/addjsp", true);
+	}
+	
+	/** 물품 등록 로직 */
+	private String addProduct(HttpSession session,
+			MultipartHttpServletRequest mrequest, MultipartFile uploadPhoto,
+			String failMapping, boolean isNewProduct){
+		
+		// 처리 완료시 이동할 페이지
 		session.setAttribute("gotoPage", "/mileageManage/main");
-		/*
+		
 		// multipart/form-data 타입 form 데이터 전달
+		String productIdStr = mrequest.getParameter("productId");
 		String productName = mrequest.getParameter("productName");
 		String productCostStr = mrequest.getParameter("productCost");
 		String productContent = mrequest.getParameter("productContent");
 		String isDeletePhoto = mrequest.getParameter("deletePhoto");
+		Integer productCost = null;
+		String inputNeedStr = null;
 		
 		if(productName == null || productCostStr == null || productContent == null) {
 			throw new WrongRequestException();	
-		} else if(postingTitle.equals("")){
-			session.setAttribute("postingData", postingData);
-			session.setAttribute("gotoPage", failMapping);
-			throw new PageRedirectException("제목을 입력해주세요.");
-		} else if(postingContent.equals("")){
-			session.setAttribute("postingData", postingData);
-			session.setAttribute("gotoPage", failMapping);
-			throw new PageRedirectException("내용을 입력해주세요.");
+		} else if(productName.equals("")){
+			inputNeedStr = "이름";
+		} else if(productContent.equals("")){
+			inputNeedStr = "설명";
 		}
 		
-		service.registerProduct(productName, Integer.parseInt(productCostStr), 
-				productContent, productImgfile);*/
+		if(productCostStr.equals("")){
+			inputNeedStr = "가격";
+		} else {
+			productCost = Integer.parseInt(productCostStr);
+		}
+		MileageProduct productData = new MileageProduct(productName, productCost, productContent, PostingService.DEFAULT_PHOTO_NAME);
+		MileageProduct existingProductData = null;
 		
-		throw new PageRedirectException("등록되었습니다.");
+		if(inputNeedStr != null){
+			session.setAttribute("productData", productData);
+			session.setAttribute("gotoPage", failMapping);
+			throw new PageRedirectException(inputNeedStr + "을 입력해주세요.");
+		}
+		// 수정시
+		if(!isNewProduct && !productIdStr.equals("") && isDeletePhoto != null){
+			// 업로드 되어있던 파일 삭제
+			if(!isDeletePhoto.equals("false")){
+				existingProductData = service.getProduct(Integer.parseInt(productIdStr));
+				service.uploadCancel(existingProductData, isDeletePhoto);
+			} else {
+				productData.setProductImgfile(null);
+			}
+		} else if(!isNewProduct){
+			throw new WrongRequestException();
+		}
+
+		if((isNewProduct && service.registerProduct(productData)) ||
+			(!isNewProduct && service.updateProduct(productData)))
+			{
+			// 이미지 업로드 처리
+			if(!uploadPhoto.isEmpty()){
+				int uploadResult = service.upload(uploadPhoto, productData);
+				// 이미지 업로드 실패시 처리
+				if(uploadResult == -1){
+					throw new PageRedirectException("이미지 업로드에 실패하였습니다.");
+				}
+			}
+			/* 정상 처리 */
+			if(isNewProduct){
+				throw new PageRedirectException("등록되었습니다.");
+			} else {
+				throw new PageRedirectException("수정되었습니다.");
+			}
+		}
+		
+		return "index";
 	}
 	
 	/** 마일리지 관리 페이지 */

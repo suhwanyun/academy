@@ -159,6 +159,17 @@
 		where product_id = #{productId}
 	</select>
 	
+	<select id="selectNewProductId" resultType="int">
+		select product_id
+		from(select rownum as rnum, sub.*
+		    from(select product_id
+		        from MileageProduct
+		        order by product_id desc
+		        ) sub
+		    )
+		where rnum = 1
+	</select>
+	
 	<insert id="insertMileageProduct" parameterType="mileage_product">
 		insert into MileageProduct
 		(product_name, product_cost, product_content, product_imgfile)
@@ -173,6 +184,12 @@
 			<if test="productImgfile != null">
 			, product_imgfile = #{productImgfile}
 			</if>
+		where product_id = #{productId}
+	</update>
+	
+	<update id="updateProductPhoto" parameterType="mileage_product">
+		update MileageProduct
+		set product_imgfile = #{productImgfile}
 		where product_id = #{productId}
 	</update>
 	

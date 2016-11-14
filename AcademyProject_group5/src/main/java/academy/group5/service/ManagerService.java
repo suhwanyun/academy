@@ -2,6 +2,8 @@ package academy.group5.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Mileage;
@@ -131,18 +133,36 @@ public interface ManagerService {
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean registerProduct(String productName, int productCost, String productContent, String productImgfile);
+	boolean registerProduct(MileageProduct productData);
 	/**
 	 * 상품 수정
 	 * @param mileageProduct
 	 * @return
 	 */
-	boolean updateProduct(int productId, String productName, int productCost, String productContent, String productImgfile);
+	boolean updateProduct(MileageProduct productData);
 	/**
 	 * 상품 삭제
 	 * @param productId
 	 * @return
 	 */
 	boolean deleteProduct(Integer productId);
+	/**
+	 * 물품 이미지 업로드
+	 * @param uploadData
+	 * @param productData
+	 * @return
+	 */
+	int upload(MultipartFile uploadData, MileageProduct productData);
+	/**
+	 * 물품 이미지명을 DB에 등록
+	 * @param productData
+	 * @return
+	 */
+	boolean photoRegister(MileageProduct productData);
+	/**
+	 * 업로드 취소(물품 이미지)
+	 * @param productData
+	 */
+	void uploadCancel(MileageProduct productData, String fileName);
 	
 }

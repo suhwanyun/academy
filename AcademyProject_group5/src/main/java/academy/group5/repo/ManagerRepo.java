@@ -115,6 +115,11 @@ public class ManagerRepo {
 		return session.selectOne(stmt, productId);
 	}
 	
+	public Integer getNewMileageProductId() {
+		String stmt = MANAGER_NS + "selectNewProductId";
+		return session.selectOne(stmt);
+	}
+	
 	public int setMileageProduct(MileageProduct prodData) {
 		String stmt = MANAGER_NS + "insertMileageProduct";
 		return session.insert(stmt, prodData);
@@ -122,6 +127,11 @@ public class ManagerRepo {
 	
 	public int updateMileageProduct(MileageProduct prodData) {
 		String stmt = MANAGER_NS + "updateMileageProduct";
+		return session.update(stmt, prodData);
+	}
+	
+	public int updateProductPhoto(MileageProduct prodData) {
+		String stmt = MANAGER_NS + "updateProductPhoto";
 		return session.update(stmt, prodData);
 	}
 	

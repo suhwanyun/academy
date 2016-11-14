@@ -14,6 +14,12 @@ public interface PostingService {
 	
 	/** 기본 이미지 */
 	public final String DEFAULT_PHOTO_NAME = "default.png";
+	/** 이미지 파일 저장 경로 */
+	public final String IMG_PATH = "d:/academyImg/";
+	/** 미리보기 이미지 파일 저장 경로 */
+	public final String PREVIEW_IMG_PATH = "d:/academyImg/preview_";
+	/** 임시파일 접두사 */
+	public final String TMP_PREFIX = "tmp_";
 	
 	/**
 	 * 게시글 리스트 불러오기
@@ -81,7 +87,7 @@ public interface PostingService {
 	 * @param postingData
 	 * @return
 	 */
-	void uploadCancel(Posting postingData, String defaultName);
+	void uploadCancel(Posting postingData, String fileName);
 	/**
 	 * 게시글 삭제
 	 * @param postingId

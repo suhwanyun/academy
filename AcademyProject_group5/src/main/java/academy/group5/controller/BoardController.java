@@ -322,8 +322,7 @@ public class BoardController {
 			postingData.setPostingId(Integer.parseInt(postingId));
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
-				postingData.setPostingPhoto(isDeletePhoto);
-				postService.uploadCancel(postingData, PostingService.DEFAULT_PHOTO_NAME);
+				postService.uploadCancel(postingData, isDeletePhoto);
 			} else {
 				postingData.setPostingPhoto(null);
 			}

@@ -38,7 +38,7 @@
 						<td id="imgShow" colspan="2" align="left">
 							<button id="imgUpdate" class="myButton">이미지 수정 </button>
 							<button id="imgdelete" class="myButton">이미지 삭제 </button>
-							<span id="checkImg">기존 이미지</span>
+							<span id="checkImg"></span>
 						</td>
 						<td class="imgSetting" align="left" hidden="true" colspan="2">
 							<input id="fileInput" type="file" name="uploadPhoto" accept="image/*"/>
@@ -61,27 +61,47 @@
 </body>
 
 <script type="text/javascript">
-//기존 이미지
+	var defaultCheckStr;
+	<c:choose>
+		<c:when test="{!empty postingData.postingPhoto}">
+			defaultCheckStr = "기존 이미지";
+		</c:when>
+		<c:otherwise>
+			defaultCheckStr = "이미지 없음";
+		</c:otherwise>
+	</c:choose>
+	
+	$(document).ready(function(){
+		$("#checkImg").html(defaultCheckStr);
+	});
+	
+	//기존 이미지
 	$("#imgCancel").click(function(event){
 		event.preventDefault();
 		$("#fileInput").val("");
 		$(".imgSetting").attr("hidden","true");
 		$("#imgShow").removeAttr("hidden");
 		$("#deletePhoto").val("false");
-		$("#checkImg").html("기존 이미지")	
+		$("#checkImg").html(defaultCheckStr);
 	});
 	//이미지 수정
 	$("#imgUpdate").click(function(event){
 		event.preventDefault();
 		$("#imgShow").attr("hidden","true");
 		$(".imgSetting").removeAttr("hidden");
-		$("#deletePhoto").val("false");
+		$("#deletePhoto").val("${postingData.postingPhoto}");
 	});
+	// 이미지 삭제
 	$("#imgdelete").click(function(event){
 		event.preventDefault();
 		$("#fileInput").val("");
 		$("#deletePhoto").val("${postingData.postingPhoto}");
 		$("#checkImg").html("이미지 없음")	
 		});
+	// 취소
+	$("cancel").click(function(event){
+		event.preventDefault();
+		$(location).attr('href', "/foodMain");
+	});
 </script>
 </html>

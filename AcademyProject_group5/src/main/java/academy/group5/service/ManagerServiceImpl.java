@@ -1,5 +1,7 @@
 package academy.group5.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,11 +11,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Manager;
-import academy.group5.dto.Mileage;
 import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Term;
 import academy.group5.dto.etc.Paging;
@@ -23,6 +25,7 @@ import academy.group5.repo.LectureRepo;
 import academy.group5.repo.ManagerRepo;
 import academy.group5.repo.TermRepo;
 import academy.group5.util.GCM;
+import academy.group5.util.ImageControl;
 import academy.group5.util.MyHash;
 
 @Service
@@ -345,11 +348,9 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
-	public boolean registerProduct(String productName, int productCost, String productContent, String productImgfile) {
-		productContent = productContent.replaceAll("\n", "<br>");
-		int result = managerRepo.setMileageProduct(
-				new MileageProduct(productName, productCost, productContent, 
-						productImgfile == null ? PostingService.DEFAULT_PHOTO_NAME : productImgfile));
+	public boolean registerProduct(MileageProduct productData) {
+		productData.setProductContent(productData.getProductContent().replaceAll("\n", "<br>"));
+		int result = managerRepo.setMileageProduct(productData);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
@@ -357,10 +358,9 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public boolean updateProduct(int productId, String productName, int productCost, String productContent, String productImgfile) {
-		productContent = productContent.replaceAll("\n", "<br>");
-		int result = managerRepo.updateMileageProduct(
-				new MileageProduct(productName, productCost, productContent, productImgfile));
+	public boolean updateProduct(MileageProduct productData) {
+		productData.setProductContent(productData.getProductContent().replaceAll("\n", "<br>"));
+		int result = managerRepo.updateMileageProduct(productData);
 		if(result != 1){
 			throw new WrongRequestException();
 		}
@@ -378,6 +378,77 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	// ----------------------------기타 로직---------------------------- */
 
+	/** 물품 이미지 업로드 */
+	@Override
+	public int upload(MultipartFile uploadData, MileageProduct productData){
+		final String TYPE_MILEAGE_PRODUCT = "mileage";
+		
+		// 원본 파일명
+		String originalName = uploadData.getOriginalFilename();
+		// 파일 확장자 추출
+		String fileType = originalName.substring(originalName.lastIndexOf(".") + 1, originalName.length());
+		// 물품 번호
+		Integer productId = productData.getProductId();
+		if(productId == null){
+			if((productId = managerRepo.getNewMileageProductId()) == null){
+				throw new WrongRequestException();
+			}
+			productData.setProductId(productId);
+		}
+		// 파일명 : mileage + 물품번호 + 확장자
+		String fileName = TYPE_MILEAGE_PRODUCT + "_" + productId + "." + fileType;	
+		
+		String tmpFilePath = PostingService.IMG_PATH + PostingService.TMP_PREFIX + fileName;
+		String filePath = PostingService.IMG_PATH + fileName;
+		String previewPath = PostingService.PREVIEW_IMG_PATH + fileName;
+		
+		File originalFile = new File(tmpFilePath);
+		ImageControl imgCtrl = new ImageControl();
+		// 파일 업로드
+		try {
+			uploadData.transferTo(originalFile);
+			imgCtrl.imageResize(tmpFilePath, filePath, fileType);
+			imgCtrl.previewImageResize(tmpFilePath, previewPath, fileType);
+		} catch (IllegalStateException | IOException e) {
+			return -1;
+		} finally{
+			// 임시 파일 삭제
+			originalFile.delete();
+		}
+		
+		productData.setProductImgfile(fileName);
+		// DB에 저장된 파일의 이름을 등록
+		if(!photoRegister(productData)){
+			return -1;
+		}
+		
+		return 0;
+	}
+	
+	@Override
+	public boolean photoRegister(MileageProduct productData) {
+		int result = managerRepo.updateProductPhoto(productData);
+		
+		if(result != 1){
+			throw new WrongRequestException();
+		}
+		return true;
+	}
+	
+	/** 업로드 취소 */
+	@Override
+	public void uploadCancel(MileageProduct productData, String fileName){
+		if(fileName == null){
+			fileName = productData.getProductImgfile();		
+		}
+
+		String filePath = PostingService.IMG_PATH + fileName;
+		String previewPath = PostingService.PREVIEW_IMG_PATH + fileName;
+		
+		new File(filePath).delete();
+		new File(previewPath).delete();
+	}
+	
 	/** 암호화 */
 	private Manager toHash(Manager data){
 		String oriPass = data.getManagerPass();
