@@ -29,6 +29,10 @@ public class LectureApply {
 	/** 권한종료 날짜. */
 	private Date rightEndTime;
 
+	public LectureApply(Integer lectureId, String userId) {
+		this(lectureId, userId, null);
+	}
+	
 	public LectureApply(Integer lectureId, String userId, Integer lectureClass) {
 		super();
 		this.lectureId = lectureId;

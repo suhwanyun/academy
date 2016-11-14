@@ -120,4 +120,18 @@ public class LectureController {
 				
 		throw new PageRedirectException("신청되었습니다.");
 	}
+	
+	/** 강의 신청 취소 */
+	@RequestMapping(value="/lecture/lectureApplyCancel", method=RequestMethod.POST)
+	public String applyLectureCancel(HttpSession session, @RequestParam Integer lectureId){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/campus/campusMain");
+		session.setAttribute("gotoPage", "/campus/campusMain");
+				
+		String userId = identify.getUserId(session);
+		lecService.cancelApply(lectureId, userId);
+				
+		throw new PageRedirectException("삭제되었습니다.");
+	}
 }

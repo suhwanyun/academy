@@ -112,9 +112,7 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public boolean cancelApply(Integer lectureId, String userId) {
-		LectureApply data = new LectureApply();
-		data.setLectureId(lectureId);
-		data.setUserId(userId);
+		LectureApply data = new LectureApply(lectureId, userId);
 		
 		int result = lecRepo.deleteLectureApply(data);
 		
