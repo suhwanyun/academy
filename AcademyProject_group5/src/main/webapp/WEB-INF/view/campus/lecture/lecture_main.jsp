@@ -9,7 +9,8 @@
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container">
-		<div id="incluedjsp">
+		<div id="incluedjsp" align="center">
+		<h3>${lectureName }</h3>
 			<jsp:include page="/WEB-INF/view/campus/lecture/lecture_noti_list.jsp" />
 			<hr>
 			<jsp:include page="/WEB-INF/view/campus/lecture/lecture_board.jsp" />

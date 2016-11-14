@@ -16,6 +16,7 @@
 				<th>담당 교수</th>
 				<th>강의 장소</th>
 				<th>강의 시간</th>
+				<th>강의 취소</th>
 			</tr>
 			<c:forEach items="${lectureList }" var="list"  varStatus="index">
 				<tr align="center" onclick="movePage(this, ${list.lectureId}, ${list.lectureClass })">
@@ -62,6 +63,20 @@
 							<button class="myButton lectureChangeBtn" onclick="movePage2(this)" value="${list.lectureTimeId}">시간/장소 변경</button>
 						</c:if>
 						</td>
+						<c:choose>
+						<c:when test="${list.lectureId == lectureList[index.index +1].lectureId}">
+							<td rowspan="2">
+							<button class="myButton lectureCancelBtn" onclick="cancel(this)" value="${list.lectureId}">강의 취소</button>
+							</td>
+						</c:when>
+						<c:when test="${list.lectureId == lectureList[index.index -1].lectureId}">
+						</c:when>
+						<c:otherwise>
+							<td>
+							<button class="myButton lectureCancelBtn" onclick="cancel(this)" value="${list.lectureId}">강의 취소</button>
+							</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 		</table>
@@ -75,9 +90,18 @@ function movePage(el,id,Lclass){
 function movePage2(el){
 	targetVal=$(el).val();
 }
+function cancel(el){
+	targetVal=$(el).val();
+}
 $(".lectureChangeBtn").click(function(event){
 	event.stopPropagation();
 	$(location).attr("href","/write/lectureTimeNotiAddjsp?lectureTimeId="+targetVal);
+});
+$(".lectureCancelBtn").click(function(event){
+	event.stopPropagation();
+	if(confirm("정말 삭제 하시겠습니까?")){
+		$(location).attr("href","/lecture/lectureApplyCancel?lectureId="+targetVal);
+	}
 })
 </script>
 </html>

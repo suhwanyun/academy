@@ -9,8 +9,8 @@
 <body>
 <jsp:include page="/WEB-INF/view/manage/header.jsp" />
 <sform:form modelAttribute="timeData" action="/lectureManage/timeAdd" method="post">
-	<div class="containerM center text-center Lmargin">
-	<table class="table bigFont">
+	<div class="center text-center">
+	<table class="table">
 		<tr>
 			<th>강의 ID</th>
 			<th>시작 교시</th>
