@@ -114,28 +114,6 @@ public interface ManagerService {
 	 * @return
 	 */
 	boolean deleteLectureTime(Integer lectureTimeId);
-	
-	/**
-	 * 마일리지 리스트 확인
-	 * @param page
-	 * @param orderType
-	 * @param isAsc 정렬방향(default: 오름차순 / false: 내림차순)
-	 * @return
-	 */
-	List<Mileage> getAllMileage(int page, String orderType, boolean isAsc);
-	/**
-	 * 마일리지 설정
-	 * @param mileName
-	 * @param mileValue
-	 * @return
-	 */
-	boolean registMileage(String mileName, int mileValue);
-	/**
-	 * 마일리지 제거
-	 * @param mileName
-	 * @return
-	 */
-	boolean deleteMileage(String mileName);
 	/**
 	 * 마일리지 물품 리스트 확인
 	 * @param page

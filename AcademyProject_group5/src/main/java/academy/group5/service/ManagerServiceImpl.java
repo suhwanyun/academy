@@ -51,8 +51,6 @@ public class ManagerServiceImpl implements ManagerService {
 	private final int LECTURE_MAX_PAGE = 10;
 	/** 한 페이지에 표시되는 마일리지 상품의 수 */
 	private final int MILEAGE_PRODUCT_MAX_PAGE = 10;
-	/** 한 페이지에 표시되는 마일리지의 수 */
-	private final int MILEAGE_MAX_PAGE = 10;
 	
 	@Override
 	public boolean isTermSetted(){
@@ -331,32 +329,6 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	// ----------------------------마일리지---------------------------- */
-
-	public List<Mileage> getAllMileage(int page, String orderType, boolean isAsc) {
-		return managerRepo.getAllMileage(new Paging(page, MILEAGE_MAX_PAGE, null, null, null, orderType, isAsc));
-	}
-	
-	@Override
-	public boolean registMileage(String mileName, int mileValue) {
-		if(managerRepo.getMileage(mileName) != null){
-			throw new WrongRequestException("이미 등록된 이름입니다.");
-		}
-		int result = managerRepo.setMileage(new Mileage(mileName, mileValue));
-		
-		if(result != 1){
-			throw new WrongRequestException();
-		}
-		return true;
-	}
-
-	@Override
-	public boolean deleteMileage(String mileName) {
-		int result = managerRepo.delMileage(mileName);
-		if(result != 1){
-			throw new WrongRequestException();
-		}
-		return true;
-	}
 	
 	@Override
 	public List<MileageProduct> getAllProduct(int page, String orderType, boolean isAsc) {

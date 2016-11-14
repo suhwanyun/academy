@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
-import academy.group5.dto.Mileage;
+import academy.group5.dto.MileageProduct;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.LectureNoticeSetTime;
@@ -222,9 +222,10 @@ public class IndexController {
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
 		
-		List<Mileage> mileageList = manageService.getAllMileage(1, null, true);
+		// 마일리지 물품 리스트
+		List<MileageProduct> productList = manageService.getAllProduct(1, null, true);
+		model.addAttribute("productList", productList);
 		
-		model.addAttribute("mileageList", mileageList);
 		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
 				

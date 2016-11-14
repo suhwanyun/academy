@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Mileage;
+import academy.group5.dto.MileageProduct;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
@@ -212,12 +213,12 @@ public class ManageController {
 	
 	/** 강의 등록 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<Mileage> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
+	public @ResponseBody List<MileageProduct> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
 				
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
 		// 저장된 정렬 데이터
-		// 마일리지 순 정렬 : orderType = 'mileValue'
+		// 마일리지 순 정렬 : orderType = 'productCost'
 		// 내림차순 정렬 : isAsc = 'false'
 		Object typeObj = session.getAttribute("orderType");
 		Object ascObj = session.getAttribute("isAsc");
@@ -225,8 +226,8 @@ public class ManageController {
 		String searchType = typeObj == null ? null : (String)typeObj;
 		boolean isAsc = ascObj == null ? true : false;
 				
-		List<Mileage> mileageList = service.getAllMileage(page, searchType, isAsc);
-		return mileageList;
+		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);
+		return productList;
 	}
 	
 	/** 마일리지 등록 페이지 */
