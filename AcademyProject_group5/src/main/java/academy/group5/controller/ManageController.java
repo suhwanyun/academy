@@ -211,13 +211,6 @@ public class ManageController {
 		throw new PageRedirectException("삭제되었습니다.");
 	}
 	
-	/** 마일리지 등록 관리자 메인 페이지 */
-	@RequestMapping(value="/mileageManage/main", method=RequestMethod.GET)
-	public String manageMileageMainPage(){
-		
-		return "/manage/mileage/mileage";
-	}
-	
 	/** 마일리지 등록 페이지 */
 	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
 	public String addMileage(){
