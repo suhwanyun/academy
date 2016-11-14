@@ -128,6 +128,9 @@ public class LectureController {
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/campus/campusMain");
 		session.setAttribute("gotoPage", "/campus/campusMain");
+		
+		// 현재 열린 탭 저장
+		session.setAttribute("nowTab", "selectedLectureList");
 				
 		String userId = identify.getUserId(session);
 		lecService.cancelApply(lectureId, userId);

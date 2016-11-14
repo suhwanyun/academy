@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.Mileage;
+import academy.group5.dto.MileageProduct;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.ManagerService;
@@ -210,30 +213,85 @@ public class ManageController {
 	
 	// ---------------------------------마일리지 등록 관리자--------------------------------- */
 	
-	/** 강의 등록 관리자 메인화면 페이징 */
+	/** 마일리지 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<Mileage> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
+	public @ResponseBody List<MileageProduct> manageProductMainPaging(HttpSession session){
 				
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
 		// 저장된 정렬 데이터
-		// 마일리지 순 정렬 : orderType = 'mileValue'
+		// 마일리지 순 정렬 : orderType = 'productCost'
 		// 내림차순 정렬 : isAsc = 'false'
 		Object typeObj = session.getAttribute("orderType");
 		Object ascObj = session.getAttribute("isAsc");
 		
 		String searchType = typeObj == null ? null : (String)typeObj;
-		boolean isAsc = ascObj == null ? true : false;
-				
-		List<Mileage> mileageList = service.getAllMileage(page, searchType, isAsc);
-		return mileageList;
+		boolean isAsc = true;
+		if(ascObj != null & ascObj.equals("false")){
+			isAsc = false;
+		}
+		// 페이지 설정
+		Object pageObj = session.getAttribute("page");
+		int page = pageObj == null ? 2 : ((Integer)pageObj + 1);
+		session.setAttribute("page", page);
+		
+		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);
+		return productList;
 	}
 	
-	/** 마일리지 등록 페이지 */
-	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
-	public String addMileage(){
+	
+	/** 마일리지 관리자 메인화면 마일리지 물품 목록 정렬 */
+	@RequestMapping(value="/mileageManage/search", method=RequestMethod.GET)
+	public @ResponseBody List<MileageProduct> manageProductMainSearch(HttpSession session, Model model,
+			@RequestParam String orderType, @RequestParam String isAsc){
 		
-		return "/manage/mileage/mileage_add";
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/mileageManage/main");
+
+		// 페이지 확인
+		Object pageObj = session.getAttribute("page");
+		int page = pageObj == null ? 1 : (Integer)pageObj;
+		
+		// DB 조회
+		session.setAttribute("orderType", orderType);
+		session.setAttribute("isAsc", isAsc);
+		List<MileageProduct> productList = service.getAllProduct(page, orderType, 
+				isAsc.equals("false") ? false : true);
+		
+		return productList;
+	}
+	
+	/** 마일리지 물품 등록 */
+	@RequestMapping(value="/mileageManage/add", method=RequestMethod.POST)
+	public String addProduct(HttpSession session, MultipartHttpServletRequest mrequest,
+			@RequestParam(required=false) MultipartFile uploadPhoto){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/mileageManage/addjsp");
+		session.setAttribute("gotoPage", "/mileageManage/main");
+		/*
+		// multipart/form-data 타입 form 데이터 전달
+		String productName = mrequest.getParameter("productName");
+		String productCostStr = mrequest.getParameter("productCost");
+		String productContent = mrequest.getParameter("productContent");
+		String isDeletePhoto = mrequest.getParameter("deletePhoto");
+		
+		if(productName == null || productCostStr == null || productContent == null) {
+			throw new WrongRequestException();	
+		} else if(postingTitle.equals("")){
+			session.setAttribute("postingData", postingData);
+			session.setAttribute("gotoPage", failMapping);
+			throw new PageRedirectException("제목을 입력해주세요.");
+		} else if(postingContent.equals("")){
+			session.setAttribute("postingData", postingData);
+			session.setAttribute("gotoPage", failMapping);
+			throw new PageRedirectException("내용을 입력해주세요.");
+		}
+		
+		service.registerProduct(productName, Integer.parseInt(productCostStr), 
+				productContent, productImgfile);*/
+		
+		throw new PageRedirectException("등록되었습니다.");
 	}
 	
 	/** 마일리지 관리 페이지 */

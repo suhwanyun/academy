@@ -105,26 +105,6 @@ public class ManagerRepo {
 	
 	// ---------------------------마일리지 관리자--------------------------- */
 	
-	public List<Mileage> getAllMileage(Paging pageData) {
-		String stmt = MANAGER_NS + "selectAllMileage";
-		return session.selectList(stmt, pageData);
-	}
-	
-	public Mileage getMileage(String mileName) {
-		String stmt = MANAGER_NS + "selectMileage";
-		return session.selectOne(stmt, mileName);
-	}
-	
-	public int setMileage(Mileage mileData) {
-		String stmt = MANAGER_NS + "insertMileage";
-		return session.insert(stmt, mileData);
-	}
-	
-	public int delMileage(String mileName) {
-		String stmt = MANAGER_NS + "deleteMileage";
-		return session.delete(stmt, mileName);
-	}
-	
 	public List<MileageProduct> getAllMileageProduct(Paging pageData) {
 		String stmt = MANAGER_NS + "selectAllMileageProduct";
 		return session.selectList(stmt, pageData);
