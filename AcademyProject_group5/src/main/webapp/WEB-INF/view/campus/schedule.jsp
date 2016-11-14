@@ -164,7 +164,7 @@ function timeTable(tableList){
 	var endClass = 0;
 	var day = 0;
 	$(tableList).each(function(index,item){
-		day = item.lectureWeek;
+		day = item.lectureWeek - 1;
 		startClass = item.lectureStart;
 		endClass = item.lectureEnd;
 		for(var i = startClass; i <= endClass; i++){
