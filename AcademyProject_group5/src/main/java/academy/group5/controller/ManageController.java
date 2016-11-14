@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import academy.group5.dto.Lecture;
 import academy.group5.dto.LectureTime;
@@ -213,19 +215,26 @@ public class ManageController {
 	
 	/** 마일리지 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<MileageProduct> manageMileageMainPaging(HttpSession session, @RequestParam Integer page){
+	public @ResponseBody List<MileageProduct> manageProductMainPaging(HttpSession session){
 				
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
 		// 저장된 정렬 데이터
 		// 마일리지 순 정렬 : orderType = 'productCost'
-		// 내림차순 정렬 : isDesc = 'true'
+		// 내림차순 정렬 : isAsc = 'false'
 		Object typeObj = session.getAttribute("orderType");
-		Object descObj = session.getAttribute("isDesc");
+		Object ascObj = session.getAttribute("isAsc");
 		
 		String searchType = typeObj == null ? null : (String)typeObj;
-		boolean isAsc = descObj == null ? true : false;
-				
+		boolean isAsc = true;
+		if(ascObj != null & ascObj.equals("false")){
+			isAsc = false;
+		}
+		// 페이지 설정
+		Object pageObj = session.getAttribute("page");
+		int page = pageObj == null ? 2 : ((Integer)pageObj + 1);
+		session.setAttribute("page", page);
+		
 		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);
 		return productList;
 	}
@@ -233,39 +242,56 @@ public class ManageController {
 	
 	/** 마일리지 관리자 메인화면 마일리지 물품 목록 정렬 */
 	@RequestMapping(value="/mileageManage/search", method=RequestMethod.GET)
-	public String manageMileageMainSearch(HttpSession session, Model model,
-			@RequestParam String searchType, @RequestParam String searchData){
+	public @ResponseBody List<MileageProduct> manageProductMainSearch(HttpSession session, Model model,
+			@RequestParam String orderType, @RequestParam String isAsc){
 		
 		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/lectureManage/main");
+		session.setAttribute("errorGotoPage", "/mileageManage/main");
+
+		// 페이지 확인
+		Object pageObj = session.getAttribute("page");
+		int page = pageObj == null ? 1 : (Integer)pageObj;
 		
-		List<Lecture> lectureList = null;
-		int pageCount = 1;
-		// 검색 데이터가 없으면 기존 검색 데이터 삭제 후 전체 강의 목록 조회
-		if(searchType.equals("") || searchData.equals("")){
-			session.removeAttribute("searchType");
-			session.removeAttribute("searchData");
-			lectureList = service.getAllLectureList();
-			pageCount = service.getMaxLectureListPage();
-		} 
-		// 검색 데이터를 저장 후 DB 조회
-		else {
-			session.setAttribute("searchType", searchType);
-			session.setAttribute("searchData", searchData);
-			lectureList = service.getAllLectureListBySearch(1, searchData, searchType);
-			pageCount = service.getMaxLectureListPageBySearch(searchData, searchType);
+		// DB 조회
+		session.setAttribute("orderType", orderType);
+		session.setAttribute("isAsc", isAsc);
+		List<MileageProduct> productList = service.getAllProduct(page, orderType, 
+				isAsc.equals("false") ? false : true);
+		
+		return productList;
+	}
+	
+	/** 마일리지 물품 등록 */
+	@RequestMapping(value="/mileageManage/add", method=RequestMethod.POST)
+	public String addProduct(HttpSession session, MultipartHttpServletRequest mrequest,
+			@RequestParam(required=false) MultipartFile uploadPhoto){
+		
+		// 에러 발생시 / 처리 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/mileageManage/addjsp");
+		session.setAttribute("gotoPage", "/mileageManage/main");
+		/*
+		// multipart/form-data 타입 form 데이터 전달
+		String productName = mrequest.getParameter("productName");
+		String productCostStr = mrequest.getParameter("productCost");
+		String productContent = mrequest.getParameter("productContent");
+		String isDeletePhoto = mrequest.getParameter("deletePhoto");
+		
+		if(productName == null || productCostStr == null || productContent == null) {
+			throw new WrongRequestException();	
+		} else if(postingTitle.equals("")){
+			session.setAttribute("postingData", postingData);
+			session.setAttribute("gotoPage", failMapping);
+			throw new PageRedirectException("제목을 입력해주세요.");
+		} else if(postingContent.equals("")){
+			session.setAttribute("postingData", postingData);
+			session.setAttribute("gotoPage", failMapping);
+			throw new PageRedirectException("내용을 입력해주세요.");
 		}
 		
-		model.addAttribute("lectureList", lectureList);
-		model.addAttribute("pageCount", pageCount);
+		service.registerProduct(productName, Integer.parseInt(productCostStr), 
+				productContent, productImgfile);*/
 		
-		return "/manage/lecture/lecture";
-	}
-	/** 마일리지 등록 페이지 */
-	@RequestMapping(value="/mileageManage/add", method=RequestMethod.GET)
-	public String addMileage(){
-		
-		return "/manage/mileage/mileage_add";
+		throw new PageRedirectException("등록되었습니다.");
 	}
 	
 	/** 마일리지 관리 페이지 */

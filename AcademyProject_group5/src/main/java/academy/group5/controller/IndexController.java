@@ -221,7 +221,8 @@ public class IndexController {
 	public String manageMileageMainPage(HttpSession session, Model model){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
-		
+		// 페이지 기록 삭제
+		session.removeAttribute("page");
 		// 마일리지 물품 리스트
 		List<MileageProduct> productList = manageService.getAllProduct(1, null, true);
 		model.addAttribute("productList", productList);
@@ -441,7 +442,7 @@ public class IndexController {
 		}
 	}
 	
-	/**-----------------------관리자----------------------- */
+	//------------------------------관리자(강의)------------------------------ */
 	
 	/** 학기 추가 페이지*/
 	@RequestMapping(value="/lectureManage/termSettingjsp", method=RequestMethod.GET)
@@ -500,5 +501,14 @@ public class IndexController {
 		LectureTime timeData = manageService.getLectureTime(lectureTimeId);
 		model.addAttribute("timeData", timeData);
 		return "/manage/lecture/lecture_time_manage";
+	}
+	
+	//------------------------------관리자(마일리지)------------------------------ */
+	
+	/** 마일리지 등록 페이지 */
+	@RequestMapping(value="/mileageManage/addjsp", method=RequestMethod.GET)
+	public String addMileage(){
+		
+		return "/manage/mileage/mileage_add";
 	}
 }
