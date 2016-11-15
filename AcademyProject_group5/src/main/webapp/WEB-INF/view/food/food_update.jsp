@@ -4,22 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>식사 추가 게시판</title>
+<title>게시글 수정</title>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container text-center center">
 
-
-		<h1>글 수정</h1>
 		<form method="post" action="/write/postingUpdate"
 			enctype="multipart/form-data">
 			<table class="table">
 				<colgroup>
 					<col width="15%">
-					<col width="15%">
 					<col width="70%">
+					<col width="15%">
 				</colgroup>
 
 				<tr>
@@ -33,18 +31,22 @@
 					<td colspan="2"><textarea style="" rows="13" maxlength="1300"
 							name="postingContent">${postingData.postingContent }</textarea></td>
 				</tr>
-				<tr id="imgShow" align="left">
+				<tr id="imgShow">
 					<td></td>
-					<td><button id="imgUpdate" class="myButton">이미지 수정</button></td>
-					<td>
+					<td align="left">
 						<button id="imgdelete" class="myButton">이미지 삭제</button>
 						<span id="checkImg"></span>
 					</td>
+					<td align="right"><button id="imgUpdate" class="myButton">이미지 수정</button></td>
 				</tr>
-				<tr class="imgSetting" align="left" hidden="true">
+				<tr class="imgSetting" hidden="true">
 					<td></td>
-					<td><button class="myButton" id="imgCancel">기존 이미지</button></td>
-					<td><input id="fileInput" type="file" name="uploadPhoto" style="width:100%" accept="image/*" /></td>
+					<td align="left">
+					<label for="fileInput" class="myButton">파일 선택</label>
+					<input id="fileInput" type="file" name="uploadPhoto" accept="image/*" />
+					<input id="fileText" class="fileText" type="text" value="파일 선택" disabled="disabled" style="width:100px;"/>
+					</td>
+					<td align="right"><button class="myButton" id="imgCancel">기존 이미지</button></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center">
@@ -74,6 +76,21 @@
 	
 	$(document).ready(function(){
 		$("#checkImg").html(defaultCheckStr);
+		
+		 var fileTarget = $('#fileInput');
+		 
+		  fileTarget.on('change', function(){  // 값이 변경되면
+			// modern browser
+		    if(window.FileReader){  
+		      var filename = $(this)[0].files[0].name;
+		    } 
+		 	// old IE
+		    else {  
+		      var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+		    }    
+		    // 추출한 파일명 삽입
+		    $(this).siblings('#fileText').val(filename);
+		  });
 	});
 	
 	//기존 이미지

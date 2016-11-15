@@ -1,5 +1,7 @@
 package academy.group5.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.service.LoginService;
 import academy.group5.service.PhoneService;
-import academy.group5.util.Identify;
+import academy.group5.util.MyHash;
 
 /**
  * 계정 관련 컨트롤러
@@ -70,7 +72,8 @@ public class LoginController {
 	
 	/** 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public @ResponseBody String login(Model model, HttpSession session,
+	public @ResponseBody String login(Model model, 
+			HttpSession session, HttpServletResponse response,
 			@RequestParam String userId, @RequestParam String userPass){
 		
 		try{
@@ -80,12 +83,26 @@ public class LoginController {
 			return "false";
 		}
 		
+		Object isPhone = session.getAttribute("isPhone");
+		// 핸드폰으로 로그인시 자동 로그인 설정
+		if(isPhone != null && isPhone.equals("true")) {
+			final int COOKIE_AGE_YEAR = 60*60*24*365;
+			
+			Cookie idCookie = new Cookie("id", userId);
+			Cookie passCookie = new Cookie("encPass", MyHash.MD5(userPass));
+			idCookie.setMaxAge(COOKIE_AGE_YEAR);
+			passCookie.setMaxAge(COOKIE_AGE_YEAR);
+			
+			response.addCookie(idCookie);
+			response.addCookie(passCookie);	
+		}
+		
 		return "true";
 	}
 	
 	/** 로그 아웃 */
 	@RequestMapping(value="logout", method=RequestMethod.GET)
-	public String logout(HttpSession session){
+	public String logout(HttpSession session, HttpServletResponse response){
 		
 		// 핸드폰에서 로그아웃 선택시 어플 로그인 데이터 삭제
 		Object isPhone = session.getAttribute("isPhone");	
@@ -96,6 +113,15 @@ public class LoginController {
 				String userId = ((UserData)userAttrObj).getUserId();
 				phoneService.removeGCMData(userId);
 			}		
+			
+			// 쿠키 삭제(유효시간을 0으로 설정)
+			Cookie idCookie = new Cookie("id", null);
+			Cookie passCookie = new Cookie("encPass", null);
+			idCookie.setMaxAge(0);
+			passCookie.setMaxAge(0);
+			
+			response.addCookie(idCookie);
+			response.addCookie(passCookie);
 		}
 		session.removeAttribute("user");
 		

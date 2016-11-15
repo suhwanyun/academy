@@ -35,6 +35,18 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return data;
 	}
+	
+	/** 자동로그인 */
+	@Override
+	public UserData autoLogin(String userId, String userEncPass) {
+		UserData data = loginRepo.getUser(userId);
+		String encPass = loginRepo.getEncPass(userId);
+		
+		if(data == null || !encPass.equals(userEncPass)){
+			return null;
+		}
+		return data;
+	}
 
 	/** 회원가입 */
 	@Override

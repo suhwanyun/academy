@@ -2,11 +2,14 @@ package academy.group5.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,7 @@ import academy.group5.service.LoginService;
 import academy.group5.service.ManagerService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
+import academy.group5.util.MyHash;
 
 /**
  * 페이지(JSP) 이동 컨트롤러
@@ -55,12 +59,20 @@ public class IndexController {
 	
 	/** 메인 화면 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String mainPage(HttpSession session){
+	public String mainPage(HttpSession session,
+			@CookieValue(required=false, value="id") String userId,
+			@CookieValue(required=false, value="encPass") String encPass){
 		// 에러 발생시 / 처리 완료시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/main");
 		session.setAttribute("gotoPage", "/main");
 		// 학업 페이지에서 열렸던 텝 기록 삭제
 		session.removeAttribute("nowTab");
+		// 자동 로그인 설정
+		if(session.getAttribute("user") == null
+				&& userId != null && encPass != null){
+			UserData data = loginService.autoLogin(userId, encPass);
+			session.setAttribute("user", data);
+		}
 		
 		return "/index";
 	}

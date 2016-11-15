@@ -11,6 +11,13 @@ public interface LoginService {
 	 */
 	UserData login(String userId, String userPass);
 	/**
+	 * 자동 로그인
+	 * @param userId
+	 * @param userPass
+	 * @return
+	 */
+	UserData autoLogin(String userId, String encPass);
+	/**
 	 * 회원가입 서비스
 	 * @param userdata
 	 * @return

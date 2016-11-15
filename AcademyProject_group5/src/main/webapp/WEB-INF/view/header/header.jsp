@@ -8,11 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/bootstrap-theme.css" />
 <link rel="stylesheet" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="/css/custom.css" />
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/remoteBtn.js"></script>
 <script src="/js/bootstrap-toggle.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-toggle.min.css" />
+<!-- 이미지 캐싱 금지 -->
+<% 
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache"); 
+ response.setDateHeader("Expires",0);
+%>
 </head>
 
  <div class="text-center">
