@@ -91,8 +91,6 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	@Override
 	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
-		// 휴강, 보강시 날짜 출력에 사용
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일");
 		
 		if(lectureNoticeAndTime.getIsTempDate() == null){
 			throw new WrongRequestException("날짜가 설정되지 않았습니다.");
@@ -167,10 +165,10 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			if(existingLectureTime.compareTo(newLectureTime) != 0){
 				noticeTitle += " 시간";
 				
-				noticeContent += dateFormat.format(existingLectureTime);
+				noticeContent += getDateStr(existingLectureTime);
 				noticeContent += setNoticeContentByClass(noticeContent, existingLectureData);
 				noticeContent += " -> ";
-				noticeContent += dateFormat.format(newLectureTime);
+				noticeContent += getDateStr(newLectureTime);
 				noticeContent += setNoticeContentByClass(noticeContent, lectureData);
 				
 				isTimeChanged = true;
@@ -214,7 +212,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 	
 			// 메세지 설정
 			noticeTitle = "강의가 휴강처리 되었습니다.";
-			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime) + " ", lectureData);
+			noticeContent = setNoticeContentByClass(getDateStr(newLectureTime) + " ", lectureData);
 		}
 		// 보강인 경우
 		else if(noticeData.getNoticeType().equals("addDate")) {
@@ -236,7 +234,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				}
 			}
 			if(!errorStr.equals("")){
-				throw new WrongRequestException(dateFormat.format(lectureData.getIsTempDate()) + "강의 시간이 중복됩니다." + errorStr);
+				throw new WrongRequestException(getDateStr(lectureData.getIsTempDate()) + "강의 시간이 중복됩니다." + errorStr);
 			}
 			
 			// 임시 강의 시간 등록
@@ -246,7 +244,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 
 			// 메세지 설정
 			noticeTitle = "보강이 등록 되었습니다.";
-			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime) + " ", lectureData);
+			noticeContent = setNoticeContentByClass(getDateStr(newLectureTime), lectureData);
 		}
 		
 		noticeData.setNoticeTitle(noticeTitle);
@@ -274,6 +272,16 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		}
 		contentData += timeData.getLectureEnd() + "교시";
 		return contentData;
+	}
+	
+	/** 날짜 출력 */
+	private String getDateStr(Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		String dateStr = "";
+		dateStr += cal.get(Calendar.MONTH) + "월";
+		dateStr += cal.get(Calendar.DAY_OF_MONTH) + "일 ";
+		return dateStr;
 	}
 	
 	/** 공지내용을 알림으로 푸쉬 */
