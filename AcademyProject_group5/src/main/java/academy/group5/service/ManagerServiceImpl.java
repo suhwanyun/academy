@@ -110,6 +110,10 @@ public class ManagerServiceImpl implements ManagerService {
 		} else if(termEnd.before(termStart)){
 			throw new WrongRequestException("학기 종료시간이 시작시간보다 앞설 수 없습니다.");
 		}
+		// 학기 종료날짜는 자정이 지난 다음날 0시로 설정
+		cal.setTime(termEnd);
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		termEnd = cal.getTime();
 		
 		Term term = new Term(termStart, termEnd);
 		

@@ -35,5 +35,5 @@ public class LectureTimeForPhone {
 	private String lecturePlace;
 	
 	/** 임시 등록 날짜. */
-	private Date isTempDate;
+	private String isTempDate;
 }
