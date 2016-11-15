@@ -19,11 +19,13 @@
 				<th>강의 취소</th>
 			</tr>
 			<c:set var="spanCount" value="0"/>
+			<c:set var="doneLoop" value="false"/>
+			
 			<c:forEach items="${lectureList }" var="list"  varStatus="index">
 				<tr align="center" onclick="movePage(this, ${list.lectureId}, ${list.lectureClass })">
 				
-					<c:if test="${spanCount lt 1}">				
-						<c:set var="doneLoop" value="false"/>
+					<c:if test="${spanCount lt 1}">	
+								
 						<c:forEach items="${lectureList }" var="subList" varStatus="subIndex">
 							<c:set var="spanCount" value="${subIndex.index - index.index}"/>
 							<c:if test="${spanCount gt 0 && not doneLoop }">
@@ -34,6 +36,7 @@
 								</c:if>
 							</c:if>
 						</c:forEach>
+						
 					</c:if>
 				
 					<td>${list.lecturePlace }</td>
@@ -64,34 +67,24 @@
 							</c:otherwise>
 						</c:choose> &nbsp;${list.lectureStart }교시~${list.lectureEnd }교시
 					</td>
-					
-					<c:choose>
-						<c:when test="${spanCount lt 1}">		
-							<c:set var="doneLoop" value="false"/>
-							<c:forEach items="${lectureList }" var="subList"  varStatus="subIndex">
-								<c:set var="spanCount" value="${subIndex.index - index.index}"/>
-								<c:if test="${spanCount gt 0 && not doneLoop }">
-									<c:if test="${list.lectureId == lectureList[subIndex.index].lectureId}">
-										<c:set var="doneLoop" value="true"/>
-										<td rowspan="${spanCount }">
-										<c:choose>
-											<c:when test="${list.isPresident =='Y'}">
-												<button class="myButton lectureChangeBtn" onclick="movePage2(this)" value="${list.lectureTimeId}">강의 공지</button>
-											</c:when>
-											<c:otherwise>
-												<button class="myButton lectureCancelBtn" onclick="cancel(this)" value="${list.lectureId}">강의 취소</button>
-											</c:otherwise>
-										</c:choose>
-										</td>
-									</c:if>
-								</c:if>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<c:set var="spanCount" value="${spanCount - 1}"/>
-						</c:otherwise>
-					</c:choose>
-					
+						
+					<c:if test="${doneLoop }">
+						<c:set var="doneLoop" value="false"/>
+			
+						<td rowspan="${spanCount }">
+						<c:choose>
+							<c:when test="${list.isPresident =='Y'}">
+								<button class="myButton lectureChangeBtn" onclick="movePage2(this)" value="${list.lectureTimeId}">강의 공지</button>
+							</c:when>
+							<c:otherwise>
+								<button class="myButton lectureCancelBtn" onclick="cancel(this)" value="${list.lectureId}">강의 취소</button>
+							</c:otherwise>
+						</c:choose>
+						</td>
+				
+					</c:if>
+								
+					<c:set var="spanCount" value="${spanCount - 1}"/>
 				</tr>
 			</c:forEach>
 		</table>
