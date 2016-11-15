@@ -161,22 +161,22 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				noticeTitle += " 시간";
 				
 				noticeContent += getDateStr(existingLectureTime);
-				setNoticeContentByClass(noticeContent, existingLectureData);
-				noticeContent += " -> ";
+				noticeContent = setNoticeContentByClass(noticeContent, existingLectureData);
+				noticeContent += "->";
 				noticeContent += getDateStr(newLectureTime);
-				setNoticeContentByClass(noticeContent, lectureData);
+				noticeContent = setNoticeContentByClass(noticeContent, lectureData);
 				
 				isTimeChanged = true;
 			}
 			if(!lectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
 				if(isTimeChanged) {
 					noticeTitle += "과 장소가";
-					noticeContent += " / ";
+					noticeContent += "/ ";
 				} else {
 					noticeTitle += " 장소가";
 				}
 				noticeContent += existingLectureData.getLecturePlace();
-				noticeContent += " -> ";
+				noticeContent += "->";
 				noticeContent += lectureData.getLecturePlace();
 			}
 			else {
