@@ -112,6 +112,9 @@ public class LectureServiceImpl implements LectureService{
 
 	@Override
 	public boolean cancelApply(Integer lectureId, String userId) {
+		if(getIsPresident(lectureId, userId)){
+			throw new WrongRequestException("반장은 강의를 신청취소할 수 없습니다.");
+		}
 		LectureApply data = new LectureApply(lectureId, userId);
 		
 		int result = lecRepo.deleteLectureApply(data);
