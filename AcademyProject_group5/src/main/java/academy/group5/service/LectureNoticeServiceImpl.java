@@ -94,6 +94,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
 		LectureTime lectureData = new LectureTime(lectureNoticeAndTime);	
+
 		// 강의 이름
 		String lectureName = lecRepo.getLectureName(new Lecture(lectureData.getLectureId(), lectureData.getLectureClass()));
 		
@@ -110,6 +111,10 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		Calendar newLectureCal = Calendar.getInstance();
 		newLectureCal.setTime(lectureData.getIsTempDate());
 		newLectureCal.set(Calendar.HOUR_OF_DAY, lectureData.getLectureStart() + LectureService.FIRST_CLASS_CRITERIA);
+		if(newLectureCal.before(Calendar.getInstance())){
+			throw new PageRedirectException("이미 지난 날짜는 지정하실 수 없습니다.");
+		}
+		
 		// 새로운 강의 시간
 		Date newLectureTime = newLectureCal.getTime();
 					
@@ -144,9 +149,11 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			if(existingLectureTime.compareTo(newLectureTime) != 0){
 				noticeTitle += " 시간";
 				
-				noticeContent = setNoticeContentByClass(noticeContent, existingLectureData);
+				noticeContent += dateFormat.format(existingLectureTime);
+				noticeContent += setNoticeContentByClass(noticeContent, existingLectureData);
 				noticeContent += " -> ";
-				noticeContent = setNoticeContentByClass(noticeContent, lectureData);
+				noticeContent += dateFormat.format(newLectureTime);
+				noticeContent += setNoticeContentByClass(noticeContent, lectureData);
 				
 				isTimeChanged = true;
 			}
@@ -242,10 +249,10 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	/** 알림 내용에 강의 시간을 추가 */
 	@Override
-	public String setNoticeContentByClass(String contentData, LectureTime timaData){
-		contentData = LectureService.weekList[timaData.getLectureWeek()] + "요일 ";
-		contentData += timaData.getLectureStart() + "교시~";
-		contentData += timaData.getLectureEnd() + "교시";
+	public String setNoticeContentByClass(String contentData, LectureTime timeData){
+		contentData = LectureService.weekList[timeData.getLectureWeek()] + "요일 ";
+		contentData += timeData.getLectureStart() + "교시~";
+		contentData += timeData.getLectureEnd() + "교시";
 		return contentData;
 	}
 	
