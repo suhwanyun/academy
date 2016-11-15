@@ -311,7 +311,9 @@ public class IndexController {
 		// 변경될 강의의 정보
 		model.addAttribute("lectureTimeSetting", new LectureNoticeSetTime(timeData));
 		// 변경될 강의의 다음 강의 시간 텍스트(출력용)
-		model.addAttribute("targetTimeStr", lecService.getLectureTimeStr(timeData));
+		String timeStr = lecService.getLectureTimeStr(timeData);
+		model.addAttribute("targetTimeStr", timeStr);
+		model.addAttribute("targetTimeStrWithoutDate", timeStr.substring(7));
 		
 		return "/campus/lecture/lecture_update";
 	}
