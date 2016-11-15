@@ -4,8 +4,8 @@ import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
-import academy.group5.dto.Term;
 import academy.group5.dto.etc.LectureTimeForPhone;
+import academy.group5.dto.etc.TermForPhone;
 
 public interface PhoneService {
 	/**
@@ -23,7 +23,7 @@ public interface PhoneService {
 	 * 학기 정보 획득
 	 * @return
 	 */
-	Term getTermData();
+	TermForPhone getTermData();
 
 	/**
 	 * 알람 설정 정보 획득

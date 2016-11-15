@@ -11,6 +11,7 @@ import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.dto.etc.TermForPhone;
 
 @Repository
 public class PhoneRepo {
@@ -55,5 +56,11 @@ public class PhoneRepo {
 	public List<LectureTimeForPhone> getLectureTimeList(String userId) {
 		String stmt = PHONE_NS + "selectLectureTimeForPhone";
 		return session.selectList(stmt, userId);
+	}
+	
+	/** 학기 정보 획득 */
+	public TermForPhone getTerm() {
+		String stmt = PHONE_NS + "selectTodayTermForPhone";
+		return session.selectOne(stmt);
 	}
 }

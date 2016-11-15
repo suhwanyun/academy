@@ -55,5 +55,12 @@
 						 join LectureApply using (lecture_id, lecture_class)
 		where user_id = #{userId}
 	</select>
+	
+	<select id="selectTodayTermForPhone" resultType="term_for_phone">
+		select to_char(term_start, 'YYYY/MM/dd') as term_start, to_char(term_end, 'YYYY/MM/dd') as term_end
+		from Term
+		where term_start &lt;= to_char(sysdate, 'YYYY-mm-dd') and
+				term_end &gt;= to_char(sysdate, 'YYYY-mm-dd')
+	</select>
 
 </mapper>

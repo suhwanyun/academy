@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import academy.group5.dto.Term;
 import academy.group5.dto.UserData;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.MostRecommend;
+import academy.group5.dto.etc.TermForPhone;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.PhoneRepo;
@@ -80,17 +82,18 @@ public class PhoneServiceImpl implements PhoneService {
 	}
 	
 	@Override
-	public Term getTermData(){
-		Term termData = termRepo.getTodayTerm();
+	public TermForPhone getTermData(){
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		TermForPhone termData = phoneRepo.getTerm();
 		if(termData == null){
-			termData = new Term();
+			termData = new TermForPhone();
 			Date startDate = termRepo.getNextTermStartDate();
 			Date endDate = termRepo.getTermEndDate();
 			if(startDate == null || endDate == null){
 				return null;
 			}
-			termData.setTermStart(startDate);
-			termData.setTermEnd(endDate);
+			termData.setTermStart(format.format(startDate));
+			termData.setTermEnd(format.format(endDate));
 		}
 		return termData;
 	}

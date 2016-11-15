@@ -14,8 +14,8 @@ import com.google.gson.Gson;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
-import academy.group5.dto.Term;
 import academy.group5.dto.etc.LectureTimeForPhone;
+import academy.group5.dto.etc.TermForPhone;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
@@ -54,7 +54,7 @@ public class PhoneController {
 	@RequestMapping(value="/termTime", method=RequestMethod.POST)
 	public @ResponseBody String termData(){
 		Gson gson = new Gson();
-		Term termData = null;
+		TermForPhone termData = null;
 		try{
 			termData = phoneService.getTermData();
 		} catch(DataAccessException e){
