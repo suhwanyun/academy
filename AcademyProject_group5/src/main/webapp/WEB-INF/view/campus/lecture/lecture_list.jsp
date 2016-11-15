@@ -18,10 +18,11 @@
 				<th>강의 시간</th>
 				<th>강의 취소</th>
 			</tr>
+			<c:set var="spanCount" value="0"/>
 			<c:forEach items="${lectureList }" var="list"  varStatus="index">
 				<tr align="center" onclick="movePage(this, ${list.lectureId}, ${list.lectureClass })">
 				
-					<c:if test="${spanCount gt 0}">				
+					<c:if test="${spanCount lt 1}">				
 						<c:set var="doneLoop" value="false"/>
 						<c:forEach items="${lectureList }" var="subList" varStatus="subIndex">
 							<c:set var="spanCount" value="${subIndex.index - index.index}"/>
@@ -65,7 +66,7 @@
 					</td>
 					
 					<c:choose>
-						<c:when test="${spanCount gt 0}">		
+						<c:when test="${spanCount lt 1}">		
 							<c:set var="doneLoop" value="false"/>
 							<c:forEach items="${lectureList }" var="subList"  varStatus="subIndex">
 								<c:set var="spanCount" value="${subIndex.index - index.index}"/>
