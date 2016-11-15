@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>명소 추가 게시판</title>
+<title>데이트 코스 추가 게시판</title>
 
 </head>
 <body>

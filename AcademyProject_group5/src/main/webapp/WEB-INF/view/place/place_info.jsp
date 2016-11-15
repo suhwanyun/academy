@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>명소 추가 게시판</title>
+<title>데이트 코스 추가 게시판</title>
 
 <script type="text/javascript">
 function errorFun(e){
@@ -19,7 +19,7 @@ function errorFun(e){
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container">
 		<div class="text-center">
-		<h1>명소 게시글</h1>
+		<img width="100%" alt="데이트코스 게시판" src="/images/placePosting.png">
 		
 			
 				<table class="table">

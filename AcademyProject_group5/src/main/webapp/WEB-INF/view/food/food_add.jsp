@@ -12,7 +12,7 @@
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container cMargin">
 		<div class="text-center">
-			<h1>식사 글쓰기</h1>
+			<img width="100%" alt="음식 게시판" src="/images/foodPosting.png">
 		</div>
 
 		<form method="post" action="food" enctype="multipart/form-data"
