@@ -170,7 +170,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			if(!lectureData.getLecturePlace().equals(existingLectureData.getLecturePlace())){
 				if(isTimeChanged) {
 					noticeTitle += "과 장소가";
-					noticeContent += "/ ";
+					noticeContent += "/";
 				} else {
 					noticeTitle += " 장소가";
 				}
