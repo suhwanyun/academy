@@ -36,6 +36,7 @@
 		<typeAlias type="academy.group5.dto.etc.UserLectureTime" alias="user_lecture_time"/>
 		<typeAlias type="academy.group5.dto.etc.LectureTimeForPhone" alias="lecture_time_for_phone"/>
 		<typeAlias type="academy.group5.dto.etc.UserLectureNotice" alias="user_lecture_notice"/>
+		<typeAlias type="academy.group5.dto.etc.TermForPhone" alias="term_for_phone"/>
 	</typeAliases>
 	
 	<mappers>
