@@ -89,7 +89,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	@Override
 	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
 		// 휴강, 보강시 날짜 출력에 사용
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일 ");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일");
 	
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
@@ -140,7 +140,11 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				throw new PageRedirectException("기존 강의와 동일합니다.");
 			}
 			// 휴강 처리
+			try {
 			result = lecRepo.setLectureCancel(new CancelLecture(existingLectureTime, lectureData.getLectureTimeId()));
+			} catch (DuplicateKeyException e){
+				throw new WrongRequestException("이미 다음 강의가 휴강 처리된 날짜입니다.");
+			}
 			if(result != 1){
 				throw new WrongRequestException();
 			} 
@@ -203,7 +207,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 	
 			// 메세지 설정
 			noticeTitle = "강의가 휴강처리 되었습니다.";
-			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime), lectureData);
+			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime) + " ", lectureData);
 		}
 		// 보강인 경우
 		else if(noticeData.getNoticeType().equals("addDate")) {
@@ -235,7 +239,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 
 			// 메세지 설정
 			noticeTitle = "보강이 등록 되었습니다.";
-			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime), lectureData);
+			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime) + " ", lectureData);
 		}
 		
 		noticeData.setNoticeTitle(noticeTitle);
