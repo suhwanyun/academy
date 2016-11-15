@@ -121,6 +121,7 @@ textarea {
 }
 textarea{
 	resize:none;
+	width:100%;
 }
 button {
   overflow: visible;
