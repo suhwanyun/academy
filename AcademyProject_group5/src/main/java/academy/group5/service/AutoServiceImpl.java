@@ -130,7 +130,7 @@ public class AutoServiceImpl implements AutoService {
 				
 				// 전체 공지
 				List<String> userList = gcmRepo.getAllUser();
-				new GCM("학기가 끝났습니다.", "이번 학기도 수고하셨습니다.", userList, GCM.TYPE_NOTICE);
+				new GCM("이번 학기도 수고하셨습니다.", "방학 중에는 추천 알림이 송신되지 않습니다.", userList, GCM.TYPE_NOTICE);
 			}
 		}, nextTermDate);
 	}
@@ -163,6 +163,12 @@ public class AutoServiceImpl implements AutoService {
 		
 		scheduler.taskScheduler().schedule(new Runnable() {
 			public void run() {
+				// 학기 중이 아니면 알림을 하지 않음
+				if(termRepo.getTodayTerm() == null){
+					startTermScheduler();
+					return;
+				}
+				
 				// 게시판 검색 조건 설정
 				List<MostRecommend> mostRecommendSettingList = new ArrayList<>();
 				mostRecommendSettingList.add(new MostRecommend(Posting.TYPE_FOOD, MostRecommend.PERIOD_DAY));

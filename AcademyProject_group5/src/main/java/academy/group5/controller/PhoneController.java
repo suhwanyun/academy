@@ -14,7 +14,8 @@ import com.google.gson.Gson;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
-import academy.group5.dto.etc.UserLectureTime;
+import academy.group5.dto.Term;
+import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.service.LoginService;
@@ -47,6 +48,23 @@ public class PhoneController {
 			return "false";
 		}
 		
+	}
+	
+	/** 학기 정보 데이터 획득 */
+	@RequestMapping(value="/termTime", method=RequestMethod.POST)
+	public @ResponseBody String termData(){
+		Gson gson = new Gson();
+		Term termData = null;
+		try{
+			termData = phoneService.getTermData();
+		} catch(DataAccessException e){
+			return "false";
+		}
+		if(termData == null){
+			return "false";
+		}
+		
+		return gson.toJson(termData);
 	}
 	
 	/** 알림 설정 데이터 획득 */
@@ -84,7 +102,7 @@ public class PhoneController {
 	public @ResponseBody String lectureDataList(@RequestParam String userId){
 		Gson gson = new Gson();
 		
-		List<UserLectureTime> lectureData = null;
+		List<LectureTimeForPhone> lectureData = null;
 		try{
 			lectureData = phoneService.getLectureTimeList(userId);
 		}catch(DataAccessException e){

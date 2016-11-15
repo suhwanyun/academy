@@ -4,7 +4,8 @@ import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
-import academy.group5.dto.etc.UserLectureTime;
+import academy.group5.dto.Term;
+import academy.group5.dto.etc.LectureTimeForPhone;
 
 public interface PhoneService {
 	/**
@@ -18,6 +19,11 @@ public interface PhoneService {
 	 * @return
 	 */
 	boolean removeGCMData(String userId);
+	/**
+	 * 학기 정보 획득
+	 * @return
+	 */
+	Term getTermData();
 
 	/**
 	 * 알람 설정 정보 획득
@@ -38,5 +44,5 @@ public interface PhoneService {
 	 * @param userId
 	 * @return
 	 */
-	List<UserLectureTime> getLectureTimeList(String userId);
+	List<LectureTimeForPhone> getLectureTimeList(String userId);
 }

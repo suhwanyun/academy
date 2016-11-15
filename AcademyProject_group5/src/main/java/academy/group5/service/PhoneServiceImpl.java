@@ -1,6 +1,7 @@
 package academy.group5.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
+import academy.group5.dto.Term;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.MostRecommend;
-import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
 import academy.group5.repo.PhoneRepo;
+import academy.group5.repo.TermRepo;
 import academy.group5.util.GCM;
 
 @Service
@@ -27,6 +30,9 @@ public class PhoneServiceImpl implements PhoneService {
 	
 	@Autowired
 	PhoneRepo phoneRepo;
+	
+	@Autowired
+	TermRepo termRepo;
 	
 	@Autowired
 	GCMRepo gcmRepo;
@@ -72,6 +78,22 @@ public class PhoneServiceImpl implements PhoneService {
 		}
 		return true;
 	}
+	
+	@Override
+	public Term getTermData(){
+		Term termData = termRepo.getTodayTerm();
+		if(termData == null){
+			termData = new Term();
+			Date startDate = termRepo.getNextTermStartDate();
+			Date endDate = termRepo.getTermEndDate();
+			if(startDate == null || endDate == null){
+				return null;
+			}
+			termData.setTermStart(startDate);
+			termData.setTermEnd(endDate);
+		}
+		return termData;
+	}
 
 	@Override
 	public List<NotificationSetting> getNotificationSettingList(String userId) {
@@ -109,7 +131,7 @@ public class PhoneServiceImpl implements PhoneService {
 	}
 	
 	@Override
-	public List<UserLectureTime> getLectureTimeList(String userId){
+	public List<LectureTimeForPhone> getLectureTimeList(String userId){
 		
 		return phoneRepo.getLectureTimeList(userId);
 	}
