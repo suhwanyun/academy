@@ -52,7 +52,7 @@ $("#submitBtn").click(function(event){
 })
 
 $("#cancel").click(function(event){
-		$(location).attr('href', "/campus/campusMain");
+		$(location).attr('href', "/lecture/lectureMain?lectureId=${lectureId}&lectureClass=${lectureClass}");
 	});
 </script>
 </html>

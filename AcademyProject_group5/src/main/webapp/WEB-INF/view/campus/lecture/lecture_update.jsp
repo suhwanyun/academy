@@ -149,5 +149,9 @@ $("#submitBtn").click(function(event){
 		}
 	}
 })
+
+$("#cancel").click(function(event){
+		$(location).attr('href', "/campus/campusMain");
+	});
 </script>
 </html>
