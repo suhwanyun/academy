@@ -14,8 +14,8 @@ public interface LectureService {
 	final int LECTURE_MAX_PAGE = 10;
 	
 	// 강의 시간 계산 기준
-	// 1교시 = 9시 = 7 + 1 = 8 (0~23 중)
-	final int FIRST_CLASS_CRITERIA = 7; 
+	// 1교시 = 9시 = 8 + 1 = 9
+	final int FIRST_CLASS_CRITERIA = 8; 
 	
 	final String[] weekList = {"일", "월", "화", "수", "목", "금", "토"};
 	
