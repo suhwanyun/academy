@@ -21,8 +21,8 @@
 							<option value="addDate">보강</option>
 							<option value="changeDate" selected="selected">시간/장소 임시변경</option>
 						</sform:select> <br>
-					<span id='targetTime'>${targetTimeStr}</span>
-					<span id='targetTimeWithoutDate' hidden="hidden">${targetTimeStrWithoutDate}</span></td>
+					<span class='dateTR' id='targetTime'>${targetTimeStr}</span>
+					<span class='dateTR' id='targetTimeWithoutDate' hidden="hidden">${targetTimeStrWithoutDate}</span></td>
 				</tr>
 				<tr>
 					<td><span>날짜</span></td>
@@ -129,10 +129,8 @@ $("#noticeType").change(function(){
 		$(".dateTR").removeAttr("hidden");
 		
 		if($("#noticeType").val()=='changeDate'){
-			$("#targetTime").removeAttr("hidden");
 			$("#targetTimeWithoutDate").attr("hidden", "hidden");
 		} else {
-			$("#targetTimeWithoutDate").removeAttr("hidden");
 			$("#targetTime").attr("hidden", "hidden");
 		}
 		
