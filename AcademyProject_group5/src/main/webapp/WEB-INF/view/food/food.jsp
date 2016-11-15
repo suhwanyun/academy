@@ -16,7 +16,7 @@
    <jsp:include page="/WEB-INF/view/header/header.jsp" />
 
       <div class="container text-center">
-      	<h1>식사 게시판</h1>
+      	<img width="100%" alt="음식 게시판" src="/images/foodPosting.png">
             <table class="table-condensed">
            
                <tr>

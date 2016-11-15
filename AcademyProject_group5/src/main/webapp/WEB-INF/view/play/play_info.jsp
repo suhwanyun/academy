@@ -19,7 +19,7 @@ function errorFun(e){
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container">
 		<div class="text-center">
-		<h1>오락 게시글</h1>
+		<img width="100%" alt="음식 게시판" src="/images/playPosting.png">
 		
 			
 				<table class="table">

@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>명소 추가 게시판</title>
+<title>데이트 코스 추가 게시판</title>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/header/header.jsp" />
 	<div class="container cMargin">
 		<div class="text-center">
-			<h1>명소 글쓰기</h1>
+			<img width="100%" alt="데이트코스 게시판" src="/images/placePosting.png">
 		</div>
 
 		<form method="post" action="place" enctype="multipart/form-data"
