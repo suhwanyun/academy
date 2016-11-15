@@ -16,4 +16,7 @@
 	border: 1px solid #ebebeb;
 	border-bottom-color: #e2e2e2;
 	border-radius: .25em;
+	width: 50% !important;
+	float: left;
+	margin-left: 10px;
 }

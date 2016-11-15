@@ -42,9 +42,9 @@
 				<tr class="imgSetting" hidden="true">
 					<td></td>
 					<td align="left">
-					<label for="fileInput" class="myButton">파일 선택</label>
+					<label for="fileInput" style="float:left" class="myButton">파일 선택</label>
 					<input id="fileInput" type="file" name="uploadPhoto" accept="image/*" />
-					<input id="fileText" class="fileText" type="text" value="파일 선택" disabled="disabled" style="width:100px;"/>
+					<input id="fileText" class="fileText" type="text" value="파일 선택" disabled="disabled"/>
 					</td>
 					<td align="right"><button class="myButton" id="imgCancel">기존 이미지</button></td>
 				</tr>
@@ -117,9 +117,9 @@
 		$("#checkImg").html("이미지 없음")	;
 	});
 	// 취소
-	$("cancel").click(function(event){
+	$("#cancel").click(function(event){
 		event.preventDefault();
-		$(location).attr('href', "/playMain");
+		$(location).attr('href', "postingInfo?postingId=${postingData.postingId }");
 	});
 </script>
 </html>
