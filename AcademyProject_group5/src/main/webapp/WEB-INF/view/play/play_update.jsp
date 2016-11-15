@@ -119,7 +119,7 @@
 	// 취소
 	$("#cancel").click(function(event){
 		event.preventDefault();
-		$(location).attr('href', "postingInfo?postingId=${postingData.postingId }");
+		$(location).attr('href', "/postingInfo?postingId=${postingData.postingId }");
 	});
 </script>
 </html>
