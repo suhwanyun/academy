@@ -1,12 +1,9 @@
 package academy.group5.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,6 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.LecturePaging;
 import academy.group5.dto.etc.UserLectureNotice;
-import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
@@ -45,7 +41,6 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	@Autowired
 	GCMRepo gcmRepo;
-	private static final Logger logger = LoggerFactory.getLogger(LectureNoticeServiceImpl.class);
 	
 	@Override
 	public List<UserLectureNotice> allLectureNoticeList(String userId, int page) {
@@ -266,7 +261,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	/** 알림 내용에 강의 시간을 추가 */
 	@Override
 	public String setNoticeContentByClass(String contentData, LectureTime timeData){
-		contentData = LectureService.weekList[timeData.getLectureWeek()] + "요일 ";
+		contentData += LectureService.weekList[timeData.getLectureWeek()] + "요일 ";
 		if(timeData.getLectureStart() != timeData.getLectureEnd()){
 			contentData += timeData.getLectureStart() + "교시~";
 		}
@@ -276,13 +271,11 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	/** 날짜 출력 */
 	private String getDateStr(Date date){
-		logger.trace("date:{}", date);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		String dateStr = "";
 		dateStr += (cal.get(Calendar.MONTH)+1) + "월";
 		dateStr += cal.get(Calendar.DAY_OF_MONTH) + "일 ";
-		logger.trace("str:{}", dateStr);
 		return dateStr;
 	}
 	
