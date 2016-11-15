@@ -6,6 +6,19 @@
 <head>
 <title>My Campus Manager</title>
 
+<%
+	String browser = request.getHeader("User-Agent");	// 브라우저 구해오기
+	boolean result = false;
+	if(browser.indexOf("Android") > 0) {              // 안드로이드로 접속
+		result = true;
+	}else if(browser.indexOf("iPhone") > 0) {        // 아이폰으로 접속
+		result = true;
+	}
+	if(result == true) {
+		session.setAttribute("isPhone", "true"); 	// 스마트폰 접속 플래그
+	} 
+%>
+
 </head>
 
 <body>
