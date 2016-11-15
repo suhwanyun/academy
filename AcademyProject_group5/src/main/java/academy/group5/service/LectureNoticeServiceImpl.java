@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	@Autowired
 	GCMRepo gcmRepo;
+	private static final Logger logger = LoggerFactory.getLogger(LectureNoticeServiceImpl.class);
 	
 	@Override
 	public List<UserLectureNotice> allLectureNoticeList(String userId, int page) {
@@ -90,6 +93,10 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
 		// 휴강, 보강시 날짜 출력에 사용
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일");
+		
+		if(lectureNoticeAndTime.getIsTempDate() == null){
+			throw new WrongRequestException("날짜가 설정되지 않았습니다.");
+		}
 	
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
