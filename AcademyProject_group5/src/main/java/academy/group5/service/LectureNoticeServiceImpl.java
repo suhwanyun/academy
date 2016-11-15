@@ -161,7 +161,6 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				noticeTitle += " 시간";
 				
 				noticeContent += getDateStr(existingLectureTime);
-				noticeContent = setNoticeContentByClass(noticeContent, existingLectureData);
 				noticeContent += "->";
 				noticeContent += getDateStr(newLectureTime);
 				noticeContent = setNoticeContentByClass(noticeContent, lectureData);
@@ -263,7 +262,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	public String setNoticeContentByClass(String contentData, LectureTime timeData){
 		contentData += LectureService.weekList[timeData.getLectureWeek()] + " ";
 		if(timeData.getLectureStart() != timeData.getLectureEnd()){
-			contentData += timeData.getLectureStart() + "교시~";
+			contentData += timeData.getLectureStart() + "~";
 		}
 		contentData += timeData.getLectureEnd() + "교시";
 		
