@@ -90,7 +90,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
 		// 휴강, 보강시 날짜 출력에 사용
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일 ");
-		SimpleDateFormat tmpdateFormat = new SimpleDateFormat("MM-dd HH-mm-ss");
+		SimpleDateFormat tmpdateFormat = new SimpleDateFormat("HH:mm");
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
 		LectureTime lectureData = new LectureTime(lectureNoticeAndTime);	
@@ -119,7 +119,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		newLectureCal.setTime(lectureData.getIsTempDate());
 		newLectureCal.set(Calendar.HOUR_OF_DAY, newLectureStart + LectureService.FIRST_CLASS_CRITERIA);
 		if(newLectureCal.before(Calendar.getInstance())){
-			throw new PageRedirectException(tmpdateFormat.format(newLectureCal.getTime()) + "이미 지난 날짜는 지정하실 수 없습니다.");
+			throw new PageRedirectException("start("+newLectureStart+")" + tmpdateFormat.format(newLectureCal.getTime()) + "이미 지난 날짜는 지정하실 수 없습니다.");
 		}
 		
 		// 새로운 강의 시간
