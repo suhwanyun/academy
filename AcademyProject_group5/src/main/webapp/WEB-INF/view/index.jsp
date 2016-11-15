@@ -16,9 +16,8 @@
 	}
 	if(result == true) {
 		session.setAttribute("isPhone", "true"); 	// 스마트폰 접속 플래그
-	} 
+	} 	
 %>
-
 </head>
 
 <body>
