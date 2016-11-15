@@ -161,10 +161,10 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 				noticeTitle += " 시간";
 				
 				noticeContent += getDateStr(existingLectureTime);
-				noticeContent += setNoticeContentByClass(noticeContent, existingLectureData);
+				setNoticeContentByClass(noticeContent, existingLectureData);
 				noticeContent += " -> ";
 				noticeContent += getDateStr(newLectureTime);
-				noticeContent += setNoticeContentByClass(noticeContent, lectureData);
+				setNoticeContentByClass(noticeContent, lectureData);
 				
 				isTimeChanged = true;
 			}
@@ -261,11 +261,12 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	/** 알림 내용에 강의 시간을 추가 */
 	@Override
 	public String setNoticeContentByClass(String contentData, LectureTime timeData){
-		contentData += LectureService.weekList[timeData.getLectureWeek()] + "요일 ";
+		contentData += LectureService.weekList[timeData.getLectureWeek()] + " ";
 		if(timeData.getLectureStart() != timeData.getLectureEnd()){
 			contentData += timeData.getLectureStart() + "교시~";
 		}
 		contentData += timeData.getLectureEnd() + "교시";
+		
 		return contentData;
 	}
 	
