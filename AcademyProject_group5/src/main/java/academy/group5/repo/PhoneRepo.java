@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.LectureCancelForPhone;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.TermForPhone;
@@ -62,5 +63,11 @@ public class PhoneRepo {
 	public TermForPhone getTerm() {
 		String stmt = PHONE_NS + "selectTodayTermForPhone";
 		return session.selectOne(stmt);
+	}
+	
+	/** 휴강 일자 획득 */
+	public List<LectureCancelForPhone> getCancelDateList(int lectureTimeId){
+		String stmt = PHONE_NS + "isCanceled";
+		return session.selectList(stmt, lectureTimeId);
 	}
 }

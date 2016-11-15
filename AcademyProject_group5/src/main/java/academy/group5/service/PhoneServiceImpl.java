@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
-import academy.group5.dto.Term;
 import academy.group5.dto.UserData;
+import academy.group5.dto.etc.LectureCancelForPhone;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.MostRecommend;
 import academy.group5.dto.etc.TermForPhone;
@@ -136,7 +136,19 @@ public class PhoneServiceImpl implements PhoneService {
 	@Override
 	public List<LectureTimeForPhone> getLectureTimeList(String userId){
 		
-		return phoneRepo.getLectureTimeList(userId);
+		List<LectureTimeForPhone> timeList = phoneRepo.getLectureTimeList(userId);
+		for(LectureTimeForPhone timeData : timeList){
+			if(timeData.getIsTempDate() == null){
+				timeData.setIsTempDate("");
+			}
+		}
+		return timeList;
+	}
+	
+	@Override
+	public List<LectureCancelForPhone> getCancelDateList(int lectureTimeId){
+		
+		return phoneRepo.getCancelDateList(lectureTimeId);
 	}
 
 }

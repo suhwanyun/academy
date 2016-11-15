@@ -62,5 +62,11 @@
 		where term_start &lt;= to_char(sysdate, 'YYYY-mm-dd') and
 				term_end &gt;= to_char(sysdate, 'YYYY-mm-dd')
 	</select>
+	
+	<select id="isCanceled" parameterType="int" resultType="lecture_cancel_for_phone">
+		select to_char(cancel_date, 'YYYY/MM/dd') as cancel_date
+		from CancelLecture
+		where lecture_time_id = #{lectureTimeId}
+	</select>
 
 </mapper>

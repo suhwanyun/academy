@@ -4,6 +4,7 @@ import java.util.List;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
+import academy.group5.dto.etc.LectureCancelForPhone;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.TermForPhone;
 
@@ -45,4 +46,11 @@ public interface PhoneService {
 	 * @return
 	 */
 	List<LectureTimeForPhone> getLectureTimeList(String userId);
+	
+	/**
+	 * 휴강 일자 목록 획득
+	 * @param lectureTimeId
+	 * @return
+	 */
+	List<LectureCancelForPhone> getCancelDateList(int lectureTimeId);
 }

@@ -1,7 +1,5 @@
 package academy.group5.dto.etc;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

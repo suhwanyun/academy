@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import academy.group5.dto.NotificationSetting;
 import academy.group5.dto.Posting;
+import academy.group5.dto.etc.LectureCancelForPhone;
 import academy.group5.dto.etc.LectureTimeForPhone;
 import academy.group5.dto.etc.TermForPhone;
 import academy.group5.exception.WrongRequestException;
@@ -109,5 +110,20 @@ public class PhoneController {
 			return "false";
 		}
 		return gson.toJson(lectureData);
+	}
+
+	/** 휴강 데이터 획득 */
+	@RequestMapping(value="/lectureCancelData", method=RequestMethod.POST, 
+			produces="text/plain;charset=UTF-8")
+	public @ResponseBody String lectureCancelDataList(@RequestParam int lectureTimeId){
+		Gson gson = new Gson();
+		
+		List<LectureCancelForPhone> cancelData = null;
+		try{
+			cancelData = phoneService.getCancelDateList(lectureTimeId);
+		}catch(DataAccessException e){
+			return "false";
+		}
+		return gson.toJson(cancelData);
 	}
 }
