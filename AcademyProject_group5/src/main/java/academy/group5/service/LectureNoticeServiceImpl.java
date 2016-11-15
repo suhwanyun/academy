@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.LectureNoticeSetTime;
 import academy.group5.dto.etc.LecturePaging;
 import academy.group5.dto.etc.UserLectureNotice;
+import academy.group5.dto.etc.UserLectureTime;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.exception.WrongRequestException;
 import academy.group5.repo.GCMRepo;
@@ -114,7 +116,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		// DB에 공지 내용 등록(메세지 푸쉬X)
 		postNotice(noticeData, false);
 		// DB result 담을 변수
-		int result;	
+		int result = 1;	
 		// 알람 내용
 		String noticeTitle = "";
 		String noticeContent = "";
@@ -177,7 +179,11 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			newLectureCal.set(Calendar.HOUR_OF_DAY, existingLectureData.getLectureStart() + LectureService.FIRST_CLASS_CRITERIA);
 			newLectureTime = newLectureCal.getTime();
 			// 휴강 처리
+			try{
 			result = lecRepo.setLectureCancel(new CancelLecture(newLectureTime, lectureData.getLectureTimeId()));
+			} catch (DuplicateKeyException e){
+				throw new WrongRequestException("이미 휴강 처리된 날짜입니다.");
+			}
 			if(result != 1){
 				throw new WrongRequestException();
 			} 	
@@ -191,6 +197,23 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			if(existingLectureTime.compareTo(newLectureTime) == 0){
 				throw new PageRedirectException("기존 강의와 동일합니다.");
 			}
+
+			// 해당 강의의 강의시간(보강포함) 중 겹치는 시간 리스트
+			List<LectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTime(lectureData);
+			String errorStr = "";
+			for(LectureTime alreadyLectureTime : alreadyLectureTimeList) {
+				Date tempDate = alreadyLectureTime.getIsTempDate();
+				errorStr += "\\n";
+				if(tempDate != null){
+					errorStr += "(보강)" + dateFormat.format(tempDate);
+				}
+				errorStr += alreadyLectureTime.getLectureStart() + "교시~";
+				errorStr += alreadyLectureTime.getLectureEnd() + "교시";
+			}
+			if(!errorStr.equals("")){
+				throw new WrongRequestException("강의 시간이 중복됩니다." + errorStr);
+			}
+			
 			// 임시 강의 시간 등록
 			result = lecRepo.setTempLectureTime(lectureData);
 			if(result != 1){

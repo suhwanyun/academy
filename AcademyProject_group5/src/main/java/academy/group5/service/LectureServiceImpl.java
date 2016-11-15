@@ -69,7 +69,7 @@ public class LectureServiceImpl implements LectureService{
 					selectedLectureTime.getLectureEnd(), 
 					selectedLectureTime.getLectureWeek());
 			// 이미 신청한 강의들의 강의시간 중 겹치는 시간 리스트
-			List<UserLectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTime(userLectureTimeData);
+			List<UserLectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTimeByUser(userLectureTimeData);
 			
 			for(UserLectureTime alreadyLectureTime : alreadyLectureTimeList) {
 				errorStr += "\\n" + alreadyLectureTime.getLectureName() + " ";

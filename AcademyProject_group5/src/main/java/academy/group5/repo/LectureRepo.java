@@ -66,9 +66,14 @@ public class LectureRepo {
 		return session.selectList(stmt, data);
 	}
 	
-	public List<UserLectureTime> getAlreadyLectureTime(UserLectureTime userTimeData) {
-		String stmt = LECTURE_NS + "selectAlreadyLectureTime";
+	public List<UserLectureTime> getAlreadyLectureTimeByUser(UserLectureTime userTimeData) {
+		String stmt = LECTURE_NS + "selectAlreadyLectureTimeByUser";
 		return session.selectList(stmt, userTimeData);
+	}
+	
+	public List<LectureTime> getAlreadyLectureTime(LectureTime timeData) {
+		String stmt = LECTURE_NS + "selectAlreadyLectureTime";
+		return session.selectList(stmt, timeData);
 	}
 	
 	public LectureTime getLectureTimeById(int lectureTimeId) {

@@ -79,7 +79,7 @@
 		  and is_temp_date is null
 	</select>
 	
-	<select id="selectAlreadyLectureTime" parameterType="user_lecture_time" resultType="user_lecture_time">
+	<select id="selectAlreadyLectureTimeByUser" parameterType="user_lecture_time" resultType="user_lecture_time">
 		select lecture_name, lecture_class, lecture_week, lecture_start, lecture_end
 		from LectureTime join LectureApply using (lecture_id, lecture_class)
 						 join Lecture using (lecture_id, lecture_class)
@@ -88,6 +88,17 @@
 		  and lecture_week = #{lectureWeek}
 		  and user_id = #{userId}
 		  and is_temp_date is null
+	</select>
+	
+	<select id="selectAlreadyLectureTime" parameterType="lecture_time" resultType="lecture_time">
+		select is_temp_date, lecture_start, lecture_end
+		from LectureTime
+		where lecture_id = #{lectureId}
+		  and lecture_class = #{lectureClass}
+		  and lecture_start &lt;= #{lectureEnd}
+		  and lecture_end &gt;= #{lectureStart}
+		  and lecture_week = #{lectureWeek}
+		  and (is_temp_date is null or is_temp_date = #{isTempDate})
 	</select>
 	
 	<select id="selectLectureTimeById" parameterType="int" resultType="lecture_time">
