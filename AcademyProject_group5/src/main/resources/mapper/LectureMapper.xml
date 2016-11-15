@@ -48,6 +48,7 @@
 		from LectureTime join LectureApply using (lecture_id, lecture_class)
 						 join Lecture using (lecture_id, lecture_class)
 		where user_id = #{userId} and is_temp_date is null
+		order by lecture_id, lecture_class
 	</select>
 	
 	<select id="selectLectureByClass" parameterType="lecture" resultType="lecture">
