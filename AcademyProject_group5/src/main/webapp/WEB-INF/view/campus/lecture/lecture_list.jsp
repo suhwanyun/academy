@@ -27,10 +27,14 @@
 					<c:if test="${spanCount lt 1}">	
 								
 						<c:forEach items="${lectureList }" var="subList" varStatus="subIndex">
-							<c:if test="${(subIndex.index - index.index) gt 0 && not doneLoop }">
+							<c:if test="${(subIndex.index - index.index) gt -1 && not doneLoop }">
 								<c:set var="spanCount" value="${subIndex.index - index.index}"/>
 								
-								<c:if test="${list.lectureId != lectureList[subIndex.index].lectureId}">
+								<c:if test="${subIndex.index == subIndex.end}">
+									<c:set var="spanCount" value="1"/>
+								</c:if>
+								
+								<c:if test="${subIndex.index == subIndex.end || list.lectureId != lectureList[subIndex.index].lectureId}">
 									<c:set var="doneLoop" value="true"/>
 									<td rowspan="${spanCount }">${list.lectureName }&nbsp;(${list.lectureClass })</td>
 									<td rowspan="${spanCount }">${list.professorName }</td>
