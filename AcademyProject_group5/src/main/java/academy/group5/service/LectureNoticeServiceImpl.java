@@ -212,7 +212,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 	
 			// 메세지 설정
 			noticeTitle = "강의가 휴강처리 되었습니다.";
-			noticeContent = setNoticeContentByClass(getDateStr(newLectureTime) + " ", lectureData);
+			noticeContent = setNoticeContentByClass(getDateStr(newLectureTime), lectureData);
 		}
 		// 보강인 경우
 		else if(noticeData.getNoticeType().equals("addDate")) {
@@ -276,11 +276,13 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	/** 날짜 출력 */
 	private String getDateStr(Date date){
+		logger.trace("date:{}", date);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		String dateStr = "";
-		dateStr += cal.get(Calendar.MONTH) + "월";
+		dateStr += (cal.get(Calendar.MONTH)+1) + "월";
 		dateStr += cal.get(Calendar.DAY_OF_MONTH) + "일 ";
+		logger.trace("str:{}", dateStr);
 		return dateStr;
 	}
 	
