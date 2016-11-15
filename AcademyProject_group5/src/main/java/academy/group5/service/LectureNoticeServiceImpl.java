@@ -94,6 +94,13 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
 		LectureTime lectureData = new LectureTime(lectureNoticeAndTime);	
+		
+		Integer newLectureStart = lectureData.getLectureStart();
+		Integer newLectureEnd = lectureData.getLectureEnd();
+		if (newLectureStart != null && newLectureEnd != null
+				&& newLectureStart > newLectureEnd){
+			throw new WrongRequestException("시작교시보다 종료교시가 앞설 수 없습니다.");
+		}
 
 		// 강의 이름
 		String lectureName = lecRepo.getLectureName(new Lecture(lectureData.getLectureId(), lectureData.getLectureClass()));
@@ -110,7 +117,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		// 입력된 날짜로 새로운 강의 시간 계산
 		Calendar newLectureCal = Calendar.getInstance();
 		newLectureCal.setTime(lectureData.getIsTempDate());
-		newLectureCal.set(Calendar.HOUR_OF_DAY, lectureData.getLectureStart() + LectureService.FIRST_CLASS_CRITERIA);
+		newLectureCal.set(Calendar.HOUR_OF_DAY, newLectureStart + LectureService.FIRST_CLASS_CRITERIA);
 		if(newLectureCal.before(Calendar.getInstance())){
 			throw new PageRedirectException("이미 지난 날짜는 지정하실 수 없습니다.");
 		}
@@ -251,7 +258,9 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	@Override
 	public String setNoticeContentByClass(String contentData, LectureTime timeData){
 		contentData = LectureService.weekList[timeData.getLectureWeek()] + "요일 ";
-		contentData += timeData.getLectureStart() + "교시~";
+		if(timeData.getLectureStart() != timeData.getLectureEnd()){
+			contentData += timeData.getLectureStart() + "교시~";
+		}
 		contentData += timeData.getLectureEnd() + "교시";
 		return contentData;
 	}
