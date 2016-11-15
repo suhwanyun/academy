@@ -49,7 +49,8 @@
 	</select>
 	
 	<select id="selectLectureTimeForPhone" parameterType="String" resultType="lecture_time_for_phone">
-		select lecture_time_id, lecture_name, professor_name, lecture_week, lecture_start, lecture_place, is_temp_date
+		select lecture_time_id, lecture_name, professor_name, 
+			   lecture_week, lecture_start, lecture_place, to_char(is_temp_date, 'YYYY/MM/dd') as is_temp_date
 		from LectureTime join Lecture using (lecture_id, lecture_class)
 						 join LectureApply using (lecture_id, lecture_class)
 		where user_id = #{userId}

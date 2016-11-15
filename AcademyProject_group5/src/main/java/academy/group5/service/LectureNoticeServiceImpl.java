@@ -1,5 +1,6 @@
 package academy.group5.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +86,9 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 	
 	@Override
 	public boolean postNotice(LectureNoticeSetTime lectureNoticeAndTime) {
+		// 휴강, 보강시 날짜 출력에 사용
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM월dd일 ");
+		
 		// 공지사항 정보, 새 강의 정보
 		LectureNotice noticeData = new LectureNotice(lectureNoticeAndTime);
 		LectureTime lectureData = new LectureTime(lectureNoticeAndTime);	
@@ -179,7 +183,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 	
 			// 메세지 설정
 			noticeTitle = "강의가 휴강처리 되었습니다.";
-			noticeContent = setNoticeContentByClass("", lectureData);
+			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime), lectureData);
 		}
 		// 보강인 경우
 		else if(noticeData.getNoticeType().equals("addDate")) {
@@ -194,7 +198,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			} 
 			// 메세지 설정
 			noticeTitle = "보강이 등록 되었습니다.";
-			noticeContent = setNoticeContentByClass("", lectureData);
+			noticeContent = setNoticeContentByClass(dateFormat.format(newLectureTime), lectureData);
 		}
 		
 		noticeData.setNoticeTitle(noticeTitle);
