@@ -27,8 +27,9 @@
 					<c:if test="${spanCount lt 1}">	
 								
 						<c:forEach items="${lectureList }" var="subList" varStatus="subIndex">
-							<c:set var="spanCount" value="${subIndex.index - index.index}"/>
-							<c:if test="${spanCount gt 0 && not doneLoop }">
+							<c:if test="${(subIndex.index - index.index) gt 0 && not doneLoop }">
+								<c:set var="spanCount" value="${subIndex.index - index.index}"/>
+								
 								<c:if test="${list.lectureId != lectureList[subIndex.index].lectureId}">
 									<c:set var="doneLoop" value="true"/>
 									<td rowspan="${spanCount }">${list.lectureName }&nbsp;(${list.lectureClass })</td>
