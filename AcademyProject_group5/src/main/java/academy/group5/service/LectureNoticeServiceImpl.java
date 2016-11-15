@@ -202,16 +202,16 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 			List<LectureTime> alreadyLectureTimeList = lecRepo.getAlreadyLectureTime(lectureData);
 			String errorStr = "";
 			for(LectureTime alreadyLectureTime : alreadyLectureTimeList) {
-				Date tempDate = alreadyLectureTime.getIsTempDate();
-				errorStr += "\\n";
-				if(tempDate != null){
-					errorStr += "(보강)" + dateFormat.format(tempDate);
-				}
-				errorStr += alreadyLectureTime.getLectureStart() + "교시~";
+				errorStr += "\\n" + alreadyLectureTime.getLectureStart() + "교시~";
 				errorStr += alreadyLectureTime.getLectureEnd() + "교시";
+				
+				Date tempDate = alreadyLectureTime.getIsTempDate();
+				if(tempDate != null){
+					errorStr += "(보강)";
+				}
 			}
 			if(!errorStr.equals("")){
-				throw new WrongRequestException("강의 시간이 중복됩니다." + errorStr);
+				throw new WrongRequestException(dateFormat.format(lectureData.getIsTempDate()) + "강의 시간이 중복됩니다." + errorStr);
 			}
 			
 			// 임시 강의 시간 등록
