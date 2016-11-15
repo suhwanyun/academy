@@ -119,7 +119,7 @@ public class LectureNoticeServiceImpl implements LectureNoticeService{
 		newLectureCal.setTime(lectureData.getIsTempDate());
 		newLectureCal.set(Calendar.HOUR_OF_DAY, newLectureStart + LectureService.FIRST_CLASS_CRITERIA);
 		if(newLectureCal.before(Calendar.getInstance())){
-			throw new PageRedirectException("start("+newLectureStart+")" + tmpdateFormat.format(newLectureCal.getTime()) + "이미 지난 날짜는 지정하실 수 없습니다.");
+			throw new PageRedirectException("start("+newLectureStart+")" + tmpdateFormat.format(newLectureCal.getTime()) + "/" + tmpdateFormat.format(Calendar.getInstance().getTime()) + "이미 지난 날짜는 지정하실 수 없습니다.");
 		}
 		
 		// 새로운 강의 시간
