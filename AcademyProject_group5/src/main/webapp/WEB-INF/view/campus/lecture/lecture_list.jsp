@@ -28,9 +28,9 @@
 								
 						<c:forEach items="${lectureList }" var="subList" varStatus="subIndex">
 							<c:if test="${(subIndex.index - index.index) gt -1 && not doneLoop }">
-								<c:set var="spanCount" value="${subIndex.index - index.index}"/>
+								<c:set var="spanCount" value="${subIndex.index - index.index + 1}"/>
 								
-								<c:if test="${subIndex.last}">
+								<c:if test="${index.last}">
 									<c:set var="spanCount" value="1"/>
 								</c:if>
 								

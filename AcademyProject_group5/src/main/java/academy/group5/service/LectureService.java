@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import academy.group5.dto.Lecture;
+import academy.group5.dto.LectureApply;
 import academy.group5.dto.LectureNotice;
 import academy.group5.dto.LectureTime;
 import academy.group5.dto.etc.LectureNoticeSetTime;
@@ -88,6 +89,11 @@ public interface LectureService {
 	 * @return
 	 */
 	boolean getIsPresident(Integer lectureId, String userId, Integer lectureClass);
+	/**
+	 * 해당 강의의 반장여부를 반환(강의정보 전달)
+	 * @return
+	 */
+	boolean getIsPresident(LectureApply applyData);
 	/**
 	 * 해당 강의의 반장여부를 반환
 	 * @param lectureTimeId

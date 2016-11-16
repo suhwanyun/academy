@@ -119,7 +119,9 @@
 		select is_president, right_end_time
 		from LectureApply
 		where lecture_id = #{lectureId} 
+		<if test="lectureClass != null">
 			and lecture_class = #{lectureClass}
+		</if>
 			and user_id = #{userId}
 	</select>
 	

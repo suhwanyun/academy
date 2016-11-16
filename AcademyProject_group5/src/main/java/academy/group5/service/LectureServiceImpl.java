@@ -110,12 +110,15 @@ public class LectureServiceImpl implements LectureService{
 		return alreadyApplied != 0;
 	}
 
+	
+	
 	@Override
 	public boolean cancelApply(Integer lectureId, String userId) {
-		if(getIsPresident(lectureId, userId)){
+		LectureApply data = new LectureApply(lectureId, userId);
+		
+		if(getIsPresident(data)){
 			throw new WrongRequestException("반장은 강의를 신청취소할 수 없습니다.");
 		}
-		LectureApply data = new LectureApply(lectureId, userId);
 		
 		int result = lecRepo.deleteLectureApply(data);
 		
@@ -181,6 +184,13 @@ public class LectureServiceImpl implements LectureService{
 	public boolean getIsPresident(Integer lectureTimeId, String userId){
 		Lecture lectureData = lecRepo.getLectureByTimeId(lectureTimeId);
 		LectureApply result = lecRepo.getIsPresident(new LectureApply(lectureData, userId));	
+		
+		return isPresidentLogic(result);
+	}
+	
+	@Override
+	public boolean getIsPresident(LectureApply applyData){
+		LectureApply result = lecRepo.getIsPresident(applyData);	
 		
 		return isPresidentLogic(result);
 	}
