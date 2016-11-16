@@ -16,7 +16,7 @@
 				<th>담당 교수</th>
 				<th>강의 장소</th>
 				<th>강의 시간</th>
-				<th>강의 취소</th>
+				<th></th>
 			</tr>
 			<c:set var="spanCount" value="0"/>
 			<c:set var="doneLoop" value="false"/>

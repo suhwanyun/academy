@@ -38,6 +38,7 @@
 		<typeAlias type="academy.group5.dto.etc.UserLectureNotice" alias="user_lecture_notice"/>
 		<typeAlias type="academy.group5.dto.etc.TermForPhone" alias="term_for_phone"/>
 		<typeAlias type="academy.group5.dto.etc.LectureCancelForPhone" alias="lecture_cancel_for_phone"/>
+		<typeAlias type="academy.group5.dto.etc.UserMileageProduct" alias="user_mileage_product"/>
 	</typeAliases>
 	
 	<mappers>

@@ -30,4 +30,37 @@
 		where rnum = 1
 	</select>
 	
+	<select id="selectAllProduct" resultType="mileage_product">
+		select product_id, product_name, product_cost, product_imgfile
+		from MileageProduct join UserMileage using (product_id)
+	</select>
+	
+	<select id="selectAllProductByUser" parameterType="String" resultType="mileage_product">
+		select product_id, product_name, product_cost, product_imgfile
+		from MileageProduct join UserMileage using (product_id)
+		where user_id = #{userId} and product_remain &gt; 0
+	</select>
+	
+	<select id="selectProduct" parameterType="int" resultType="mileage_product">
+		select *
+		from MileageProduct
+		where product_id = #{productId}
+	</select>
+	
+	<select id="selectProductByUser" parameterType="user_mileage" resultType="user_mileage_product">
+		select *
+		from MileageProduct join UserMileage using (product_id)
+		where user_id = #{userId} and product_id = #{productId}
+	</select>
+	
+	<insert id="insertProduct" parameterType="user_mileage">
+		insert into UserMileage
+		values (#{userId}, #{productId}, 1)
+	</insert>
+	
+	<update id="updateProduct" parameterType="user_mileage">
+		update UserMileage
+		set product_remain = #{productRemain}
+		where user_id = #{userId} and product_id = #{productId}
+	</update>
 </mapper>
