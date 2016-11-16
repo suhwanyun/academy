@@ -110,6 +110,11 @@ public class ManagerRepo {
 		return session.selectList(stmt, pageData);
 	}
 	
+	public int getAllProductCount() {
+		String stmt = MANAGER_NS + "selectAllProductCount";
+		return session.selectOne(stmt);
+	}
+	
 	public MileageProduct getMileageProduct(int productId) {
 		String stmt = MANAGER_NS + "selectMileageProduct";
 		return session.selectOne(stmt, productId);

@@ -123,6 +123,11 @@ public interface ManagerService {
 	 */
 	List<MileageProduct> getAllProduct(int page, String orderType, boolean isAsc);
 	/**
+	 * 상품 최대 페이지 확인
+	 * @return
+	 */
+	int getMaxMileagePage();
+	/**
 	 * 마일리지 물품 정보 확인
 	 * @param productId
 	 * @return

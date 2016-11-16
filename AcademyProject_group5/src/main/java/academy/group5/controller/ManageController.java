@@ -215,7 +215,7 @@ public class ManageController {
 	
 	/** 마일리지 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<MileageProduct> manageProductMainPaging(HttpSession session){
+	public @ResponseBody List<MileageProduct> manageProductMainPaging(HttpSession session, @RequestParam int page){
 				
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
@@ -230,9 +230,11 @@ public class ManageController {
 		if(ascObj != null & ascObj.equals("false")){
 			isAsc = false;
 		}
+		Object maxPageObj = session.getAttribute("maxPage");
+		if(maxPageObj == null || (Integer)maxPageObj < page){
+			throw new WrongRequestException();
+		}
 		// 페이지 설정
-		Object pageObj = session.getAttribute("page");
-		int page = pageObj == null ? 2 : ((Integer)pageObj + 1);
 		session.setAttribute("page", page);
 		
 		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);

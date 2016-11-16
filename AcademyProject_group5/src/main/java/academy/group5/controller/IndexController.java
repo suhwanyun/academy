@@ -238,6 +238,8 @@ public class IndexController {
 		// 마일리지 물품 리스트
 		List<MileageProduct> productList = manageService.getAllProduct(1, null, true);
 		model.addAttribute("productList", productList);
+		// 최대 페이지수
+		model.addAttribute("maxPage", manageService.getMaxMileagePage());
 		
 		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
 		session.setAttribute("errorGotoPage", "/mileageManage/main");

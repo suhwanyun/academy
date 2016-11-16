@@ -153,6 +153,11 @@
 		where rnum &gt;= #{startIdx} and rnum &lt;= #{endIdx} 
 	</select>
 	
+	<select id="selectAllProductCount" resultType="int">
+		select count(*)
+		from MileageProduct
+	</select>
+	
 	<select id="selectMileageProduct" parameterType="int" resultType="mileage_product">
 		select *
 		from MileageProduct

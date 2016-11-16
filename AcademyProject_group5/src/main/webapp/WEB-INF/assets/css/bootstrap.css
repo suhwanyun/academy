@@ -6982,7 +6982,7 @@ background-color: #eee;
   color:#606060;
  border:solid 1px #b7b7b7;
   background-color:rgb(255,255,255);
-  
+  font:inherit;
   
 }
 #searchDiv{

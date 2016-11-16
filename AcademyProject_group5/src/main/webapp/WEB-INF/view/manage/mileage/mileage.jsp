@@ -7,8 +7,20 @@
 <title>마일리지 관리자 메인화면</title>
 
 <style>
+	div {
+		text-align: center;
+	}
+
+	#mileageDataTable {
+	    display: inline-block;
+	}
+
 	#mileageDataTable tr{
 		align:center;
+		text-align: center;
+	}
+	#mileageAddBtn {
+		float:right;
 	}
 </style>
 
@@ -18,10 +30,17 @@
 	<div class="container">
 
 		<button id="mileageAddBtn">물품 등록</button>
-		<table id="mileageDataTable">
+		<br>
+		<br>
+		<hr>
+		<table id="mileageDataTable" border="1">
 			<tr>
 				<c:forEach items="${productList }" var="list" >
-					<td><a href="/mileageManage/managejsp?productId=${list.productId }"><img src="preview_${list.productImgfile }"/></a></td>
+					<td>
+						<a href="/mileageManage/managejsp?productId=${list.productId }">
+							<img src="/upload/preview_${list.productImgfile }" onerror="errorFun(this);"/>
+						</a>
+					</td>
 				</c:forEach>
 			</tr>
 			<tr>
@@ -35,21 +54,42 @@
 			</tr>
 		</table>
 	</div>
-	<%-- 	<div id=searchDiv align="center">
-		<!-- 검색을 위한 div -->
-			<select id="searchSelect" >
-				<option value="lectureId">강의 ID</option>
-				<option value="professorName">교수 이름</option>
-				<option value="lectureName">강의 명</option>
-			</select>
-			<input type="search" id="searchInput" value="${searchData }">
-			<input type="button" id="searchBtn" value="검색">
-		</div> --%>
-		<div id="pageDiv" align="center">
-		<!-- 페이지 처리를 위한 div입니다. -->
-		</div>
+	<div id="pageDiv" align="center">
+	<!-- 페이지 처리를 위한 div입니다. -->
+	</div>
 </body>
 <script type="text/javascript">
+<c:set var="maxPage" value="11"/>
+$(document).ready(function(){
+	pageCtrl(1);
+});
+
+function pageCtrl(pages){
+	var pageDiv = $("#pageDiv");
+	var pageIdx = (pages-1) * 10 + 1;
+	
+	if(pageIdx > ${maxPage}){
+		pageCtrl(pages-1);
+	}
+	pageDiv.html("");
+	
+	if(pages != 1){
+		pageDiv.append($("<a href='#' onlick='pageCtrl(" + pages-1 + ")'><i class='balloon test_3'></a>"));
+	}
+	
+	for(; pageIdx <= ${maxPage}; pageIdx++){
+		pageDiv.append($("<a href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>&nbsp;&nbsp;"));
+		if(pageIdx % 10 == 0 && pageIdx < ${maxPage}){
+			pageDiv.append($("<a href='#' onlick='pageCtrl(" + pages+1 + ")'><i class='balloon test_4'></a>"));
+			break;
+		}
+	}
+}
+
+$("#mileageAddBtn").click(function(){
+	$(location).attr('href', "/mileageManage/addjsp");
+});
+
 /* <c:url value="/lectureManage/page" var="page"/>
 //페이징을 위한 번수
 var nowPage = 1;

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
 <link rel="stylesheet" href="/css/bootstrap.css"/>
 <link rel="stylesheet" href="/css/datepicker3.css"/>
+<link rel="stylesheet" href="/css/custom.css"/>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/bootstrap-datepicker.js"></script>

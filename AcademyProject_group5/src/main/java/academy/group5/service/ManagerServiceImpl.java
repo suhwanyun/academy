@@ -343,6 +343,16 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
+	public int getMaxMileagePage(){
+		int allCount = managerRepo.getAllProductCount();
+		
+		if(allCount % MILEAGE_PRODUCT_MAX_PAGE == 0){
+			return allCount / MILEAGE_PRODUCT_MAX_PAGE;
+		}
+		return allCount / MILEAGE_PRODUCT_MAX_PAGE + 1;
+	}
+	
+	@Override
 	public MileageProduct getProduct(int productId) {
 		MileageProduct productData = managerRepo.getMileageProduct(productId);
 		if(productData == null) {
