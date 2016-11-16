@@ -11,14 +11,14 @@
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" /><br>
 		<div class="container">
 	<form name="myForm" method="post">
-		<table class="table table-bordered">
+		<table class="table table-bordered" >
 			<tr>
 				<th>강의 ID</th>
 				<th>강의 이름</th>
 				<th>교수 이름</th>
 				<th>강의 분반</th>
 			</tr>
-			<tr>
+			<tr align="center">
 				<td><input type="number" name="lectureId" id="lectureId"
 					readonly="readonly" value="${lectureData.lectureId }"></td>
 				<td><input type="text" name="lectureName" id="lectureName"

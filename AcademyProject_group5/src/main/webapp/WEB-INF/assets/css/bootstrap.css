@@ -6960,7 +6960,7 @@ background-color: #eee;
  font-size:20px;
 	
 }
-#lectureAddBtn{
+#lectureAddBtn, #mileageAddBtn{
 	  display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;

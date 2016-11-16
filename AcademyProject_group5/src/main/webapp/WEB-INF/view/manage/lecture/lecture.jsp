@@ -11,8 +11,8 @@
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<div class="container">
 
-		
-		<table id="lectureDataTable">
+		<button id="lectureAddBtn">강의 등록</button>
+		<table id="lectureDataTable" border="1">
 			<colgroup>
 					<col width="15%">
 					<col width="15%">
@@ -20,11 +20,15 @@
 					<col width="15%">
 					<col width="40%">
 			</colgroup>
-			<tr><td colspan="4"></td>
-				<td><button id="lectureAddBtn">강의 등록</button></td>
-			</tr>
 			<c:forEach items="${lectureList }" var="list" >
-			<tr align="right">
+			<tr>
+			<th>강의ID</th>
+			<th>강의명</th>
+			<th>분반</th>
+			<th>담당교수</th>
+			<th>강의시간</th>
+			</tr>
+			<tr align="center">
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureId }</a></td>
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureName }</a></td>
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureClass }반</a></td>
