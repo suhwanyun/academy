@@ -37,7 +37,7 @@
 					<img class="img-circle img-thumbnail" src="/upload/preview_${list.productImgfile }" alt="" />
 					<br>${list.productName }
 				</a>
-				<c:if test="${not status.last}">
+				<c:if test="${productList.size() gt status.count}">
 					<a href="#" onclick="clickProduct(${productList[status.count].productId})"
 					   class="btn-lg col-xs-6">
 						<img class="img-circle img-thumbnail" src="/upload/preview_${productList[status.count].productImgfile }" alt="" />
