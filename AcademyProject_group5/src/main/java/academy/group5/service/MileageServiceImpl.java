@@ -109,7 +109,7 @@ public class MileageServiceImpl implements MileageService {
 		else {
 			useData.setProductRemain(remainCount);
 			int result = mileRepo.updateProduct(useData);
-			if(result != 0){
+			if(result != 1){
 				throw new WrongRequestException();
 			}
 		}
