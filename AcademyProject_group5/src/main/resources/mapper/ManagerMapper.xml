@@ -134,7 +134,7 @@
 	<select id="selectAllMileageProduct" parameterType="paging" resultType="mileage_product">
 		select *
 		from(select rownum as rnum, sub.*
-			 from (select product_id, product_name, product_cost, product_img_file
+			 from (select product_id, product_name, product_cost, product_imgfile
 				  from MileageProduct
 			 	  order by
 			 	  <choose>
