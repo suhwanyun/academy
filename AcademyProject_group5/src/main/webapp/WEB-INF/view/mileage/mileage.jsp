@@ -27,7 +27,9 @@
 					<p class="mileage_help">사용하실 상품을 선택하세요</p>
 				</c:otherwise>
 			</c:choose>
-			<p>보유 마일리지:&nbsp;${user.userMileage }</p>
+			<c:if test="${!empty user }">
+				<p>보유 마일리지:&nbsp;${user.userMileage }</p>
+			</c:if>
 
 			<c:forEach items="${productList }" var="list" varStatus="status" step="2">
 				<a href="#" onclick="clickProduct(${list.productId})"
