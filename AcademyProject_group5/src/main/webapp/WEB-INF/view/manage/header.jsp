@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div class="container-fix  text-center" style="margin-left:100px;">
+<div class="container-fix  text-center" style="width:100%">
 	<table class="table">
 		<colgroup>
 			<col width="33%">

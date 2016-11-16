@@ -50,7 +50,7 @@
 		</div>
 </body>
 <script type="text/javascript">
-<c:url value="/lectureManage/page" var="page"/>
+/* <c:url value="/lectureManage/page" var="page"/>
 //페이징을 위한 번수
 var nowPage = 1;
 //페이지 요소 저장변수
@@ -208,7 +208,7 @@ function requesetPageFun(){
 	    	   $("#pageDiv").html(pageHtml);
 	      }
 	   });
-}
+} */
 //검색 버튼
 /* $("#searchBtn").click(function(){
 	$(location).attr('href', "/lectureManage/search?searchType="+$("#searchSelect").val()+"&searchData="+$("#searchInput").val());
