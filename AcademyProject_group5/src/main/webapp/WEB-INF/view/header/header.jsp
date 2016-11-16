@@ -37,7 +37,7 @@
 					<a href="/main" class="btn-mcm"><span>MCM</span></a>
 					<h3>${user.userName}님 어서오세요</h3>
 					<a href="/noti/notiSettingjsp" class="btn btn-danger"><span>알림</span></a>
-					<a href="/info/myinfo" class="btn btn-danger"><span>정보관리</span></a>
+					<a href="/info/myinfo" class="btn btn-danger"><span>내정보관리</span></a>
 					<br>
 					<br>
 
