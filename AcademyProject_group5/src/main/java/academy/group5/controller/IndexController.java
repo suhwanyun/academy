@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.imgscalr.Scalr.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -233,13 +234,13 @@ public class IndexController {
 	public String manageMileageMainPage(HttpSession session, Model model){
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/managerLoginjsp");
-		// 페이지 기록 삭제
-		session.removeAttribute("page");
 		// 마일리지 물품 리스트
 		List<MileageProduct> productList = manageService.getAllProduct(1, null, true);
 		model.addAttribute("productList", productList);
 		// 최대 페이지수
-		model.addAttribute("maxPage", manageService.getMaxMileagePage());
+		session.setAttribute("maxPage", manageService.getMaxMileagePage());
+		// 현재 페이지 초기화
+		session.setAttribute("page", 1);
 		
 		// 이후 페이지에서 에러 발생시 이동할 페이지를 현재 페이지로 설정
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
@@ -478,7 +479,7 @@ public class IndexController {
 		// 매니저 접속임을 명시
 		session.setAttribute("isManage", "true");
 		// 에러 발생시 이동할 페이지
-				session.setAttribute("errorGotoPage", "/managerLoginjsp");
+		session.setAttribute("errorGotoPage", "/managerLoginjsp");
 				
 		Object typeObj = session.getAttribute("managerType");
 		if(typeObj != null && typeObj.equals("lecture")){
@@ -528,10 +529,25 @@ public class IndexController {
 	
 	//------------------------------관리자(마일리지)------------------------------ */
 	
-	/** 마일리지 등록 페이지 */
+	/** 마일리지 물품 등록 페이지 */
 	@RequestMapping(value="/mileageManage/addjsp", method=RequestMethod.GET)
 	public String addMileage(){
 		
-		return "/manage/mileage/mileage_add";
+		return "/manage/mileage/add";
+	}
+	
+	/** 마일리지 물품 관리 페이지 */
+	@RequestMapping(value="/mileageManage/managejsp", method=RequestMethod.GET)
+	public String manageMileage(HttpSession session, Model model,
+			@RequestParam int productId){
+		
+		// 에러 발생시 / 작업 완료시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/mileageManage/main");
+		session.setAttribute("gotoPage", "/main");
+				
+		MileageProduct productData = manageService.getProduct(productId);
+		model.addAttribute("productData", productData);
+		
+		return "/manage/mileage/manage";
 	}
 }

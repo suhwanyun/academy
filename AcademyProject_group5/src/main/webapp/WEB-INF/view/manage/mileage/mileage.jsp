@@ -32,6 +32,10 @@
 		<button id="mileageAddBtn">물품 등록</button>
 		<br>
 		<br>
+		<div align="center">
+			<a id="searchType" href="#" onclick="changeType()" style="margin-right: 10px;">이름순</a>/
+			<a id="searchOrder" href="#" onclick="changeOrder()">오름차순</a>
+		</div>
 		<hr>
 		<table id="mileageDataTable" border="1">
 			<tr>
@@ -54,19 +58,71 @@
 			</tr>
 		</table>
 	</div>
+	
 	<div id="pageDiv" align="center">
 	<!-- 페이지 처리를 위한 div입니다. -->
 	</div>
 </body>
+
 <script type="text/javascript">
-<c:set var="maxPage" value="11"/>
+
+var orderType = null;
+var isAsc = null;
+
 $(document).ready(function(){
+	if(${!empty orderType}){
+		orderType = "productCost";
+		$("#searchType").text("가격순");
+	} 
+	if(${!empty isAsc}){
+		isAsc = "false";
+		$("#searchOrder").text("내림차순");
+	} 
+	
 	pageCtrl(1);
 });
 
+/* 정렬방식 변경 */
+function changeType(){
+	
+	if(${empty orderType}){
+		orderType = "productCost";	
+	} else {
+		orderType = null;
+	}
+	
+	order();
+}
+/* 정렬방향 변경 */
+function changeOrder(){
+	
+	if(${empty isAsc}){
+		isAsc = "false";		
+	} else {
+		isAsc = null;	
+	}
+	order();
+}
+
+/* 정렬 */
+function order(){
+	console.log("type:" + orderType + " asc:" + isAsc);
+	var href = "/mileageManage/search";
+	if(orderType != null && isAsc == null){
+		href += "?orderType=" + orderType;
+	} else if(isAsc != null && orderType == null){
+		href += "?isAsc=" + isAsc;
+	} else if(isAsc != null && orderType != null){
+		href += "?orderType=" + orderType;
+		href += "&isAsc=" + isAsc;
+	}
+	
+	$(location).attr('href', href);
+}
+
 function pageCtrl(pages){
 	var pageDiv = $("#pageDiv");
-	var pageIdx = (pages-1) * 10 + 1;
+	var pageIdx = (pages-1) * 5 + 1;
 	
 	if(pageIdx > ${maxPage}){
 		pageCtrl(pages-1);
@@ -74,13 +130,17 @@ function pageCtrl(pages){
 	pageDiv.html("");
 	
 	if(pages != 1){
-		pageDiv.append($("<a href='#' onlick='pageCtrl(" + pages-1 + ")'><i class='balloon test_3'></a>"));
+		pageDiv.append($("<a href='#' onclick='pageCtrl(" + (pages-1) + ")'><i class='balloon test_3'></a>"));
 	}
 	
 	for(; pageIdx <= ${maxPage}; pageIdx++){
-		pageDiv.append($("<a href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>&nbsp;&nbsp;"));
-		if(pageIdx % 10 == 0 && pageIdx < ${maxPage}){
-			pageDiv.append($("<a href='#' onlick='pageCtrl(" + pages+1 + ")'><i class='balloon test_4'></a>"));
+		if(pageIdx == ${page}){
+			pageDiv.append($("<a style='margin:10px; font-size:large; color:black;' href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>"));
+		} else {
+			pageDiv.append($("<a style='margin:10px; font-size:large; href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>"));
+		}
+		if(pageIdx % 5 == 0 && pageIdx < ${maxPage}){
+			pageDiv.append($("<a href='#' onclick='pageCtrl(" + (pages+1) + ")'><i class='balloon test_4'></a>"));
 			break;
 		}
 	}
@@ -89,169 +149,5 @@ function pageCtrl(pages){
 $("#mileageAddBtn").click(function(){
 	$(location).attr('href', "/mileageManage/addjsp");
 });
-
-/* <c:url value="/lectureManage/page" var="page"/>
-//페이징을 위한 번수
-var nowPage = 1;
-//페이지 요소 저장변수
-var pageHtml;
-//테이블 데이터 요소 저장변수
-var dataHtml;
-//페이지 요소 상황별 저장
-function paging(){
-	pageHtml = "";
-		if(nowPage>1){
-			pageHtml +=
-			"<input type='button' onclick='firstPage()' value='첫 페이지'>"+
-			"<input type='button' onclick='prevPage()' value='<<'>";
-		}
-		for(var i = nowPage-1; i>=1; i--){
-			if(nowPage-4==i){
-				break;
-			}
-			pageHtml +="<a onclick='movepage("+i+")'> ["+i+"] </a>";
-		}
-		pageHtml +="<a onclick='movepage("+nowPage+")'> _["+nowPage+"]_ </a>";
-		for(var i = nowPage+1; i<=${ pageCount}; i++){
-			if(nowPage+4==i){
-				break;
-			}
-			pageHtml +="<a onclick='movepage("+i+")'> ["+i+"] </a>";
-		} 
-		if(nowPage<${ pageCount}){
-			pageHtml +="<input type='button' onclick='nextPage()' value='>>'>"+
-			"<input type='button' onclick='lastPage()' value='끝 페이지'>";
-		}
-}
-function dataSetting(dataList){
-	dataHtml="";
-	for(var i=0; i<dataList.length; i++){
-		dataHtml+=
-		"<tr>"+
-			"<td><a href='/lectureManage/managejsp?lectureId="+dataList[i].lectureId+"&lectureClass="+dataList[i].lectureClass +"'>"+
-			dataList[i].lectureId +"</a></td>"+
-			"<td>"+dataList[i].lectureName+"</td>"+
-			"<td>"+dataList[i].professorName+"</td>"+
-			"<td>"+dataList[i].lectureClass+"반</td>"+
-			"<td>"+
-				"<ul>";
-					for(var j=0; j<dataList[i].lectureTimeList.length; j++){
-						dataHtml+="<li>";
-						switch(dataList[i].lectureTimeList[j].lectureWeek){
-						case 1:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>일요일</span></a>";
-							break;
-						case 2:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>월요일</span></a>";
-							break;
-						case 3:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>화요일</span></a>";
-							break;
-						case 4:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>수요일</span></a>";
-							break;
-						case 5:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>목요일</span></a>";
-							break;
-						case 6:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>금요일</span></a>";
-							break;
-						case 7:
-							dataHtml+=
-								"<a href='/lectureManage/timeManagejsp?lectureTimeId="+dataList[i].lectureTimeList[j].lectureTimeId+"'>"+
-								"<span>토요일</span></a>";
-							break;
-						}
-						dataHtml+=
-							"<span>"+dataList[i].lectureTimeList[j].lectureStart+"교시</span>"+
-							"<span>~</span>"+
-							"<span>"+dataList[i].lectureTimeList[j].lectureEnd+"교시</span>"+
-							"<span>"+dataList[i].lectureTimeList[j].lecturePlace+"</span>";
-						dataHtml+="</li>";
-					}
-							
-					dataHtml+="<li>"+
-					"<a href='/lectureManage/timeAddjsp?lectureId="+dataList[i].lectureId+"&lectureClass="+dataList[i].lectureClass+"'>추가 +</a>"+
-					"</li></ul></td></tr>";
-	}
-}
-$("document").ready(function(){
-	paging();
-	if(${ searchType=="professorName"}){
-		$("#searchSelect option:eq(1)").attr("selected", "selected");
-	}else if(${ searchType=="lectureName"}){
-		$("#searchSelect option:eq(2)").attr("selected", "selected");
-	}else{
-		$("#searchSelect option:eq(0)").attr("selected", "selected");
-	}
-	
-	
-	$("#pageDiv").html(pageHtml);				
-});
-$("#mileageAddBtn").click(function(){
-	$(location).attr('href', "/mileageManage/addjsp");
-});
-function movepage(index){
-	nowPage = index;
-	requesetPageFun();
-}
-
-function firstPage(){
-	nowPage=1;
-	requesetPageFun();
-}
-function prevPage(){
-	if(nowPage>1){
-		nowPage--;
-	}else{
-		nowPage=1;
-	}
-	requesetPageFun();
-}
-function nextPage(){
-	if(nowPage< ${ pageCount}){
-		nowPage++;
-	}else{
-		nowPage=${ pageCount};
-	}
-	requesetPageFun();
-}
-function lastPage(){
-	nowPage=${pageCount};
-	requesetPageFun();
-}
-function requesetPageFun(){
-	$.ajax({
-	      type : "get",
-	      url : "${page}",
-	      data : {
-	    	  page : nowPage
-	      },
-	       success : function(result) {
-	    	   $("#mileageDataTable").empty();
-	    	   dataSetting(result);
-	    	   $("#mileageDataTable").html(dataHtml);
-	    	   $("#pageDiv").empty();
-	    	   paging();
-	    	   $("#pageDiv").html(pageHtml);
-	      }
-	   });
-} */
-//검색 버튼
-/* $("#searchBtn").click(function(){
-	$(location).attr('href', "/lectureManage/search?searchType="+$("#searchSelect").val()+"&searchData="+$("#searchInput").val());
-}); */
 </script>
 </html>

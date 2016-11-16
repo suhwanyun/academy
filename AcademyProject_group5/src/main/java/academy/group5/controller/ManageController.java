@@ -215,7 +215,7 @@ public class ManageController {
 	
 	/** 마일리지 관리자 메인화면 페이징 */
 	@RequestMapping(value="/mileageManage/page", method=RequestMethod.GET)
-	public @ResponseBody List<MileageProduct> manageProductMainPaging(HttpSession session, @RequestParam int page){
+	public String manageProductMainPaging(HttpSession session, Model model, @RequestParam int page){
 				
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
@@ -227,7 +227,7 @@ public class ManageController {
 		
 		String searchType = typeObj == null ? null : (String)typeObj;
 		boolean isAsc = true;
-		if(ascObj != null & ascObj.equals("false")){
+		if(ascObj != null && ascObj.equals("false")){
 			isAsc = false;
 		}
 		Object maxPageObj = session.getAttribute("maxPage");
@@ -238,14 +238,16 @@ public class ManageController {
 		session.setAttribute("page", page);
 		
 		List<MileageProduct> productList = service.getAllProduct(page, searchType, isAsc);
-		return productList;
+		model.addAttribute("productList", productList);
+		
+		return "/manage/mileage/mileage";
 	}
 	
 	
 	/** 마일리지 관리자 메인화면 마일리지 물품 목록 정렬 */
 	@RequestMapping(value="/mileageManage/search", method=RequestMethod.GET)
-	public @ResponseBody List<MileageProduct> manageProductMainSearch(HttpSession session, Model model,
-			@RequestParam String orderType, @RequestParam String isAsc){
+	public String manageProductMainSearch(HttpSession session, Model model,
+			@RequestParam(required=false) String orderType, @RequestParam(required=false) String isAsc){
 		
 		// 에러 발생시 이동할 페이지
 		session.setAttribute("errorGotoPage", "/mileageManage/main");
@@ -254,13 +256,23 @@ public class ManageController {
 		Object pageObj = session.getAttribute("page");
 		int page = pageObj == null ? 1 : (Integer)pageObj;
 		
-		// DB 조회
-		session.setAttribute("orderType", orderType);
-		session.setAttribute("isAsc", isAsc);
-		List<MileageProduct> productList = service.getAllProduct(page, orderType, 
-				isAsc.equals("false") ? false : true);
 		
-		return productList;
+		if(orderType != null){
+			session.setAttribute("orderType", orderType);
+		} else {
+			session.removeAttribute("orderType");
+		}
+		if(isAsc != null){
+			session.setAttribute("isAsc", isAsc);
+		} else {
+			session.removeAttribute("isAsc");
+		}
+		// DB 조회
+		List<MileageProduct> productList = service.getAllProduct(page, orderType, 
+				isAsc == null ? true : false);
+		model.addAttribute("productList", productList);
+		
+		return"/manage/mileage/mileage";
 	}
 	
 	/** 마일리지 물품 등록 */
@@ -312,9 +324,12 @@ public class ManageController {
 		}
 		// 수정시
 		if(!isNewProduct && !productIdStr.equals("") && isDeletePhoto != null){
+			Integer productId = Integer.parseInt(productIdStr);
+			productData.setProductId(productId);
+			
 			// 업로드 되어있던 파일 삭제
 			if(!isDeletePhoto.equals("false")){
-				existingProductData = service.getProduct(Integer.parseInt(productIdStr));
+				existingProductData = service.getProduct(productId);
 				service.uploadCancel(existingProductData, isDeletePhoto);
 			} else {
 				productData.setProductImgfile(null);
@@ -345,10 +360,16 @@ public class ManageController {
 		return "index";
 	}
 	
-	/** 마일리지 관리 페이지 */
-	@RequestMapping(value="/mileageManage/manage", method=RequestMethod.GET)
-	public String manageMileage(){
+	/** 마일리지 물품 관리 */
+	@RequestMapping(value="/mileageManage/manage", method=RequestMethod.POST)
+	public String manageMileage(HttpSession session,
+			MultipartHttpServletRequest mrequest, @RequestParam(required=false) MultipartFile uploadPhoto){
 		
-		return "/manage/mileage/manage";
+		String productIdStr = mrequest.getParameter("productId");
+		String failMappingStr = "/mileageManage/main";
+		if(productIdStr != null){
+			failMappingStr = "/managejsp?productId=" + productIdStr;
+		}
+		return addProduct(session, mrequest, uploadPhoto, failMappingStr, false);
 	}
 }

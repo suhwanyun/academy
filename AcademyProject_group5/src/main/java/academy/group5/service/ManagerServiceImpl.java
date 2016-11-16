@@ -53,7 +53,7 @@ public class ManagerServiceImpl implements ManagerService {
 	/** 한 페이지에 표시되는 강의의 수 */
 	private final int LECTURE_MAX_PAGE = 10;
 	/** 한 페이지에 표시되는 마일리지 상품의 수 */
-	private final int MILEAGE_PRODUCT_MAX_PAGE = 10;
+	private final int MILEAGE_PRODUCT_MAX_PAGE = 5;
 	
 	@Override
 	public boolean isTermSetted(){
@@ -358,6 +358,7 @@ public class ManagerServiceImpl implements ManagerService {
 		if(productData == null) {
 			throw new WrongRequestException();
 		}
+		productData.setProductContent(productData.getProductContent().replaceAll("<br>", "\n"));
 		return productData;
 	}
 	
