@@ -47,6 +47,12 @@
 		where product_id = #{productId}
 	</select>
 	
+	<select id="selectProductCountByUser" parameterType="user_mileage" resultType="int">
+		select product_remain
+		from UserMileage
+		where user_id = #{userId} and product_id = #{productId}
+	</select>
+	
 	<select id="selectProductByUser" parameterType="user_mileage" resultType="user_mileage_product">
 		select *
 		from MileageProduct join UserMileage using (product_id)
