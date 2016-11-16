@@ -66,11 +66,13 @@
 	}
 	
 	function useProduct(id){
-		$(location).attr("href", "/mileage/productUse?productId=" + ${productData.productId});		
+		if(confirm("정말 사용하시겠습니까?")){	
+			$(location).attr("href", "/mileage/productUse?productId=" + ${productData.productId});	
+		}
 	}
 	
 	function notUseProduct(id){
-		$(location).attr("href", "mileage/myMileageMain");		
+		$(location).attr("href", "/mileage/myMileageMain");		
 	}
 </script>
 </html>
