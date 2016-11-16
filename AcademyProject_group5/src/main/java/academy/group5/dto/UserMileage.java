@@ -21,4 +21,11 @@ public class UserMileage {
 	/** 남은 수량. */
 	private Integer productRemain;
 
+	public UserMileage(String userId, Integer productId) {
+		super();
+		this.userId = userId;
+		this.productId = productId;
+	}
+
+	
 }

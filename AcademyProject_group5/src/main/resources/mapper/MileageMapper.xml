@@ -32,7 +32,7 @@
 	
 	<select id="selectAllProduct" resultType="mileage_product">
 		select product_id, product_name, product_cost, product_imgfile
-		from MileageProduct join UserMileage using (product_id)
+		from MileageProduct
 	</select>
 	
 	<select id="selectAllProductByUser" parameterType="String" resultType="mileage_product">
@@ -47,15 +47,15 @@
 		where product_id = #{productId}
 	</select>
 	
-	<select id="selectProductCountByUser" parameterType="user_mileage" resultType="int">
-		select product_remain
-		from UserMileage
-		where user_id = #{userId} and product_id = #{productId}
-	</select>
-	
 	<select id="selectProductByUser" parameterType="user_mileage" resultType="user_mileage_product">
 		select *
 		from MileageProduct join UserMileage using (product_id)
+		where user_id = #{userId} and product_id = #{productId}
+	</select>
+	
+	<select id="selectProductCountByUser" parameterType="user_mileage" resultType="int">
+		select product_remain
+		from UserMileage
 		where user_id = #{userId} and product_id = #{productId}
 	</select>
 	
@@ -69,4 +69,9 @@
 		set product_remain = #{productRemain}
 		where user_id = #{userId} and product_id = #{productId}
 	</update>
+	
+	<delete id="deleteProduct" parameterType="user_mileage">
+		delete from UserMileage
+		where user_id = #{userId} and product_id = #{productId}
+	</delete>
 </mapper>

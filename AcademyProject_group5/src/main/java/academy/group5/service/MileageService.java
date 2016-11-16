@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.MileageProduct;
+import academy.group5.dto.etc.UserMileageProduct;
 
 public interface MileageService {
 	/**
@@ -16,6 +17,13 @@ public interface MileageService {
 	 * @return
 	 */
 	MileageProduct productOne(Integer productId);
+	/**
+	 * 하나의 상품 내용(수량 포함)
+	 * @param userId
+	 * @param productId
+	 * @return
+	 */
+	UserMileageProduct productOneByUser(String userId, Integer productId);
 	/**
 	 * 회원의 구매목록
 	 * @param userId

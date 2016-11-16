@@ -2,11 +2,8 @@ package academy.group5.controller;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.imgscalr.Scalr.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +26,9 @@ import academy.group5.service.LectureNoticeService;
 import academy.group5.service.LectureService;
 import academy.group5.service.LoginService;
 import academy.group5.service.ManagerService;
+import academy.group5.service.MileageService;
 import academy.group5.service.PostingService;
 import academy.group5.util.Identify;
-import academy.group5.util.MyHash;
 
 /**
  * 페이지(JSP) 이동 컨트롤러
@@ -55,6 +52,9 @@ public class IndexController {
 	
 	@Autowired
 	ManagerService manageService;
+	
+	@Autowired
+	MileageService mileageService;
 	
 	Identify identify = new Identify();
 	
@@ -199,9 +199,31 @@ public class IndexController {
 		return "/campus/lecture/lecture_main";
 	}
 	
-	/** 마일리지 페이지 */
+	/** 마일리지 페이지 메인 */
 	@RequestMapping(value="/mileageMain", method=RequestMethod.GET)
-	public String mileageMainPage(){
+	public String mileageMainPage(HttpSession session, Model model){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+		// 물품 리스트
+		List<MileageProduct> productList = mileageService.productList();
+		model.addAttribute("productList", productList);		
+		
+		return "/mileage/mileage";
+	}
+	
+	/** 마일리지 사용 페이지 메인 */
+	@RequestMapping(value="/mileage/myMileageMain", method=RequestMethod.GET)
+	public String myMileageMainPage(HttpSession session, Model model){
+		
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/main");
+		String userId = identify.getUserId(session);
+		// 물품 리스트
+		List<MileageProduct> productList = mileageService.shoppingList(userId);
+		model.addAttribute("productList", productList);		
+		// 물품 사용페이지 플래그 설정
+		model.addAttribute("isMine", "ture");
 		
 		return "/mileage/mileage";
 	}

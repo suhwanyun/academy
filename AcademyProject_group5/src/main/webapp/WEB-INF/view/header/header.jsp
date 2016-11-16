@@ -35,15 +35,14 @@
 			<c:choose>
 				<c:when test="${!empty user }">
 					<a href="/main" class="btn-mcm"><span>MCM</span></a>
-					<h3>${user.userName}님어서오세요</h3>
+					<h3>${user.userName}님 어서오세요</h3>
 					<a href="/noti/notiSettingjsp" class="btn btn-danger"><span>알림</span></a>
 					<a href="/info/myinfo" class="btn btn-danger"><span>내
 							정보관리</span></a>
 					<br>
 					<br>
 
-					<a href="/mileage/confirm" class="btn btn-danger"><span>${user.userMileage}
-							m</span></a>
+					<a href="/mileage/myMileageMain" class="btn btn-danger"><span>보관함</span></a>
 					<a href="/logout" class="btn btn-danger"><span>로그아웃</span></a>
 
 
