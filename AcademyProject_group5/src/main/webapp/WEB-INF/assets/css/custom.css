@@ -27,6 +27,10 @@
 	
 }
 
+input[type="search"] {
+	width:100%;
+}
+
 
 /* 화살표 아이콘 */
 .balloon {position:relative; display:inline-block;}
