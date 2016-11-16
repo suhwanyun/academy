@@ -57,7 +57,7 @@
 		} 
 		// 상품이 하나일 땐 가운데 정렬
 		else if(${productList.size() == 1}) {
-			$("a").css("margin-left", "25%");
+			$(".col-xs-6").css("margin-left", "25%");
 		}
 	});
 	function clickProduct(id){
