@@ -34,19 +34,19 @@
 				<tr id="imgShow">
 					<td></td>
 					<td align="left">
-						<button id="imgdelete" class="myButton">이미지 삭제</button>
+						<button id="imgdelete" class="myButton">사진삭제</button>
 						<span id="checkImg"></span>
 					</td>
-					<td align="right"><button id="imgUpdate" class="myButton">이미지 수정</button></td>
+					<td align="right"><button id="imgUpdate" class="myButton">사진수정</button></td>
 				</tr>
 				<tr class="imgSetting" hidden="true">
 					<td></td>
 					<td align="left">
-					<label for="fileInput" style="float:left" class="myButton">파일 선택</label>
+					<label for="fileInput" style="float:left" class="myButton">사진선택</label>
 					<input id="fileInput" type="file" name="uploadPhoto" accept="image/*" />
-					<input id="fileText" class="fileText" type="text" value="파일 선택" disabled="disabled"/>
+					<input id="fileText" class="fileText" type="text" value="사진선택" disabled="disabled"/>
 					</td>
-					<td align="right"><button class="myButton" id="imgCancel">기존 이미지</button></td>
+					<td align="right"><button class="myButton" id="imgCancel">기존사진</button></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="center">
@@ -67,10 +67,10 @@
 	var defaultCheckStr;
 	<c:choose>
 		<c:when test="${postingData.postingPhoto != 'default.png'}">
-			defaultCheckStr = "기존 이미지";
+			defaultCheckStr = "기존사진";
 		</c:when>
 		<c:otherwise>
-			defaultCheckStr = "이미지 없음";
+			defaultCheckStr = "사진없음";
 		</c:otherwise>
 	</c:choose>
 	
@@ -114,7 +114,7 @@
 		event.preventDefault();
 		$("#fileInput").val("");
 		$("#deletePhoto").val("${postingData.postingPhoto}");
-		$("#checkImg").html("이미지 없음")	;
+		$("#checkImg").html("사진없음")	;
 	});
 	// 취소
 	$("#cancel").click(function(event){

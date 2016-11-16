@@ -43,10 +43,10 @@
 						<div class="col-xs-2">
 						</div>
 						<div class="col-xs-10" align="right">
-						<input id="fileText" class="fileText" type="text" value="파일 선택" disabled="disabled"/>
+						<input id="fileText" class="fileText" type="text" value="사진선택" disabled="disabled"/>
 						<label for="fileInput" class="myButton">사진업로드</label>
 						<input id="fileInput" type="file" name="uploadPhoto" accept="image/*" />
-						<button id="imgCancel" class="btn white">취소</button>
+						<button id="imgCancel" class="btn white">업로드취소</button>
 				</div>
 			</div>
 			</div>		
