@@ -473,10 +473,18 @@ public class IndexController {
 	@RequestMapping(value="/managerLoginjsp", method=RequestMethod.GET)
 	public String managerLoginPage(HttpSession session){
 		
-		// 에러 발생시 이동할 페이지
-		session.setAttribute("errorGotoPage", "/managerLoginjsp");
 		// 매니저 접속임을 명시
 		session.setAttribute("isManage", "true");
+				
+		Object typeObj = session.getAttribute("managerType");
+		if(typeObj != null && typeObj.equals("lecture")){
+			return "redirect:/lectureManage/main";
+		} else if(typeObj != null && typeObj.equals("mileage")){
+			return "redirect:/mileageManage/main";
+		}
+		// 에러 발생시 이동할 페이지
+		session.setAttribute("errorGotoPage", "/managerLoginjsp");
+		
 		
 		return "/login/login_manager";
 	}

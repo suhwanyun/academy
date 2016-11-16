@@ -17,57 +17,53 @@
 			<c:forEach items="${lectureList }" var="list" >
 			<tr>
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureId }</a></td>
-				<td>${list.lectureName }</td>
+				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureName }</a></td>
+				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureClass }반</a></td>
 				<td>${list.professorName }</td>
-				<td>${list.lectureClass }반</td>
+				
 				<td>
 					<ul>
 						<c:forEach items="${list.lectureTimeList }" var="timeList" >
 							<li>
-								<c:choose>
-									<c:when test="${timeList.lectureWeek == 1}">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>일요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 2 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>월요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 3 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>화요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 4 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>수요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 5 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>목요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 6 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>금요일</span>
-										</a>
-									</c:when>
-									<c:when test="${timeList.lectureWeek == 7 }">
-										<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
-											<span>토요일</span>
-										</a>
-									</c:when>
-									<c:otherwise>
-										<span>error</span>
-									</c:otherwise>
-								</c:choose>
-								<span>${timeList.lectureStart }교시</span>
-								<span>~</span>
-								<span>${timeList.lectureEnd }교시</span>
-								<span>${timeList.lecturePlace }</span>
+								<a href="/lectureManage/timeManagejsp?lectureTimeId=${timeList.lectureTimeId }">
+									<c:choose>
+										<c:when test="${timeList.lectureWeek == 1}">
+												<span>일요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 2 }">
+												<span>월요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 3 }">
+												<span>화요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 4 }">
+												<span>수요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 5 }">
+												<span>목요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 6 }">
+												<span>금요일</span>
+											
+										</c:when>
+										<c:when test="${timeList.lectureWeek == 7 }">
+												<span>토요일</span>
+											
+										</c:when>
+										<c:otherwise>
+											<span>error</span>
+										</c:otherwise>
+									</c:choose>
+									<span>${timeList.lectureStart }교시</span>
+									<span>~</span>
+									<span>${timeList.lectureEnd }교시</span>
+									<span>${timeList.lecturePlace }</span>
+								</a>
 							</li>
 						</c:forEach>
 						<li>

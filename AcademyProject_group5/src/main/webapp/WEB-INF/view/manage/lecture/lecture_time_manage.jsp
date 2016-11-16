@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<sform:form id="myForm" modelAttribute="timeData" method="post">
-		<table>
+		<table id="lectureDataTable">
 			<tr>
 				<th>강의 ID</th>
 				<th>시작 교시</th>
@@ -19,11 +19,10 @@
 				<th>강의 요일</th>
 			</tr>
 			<tr>
-				<td><sform:hidden path="lectureTimeId"
-						value="${timeData.lectureTimeId  }" /> <sform:hidden
-						path="lectureClass" value="${timeData.lectureClass }" /> <sform:hidden
-						path="lectureWeek" value="${timeData.lectureWeek  }" /> <sform:input
-						readonly="true" path="lectureId" value="${timeData.lectureId }" />
+				<td><sform:hidden path="lectureTimeId" value="${timeData.lectureTimeId  }" /> 
+					<sform:hidden path="lectureClass" value="${timeData.lectureClass }" /> 
+					<sform:hidden path="lectureWeek" value="${timeData.lectureWeek  }" /> 
+					<sform:input readonly="true" path="lectureId" value="${timeData.lectureId }" />
 				<td><sform:input type="number" path="lectureStart"
 						value="${timeData.lectureStart  }" /></td>
 				<td><sform:input type="number" path="lectureEnd"

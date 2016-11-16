@@ -6,20 +6,33 @@
 <head>
 <title>마일리지 관리자 메인화면</title>
 
+<style>
+	#mileageDataTable tr{
+		align:center;
+	}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
 	<div class="container">
 
-		<button id="mileageAddBtn">강의 등록</button>
-		<table id="mileageDataTable" >
-
-			<c:forEach items="${productList }" var="list" >
+		<button id="mileageAddBtn">물품 등록</button>
+		<table id="mileageDataTable">
 			<tr>
-				<td><a href="/mileageManage/managejsp?productId=${list.productId }">${list.productName }</a></td>
-				<td>${list.productCost }</td>
+				<c:forEach items="${productList }" var="list" >
+					<td><a href="/mileageManage/managejsp?productId=${list.productId }"><img src="preview_${list.productImgfile }"/></a></td>
+				</c:forEach>
 			</tr>
-			</c:forEach>
+			<tr>
+				<c:forEach items="${productList }" var="list" >
+					<td><a href="/mileageManage/managejsp?productId=${list.productId }">${list.productName }</a></td>
+				</c:forEach>
+			<tr>
+				<c:forEach items="${productList }" var="list" >
+					<td>${list.productCost }</td>
+				</c:forEach>
+			</tr>
 		</table>
 	</div>
 	<%-- 	<div id=searchDiv align="center">
@@ -148,7 +161,7 @@ $("document").ready(function(){
 	$("#pageDiv").html(pageHtml);				
 });
 $("#mileageAddBtn").click(function(){
-	$(location).attr('href', "/lectureManage/addjsp");
+	$(location).attr('href', "/mileageManage/addjsp");
 });
 function movepage(index){
 	nowPage = index;

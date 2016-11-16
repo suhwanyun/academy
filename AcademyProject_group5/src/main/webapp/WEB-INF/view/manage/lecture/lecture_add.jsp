@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>강의 등록 페이지</title>
+<title>강의 등록</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/manage/header.jsp" />
@@ -16,7 +16,7 @@
 			<th>교수 이름</th>
 			<th>분반</th>
 		</tr>
-		<tr>
+		<tr  align="center">
 			<td><input type="number" name="lectureId" id="lectureId"></td>
 			<td><input type="text" name="lectureName" id="lectureName"></td>
 			<td><input type="text" name="professorName" id="professorName"></td>
