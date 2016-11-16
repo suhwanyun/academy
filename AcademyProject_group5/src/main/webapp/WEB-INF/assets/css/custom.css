@@ -27,6 +27,11 @@
 	
 }
 
+.left-radio-td{
+	text-align:left;
+	padding-left:18px;
+}
+
 input[type="search"] {
 	width:100%;
 }

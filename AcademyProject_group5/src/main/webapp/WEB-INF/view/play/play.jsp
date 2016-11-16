@@ -35,7 +35,7 @@
                
                <tr>
 
-                  <td colspan="3">
+                  <td class="left-radio-td" colspan="3">
                      <input type="radio" name="sortVal" checked="checked" value="time">날짜
                      <input type="radio" name="sortVal" value="recommend">추천
                   </td>
