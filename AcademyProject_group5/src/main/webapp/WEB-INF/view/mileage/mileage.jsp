@@ -54,6 +54,10 @@
 	$(document).ready(function(){
 		if(${productList.size() == 0}){
 			$(".mileage_help").text("등록된 상품이 없습니다.");
+		} 
+		// 상품이 하나일 땐 가운데 정렬
+		else if(${productList.size() == 1}) {
+			$("a").css("margin-left", "25%");
 		}
 	});
 	function clickProduct(id){

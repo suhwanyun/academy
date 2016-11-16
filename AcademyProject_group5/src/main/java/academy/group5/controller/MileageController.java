@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import academy.group5.dto.MileageProduct;
+import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserMileageProduct;
 import academy.group5.exception.PageRedirectException;
 import academy.group5.service.MileageService;
@@ -53,7 +54,9 @@ public class MileageController {
 		// 회원 ID확인
 		String userId = identify.getUserId(session);
 		
-		mileageService.buyProduct(userId, productId);
+		UserData newUserData = mileageService.buyProduct(userId, productId);
+		// 줄어든 마일리지 반영
+		session.setAttribute("user", newUserData);
 			
 		throw new PageRedirectException("구입하신 상품은 메뉴-보관함에서 확인하실 수 있습니다.");
 	}

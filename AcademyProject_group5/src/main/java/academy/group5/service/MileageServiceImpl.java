@@ -11,6 +11,7 @@ import academy.group5.dto.UserData;
 import academy.group5.dto.UserMileage;
 import academy.group5.dto.etc.UserMileageProduct;
 import academy.group5.exception.WrongRequestException;
+import academy.group5.repo.LoginRepo;
 import academy.group5.repo.MileageRepo;
 
 @Service
@@ -19,6 +20,9 @@ public class MileageServiceImpl implements MileageService {
 
 	@Autowired
 	MileageRepo mileRepo;
+	
+	@Autowired
+	LoginRepo loginRepo;
 	
 	@Override
 	public List<MileageProduct> productList() {
@@ -49,7 +53,7 @@ public class MileageServiceImpl implements MileageService {
 	}
 
 	@Override
-	public boolean buyProduct(String userId, Integer productId) {
+	public UserData buyProduct(String userId, Integer productId) {
 		
 		MileageProduct productData = mileRepo.getProduct(productId);
 		Integer productCost = productData.getProductCost();
@@ -82,8 +86,11 @@ public class MileageServiceImpl implements MileageService {
 		if(result != 1){
 			throw new WrongRequestException();
 		}
-		
-		return true;
+		UserData newUserData = loginRepo.getUser(userId);
+		if(newUserData == null){
+			throw new WrongRequestException();
+		}
+		return newUserData;
 	}
 
 	@Override

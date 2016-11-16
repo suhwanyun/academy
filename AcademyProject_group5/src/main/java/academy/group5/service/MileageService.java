@@ -3,6 +3,7 @@ package academy.group5.service;
 import java.util.List;
 
 import academy.group5.dto.MileageProduct;
+import academy.group5.dto.UserData;
 import academy.group5.dto.etc.UserMileageProduct;
 
 public interface MileageService {
@@ -36,7 +37,7 @@ public interface MileageService {
 	 * @param productId
 	 * @return
 	 */
-	boolean buyProduct(String userId, Integer productId);
+	UserData buyProduct(String userId, Integer productId);
 	/**
 	 * 상품 사용하기
 	 * @param userId
