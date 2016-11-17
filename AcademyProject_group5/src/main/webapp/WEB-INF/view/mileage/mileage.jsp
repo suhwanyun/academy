@@ -37,11 +37,11 @@
 					<img class="img-circle img-thumbnail" src="/upload/preview_${list.productImgfile }" alt="" />
 					<br>${list.productName }
 				</a>
-				<c:if test="${productList.size() gt status.count}">
-					<a href="#" onclick="clickProduct(${productList[status.count].productId})"
+				<c:if test="${productList.size() gt (status.index+1)}">
+					<a href="#" onclick="clickProduct(${productList[status.index+1].productId})"
 					   class="btn-lg col-xs-6">
-						<img class="img-circle img-thumbnail" src="/upload/preview_${productList[status.count].productImgfile }" alt="" />
-						<br>${productList[status.count].productName }
+						<img class="img-circle img-thumbnail" src="/upload/preview_${productList[status.index+1].productImgfile }" alt="" />
+						<br>${productList[status.index+1].productName }
 					</a>
 				</c:if>
 			</c:forEach>
