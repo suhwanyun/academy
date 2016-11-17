@@ -137,7 +137,7 @@ function pageCtrl(pages){
 		if(pageIdx == ${page}){
 			pageDiv.append($("<a style='margin:10px; font-size:large; color:black;' href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>"));
 		} else {
-			pageDiv.append($("<a style='margin:10px; font-size:large; href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>"));
+			pageDiv.append($("<a style='margin:10px; font-size:large;' href='/mileageManage/page?page=" + pageIdx + "'>" + pageIdx + "</a>"));
 		}
 		if(pageIdx % 5 == 0 && pageIdx < ${maxPage}){
 			pageDiv.append($("<a href='#' onclick='pageCtrl(" + (pages+1) + ")'><i class='balloon test_4'></a>"));
