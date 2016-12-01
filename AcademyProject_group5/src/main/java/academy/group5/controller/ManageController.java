@@ -61,8 +61,7 @@ public class ManageController {
 		return "/login/login_manager";
 	}
 	
-	/** 학기 추가
-	 * @throws ParseException */
+	/** 학기 추가 */
 	@RequestMapping(value="/lectureManage/termSetting", method=RequestMethod.POST)
 	public String termSetting(HttpSession session,
 			@RequestParam String termStart, @RequestParam String termEnd){		

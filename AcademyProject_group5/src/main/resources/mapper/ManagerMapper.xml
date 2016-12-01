@@ -85,6 +85,7 @@
 		  and lecture_end &gt;= #{lectureStart}
 		  and lecture_week = #{lectureWeek}
 		  and lecture_id = #{lectureId}
+		  and lecture_time_id != #{lectureTimeId}
 	</select>
 	
 	<select id="selectLectureTime" parameterType="int" resultType="lecture_time">
