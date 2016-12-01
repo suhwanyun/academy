@@ -63,7 +63,7 @@ public interface ManagerService {
 	 * @param searchData
 	 * @return
 	 */
-	List<Lecture> getAllLectureListBySearch(int page, String searchType, String searchData);
+	List<Lecture> getAllLectureListBySearch(int page, String searchData, String searchType);
 	
 	/**
 	 * 전체 강의 페이지 수 확인
