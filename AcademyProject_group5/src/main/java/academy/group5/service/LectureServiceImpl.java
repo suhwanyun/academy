@@ -50,7 +50,7 @@ public class LectureServiceImpl implements LectureService{
 
 		Lecture newLectureData = new Lecture(lectureId, lectureClass);
 			
-		if(isAppliedLecture(lectureId, userId, lectureClass)){
+		if(isAppliedLecture(lectureId, userId, null)){
 			throw new WrongRequestException("이미 신청한 강의입니다.");
 		}
 		
