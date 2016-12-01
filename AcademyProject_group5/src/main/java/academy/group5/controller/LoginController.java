@@ -83,7 +83,7 @@ public class LoginController {
 			return "false";
 		}
 		
-		Object isPhone = session.getAttribute("isPhone");
+		/*Object isPhone = session.getAttribute("isPhone");
 		// 핸드폰으로 로그인시 자동 로그인 설정
 		if(isPhone != null && isPhone.equals("true")) {
 			final int COOKIE_AGE_YEAR = 60*60*24*365;
@@ -95,7 +95,7 @@ public class LoginController {
 			
 			response.addCookie(idCookie);
 			response.addCookie(passCookie);	
-		}
+		}*/
 		
 		return "true";
 	}
@@ -103,7 +103,7 @@ public class LoginController {
 	/** 로그 아웃 */
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletResponse response){
-		
+		/*
 		// 핸드폰에서 로그아웃 선택시 어플 로그인 데이터 삭제
 		Object isPhone = session.getAttribute("isPhone");	
 		if(isPhone != null && isPhone.equals("true")){
@@ -122,7 +122,7 @@ public class LoginController {
 			
 			response.addCookie(idCookie);
 			response.addCookie(passCookie);
-		}
+		}*/
 		session.removeAttribute("user");
 		
 		return "index";
