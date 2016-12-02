@@ -33,11 +33,8 @@
 								<!-- 현재 강의정보가 마지막 강의정보이거나, 출력할 강의정보가 아닌 다른 강의의 정보가 등장시, 정보 출력 및 루프 종료 -->
 								<c:if test="${subIndex.last || (list.lectureId != subList.lectureId)}">
 									<c:set var="doneLoop" value="true"/>	
-									<!-- 현재 강의 정보가 출력될 행의 수 (마지막 강의정보이면 +1필요)-->	
+									<!-- 현재 강의 정보가 출력될 행의 수 -->	
 									<c:set var="spanCount" value="${subIndex.index - index.index}"/>					
-									<c:if test="${subIndex.last }">
-										<c:set var="spanCount" value="${subIndex.index - index.index + 1}"/>
-									</c:if>
 	
 									<td rowspan="${spanCount }">${list.lectureName }&nbsp;(${list.lectureClass })</td>
 									<td rowspan="${spanCount }">${list.professorName }</td>
