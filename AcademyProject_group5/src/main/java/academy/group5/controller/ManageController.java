@@ -61,8 +61,7 @@ public class ManageController {
 		return "/login/login_manager";
 	}
 	
-	/** 학기 추가
-	 * @throws ParseException */
+	/** 학기 추가 */
 	@RequestMapping(value="/lectureManage/termSetting", method=RequestMethod.POST)
 	public String termSetting(HttpSession session,
 			@RequestParam String termStart, @RequestParam String termEnd){		
@@ -119,7 +118,7 @@ public class ManageController {
 		String searchType = typeObj == null ? null : (String)typeObj;
 		String searchData = dataObj == null ? null : (String)dataObj;
 				
-		List<Lecture> lectureList = service.getAllLectureListBySearch(page, searchType, searchData);
+		List<Lecture> lectureList = service.getAllLectureListBySearch(page, searchData, searchType);
 		return lectureList;
 	}
 	

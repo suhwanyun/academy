@@ -20,7 +20,7 @@
 					<col width="15%">
 					<col width="40%">
 			</colgroup>
-			<c:forEach items="${lectureList }" var="list" >
+			
 			<tr>
 			<th>강의ID</th>
 			<th>강의명</th>
@@ -28,10 +28,12 @@
 			<th>담당교수</th>
 			<th>강의시간</th>
 			</tr>
+			
+			<c:forEach items="${lectureList }" var="list" >
 			<tr align="center">
 				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureId }</a></td>
-				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureName }</a></td>
-				<td><a href="/lectureManage/managejsp?lectureId=${list.lectureId }&lectureClass=${list.lectureClass }">${list.lectureClass }반</a></td>
+				<td>${list.lectureName }</td>
+				<td>${list.lectureClass }반</td>
 				<td>${list.professorName }</td>
 				
 				<td>
@@ -138,10 +140,12 @@ function paging(){
 		}
 }
 function dataSetting(dataList){
-	dataHtml="";
+	dataHtml="<colgroup><col width='15%'><col width='15%'><col width='15%'><col width='15%'><col width='40%'></colgroup>";
+	dataHtml+="<tr><th>강의ID</th><th>강의명</th><th>분반</th><th>담당교수</th><th>강의시간</th></tr>";
+	
 	for(var i=0; i<dataList.length; i++){
 		dataHtml+=
-		"<tr>"+
+		"<tr style='text-align:center;'>"+
 			"<td><a href='/lectureManage/managejsp?lectureId="+dataList[i].lectureId+"&lectureClass="+dataList[i].lectureClass +"'>"+
 			dataList[i].lectureId +"</a></td>"+
 			"<td>"+dataList[i].lectureName+"</td>"+

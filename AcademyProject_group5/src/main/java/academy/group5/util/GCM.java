@@ -34,6 +34,11 @@ public class GCM {
 	
 	public GCM(String title, String msg, String submsg, List<String> userIdList, String msgtype) {
 		
+		// 메세지를 받을 사람이 없음
+		if(userIdList.size() == 0){
+			return;
+		}
+		
 		try {
 			title = title == null ? GCM_TITLE : java.net.URLEncoder.encode(title, "UTF-8");
 			
