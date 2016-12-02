@@ -30,10 +30,6 @@
 							<c:if test="${(subIndex.index - index.index) gt -1 && not doneLoop }">
 								<c:set var="spanCount" value="${subIndex.index - index.index + 1}"/>
 								
-								<c:if test="${index.last}">
-									<c:set var="spanCount" value="1"/>
-								</c:if>
-								
 								<c:if test="${subIndex.last || list.lectureId != lectureList[subIndex.index].lectureId}">
 									<c:set var="doneLoop" value="true"/>
 									<td rowspan="${spanCount }">${list.lectureName }&nbsp;(${list.lectureClass })</td>

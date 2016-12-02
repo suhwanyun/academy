@@ -50,8 +50,8 @@
     </div>
     <div class="col-xs-4">
       <a href="/placeMain"><span class="glyphicon glyphicon-plane"></span></a>
-      <h4>Place</h4>
-      <p>명소</p>
+      <h4>Date</h4>
+      <p>데이트코스</p>
     </div>
     <div class="col-xs-4">
        <a href="/mileageMain"><span class="glyphicon glyphicon-wrench"></span></a>
